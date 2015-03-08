@@ -1,0 +1,13 @@
+c:\users\client\documents\visual studio 2013\Projects\R1API\R1API\bin\Debug\R1API.exe.config
+c:\users\client\documents\visual studio 2013\Projects\R1API\R1API\obj\Debug\R1API.Resources.resources
+c:\users\client\documents\visual studio 2013\Projects\R1API\R1API\obj\Debug\R1API.vbproj.GenerateResource.Cache
+c:\users\client\documents\visual studio 2013\Projects\R1API\R1API\bin\Debug\R1API.exe
+c:\users\client\documents\visual studio 2013\Projects\R1API\R1API\bin\Debug\R1API.pdb
+c:\users\client\documents\visual studio 2013\Projects\R1API\R1API\bin\Debug\R1API.xml
+c:\users\client\documents\visual studio 2013\Projects\R1API\R1API\obj\Debug\R1API.exe
+c:\users\client\documents\visual studio 2013\Projects\R1API\R1API\obj\Debug\R1API.xml
+c:\users\client\documents\visual studio 2013\Projects\R1API\R1API\obj\Debug\R1API.pdb
+c:\users\client\documents\visual studio 2013\Projects\R1API\R1API\obj\Debug\R1API.vbprojResolveAssemblyReference.cache
+c:\users\client\documents\visual studio 2013\Projects\R1API\R1API\bin\Debug\Newtonsoft.Json.dll
+c:\users\client\documents\visual studio 2013\Projects\R1API\R1API\obj\Debug\R1API.AgentorShareDialog.resources
+c:\users\client\documents\visual studio 2013\Projects\R1API\R1API\obj\Debug\R1API.Main.resources
