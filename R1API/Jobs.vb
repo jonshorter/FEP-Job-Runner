@@ -34,7 +34,33 @@ Module Jobs
         Public MD5HashsEntryText As String
     End Class
 
+    Public Class AgentRemediation_SendFile
+        'Inherit the array from the API
+        Inherits R1API.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile
 
+    End Class
+
+    Public Class AgentRemediation_Erase
+        'Inherit the array from the API
+        Inherits R1API.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase
+
+    End Class
+
+    Public Class AgentRemediation_Execute
+        'Inherit the array from the API
+        Inherits R1API.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute
+
+    End Class
+
+    Public Class AgentRemediation_ProcessID
+        'ProcessID
+        Public ProcessID As String
+    End Class
+
+    Public Class AgentRemediation_ProcessName
+        'ProcessName
+        Public ProcessName As String
+    End Class
 
     Public Function CreateFilter()
         'The API wants a combined JSON for the filter that includes all options for
@@ -42,6 +68,7 @@ Module Jobs
         'This returns a JSON
         '-------------------------------
         'Make a new inclusion filter based on the class and set the variables based on the Form
+      
         Dim inclfilter As New InclFilter
         If Main.txtinclfiltername.Text <> "" Then inclfilter.FilterName = Main.txtinclfiltername.Text
         If Main.txtinclkeywords.Text <> "" Then

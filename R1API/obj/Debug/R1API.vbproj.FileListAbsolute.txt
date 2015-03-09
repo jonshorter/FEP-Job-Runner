@@ -11,3 +11,16 @@ c:\users\client\documents\visual studio 2013\Projects\R1API\R1API\obj\Debug\R1AP
 c:\users\client\documents\visual studio 2013\Projects\R1API\R1API\bin\Debug\Newtonsoft.Json.dll
 c:\users\client\documents\visual studio 2013\Projects\R1API\R1API\obj\Debug\R1API.AgentorShareDialog.resources
 c:\users\client\documents\visual studio 2013\Projects\R1API\R1API\obj\Debug\R1API.Main.resources
+C:\Users\Client\Documents\R1-Job-Runner\R1API\bin\Debug\R1API.exe.config
+C:\Users\Client\Documents\R1-Job-Runner\R1API\obj\Debug\R1API.exe
+C:\Users\Client\Documents\R1-Job-Runner\R1API\obj\Debug\R1API.xml
+C:\Users\Client\Documents\R1-Job-Runner\R1API\obj\Debug\R1API.pdb
+C:\Users\Client\Documents\R1-Job-Runner\R1API\bin\Debug\R1API.exe
+C:\Users\Client\Documents\R1-Job-Runner\R1API\bin\Debug\R1API.pdb
+C:\Users\Client\Documents\R1-Job-Runner\R1API\bin\Debug\R1API.xml
+C:\Users\Client\Documents\R1-Job-Runner\R1API\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Client\Documents\R1-Job-Runner\R1API\obj\Debug\R1API.vbprojResolveAssemblyReference.cache
+C:\Users\Client\Documents\R1-Job-Runner\R1API\obj\Debug\R1API.AgentorShareDialog.resources
+C:\Users\Client\Documents\R1-Job-Runner\R1API\obj\Debug\R1API.Main.resources
+C:\Users\Client\Documents\R1-Job-Runner\R1API\obj\Debug\R1API.Resources.resources
+C:\Users\Client\Documents\R1-Job-Runner\R1API\obj\Debug\R1API.vbproj.GenerateResource.Cache

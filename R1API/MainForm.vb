@@ -159,6 +159,40 @@ Public Class Main
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
+        'First Run-Generate default templates
+
+        If My.Settings.firstrun = True Then
+            'Set templates
+            My.Settings.templatename.Clear()
+            My.Settings.templatename.Add("coll-evtx")
+            My.Settings.templatename.Add("Drop Process by PID")
+            My.Settings.templatename.Add("ETM Relative Time Query")
+            My.Settings.templatename.Add("EXE-Metadata-Cerb")
+            My.Settings.templatename.Add("Lockdown NIC")
+            My.Settings.templatename.Add("LockdownEnableNIC")
+            My.Settings.templatename.Add("Memory Acquisition")
+            My.Settings.templatename.Add("Memory Analysis")
+            My.Settings.templatename.Add("Registry -Autostart")
+            My.Settings.templatename.Add("Registry -Full")
+            My.Settings.templatename.Add("Remediate -Name")
+            My.Settings.templatename.Add("Remediate-PID")
+            My.Settings.templatename.Add("Small-exes-Cerb")
+            My.Settings.templatename.Add("Software Inventory")
+            My.Settings.templatename.Add("Vol-Deep")
+            My.Settings.templatename.Add("Vol-Deep-Cerb")
+            My.Settings.templatename.Add("Vol-Hidden-Cerb")
+            My.Settings.templatename.Add("Vol-Hidden-Injected")
+            My.Settings.templatename.Add("Vol-Quick")
+            My.Settings.templatename.Add("Vol-Quick-Cerb")
+            My.Settings.templatename.Add("Vol-Quick-Sched")
+            'Turn first run off
+            My.Settings.firstrun = False
+            My.Settings.Save()
+        End If
+
+        'End First Run
+
+
         'Set Target to Agent 
         rdoagent.Checked = True
         rdoshare.Checked = False
@@ -190,6 +224,10 @@ Public Class Main
         Next
         txtTemplateName.Text = My.Settings.templatenameselect
         txtboxtargetcomputer.Text = txtdefaultcomputer.Text
+
+
+
+
 
     End Sub
 
