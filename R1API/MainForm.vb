@@ -280,6 +280,10 @@ Public Class Main
 
     Private Sub tabBoxedJobs_Enter(sender As Object, e As EventArgs) Handles tabBoxedJobs.Enter
         txtboxtargetcomputer.Text = txtdefaultcomputer.Text
+        Dim boxnames As List(Of String) = GetListofBoxedJobs()
+        For Each item In boxnames
+            lstBoxedJobs.Items.Add(item)
+        Next
     End Sub
 
     Private Sub btnBoxJobCollection1_Click(sender As Object, e As EventArgs) Handles btnBoxJobCollection1.Click
