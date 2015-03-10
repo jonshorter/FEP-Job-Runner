@@ -283,90 +283,11 @@ Public Class Main
     End Sub
 
     Private Sub btnBoxJobCollection1_Click(sender As Object, e As EventArgs) Handles btnBoxJobCollection1.Click
-
-        'Agent Remediation - Send File
-        Dim remediatesendfile(0) As R1API.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile
-        If txtremsendsource.Text <> "" Then
-            'Set options
-            remediatesendfile(0) = New R1API.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile
-            remediatesendfile(0).FileToSend = txtremsendsource.Text
-            remediatesendfile(0).IsRelative = True
-            remediatesendfile(0).RemotePath = txtremsenddest.Text
-            remediatesendfile(0).OverwriteIfExists = chkremsenddelete.Checked
-        Else
-            'Blank options - null it 
-            remediatesendfile = New R1API.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile() {}
-        End If
-
-        'Agent Remediation - Erase File
-        Dim remediateerase(0) As R1API.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase
-        If txtremdelfilepath.Text <> "" Then
-            'Set options
-            remediateerase(0) = New R1API.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase
-            remediateerase(0).RemotePath = txtremdelfilepath.Text
-        Else
-            'Blank options - null it
-            remediateerase = New R1API.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase() {}
-        End If
-
-        'Agent Remediation - Execute
-        Dim remediateexecute(0) As R1API.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute
-        If txtremexecpath.Text <> "" Then
-            'Set options
-            remediateexecute(0) = New R1API.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute
-            remediateexecute(0).Executable = txtremexecpath.Text
-            remediateexecute(0).Arguments = txtremexecargs.Text
-        Else
-            'Blank options - null it
-            remediateexecute = New R1API.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute() {}
-        End If
-
-        'Agent Remediation - Kill by PID
-        Dim pids() As String = New String() {}
-        If nmbremkillprocid.Value <> 0 Then
-            'Set pid
-            pids(0) = New Integer
-            pids(0) = nmbremkillprocid.Value
-        Else
-            'Blank options - null it
-            pids = New String() {}
-        End If
-
-
-        'Agent Remediation - Kill by Process Name
-        Dim processnames() As String = New String() {}
-        If txtremkillprocname.Text <> "" Then
-            processnames(0) = New String(txtremkillprocname.Text)
-        Else
-            'Blank options - null it
-            processnames = New String() {}
-        End If
-
-        Dim templatename = "coll-evtx"
-
-        Dim cnames(0) As String
-        cnames(0) = txtboxtargetcomputer.Text
-
-        Dim snames() As String
-        snames = Jobs.nullstring
-
-        'job 1 filter opts
-        txtinclfiltername.Text = "Collection1 Test"
-        txtinclextensions.Text = "txt"
-        txtinclpathcontains.Text = "Users"
-
-        'Generate Inclusion/Exclusion Filters
-        Dim filter As String = Jobs.CreateFilter
-
-
-        'Kick off the job
-        Dim jobid = Jobs.RunFromTemplateName(txtServer.Text, templatename, txtJobName.Text, txtProjectName.Text, txtApiUser.Text, txtAPIPass.Text, cnames, snames, Filter, pids, processnames, remediatesendfile, remediateexecute, remediateerase)
-
-
+        Dim jobid = BoxedJobs.BoxedJob1(txtServer.Text, txtProjectName.Text, txtApiUser.Text, txtAPIPass.Text, txtboxtargetcomputer.Text)
         'Check if the returned message is a GUID or Error
         If isGuid(jobid) Then
             'GUID - Job submitted successfully
-            txtStatusBoxJob.Text = "Job: " & txtDefaultJobName.Text & " in Project: " & txtDefaultProjectName.Text & " submitted sucessfully. GUID: " & jobid
+            txtStatusBoxJob.Text = "Job submitted sucessfully. GUID: " & jobid
             txtStatusBoxJob.ForeColor = Color.Black
         Else
             'Error - Something happened

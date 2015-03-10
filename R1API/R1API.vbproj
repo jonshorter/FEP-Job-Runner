@@ -82,6 +82,7 @@
     <Compile Include="AgentorShareDialog.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="BoxedJobs.vb" />
     <Compile Include="MainForm.vb">
       <SubType>Form</SubType>
     </Compile>

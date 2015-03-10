@@ -34,6 +34,8 @@ Module Jobs
         Public MD5HashsEntryText As String
     End Class
 
+
+
     Public Class AgentRemediation_SendFile
         'Inherit the array from the API
         Inherits R1API.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile
@@ -62,13 +64,53 @@ Module Jobs
         Public ProcessName As String
     End Class
 
+    Public Function BuildFilterJSON(ByVal InclFilter As InclFilter, ByVal ExclFilter As ExclFilter)
+        'Create StringWriter for use with JSONTextWriter
+        Dim jsonsw As New System.IO.StringWriter
+        'Create JsonTextWriter
+        Dim jsonstr As New JsonTextWriter(jsonsw)
+        'Json Start
+        jsonstr.WriteStartObject()
+        'If the inclusion filter has a name, generate the JSON
+        If InclFilter.FilterName <> "" Then
+            'JSON Property
+            jsonstr.WritePropertyName("InclusionFilters")
+            'Array
+            jsonstr.WriteStartArray()
+            'We are serializing the inclusion filter class into JSON. So we WriteRaw so it doesn't try to serialize it twice.
+            jsonstr.WriteRaw(JsonConvert.SerializeObject(InclFilter))
+            'End Array
+            jsonstr.WriteEndArray()
+        End If
+        'If the exclusion filter has a name, generate the JSON
+        If ExclFilter.FilterName <> "" Then
+            'JSON Property
+            jsonstr.WritePropertyName("ExclusionFilters")
+            'Array
+            jsonstr.WriteStartArray()
+            'We are serializing the exclusion filter class into JSON. So we WriteRaw so it doesn't try to serialize it twice.
+            jsonstr.WriteRaw(JsonConvert.SerializeObject(ExclFilter))
+            'End Array
+            jsonstr.WriteEndArray()
+        End If
+        'Json End
+        jsonstr.WriteEndObject()
+        'Close the json writer
+        jsonstr.Close()
+        'Return the JSON
+        Return jsonsw.ToString
+        jsonsw.Close()
+
+    End Function
+
+
     Public Function CreateFilter()
         'The API wants a combined JSON for the filter that includes all options for
         'both the Inclusion and Exclusion filter in one.
         'This returns a JSON
         '-------------------------------
         'Make a new inclusion filter based on the class and set the variables based on the Form
-      
+
         Dim inclfilter As New InclFilter
         If Main.txtinclfiltername.Text <> "" Then inclfilter.FilterName = Main.txtinclfiltername.Text
         If Main.txtinclkeywords.Text <> "" Then
