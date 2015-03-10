@@ -119,12 +119,13 @@ Partial Class Main
         Me.tabSettings = New System.Windows.Forms.TabPage()
         Me.tabJobExecution = New System.Windows.Forms.TabPage()
         Me.tabBoxedJobs = New System.Windows.Forms.TabPage()
+        Me.txtStatusBoxJob = New System.Windows.Forms.TextBox()
+        Me.btnBoxJobCollection1 = New System.Windows.Forms.Button()
         Me.Label30 = New System.Windows.Forms.Label()
         Me.txtboxtargetcomputer = New System.Windows.Forms.TextBox()
         Me.tabAbout = New System.Windows.Forms.TabPage()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.btnBoxJobCollection1 = New System.Windows.Forms.Button()
-        Me.txtStatusBoxJob = New System.Windows.Forms.TextBox()
+        Me.lstBoxedJobs = New System.Windows.Forms.CheckedListBox()
         Me.grpagent.SuspendLayout()
         Me.grpshare.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -1086,6 +1087,7 @@ Partial Class Main
         '
         'tabBoxedJobs
         '
+        Me.tabBoxedJobs.Controls.Add(Me.lstBoxedJobs)
         Me.tabBoxedJobs.Controls.Add(Me.txtStatusBoxJob)
         Me.tabBoxedJobs.Controls.Add(Me.btnBoxJobCollection1)
         Me.tabBoxedJobs.Controls.Add(Me.Label30)
@@ -1097,6 +1099,27 @@ Partial Class Main
         Me.tabBoxedJobs.TabIndex = 2
         Me.tabBoxedJobs.Text = "Boxed Jobs"
         Me.tabBoxedJobs.UseVisualStyleBackColor = True
+        '
+        'txtStatusBoxJob
+        '
+        Me.txtStatusBoxJob.BackColor = System.Drawing.SystemColors.Control
+        Me.txtStatusBoxJob.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtStatusBoxJob.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtStatusBoxJob.Location = New System.Drawing.Point(11, 410)
+        Me.txtStatusBoxJob.Name = "txtStatusBoxJob"
+        Me.txtStatusBoxJob.ReadOnly = True
+        Me.txtStatusBoxJob.Size = New System.Drawing.Size(531, 16)
+        Me.txtStatusBoxJob.TabIndex = 21
+        Me.txtStatusBoxJob.Text = "Status"
+        '
+        'btnBoxJobCollection1
+        '
+        Me.btnBoxJobCollection1.Location = New System.Drawing.Point(11, 42)
+        Me.btnBoxJobCollection1.Name = "btnBoxJobCollection1"
+        Me.btnBoxJobCollection1.Size = New System.Drawing.Size(75, 23)
+        Me.btnBoxJobCollection1.TabIndex = 2
+        Me.btnBoxJobCollection1.Text = "Collection1"
+        Me.btnBoxJobCollection1.UseVisualStyleBackColor = True
         '
         'Label30
         '
@@ -1137,26 +1160,13 @@ Partial Class Main
         Me.TextBox1.TabIndex = 0
         Me.TextBox1.Text = resources.GetString("TextBox1.Text")
         '
-        'btnBoxJobCollection1
+        'lstBoxedJobs
         '
-        Me.btnBoxJobCollection1.Location = New System.Drawing.Point(11, 42)
-        Me.btnBoxJobCollection1.Name = "btnBoxJobCollection1"
-        Me.btnBoxJobCollection1.Size = New System.Drawing.Size(75, 23)
-        Me.btnBoxJobCollection1.TabIndex = 2
-        Me.btnBoxJobCollection1.Text = "Collection1"
-        Me.btnBoxJobCollection1.UseVisualStyleBackColor = True
-        '
-        'txtStatusBoxJob
-        '
-        Me.txtStatusBoxJob.BackColor = System.Drawing.SystemColors.Control
-        Me.txtStatusBoxJob.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtStatusBoxJob.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtStatusBoxJob.Location = New System.Drawing.Point(11, 410)
-        Me.txtStatusBoxJob.Name = "txtStatusBoxJob"
-        Me.txtStatusBoxJob.ReadOnly = True
-        Me.txtStatusBoxJob.Size = New System.Drawing.Size(531, 16)
-        Me.txtStatusBoxJob.TabIndex = 21
-        Me.txtStatusBoxJob.Text = "Status"
+        Me.lstBoxedJobs.FormattingEnabled = True
+        Me.lstBoxedJobs.Location = New System.Drawing.Point(22, 98)
+        Me.lstBoxedJobs.Name = "lstBoxedJobs"
+        Me.lstBoxedJobs.Size = New System.Drawing.Size(311, 214)
+        Me.lstBoxedJobs.TabIndex = 22
         '
         'Main
         '
@@ -1310,5 +1320,6 @@ Partial Class Main
     Friend WithEvents txtboxtargetcomputer As System.Windows.Forms.TextBox
     Friend WithEvents btnBoxJobCollection1 As System.Windows.Forms.Button
     Friend WithEvents txtStatusBoxJob As System.Windows.Forms.TextBox
+    Friend WithEvents lstBoxedJobs As System.Windows.Forms.CheckedListBox
 
 End Class

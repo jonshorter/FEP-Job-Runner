@@ -36,24 +36,6 @@ Module Jobs
 
 
 
-    Public Class AgentRemediation_SendFile
-        'Inherit the array from the API
-        Inherits R1API.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile
-
-    End Class
-
-    Public Class AgentRemediation_Erase
-        'Inherit the array from the API
-        Inherits R1API.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase
-
-    End Class
-
-    Public Class AgentRemediation_Execute
-        'Inherit the array from the API
-        Inherits R1API.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute
-
-    End Class
-
     Public Class AgentRemediation_ProcessID
         'ProcessID
         Public ProcessID As String
@@ -64,7 +46,7 @@ Module Jobs
         Public ProcessName As String
     End Class
 
-    Public Function BuildFilterJSON(ByVal InclFilter As InclFilter, ByVal ExclFilter As ExclFilter)
+    Public Function BuildFilterJSON(ByVal InFilterList As List(Of Jobs.InclFilter), ByVal ExFilterList As List(Of Jobs.ExclFilter))
         'Create StringWriter for use with JSONTextWriter
         Dim jsonsw As New System.IO.StringWriter
         'Create JsonTextWriter
@@ -72,25 +54,38 @@ Module Jobs
         'Json Start
         jsonstr.WriteStartObject()
         'If the inclusion filter has a name, generate the JSON
-        If InclFilter.FilterName <> "" Then
+        If InFilterList.Count > 0 Then
             'JSON Property
             jsonstr.WritePropertyName("InclusionFilters")
             'Array
             jsonstr.WriteStartArray()
-            'We are serializing the inclusion filter class into JSON. So we WriteRaw so it doesn't try to serialize it twice.
-            jsonstr.WriteRaw(JsonConvert.SerializeObject(InclFilter))
-            'End Array
+            For Each item As InclFilter In InFilterList
+
+                If item.FilterName <> "" Then
+
+                    'We are serializing the inclusion filter class into JSON. So we WriteRaw so it doesn't try to serialize it twice.
+                    jsonstr.WriteRawValue(JsonConvert.SerializeObject(item))
+                    'End Array
+
+                End If
+            Next
             jsonstr.WriteEndArray()
         End If
         'If the exclusion filter has a name, generate the JSON
-        If ExclFilter.FilterName <> "" Then
+        If ExFilterList.Count > 0 Then
             'JSON Property
             jsonstr.WritePropertyName("ExclusionFilters")
             'Array
             jsonstr.WriteStartArray()
-            'We are serializing the exclusion filter class into JSON. So we WriteRaw so it doesn't try to serialize it twice.
-            jsonstr.WriteRaw(JsonConvert.SerializeObject(ExclFilter))
-            'End Array
+            For Each item As ExclFilter In ExFilterList
+                If item.FilterName <> "" Then
+
+                    'We are serializing the exclusion filter class into JSON. So we WriteRaw so it doesn't try to serialize it twice.
+                    jsonstr.WriteRawValue(JsonConvert.SerializeObject(item))
+                    'End Array
+
+                End If
+            Next
             jsonstr.WriteEndArray()
         End If
         'Json End

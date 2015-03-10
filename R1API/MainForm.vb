@@ -283,18 +283,23 @@ Public Class Main
     End Sub
 
     Private Sub btnBoxJobCollection1_Click(sender As Object, e As EventArgs) Handles btnBoxJobCollection1.Click
+        '  BoxedJobs.SaveBoxedJob()
         Dim jobid = BoxedJobs.BoxedJob1(txtServer.Text, txtProjectName.Text, txtApiUser.Text, txtAPIPass.Text, txtboxtargetcomputer.Text)
-        'Check if the returned message is a GUID or Error
-        If isGuid(jobid) Then
-            'GUID - Job submitted successfully
-            txtStatusBoxJob.Text = "Job submitted sucessfully. GUID: " & jobid
-            txtStatusBoxJob.ForeColor = Color.Black
-        Else
-            'Error - Something happened
-            txtStatusBoxJob.Text = "Error: " & jobid
-            txtStatusBoxJob.ForeColor = Color.Red
-            MsgBox("Error: " & jobid)
-        End If
+        '' Check if the returned message is a GUID or Error
+        'If isGuid(jobid) Then
+        '    'GUID - Job submitted successfully
+        '    txtStatusBoxJob.Text = "Job submitted sucessfully. GUID: " & jobid
+        '    txtStatusBoxJob.ForeColor = Color.Black
+        'Else
+        '    'Error - Something happened
+        '    txtStatusBoxJob.Text = "Error: " & jobid
+        '    txtStatusBoxJob.ForeColor = Color.Red
+        '    MsgBox("Error: " & jobid)
+        'End If
+
+    End Sub
+
+    Private Sub tabBoxedJobs_Click(sender As Object, e As EventArgs) Handles tabBoxedJobs.Click
 
     End Sub
 End Class
