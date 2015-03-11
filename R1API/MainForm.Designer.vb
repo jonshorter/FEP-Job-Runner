@@ -118,6 +118,8 @@ Partial Class Main
         Me.tabMenu = New System.Windows.Forms.TabControl()
         Me.tabSettings = New System.Windows.Forms.TabPage()
         Me.tabJobExecution = New System.Windows.Forms.TabPage()
+        Me.btnLoadFromBox = New System.Windows.Forms.Button()
+        Me.btnSaveAsBox = New System.Windows.Forms.Button()
         Me.tabBoxedJobs = New System.Windows.Forms.TabPage()
         Me.lstBoxedJobs = New System.Windows.Forms.CheckedListBox()
         Me.txtStatusBoxJob = New System.Windows.Forms.TextBox()
@@ -126,8 +128,8 @@ Partial Class Main
         Me.txtboxtargetcomputer = New System.Windows.Forms.TextBox()
         Me.tabAbout = New System.Windows.Forms.TabPage()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.btnSaveAsBox = New System.Windows.Forms.Button()
-        Me.btnLoadFromBox = New System.Windows.Forms.Button()
+        Me.ofdBox = New System.Windows.Forms.OpenFileDialog()
+        Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
         Me.grpagent.SuspendLayout()
         Me.grpshare.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -1024,6 +1026,7 @@ Partial Class Main
         'nmbremkillprocid
         '
         Me.nmbremkillprocid.Location = New System.Drawing.Point(93, 13)
+        Me.nmbremkillprocid.Maximum = New Decimal(New Integer() {999999999, 0, 0, 0})
         Me.nmbremkillprocid.Name = "nmbremkillprocid"
         Me.nmbremkillprocid.Size = New System.Drawing.Size(76, 20)
         Me.nmbremkillprocid.TabIndex = 13
@@ -1089,6 +1092,24 @@ Partial Class Main
         Me.tabJobExecution.Text = "Job Execution"
         Me.tabJobExecution.UseVisualStyleBackColor = True
         '
+        'btnLoadFromBox
+        '
+        Me.btnLoadFromBox.Location = New System.Drawing.Point(319, 400)
+        Me.btnLoadFromBox.Name = "btnLoadFromBox"
+        Me.btnLoadFromBox.Size = New System.Drawing.Size(90, 23)
+        Me.btnLoadFromBox.TabIndex = 22
+        Me.btnLoadFromBox.Text = "Load From Box"
+        Me.btnLoadFromBox.UseVisualStyleBackColor = True
+        '
+        'btnSaveAsBox
+        '
+        Me.btnSaveAsBox.Location = New System.Drawing.Point(436, 400)
+        Me.btnSaveAsBox.Name = "btnSaveAsBox"
+        Me.btnSaveAsBox.Size = New System.Drawing.Size(75, 23)
+        Me.btnSaveAsBox.TabIndex = 21
+        Me.btnSaveAsBox.Text = "Save as Box"
+        Me.btnSaveAsBox.UseVisualStyleBackColor = True
+        '
         'tabBoxedJobs
         '
         Me.tabBoxedJobs.Controls.Add(Me.lstBoxedJobs)
@@ -1123,6 +1144,7 @@ Partial Class Main
         Me.txtStatusBoxJob.Size = New System.Drawing.Size(531, 16)
         Me.txtStatusBoxJob.TabIndex = 21
         Me.txtStatusBoxJob.Text = "Status"
+        Me.txtStatusBoxJob.Visible = False
         '
         'btnBoxJobCollection1
         '
@@ -1172,23 +1194,17 @@ Partial Class Main
         Me.TextBox1.TabIndex = 0
         Me.TextBox1.Text = resources.GetString("TextBox1.Text")
         '
-        'btnSaveAsBox
+        'ofdBox
         '
-        Me.btnSaveAsBox.Location = New System.Drawing.Point(436, 400)
-        Me.btnSaveAsBox.Name = "btnSaveAsBox"
-        Me.btnSaveAsBox.Size = New System.Drawing.Size(75, 23)
-        Me.btnSaveAsBox.TabIndex = 21
-        Me.btnSaveAsBox.Text = "Save as Box"
-        Me.btnSaveAsBox.UseVisualStyleBackColor = True
+        Me.ofdBox.FileName = "*.json"
+        Me.ofdBox.Filter = "Box Files|*.json"
+        Me.ofdBox.InitialDirectory = "My.Application.Info.DirectoryPath & ""\BoxedJobs"""
         '
-        'btnLoadFromBox
+        'sfdBox
         '
-        Me.btnLoadFromBox.Location = New System.Drawing.Point(319, 400)
-        Me.btnLoadFromBox.Name = "btnLoadFromBox"
-        Me.btnLoadFromBox.Size = New System.Drawing.Size(90, 23)
-        Me.btnLoadFromBox.TabIndex = 22
-        Me.btnLoadFromBox.Text = "Load From Box"
-        Me.btnLoadFromBox.UseVisualStyleBackColor = True
+        Me.sfdBox.DefaultExt = "json"
+        Me.sfdBox.Filter = "Box Files|*.json"
+        Me.sfdBox.InitialDirectory = "My.Application.Info.DirectoryPath & ""\BoxedJobs"""
         '
         'Main
         '
@@ -1345,5 +1361,7 @@ Partial Class Main
     Friend WithEvents lstBoxedJobs As System.Windows.Forms.CheckedListBox
     Friend WithEvents btnSaveAsBox As System.Windows.Forms.Button
     Friend WithEvents btnLoadFromBox As System.Windows.Forms.Button
+    Friend WithEvents ofdBox As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents sfdBox As System.Windows.Forms.SaveFileDialog
 
 End Class

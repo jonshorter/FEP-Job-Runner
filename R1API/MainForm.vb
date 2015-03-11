@@ -191,7 +191,8 @@ Public Class Main
         End If
 
         'End First Run
-
+        'Hide Boxed Jobs
+        Me.tabMenu.TabPages.Remove(tabBoxedJobs)
 
         'Set Target to Agent 
         rdoagent.Checked = True
@@ -314,18 +315,86 @@ Public Class Main
     End Sub
 
     Private Sub btnSaveAsBox_Click(sender As Object, e As EventArgs) Handles btnSaveAsBox.Click
+        sfdBox.ShowDialog()
+        Dim sbox As New BoxedJob
+        sbox.BoxJobName = sfdBox.FileName
+        sbox.R1JobName = txtJobName.Text
+        sbox.R1Template = txtTemplateName.Text
+        sbox.R1Project = txtProjectName.Text
+        'Process IDs
+        Dim pids(0) As String
+        pids(0) = nmbremkillprocid.Value
+        sbox.R1_AR_PIDS = pids
+        'Process Names
+        Dim pnames(0) As String
+        pnames(0) = txtremkillprocname.Text
+        sbox.R1_AR_ProcessNames = pnames
+        'Send Options
+        Dim ar_send(0) As JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile
+        Dim ar_send_0 As New JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile
+        ar_send_0.RemotePath = txtremsenddest.Text
+        ar_send_0.FileToSend = txtremsendsource.Text
+        ar_send_0.OverwriteIfExists = chkremsenddelete.Checked
+        ar_send(0) = ar_send_0
+        sbox.R1_AR_Send = ar_send
+        'Execute Options
+        Dim ar_exec(0) As JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute
+        Dim ar_exec_0 As New JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute
+        ar_exec_0.Executable = txtremexecpath.Text
+        ar_exec_0.Arguments = txtremexecargs.Text
+        ar_exec(0) = ar_exec_0
+        sbox.R1_AR_Execute = ar_exec
+        'Erase Options
+        Dim ar_erase(0) As JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase
+        Dim ar_erase_0 As New JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase
+        ar_erase_0.RemotePath = txtremdelfilepath.Text
+        ar_erase(0) = ar_erase_0
+        sbox.R1_AR_Erase = ar_erase
+
+        'Filters
+
+        'Inclusion 1
         Dim in1 As New InclusionFilter
         Dim in1l As New List(Of InclusionFilter)
+        in1.FilterName = txtinclfiltername.Text
+        in1.Extensions = txtinclextensions.Text
+        in1.IsKeyWordSearch = rdoinclsimplesearch.Checked
+        in1.IsRegexSearch = rdoinclregexsearch.Checked
+        in1.IsSearchFilenameOnly = chkinclsearchfilename.Checked
+        in1.Keywords = txtinclkeywords.Text
+        in1.MD5HashsEntryText = txtinclmd5hash.Text
+        in1.PathURLContains = txtinclpathcontains.Text
+
         in1l.Add(in1)
+
+        'Exclusion 1
+        Dim ex1 As New ExclusionFilter
         Dim ex1l As New List(Of ExclusionFilter)
-        Dim bname = InputBox("Box Name")
-        BoxedJobs.SaveBoxedJob(bname, txtJobName.Text, txtProjectName.Text, txtTemplateName.Text, Jobs.BuildFilterJSON(in1l, ex1l), New JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile() {}, New JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute() {}, New JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase() {}, Jobs.nullstring, Jobs.nullstring)
+        ex1.FilterName = txtexclfiltername.Text
+        ex1.Extensions = txtexclextensions.Text
+        ex1.MD5HashsEntryText = txtexclmd5hash.Text
+        ex1.PathURLContains = txtexclpathcontains.Text
+
+        ex1l.Add(ex1)
+
+
+        sbox.R1Filter = Jobs.BuildFilterJSON(in1l, ex1l)
+        BoxedJobs.SaveBoxedJob(sfdBox.FileName, sbox)
+        'BoxedJobs.SaveBoxedJob(bname, txtJobName.Text, txtProjectName.Text, txtTemplateName.Text, Jobs.BuildFilterJSON(in1l, ex1l), New JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile() {}, New JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute() {}, New JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase() {}, Jobs.nullstring, Jobs.nullstring)
     End Sub
-
+ 
     Private Sub btnLoadFromBox_Click(sender As Object, e As EventArgs) Handles btnLoadFromBox.Click
-        Dim fname = InputBox("JSON Path")
+        ofdBox.ShowDialog()
+        Dim fname = ofdBox.FileName
         If IO.File.Exists(fname) Then
-
+            ClearAllJobOptioons(Me.tabJobInfo.Controls)
+            ClearAllJobOptioons(Me.tabFilters.Controls)
+            ClearAllJobOptioons(Me.tabInclusionFilter.Controls)
+            ClearAllJobOptioons(Me.tabExclusionFilter.Controls)
+            ClearAllJobOptioons(Me.tabAgentDelete.Controls)
+            ClearAllJobOptioons(Me.tabAgentExecute.Controls)
+            ClearAllJobOptioons(Me.TabAgentKill.Controls)
+            ClearAllJobOptioons(Me.tabAgentSendFile.Controls)
 
             Dim box As BoxedJob = BoxedJobs.ParseBoxedJobFromFile(fname)
             txtJobName.Text = box.R1JobName
@@ -385,6 +454,7 @@ Public Class Main
             If processnames.Count > 0 Then
                 txtremkillprocname.Text = processnames(0)
             End If
+
 
 
         Else

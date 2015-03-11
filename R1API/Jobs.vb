@@ -119,6 +119,7 @@ Module Jobs
         jsonstr.Close()
         'Return the JSON
         Return jsonsw.ToString
+
         jsonsw.Close()
 
     End Function
@@ -257,5 +258,19 @@ Module Jobs
         'Return result
         Return test.IsMatch(input)
     End Function
+
+    Public Sub ClearAllJobOptioons(ByVal controls As System.Windows.Forms.Control.ControlCollection)
+        For Each ctrl As Control In controls
+            Console.WriteLine("Control: " & ctrl.Name)
+            If TypeOf (ctrl) Is TextBox Then
+                CType(ctrl, TextBox).Text = String.Empty
+            ElseIf TypeOf (ctrl) Is NumericUpDown Then
+                CType(ctrl, NumericUpDown).Value = 0
+            ElseIf TypeOf (ctrl) Is CheckBox Then
+                CType(ctrl, CheckBox).Checked = False
+            End If
+
+        Next
+    End Sub
 
 End Module
