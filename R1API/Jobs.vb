@@ -197,7 +197,12 @@ Module Jobs
 
     Public Function RunFromTemplateName(ByVal srvname As String, ByVal templatename As String, ByVal JobName As String, ByVal ProjectName As String, ByVal APIUser As String, ByVal APIPass As String, ByVal cnames() As String, ByVal snames() As String, ByVal filter As String, ByVal pids() As String, ByVal processnames() As String, ByVal remediatesendfile() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile, ByVal remediateexecute() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute, ByVal remediateerase() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase)
         'Submit a job via the API
+
+
         Try
+
+          
+
 
             If Main.chkbypasscerts.Checked Then
                 'Ignore self-signed / bad certificates
@@ -208,10 +213,13 @@ Module Jobs
             'Create a new job request
             Dim js As New JobsService.RunJobFromTemplateNameRequest(templatename, JobName, ProjectName, APIUser, APIPass, cnames, snames, pids, processnames, remediatesendfile, remediateexecute, remediateerase, filter, filter, "ISModuleArcSight", "6732A1F0-7FAC-4D25-AACB-3BD0B8E8D146", "Module specific string")
 
+            'Jobs Service Binding
+            Dim JobsServiceBinding As New System.ServiceModel.BasicHttpBinding(ServiceModel.BasicHttpSecurityMode.Transport)
+            JobsServiceBinding.Name = "JobsServiceSoap"
             'Set servername
             Dim servername As New System.ServiceModel.EndpointAddress("https://" & srvname & "/adg.map.web/services/api/JobsService.asmx")
             'Create a new soap client
-            Dim jsserv As New JobsService.JobsServiceSoapClient
+            Dim jsserv As New JobsService.JobsServiceSoapClient(JobsServiceBinding, servername)
             'Set address
             jsserv.Endpoint.Address = servername
             'Open the connection
@@ -260,6 +268,7 @@ Module Jobs
     End Function
 
     Public Sub ClearAllJobOptioons(ByVal controls As System.Windows.Forms.Control.ControlCollection)
+        'Clear each control
         For Each ctrl As Control In controls
             Console.WriteLine("Control: " & ctrl.Name)
             If TypeOf (ctrl) Is TextBox Then

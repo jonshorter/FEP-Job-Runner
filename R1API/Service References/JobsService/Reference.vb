@@ -22,15 +22,19 @@ Namespace JobsService
          System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults:=true)>  _
         Function RunJobFromTemplateName(ByVal request As JobsService.RunJobFromTemplateNameRequest) As JobsService.RunJobFromTemplateNameResponse
         
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/RunJobFromTemplateName", ReplyAction:="*")>  _
-        Function RunJobFromTemplateNameAsync(ByVal request As JobsService.RunJobFromTemplateNameRequest) As System.Threading.Tasks.Task(Of JobsService.RunJobFromTemplateNameResponse)
+        <System.ServiceModel.OperationContractAttribute(AsyncPattern:=true, Action:="http://tempuri.org/RunJobFromTemplateName", ReplyAction:="*")>  _
+        Function BeginRunJobFromTemplateName(ByVal request As JobsService.RunJobFromTemplateNameRequest, ByVal callback As System.AsyncCallback, ByVal asyncState As Object) As System.IAsyncResult
+        
+        Function EndRunJobFromTemplateName(ByVal result As System.IAsyncResult) As JobsService.RunJobFromTemplateNameResponse
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/RunJobTemplateFromOptionsXml", ReplyAction:="*"),  _
          System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults:=true)>  _
         Function RunJobTemplateFromOptionsXml(ByVal request As JobsService.RunJobTemplateFromOptionsXmlRequest) As JobsService.RunJobTemplateFromOptionsXmlResponse
         
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/RunJobTemplateFromOptionsXml", ReplyAction:="*")>  _
-        Function RunJobTemplateFromOptionsXmlAsync(ByVal request As JobsService.RunJobTemplateFromOptionsXmlRequest) As System.Threading.Tasks.Task(Of JobsService.RunJobTemplateFromOptionsXmlResponse)
+        <System.ServiceModel.OperationContractAttribute(AsyncPattern:=true, Action:="http://tempuri.org/RunJobTemplateFromOptionsXml", ReplyAction:="*")>  _
+        Function BeginRunJobTemplateFromOptionsXml(ByVal request As JobsService.RunJobTemplateFromOptionsXmlRequest, ByVal callback As System.AsyncCallback, ByVal asyncState As Object) As System.IAsyncResult
+        
+        Function EndRunJobTemplateFromOptionsXml(ByVal result As System.IAsyncResult) As JobsService.RunJobTemplateFromOptionsXmlResponse
     End Interface
     
     '''<remarks/>
@@ -382,9 +386,61 @@ Namespace JobsService
     
     <System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")>  _
+    Partial Public Class RunJobFromTemplateNameCompletedEventArgs
+        Inherits System.ComponentModel.AsyncCompletedEventArgs
+        
+        Private results() As Object
+        
+        Public Sub New(ByVal results() As Object, ByVal exception As System.Exception, ByVal cancelled As Boolean, ByVal userState As Object)
+            MyBase.New(exception, cancelled, userState)
+            Me.results = results
+        End Sub
+        
+        Public ReadOnly Property Result() As JobsService.RunJobFromTemplateNameResponse
+            Get
+                MyBase.RaiseExceptionIfNecessary
+                Return CType(Me.results(0),JobsService.RunJobFromTemplateNameResponse)
+            End Get
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")>  _
+    Partial Public Class RunJobTemplateFromOptionsXmlCompletedEventArgs
+        Inherits System.ComponentModel.AsyncCompletedEventArgs
+        
+        Private results() As Object
+        
+        Public Sub New(ByVal results() As Object, ByVal exception As System.Exception, ByVal cancelled As Boolean, ByVal userState As Object)
+            MyBase.New(exception, cancelled, userState)
+            Me.results = results
+        End Sub
+        
+        Public ReadOnly Property Result() As JobsService.RunJobTemplateFromOptionsXmlResponse
+            Get
+                MyBase.RaiseExceptionIfNecessary
+                Return CType(Me.results(0),JobsService.RunJobTemplateFromOptionsXmlResponse)
+            End Get
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")>  _
     Partial Public Class JobsServiceSoapClient
         Inherits System.ServiceModel.ClientBase(Of JobsService.JobsServiceSoap)
         Implements JobsService.JobsServiceSoap
+        
+        Private onBeginRunJobFromTemplateNameDelegate As BeginOperationDelegate
+        
+        Private onEndRunJobFromTemplateNameDelegate As EndOperationDelegate
+        
+        Private onRunJobFromTemplateNameCompletedDelegate As System.Threading.SendOrPostCallback
+        
+        Private onBeginRunJobTemplateFromOptionsXmlDelegate As BeginOperationDelegate
+        
+        Private onEndRunJobTemplateFromOptionsXmlDelegate As EndOperationDelegate
+        
+        Private onRunJobTemplateFromOptionsXmlCompletedDelegate As System.Threading.SendOrPostCallback
         
         Public Sub New()
             MyBase.New
@@ -406,20 +462,104 @@ Namespace JobsService
             MyBase.New(binding, remoteAddress)
         End Sub
         
+        Public Event RunJobFromTemplateNameCompleted As System.EventHandler(Of RunJobFromTemplateNameCompletedEventArgs)
+        
+        Public Event RunJobTemplateFromOptionsXmlCompleted As System.EventHandler(Of RunJobTemplateFromOptionsXmlCompletedEventArgs)
+        
         Public Function RunJobFromTemplateName(ByVal request As JobsService.RunJobFromTemplateNameRequest) As JobsService.RunJobFromTemplateNameResponse Implements JobsService.JobsServiceSoap.RunJobFromTemplateName
             Return MyBase.Channel.RunJobFromTemplateName(request)
         End Function
         
-        Public Function RunJobFromTemplateNameAsync(ByVal request As JobsService.RunJobFromTemplateNameRequest) As System.Threading.Tasks.Task(Of JobsService.RunJobFromTemplateNameResponse) Implements JobsService.JobsServiceSoap.RunJobFromTemplateNameAsync
-            Return MyBase.Channel.RunJobFromTemplateNameAsync(request)
+        <System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)>  _
+        Public Function BeginRunJobFromTemplateName(ByVal request As JobsService.RunJobFromTemplateNameRequest, ByVal callback As System.AsyncCallback, ByVal asyncState As Object) As System.IAsyncResult Implements JobsService.JobsServiceSoap.BeginRunJobFromTemplateName
+            Return MyBase.Channel.BeginRunJobFromTemplateName(request, callback, asyncState)
         End Function
+        
+        <System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)>  _
+        Public Function EndRunJobFromTemplateName(ByVal result As System.IAsyncResult) As JobsService.RunJobFromTemplateNameResponse Implements JobsService.JobsServiceSoap.EndRunJobFromTemplateName
+            Return MyBase.Channel.EndRunJobFromTemplateName(result)
+        End Function
+        
+        Private Function OnBeginRunJobFromTemplateName(ByVal inValues() As Object, ByVal callback As System.AsyncCallback, ByVal asyncState As Object) As System.IAsyncResult
+            Dim request As JobsService.RunJobFromTemplateNameRequest = CType(inValues(0),JobsService.RunJobFromTemplateNameRequest)
+            Return Me.BeginRunJobFromTemplateName(request, callback, asyncState)
+        End Function
+        
+        Private Function OnEndRunJobFromTemplateName(ByVal result As System.IAsyncResult) As Object()
+            Dim retVal As JobsService.RunJobFromTemplateNameResponse = Me.EndRunJobFromTemplateName(result)
+            Return New Object() {retVal}
+        End Function
+        
+        Private Sub OnRunJobFromTemplateNameCompleted(ByVal state As Object)
+            If (Not (Me.RunJobFromTemplateNameCompletedEvent) Is Nothing) Then
+                Dim e As InvokeAsyncCompletedEventArgs = CType(state,InvokeAsyncCompletedEventArgs)
+                RaiseEvent RunJobFromTemplateNameCompleted(Me, New RunJobFromTemplateNameCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState))
+            End If
+        End Sub
+        
+        Public Overloads Sub RunJobFromTemplateNameAsync(ByVal request As JobsService.RunJobFromTemplateNameRequest)
+            Me.RunJobFromTemplateNameAsync(request, Nothing)
+        End Sub
+        
+        Public Overloads Sub RunJobFromTemplateNameAsync(ByVal request As JobsService.RunJobFromTemplateNameRequest, ByVal userState As Object)
+            If (Me.onBeginRunJobFromTemplateNameDelegate Is Nothing) Then
+                Me.onBeginRunJobFromTemplateNameDelegate = AddressOf Me.OnBeginRunJobFromTemplateName
+            End If
+            If (Me.onEndRunJobFromTemplateNameDelegate Is Nothing) Then
+                Me.onEndRunJobFromTemplateNameDelegate = AddressOf Me.OnEndRunJobFromTemplateName
+            End If
+            If (Me.onRunJobFromTemplateNameCompletedDelegate Is Nothing) Then
+                Me.onRunJobFromTemplateNameCompletedDelegate = AddressOf Me.OnRunJobFromTemplateNameCompleted
+            End If
+            MyBase.InvokeAsync(Me.onBeginRunJobFromTemplateNameDelegate, New Object() {request}, Me.onEndRunJobFromTemplateNameDelegate, Me.onRunJobFromTemplateNameCompletedDelegate, userState)
+        End Sub
         
         Public Function RunJobTemplateFromOptionsXml(ByVal request As JobsService.RunJobTemplateFromOptionsXmlRequest) As JobsService.RunJobTemplateFromOptionsXmlResponse Implements JobsService.JobsServiceSoap.RunJobTemplateFromOptionsXml
             Return MyBase.Channel.RunJobTemplateFromOptionsXml(request)
         End Function
         
-        Public Function RunJobTemplateFromOptionsXmlAsync(ByVal request As JobsService.RunJobTemplateFromOptionsXmlRequest) As System.Threading.Tasks.Task(Of JobsService.RunJobTemplateFromOptionsXmlResponse) Implements JobsService.JobsServiceSoap.RunJobTemplateFromOptionsXmlAsync
-            Return MyBase.Channel.RunJobTemplateFromOptionsXmlAsync(request)
+        <System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)>  _
+        Public Function BeginRunJobTemplateFromOptionsXml(ByVal request As JobsService.RunJobTemplateFromOptionsXmlRequest, ByVal callback As System.AsyncCallback, ByVal asyncState As Object) As System.IAsyncResult Implements JobsService.JobsServiceSoap.BeginRunJobTemplateFromOptionsXml
+            Return MyBase.Channel.BeginRunJobTemplateFromOptionsXml(request, callback, asyncState)
         End Function
+        
+        <System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)>  _
+        Public Function EndRunJobTemplateFromOptionsXml(ByVal result As System.IAsyncResult) As JobsService.RunJobTemplateFromOptionsXmlResponse Implements JobsService.JobsServiceSoap.EndRunJobTemplateFromOptionsXml
+            Return MyBase.Channel.EndRunJobTemplateFromOptionsXml(result)
+        End Function
+        
+        Private Function OnBeginRunJobTemplateFromOptionsXml(ByVal inValues() As Object, ByVal callback As System.AsyncCallback, ByVal asyncState As Object) As System.IAsyncResult
+            Dim request As JobsService.RunJobTemplateFromOptionsXmlRequest = CType(inValues(0),JobsService.RunJobTemplateFromOptionsXmlRequest)
+            Return Me.BeginRunJobTemplateFromOptionsXml(request, callback, asyncState)
+        End Function
+        
+        Private Function OnEndRunJobTemplateFromOptionsXml(ByVal result As System.IAsyncResult) As Object()
+            Dim retVal As JobsService.RunJobTemplateFromOptionsXmlResponse = Me.EndRunJobTemplateFromOptionsXml(result)
+            Return New Object() {retVal}
+        End Function
+        
+        Private Sub OnRunJobTemplateFromOptionsXmlCompleted(ByVal state As Object)
+            If (Not (Me.RunJobTemplateFromOptionsXmlCompletedEvent) Is Nothing) Then
+                Dim e As InvokeAsyncCompletedEventArgs = CType(state,InvokeAsyncCompletedEventArgs)
+                RaiseEvent RunJobTemplateFromOptionsXmlCompleted(Me, New RunJobTemplateFromOptionsXmlCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState))
+            End If
+        End Sub
+        
+        Public Overloads Sub RunJobTemplateFromOptionsXmlAsync(ByVal request As JobsService.RunJobTemplateFromOptionsXmlRequest)
+            Me.RunJobTemplateFromOptionsXmlAsync(request, Nothing)
+        End Sub
+        
+        Public Overloads Sub RunJobTemplateFromOptionsXmlAsync(ByVal request As JobsService.RunJobTemplateFromOptionsXmlRequest, ByVal userState As Object)
+            If (Me.onBeginRunJobTemplateFromOptionsXmlDelegate Is Nothing) Then
+                Me.onBeginRunJobTemplateFromOptionsXmlDelegate = AddressOf Me.OnBeginRunJobTemplateFromOptionsXml
+            End If
+            If (Me.onEndRunJobTemplateFromOptionsXmlDelegate Is Nothing) Then
+                Me.onEndRunJobTemplateFromOptionsXmlDelegate = AddressOf Me.OnEndRunJobTemplateFromOptionsXml
+            End If
+            If (Me.onRunJobTemplateFromOptionsXmlCompletedDelegate Is Nothing) Then
+                Me.onRunJobTemplateFromOptionsXmlCompletedDelegate = AddressOf Me.OnRunJobTemplateFromOptionsXmlCompleted
+            End If
+            MyBase.InvokeAsync(Me.onBeginRunJobTemplateFromOptionsXmlDelegate, New Object() {request}, Me.onEndRunJobTemplateFromOptionsXmlDelegate, Me.onRunJobTemplateFromOptionsXmlCompletedDelegate, userState)
+        End Sub
     End Class
 End Namespace
