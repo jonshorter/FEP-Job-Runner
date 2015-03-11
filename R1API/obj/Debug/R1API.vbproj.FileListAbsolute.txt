@@ -24,3 +24,4 @@ C:\Users\Client\Documents\R1-Job-Runner\R1API\obj\Debug\R1API.AgentorShareDialog
 C:\Users\Client\Documents\R1-Job-Runner\R1API\obj\Debug\R1API.Main.resources
 C:\Users\Client\Documents\R1-Job-Runner\R1API\obj\Debug\R1API.Resources.resources
 C:\Users\Client\Documents\R1-Job-Runner\R1API\obj\Debug\R1API.vbproj.GenerateResource.Cache
+C:\Users\Client\Documents\R1-Job-Runner\R1API\bin\Debug\R1_Job_Runner.exe.config

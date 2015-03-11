@@ -1,6 +1,6 @@
 ﻿Imports Newtonsoft.Json
 Imports System.Runtime.CompilerServices
-Imports R1API.JobsService
+Imports R1_Job_Runner.JobsService
 Imports Newtonsoft.Json.Linq
 
 Module BoxedJobs

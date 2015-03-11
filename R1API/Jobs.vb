@@ -195,7 +195,7 @@ Module Jobs
 
     End Function
 
-    Public Function RunFromTemplateName(ByVal srvname As String, ByVal templatename As String, ByVal JobName As String, ByVal ProjectName As String, ByVal APIUser As String, ByVal APIPass As String, ByVal cnames() As String, ByVal snames() As String, ByVal filter As String, ByVal pids() As String, ByVal processnames() As String, ByVal remediatesendfile() As R1API.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile, ByVal remediateexecute() As R1API.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute, ByVal remediateerase() As R1API.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase)
+    Public Function RunFromTemplateName(ByVal srvname As String, ByVal templatename As String, ByVal JobName As String, ByVal ProjectName As String, ByVal APIUser As String, ByVal APIPass As String, ByVal cnames() As String, ByVal snames() As String, ByVal filter As String, ByVal pids() As String, ByVal processnames() As String, ByVal remediatesendfile() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile, ByVal remediateexecute() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute, ByVal remediateerase() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase)
         'Submit a job via the API
         Try
 

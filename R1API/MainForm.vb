@@ -44,40 +44,40 @@ Public Class Main
         End If
 
         'Agent Remediation - Send File
-        Dim remediatesendfile(0) As R1API.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile
+        Dim remediatesendfile(0) As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile
         If txtremsendsource.Text <> "" Then
             'Set options
-            remediatesendfile(0) = New R1API.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile
+            remediatesendfile(0) = New R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile
             remediatesendfile(0).FileToSend = txtremsendsource.Text
             remediatesendfile(0).IsRelative = True
             remediatesendfile(0).RemotePath = txtremsenddest.Text
             remediatesendfile(0).OverwriteIfExists = chkremsenddelete.Checked
         Else
             'Blank options - null it 
-            remediatesendfile = New R1API.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile() {}
+            remediatesendfile = New R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile() {}
         End If
 
         'Agent Remediation - Erase File
-        Dim remediateerase(0) As R1API.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase
+        Dim remediateerase(0) As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase
         If txtremdelfilepath.Text <> "" Then
             'Set options
-            remediateerase(0) = New R1API.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase
+            remediateerase(0) = New R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase
             remediateerase(0).RemotePath = txtremdelfilepath.Text
         Else
             'Blank options - null it
-            remediateerase = New R1API.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase() {}
+            remediateerase = New R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase() {}
         End If
 
         'Agent Remediation - Execute
-        Dim remediateexecute(0) As R1API.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute
+        Dim remediateexecute(0) As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute
         If txtremexecpath.Text <> "" Then
             'Set options
-            remediateexecute(0) = New R1API.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute
+            remediateexecute(0) = New R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute
             remediateexecute(0).Executable = txtremexecpath.Text
             remediateexecute(0).Arguments = txtremexecargs.Text
         Else
             'Blank options - null it
-            remediateexecute = New R1API.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute() {}
+            remediateexecute = New R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute() {}
         End If
 
         'Agent Remediation - Kill by PID
@@ -268,6 +268,7 @@ Public Class Main
    
 
     Private Sub TabPage1_Enter(sender As Object, e As EventArgs) Handles tabTargets.Enter
+        'Set text boxes to default values from settings
         txtComputerTarget.Text = txtdefaultcomputer.Text
         txtNetSharePath.Text = txtdefaultshare.Text
 
@@ -280,6 +281,7 @@ Public Class Main
     End Sub
 
     Private Sub tabBoxedJobs_Enter(sender As Object, e As EventArgs) Handles tabBoxedJobs.Enter
+        'Get box jobs into UI
         txtboxtargetcomputer.Text = txtdefaultcomputer.Text
         Dim boxnames As Dictionary(Of String, String) = GetListofBoxedJobs()
         For Each item In boxnames
