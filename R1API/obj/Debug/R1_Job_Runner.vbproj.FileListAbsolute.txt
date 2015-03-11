@@ -1,0 +1,12 @@
+C:\Users\Client\Documents\R1-Job-Runner\R1API\bin\Debug\R1_Job_Runner.exe.config
+C:\Users\Client\Documents\R1-Job-Runner\R1API\bin\Debug\R1_Job_Runner.exe
+C:\Users\Client\Documents\R1-Job-Runner\R1API\bin\Debug\R1_Job_Runner.pdb
+C:\Users\Client\Documents\R1-Job-Runner\R1API\bin\Debug\R1_Job_Runner.xml
+C:\Users\Client\Documents\R1-Job-Runner\R1API\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Client\Documents\R1-Job-Runner\R1API\obj\Debug\R1_Job_Runner.AgentorShareDialog.resources
+C:\Users\Client\Documents\R1-Job-Runner\R1API\obj\Debug\R1_Job_Runner.Main.resources
+C:\Users\Client\Documents\R1-Job-Runner\R1API\obj\Debug\R1_Job_Runner.Resources.resources
+C:\Users\Client\Documents\R1-Job-Runner\R1API\obj\Debug\R1_Job_Runner.vbproj.GenerateResource.Cache
+C:\Users\Client\Documents\R1-Job-Runner\R1API\obj\Debug\R1_Job_Runner.exe
+C:\Users\Client\Documents\R1-Job-Runner\R1API\obj\Debug\R1_Job_Runner.xml
+C:\Users\Client\Documents\R1-Job-Runner\R1API\obj\Debug\R1_Job_Runner.pdb
