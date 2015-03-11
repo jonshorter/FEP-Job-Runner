@@ -236,9 +236,9 @@ Partial Class Main
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(5, 45)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(58, 13)
+        Me.Label2.Size = New System.Drawing.Size(95, 13)
         Me.Label2.TabIndex = 7
-        Me.Label2.Text = "Job Name:"
+        Me.Label2.Text = "Default Job Name:"
         '
         'txtDefaultJobName
         '
@@ -369,9 +369,9 @@ Partial Class Main
         Me.Label7.AutoSize = True
         Me.Label7.Location = New System.Drawing.Point(5, 20)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(102, 13)
+        Me.Label7.Size = New System.Drawing.Size(122, 13)
         Me.Label7.TabIndex = 16
-        Me.Label7.Text = "Web Server Name*:"
+        Me.Label7.Text = "Web Server Hostname*:"
         '
         'GroupBox4
         '
@@ -396,7 +396,7 @@ Partial Class Main
         Me.GroupBox4.Controls.Add(Me.Label4)
         Me.GroupBox4.Location = New System.Drawing.Point(6, 7)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(616, 199)
+        Me.GroupBox4.Size = New System.Drawing.Size(616, 208)
         Me.GroupBox4.TabIndex = 19
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Settings"
@@ -406,7 +406,7 @@ Partial Class Main
         Me.txtStatusSettings.BackColor = System.Drawing.SystemColors.Control
         Me.txtStatusSettings.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtStatusSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtStatusSettings.Location = New System.Drawing.Point(11, 165)
+        Me.txtStatusSettings.Location = New System.Drawing.Point(8, 186)
         Me.txtStatusSettings.Name = "txtStatusSettings"
         Me.txtStatusSettings.ReadOnly = True
         Me.txtStatusSettings.Size = New System.Drawing.Size(482, 16)
@@ -459,7 +459,7 @@ Partial Class Main
         '
         'btnSaveSettings
         '
-        Me.btnSaveSettings.Location = New System.Drawing.Point(499, 165)
+        Me.btnSaveSettings.Location = New System.Drawing.Point(454, 157)
         Me.btnSaveSettings.Name = "btnSaveSettings"
         Me.btnSaveSettings.Size = New System.Drawing.Size(96, 23)
         Me.btnSaveSettings.TabIndex = 21
@@ -470,7 +470,7 @@ Partial Class Main
         '
         Me.txtDefaultTemplateName.FormattingEnabled = True
         Me.txtDefaultTemplateName.Items.AddRange(New Object() {"coll-evtx", "Drop Process by PID", "ETM Relative Time Query", "EXE-Metadata-Cerb", "Lockdown NIC", "LockdownEnableNIC", "Memory Acquisition", "Memory Analysis", "Registry-Autostart", "Registry-Full", "Remediate-Name", "Remediate-PID", "Small-exes-Cerb", "Software Inventory", "Vol-Deep", "Vol-Deep-Cerb", "Vol-Hidden-Cerb", "Vol-Hidden-Injected", "Vol-Quick", "Vol-Quick-Cerb", "Vol-Quick-Sched"})
-        Me.txtDefaultTemplateName.Location = New System.Drawing.Point(454, 68)
+        Me.txtDefaultTemplateName.Location = New System.Drawing.Point(129, 146)
         Me.txtDefaultTemplateName.Name = "txtDefaultTemplateName"
         Me.txtDefaultTemplateName.Size = New System.Drawing.Size(154, 21)
         Me.txtDefaultTemplateName.TabIndex = 20
@@ -479,11 +479,11 @@ Partial Class Main
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(366, 71)
+        Me.Label14.Location = New System.Drawing.Point(6, 149)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(85, 13)
+        Me.Label14.Size = New System.Drawing.Size(122, 13)
         Me.Label14.TabIndex = 19
-        Me.Label14.Text = "Template Name:"
+        Me.Label14.Text = "Default Template Name:"
         '
         'tabSubMenu
         '

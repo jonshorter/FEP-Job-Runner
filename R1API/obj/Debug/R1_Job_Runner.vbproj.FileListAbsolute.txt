@@ -10,3 +10,4 @@ C:\Users\Client\Documents\R1-Job-Runner\R1API\obj\Debug\R1_Job_Runner.vbproj.Gen
 C:\Users\Client\Documents\R1-Job-Runner\R1API\obj\Debug\R1_Job_Runner.exe
 C:\Users\Client\Documents\R1-Job-Runner\R1API\obj\Debug\R1_Job_Runner.xml
 C:\Users\Client\Documents\R1-Job-Runner\R1API\obj\Debug\R1_Job_Runner.pdb
+C:\Users\Client\Documents\R1-Job-Runner\R1API\obj\Debug\R1_Job_Runner.vbprojResolveAssemblyReference.cache
