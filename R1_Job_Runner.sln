@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "R1API", "R1API\R1API.vbproj", "{DE12E496-15C2-42F9-B562-2C0A4703730D}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "R1_Job_Runner", "R1API\R1_Job_Runner.vbproj", "{DE12E496-15C2-42F9-B562-2C0A4703730D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

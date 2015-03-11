@@ -8,13 +8,14 @@ Imports System
 Imports System.Security.Cryptography.X509Certificates
 Imports System.Net.Security
 Imports System.Text.RegularExpressions
+Imports Newtonsoft.Json.Linq
 
 Module Jobs
     'Null String 
     Public nullstring() As String = New String() {}
 
 
-    Public Class InclFilter
+    Public Class InclusionFilter
         'Inclusion Filter Class - All options available in an inclusion filter
         Public FilterName As String
         Public PathURLContains As String
@@ -26,7 +27,7 @@ Module Jobs
         Public IsRegexSearch As Boolean
     End Class
 
-    Public Class ExclFilter
+    Public Class ExclusionFilter
         'Exclusion Filter Class - All options available in an inclusion filter
         Public FilterName As String
         Public PathURLContains As String
@@ -34,6 +35,94 @@ Module Jobs
         Public MD5HashsEntryText As String
     End Class
 
+    Public Function ParseFilterJSON(ByVal JSON As String)
+
+        Dim jsonfilter As JObject = JsonConvert.DeserializeObject(JSON)
+        'Get All Inclusion Filters
+        Dim InList As New List(Of InclusionFilter)
+        Dim inob As New JArray
+        If jsonfilter.TryGetValue("InclusionFilters", inob) = True Then
+            Dim infilt() As InclusionFilter = JsonConvert.DeserializeObject(Of InclusionFilter())(jsonfilter.GetValue("InclusionFilters").ToString)
+            For Each item In infilt
+                InList.Add(item)
+            Next
+        Else
+        End If
+
+        'Get All Exclusion Filters
+        Dim ExList As New List(Of ExclusionFilter)
+
+        If jsonfilter.TryGetValue("ExclusionFilters", inob) = True Then
+            Dim exfilt() As ExclusionFilter = JsonConvert.DeserializeObject(Of ExclusionFilter())(jsonfilter.GetValue("ExclusionFilters").ToString)
+            For Each item In exfilt
+                ExList.Add(item)
+            Next
+        Else
+
+        End If
+
+        Dim FList As New List(Of Object)
+        FList.Add(InList)
+        FList.Add(ExList)
+
+        Return FList
+
+    End Function
+
+
+
+    Public Function BuildFilterJSON(ByVal InFilterList As List(Of Jobs.InclusionFilter), ByVal ExFilterList As List(Of Jobs.ExclusionFilter))
+        'Create StringWriter for use with JSONTextWriter
+        Dim jsonsw As New System.IO.StringWriter
+        'Create JsonTextWriter
+        Dim jsonstr As New JsonTextWriter(jsonsw)
+        'Json Start
+        jsonstr.WriteStartObject()
+        'If the inclusion filter has a name, generate the JSON
+        If InFilterList.Count > 0 Then
+            'JSON Property
+            jsonstr.WritePropertyName("InclusionFilters")
+            'Array
+            jsonstr.WriteStartArray()
+            For Each item As InclusionFilter In InFilterList
+
+                If item.FilterName <> "" Then
+
+                    'We are serializing the inclusion filter class into JSON. So we WriteRaw so it doesn't try to serialize it twice.
+                    jsonstr.WriteRawValue(JsonConvert.SerializeObject(item))
+                    'End Array
+
+                End If
+            Next
+            jsonstr.WriteEndArray()
+        End If
+        'If the exclusion filter has a name, generate the JSON
+        If ExFilterList.Count > 0 Then
+            'JSON Property
+            jsonstr.WritePropertyName("ExclusionFilters")
+            'Array
+            jsonstr.WriteStartArray()
+            For Each item As ExclusionFilter In ExFilterList
+                If item.FilterName <> "" Then
+
+                    'We are serializing the exclusion filter class into JSON. So we WriteRaw so it doesn't try to serialize it twice.
+                    jsonstr.WriteRawValue(JsonConvert.SerializeObject(item))
+                    'End Array
+
+                End If
+            Next
+            jsonstr.WriteEndArray()
+        End If
+        'Json End
+        jsonstr.WriteEndObject()
+        'Close the json writer
+        jsonstr.Close()
+        'Return the JSON
+        Return jsonsw.ToString
+
+        jsonsw.Close()
+
+    End Function
 
 
     Public Function CreateFilter()
@@ -42,7 +131,8 @@ Module Jobs
         'This returns a JSON
         '-------------------------------
         'Make a new inclusion filter based on the class and set the variables based on the Form
-        Dim inclfilter As New InclFilter
+
+        Dim inclfilter As New InclusionFilter
         If Main.txtinclfiltername.Text <> "" Then inclfilter.FilterName = Main.txtinclfiltername.Text
         If Main.txtinclkeywords.Text <> "" Then
             If Main.rdoinclsimplesearch.Checked Then inclfilter.IsKeyWordSearch = Main.rdoinclsimplesearch.Checked
@@ -55,7 +145,7 @@ Module Jobs
         If Main.txtinclpathcontains.Text <> "" Then inclfilter.PathURLContains = Main.txtinclpathcontains.Text
 
         'Make a new exclusion filter based on the class and set the variables based on the Form
-        Dim exclfilter As New ExclFilter
+        Dim exclfilter As New ExclusionFilter
         If Main.txtexclfiltername.Text <> "" Then exclfilter.FilterName = Main.txtexclfiltername.Text
         If Main.txtexclextensions.Text <> "" Then exclfilter.Extensions = Main.txtexclextensions.Text
         If Main.txtexclpathcontains.Text <> "" Then exclfilter.PathURLContains = Main.txtexclpathcontains.Text
@@ -105,7 +195,7 @@ Module Jobs
 
     End Function
 
-    Public Function RunFromTemplateName(ByVal srvname As String, ByVal templatename As String, ByVal JobName As String, ByVal ProjectName As String, ByVal APIUser As String, ByVal APIPass As String, ByVal cnames() As String, ByVal snames() As String, ByVal filter As String, ByVal pids() As String, ByVal processnames() As String, ByVal remediatesendfile() As R1API.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile, ByVal remediateexecute() As R1API.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute, ByVal remediateerase() As R1API.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase)
+    Public Function RunFromTemplateName(ByVal srvname As String, ByVal templatename As String, ByVal JobName As String, ByVal ProjectName As String, ByVal APIUser As String, ByVal APIPass As String, ByVal cnames() As String, ByVal snames() As String, ByVal filter As String, ByVal pids() As String, ByVal processnames() As String, ByVal remediatesendfile() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile, ByVal remediateexecute() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute, ByVal remediateerase() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase)
         'Submit a job via the API
         Try
 
@@ -168,5 +258,19 @@ Module Jobs
         'Return result
         Return test.IsMatch(input)
     End Function
+
+    Public Sub ClearAllJobOptioons(ByVal controls As System.Windows.Forms.Control.ControlCollection)
+        For Each ctrl As Control In controls
+            Console.WriteLine("Control: " & ctrl.Name)
+            If TypeOf (ctrl) Is TextBox Then
+                CType(ctrl, TextBox).Text = String.Empty
+            ElseIf TypeOf (ctrl) Is NumericUpDown Then
+                CType(ctrl, NumericUpDown).Value = 0
+            ElseIf TypeOf (ctrl) Is CheckBox Then
+                CType(ctrl, CheckBox).Checked = False
+            End If
+
+        Next
+    End Sub
 
 End Module
