@@ -108,7 +108,7 @@ Public Class Main
         'Check if the returned message is a GUID or Error
         If isGuid(jobid) Then
             'GUID - Job submitted successfully
-            txtStatusBox.Text = "Job: " & txtDefaultJobName.Text & " in Project: " & txtDefaultProjectName.Text & " submitted sucessfully. GUID: " & jobid
+            txtStatusBox.Text = "Job: " & txtJobName.Text & " in Project: " & txtProjectName.Text & " submitted sucessfully. GUID: " & jobid
             txtStatusBox.ForeColor = Color.Black
         Else
             'Error - Something happened

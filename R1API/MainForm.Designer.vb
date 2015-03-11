@@ -234,15 +234,15 @@ Partial Class Main
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(8, 45)
+        Me.Label2.Location = New System.Drawing.Point(5, 45)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(62, 13)
+        Me.Label2.Size = New System.Drawing.Size(58, 13)
         Me.Label2.TabIndex = 7
-        Me.Label2.Text = "Job Name*:"
+        Me.Label2.Text = "Job Name:"
         '
         'txtDefaultJobName
         '
-        Me.txtDefaultJobName.Location = New System.Drawing.Point(116, 42)
+        Me.txtDefaultJobName.Location = New System.Drawing.Point(129, 42)
         Me.txtDefaultJobName.Name = "txtDefaultJobName"
         Me.txtDefaultJobName.Size = New System.Drawing.Size(235, 20)
         Me.txtDefaultJobName.TabIndex = 8
@@ -250,7 +250,7 @@ Partial Class Main
         '
         'txtDefaultProjectName
         '
-        Me.txtDefaultProjectName.Location = New System.Drawing.Point(116, 68)
+        Me.txtDefaultProjectName.Location = New System.Drawing.Point(129, 68)
         Me.txtDefaultProjectName.Name = "txtDefaultProjectName"
         Me.txtDefaultProjectName.Size = New System.Drawing.Size(235, 20)
         Me.txtDefaultProjectName.TabIndex = 9
@@ -259,15 +259,15 @@ Partial Class Main
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(8, 71)
+        Me.Label3.Location = New System.Drawing.Point(5, 71)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(74, 13)
+        Me.Label3.Size = New System.Drawing.Size(111, 13)
         Me.Label3.TabIndex = 10
-        Me.Label3.Text = "Project Name:"
+        Me.Label3.Text = "Default Project Name:"
         '
         'txtApiUser
         '
-        Me.txtApiUser.Location = New System.Drawing.Point(441, 17)
+        Me.txtApiUser.Location = New System.Drawing.Point(454, 17)
         Me.txtApiUser.Name = "txtApiUser"
         Me.txtApiUser.Size = New System.Drawing.Size(154, 20)
         Me.txtApiUser.TabIndex = 11
@@ -276,7 +276,7 @@ Partial Class Main
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(357, 20)
+        Me.Label4.Location = New System.Drawing.Point(370, 20)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(82, 13)
         Me.Label4.TabIndex = 12
@@ -285,7 +285,7 @@ Partial Class Main
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(357, 46)
+        Me.Label5.Location = New System.Drawing.Point(370, 46)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(80, 13)
         Me.Label5.TabIndex = 13
@@ -293,7 +293,7 @@ Partial Class Main
         '
         'txtAPIPass
         '
-        Me.txtAPIPass.Location = New System.Drawing.Point(441, 43)
+        Me.txtAPIPass.Location = New System.Drawing.Point(454, 43)
         Me.txtAPIPass.Name = "txtAPIPass"
         Me.txtAPIPass.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtAPIPass.Size = New System.Drawing.Size(154, 20)
@@ -358,7 +358,7 @@ Partial Class Main
         '
         'txtServer
         '
-        Me.txtServer.Location = New System.Drawing.Point(116, 17)
+        Me.txtServer.Location = New System.Drawing.Point(129, 17)
         Me.txtServer.Name = "txtServer"
         Me.txtServer.Size = New System.Drawing.Size(235, 20)
         Me.txtServer.TabIndex = 17
@@ -367,7 +367,7 @@ Partial Class Main
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(8, 20)
+        Me.Label7.Location = New System.Drawing.Point(5, 20)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(102, 13)
         Me.Label7.TabIndex = 16
@@ -416,7 +416,7 @@ Partial Class Main
         'chkbypasscerts
         '
         Me.chkbypasscerts.AutoSize = True
-        Me.chkbypasscerts.Location = New System.Drawing.Point(441, 97)
+        Me.chkbypasscerts.Location = New System.Drawing.Point(454, 97)
         Me.chkbypasscerts.Name = "chkbypasscerts"
         Me.chkbypasscerts.Size = New System.Drawing.Size(145, 17)
         Me.chkbypasscerts.TabIndex = 26
@@ -425,7 +425,7 @@ Partial Class Main
         '
         'txtdefaultshare
         '
-        Me.txtdefaultshare.Location = New System.Drawing.Point(116, 120)
+        Me.txtdefaultshare.Location = New System.Drawing.Point(129, 120)
         Me.txtdefaultshare.Name = "txtdefaultshare"
         Me.txtdefaultshare.Size = New System.Drawing.Size(235, 20)
         Me.txtdefaultshare.TabIndex = 24
@@ -434,15 +434,15 @@ Partial Class Main
         'Label29
         '
         Me.Label29.AutoSize = True
-        Me.Label29.Location = New System.Drawing.Point(8, 123)
+        Me.Label29.Location = New System.Drawing.Point(5, 123)
         Me.Label29.Name = "Label29"
-        Me.Label29.Size = New System.Drawing.Size(69, 13)
+        Me.Label29.Size = New System.Drawing.Size(106, 13)
         Me.Label29.TabIndex = 25
-        Me.Label29.Text = "Share Name:"
+        Me.Label29.Text = "Default Share Name:"
         '
         'txtdefaultcomputer
         '
-        Me.txtdefaultcomputer.Location = New System.Drawing.Point(116, 94)
+        Me.txtdefaultcomputer.Location = New System.Drawing.Point(129, 94)
         Me.txtdefaultcomputer.Name = "txtdefaultcomputer"
         Me.txtdefaultcomputer.Size = New System.Drawing.Size(235, 20)
         Me.txtdefaultcomputer.TabIndex = 22
@@ -451,11 +451,11 @@ Partial Class Main
         'Label28
         '
         Me.Label28.AutoSize = True
-        Me.Label28.Location = New System.Drawing.Point(8, 97)
+        Me.Label28.Location = New System.Drawing.Point(5, 97)
         Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(86, 13)
+        Me.Label28.Size = New System.Drawing.Size(123, 13)
         Me.Label28.TabIndex = 23
-        Me.Label28.Text = "Computer Name:"
+        Me.Label28.Text = "Default Computer Name:"
         '
         'btnSaveSettings
         '
@@ -470,7 +470,7 @@ Partial Class Main
         '
         Me.txtDefaultTemplateName.FormattingEnabled = True
         Me.txtDefaultTemplateName.Items.AddRange(New Object() {"coll-evtx", "Drop Process by PID", "ETM Relative Time Query", "EXE-Metadata-Cerb", "Lockdown NIC", "LockdownEnableNIC", "Memory Acquisition", "Memory Analysis", "Registry-Autostart", "Registry-Full", "Remediate-Name", "Remediate-PID", "Small-exes-Cerb", "Software Inventory", "Vol-Deep", "Vol-Deep-Cerb", "Vol-Hidden-Cerb", "Vol-Hidden-Injected", "Vol-Quick", "Vol-Quick-Cerb", "Vol-Quick-Sched"})
-        Me.txtDefaultTemplateName.Location = New System.Drawing.Point(441, 68)
+        Me.txtDefaultTemplateName.Location = New System.Drawing.Point(454, 68)
         Me.txtDefaultTemplateName.Name = "txtDefaultTemplateName"
         Me.txtDefaultTemplateName.Size = New System.Drawing.Size(154, 21)
         Me.txtDefaultTemplateName.TabIndex = 20
@@ -479,7 +479,7 @@ Partial Class Main
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(353, 71)
+        Me.Label14.Location = New System.Drawing.Point(366, 71)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(85, 13)
         Me.Label14.TabIndex = 19
