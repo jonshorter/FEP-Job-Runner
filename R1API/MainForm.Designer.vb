@@ -119,13 +119,15 @@ Partial Class Main
         Me.tabSettings = New System.Windows.Forms.TabPage()
         Me.tabJobExecution = New System.Windows.Forms.TabPage()
         Me.tabBoxedJobs = New System.Windows.Forms.TabPage()
+        Me.lstBoxedJobs = New System.Windows.Forms.CheckedListBox()
         Me.txtStatusBoxJob = New System.Windows.Forms.TextBox()
         Me.btnBoxJobCollection1 = New System.Windows.Forms.Button()
         Me.Label30 = New System.Windows.Forms.Label()
         Me.txtboxtargetcomputer = New System.Windows.Forms.TextBox()
         Me.tabAbout = New System.Windows.Forms.TabPage()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.lstBoxedJobs = New System.Windows.Forms.CheckedListBox()
+        Me.btnSaveAsBox = New System.Windows.Forms.Button()
+        Me.btnLoadFromBox = New System.Windows.Forms.Button()
         Me.grpagent.SuspendLayout()
         Me.grpshare.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -1015,9 +1017,9 @@ Partial Class Main
         Me.Label22.AutoSize = True
         Me.Label22.Location = New System.Drawing.Point(10, 42)
         Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(74, 13)
+        Me.Label22.Size = New System.Drawing.Size(79, 13)
         Me.Label22.TabIndex = 15
-        Me.Label22.Text = "Project Name:"
+        Me.Label22.Text = "Process Name:"
         '
         'nmbremkillprocid
         '
@@ -1074,6 +1076,8 @@ Partial Class Main
         '
         'tabJobExecution
         '
+        Me.tabJobExecution.Controls.Add(Me.btnLoadFromBox)
+        Me.tabJobExecution.Controls.Add(Me.btnSaveAsBox)
         Me.tabJobExecution.Controls.Add(Me.btnExecute)
         Me.tabJobExecution.Controls.Add(Me.txtStatusBox)
         Me.tabJobExecution.Controls.Add(Me.tabSubMenu)
@@ -1099,6 +1103,14 @@ Partial Class Main
         Me.tabBoxedJobs.TabIndex = 2
         Me.tabBoxedJobs.Text = "Boxed Jobs"
         Me.tabBoxedJobs.UseVisualStyleBackColor = True
+        '
+        'lstBoxedJobs
+        '
+        Me.lstBoxedJobs.FormattingEnabled = True
+        Me.lstBoxedJobs.Location = New System.Drawing.Point(22, 98)
+        Me.lstBoxedJobs.Name = "lstBoxedJobs"
+        Me.lstBoxedJobs.Size = New System.Drawing.Size(311, 214)
+        Me.lstBoxedJobs.TabIndex = 22
         '
         'txtStatusBoxJob
         '
@@ -1160,13 +1172,23 @@ Partial Class Main
         Me.TextBox1.TabIndex = 0
         Me.TextBox1.Text = resources.GetString("TextBox1.Text")
         '
-        'lstBoxedJobs
+        'btnSaveAsBox
         '
-        Me.lstBoxedJobs.FormattingEnabled = True
-        Me.lstBoxedJobs.Location = New System.Drawing.Point(22, 98)
-        Me.lstBoxedJobs.Name = "lstBoxedJobs"
-        Me.lstBoxedJobs.Size = New System.Drawing.Size(311, 214)
-        Me.lstBoxedJobs.TabIndex = 22
+        Me.btnSaveAsBox.Location = New System.Drawing.Point(436, 400)
+        Me.btnSaveAsBox.Name = "btnSaveAsBox"
+        Me.btnSaveAsBox.Size = New System.Drawing.Size(75, 23)
+        Me.btnSaveAsBox.TabIndex = 21
+        Me.btnSaveAsBox.Text = "Save as Box"
+        Me.btnSaveAsBox.UseVisualStyleBackColor = True
+        '
+        'btnLoadFromBox
+        '
+        Me.btnLoadFromBox.Location = New System.Drawing.Point(319, 400)
+        Me.btnLoadFromBox.Name = "btnLoadFromBox"
+        Me.btnLoadFromBox.Size = New System.Drawing.Size(90, 23)
+        Me.btnLoadFromBox.TabIndex = 22
+        Me.btnLoadFromBox.Text = "Load From Box"
+        Me.btnLoadFromBox.UseVisualStyleBackColor = True
         '
         'Main
         '
@@ -1321,5 +1343,7 @@ Partial Class Main
     Friend WithEvents btnBoxJobCollection1 As System.Windows.Forms.Button
     Friend WithEvents txtStatusBoxJob As System.Windows.Forms.TextBox
     Friend WithEvents lstBoxedJobs As System.Windows.Forms.CheckedListBox
+    Friend WithEvents btnSaveAsBox As System.Windows.Forms.Button
+    Friend WithEvents btnLoadFromBox As System.Windows.Forms.Button
 
 End Class

@@ -280,15 +280,21 @@ Public Class Main
 
     Private Sub tabBoxedJobs_Enter(sender As Object, e As EventArgs) Handles tabBoxedJobs.Enter
         txtboxtargetcomputer.Text = txtdefaultcomputer.Text
-        Dim boxnames As List(Of String) = GetListofBoxedJobs()
+        Dim boxnames As Dictionary(Of String, String) = GetListofBoxedJobs()
         For Each item In boxnames
-            lstBoxedJobs.Items.Add(item)
+            lstBoxedJobs.Items.Add(item.Key & "*" & item.Value)
         Next
     End Sub
 
     Private Sub btnBoxJobCollection1_Click(sender As Object, e As EventArgs) Handles btnBoxJobCollection1.Click
         '  BoxedJobs.SaveBoxedJob()
-        Dim jobid = BoxedJobs.BoxedJob1(txtServer.Text, txtProjectName.Text, txtApiUser.Text, txtAPIPass.Text, txtboxtargetcomputer.Text)
+        'Dim jobid = BoxedJobs.BoxedJob1(txtServer.Text, txtProjectName.Text, txtApiUser.Text, txtAPIPass.Text, txtboxtargetcomputer.Text)
+        Dim bxjob As New BoxedJob
+        Dim joblocation() As String = lstBoxedJobs.CheckedItems(0).ToString.Split("*")
+        Console.WriteLine("Job Loca: " & joblocation(1))
+        bxjob = BoxedJobs.ParseBoxedJobFromFile(joblocation(1).ToString)
+        If bxjob.BoxJobName = "" Then MsgBox("BAD")
+        MsgBox(bxjob.BoxJobName & " - " & bxjob.R1Filter)
         '' Check if the returned message is a GUID or Error
         'If isGuid(jobid) Then
         '    'GUID - Job submitted successfully
@@ -304,6 +310,89 @@ Public Class Main
     End Sub
 
     Private Sub tabBoxedJobs_Click(sender As Object, e As EventArgs) Handles tabBoxedJobs.Click
+
+    End Sub
+
+    Private Sub btnSaveAsBox_Click(sender As Object, e As EventArgs) Handles btnSaveAsBox.Click
+        Dim in1 As New InclusionFilter
+        Dim in1l As New List(Of InclusionFilter)
+        in1l.Add(in1)
+        Dim ex1l As New List(Of ExclusionFilter)
+        Dim bname = InputBox("Box Name")
+        BoxedJobs.SaveBoxedJob(bname, txtJobName.Text, txtProjectName.Text, txtTemplateName.Text, Jobs.BuildFilterJSON(in1l, ex1l), New JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile() {}, New JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute() {}, New JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase() {}, Jobs.nullstring, Jobs.nullstring)
+    End Sub
+
+    Private Sub btnLoadFromBox_Click(sender As Object, e As EventArgs) Handles btnLoadFromBox.Click
+        Dim fname = InputBox("JSON Path")
+        If IO.File.Exists(fname) Then
+
+
+            Dim box As BoxedJob = BoxedJobs.ParseBoxedJobFromFile(fname)
+            txtJobName.Text = box.R1JobName
+            txtProjectName.Text = box.R1Project
+            txtTemplateName.Text = box.R1Template
+            Dim flist As List(Of Object) = Jobs.ParseFilterJSON(box.R1Filter)
+            Dim inlist As New List(Of InclusionFilter)
+            Dim exlist As New List(Of ExclusionFilter)
+            inlist = flist(0)
+            exlist = flist(1)
+            If inlist.Count > 0 Then
+                txtinclfiltername.Text = inlist.Item(0).FilterName
+                txtinclextensions.Text = inlist.Item(0).Extensions
+                txtinclkeywords.Text = inlist.Item(0).Keywords
+                txtinclmd5hash.Text = inlist.Item(0).MD5HashsEntryText
+                txtinclpathcontains.Text = inlist(0).PathURLContains
+                chkinclsearchfilename.Checked = inlist.Item(0).IsSearchFilenameOnly
+                rdoinclregexsearch.Checked = inlist.Item(0).IsRegexSearch
+                rdoinclsimplesearch.Checked = inlist.Item(0).IsKeyWordSearch
+            End If
+
+            If exlist.Count > 0 Then
+                txtexclextensions.Text = exlist(0).Extensions
+                txtexclfiltername.Text = exlist(0).FilterName
+                txtexclmd5hash.Text = exlist(0).MD5HashsEntryText
+                txtexclpathcontains.Text = exlist(0).PathURLContains
+            End If
+
+
+            Dim ar_send() As JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile
+            ar_send = box.R1_AR_Send
+            If ar_send.Count > 0 Then
+                txtremsenddest.Text = ar_send(0).RemotePath
+                txtremsendsource.Text = ar_send(0).FileToSend
+                chkremsenddelete.Checked = ar_send(0).OverwriteIfExists
+            End If
+
+            Dim ar_exec() As JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute
+            ar_exec = box.R1_AR_Execute
+            If ar_exec.Count > 0 Then
+                txtremexecargs.Text = ar_exec(0).Arguments
+                txtremexecpath.Text = ar_exec(0).Executable
+            End If
+
+            Dim ar_erase() As JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase
+            ar_erase = box.R1_AR_Erase
+            If ar_erase.Count > 0 Then
+                txtremdelfilepath.Text = ar_erase(0).RemotePath
+            End If
+
+            Dim pids() As String = box.R1_AR_PIDS
+            If pids.Count > 0 Then
+                nmbremkillprocid.Value = pids(0)
+            End If
+
+            Dim processnames() As String = box.R1_AR_ProcessNames
+            If processnames.Count > 0 Then
+                txtremkillprocname.Text = processnames(0)
+            End If
+
+
+        Else
+            MsgBox("File Doesn't Exist")
+        End If
+
+
+
 
     End Sub
 End Class

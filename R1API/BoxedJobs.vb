@@ -5,6 +5,21 @@ Imports Newtonsoft.Json.Linq
 
 Module BoxedJobs
 
+    Public Class BoxedJob
+        Public BoxJobName As String
+        Public R1JobName As String
+        Public R1Project As String
+        Public R1Template As String
+        Public R1Filter As String
+        Public R1_AR_Send() As JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile
+        Public R1_AR_Execute() As JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute
+        Public R1_AR_Erase() As JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase
+        Public R1_AR_PIDS() As String
+        Public R1_AR_ProcessNames() As String
+
+
+    End Class
+
     Public Function BoxedJob1(ByVal Server As String, ByVal Project As String, ByVal apiUser As String, ByVal apiPass As String, ByVal target As String)
 
         Dim ar_sf(1) As JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile
@@ -61,28 +76,28 @@ Module BoxedJobs
         ' ar_pnames = Jobs.nullstring
 
         'job 1 filter opts
-        Dim inclfilter As New InclFilter
+        Dim inclfilter As New InclusionFilter
         inclfilter.FilterName = "Collection1 Test"
         inclfilter.Extensions = "txt"
         inclfilter.PathURLContains = "Users"
-        Dim inclfilter2 As New InclFilter
+        Dim inclfilter2 As New InclusionFilter
         inclfilter2.FilterName = "Collection2 Test"
         inclfilter2.Extensions = "doc"
         inclfilter2.PathURLContains = "Users"
 
-        Dim exclfilter As New ExclFilter
+        Dim exclfilter As New ExclusionFilter
         exclfilter.FilterName = "Ignore 1"
         exclfilter.Extensions = "exe"
 
-        Dim exclfilter2 As New ExclFilter
+        Dim exclfilter2 As New ExclusionFilter
         exclfilter2.FilterName = "Ignore 2"
         exclfilter2.Extensions = "dll"
 
-        Dim incllist As New List(Of InclFilter)
+        Dim incllist As New List(Of InclusionFilter)
         incllist.Add(inclfilter)
         incllist.Add(inclfilter2)
 
-        Dim excllist As New List(Of ExclFilter)
+        Dim excllist As New List(Of ExclusionFilter)
         excllist.Add(exclfilter)
         excllist.Add(exclfilter2)
 
@@ -105,7 +120,7 @@ Module BoxedJobs
     End Sub
 
     Public Function GetListofBoxedJobs()
-        Dim boxnames As new List(Of String)
+        Dim boxnames As New Dictionary(Of String, String)
         'enumerate files and load box job names
         For Each file In IO.Directory.EnumerateFiles(My.Application.Info.DirectoryPath & "\BoxedJobs", "*.json")
             'create stream reader
@@ -114,10 +129,38 @@ Module BoxedJobs
             Dim jtr As New JsonTextReader(jsonsr)
             'read the file to a new json object
             Dim jsonbox As JObject = DirectCast(JToken.ReadFrom(jtr), JObject)
+            boxnames.Add(jsonbox.GetValue("BoxedJobName"), file)
 
-            boxnames.Add(jsonbox.GetValue("BoxedJobName"))
         Next
         Return boxnames
+    End Function
+
+
+    Public Function ParseBoxedJobFromFile(ByVal BoxJobFilePath As String) As BoxedJob
+        If Not System.IO.File.Exists(BoxJobFilePath) Then
+            Return New BoxedJob
+        Else
+            'create stream reader
+            Dim jsonsr As New System.IO.StreamReader(BoxJobFilePath)
+            'create json text reader
+            Dim jtr As New JsonTextReader(jsonsr)
+            'read the file to a new json object
+            Dim jsonbox As JObject = DirectCast(JToken.ReadFrom(jtr), JObject)
+            Dim ReturnBox As New BoxedJob
+            ReturnBox.BoxJobName = jsonbox.GetValue("BoxedJobName")
+            ReturnBox.R1JobName = jsonbox.GetValue("R1JobName")
+            ReturnBox.R1Project = jsonbox.GetValue("R1Project")
+            ReturnBox.R1Template = jsonbox.GetValue("R1Template")
+            ReturnBox.R1Filter = jsonbox.GetValue("R1Filter").ToString
+            ReturnBox.R1_AR_PIDS = JsonConvert.DeserializeObject(Of String())(jsonbox.GetValue("R1_AR_PIDs").ToString)
+            ReturnBox.R1_AR_ProcessNames = JsonConvert.DeserializeObject(Of String())(jsonbox.GetValue("R1_AR_ProcessNames").ToString)
+            ReturnBox.R1_AR_Send = JsonConvert.DeserializeObject(Of ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile())(jsonbox.GetValue("R1_AR_Send").ToString)
+            ReturnBox.R1_AR_Execute = JsonConvert.DeserializeObject(Of ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute())(jsonbox.GetValue("R1_AR_Execute").ToString)
+            ReturnBox.R1_AR_Erase = JsonConvert.DeserializeObject(Of ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase())(jsonbox.GetValue("R1_AR_Erase").ToString)
+
+            Return ReturnBox
+        End If
+          
     End Function
 
     Public Function SaveBoxedJob(ByVal BoxJobName As String, ByVal R1JobName As String, ByVal R1Project As String, ByVal R1Template As String, ByVal R1Filter As String, ByVal R1_AR_Send() As JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile, ByVal R1_AR_Execute() As JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute, ByVal R1_AR_Erase() As JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase, ByVal R1_AR_PIDS() As String, ByVal R1_AR_ProcessNames() As String)
@@ -184,4 +227,76 @@ Module BoxedJobs
         End Try
         Return 1
     End Function
+
+
+
+    Public Function SaveBoxedJob(ByVal BoxedJob As BoxedJob)
+        Try
+            'Create StringWriter for use with JSONTextWriter
+            If Not System.IO.Directory.Exists(My.Application.Info.DirectoryPath & "\BoxedJobs") Then IO.Directory.CreateDirectory(My.Application.Info.DirectoryPath & "\BoxedJobs")
+            Dim jsonsw As New System.IO.StreamWriter(My.Application.Info.DirectoryPath & "\BoxedJobs\" & BoxedJob.BoxJobName & ".json", False)
+
+            'Create JsonTextWriter
+            Dim jsonstr As New JsonTextWriter(jsonsw)
+            'Json Start
+            jsonstr.WriteStartObject()
+
+
+            'BoxedJobName
+            jsonstr.WritePropertyName("BoxedJobName")
+            jsonstr.WriteValue(BoxedJob.BoxJobName)
+
+            'R1 Job Name
+            jsonstr.WritePropertyName("R1JobName")
+            jsonstr.WriteValue(BoxedJob.R1JobName)
+
+            'R1 Project
+            jsonstr.WritePropertyName("R1Project")
+            jsonstr.WriteValue(BoxedJob.R1Project)
+
+            'R1 Template    
+            jsonstr.WritePropertyName("R1Template")
+            jsonstr.WriteValue(BoxedJob.R1Template)
+
+            'R1 Filter
+            jsonstr.WritePropertyName("R1Filter")
+            jsonstr.WriteRawValue(BoxedJob.R1Filter)
+
+
+            'R1 AR-SendFile
+            jsonstr.WritePropertyName("R1_AR_Send")
+            jsonstr.WriteRawValue(JsonConvert.SerializeObject(BoxedJob.R1_AR_Send))
+
+
+            'R1 AR-Execute
+            jsonstr.WritePropertyName("R1_AR_Execute")
+            jsonstr.WriteRawValue(JsonConvert.SerializeObject(BoxedJob.R1_AR_Execute))
+
+            'R1 AR-EraseFile
+            jsonstr.WritePropertyName("R1_AR_Erase")
+            jsonstr.WriteRawValue(JsonConvert.SerializeObject(BoxedJob.R1_AR_Erase))
+
+            'R1 AR-PIDs
+            jsonstr.WritePropertyName("R1_AR_PIDs")
+            jsonstr.WriteRawValue(JsonConvert.SerializeObject(BoxedJob.R1_AR_PIDS))
+
+            'R1 AR-ProcessNames
+            jsonstr.WritePropertyName("R1_AR_ProcessNames")
+            jsonstr.WriteRawValue(JsonConvert.SerializeObject(BoxedJob.R1_AR_ProcessNames))
+
+            'Json End
+            jsonstr.WriteEndObject()
+            'Close Writer
+            jsonsw.Close()
+
+        Catch ex As Exception
+            Return 0
+        End Try
+        Return 1
+    End Function
+
+
+
+
+
 End Module
