@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="IH5T5xpNGo81PCrIHF3a/ULOzS0=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="Dwie6IpwZU4x1Mss0K2+9CJ9xjA=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="JobsServiceSoap">
       <properties>
@@ -221,10 +221,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="JobsServiceSoap" contract="JobsService.JobsServiceSoap" bindingType="basicHttpBinding" address="https://resone55/adg.map.web/services/api/JobsService.asmx" bindingConfiguration="JobsServiceSoap">
+    <endpoint name="JobsServiceSoap" contract="JobsService.JobsServiceSoap" bindingType="basicHttpBinding" address="https://r1.bmartin.pw/adg.map.web/services/api/JobsService.asmx" bindingConfiguration="JobsServiceSoap">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>https://resone55/adg.map.web/services/api/JobsService.asmx</serializedValue>
+          <serializedValue>https://r1.bmartin.pw/adg.map.web/services/api/JobsService.asmx</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

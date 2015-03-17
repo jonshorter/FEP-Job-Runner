@@ -11,6 +11,8 @@ Public Class Main
 
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnExecute.Click
+        statuslabel.BackColor = Control.DefaultBackColor
+        statuslabel.ForeColor = Color.Black
         statuslabel.Text = "Submitting Job..."
         'Get Computers
         Dim cnames(lstComputerTargets.Items.Count - 1) As String
@@ -123,20 +125,21 @@ Public Class Main
         'End If
 
         'Kick off the job
-        Dim jobid = Jobs.RunFromTemplateName(txtServer.Text, templatename, txtJobName.Text, txtProjectName.Text, txtApiUser.Text, txtAPIPass.Text, cnames, snames, filter, pids, processnames, remediatesendfile, remediateexecute, remediateerase)
+        ' Dim jobid = Jobs.RunFromTemplateName(txtServer.Text, templatename, txtJobName.Text, txtProjectName.Text, txtApiUser.Text, txtAPIPass.Text, cnames, snames, filter, pids, processnames, remediatesendfile, remediateexecute, remediateerase)
+        Jobs.RunFromTemplateName(txtServer.Text, templatename, txtJobName.Text, txtProjectName.Text, txtApiUser.Text, txtAPIPass.Text, cnames, snames, filter, pids, processnames, remediatesendfile, remediateexecute, remediateerase)
 
 
-        'Check if the returned message is a GUID or Error
-        If isGuid(jobid) Then
-            'GUID - Job submitted successfully
-            statuslabel.Text = "Job: " & txtJobName.Text & " in Project: " & txtProjectName.Text & " submitted sucessfully. GUID: " & jobid
-            statuslabel.ForeColor = Color.Black
-        Else
-            'Error - Something happened
-            statuslabel.Text = "Error: " & jobid
-            statuslabel.ForeColor = Color.Red
-            MsgBox("Error: " & jobid)
-        End If
+        ''Check if the returned message is a GUID or Error
+        'If isGuid(jobid) Then
+        '    'GUID - Job submitted successfully
+        '    statuslabel.Text = "Job: " & txtJobName.Text & " in Project: " & txtProjectName.Text & " submitted sucessfully. GUID: " & jobid
+        '    statuslabel.ForeColor = Color.Black
+        'Else
+        '    'Error - Something happened
+        '    statuslabel.Text = "Error: " & jobid
+        '    statuslabel.ForeColor = Color.Red
+        '    MsgBox("Error: " & jobid)
+        'End If
 
 
     End Sub

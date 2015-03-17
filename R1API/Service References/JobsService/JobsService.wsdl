@@ -166,10 +166,10 @@
   </wsdl:binding>
   <wsdl:service name="JobsService">
     <wsdl:port name="JobsServiceSoap" binding="tns:JobsServiceSoap">
-      <soap:address location="https://resone55/adg.map.web/services/api/JobsService.asmx" />
+      <soap:address location="https://r1.bmartin.pw/adg.map.web/services/api/JobsService.asmx" />
     </wsdl:port>
     <wsdl:port name="JobsServiceSoap12" binding="tns:JobsServiceSoap12">
-      <soap12:address location="https://resone55/adg.map.web/services/api/JobsService.asmx" />
+      <soap12:address location="https://r1.bmartin.pw/adg.map.web/services/api/JobsService.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e1d4a373-0792-44bb-9f52-1ac343de54fc" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="00f009aa-3344-4065-b369-866a99392451" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
     <EnableDataBinding>true</EnableDataBinding>
@@ -18,10 +18,10 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="https://resone55/adg.map.web/services/api/JobsService.asmx?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="https://r1.bmartin.pw/adg.map.web/services/api/JobsService.asmx?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="JobsService.wsdl" MetadataType="Wsdl" ID="496592b0-5806-4c16-b3a1-0fccf3f30c16" SourceId="1" SourceUrl="https://resone55/adg.map.web/services/api/JobsService.asmx?wsdl" />
+    <MetadataFile FileName="JobsService.wsdl" MetadataType="Wsdl" ID="2b8fe820-0b71-46c2-b3f4-77af800dc8d0" SourceId="1" SourceUrl="https://r1.bmartin.pw/adg.map.web/services/api/JobsService.asmx?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

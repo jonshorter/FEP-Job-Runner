@@ -128,6 +128,8 @@ Partial Class Main
         Me.txtremdelfilepath = New System.Windows.Forms.TextBox()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.TabAgentKill = New System.Windows.Forms.TabPage()
+        Me.rdoPName = New System.Windows.Forms.RadioButton()
+        Me.rdoPID = New System.Windows.Forms.RadioButton()
         Me.txtremkillprocname = New System.Windows.Forms.TextBox()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.nmbremkillprocid = New System.Windows.Forms.NumericUpDown()
@@ -149,8 +151,6 @@ Partial Class Main
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.ofdBox = New System.Windows.Forms.OpenFileDialog()
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
-        Me.rdoPID = New System.Windows.Forms.RadioButton()
-        Me.rdoPName = New System.Windows.Forms.RadioButton()
         Me.GroupBox4.SuspendLayout()
         Me.tabSubMenu.SuspendLayout()
         Me.tabJobInfo.SuspendLayout()
@@ -1234,6 +1234,28 @@ Partial Class Main
         Me.TabAgentKill.Text = "Kill Process"
         Me.TabAgentKill.UseVisualStyleBackColor = True
         '
+        'rdoPName
+        '
+        Me.rdoPName.AutoSize = True
+        Me.rdoPName.Location = New System.Drawing.Point(160, 15)
+        Me.rdoPName.Name = "rdoPName"
+        Me.rdoPName.Size = New System.Drawing.Size(94, 17)
+        Me.rdoPName.TabIndex = 17
+        Me.rdoPName.TabStop = True
+        Me.rdoPName.Text = "Process Name"
+        Me.rdoPName.UseVisualStyleBackColor = True
+        '
+        'rdoPID
+        '
+        Me.rdoPID.AutoSize = True
+        Me.rdoPID.Location = New System.Drawing.Point(14, 15)
+        Me.rdoPID.Name = "rdoPID"
+        Me.rdoPID.Size = New System.Drawing.Size(77, 17)
+        Me.rdoPID.TabIndex = 16
+        Me.rdoPID.TabStop = True
+        Me.rdoPID.Text = "Process ID"
+        Me.rdoPID.UseVisualStyleBackColor = True
+        '
         'txtremkillprocname
         '
         Me.txtremkillprocname.Location = New System.Drawing.Point(94, 79)
@@ -1320,8 +1342,9 @@ Partial Class Main
         '
         'statuslabel
         '
+        Me.statuslabel.Font = New System.Drawing.Font("Tahoma", 10.0!)
         Me.statuslabel.Name = "statuslabel"
-        Me.statuslabel.Size = New System.Drawing.Size(59, 17)
+        Me.statuslabel.Size = New System.Drawing.Size(71, 17)
         Me.statuslabel.Spring = True
         Me.statuslabel.Text = "statuslabel"
         '
@@ -1438,28 +1461,6 @@ Partial Class Main
         Me.sfdBox.DefaultExt = "json"
         Me.sfdBox.Filter = "Box Files|*.json"
         Me.sfdBox.InitialDirectory = "My.Application.Info.DirectoryPath & ""\BoxedJobs"""
-        '
-        'rdoPID
-        '
-        Me.rdoPID.AutoSize = True
-        Me.rdoPID.Location = New System.Drawing.Point(14, 15)
-        Me.rdoPID.Name = "rdoPID"
-        Me.rdoPID.Size = New System.Drawing.Size(77, 17)
-        Me.rdoPID.TabIndex = 16
-        Me.rdoPID.TabStop = True
-        Me.rdoPID.Text = "Process ID"
-        Me.rdoPID.UseVisualStyleBackColor = True
-        '
-        'rdoPName
-        '
-        Me.rdoPName.AutoSize = True
-        Me.rdoPName.Location = New System.Drawing.Point(160, 15)
-        Me.rdoPName.Name = "rdoPName"
-        Me.rdoPName.Size = New System.Drawing.Size(94, 17)
-        Me.rdoPName.TabIndex = 17
-        Me.rdoPName.TabStop = True
-        Me.rdoPName.Text = "Process Name"
-        Me.rdoPName.UseVisualStyleBackColor = True
         '
         'Main
         '

@@ -195,64 +195,103 @@ Module Jobs
 
     End Function
 
-    Public Function RunFromTemplateName(ByVal srvname As String, ByVal templatename As String, ByVal JobName As String, ByVal ProjectName As String, ByVal APIUser As String, ByVal APIPass As String, ByVal cnames() As String, ByVal snames() As String, ByVal filter As String, ByVal pids() As String, ByVal processnames() As String, ByVal remediatesendfile() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile, ByVal remediateexecute() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute, ByVal remediateerase() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase)
+    Private Sub JobSubCallBack(ByVal send As Object, ByVal e As JobsService.RunJobFromTemplateNameCompletedEventArgs)
+
+        If e.Error Is Nothing Then
+            Main.statuslabel.Text = "Job Submitted: " & e.Result.RunJobFromTemplateNameResult.ToString
+        Else
+
+            Main.statuslabel.BackColor = Color.DarkRed
+            Main.statuslabel.ForeColor = Color.White
+
+
+            If e.Error.Message.Contains("There was no endpoint listening") Then
+                Main.statuslabel.Text = "Invalid Server Name or Address"
+
+            ElseIf e.Error.Message.Contains("computerNames or shareName must be provided") Then
+                Main.statuslabel.Text = "A job target must be specificed. Computer or Network Share."
+            ElseIf e.Error.Message.Contains("Bad username or password") Then
+                Main.statuslabel.Text = "Bad API Username or Password!"
+            ElseIf e.Error.Message.Contains("Unable to retrieve template") Then
+                Main.statuslabel.Text = e.Error.Message.Replace("Server was unable to process request. --->", "").ToString
+            ElseIf e.Error.Message.Contains("Invalid Project Name") Then
+                Main.statuslabel.Text = e.Error.Message.Replace("Server was unable to process request. --->", "").ToString
+            Else
+                Main.statuslabel.Text = e.Error.Message.ToString
+            End If
+        End If
+
+
+    End Sub
+
+    Public Sub RunFromTemplateName(ByVal srvname As String, ByVal templatename As String, ByVal JobName As String, ByVal ProjectName As String, ByVal APIUser As String, ByVal APIPass As String, ByVal cnames() As String, ByVal snames() As String, ByVal filter As String, ByVal pids() As String, ByVal processnames() As String, ByVal remediatesendfile() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile, ByVal remediateexecute() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute, ByVal remediateerase() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase)
         'Submit a job via the API
 
 
-        Try
-
-          
+        '   Try
 
 
-            If Main.chkbypasscerts.Checked Then
-                'Ignore self-signed / bad certificates
-                ServicePointManager.ServerCertificateValidationCallback = AddressOf ValidateRemoteCertificate
-            End If
 
 
-            'Create a new job request
-            Dim js As New JobsService.RunJobFromTemplateNameRequest(templatename, JobName, ProjectName, APIUser, APIPass, cnames, snames, pids, processnames, remediatesendfile, remediateexecute, remediateerase, filter, filter, "ISModuleArcSight", "6732A1F0-7FAC-4D25-AACB-3BD0B8E8D146", "Module specific string")
+        If Main.chkbypasscerts.Checked Then
+            'Ignore self-signed / bad certificates
+            ServicePointManager.ServerCertificateValidationCallback = AddressOf ValidateRemoteCertificate
+        End If
 
-            'Jobs Service Binding
-            Dim JobsServiceBinding As New System.ServiceModel.BasicHttpBinding(ServiceModel.BasicHttpSecurityMode.Transport)
-            JobsServiceBinding.Name = "JobsServiceSoap"
-            'Set servername
-            Dim servername As New System.ServiceModel.EndpointAddress("https://" & srvname & "/adg.map.web/services/api/JobsService.asmx")
-            'Create a new soap client
-            Dim jsserv As New JobsService.JobsServiceSoapClient(JobsServiceBinding, servername)
-            'Set address
-            jsserv.Endpoint.Address = servername
-            'Open the connection
-            jsserv.Open()
 
-            'Create a new job response (output)
-            Dim out As New JobsService.RunJobFromTemplateNameResponse
-            'Submit the job and receive response into out
-            out = jsserv.RunJobFromTemplateName(js)
+        'Create a new job request
+        Dim js As New JobsService.RunJobFromTemplateNameRequest(templatename, JobName, ProjectName, APIUser, APIPass, cnames, snames, pids, processnames, remediatesendfile, remediateexecute, remediateerase, filter, filter, "ISModuleArcSight", "6732A1F0-7FAC-4D25-AACB-3BD0B8E8D146", "Module specific string")
 
-            'Return the result
-            Return out.RunJobFromTemplateNameResult.ToString
-        Catch noend As System.ServiceModel.EndpointNotFoundException
-            'No endpoint found exception (bad servername/wrong server)
-            Return "There was no endpoint listening at " & srvname & "."
-        Catch noname As System.ServiceModel.FaultException
-            If noname.Message.Contains("computerNames or shareName must be provided") Then
-                Return "A job target must be specificed. Computer or Network Share."
-            ElseIf noname.Message.Contains("Bad username or password") Then
-                Return "Bad API Username or Password!"
-            ElseIf noname.Message.Contains("Unable to retrieve template") Then
-                Return noname.Message.Replace("Server was unable to process request. --->", "").ToString
-            ElseIf noname.Message.Contains("Invalid Project Name") Then
-                Return noname.Message.Replace("Server was unable to process request. --->", "").ToString
-            Else
-                Return noname.Message
-            End If
+        'Jobs Service Binding
+        Dim JobsServiceBinding As New System.ServiceModel.BasicHttpBinding(ServiceModel.BasicHttpSecurityMode.Transport)
+        JobsServiceBinding.Name = "JobsServiceSoap"
+        'Set servername
+        Dim servername As New System.ServiceModel.EndpointAddress("https://" & srvname & "/adg.map.web/services/api/JobsService.asmx")
+        'Create a new soap client
+        Dim jsserv As New JobsService.JobsServiceSoapClient(JobsServiceBinding, servername)
+        'Set address
+        jsserv.Endpoint.Address = servername
+        'Open the connection
 
-        Catch Ex As Exception
-            'Catch anything else
-            Return Ex.Message
-        End Try
-    End Function
+        jsserv.Open()
+
+        'Create a new job response (output)
+        ' Dim out As New JobsService.RunJobFromTemplateNameResponse
+        ' Dim out As JobsService.RunJobFromTemplateNameCompletedEventArgs
+        'Submit the job and receive response into out
+        'out = jsserv.RunJobFromTemplateName(js)
+        AddHandler jsserv.RunJobFromTemplateNameCompleted, AddressOf JobSubCallBack
+
+        jsserv.RunJobFromTemplateNameAsync(js)
+        '  Dim guid As New Guid
+        '  Return guid.ToString
+        'Return the result
+        '  Return JobsService.RunJobFromTemplateNameCompletedEventArgs.
+        'Return out.RunJobFromTemplateNameResult.ToString
+   
+
+
+        'Catch noend As System.ServiceModel.EndpointNotFoundException
+        '    'No endpoint found exception (bad servername/wrong server)
+        '    Return "There was no endpoint listening at " & srvname & "."
+        'Catch noname As System.ServiceModel.FaultException
+        '    If noname.Message.Contains("computerNames or shareName must be provided") Then
+        '        Return "A job target must be specificed. Computer or Network Share."
+        '    ElseIf noname.Message.Contains("Bad username or password") Then
+        '        Return "Bad API Username or Password!"
+        '    ElseIf noname.Message.Contains("Unable to retrieve template") Then
+        '        Return noname.Message.Replace("Server was unable to process request. --->", "").ToString
+        '    ElseIf noname.Message.Contains("Invalid Project Name") Then
+        '        Return noname.Message.Replace("Server was unable to process request. --->", "").ToString
+        '    Else
+        '        Return noname.Message
+        '    End If
+
+        'Catch Ex As Exception
+        '    'Catch anything else
+        '    ' Return Ex.Message
+        'End Try
+    End Sub
 
     Public Function ValidateRemoteCertificate(ByVal sender As Object, ByVal certificate As X509Certificate, ByVal chain As X509Chain, ByVal sslPolicyErrors As SslPolicyErrors) As Boolean
         Return True
@@ -340,7 +379,7 @@ Module Jobs
 
         End Select
 
-      
+
     End Sub
 
 End Module
