@@ -277,9 +277,70 @@ Module Jobs
                 CType(ctrl, NumericUpDown).Value = 0
             ElseIf TypeOf (ctrl) Is CheckBox Then
                 CType(ctrl, CheckBox).Checked = False
+            ElseIf TypeOf (ctrl) Is CheckedListBox Then
+                CType(ctrl, CheckedListBox).Items.Clear()
+
             End If
 
         Next
+    End Sub
+
+    Public Sub RemoveItemFromInclusionStore(ByVal FilterName As String)
+        Dim inclist As List(Of InclusionFilter) = Main.StoreInFiltList
+        Dim incx As Integer
+
+        For i = 0 To inclist.Count - 1
+            Dim tinfil As InclusionFilter = inclist(i)
+            If tinfil.FilterName = FilterName Then
+                incx = i
+            End If
+        Next
+        inclist.RemoveAt(incx)
+    End Sub
+
+
+
+    Public Sub RemoveItemFromExclusionStore(ByVal FilterName As String)
+        Dim exclist As List(Of ExclusionFilter) = Main.StoreExFiltList
+        Dim excx As Integer
+
+        For i = 0 To exclist.Count - 1
+            Dim texfil As ExclusionFilter = exclist(i)
+            If texfil.FilterName = FilterName Then
+                excx = i
+            End If
+        Next
+        exclist.RemoveAt(excx)
+    End Sub
+
+
+    Public Sub RemoveItemFromRemStores(ByVal Item As ListViewItem)
+
+        Select Case Item.Text
+            Case "Send File"
+                Dim sflist As List(Of JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile) = Main.StoreRemSendList
+                sflist.RemoveAt(Item.SubItems(1).Text - 1)
+                Console.WriteLine(Item.Text & " - " & Item.SubItems(1).Text)
+            Case "Execute"
+                Dim xflist As List(Of JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute) = Main.StoreRemExecList
+                xflist.RemoveAt(Item.SubItems(1).Text - 1)
+                Console.WriteLine(Item.Text & " - " & Item.SubItems(1).Text)
+            Case "Delete File"
+                Dim dflist As List(Of JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase) = Main.StoreRemDelList
+                dflist.RemoveAt(Item.SubItems(1).Text - 1)
+                Console.WriteLine(Item.Text & " - " & Item.SubItems(1).Text)
+            Case "Kill Process Name"
+                Dim kpnamelist As List(Of String) = Main.StoreRemKillNameList
+                kpnamelist.RemoveAt(Item.SubItems(1).Text - 1)
+                Console.WriteLine(Item.Text & " - " & Item.SubItems(1).Text)
+            Case "Kill Process ID"
+                Dim kpidlist As List(Of String) = Main.StoreRemKillIDList
+                kpidlist.RemoveAt(Item.SubItems(1).Text - 1)
+                Console.WriteLine(Item.Text & " - " & Item.SubItems(1).Text)
+
+        End Select
+
+      
     End Sub
 
 End Module
