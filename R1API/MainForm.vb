@@ -1049,4 +1049,10 @@ Public Class Main
         nmbremkillprocid.Enabled = False
         nmbremkillprocid.Value = 0
     End Sub
+
+    Private Sub btn_FEEvent_Click(sender As Object, e As EventArgs) Handles btn_FEEvent.Click
+        statuslabel.Text = ""
+        Dim fevent = FireEye.GenerateFEEvent
+        FireEye.SendEvent(FireEye.FEventtoJson(fevent))
+    End Sub
 End Class

@@ -137,8 +137,6 @@ Partial Class Main
         Me.tabMenu = New System.Windows.Forms.TabControl()
         Me.tabSettings = New System.Windows.Forms.TabPage()
         Me.tabJobExecution = New System.Windows.Forms.TabPage()
-        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
-        Me.statuslabel = New System.Windows.Forms.ToolStripStatusLabel()
         Me.btnLoadFromBox = New System.Windows.Forms.Button()
         Me.btnSaveAsBox = New System.Windows.Forms.Button()
         Me.tabBoxedJobs = New System.Windows.Forms.TabPage()
@@ -151,6 +149,12 @@ Partial Class Main
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.ofdBox = New System.Windows.Forms.OpenFileDialog()
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
+        Me.tabFireEye = New System.Windows.Forms.TabPage()
+        Me.btn_FEEvent = New System.Windows.Forms.Button()
+        Me.Label33 = New System.Windows.Forms.Label()
+        Me.txtFETarget = New System.Windows.Forms.TextBox()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.statuslabel = New System.Windows.Forms.ToolStripStatusLabel()
         Me.GroupBox4.SuspendLayout()
         Me.tabSubMenu.SuspendLayout()
         Me.tabJobInfo.SuspendLayout()
@@ -179,9 +183,10 @@ Partial Class Main
         Me.tabMenu.SuspendLayout()
         Me.tabSettings.SuspendLayout()
         Me.tabJobExecution.SuspendLayout()
-        Me.StatusStrip1.SuspendLayout()
         Me.tabBoxedJobs.SuspendLayout()
         Me.tabAbout.SuspendLayout()
+        Me.tabFireEye.SuspendLayout()
+        Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnExecute
@@ -1295,6 +1300,7 @@ Partial Class Main
         Me.tabMenu.Controls.Add(Me.tabSettings)
         Me.tabMenu.Controls.Add(Me.tabJobExecution)
         Me.tabMenu.Controls.Add(Me.tabBoxedJobs)
+        Me.tabMenu.Controls.Add(Me.tabFireEye)
         Me.tabMenu.Controls.Add(Me.tabAbout)
         Me.tabMenu.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tabMenu.Location = New System.Drawing.Point(0, 0)
@@ -1316,7 +1322,6 @@ Partial Class Main
         '
         'tabJobExecution
         '
-        Me.tabJobExecution.Controls.Add(Me.StatusStrip1)
         Me.tabJobExecution.Controls.Add(Me.btnLoadFromBox)
         Me.tabJobExecution.Controls.Add(Me.btnSaveAsBox)
         Me.tabJobExecution.Controls.Add(Me.btnExecute)
@@ -1328,25 +1333,6 @@ Partial Class Main
         Me.tabJobExecution.TabIndex = 0
         Me.tabJobExecution.Text = "Job Execution"
         Me.tabJobExecution.UseVisualStyleBackColor = True
-        '
-        'StatusStrip1
-        '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.statuslabel})
-        Me.StatusStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
-        Me.StatusStrip1.Location = New System.Drawing.Point(3, 521)
-        Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(622, 22)
-        Me.StatusStrip1.SizingGrip = False
-        Me.StatusStrip1.TabIndex = 23
-        Me.StatusStrip1.Text = "StatusStrip1"
-        '
-        'statuslabel
-        '
-        Me.statuslabel.Font = New System.Drawing.Font("Tahoma", 10.0!)
-        Me.statuslabel.Name = "statuslabel"
-        Me.statuslabel.Size = New System.Drawing.Size(71, 17)
-        Me.statuslabel.Spring = True
-        Me.statuslabel.Text = "statuslabel"
         '
         'btnLoadFromBox
         '
@@ -1462,11 +1448,69 @@ Partial Class Main
         Me.sfdBox.Filter = "Box Files|*.json"
         Me.sfdBox.InitialDirectory = "My.Application.Info.DirectoryPath & ""\BoxedJobs"""
         '
+        'tabFireEye
+        '
+        Me.tabFireEye.Controls.Add(Me.txtFETarget)
+        Me.tabFireEye.Controls.Add(Me.Label33)
+        Me.tabFireEye.Controls.Add(Me.btn_FEEvent)
+        Me.tabFireEye.Location = New System.Drawing.Point(4, 25)
+        Me.tabFireEye.Name = "tabFireEye"
+        Me.tabFireEye.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabFireEye.Size = New System.Drawing.Size(628, 546)
+        Me.tabFireEye.TabIndex = 4
+        Me.tabFireEye.Text = "FireEye"
+        Me.tabFireEye.UseVisualStyleBackColor = True
+        '
+        'btn_FEEvent
+        '
+        Me.btn_FEEvent.Location = New System.Drawing.Point(106, 41)
+        Me.btn_FEEvent.Name = "btn_FEEvent"
+        Me.btn_FEEvent.Size = New System.Drawing.Size(75, 23)
+        Me.btn_FEEvent.TabIndex = 0
+        Me.btn_FEEvent.Text = "Fire Event"
+        Me.btn_FEEvent.UseVisualStyleBackColor = True
+        '
+        'Label33
+        '
+        Me.Label33.AutoSize = True
+        Me.Label33.Location = New System.Drawing.Point(8, 18)
+        Me.Label33.Name = "Label33"
+        Me.Label33.Size = New System.Drawing.Size(92, 13)
+        Me.Label33.TabIndex = 2
+        Me.Label33.Text = "Target Hostname:"
+        '
+        'txtFETarget
+        '
+        Me.txtFETarget.Location = New System.Drawing.Point(106, 15)
+        Me.txtFETarget.Name = "txtFETarget"
+        Me.txtFETarget.Size = New System.Drawing.Size(176, 20)
+        Me.txtFETarget.TabIndex = 3
+        '
+        'StatusStrip1
+        '
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.statuslabel})
+        Me.StatusStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 553)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.Size = New System.Drawing.Size(636, 22)
+        Me.StatusStrip1.SizingGrip = False
+        Me.StatusStrip1.TabIndex = 24
+        Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'statuslabel
+        '
+        Me.statuslabel.Font = New System.Drawing.Font("Tahoma", 10.0!)
+        Me.statuslabel.Name = "statuslabel"
+        Me.statuslabel.Size = New System.Drawing.Size(71, 17)
+        Me.statuslabel.Spring = True
+        Me.statuslabel.Text = "statuslabel"
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(636, 575)
+        Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.tabMenu)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -1514,14 +1558,16 @@ Partial Class Main
         Me.tabMenu.ResumeLayout(False)
         Me.tabSettings.ResumeLayout(False)
         Me.tabJobExecution.ResumeLayout(False)
-        Me.tabJobExecution.PerformLayout()
-        Me.StatusStrip1.ResumeLayout(False)
-        Me.StatusStrip1.PerformLayout()
         Me.tabBoxedJobs.ResumeLayout(False)
         Me.tabBoxedJobs.PerformLayout()
         Me.tabAbout.ResumeLayout(False)
         Me.tabAbout.PerformLayout()
+        Me.tabFireEye.ResumeLayout(False)
+        Me.tabFireEye.PerformLayout()
+        Me.StatusStrip1.ResumeLayout(False)
+        Me.StatusStrip1.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents btnExecute As System.Windows.Forms.Button
@@ -1642,8 +1688,6 @@ Partial Class Main
     Friend WithEvents txtComputerTarget As System.Windows.Forms.TextBox
     Friend WithEvents btnAddComputer As System.Windows.Forms.Button
     Friend WithEvents btnRemoveComputer As System.Windows.Forms.Button
-    Friend WithEvents StatusStrip1 As System.Windows.Forms.StatusStrip
-    Friend WithEvents statuslabel As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents lvRemOptions As System.Windows.Forms.ListView
     Friend WithEvents colRemType As System.Windows.Forms.ColumnHeader
     Friend WithEvents colitem As System.Windows.Forms.ColumnHeader
@@ -1652,5 +1696,11 @@ Partial Class Main
     Friend WithEvents btnSaveRemOptionChange As System.Windows.Forms.Button
     Friend WithEvents rdoPName As System.Windows.Forms.RadioButton
     Friend WithEvents rdoPID As System.Windows.Forms.RadioButton
+    Friend WithEvents tabFireEye As System.Windows.Forms.TabPage
+    Friend WithEvents btn_FEEvent As System.Windows.Forms.Button
+    Friend WithEvents txtFETarget As System.Windows.Forms.TextBox
+    Friend WithEvents Label33 As System.Windows.Forms.Label
+    Friend WithEvents StatusStrip1 As System.Windows.Forms.StatusStrip
+    Friend WithEvents statuslabel As System.Windows.Forms.ToolStripStatusLabel
 
 End Class
