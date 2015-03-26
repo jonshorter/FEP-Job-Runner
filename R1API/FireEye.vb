@@ -60,7 +60,7 @@ Module FireEye
         Public Property alert As New Alert
     End Class
 
-    Public Function GenerateFEEvent()
+    Public Function GenerateFEEvent(ByVal Type As String)
         'Create a new default event
         Dim fe_event As New FireEye_Event
         fe_event.msg = "Normal"
@@ -73,7 +73,7 @@ Module FireEye
         fe_event.alert.severity = "majr"
         fe_event.alert.alerturl = "https://fireeye.adlab.local/event_stream/events_for_bot?ma_id=958"
         fe_event.alert.explanation.malwaredetected.malware.httpheader = "GET /appliance-test/test-infection.exe HTTP/1.0User-Agent: Wget/1.10.2Accept: */*Host: fedeploycheck.fireeye.comConnection: Keep-Alive"
-        fe_event.alert.explanation.malwaredetected.malware.name = "FETestEvent"
+        fe_event.alert.explanation.malwaredetected.malware.name = "FETestEvent - " & Type
         fe_event.alert.explanation.malwaredetected.malware.downloadedat = DateTime.UtcNow
         fe_event.alert.explanation.malwaredetected.malware.origid = "385"
         fe_event.alert.explanation.malwaredetected.malware.md5sum = "47f9fdc617f8c98a6732be534d8dbe9a"
@@ -90,7 +90,7 @@ Module FireEye
         fe_event.alert.action = "notified"
         fe_event.alert.dst.ip = "199.16.197.6"
         fe_event.alert.dst.port = "80"
-        fe_event.alert.name = "malware-object"
+        fe_event.alert.name = Type
         Return fe_event
     End Function
     Public Function FEventtoJson(ByVal FEEvent As FireEye.FireEye_Event)
@@ -108,30 +108,50 @@ Module FireEye
 
 
     Public Sub SendEvent(JSON As String, Optional showResult As Boolean = False)
-        'New web request = 3rdParty/FireEye
-        Dim request As HttpWebRequest = HttpWebRequest.Create("https://" & Main.txtServer.Text & "/adg.map.web/ThirdPartyIntegration/ThirdPartyIntegrationHandler/FireEye")
-        request.ContentType = "text/json"
-        request.Method = "POST"
-        request.Accept = "text/json"
-        'Set basic auth details
-        Dim credsend As String = "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(Main.txtApiUser.Text & ":" & Main.txtAPIPass.Text))
-        request.Headers.Add("Authorization", credsend)
-        'Send request
-        Using sw As New StreamWriter(request.GetRequestStream)
-            sw.Write(JSON)
-            sw.Close()
-        End Using
-        'Get response
-        Dim response As WebResponse = request.GetResponse()
+        Try
+            If Main.chkbypasscerts.Checked Then
+                'Ignore self-signed / bad certificates
+                ServicePointManager.ServerCertificateValidationCallback = AddressOf ValidateRemoteCertificate
 
-        Using sr As New StreamReader(response.GetResponseStream)
-            Dim rstring As String = sr.ReadToEnd
-            If rstring = "" Then
-                Main.statuslabel.Text = "FireEye Event Submitted"
-            Else
-                Main.statuslabel.Text = "Error Submitting FireEye Event"
             End If
-        End Using
+
+            'New web request = 3rdParty/FireEye
+            Dim request As HttpWebRequest = HttpWebRequest.Create("https://" & Main.txtServer.Text & "/ADG.Map.Web/ThirdPartyIntegration/ThirdPartyIntegrationHandler/FireEye")
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
+
+            request.ContentType = "text/json"
+            request.Method = "POST"
+            request.Accept = "text/json"
+            'Set basic auth details
+            Dim credsend As String = "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(Main.txtApiUser.Text & ":" & Main.txtAPIPass.Text))
+            request.Headers.Add("Authorization", credsend)
+            'Send request
+            Using sw As New StreamWriter(request.GetRequestStream)
+                sw.Write(JSON)
+                sw.Close()
+            End Using
+            'Get response
+
+
+            Dim response As WebResponse = request.GetResponse()
+
+            Using sr As New StreamReader(response.GetResponseStream)
+                Dim rstring As String = sr.ReadToEnd
+                If rstring = "" Then
+                    Main.statuslabel.Text = "FireEye Event Submitted"
+                Else
+                    Main.statuslabel.Text = "Error Submitting FireEye Event"
+                End If
+            End Using
+        Catch we As System.Net.WebException
+            Main.statuslabel.Text = we.Message
+
+        Catch ex As Exception
+            Main.statuslabel.Text = ex.Message
+
+
+        End Try
+
 
     End Sub
 End Module

@@ -1052,7 +1052,31 @@ Public Class Main
 
     Private Sub btn_FEEvent_Click(sender As Object, e As EventArgs) Handles btn_FEEvent.Click
         statuslabel.Text = ""
-        Dim fevent = FireEye.GenerateFEEvent
+        Dim fevent = FireEye.GenerateFEEvent(cmbFEAlertType.Text)
         FireEye.SendEvent(FireEye.FEventtoJson(fevent))
+    End Sub
+
+    Private Sub btnPANWSend_Click(sender As Object, e As EventArgs) Handles btnPANWSend.Click
+        'panwlistener.Main()
+        Dim panwthreat As New PANW.PANWThreat
+        panwthreat.P8Destination_IP = txtPANWTarget.Text
+        panwthreat.P4Subtype = cmbPANWAlert.Text
+        Dim panwtstr As String = PANW.ThreatTOCSV(panwthreat)
+        PANW.SendEvent(panwtstr)
+    End Sub
+
+    Private Sub tabMenu_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabMenu.SelectedIndexChanged
+        statuslabel.Text = ""
+    End Sub
+
+
+    Private Sub tabFireEye_Enter(sender As Object, e As EventArgs) Handles tabFireEye.Enter
+        cmbFEAlertType.SelectedIndex = 0
+    End Sub
+
+
+
+    Private Sub tabPANW_Enter(sender As Object, e As EventArgs) Handles tabPANW.Enter
+        cmbPANWAlert.SelectedIndex = 0
     End Sub
 End Class

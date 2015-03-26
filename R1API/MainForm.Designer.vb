@@ -145,16 +145,24 @@ Partial Class Main
         Me.btnBoxJobCollection1 = New System.Windows.Forms.Button()
         Me.Label30 = New System.Windows.Forms.Label()
         Me.txtboxtargetcomputer = New System.Windows.Forms.TextBox()
+        Me.tabFireEye = New System.Windows.Forms.TabPage()
+        Me.Label34 = New System.Windows.Forms.Label()
+        Me.cmbFEAlertType = New System.Windows.Forms.ComboBox()
+        Me.txtFETarget = New System.Windows.Forms.TextBox()
+        Me.Label33 = New System.Windows.Forms.Label()
+        Me.btn_FEEvent = New System.Windows.Forms.Button()
+        Me.tabPANW = New System.Windows.Forms.TabPage()
+        Me.btnPANWSend = New System.Windows.Forms.Button()
         Me.tabAbout = New System.Windows.Forms.TabPage()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.ofdBox = New System.Windows.Forms.OpenFileDialog()
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
-        Me.tabFireEye = New System.Windows.Forms.TabPage()
-        Me.btn_FEEvent = New System.Windows.Forms.Button()
-        Me.Label33 = New System.Windows.Forms.Label()
-        Me.txtFETarget = New System.Windows.Forms.TextBox()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.statuslabel = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.Label35 = New System.Windows.Forms.Label()
+        Me.cmbPANWAlert = New System.Windows.Forms.ComboBox()
+        Me.txtPANWTarget = New System.Windows.Forms.TextBox()
+        Me.Label36 = New System.Windows.Forms.Label()
         Me.GroupBox4.SuspendLayout()
         Me.tabSubMenu.SuspendLayout()
         Me.tabJobInfo.SuspendLayout()
@@ -184,8 +192,9 @@ Partial Class Main
         Me.tabSettings.SuspendLayout()
         Me.tabJobExecution.SuspendLayout()
         Me.tabBoxedJobs.SuspendLayout()
-        Me.tabAbout.SuspendLayout()
         Me.tabFireEye.SuspendLayout()
+        Me.tabPANW.SuspendLayout()
+        Me.tabAbout.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -1301,6 +1310,7 @@ Partial Class Main
         Me.tabMenu.Controls.Add(Me.tabJobExecution)
         Me.tabMenu.Controls.Add(Me.tabBoxedJobs)
         Me.tabMenu.Controls.Add(Me.tabFireEye)
+        Me.tabMenu.Controls.Add(Me.tabPANW)
         Me.tabMenu.Controls.Add(Me.tabAbout)
         Me.tabMenu.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tabMenu.Location = New System.Drawing.Point(0, 0)
@@ -1413,6 +1423,88 @@ Partial Class Main
         Me.txtboxtargetcomputer.Size = New System.Drawing.Size(199, 20)
         Me.txtboxtargetcomputer.TabIndex = 0
         '
+        'tabFireEye
+        '
+        Me.tabFireEye.Controls.Add(Me.Label34)
+        Me.tabFireEye.Controls.Add(Me.cmbFEAlertType)
+        Me.tabFireEye.Controls.Add(Me.txtFETarget)
+        Me.tabFireEye.Controls.Add(Me.Label33)
+        Me.tabFireEye.Controls.Add(Me.btn_FEEvent)
+        Me.tabFireEye.Location = New System.Drawing.Point(4, 25)
+        Me.tabFireEye.Name = "tabFireEye"
+        Me.tabFireEye.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabFireEye.Size = New System.Drawing.Size(628, 546)
+        Me.tabFireEye.TabIndex = 4
+        Me.tabFireEye.Text = "FireEye"
+        Me.tabFireEye.UseVisualStyleBackColor = True
+        '
+        'Label34
+        '
+        Me.Label34.AutoSize = True
+        Me.Label34.Location = New System.Drawing.Point(42, 44)
+        Me.Label34.Name = "Label34"
+        Me.Label34.Size = New System.Drawing.Size(58, 13)
+        Me.Label34.TabIndex = 5
+        Me.Label34.Text = "Alert Type:"
+        '
+        'cmbFEAlertType
+        '
+        Me.cmbFEAlertType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbFEAlertType.FormattingEnabled = True
+        Me.cmbFEAlertType.Items.AddRange(New Object() {"malware-object", "malware-callback", "web-infection", "domain-match", "infection-match"})
+        Me.cmbFEAlertType.Location = New System.Drawing.Point(106, 41)
+        Me.cmbFEAlertType.Name = "cmbFEAlertType"
+        Me.cmbFEAlertType.Size = New System.Drawing.Size(176, 21)
+        Me.cmbFEAlertType.TabIndex = 4
+        '
+        'txtFETarget
+        '
+        Me.txtFETarget.Location = New System.Drawing.Point(106, 15)
+        Me.txtFETarget.Name = "txtFETarget"
+        Me.txtFETarget.Size = New System.Drawing.Size(176, 20)
+        Me.txtFETarget.TabIndex = 3
+        '
+        'Label33
+        '
+        Me.Label33.AutoSize = True
+        Me.Label33.Location = New System.Drawing.Point(8, 18)
+        Me.Label33.Name = "Label33"
+        Me.Label33.Size = New System.Drawing.Size(92, 13)
+        Me.Label33.TabIndex = 2
+        Me.Label33.Text = "Target Hostname:"
+        '
+        'btn_FEEvent
+        '
+        Me.btn_FEEvent.Location = New System.Drawing.Point(106, 68)
+        Me.btn_FEEvent.Name = "btn_FEEvent"
+        Me.btn_FEEvent.Size = New System.Drawing.Size(75, 23)
+        Me.btn_FEEvent.TabIndex = 0
+        Me.btn_FEEvent.Text = "Fire Event"
+        Me.btn_FEEvent.UseVisualStyleBackColor = True
+        '
+        'tabPANW
+        '
+        Me.tabPANW.Controls.Add(Me.Label35)
+        Me.tabPANW.Controls.Add(Me.cmbPANWAlert)
+        Me.tabPANW.Controls.Add(Me.txtPANWTarget)
+        Me.tabPANW.Controls.Add(Me.Label36)
+        Me.tabPANW.Controls.Add(Me.btnPANWSend)
+        Me.tabPANW.Location = New System.Drawing.Point(4, 25)
+        Me.tabPANW.Name = "tabPANW"
+        Me.tabPANW.Size = New System.Drawing.Size(628, 546)
+        Me.tabPANW.TabIndex = 5
+        Me.tabPANW.Text = "PANW"
+        Me.tabPANW.UseVisualStyleBackColor = True
+        '
+        'btnPANWSend
+        '
+        Me.btnPANWSend.Location = New System.Drawing.Point(106, 68)
+        Me.btnPANWSend.Name = "btnPANWSend"
+        Me.btnPANWSend.Size = New System.Drawing.Size(139, 23)
+        Me.btnPANWSend.TabIndex = 0
+        Me.btnPANWSend.Text = "Send PANW SysLog Alert"
+        Me.btnPANWSend.UseVisualStyleBackColor = True
+        '
         'tabAbout
         '
         Me.tabAbout.Controls.Add(Me.TextBox1)
@@ -1448,44 +1540,6 @@ Partial Class Main
         Me.sfdBox.Filter = "Box Files|*.json"
         Me.sfdBox.InitialDirectory = "My.Application.Info.DirectoryPath & ""\BoxedJobs"""
         '
-        'tabFireEye
-        '
-        Me.tabFireEye.Controls.Add(Me.txtFETarget)
-        Me.tabFireEye.Controls.Add(Me.Label33)
-        Me.tabFireEye.Controls.Add(Me.btn_FEEvent)
-        Me.tabFireEye.Location = New System.Drawing.Point(4, 25)
-        Me.tabFireEye.Name = "tabFireEye"
-        Me.tabFireEye.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabFireEye.Size = New System.Drawing.Size(628, 546)
-        Me.tabFireEye.TabIndex = 4
-        Me.tabFireEye.Text = "FireEye"
-        Me.tabFireEye.UseVisualStyleBackColor = True
-        '
-        'btn_FEEvent
-        '
-        Me.btn_FEEvent.Location = New System.Drawing.Point(106, 41)
-        Me.btn_FEEvent.Name = "btn_FEEvent"
-        Me.btn_FEEvent.Size = New System.Drawing.Size(75, 23)
-        Me.btn_FEEvent.TabIndex = 0
-        Me.btn_FEEvent.Text = "Fire Event"
-        Me.btn_FEEvent.UseVisualStyleBackColor = True
-        '
-        'Label33
-        '
-        Me.Label33.AutoSize = True
-        Me.Label33.Location = New System.Drawing.Point(8, 18)
-        Me.Label33.Name = "Label33"
-        Me.Label33.Size = New System.Drawing.Size(92, 13)
-        Me.Label33.TabIndex = 2
-        Me.Label33.Text = "Target Hostname:"
-        '
-        'txtFETarget
-        '
-        Me.txtFETarget.Location = New System.Drawing.Point(106, 15)
-        Me.txtFETarget.Name = "txtFETarget"
-        Me.txtFETarget.Size = New System.Drawing.Size(176, 20)
-        Me.txtFETarget.TabIndex = 3
-        '
         'StatusStrip1
         '
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.statuslabel})
@@ -1504,6 +1558,41 @@ Partial Class Main
         Me.statuslabel.Size = New System.Drawing.Size(71, 17)
         Me.statuslabel.Spring = True
         Me.statuslabel.Text = "statuslabel"
+        '
+        'Label35
+        '
+        Me.Label35.AutoSize = True
+        Me.Label35.Location = New System.Drawing.Point(42, 44)
+        Me.Label35.Name = "Label35"
+        Me.Label35.Size = New System.Drawing.Size(58, 13)
+        Me.Label35.TabIndex = 9
+        Me.Label35.Text = "Alert Type:"
+        '
+        'cmbPANWAlert
+        '
+        Me.cmbPANWAlert.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbPANWAlert.FormattingEnabled = True
+        Me.cmbPANWAlert.Items.AddRange(New Object() {"VIRUS", "FILE", "FLOOD", "URL"})
+        Me.cmbPANWAlert.Location = New System.Drawing.Point(106, 41)
+        Me.cmbPANWAlert.Name = "cmbPANWAlert"
+        Me.cmbPANWAlert.Size = New System.Drawing.Size(176, 21)
+        Me.cmbPANWAlert.TabIndex = 8
+        '
+        'txtPANWTarget
+        '
+        Me.txtPANWTarget.Location = New System.Drawing.Point(106, 15)
+        Me.txtPANWTarget.Name = "txtPANWTarget"
+        Me.txtPANWTarget.Size = New System.Drawing.Size(176, 20)
+        Me.txtPANWTarget.TabIndex = 7
+        '
+        'Label36
+        '
+        Me.Label36.AutoSize = True
+        Me.Label36.Location = New System.Drawing.Point(8, 18)
+        Me.Label36.Name = "Label36"
+        Me.Label36.Size = New System.Drawing.Size(92, 13)
+        Me.Label36.TabIndex = 6
+        Me.Label36.Text = "Target Hostname:"
         '
         'Main
         '
@@ -1560,10 +1649,12 @@ Partial Class Main
         Me.tabJobExecution.ResumeLayout(False)
         Me.tabBoxedJobs.ResumeLayout(False)
         Me.tabBoxedJobs.PerformLayout()
-        Me.tabAbout.ResumeLayout(False)
-        Me.tabAbout.PerformLayout()
         Me.tabFireEye.ResumeLayout(False)
         Me.tabFireEye.PerformLayout()
+        Me.tabPANW.ResumeLayout(False)
+        Me.tabPANW.PerformLayout()
+        Me.tabAbout.ResumeLayout(False)
+        Me.tabAbout.PerformLayout()
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
         Me.ResumeLayout(False)
@@ -1702,5 +1793,13 @@ Partial Class Main
     Friend WithEvents Label33 As System.Windows.Forms.Label
     Friend WithEvents StatusStrip1 As System.Windows.Forms.StatusStrip
     Friend WithEvents statuslabel As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents tabPANW As System.Windows.Forms.TabPage
+    Friend WithEvents btnPANWSend As System.Windows.Forms.Button
+    Friend WithEvents Label34 As System.Windows.Forms.Label
+    Friend WithEvents cmbFEAlertType As System.Windows.Forms.ComboBox
+    Friend WithEvents Label35 As System.Windows.Forms.Label
+    Friend WithEvents cmbPANWAlert As System.Windows.Forms.ComboBox
+    Friend WithEvents txtPANWTarget As System.Windows.Forms.TextBox
+    Friend WithEvents Label36 As System.Windows.Forms.Label
 
 End Class
