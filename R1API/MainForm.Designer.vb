@@ -146,12 +146,18 @@ Partial Class Main
         Me.Label30 = New System.Windows.Forms.Label()
         Me.txtboxtargetcomputer = New System.Windows.Forms.TextBox()
         Me.tabFireEye = New System.Windows.Forms.TabPage()
+        Me.txtFELink = New System.Windows.Forms.TextBox()
+        Me.Label37 = New System.Windows.Forms.Label()
         Me.Label34 = New System.Windows.Forms.Label()
         Me.cmbFEAlertType = New System.Windows.Forms.ComboBox()
         Me.txtFETarget = New System.Windows.Forms.TextBox()
         Me.Label33 = New System.Windows.Forms.Label()
         Me.btn_FEEvent = New System.Windows.Forms.Button()
         Me.tabPANW = New System.Windows.Forms.TabPage()
+        Me.Label35 = New System.Windows.Forms.Label()
+        Me.cmbPANWAlert = New System.Windows.Forms.ComboBox()
+        Me.txtPANWTarget = New System.Windows.Forms.TextBox()
+        Me.Label36 = New System.Windows.Forms.Label()
         Me.btnPANWSend = New System.Windows.Forms.Button()
         Me.tabAbout = New System.Windows.Forms.TabPage()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
@@ -159,10 +165,6 @@ Partial Class Main
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.statuslabel = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.Label35 = New System.Windows.Forms.Label()
-        Me.cmbPANWAlert = New System.Windows.Forms.ComboBox()
-        Me.txtPANWTarget = New System.Windows.Forms.TextBox()
-        Me.Label36 = New System.Windows.Forms.Label()
         Me.GroupBox4.SuspendLayout()
         Me.tabSubMenu.SuspendLayout()
         Me.tabJobInfo.SuspendLayout()
@@ -1425,6 +1427,8 @@ Partial Class Main
         '
         'tabFireEye
         '
+        Me.tabFireEye.Controls.Add(Me.txtFELink)
+        Me.tabFireEye.Controls.Add(Me.Label37)
         Me.tabFireEye.Controls.Add(Me.Label34)
         Me.tabFireEye.Controls.Add(Me.cmbFEAlertType)
         Me.tabFireEye.Controls.Add(Me.txtFETarget)
@@ -1437,6 +1441,30 @@ Partial Class Main
         Me.tabFireEye.TabIndex = 4
         Me.tabFireEye.Text = "FireEye"
         Me.tabFireEye.UseVisualStyleBackColor = True
+        '
+        'txtFELink
+        '
+        Me.txtFELink.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtFELink.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.txtFELink.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFELink.Location = New System.Drawing.Point(28, 144)
+        Me.txtFELink.Name = "txtFELink"
+        Me.txtFELink.ReadOnly = True
+        Me.txtFELink.Size = New System.Drawing.Size(540, 16)
+        Me.txtFELink.TabIndex = 7
+        Me.txtFELink.TabStop = False
+        Me.txtFELink.Text = "http://fedeploycheck.fireeye.com/appliance-test/test-infection.exe"
+        '
+        'Label37
+        '
+        Me.Label37.AutoSize = True
+        Me.Label37.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label37.Location = New System.Drawing.Point(25, 117)
+        Me.Label37.Name = "Label37"
+        Me.Label37.Size = New System.Drawing.Size(543, 15)
+        Me.Label37.TabIndex = 6
+        Me.Label37.Text = "To generate a verified hit from a test FireEye ThreatScan download the following " & _
+    "EXE to your target."
         '
         'Label34
         '
@@ -1477,9 +1505,9 @@ Partial Class Main
         '
         Me.btn_FEEvent.Location = New System.Drawing.Point(106, 68)
         Me.btn_FEEvent.Name = "btn_FEEvent"
-        Me.btn_FEEvent.Size = New System.Drawing.Size(75, 23)
+        Me.btn_FEEvent.Size = New System.Drawing.Size(117, 23)
         Me.btn_FEEvent.TabIndex = 0
-        Me.btn_FEEvent.Text = "Fire Event"
+        Me.btn_FEEvent.Text = "Send FireEye Event"
         Me.btn_FEEvent.UseVisualStyleBackColor = True
         '
         'tabPANW
@@ -1495,69 +1523,6 @@ Partial Class Main
         Me.tabPANW.TabIndex = 5
         Me.tabPANW.Text = "PANW"
         Me.tabPANW.UseVisualStyleBackColor = True
-        '
-        'btnPANWSend
-        '
-        Me.btnPANWSend.Location = New System.Drawing.Point(106, 68)
-        Me.btnPANWSend.Name = "btnPANWSend"
-        Me.btnPANWSend.Size = New System.Drawing.Size(139, 23)
-        Me.btnPANWSend.TabIndex = 0
-        Me.btnPANWSend.Text = "Send PANW SysLog Alert"
-        Me.btnPANWSend.UseVisualStyleBackColor = True
-        '
-        'tabAbout
-        '
-        Me.tabAbout.Controls.Add(Me.TextBox1)
-        Me.tabAbout.Location = New System.Drawing.Point(4, 25)
-        Me.tabAbout.Name = "tabAbout"
-        Me.tabAbout.Size = New System.Drawing.Size(628, 546)
-        Me.tabAbout.TabIndex = 3
-        Me.tabAbout.Text = "About"
-        Me.tabAbout.UseVisualStyleBackColor = True
-        '
-        'TextBox1
-        '
-        Me.TextBox1.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(0, 0)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(628, 546)
-        Me.TextBox1.TabIndex = 0
-        Me.TextBox1.Text = resources.GetString("TextBox1.Text")
-        '
-        'ofdBox
-        '
-        Me.ofdBox.FileName = "*.json"
-        Me.ofdBox.Filter = "Box Files|*.json"
-        Me.ofdBox.InitialDirectory = "My.Application.Info.DirectoryPath & ""\BoxedJobs"""
-        '
-        'sfdBox
-        '
-        Me.sfdBox.DefaultExt = "json"
-        Me.sfdBox.Filter = "Box Files|*.json"
-        Me.sfdBox.InitialDirectory = "My.Application.Info.DirectoryPath & ""\BoxedJobs"""
-        '
-        'StatusStrip1
-        '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.statuslabel})
-        Me.StatusStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 553)
-        Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(636, 22)
-        Me.StatusStrip1.SizingGrip = False
-        Me.StatusStrip1.TabIndex = 24
-        Me.StatusStrip1.Text = "StatusStrip1"
-        '
-        'statuslabel
-        '
-        Me.statuslabel.Font = New System.Drawing.Font("Tahoma", 10.0!)
-        Me.statuslabel.Name = "statuslabel"
-        Me.statuslabel.Size = New System.Drawing.Size(71, 17)
-        Me.statuslabel.Spring = True
-        Me.statuslabel.Text = "statuslabel"
         '
         'Label35
         '
@@ -1593,6 +1558,70 @@ Partial Class Main
         Me.Label36.Size = New System.Drawing.Size(92, 13)
         Me.Label36.TabIndex = 6
         Me.Label36.Text = "Target Hostname:"
+        '
+        'btnPANWSend
+        '
+        Me.btnPANWSend.Location = New System.Drawing.Point(106, 68)
+        Me.btnPANWSend.Name = "btnPANWSend"
+        Me.btnPANWSend.Size = New System.Drawing.Size(139, 23)
+        Me.btnPANWSend.TabIndex = 0
+        Me.btnPANWSend.Text = "Send PANW SysLog Alert"
+        Me.btnPANWSend.UseVisualStyleBackColor = True
+        '
+        'tabAbout
+        '
+        Me.tabAbout.Controls.Add(Me.TextBox1)
+        Me.tabAbout.Location = New System.Drawing.Point(4, 25)
+        Me.tabAbout.Name = "tabAbout"
+        Me.tabAbout.Size = New System.Drawing.Size(628, 546)
+        Me.tabAbout.TabIndex = 3
+        Me.tabAbout.Text = "About"
+        Me.tabAbout.UseVisualStyleBackColor = True
+        '
+        'TextBox1
+        '
+        Me.TextBox1.BackColor = System.Drawing.SystemColors.Control
+        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.TextBox1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Location = New System.Drawing.Point(0, 0)
+        Me.TextBox1.Multiline = True
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.ReadOnly = True
+        Me.TextBox1.Size = New System.Drawing.Size(628, 546)
+        Me.TextBox1.TabIndex = 0
+        Me.TextBox1.Text = resources.GetString("TextBox1.Text")
+        '
+        'ofdBox
+        '
+        Me.ofdBox.FileName = "*.json"
+        Me.ofdBox.Filter = "Box Files|*.json"
+        Me.ofdBox.InitialDirectory = "My.Application.Info.DirectoryPath & ""\BoxedJobs"""
+        '
+        'sfdBox
+        '
+        Me.sfdBox.DefaultExt = "json"
+        Me.sfdBox.Filter = "Box Files|*.json"
+        Me.sfdBox.InitialDirectory = "My.Application.Info.DirectoryPath & ""\BoxedJobs"""
+        '
+        'StatusStrip1
+        '
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.statuslabel})
+        Me.StatusStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 553)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.Size = New System.Drawing.Size(636, 22)
+        Me.StatusStrip1.SizingGrip = False
+        Me.StatusStrip1.TabIndex = 24
+        Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'statuslabel
+        '
+        Me.statuslabel.Font = New System.Drawing.Font("Tahoma", 10.0!)
+        Me.statuslabel.Name = "statuslabel"
+        Me.statuslabel.Size = New System.Drawing.Size(71, 17)
+        Me.statuslabel.Spring = True
+        Me.statuslabel.Text = "statuslabel"
         '
         'Main
         '
@@ -1801,5 +1830,7 @@ Partial Class Main
     Friend WithEvents cmbPANWAlert As System.Windows.Forms.ComboBox
     Friend WithEvents txtPANWTarget As System.Windows.Forms.TextBox
     Friend WithEvents Label36 As System.Windows.Forms.Label
+    Friend WithEvents Label37 As System.Windows.Forms.Label
+    Friend WithEvents txtFELink As System.Windows.Forms.TextBox
 
 End Class

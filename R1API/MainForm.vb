@@ -210,8 +210,7 @@ Public Class Main
         StoreRemKillNameList = New List(Of String)
         StoreRemKillIDList = New List(Of String)
 
-
-
+      
 
     End Sub
 
@@ -1079,4 +1078,11 @@ Public Class Main
     Private Sub tabPANW_Enter(sender As Object, e As EventArgs) Handles tabPANW.Enter
         cmbPANWAlert.SelectedIndex = 0
     End Sub
+
+    Private Sub txtFELink_DoubleClick(sender As Object, e As EventArgs) Handles txtFELink.DoubleClick, txtFELink.Click
+        Dim sinfo As New ProcessStartInfo(txtFELink.Text)
+        Process.Start(sinfo)
+    End Sub
+
+
 End Class
