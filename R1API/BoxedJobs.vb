@@ -6,6 +6,7 @@ Imports Newtonsoft.Json.Linq
 Module BoxedJobs
 
     Public Class BoxedJob
+        'Boxed job declaration of properties
         Public BoxJobName As String
         Public R1JobName As String
         Public R1Project As String
@@ -20,7 +21,7 @@ Module BoxedJobs
 
     End Class
 
- 
+    'Allows adding to arrays / objects
     <Extension()> _
     Public Sub Add(Of T)(ByRef arr As T(), item As T)
         Array.Resize(arr, arr.Length + 1)
@@ -66,7 +67,6 @@ Module BoxedJobs
             ReturnBox.R1_AR_Send = JsonConvert.DeserializeObject(Of ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile())(jsonbox.GetValue("R1_AR_Send").ToString)
             ReturnBox.R1_AR_Execute = JsonConvert.DeserializeObject(Of ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute())(jsonbox.GetValue("R1_AR_Execute").ToString)
             ReturnBox.R1_AR_Erase = JsonConvert.DeserializeObject(Of ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase())(jsonbox.GetValue("R1_AR_Erase").ToString)
-
             jtr.Close()
             jsonsr.Close()
             Return ReturnBox
@@ -145,15 +145,12 @@ Module BoxedJobs
     Public Function SaveBoxedJob(ByVal filepath As String, ByVal BoxedJob As BoxedJob)
         Try
             'Create StringWriter for use with JSONTextWriter
-
             If Not System.IO.Directory.Exists(My.Application.Info.DirectoryPath & "\BoxedJobs") Then IO.Directory.CreateDirectory(My.Application.Info.DirectoryPath & "\BoxedJobs")
             Dim jsonsw As New System.IO.StreamWriter(filepath, False)
-
             'Create JsonTextWriter
             Dim jsonstr As New JsonTextWriter(jsonsw)
             'Json Start
             jsonstr.WriteStartObject()
-
 
             'BoxedJobName
             jsonstr.WritePropertyName("BoxedJobName")
@@ -208,9 +205,5 @@ Module BoxedJobs
         End Try
         Return 1
     End Function
-
-
-
-
 
 End Module
