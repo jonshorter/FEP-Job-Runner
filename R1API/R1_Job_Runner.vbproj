@@ -118,7 +118,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="PANW.vb" />
-    <Compile Include="panwlistener.vb" />
     <Compile Include="Service References\JobsService\Reference.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
