@@ -120,7 +120,7 @@
   <data name="TextBox1.Text" xml:space="preserve">
     <value>
 
-This program is for internal Resolution1 Security use only. This program makes use of the JobServices API referenced at https://server/adg.map.web/services/api/JobsService.asmx.
+This program makes use of the JobServices API referenced at https://server/adg.map.web/services/api/JobsService.asmx.
 
 This program utilizes Newtonsoft Json.Net for all JSON creation. You can find it at: http://www.newtonsoft.com/json
 </value>

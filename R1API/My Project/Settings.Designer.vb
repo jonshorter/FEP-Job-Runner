@@ -186,6 +186,54 @@ Namespace My
                 Me("firstrun") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property sqlusername() As String
+            Get
+                Return CType(Me("sqlusername"),String)
+            End Get
+            Set
+                Me("sqlusername") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property sqlpassword() As String
+            Get
+                Return CType(Me("sqlpassword"),String)
+            End Get
+            Set
+                Me("sqlpassword") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property sqlauth() As String
+            Get
+                Return CType(Me("sqlauth"),String)
+            End Get
+            Set
+                Me("sqlauth") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property sqlserver() As String
+            Get
+                Return CType(Me("sqlserver"),String)
+            End Get
+            Set
+                Me("sqlserver") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

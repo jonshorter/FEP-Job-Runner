@@ -139,7 +139,7 @@ Partial Class Main
         Me.tabJobExecution = New System.Windows.Forms.TabPage()
         Me.btnLoadFromBox = New System.Windows.Forms.Button()
         Me.btnSaveAsBox = New System.Windows.Forms.Button()
-        Me.tabBoxedJobs = New System.Windows.Forms.TabPage()
+        Me.tabAutomation = New System.Windows.Forms.TabPage()
         Me.lstBoxedJobs = New System.Windows.Forms.CheckedListBox()
         Me.txtStatusBoxJob = New System.Windows.Forms.TextBox()
         Me.btnBoxJobCollection1 = New System.Windows.Forms.Button()
@@ -165,6 +165,17 @@ Partial Class Main
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.statuslabel = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.grpOptDefSet = New System.Windows.Forms.GroupBox()
+        Me.grpReqSet = New System.Windows.Forms.GroupBox()
+        Me.grpSQLSettings = New System.Windows.Forms.GroupBox()
+        Me.Label38 = New System.Windows.Forms.Label()
+        Me.txtSQLServer = New System.Windows.Forms.TextBox()
+        Me.cmbSQLAuth = New System.Windows.Forms.ComboBox()
+        Me.Label39 = New System.Windows.Forms.Label()
+        Me.Label40 = New System.Windows.Forms.Label()
+        Me.Label41 = New System.Windows.Forms.Label()
+        Me.txtSqlUsername = New System.Windows.Forms.TextBox()
+        Me.txtSqlPass = New System.Windows.Forms.TextBox()
         Me.GroupBox4.SuspendLayout()
         Me.tabSubMenu.SuspendLayout()
         Me.tabJobInfo.SuspendLayout()
@@ -193,11 +204,14 @@ Partial Class Main
         Me.tabMenu.SuspendLayout()
         Me.tabSettings.SuspendLayout()
         Me.tabJobExecution.SuspendLayout()
-        Me.tabBoxedJobs.SuspendLayout()
+        Me.tabAutomation.SuspendLayout()
         Me.tabFireEye.SuspendLayout()
         Me.tabPANW.SuspendLayout()
         Me.tabAbout.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
+        Me.grpOptDefSet.SuspendLayout()
+        Me.grpReqSet.SuspendLayout()
+        Me.grpSQLSettings.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnExecute
@@ -212,7 +226,7 @@ Partial Class Main
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(5, 45)
+        Me.Label2.Location = New System.Drawing.Point(6, 25)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(95, 13)
         Me.Label2.TabIndex = 7
@@ -220,7 +234,7 @@ Partial Class Main
         '
         'txtDefaultJobName
         '
-        Me.txtDefaultJobName.Location = New System.Drawing.Point(129, 42)
+        Me.txtDefaultJobName.Location = New System.Drawing.Point(130, 19)
         Me.txtDefaultJobName.Name = "txtDefaultJobName"
         Me.txtDefaultJobName.Size = New System.Drawing.Size(235, 20)
         Me.txtDefaultJobName.TabIndex = 8
@@ -228,7 +242,7 @@ Partial Class Main
         '
         'txtDefaultProjectName
         '
-        Me.txtDefaultProjectName.Location = New System.Drawing.Point(129, 68)
+        Me.txtDefaultProjectName.Location = New System.Drawing.Point(130, 45)
         Me.txtDefaultProjectName.Name = "txtDefaultProjectName"
         Me.txtDefaultProjectName.Size = New System.Drawing.Size(235, 20)
         Me.txtDefaultProjectName.TabIndex = 9
@@ -237,7 +251,7 @@ Partial Class Main
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(5, 71)
+        Me.Label3.Location = New System.Drawing.Point(6, 48)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(111, 13)
         Me.Label3.TabIndex = 10
@@ -245,16 +259,16 @@ Partial Class Main
         '
         'txtApiUser
         '
-        Me.txtApiUser.Location = New System.Drawing.Point(454, 17)
+        Me.txtApiUser.Location = New System.Drawing.Point(131, 46)
         Me.txtApiUser.Name = "txtApiUser"
-        Me.txtApiUser.Size = New System.Drawing.Size(154, 20)
+        Me.txtApiUser.Size = New System.Drawing.Size(234, 20)
         Me.txtApiUser.TabIndex = 11
         Me.txtApiUser.Text = "FireEye"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(370, 20)
+        Me.Label4.Location = New System.Drawing.Point(7, 49)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(82, 13)
         Me.Label4.TabIndex = 12
@@ -263,7 +277,7 @@ Partial Class Main
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(370, 46)
+        Me.Label5.Location = New System.Drawing.Point(7, 75)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(80, 13)
         Me.Label5.TabIndex = 13
@@ -271,16 +285,16 @@ Partial Class Main
         '
         'txtAPIPass
         '
-        Me.txtAPIPass.Location = New System.Drawing.Point(454, 43)
+        Me.txtAPIPass.Location = New System.Drawing.Point(131, 72)
         Me.txtAPIPass.Name = "txtAPIPass"
         Me.txtAPIPass.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-        Me.txtAPIPass.Size = New System.Drawing.Size(154, 20)
+        Me.txtAPIPass.Size = New System.Drawing.Size(235, 20)
         Me.txtAPIPass.TabIndex = 14
         Me.txtAPIPass.Text = "abc123!"
         '
         'txtServer
         '
-        Me.txtServer.Location = New System.Drawing.Point(129, 17)
+        Me.txtServer.Location = New System.Drawing.Point(131, 20)
         Me.txtServer.Name = "txtServer"
         Me.txtServer.Size = New System.Drawing.Size(235, 20)
         Me.txtServer.TabIndex = 17
@@ -289,7 +303,7 @@ Partial Class Main
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(5, 20)
+        Me.Label7.Location = New System.Drawing.Point(7, 23)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(122, 13)
         Me.Label7.TabIndex = 16
@@ -297,28 +311,14 @@ Partial Class Main
         '
         'GroupBox4
         '
+        Me.GroupBox4.Controls.Add(Me.grpSQLSettings)
+        Me.GroupBox4.Controls.Add(Me.grpReqSet)
+        Me.GroupBox4.Controls.Add(Me.grpOptDefSet)
         Me.GroupBox4.Controls.Add(Me.txtStatusSettings)
-        Me.GroupBox4.Controls.Add(Me.chkbypasscerts)
-        Me.GroupBox4.Controls.Add(Me.txtdefaultshare)
-        Me.GroupBox4.Controls.Add(Me.Label29)
-        Me.GroupBox4.Controls.Add(Me.txtdefaultcomputer)
-        Me.GroupBox4.Controls.Add(Me.Label28)
         Me.GroupBox4.Controls.Add(Me.btnSaveSettings)
-        Me.GroupBox4.Controls.Add(Me.txtDefaultTemplateName)
-        Me.GroupBox4.Controls.Add(Me.Label14)
-        Me.GroupBox4.Controls.Add(Me.txtDefaultJobName)
-        Me.GroupBox4.Controls.Add(Me.txtServer)
-        Me.GroupBox4.Controls.Add(Me.Label2)
-        Me.GroupBox4.Controls.Add(Me.Label7)
-        Me.GroupBox4.Controls.Add(Me.txtDefaultProjectName)
-        Me.GroupBox4.Controls.Add(Me.Label3)
-        Me.GroupBox4.Controls.Add(Me.txtAPIPass)
-        Me.GroupBox4.Controls.Add(Me.txtApiUser)
-        Me.GroupBox4.Controls.Add(Me.Label5)
-        Me.GroupBox4.Controls.Add(Me.Label4)
         Me.GroupBox4.Location = New System.Drawing.Point(6, 7)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(616, 208)
+        Me.GroupBox4.Size = New System.Drawing.Size(616, 494)
         Me.GroupBox4.TabIndex = 19
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Settings"
@@ -328,7 +328,7 @@ Partial Class Main
         Me.txtStatusSettings.BackColor = System.Drawing.SystemColors.Control
         Me.txtStatusSettings.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtStatusSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtStatusSettings.Location = New System.Drawing.Point(8, 186)
+        Me.txtStatusSettings.Location = New System.Drawing.Point(6, 434)
         Me.txtStatusSettings.Name = "txtStatusSettings"
         Me.txtStatusSettings.ReadOnly = True
         Me.txtStatusSettings.Size = New System.Drawing.Size(482, 16)
@@ -338,7 +338,7 @@ Partial Class Main
         'chkbypasscerts
         '
         Me.chkbypasscerts.AutoSize = True
-        Me.chkbypasscerts.Location = New System.Drawing.Point(454, 97)
+        Me.chkbypasscerts.Location = New System.Drawing.Point(420, 19)
         Me.chkbypasscerts.Name = "chkbypasscerts"
         Me.chkbypasscerts.Size = New System.Drawing.Size(145, 17)
         Me.chkbypasscerts.TabIndex = 26
@@ -347,7 +347,7 @@ Partial Class Main
         '
         'txtdefaultshare
         '
-        Me.txtdefaultshare.Location = New System.Drawing.Point(129, 120)
+        Me.txtdefaultshare.Location = New System.Drawing.Point(130, 97)
         Me.txtdefaultshare.Name = "txtdefaultshare"
         Me.txtdefaultshare.Size = New System.Drawing.Size(235, 20)
         Me.txtdefaultshare.TabIndex = 24
@@ -356,7 +356,7 @@ Partial Class Main
         'Label29
         '
         Me.Label29.AutoSize = True
-        Me.Label29.Location = New System.Drawing.Point(5, 123)
+        Me.Label29.Location = New System.Drawing.Point(6, 100)
         Me.Label29.Name = "Label29"
         Me.Label29.Size = New System.Drawing.Size(106, 13)
         Me.Label29.TabIndex = 25
@@ -364,7 +364,7 @@ Partial Class Main
         '
         'txtdefaultcomputer
         '
-        Me.txtdefaultcomputer.Location = New System.Drawing.Point(129, 94)
+        Me.txtdefaultcomputer.Location = New System.Drawing.Point(130, 71)
         Me.txtdefaultcomputer.Name = "txtdefaultcomputer"
         Me.txtdefaultcomputer.Size = New System.Drawing.Size(235, 20)
         Me.txtdefaultcomputer.TabIndex = 22
@@ -373,7 +373,7 @@ Partial Class Main
         'Label28
         '
         Me.Label28.AutoSize = True
-        Me.Label28.Location = New System.Drawing.Point(5, 97)
+        Me.Label28.Location = New System.Drawing.Point(6, 74)
         Me.Label28.Name = "Label28"
         Me.Label28.Size = New System.Drawing.Size(123, 13)
         Me.Label28.TabIndex = 23
@@ -381,7 +381,7 @@ Partial Class Main
         '
         'btnSaveSettings
         '
-        Me.btnSaveSettings.Location = New System.Drawing.Point(454, 157)
+        Me.btnSaveSettings.Location = New System.Drawing.Point(514, 431)
         Me.btnSaveSettings.Name = "btnSaveSettings"
         Me.btnSaveSettings.Size = New System.Drawing.Size(96, 23)
         Me.btnSaveSettings.TabIndex = 21
@@ -392,16 +392,16 @@ Partial Class Main
         '
         Me.txtDefaultTemplateName.FormattingEnabled = True
         Me.txtDefaultTemplateName.Items.AddRange(New Object() {"coll-evtx", "Drop Process by PID", "ETM Relative Time Query", "EXE-Metadata-Cerb", "Lockdown NIC", "LockdownEnableNIC", "Memory Acquisition", "Memory Analysis", "Registry-Autostart", "Registry-Full", "Remediate-Name", "Remediate-PID", "Small-exes-Cerb", "Software Inventory", "Vol-Deep", "Vol-Deep-Cerb", "Vol-Hidden-Cerb", "Vol-Hidden-Injected", "Vol-Quick", "Vol-Quick-Cerb", "Vol-Quick-Sched"})
-        Me.txtDefaultTemplateName.Location = New System.Drawing.Point(129, 146)
+        Me.txtDefaultTemplateName.Location = New System.Drawing.Point(130, 123)
         Me.txtDefaultTemplateName.Name = "txtDefaultTemplateName"
-        Me.txtDefaultTemplateName.Size = New System.Drawing.Size(154, 21)
+        Me.txtDefaultTemplateName.Size = New System.Drawing.Size(235, 21)
         Me.txtDefaultTemplateName.TabIndex = 20
         Me.txtDefaultTemplateName.Text = "coll-evtx"
         '
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(6, 149)
+        Me.Label14.Location = New System.Drawing.Point(7, 126)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(122, 13)
         Me.Label14.TabIndex = 19
@@ -1310,9 +1310,9 @@ Partial Class Main
         Me.tabMenu.Appearance = System.Windows.Forms.TabAppearance.FlatButtons
         Me.tabMenu.Controls.Add(Me.tabSettings)
         Me.tabMenu.Controls.Add(Me.tabJobExecution)
-        Me.tabMenu.Controls.Add(Me.tabBoxedJobs)
         Me.tabMenu.Controls.Add(Me.tabFireEye)
         Me.tabMenu.Controls.Add(Me.tabPANW)
+        Me.tabMenu.Controls.Add(Me.tabAutomation)
         Me.tabMenu.Controls.Add(Me.tabAbout)
         Me.tabMenu.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tabMenu.Location = New System.Drawing.Point(0, 0)
@@ -1364,20 +1364,20 @@ Partial Class Main
         Me.btnSaveAsBox.Text = "Save as Box"
         Me.btnSaveAsBox.UseVisualStyleBackColor = True
         '
-        'tabBoxedJobs
+        'tabAutomation
         '
-        Me.tabBoxedJobs.Controls.Add(Me.lstBoxedJobs)
-        Me.tabBoxedJobs.Controls.Add(Me.txtStatusBoxJob)
-        Me.tabBoxedJobs.Controls.Add(Me.btnBoxJobCollection1)
-        Me.tabBoxedJobs.Controls.Add(Me.Label30)
-        Me.tabBoxedJobs.Controls.Add(Me.txtboxtargetcomputer)
-        Me.tabBoxedJobs.Location = New System.Drawing.Point(4, 25)
-        Me.tabBoxedJobs.Name = "tabBoxedJobs"
-        Me.tabBoxedJobs.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabBoxedJobs.Size = New System.Drawing.Size(628, 546)
-        Me.tabBoxedJobs.TabIndex = 2
-        Me.tabBoxedJobs.Text = "Boxed Jobs"
-        Me.tabBoxedJobs.UseVisualStyleBackColor = True
+        Me.tabAutomation.Controls.Add(Me.lstBoxedJobs)
+        Me.tabAutomation.Controls.Add(Me.txtStatusBoxJob)
+        Me.tabAutomation.Controls.Add(Me.btnBoxJobCollection1)
+        Me.tabAutomation.Controls.Add(Me.Label30)
+        Me.tabAutomation.Controls.Add(Me.txtboxtargetcomputer)
+        Me.tabAutomation.Location = New System.Drawing.Point(4, 25)
+        Me.tabAutomation.Name = "tabAutomation"
+        Me.tabAutomation.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabAutomation.Size = New System.Drawing.Size(628, 546)
+        Me.tabAutomation.TabIndex = 2
+        Me.tabAutomation.Text = "Automation"
+        Me.tabAutomation.UseVisualStyleBackColor = True
         '
         'lstBoxedJobs
         '
@@ -1623,6 +1623,127 @@ Partial Class Main
         Me.statuslabel.Spring = True
         Me.statuslabel.Text = "statuslabel"
         '
+        'grpOptDefSet
+        '
+        Me.grpOptDefSet.Controls.Add(Me.Label2)
+        Me.grpOptDefSet.Controls.Add(Me.Label3)
+        Me.grpOptDefSet.Controls.Add(Me.chkbypasscerts)
+        Me.grpOptDefSet.Controls.Add(Me.txtDefaultProjectName)
+        Me.grpOptDefSet.Controls.Add(Me.txtdefaultshare)
+        Me.grpOptDefSet.Controls.Add(Me.txtDefaultJobName)
+        Me.grpOptDefSet.Controls.Add(Me.Label29)
+        Me.grpOptDefSet.Controls.Add(Me.Label14)
+        Me.grpOptDefSet.Controls.Add(Me.txtdefaultcomputer)
+        Me.grpOptDefSet.Controls.Add(Me.txtDefaultTemplateName)
+        Me.grpOptDefSet.Controls.Add(Me.Label28)
+        Me.grpOptDefSet.Location = New System.Drawing.Point(6, 125)
+        Me.grpOptDefSet.Name = "grpOptDefSet"
+        Me.grpOptDefSet.Size = New System.Drawing.Size(604, 150)
+        Me.grpOptDefSet.TabIndex = 28
+        Me.grpOptDefSet.TabStop = False
+        Me.grpOptDefSet.Text = "Optional Default Settings"
+        '
+        'grpReqSet
+        '
+        Me.grpReqSet.Controls.Add(Me.Label7)
+        Me.grpReqSet.Controls.Add(Me.Label4)
+        Me.grpReqSet.Controls.Add(Me.Label5)
+        Me.grpReqSet.Controls.Add(Me.txtApiUser)
+        Me.grpReqSet.Controls.Add(Me.txtServer)
+        Me.grpReqSet.Controls.Add(Me.txtAPIPass)
+        Me.grpReqSet.Location = New System.Drawing.Point(6, 19)
+        Me.grpReqSet.Name = "grpReqSet"
+        Me.grpReqSet.Size = New System.Drawing.Size(604, 100)
+        Me.grpReqSet.TabIndex = 29
+        Me.grpReqSet.TabStop = False
+        Me.grpReqSet.Text = "Required Settings"
+        '
+        'grpSQLSettings
+        '
+        Me.grpSQLSettings.Controls.Add(Me.Label40)
+        Me.grpSQLSettings.Controls.Add(Me.Label39)
+        Me.grpSQLSettings.Controls.Add(Me.Label41)
+        Me.grpSQLSettings.Controls.Add(Me.cmbSQLAuth)
+        Me.grpSQLSettings.Controls.Add(Me.txtSqlUsername)
+        Me.grpSQLSettings.Controls.Add(Me.txtSqlPass)
+        Me.grpSQLSettings.Controls.Add(Me.Label38)
+        Me.grpSQLSettings.Controls.Add(Me.txtSQLServer)
+        Me.grpSQLSettings.Location = New System.Drawing.Point(6, 281)
+        Me.grpSQLSettings.Name = "grpSQLSettings"
+        Me.grpSQLSettings.Size = New System.Drawing.Size(604, 136)
+        Me.grpSQLSettings.TabIndex = 30
+        Me.grpSQLSettings.TabStop = False
+        Me.grpSQLSettings.Text = "Optional SQL Settings"
+        '
+        'Label38
+        '
+        Me.Label38.AutoSize = True
+        Me.Label38.Location = New System.Drawing.Point(7, 25)
+        Me.Label38.Name = "Label38"
+        Me.Label38.Size = New System.Drawing.Size(116, 13)
+        Me.Label38.TabIndex = 18
+        Me.Label38.Text = "SQL Server Hostname:"
+        '
+        'txtSQLServer
+        '
+        Me.txtSQLServer.Location = New System.Drawing.Point(130, 22)
+        Me.txtSQLServer.Name = "txtSQLServer"
+        Me.txtSQLServer.Size = New System.Drawing.Size(235, 20)
+        Me.txtSQLServer.TabIndex = 19
+        Me.txtSQLServer.Text = "resone55"
+        '
+        'cmbSQLAuth
+        '
+        Me.cmbSQLAuth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbSQLAuth.FormattingEnabled = True
+        Me.cmbSQLAuth.Items.AddRange(New Object() {"Windows", "SQL Authentication"})
+        Me.cmbSQLAuth.Location = New System.Drawing.Point(130, 48)
+        Me.cmbSQLAuth.Name = "cmbSQLAuth"
+        Me.cmbSQLAuth.Size = New System.Drawing.Size(235, 21)
+        Me.cmbSQLAuth.TabIndex = 27
+        '
+        'Label39
+        '
+        Me.Label39.AutoSize = True
+        Me.Label39.Location = New System.Drawing.Point(6, 51)
+        Me.Label39.Name = "Label39"
+        Me.Label39.Size = New System.Drawing.Size(78, 13)
+        Me.Label39.TabIndex = 28
+        Me.Label39.Text = "Authentication:"
+        '
+        'Label40
+        '
+        Me.Label40.AutoSize = True
+        Me.Label40.Location = New System.Drawing.Point(6, 78)
+        Me.Label40.Name = "Label40"
+        Me.Label40.Size = New System.Drawing.Size(82, 13)
+        Me.Label40.TabIndex = 19
+        Me.Label40.Text = "SQL Username:"
+        '
+        'Label41
+        '
+        Me.Label41.AutoSize = True
+        Me.Label41.Location = New System.Drawing.Point(6, 104)
+        Me.Label41.Name = "Label41"
+        Me.Label41.Size = New System.Drawing.Size(80, 13)
+        Me.Label41.TabIndex = 20
+        Me.Label41.Text = "SQL Password:"
+        '
+        'txtSqlUsername
+        '
+        Me.txtSqlUsername.Location = New System.Drawing.Point(130, 75)
+        Me.txtSqlUsername.Name = "txtSqlUsername"
+        Me.txtSqlUsername.Size = New System.Drawing.Size(234, 20)
+        Me.txtSqlUsername.TabIndex = 18
+        '
+        'txtSqlPass
+        '
+        Me.txtSqlPass.Location = New System.Drawing.Point(130, 101)
+        Me.txtSqlPass.Name = "txtSqlPass"
+        Me.txtSqlPass.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
+        Me.txtSqlPass.Size = New System.Drawing.Size(235, 20)
+        Me.txtSqlPass.TabIndex = 21
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1676,8 +1797,8 @@ Partial Class Main
         Me.tabMenu.ResumeLayout(False)
         Me.tabSettings.ResumeLayout(False)
         Me.tabJobExecution.ResumeLayout(False)
-        Me.tabBoxedJobs.ResumeLayout(False)
-        Me.tabBoxedJobs.PerformLayout()
+        Me.tabAutomation.ResumeLayout(False)
+        Me.tabAutomation.PerformLayout()
         Me.tabFireEye.ResumeLayout(False)
         Me.tabFireEye.PerformLayout()
         Me.tabPANW.ResumeLayout(False)
@@ -1686,6 +1807,12 @@ Partial Class Main
         Me.tabAbout.PerformLayout()
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
+        Me.grpOptDefSet.ResumeLayout(False)
+        Me.grpOptDefSet.PerformLayout()
+        Me.grpReqSet.ResumeLayout(False)
+        Me.grpReqSet.PerformLayout()
+        Me.grpSQLSettings.ResumeLayout(False)
+        Me.grpSQLSettings.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1756,7 +1883,7 @@ Partial Class Main
     Friend WithEvents tabSettings As System.Windows.Forms.TabPage
     Friend WithEvents tabJobExecution As System.Windows.Forms.TabPage
     Friend WithEvents btnSaveSettings As System.Windows.Forms.Button
-    Friend WithEvents tabBoxedJobs As System.Windows.Forms.TabPage
+    Friend WithEvents tabAutomation As System.Windows.Forms.TabPage
     Friend WithEvents tabAbout As System.Windows.Forms.TabPage
     Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
     Friend WithEvents tabJobInfo As System.Windows.Forms.TabPage
@@ -1832,5 +1959,16 @@ Partial Class Main
     Friend WithEvents Label36 As System.Windows.Forms.Label
     Friend WithEvents Label37 As System.Windows.Forms.Label
     Friend WithEvents txtFELink As System.Windows.Forms.TextBox
+    Friend WithEvents grpReqSet As System.Windows.Forms.GroupBox
+    Friend WithEvents grpOptDefSet As System.Windows.Forms.GroupBox
+    Friend WithEvents grpSQLSettings As System.Windows.Forms.GroupBox
+    Friend WithEvents Label38 As System.Windows.Forms.Label
+    Friend WithEvents txtSQLServer As System.Windows.Forms.TextBox
+    Friend WithEvents Label39 As System.Windows.Forms.Label
+    Friend WithEvents cmbSQLAuth As System.Windows.Forms.ComboBox
+    Friend WithEvents Label40 As System.Windows.Forms.Label
+    Friend WithEvents Label41 As System.Windows.Forms.Label
+    Friend WithEvents txtSqlUsername As System.Windows.Forms.TextBox
+    Friend WithEvents txtSqlPass As System.Windows.Forms.TextBox
 
 End Class

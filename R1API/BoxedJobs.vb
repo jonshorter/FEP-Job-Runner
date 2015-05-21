@@ -31,6 +31,7 @@ Module BoxedJobs
     Public Function GetListofBoxedJobs()
         Dim boxnames As New Dictionary(Of String, String)
         'enumerate files and load box job names
+        If Not IO.Directory.Exists(My.Application.Info.DirectoryPath & "\BoxedJobs") Then IO.Directory.CreateDirectory(My.Application.Info.DirectoryPath & "\BoxedJobs")
         For Each file In IO.Directory.EnumerateFiles(My.Application.Info.DirectoryPath & "\BoxedJobs", "*.json")
             'create stream reader
             Dim jsonsr As New System.IO.StreamReader(file)
@@ -42,6 +43,7 @@ Module BoxedJobs
             jtr.Close()
             jsonsr.Close()
         Next
+
         Return boxnames
     End Function
 

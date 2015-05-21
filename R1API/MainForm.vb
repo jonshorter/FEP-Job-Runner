@@ -163,7 +163,7 @@ Public Class Main
 
         'End First Run
         'Hide Boxed Jobs
-        Me.tabMenu.TabPages.Remove(tabBoxedJobs)
+        'Me.tabMenu.TabPages.Remove(tabAutomation)
 
         'Set Target to Agent 
         rdoagent.Checked = True
@@ -171,6 +171,9 @@ Public Class Main
 
         'Set PID rdo
         rdoPID.Checked = True
+
+        'Set SQL Auth
+        cmbSQLAuth.Text = "Windows"
 
         'Clear status message
         statuslabel.Text = ""
@@ -200,6 +203,10 @@ Public Class Main
         Next
         txtTemplateName.Text = My.Settings.templatenameselect
         txtboxtargetcomputer.Text = txtdefaultcomputer.Text
+        txtSQLServer.Text = My.Settings.sqlserver
+        txtSqlPass.Text = My.Settings.sqlpassword
+        txtSqlUsername.Text = My.Settings.sqlusername
+        cmbSQLAuth.Text = My.Settings.sqlauth
 
         'Set the job stores
         StoreInFiltList = New List(Of InclusionFilter)
@@ -210,7 +217,7 @@ Public Class Main
         StoreRemKillNameList = New List(Of String)
         StoreRemKillIDList = New List(Of String)
 
-      
+
 
     End Sub
 
@@ -243,6 +250,11 @@ Public Class Main
             My.Settings.templatename.Add(item.ToString)
         Next
         My.Settings.templatenameselect = txtDefaultTemplateName.Text
+        My.Settings.sqlserver = txtSQLServer.Text
+        My.Settings.sqlpassword = txtSqlPass.Text
+        My.Settings.sqlusername = txtSqlUsername.Text
+        My.Settings.sqlauth = cmbSQLAuth.Text
+
         My.Settings.Save()
         txtStatusSettings.Text = "Settings Saved"
     End Sub
@@ -253,7 +265,7 @@ Public Class Main
         txtStatusSettings.Text = ""
     End Sub
 
-    Private Sub tabBoxedJobs_Enter(sender As Object, e As EventArgs) Handles tabBoxedJobs.Enter
+    Private Sub tabBoxedJobs_Enter(sender As Object, e As EventArgs) Handles tabAutomation.Enter
         'Get box jobs into UI
         txtboxtargetcomputer.Text = txtdefaultcomputer.Text
         Dim boxnames As Dictionary(Of String, String) = GetListofBoxedJobs()
@@ -1085,4 +1097,17 @@ Public Class Main
     End Sub
 
 
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
+
+    End Sub
+
+    Private Sub cmbSQLAuth_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSQLAuth.SelectedIndexChanged
+        If cmbSQLAuth.Text = "Windows" Then
+            txtSqlPass.Enabled = False
+            txtSqlUsername.Enabled = False
+        Else
+            txtSqlPass.Enabled = True
+            txtSqlUsername.Enabled = True
+        End If
+    End Sub
 End Class
