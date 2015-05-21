@@ -1110,4 +1110,8 @@ Public Class Main
             txtSqlUsername.Enabled = True
         End If
     End Sub
+
+    Private Sub btnShowJSON_Click(sender As Object, e As EventArgs) Handles btnShowJSON.Click
+        MsgBox("Press Ctrl+C to copy." & vbCrLf & Jobs.BuildFilterJSON(StoreInFiltList, StoreExFiltList))
+    End Sub
 End Class

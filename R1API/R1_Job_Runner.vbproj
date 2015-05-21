@@ -92,6 +92,7 @@
     <Compile Include="AgentorShareDialog.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Automation.vb" />
     <Compile Include="BoxedJobs.vb" />
     <Compile Include="FireEye.vb" />
     <Compile Include="MainForm.vb">
@@ -123,6 +124,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="SQL.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AgentorShareDialog.resx">

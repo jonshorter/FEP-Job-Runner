@@ -176,6 +176,7 @@ Partial Class Main
         Me.Label41 = New System.Windows.Forms.Label()
         Me.txtSqlUsername = New System.Windows.Forms.TextBox()
         Me.txtSqlPass = New System.Windows.Forms.TextBox()
+        Me.btnShowJSON = New System.Windows.Forms.Button()
         Me.GroupBox4.SuspendLayout()
         Me.tabSubMenu.SuspendLayout()
         Me.tabJobInfo.SuspendLayout()
@@ -1334,6 +1335,7 @@ Partial Class Main
         '
         'tabJobExecution
         '
+        Me.tabJobExecution.Controls.Add(Me.btnShowJSON)
         Me.tabJobExecution.Controls.Add(Me.btnLoadFromBox)
         Me.tabJobExecution.Controls.Add(Me.btnSaveAsBox)
         Me.tabJobExecution.Controls.Add(Me.btnExecute)
@@ -1744,6 +1746,15 @@ Partial Class Main
         Me.txtSqlPass.Size = New System.Drawing.Size(235, 20)
         Me.txtSqlPass.TabIndex = 21
         '
+        'btnShowJSON
+        '
+        Me.btnShowJSON.Location = New System.Drawing.Point(210, 491)
+        Me.btnShowJSON.Name = "btnShowJSON"
+        Me.btnShowJSON.Size = New System.Drawing.Size(75, 23)
+        Me.btnShowJSON.TabIndex = 23
+        Me.btnShowJSON.Text = "Show JSON"
+        Me.btnShowJSON.UseVisualStyleBackColor = True
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1970,5 +1981,6 @@ Partial Class Main
     Friend WithEvents Label41 As System.Windows.Forms.Label
     Friend WithEvents txtSqlUsername As System.Windows.Forms.TextBox
     Friend WithEvents txtSqlPass As System.Windows.Forms.TextBox
+    Friend WithEvents btnShowJSON As System.Windows.Forms.Button
 
 End Class
