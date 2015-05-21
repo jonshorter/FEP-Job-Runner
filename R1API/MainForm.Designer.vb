@@ -177,6 +177,9 @@ Partial Class Main
         Me.txtSqlUsername = New System.Windows.Forms.TextBox()
         Me.txtSqlPass = New System.Windows.Forms.TextBox()
         Me.btnShowJSON = New System.Windows.Forms.Button()
+        Me.btnLoadAllBox = New System.Windows.Forms.Button()
+        Me.dgAutomation = New System.Windows.Forms.DataGridView()
+        Me.btnAutoGo = New System.Windows.Forms.Button()
         Me.GroupBox4.SuspendLayout()
         Me.tabSubMenu.SuspendLayout()
         Me.tabJobInfo.SuspendLayout()
@@ -213,6 +216,7 @@ Partial Class Main
         Me.grpOptDefSet.SuspendLayout()
         Me.grpReqSet.SuspendLayout()
         Me.grpSQLSettings.SuspendLayout()
+        CType(Me.dgAutomation, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnExecute
@@ -1368,6 +1372,9 @@ Partial Class Main
         '
         'tabAutomation
         '
+        Me.tabAutomation.Controls.Add(Me.btnAutoGo)
+        Me.tabAutomation.Controls.Add(Me.dgAutomation)
+        Me.tabAutomation.Controls.Add(Me.btnLoadAllBox)
         Me.tabAutomation.Controls.Add(Me.lstBoxedJobs)
         Me.tabAutomation.Controls.Add(Me.txtStatusBoxJob)
         Me.tabAutomation.Controls.Add(Me.btnBoxJobCollection1)
@@ -1386,7 +1393,7 @@ Partial Class Main
         Me.lstBoxedJobs.FormattingEnabled = True
         Me.lstBoxedJobs.Location = New System.Drawing.Point(22, 98)
         Me.lstBoxedJobs.Name = "lstBoxedJobs"
-        Me.lstBoxedJobs.Size = New System.Drawing.Size(311, 214)
+        Me.lstBoxedJobs.Size = New System.Drawing.Size(182, 79)
         Me.lstBoxedJobs.TabIndex = 22
         '
         'txtStatusBoxJob
@@ -1394,7 +1401,7 @@ Partial Class Main
         Me.txtStatusBoxJob.BackColor = System.Drawing.SystemColors.Control
         Me.txtStatusBoxJob.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtStatusBoxJob.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtStatusBoxJob.Location = New System.Drawing.Point(11, 410)
+        Me.txtStatusBoxJob.Location = New System.Drawing.Point(11, 468)
         Me.txtStatusBoxJob.Name = "txtStatusBoxJob"
         Me.txtStatusBoxJob.ReadOnly = True
         Me.txtStatusBoxJob.Size = New System.Drawing.Size(531, 16)
@@ -1755,6 +1762,33 @@ Partial Class Main
         Me.btnShowJSON.Text = "Show JSON"
         Me.btnShowJSON.UseVisualStyleBackColor = True
         '
+        'btnLoadAllBox
+        '
+        Me.btnLoadAllBox.Location = New System.Drawing.Point(431, 28)
+        Me.btnLoadAllBox.Name = "btnLoadAllBox"
+        Me.btnLoadAllBox.Size = New System.Drawing.Size(111, 23)
+        Me.btnLoadAllBox.TabIndex = 23
+        Me.btnLoadAllBox.Text = "Load All Box Jobs"
+        Me.btnLoadAllBox.UseVisualStyleBackColor = True
+        '
+        'dgAutomation
+        '
+        Me.dgAutomation.AllowUserToAddRows = False
+        Me.dgAutomation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgAutomation.Location = New System.Drawing.Point(3, 192)
+        Me.dgAutomation.Name = "dgAutomation"
+        Me.dgAutomation.Size = New System.Drawing.Size(622, 270)
+        Me.dgAutomation.TabIndex = 24
+        '
+        'btnAutoGo
+        '
+        Me.btnAutoGo.Location = New System.Drawing.Point(431, 80)
+        Me.btnAutoGo.Name = "btnAutoGo"
+        Me.btnAutoGo.Size = New System.Drawing.Size(111, 23)
+        Me.btnAutoGo.TabIndex = 25
+        Me.btnAutoGo.Text = "Go"
+        Me.btnAutoGo.UseVisualStyleBackColor = True
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1824,6 +1858,7 @@ Partial Class Main
         Me.grpReqSet.PerformLayout()
         Me.grpSQLSettings.ResumeLayout(False)
         Me.grpSQLSettings.PerformLayout()
+        CType(Me.dgAutomation, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1982,5 +2017,8 @@ Partial Class Main
     Friend WithEvents txtSqlUsername As System.Windows.Forms.TextBox
     Friend WithEvents txtSqlPass As System.Windows.Forms.TextBox
     Friend WithEvents btnShowJSON As System.Windows.Forms.Button
+    Friend WithEvents btnLoadAllBox As System.Windows.Forms.Button
+    Friend WithEvents dgAutomation As System.Windows.Forms.DataGridView
+    Friend WithEvents btnAutoGo As System.Windows.Forms.Button
 
 End Class

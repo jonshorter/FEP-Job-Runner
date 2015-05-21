@@ -39,7 +39,7 @@ Module BoxedJobs
             Dim jtr As New JsonTextReader(jsonsr)
             'read the file to a new json object
             Dim jsonbox As JObject = DirectCast(JToken.ReadFrom(jtr), JObject)
-            boxnames.Add(jsonbox.GetValue("BoxedJobName"), file)
+            boxnames.Add(jsonbox.GetValue("R1JobName"), file)
             jtr.Close()
             jsonsr.Close()
         Next

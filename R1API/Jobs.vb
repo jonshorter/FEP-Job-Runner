@@ -200,6 +200,11 @@ Module Jobs
         'If no errors, then update the status as Job submitted + GUID
         If e.Error Is Nothing Then
             Main.statuslabel.Text = "Job Submitted: " & e.Result.RunJobFromTemplateNameResult.ToString
+
+            MsgBox(SQLFunctions.GetJobStatus(e.Result.RunJobFromTemplateNameResult.ToString))
+            Dim jcheck As New Automation.CheckJob
+            jcheck.JobGUID = e.Result.RunJobFromTemplateNameResult.ToString
+            jcheck.CheckOnJob()
         Else
             'Errors!
             'Set the status label to draw attention

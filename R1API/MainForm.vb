@@ -9,6 +9,8 @@ Public Class Main
     Public StoreRemDelList
     Public StoreRemKillNameList
     Public StoreRemKillIDList
+    'Declare Automation Job
+    Public autojobs
 
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnExecute.Click
@@ -266,61 +268,58 @@ Public Class Main
     End Sub
 
     Private Sub tabBoxedJobs_Enter(sender As Object, e As EventArgs) Handles tabAutomation.Enter
-        'Get box jobs into UI
-        txtboxtargetcomputer.Text = txtdefaultcomputer.Text
-        Dim boxnames As Dictionary(Of String, String) = GetListofBoxedJobs()
-        For Each item In boxnames
-            lstBoxedJobs.Items.Add(item.Key & "*" & item.Value)
-        Next
+ 
     End Sub
 
 
     Private Sub btnSaveAsBox_Click(sender As Object, e As EventArgs) Handles btnSaveAsBox.Click
         'Save Boxed Job
         'Show the Save File Dialog
-        sfdBox.ShowDialog()
-        'New Box
-        Dim sbox As New BoxedJob
+        sfdBox.InitialDirectory = My.Application.Info.DirectoryPath & "\BoxedJobs"
+        If sfdBox.ShowDialog() = 1 Then
+            'New Box
+            Dim sbox As New BoxedJob
 
-        'Set Box Variables
-        sbox.BoxJobName = sfdBox.FileName
-        sbox.R1JobName = txtJobName.Text
-        sbox.R1Template = txtTemplateName.Text
-        sbox.R1Project = txtProjectName.Text
+            'Set Box Variables
+            sbox.BoxJobName = sfdBox.FileName
+            sbox.R1JobName = txtJobName.Text
+            sbox.R1Template = txtTemplateName.Text
+            sbox.R1Project = txtProjectName.Text
 
-        'Process IDs
-        Dim pids() As String = New String() {}
-        Dim pidlist As List(Of String) = StoreRemKillIDList
-        For Each item In pidlist
-            pids.Add(item)
-        Next
-        sbox.R1_AR_PIDS = pids
+            'Process IDs
+            Dim pids() As String = New String() {}
+            Dim pidlist As List(Of String) = StoreRemKillIDList
+            For Each item In pidlist
+                pids.Add(item)
+            Next
+            sbox.R1_AR_PIDS = pids
 
-        'Process Names
-        Dim processnames() As String = New String() {}
-        Dim pnamelist As List(Of String) = StoreRemKillNameList
-        For Each item In pnamelist
-            processnames.Add(item)
-        Next
-        sbox.R1_AR_ProcessNames = processnames
+            'Process Names
+            Dim processnames() As String = New String() {}
+            Dim pnamelist As List(Of String) = StoreRemKillNameList
+            For Each item In pnamelist
+                processnames.Add(item)
+            Next
+            sbox.R1_AR_ProcessNames = processnames
 
-        'Send Options
-        Dim ar_send() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile = StoreRemSendList.toarray
-        sbox.R1_AR_Send = ar_send
+            'Send Options
+            Dim ar_send() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile = StoreRemSendList.toarray
+            sbox.R1_AR_Send = ar_send
 
-        'Execute Options
-        Dim ar_exec() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute = StoreRemExecList.toarray
-        sbox.R1_AR_Execute = ar_exec
+            'Execute Options
+            Dim ar_exec() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute = StoreRemExecList.toarray
+            sbox.R1_AR_Execute = ar_exec
 
-        'Erase Options
-        Dim ar_erase() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase = StoreRemDelList.toarray
-        sbox.R1_AR_Erase = ar_erase
+            'Erase Options
+            Dim ar_erase() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase = StoreRemDelList.toarray
+            sbox.R1_AR_Erase = ar_erase
 
-        'Filters
-        sbox.R1Filter = Jobs.BuildFilterJSON(StoreInFiltList, StoreExFiltList)
+            'Filters
+            sbox.R1Filter = Jobs.BuildFilterJSON(StoreInFiltList, StoreExFiltList)
 
-        'Save Job
-        BoxedJobs.SaveBoxedJob(sfdBox.FileName, sbox)
+            'Save Job
+            BoxedJobs.SaveBoxedJob(sfdBox.FileName, sbox)
+        End If
     End Sub
 
     Private Sub btnLoadFromBox_Click(sender As Object, e As EventArgs) Handles btnLoadFromBox.Click
@@ -1113,5 +1112,39 @@ Public Class Main
 
     Private Sub btnShowJSON_Click(sender As Object, e As EventArgs) Handles btnShowJSON.Click
         MsgBox("Press Ctrl+C to copy." & vbCrLf & Jobs.BuildFilterJSON(StoreInFiltList, StoreExFiltList))
+    End Sub
+
+    
+
+    Private Sub tabAutomation_Click(sender As Object, e As EventArgs) Handles tabAutomation.Click
+
+    End Sub
+
+    Private Sub btnLoadAllBox_Click(sender As Object, e As EventArgs) Handles btnLoadAllBox.Click
+        'Get box jobs into UI
+        txtboxtargetcomputer.Text = txtdefaultcomputer.Text
+        autojobs = New DataTable
+        autojobs.Columns.Add("Selected", Type.GetType("System.Boolean"))
+        autojobs.Columns.Add("Job Name", Type.GetType("System.String"))
+        autojobs.Columns.Add("Job Path", Type.GetType("System.String"))
+        autojobs.Columns.Add("Status", Type.GetType("System.String"))
+        autojobs.Columns.Add("Job GUID", Type.GetType("System.String"))
+
+        Dim boxnames As Dictionary(Of String, String) = GetListofBoxedJobs()
+        For Each item In boxnames
+            lstBoxedJobs.Items.Add(item.Key & "*" & item.Value)
+            autojobs.Rows.Add(New String() {False, item.Key, item.Value, "", ""})
+
+        Next
+        dgAutomation.DataSource = autojobs
+        dgAutomation.Columns.Item(2).Visible = False
+    End Sub
+
+    Private Sub btnAutoGo_Click(sender As Object, e As EventArgs) Handles btnAutoGo.Click
+        For Each item As DataRow In autojobs
+            If item.Item(0) = True Then
+
+            End If
+        Next
     End Sub
 End Class
