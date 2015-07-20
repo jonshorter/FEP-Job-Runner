@@ -18,10 +18,10 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="https://r1.bmartin.pw/adg.map.web/services/api/JobsService.asmx?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="https://server/adg.map.web/services/api/JobsService.asmx?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="JobsService.wsdl" MetadataType="Wsdl" ID="2b8fe820-0b71-46c2-b3f4-77af800dc8d0" SourceId="1" SourceUrl="https://r1.bmartin.pw/adg.map.web/services/api/JobsService.asmx?wsdl" />
+    <MetadataFile FileName="JobsService.wsdl" MetadataType="Wsdl" ID="2b8fe820-0b71-46c2-b3f4-77af800dc8d0" SourceId="1" SourceUrl="https://server/adg.map.web/services/api/JobsService.asmx?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
