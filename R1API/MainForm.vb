@@ -174,8 +174,6 @@ Public Class Main
         'Set PID rdo
         rdoPID.Checked = True
 
-        'Set SQL Auth
-        cmbSQLAuth.Text = "Windows"
 
         'Clear status message
         statuslabel.Text = ""
@@ -204,11 +202,15 @@ Public Class Main
             txtTemplateName.Items.Add(item.ToString)
         Next
         txtTemplateName.Text = My.Settings.templatenameselect
-        txtboxtargetcomputer.Text = txtdefaultcomputer.Text
-        txtSQLServer.Text = My.Settings.sqlserver
-        txtSqlPass.Text = My.Settings.sqlpassword
-        txtSqlUsername.Text = My.Settings.sqlusername
-        cmbSQLAuth.Text = My.Settings.sqlauth
+
+        Dim ver As Integer = My.Settings.version
+        If ver = "55" Then
+            rdoversion55.Checked = True
+            rdoversion57.Checked = False
+        Else
+            rdoversion55.Checked = False
+            rdoversion57.Checked = True
+        End If
 
         'Set the job stores
         StoreInFiltList = New List(Of InclusionFilter)
@@ -227,14 +229,14 @@ Public Class Main
         'Agent Radio
         grpagent.Enabled = True
         grpshare.Enabled = False
-        rdoshare.Checked = False
+
     End Sub
 
     Private Sub rdoshare_CheckedChanged(sender As Object, e As EventArgs) Handles rdoshare.CheckedChanged
         'Share Radio
         grpagent.Enabled = False
         grpshare.Enabled = True
-        rdoagent.Checked = False
+
     End Sub
 
     Private Sub btnSaveSettings_Click(sender As Object, e As EventArgs) Handles btnSaveSettings.Click
@@ -252,10 +254,11 @@ Public Class Main
             My.Settings.templatename.Add(item.ToString)
         Next
         My.Settings.templatenameselect = txtDefaultTemplateName.Text
-        My.Settings.sqlserver = txtSQLServer.Text
-        My.Settings.sqlpassword = txtSqlPass.Text
-        My.Settings.sqlusername = txtSqlUsername.Text
-        My.Settings.sqlauth = cmbSQLAuth.Text
+        If rdoversion55.Checked = True Then
+            My.Settings.version = "55"
+        Else
+            My.Settings.version = "57"
+        End If
 
         My.Settings.Save()
         txtStatusSettings.Text = "Settings Saved"
@@ -267,8 +270,8 @@ Public Class Main
         txtStatusSettings.Text = ""
     End Sub
 
-    Private Sub tabBoxedJobs_Enter(sender As Object, e As EventArgs) Handles tabAutomation.Enter
- 
+    Private Sub tabBoxedJobs_Enter(sender As Object, e As EventArgs)
+
     End Sub
 
 
@@ -1100,51 +1103,11 @@ Public Class Main
 
     End Sub
 
-    Private Sub cmbSQLAuth_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSQLAuth.SelectedIndexChanged
-        If cmbSQLAuth.Text = "Windows" Then
-            txtSqlPass.Enabled = False
-            txtSqlUsername.Enabled = False
-        Else
-            txtSqlPass.Enabled = True
-            txtSqlUsername.Enabled = True
-        End If
-    End Sub
+  
 
     Private Sub btnShowJSON_Click(sender As Object, e As EventArgs) Handles btnShowJSON.Click
         MsgBox("Press Ctrl+C to copy." & vbCrLf & Jobs.BuildFilterJSON(StoreInFiltList, StoreExFiltList))
     End Sub
 
-    
-
-    Private Sub tabAutomation_Click(sender As Object, e As EventArgs) Handles tabAutomation.Click
-
-    End Sub
-
-    Private Sub btnLoadAllBox_Click(sender As Object, e As EventArgs) Handles btnLoadAllBox.Click
-        'Get box jobs into UI
-        txtboxtargetcomputer.Text = txtdefaultcomputer.Text
-        autojobs = New DataTable
-        autojobs.Columns.Add("Selected", Type.GetType("System.Boolean"))
-        autojobs.Columns.Add("Job Name", Type.GetType("System.String"))
-        autojobs.Columns.Add("Job Path", Type.GetType("System.String"))
-        autojobs.Columns.Add("Status", Type.GetType("System.String"))
-        autojobs.Columns.Add("Job GUID", Type.GetType("System.String"))
-
-        Dim boxnames As Dictionary(Of String, String) = GetListofBoxedJobs()
-        For Each item In boxnames
-            lstBoxedJobs.Items.Add(item.Key & "*" & item.Value)
-            autojobs.Rows.Add(New String() {False, item.Key, item.Value, "", ""})
-
-        Next
-        dgAutomation.DataSource = autojobs
-        dgAutomation.Columns.Item(2).Visible = False
-    End Sub
-
-    Private Sub btnAutoGo_Click(sender As Object, e As EventArgs) Handles btnAutoGo.Click
-        For Each item As DataRow In autojobs
-            If item.Item(0) = True Then
-
-            End If
-        Next
-    End Sub
+  
 End Class

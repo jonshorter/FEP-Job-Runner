@@ -35,15 +35,17 @@ Partial Class Main
         Me.txtServer = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.txtStatusSettings = New System.Windows.Forms.TextBox()
+        Me.grpReqSet = New System.Windows.Forms.GroupBox()
+        Me.grpOptDefSet = New System.Windows.Forms.GroupBox()
         Me.chkbypasscerts = New System.Windows.Forms.CheckBox()
         Me.txtdefaultshare = New System.Windows.Forms.TextBox()
         Me.Label29 = New System.Windows.Forms.Label()
-        Me.txtdefaultcomputer = New System.Windows.Forms.TextBox()
-        Me.Label28 = New System.Windows.Forms.Label()
-        Me.btnSaveSettings = New System.Windows.Forms.Button()
-        Me.txtDefaultTemplateName = New System.Windows.Forms.ComboBox()
         Me.Label14 = New System.Windows.Forms.Label()
+        Me.txtdefaultcomputer = New System.Windows.Forms.TextBox()
+        Me.txtDefaultTemplateName = New System.Windows.Forms.ComboBox()
+        Me.Label28 = New System.Windows.Forms.Label()
+        Me.txtStatusSettings = New System.Windows.Forms.TextBox()
+        Me.btnSaveSettings = New System.Windows.Forms.Button()
         Me.tabSubMenu = New System.Windows.Forms.TabControl()
         Me.tabJobInfo = New System.Windows.Forms.TabPage()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -137,14 +139,9 @@ Partial Class Main
         Me.tabMenu = New System.Windows.Forms.TabControl()
         Me.tabSettings = New System.Windows.Forms.TabPage()
         Me.tabJobExecution = New System.Windows.Forms.TabPage()
+        Me.btnShowJSON = New System.Windows.Forms.Button()
         Me.btnLoadFromBox = New System.Windows.Forms.Button()
         Me.btnSaveAsBox = New System.Windows.Forms.Button()
-        Me.tabAutomation = New System.Windows.Forms.TabPage()
-        Me.lstBoxedJobs = New System.Windows.Forms.CheckedListBox()
-        Me.txtStatusBoxJob = New System.Windows.Forms.TextBox()
-        Me.btnBoxJobCollection1 = New System.Windows.Forms.Button()
-        Me.Label30 = New System.Windows.Forms.Label()
-        Me.txtboxtargetcomputer = New System.Windows.Forms.TextBox()
         Me.tabFireEye = New System.Windows.Forms.TabPage()
         Me.txtFELink = New System.Windows.Forms.TextBox()
         Me.Label37 = New System.Windows.Forms.Label()
@@ -165,22 +162,11 @@ Partial Class Main
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.statuslabel = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.grpOptDefSet = New System.Windows.Forms.GroupBox()
-        Me.grpReqSet = New System.Windows.Forms.GroupBox()
-        Me.grpSQLSettings = New System.Windows.Forms.GroupBox()
-        Me.Label38 = New System.Windows.Forms.Label()
-        Me.txtSQLServer = New System.Windows.Forms.TextBox()
-        Me.cmbSQLAuth = New System.Windows.Forms.ComboBox()
-        Me.Label39 = New System.Windows.Forms.Label()
-        Me.Label40 = New System.Windows.Forms.Label()
-        Me.Label41 = New System.Windows.Forms.Label()
-        Me.txtSqlUsername = New System.Windows.Forms.TextBox()
-        Me.txtSqlPass = New System.Windows.Forms.TextBox()
-        Me.btnShowJSON = New System.Windows.Forms.Button()
-        Me.btnLoadAllBox = New System.Windows.Forms.Button()
-        Me.dgAutomation = New System.Windows.Forms.DataGridView()
-        Me.btnAutoGo = New System.Windows.Forms.Button()
+        Me.rdoversion55 = New System.Windows.Forms.RadioButton()
+        Me.rdoversion57 = New System.Windows.Forms.RadioButton()
         Me.GroupBox4.SuspendLayout()
+        Me.grpReqSet.SuspendLayout()
+        Me.grpOptDefSet.SuspendLayout()
         Me.tabSubMenu.SuspendLayout()
         Me.tabJobInfo.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -208,15 +194,10 @@ Partial Class Main
         Me.tabMenu.SuspendLayout()
         Me.tabSettings.SuspendLayout()
         Me.tabJobExecution.SuspendLayout()
-        Me.tabAutomation.SuspendLayout()
         Me.tabFireEye.SuspendLayout()
         Me.tabPANW.SuspendLayout()
         Me.tabAbout.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
-        Me.grpOptDefSet.SuspendLayout()
-        Me.grpReqSet.SuspendLayout()
-        Me.grpSQLSettings.SuspendLayout()
-        CType(Me.dgAutomation, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnExecute
@@ -243,7 +224,6 @@ Partial Class Main
         Me.txtDefaultJobName.Name = "txtDefaultJobName"
         Me.txtDefaultJobName.Size = New System.Drawing.Size(235, 20)
         Me.txtDefaultJobName.TabIndex = 8
-        Me.txtDefaultJobName.Text = "test"
         '
         'txtDefaultProjectName
         '
@@ -251,7 +231,6 @@ Partial Class Main
         Me.txtDefaultProjectName.Name = "txtDefaultProjectName"
         Me.txtDefaultProjectName.Size = New System.Drawing.Size(235, 20)
         Me.txtDefaultProjectName.TabIndex = 9
-        Me.txtDefaultProjectName.Text = "ETA"
         '
         'Label3
         '
@@ -268,7 +247,6 @@ Partial Class Main
         Me.txtApiUser.Name = "txtApiUser"
         Me.txtApiUser.Size = New System.Drawing.Size(234, 20)
         Me.txtApiUser.TabIndex = 11
-        Me.txtApiUser.Text = "FireEye"
         '
         'Label4
         '
@@ -295,7 +273,6 @@ Partial Class Main
         Me.txtAPIPass.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtAPIPass.Size = New System.Drawing.Size(235, 20)
         Me.txtAPIPass.TabIndex = 14
-        Me.txtAPIPass.Text = "abc123!"
         '
         'txtServer
         '
@@ -303,7 +280,6 @@ Partial Class Main
         Me.txtServer.Name = "txtServer"
         Me.txtServer.Size = New System.Drawing.Size(235, 20)
         Me.txtServer.TabIndex = 17
-        Me.txtServer.Text = "resone55"
         '
         'Label7
         '
@@ -316,7 +292,6 @@ Partial Class Main
         '
         'GroupBox4
         '
-        Me.GroupBox4.Controls.Add(Me.grpSQLSettings)
         Me.GroupBox4.Controls.Add(Me.grpReqSet)
         Me.GroupBox4.Controls.Add(Me.grpOptDefSet)
         Me.GroupBox4.Controls.Add(Me.txtStatusSettings)
@@ -328,17 +303,42 @@ Partial Class Main
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Settings"
         '
-        'txtStatusSettings
+        'grpReqSet
         '
-        Me.txtStatusSettings.BackColor = System.Drawing.SystemColors.Control
-        Me.txtStatusSettings.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtStatusSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtStatusSettings.Location = New System.Drawing.Point(6, 434)
-        Me.txtStatusSettings.Name = "txtStatusSettings"
-        Me.txtStatusSettings.ReadOnly = True
-        Me.txtStatusSettings.Size = New System.Drawing.Size(482, 16)
-        Me.txtStatusSettings.TabIndex = 27
-        Me.txtStatusSettings.Text = "Status"
+        Me.grpReqSet.Controls.Add(Me.rdoversion57)
+        Me.grpReqSet.Controls.Add(Me.rdoversion55)
+        Me.grpReqSet.Controls.Add(Me.Label7)
+        Me.grpReqSet.Controls.Add(Me.Label4)
+        Me.grpReqSet.Controls.Add(Me.Label5)
+        Me.grpReqSet.Controls.Add(Me.txtApiUser)
+        Me.grpReqSet.Controls.Add(Me.txtServer)
+        Me.grpReqSet.Controls.Add(Me.txtAPIPass)
+        Me.grpReqSet.Location = New System.Drawing.Point(6, 19)
+        Me.grpReqSet.Name = "grpReqSet"
+        Me.grpReqSet.Size = New System.Drawing.Size(604, 100)
+        Me.grpReqSet.TabIndex = 29
+        Me.grpReqSet.TabStop = False
+        Me.grpReqSet.Text = "Required Settings"
+        '
+        'grpOptDefSet
+        '
+        Me.grpOptDefSet.Controls.Add(Me.Label2)
+        Me.grpOptDefSet.Controls.Add(Me.Label3)
+        Me.grpOptDefSet.Controls.Add(Me.chkbypasscerts)
+        Me.grpOptDefSet.Controls.Add(Me.txtDefaultProjectName)
+        Me.grpOptDefSet.Controls.Add(Me.txtdefaultshare)
+        Me.grpOptDefSet.Controls.Add(Me.txtDefaultJobName)
+        Me.grpOptDefSet.Controls.Add(Me.Label29)
+        Me.grpOptDefSet.Controls.Add(Me.Label14)
+        Me.grpOptDefSet.Controls.Add(Me.txtdefaultcomputer)
+        Me.grpOptDefSet.Controls.Add(Me.txtDefaultTemplateName)
+        Me.grpOptDefSet.Controls.Add(Me.Label28)
+        Me.grpOptDefSet.Location = New System.Drawing.Point(6, 125)
+        Me.grpOptDefSet.Name = "grpOptDefSet"
+        Me.grpOptDefSet.Size = New System.Drawing.Size(604, 150)
+        Me.grpOptDefSet.TabIndex = 28
+        Me.grpOptDefSet.TabStop = False
+        Me.grpOptDefSet.Text = "Optional Default Settings"
         '
         'chkbypasscerts
         '
@@ -356,7 +356,6 @@ Partial Class Main
         Me.txtdefaultshare.Name = "txtdefaultshare"
         Me.txtdefaultshare.Size = New System.Drawing.Size(235, 20)
         Me.txtdefaultshare.TabIndex = 24
-        Me.txtdefaultshare.Text = "\\resone55\share"
         '
         'Label29
         '
@@ -367,31 +366,21 @@ Partial Class Main
         Me.Label29.TabIndex = 25
         Me.Label29.Text = "Default Share Name:"
         '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(7, 126)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(122, 13)
+        Me.Label14.TabIndex = 19
+        Me.Label14.Text = "Default Template Name:"
+        '
         'txtdefaultcomputer
         '
         Me.txtdefaultcomputer.Location = New System.Drawing.Point(130, 71)
         Me.txtdefaultcomputer.Name = "txtdefaultcomputer"
         Me.txtdefaultcomputer.Size = New System.Drawing.Size(235, 20)
         Me.txtdefaultcomputer.TabIndex = 22
-        Me.txtdefaultcomputer.Text = "client-pc7"
-        '
-        'Label28
-        '
-        Me.Label28.AutoSize = True
-        Me.Label28.Location = New System.Drawing.Point(6, 74)
-        Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(123, 13)
-        Me.Label28.TabIndex = 23
-        Me.Label28.Text = "Default Computer Name:"
-        '
-        'btnSaveSettings
-        '
-        Me.btnSaveSettings.Location = New System.Drawing.Point(514, 431)
-        Me.btnSaveSettings.Name = "btnSaveSettings"
-        Me.btnSaveSettings.Size = New System.Drawing.Size(96, 23)
-        Me.btnSaveSettings.TabIndex = 21
-        Me.btnSaveSettings.Text = "Save Settings"
-        Me.btnSaveSettings.UseVisualStyleBackColor = True
         '
         'txtDefaultTemplateName
         '
@@ -403,14 +392,35 @@ Partial Class Main
         Me.txtDefaultTemplateName.TabIndex = 20
         Me.txtDefaultTemplateName.Text = "coll-evtx"
         '
-        'Label14
+        'Label28
         '
-        Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(7, 126)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(122, 13)
-        Me.Label14.TabIndex = 19
-        Me.Label14.Text = "Default Template Name:"
+        Me.Label28.AutoSize = True
+        Me.Label28.Location = New System.Drawing.Point(6, 74)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(123, 13)
+        Me.Label28.TabIndex = 23
+        Me.Label28.Text = "Default Computer Name:"
+        '
+        'txtStatusSettings
+        '
+        Me.txtStatusSettings.BackColor = System.Drawing.SystemColors.Control
+        Me.txtStatusSettings.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtStatusSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtStatusSettings.Location = New System.Drawing.Point(6, 284)
+        Me.txtStatusSettings.Name = "txtStatusSettings"
+        Me.txtStatusSettings.ReadOnly = True
+        Me.txtStatusSettings.Size = New System.Drawing.Size(482, 16)
+        Me.txtStatusSettings.TabIndex = 27
+        Me.txtStatusSettings.Text = "Status"
+        '
+        'btnSaveSettings
+        '
+        Me.btnSaveSettings.Location = New System.Drawing.Point(514, 281)
+        Me.btnSaveSettings.Name = "btnSaveSettings"
+        Me.btnSaveSettings.Size = New System.Drawing.Size(96, 23)
+        Me.btnSaveSettings.TabIndex = 21
+        Me.btnSaveSettings.Text = "Save Settings"
+        Me.btnSaveSettings.UseVisualStyleBackColor = True
         '
         'tabSubMenu
         '
@@ -1317,7 +1327,6 @@ Partial Class Main
         Me.tabMenu.Controls.Add(Me.tabJobExecution)
         Me.tabMenu.Controls.Add(Me.tabFireEye)
         Me.tabMenu.Controls.Add(Me.tabPANW)
-        Me.tabMenu.Controls.Add(Me.tabAutomation)
         Me.tabMenu.Controls.Add(Me.tabAbout)
         Me.tabMenu.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tabMenu.Location = New System.Drawing.Point(0, 0)
@@ -1352,6 +1361,15 @@ Partial Class Main
         Me.tabJobExecution.Text = "Job Execution"
         Me.tabJobExecution.UseVisualStyleBackColor = True
         '
+        'btnShowJSON
+        '
+        Me.btnShowJSON.Location = New System.Drawing.Point(210, 491)
+        Me.btnShowJSON.Name = "btnShowJSON"
+        Me.btnShowJSON.Size = New System.Drawing.Size(75, 23)
+        Me.btnShowJSON.TabIndex = 23
+        Me.btnShowJSON.Text = "Show JSON"
+        Me.btnShowJSON.UseVisualStyleBackColor = True
+        '
         'btnLoadFromBox
         '
         Me.btnLoadFromBox.Location = New System.Drawing.Point(319, 491)
@@ -1369,70 +1387,6 @@ Partial Class Main
         Me.btnSaveAsBox.TabIndex = 21
         Me.btnSaveAsBox.Text = "Save as Box"
         Me.btnSaveAsBox.UseVisualStyleBackColor = True
-        '
-        'tabAutomation
-        '
-        Me.tabAutomation.Controls.Add(Me.btnAutoGo)
-        Me.tabAutomation.Controls.Add(Me.dgAutomation)
-        Me.tabAutomation.Controls.Add(Me.btnLoadAllBox)
-        Me.tabAutomation.Controls.Add(Me.lstBoxedJobs)
-        Me.tabAutomation.Controls.Add(Me.txtStatusBoxJob)
-        Me.tabAutomation.Controls.Add(Me.btnBoxJobCollection1)
-        Me.tabAutomation.Controls.Add(Me.Label30)
-        Me.tabAutomation.Controls.Add(Me.txtboxtargetcomputer)
-        Me.tabAutomation.Location = New System.Drawing.Point(4, 25)
-        Me.tabAutomation.Name = "tabAutomation"
-        Me.tabAutomation.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabAutomation.Size = New System.Drawing.Size(628, 546)
-        Me.tabAutomation.TabIndex = 2
-        Me.tabAutomation.Text = "Automation"
-        Me.tabAutomation.UseVisualStyleBackColor = True
-        '
-        'lstBoxedJobs
-        '
-        Me.lstBoxedJobs.FormattingEnabled = True
-        Me.lstBoxedJobs.Location = New System.Drawing.Point(22, 98)
-        Me.lstBoxedJobs.Name = "lstBoxedJobs"
-        Me.lstBoxedJobs.Size = New System.Drawing.Size(182, 79)
-        Me.lstBoxedJobs.TabIndex = 22
-        '
-        'txtStatusBoxJob
-        '
-        Me.txtStatusBoxJob.BackColor = System.Drawing.SystemColors.Control
-        Me.txtStatusBoxJob.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtStatusBoxJob.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtStatusBoxJob.Location = New System.Drawing.Point(11, 468)
-        Me.txtStatusBoxJob.Name = "txtStatusBoxJob"
-        Me.txtStatusBoxJob.ReadOnly = True
-        Me.txtStatusBoxJob.Size = New System.Drawing.Size(531, 16)
-        Me.txtStatusBoxJob.TabIndex = 21
-        Me.txtStatusBoxJob.Text = "Status"
-        Me.txtStatusBoxJob.Visible = False
-        '
-        'btnBoxJobCollection1
-        '
-        Me.btnBoxJobCollection1.Location = New System.Drawing.Point(11, 42)
-        Me.btnBoxJobCollection1.Name = "btnBoxJobCollection1"
-        Me.btnBoxJobCollection1.Size = New System.Drawing.Size(75, 23)
-        Me.btnBoxJobCollection1.TabIndex = 2
-        Me.btnBoxJobCollection1.Text = "Collection1"
-        Me.btnBoxJobCollection1.UseVisualStyleBackColor = True
-        '
-        'Label30
-        '
-        Me.Label30.AutoSize = True
-        Me.Label30.Location = New System.Drawing.Point(8, 9)
-        Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(89, 13)
-        Me.Label30.TabIndex = 1
-        Me.Label30.Text = "Target Computer:"
-        '
-        'txtboxtargetcomputer
-        '
-        Me.txtboxtargetcomputer.Location = New System.Drawing.Point(100, 6)
-        Me.txtboxtargetcomputer.Name = "txtboxtargetcomputer"
-        Me.txtboxtargetcomputer.Size = New System.Drawing.Size(199, 20)
-        Me.txtboxtargetcomputer.TabIndex = 0
         '
         'tabFireEye
         '
@@ -1632,162 +1586,28 @@ Partial Class Main
         Me.statuslabel.Spring = True
         Me.statuslabel.Text = "statuslabel"
         '
-        'grpOptDefSet
+        'rdoversion55
         '
-        Me.grpOptDefSet.Controls.Add(Me.Label2)
-        Me.grpOptDefSet.Controls.Add(Me.Label3)
-        Me.grpOptDefSet.Controls.Add(Me.chkbypasscerts)
-        Me.grpOptDefSet.Controls.Add(Me.txtDefaultProjectName)
-        Me.grpOptDefSet.Controls.Add(Me.txtdefaultshare)
-        Me.grpOptDefSet.Controls.Add(Me.txtDefaultJobName)
-        Me.grpOptDefSet.Controls.Add(Me.Label29)
-        Me.grpOptDefSet.Controls.Add(Me.Label14)
-        Me.grpOptDefSet.Controls.Add(Me.txtdefaultcomputer)
-        Me.grpOptDefSet.Controls.Add(Me.txtDefaultTemplateName)
-        Me.grpOptDefSet.Controls.Add(Me.Label28)
-        Me.grpOptDefSet.Location = New System.Drawing.Point(6, 125)
-        Me.grpOptDefSet.Name = "grpOptDefSet"
-        Me.grpOptDefSet.Size = New System.Drawing.Size(604, 150)
-        Me.grpOptDefSet.TabIndex = 28
-        Me.grpOptDefSet.TabStop = False
-        Me.grpOptDefSet.Text = "Optional Default Settings"
+        Me.rdoversion55.AutoSize = True
+        Me.rdoversion55.Checked = True
+        Me.rdoversion55.Location = New System.Drawing.Point(420, 19)
+        Me.rdoversion55.Name = "rdoversion55"
+        Me.rdoversion55.Size = New System.Drawing.Size(99, 17)
+        Me.rdoversion55.TabIndex = 18
+        Me.rdoversion55.TabStop = True
+        Me.rdoversion55.Text = "Resolution1 5.5"
+        Me.rdoversion55.UseVisualStyleBackColor = True
         '
-        'grpReqSet
+        'rdoversion57
         '
-        Me.grpReqSet.Controls.Add(Me.Label7)
-        Me.grpReqSet.Controls.Add(Me.Label4)
-        Me.grpReqSet.Controls.Add(Me.Label5)
-        Me.grpReqSet.Controls.Add(Me.txtApiUser)
-        Me.grpReqSet.Controls.Add(Me.txtServer)
-        Me.grpReqSet.Controls.Add(Me.txtAPIPass)
-        Me.grpReqSet.Location = New System.Drawing.Point(6, 19)
-        Me.grpReqSet.Name = "grpReqSet"
-        Me.grpReqSet.Size = New System.Drawing.Size(604, 100)
-        Me.grpReqSet.TabIndex = 29
-        Me.grpReqSet.TabStop = False
-        Me.grpReqSet.Text = "Required Settings"
-        '
-        'grpSQLSettings
-        '
-        Me.grpSQLSettings.Controls.Add(Me.Label40)
-        Me.grpSQLSettings.Controls.Add(Me.Label39)
-        Me.grpSQLSettings.Controls.Add(Me.Label41)
-        Me.grpSQLSettings.Controls.Add(Me.cmbSQLAuth)
-        Me.grpSQLSettings.Controls.Add(Me.txtSqlUsername)
-        Me.grpSQLSettings.Controls.Add(Me.txtSqlPass)
-        Me.grpSQLSettings.Controls.Add(Me.Label38)
-        Me.grpSQLSettings.Controls.Add(Me.txtSQLServer)
-        Me.grpSQLSettings.Location = New System.Drawing.Point(6, 281)
-        Me.grpSQLSettings.Name = "grpSQLSettings"
-        Me.grpSQLSettings.Size = New System.Drawing.Size(604, 136)
-        Me.grpSQLSettings.TabIndex = 30
-        Me.grpSQLSettings.TabStop = False
-        Me.grpSQLSettings.Text = "Optional SQL Settings"
-        '
-        'Label38
-        '
-        Me.Label38.AutoSize = True
-        Me.Label38.Location = New System.Drawing.Point(7, 25)
-        Me.Label38.Name = "Label38"
-        Me.Label38.Size = New System.Drawing.Size(116, 13)
-        Me.Label38.TabIndex = 18
-        Me.Label38.Text = "SQL Server Hostname:"
-        '
-        'txtSQLServer
-        '
-        Me.txtSQLServer.Location = New System.Drawing.Point(130, 22)
-        Me.txtSQLServer.Name = "txtSQLServer"
-        Me.txtSQLServer.Size = New System.Drawing.Size(235, 20)
-        Me.txtSQLServer.TabIndex = 19
-        Me.txtSQLServer.Text = "resone55"
-        '
-        'cmbSQLAuth
-        '
-        Me.cmbSQLAuth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbSQLAuth.FormattingEnabled = True
-        Me.cmbSQLAuth.Items.AddRange(New Object() {"Windows", "SQL Authentication"})
-        Me.cmbSQLAuth.Location = New System.Drawing.Point(130, 48)
-        Me.cmbSQLAuth.Name = "cmbSQLAuth"
-        Me.cmbSQLAuth.Size = New System.Drawing.Size(235, 21)
-        Me.cmbSQLAuth.TabIndex = 27
-        '
-        'Label39
-        '
-        Me.Label39.AutoSize = True
-        Me.Label39.Location = New System.Drawing.Point(6, 51)
-        Me.Label39.Name = "Label39"
-        Me.Label39.Size = New System.Drawing.Size(78, 13)
-        Me.Label39.TabIndex = 28
-        Me.Label39.Text = "Authentication:"
-        '
-        'Label40
-        '
-        Me.Label40.AutoSize = True
-        Me.Label40.Location = New System.Drawing.Point(6, 78)
-        Me.Label40.Name = "Label40"
-        Me.Label40.Size = New System.Drawing.Size(82, 13)
-        Me.Label40.TabIndex = 19
-        Me.Label40.Text = "SQL Username:"
-        '
-        'Label41
-        '
-        Me.Label41.AutoSize = True
-        Me.Label41.Location = New System.Drawing.Point(6, 104)
-        Me.Label41.Name = "Label41"
-        Me.Label41.Size = New System.Drawing.Size(80, 13)
-        Me.Label41.TabIndex = 20
-        Me.Label41.Text = "SQL Password:"
-        '
-        'txtSqlUsername
-        '
-        Me.txtSqlUsername.Location = New System.Drawing.Point(130, 75)
-        Me.txtSqlUsername.Name = "txtSqlUsername"
-        Me.txtSqlUsername.Size = New System.Drawing.Size(234, 20)
-        Me.txtSqlUsername.TabIndex = 18
-        '
-        'txtSqlPass
-        '
-        Me.txtSqlPass.Location = New System.Drawing.Point(130, 101)
-        Me.txtSqlPass.Name = "txtSqlPass"
-        Me.txtSqlPass.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-        Me.txtSqlPass.Size = New System.Drawing.Size(235, 20)
-        Me.txtSqlPass.TabIndex = 21
-        '
-        'btnShowJSON
-        '
-        Me.btnShowJSON.Location = New System.Drawing.Point(210, 491)
-        Me.btnShowJSON.Name = "btnShowJSON"
-        Me.btnShowJSON.Size = New System.Drawing.Size(75, 23)
-        Me.btnShowJSON.TabIndex = 23
-        Me.btnShowJSON.Text = "Show JSON"
-        Me.btnShowJSON.UseVisualStyleBackColor = True
-        '
-        'btnLoadAllBox
-        '
-        Me.btnLoadAllBox.Location = New System.Drawing.Point(431, 28)
-        Me.btnLoadAllBox.Name = "btnLoadAllBox"
-        Me.btnLoadAllBox.Size = New System.Drawing.Size(111, 23)
-        Me.btnLoadAllBox.TabIndex = 23
-        Me.btnLoadAllBox.Text = "Load All Box Jobs"
-        Me.btnLoadAllBox.UseVisualStyleBackColor = True
-        '
-        'dgAutomation
-        '
-        Me.dgAutomation.AllowUserToAddRows = False
-        Me.dgAutomation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgAutomation.Location = New System.Drawing.Point(3, 192)
-        Me.dgAutomation.Name = "dgAutomation"
-        Me.dgAutomation.Size = New System.Drawing.Size(622, 270)
-        Me.dgAutomation.TabIndex = 24
-        '
-        'btnAutoGo
-        '
-        Me.btnAutoGo.Location = New System.Drawing.Point(431, 80)
-        Me.btnAutoGo.Name = "btnAutoGo"
-        Me.btnAutoGo.Size = New System.Drawing.Size(111, 23)
-        Me.btnAutoGo.TabIndex = 25
-        Me.btnAutoGo.Text = "Go"
-        Me.btnAutoGo.UseVisualStyleBackColor = True
+        Me.rdoversion57.AutoSize = True
+        Me.rdoversion57.Location = New System.Drawing.Point(420, 49)
+        Me.rdoversion57.Name = "rdoversion57"
+        Me.rdoversion57.Size = New System.Drawing.Size(99, 17)
+        Me.rdoversion57.TabIndex = 19
+        Me.rdoversion57.TabStop = True
+        Me.rdoversion57.Text = "Resolution1 5.7"
+        Me.rdoversion57.UseVisualStyleBackColor = True
         '
         'Main
         '
@@ -1803,6 +1623,10 @@ Partial Class Main
         Me.Text = "R1 Job Runner"
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
+        Me.grpReqSet.ResumeLayout(False)
+        Me.grpReqSet.PerformLayout()
+        Me.grpOptDefSet.ResumeLayout(False)
+        Me.grpOptDefSet.PerformLayout()
         Me.tabSubMenu.ResumeLayout(False)
         Me.tabJobInfo.ResumeLayout(False)
         Me.tabJobInfo.PerformLayout()
@@ -1842,8 +1666,6 @@ Partial Class Main
         Me.tabMenu.ResumeLayout(False)
         Me.tabSettings.ResumeLayout(False)
         Me.tabJobExecution.ResumeLayout(False)
-        Me.tabAutomation.ResumeLayout(False)
-        Me.tabAutomation.PerformLayout()
         Me.tabFireEye.ResumeLayout(False)
         Me.tabFireEye.PerformLayout()
         Me.tabPANW.ResumeLayout(False)
@@ -1852,13 +1674,6 @@ Partial Class Main
         Me.tabAbout.PerformLayout()
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
-        Me.grpOptDefSet.ResumeLayout(False)
-        Me.grpOptDefSet.PerformLayout()
-        Me.grpReqSet.ResumeLayout(False)
-        Me.grpReqSet.PerformLayout()
-        Me.grpSQLSettings.ResumeLayout(False)
-        Me.grpSQLSettings.PerformLayout()
-        CType(Me.dgAutomation, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1929,7 +1744,6 @@ Partial Class Main
     Friend WithEvents tabSettings As System.Windows.Forms.TabPage
     Friend WithEvents tabJobExecution As System.Windows.Forms.TabPage
     Friend WithEvents btnSaveSettings As System.Windows.Forms.Button
-    Friend WithEvents tabAutomation As System.Windows.Forms.TabPage
     Friend WithEvents tabAbout As System.Windows.Forms.TabPage
     Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
     Friend WithEvents tabJobInfo As System.Windows.Forms.TabPage
@@ -1945,11 +1759,6 @@ Partial Class Main
     Friend WithEvents Label28 As System.Windows.Forms.Label
     Friend WithEvents chkbypasscerts As System.Windows.Forms.CheckBox
     Friend WithEvents txtStatusSettings As System.Windows.Forms.TextBox
-    Friend WithEvents Label30 As System.Windows.Forms.Label
-    Friend WithEvents txtboxtargetcomputer As System.Windows.Forms.TextBox
-    Friend WithEvents btnBoxJobCollection1 As System.Windows.Forms.Button
-    Friend WithEvents txtStatusBoxJob As System.Windows.Forms.TextBox
-    Friend WithEvents lstBoxedJobs As System.Windows.Forms.CheckedListBox
     Friend WithEvents btnSaveAsBox As System.Windows.Forms.Button
     Friend WithEvents btnLoadFromBox As System.Windows.Forms.Button
     Friend WithEvents ofdBox As System.Windows.Forms.OpenFileDialog
@@ -2007,18 +1816,8 @@ Partial Class Main
     Friend WithEvents txtFELink As System.Windows.Forms.TextBox
     Friend WithEvents grpReqSet As System.Windows.Forms.GroupBox
     Friend WithEvents grpOptDefSet As System.Windows.Forms.GroupBox
-    Friend WithEvents grpSQLSettings As System.Windows.Forms.GroupBox
-    Friend WithEvents Label38 As System.Windows.Forms.Label
-    Friend WithEvents txtSQLServer As System.Windows.Forms.TextBox
-    Friend WithEvents Label39 As System.Windows.Forms.Label
-    Friend WithEvents cmbSQLAuth As System.Windows.Forms.ComboBox
-    Friend WithEvents Label40 As System.Windows.Forms.Label
-    Friend WithEvents Label41 As System.Windows.Forms.Label
-    Friend WithEvents txtSqlUsername As System.Windows.Forms.TextBox
-    Friend WithEvents txtSqlPass As System.Windows.Forms.TextBox
     Friend WithEvents btnShowJSON As System.Windows.Forms.Button
-    Friend WithEvents btnLoadAllBox As System.Windows.Forms.Button
-    Friend WithEvents dgAutomation As System.Windows.Forms.DataGridView
-    Friend WithEvents btnAutoGo As System.Windows.Forms.Button
+    Friend WithEvents rdoversion57 As System.Windows.Forms.RadioButton
+    Friend WithEvents rdoversion55 As System.Windows.Forms.RadioButton
 
 End Class
