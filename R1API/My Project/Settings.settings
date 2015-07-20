@@ -36,5 +36,8 @@
     <Setting Name="firstrun" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="version" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">55</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

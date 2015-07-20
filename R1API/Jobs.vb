@@ -200,6 +200,8 @@ Module Jobs
         'If no errors, then update the status as Job submitted + GUID
         If e.Error Is Nothing Then
             Main.statuslabel.Text = "Job Submitted: " & e.Result.RunJobFromTemplateNameResult.ToString
+
+          
         Else
             'Errors!
             'Set the status label to draw attention
@@ -243,7 +245,17 @@ Module Jobs
         Dim JobsServiceBinding As New System.ServiceModel.BasicHttpBinding(ServiceModel.BasicHttpSecurityMode.Transport)
         JobsServiceBinding.Name = "JobsServiceSoap"
         'Set servername
-        Dim servername As New System.ServiceModel.EndpointAddress("https://" & srvname & "/adg.map.web/services/api/JobsService.asmx")
+
+        Dim endpointaddress As String = ""
+        If Main.rdoversion55.Checked = True Then
+            endpointaddress = "https://" & srvname & "/adg.map.web/services/api/JobsService.asmx"
+        Else
+            endpointaddress = "https://" & srvname & "/r1/services/api/JobsService.asmx"
+        End If
+
+        Dim servername As New System.ServiceModel.EndpointAddress(endpointaddress)
+
+
         'Create a new soap client
         Dim jsserv As New JobsService.JobsServiceSoapClient(JobsServiceBinding, servername)
         'Set address

@@ -116,7 +116,13 @@ Module FireEye
             End If
 
             'New web request = 3rdParty/FireEye
-            Dim request As HttpWebRequest = HttpWebRequest.Create("https://" & Main.txtServer.Text & "/ADG.Map.Web/ThirdPartyIntegration/ThirdPartyIntegrationHandler/FireEye")
+         Dim request As HttpWebRequest
+            If Main.rdoversion55.Checked = True Then
+                request = HttpWebRequest.Create("https://" & Main.txtServer.Text & "/ADG.Map.Web/ThirdPartyIntegration/ThirdPartyIntegrationHandler/FireEye")
+            Else
+                request = HttpWebRequest.Create("https://" & Main.txtServer.Text & "/r1/ThirdPartyIntegration/ThirdPartyIntegrationHandler/FireEye")
+            End If
+
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
 
             request.ContentType = "text/json"

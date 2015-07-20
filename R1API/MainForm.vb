@@ -9,6 +9,8 @@ Public Class Main
     Public StoreRemDelList
     Public StoreRemKillNameList
     Public StoreRemKillIDList
+    'Declare Automation Job
+    Public autojobs
 
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnExecute.Click
@@ -163,7 +165,7 @@ Public Class Main
 
         'End First Run
         'Hide Boxed Jobs
-        Me.tabMenu.TabPages.Remove(tabBoxedJobs)
+        'Me.tabMenu.TabPages.Remove(tabAutomation)
 
         'Set Target to Agent 
         rdoagent.Checked = True
@@ -171,6 +173,7 @@ Public Class Main
 
         'Set PID rdo
         rdoPID.Checked = True
+
 
         'Clear status message
         statuslabel.Text = ""
@@ -199,7 +202,15 @@ Public Class Main
             txtTemplateName.Items.Add(item.ToString)
         Next
         txtTemplateName.Text = My.Settings.templatenameselect
-        txtboxtargetcomputer.Text = txtdefaultcomputer.Text
+
+        Dim ver As Integer = My.Settings.version
+        If ver = "55" Then
+            rdoversion55.Checked = True
+            rdoversion57.Checked = False
+        Else
+            rdoversion55.Checked = False
+            rdoversion57.Checked = True
+        End If
 
         'Set the job stores
         StoreInFiltList = New List(Of InclusionFilter)
@@ -210,7 +221,7 @@ Public Class Main
         StoreRemKillNameList = New List(Of String)
         StoreRemKillIDList = New List(Of String)
 
-      
+
 
     End Sub
 
@@ -218,14 +229,14 @@ Public Class Main
         'Agent Radio
         grpagent.Enabled = True
         grpshare.Enabled = False
-        rdoshare.Checked = False
+
     End Sub
 
     Private Sub rdoshare_CheckedChanged(sender As Object, e As EventArgs) Handles rdoshare.CheckedChanged
         'Share Radio
         grpagent.Enabled = False
         grpshare.Enabled = True
-        rdoagent.Checked = False
+
     End Sub
 
     Private Sub btnSaveSettings_Click(sender As Object, e As EventArgs) Handles btnSaveSettings.Click
@@ -243,6 +254,12 @@ Public Class Main
             My.Settings.templatename.Add(item.ToString)
         Next
         My.Settings.templatenameselect = txtDefaultTemplateName.Text
+        If rdoversion55.Checked = True Then
+            My.Settings.version = "55"
+        Else
+            My.Settings.version = "57"
+        End If
+
         My.Settings.Save()
         txtStatusSettings.Text = "Settings Saved"
     End Sub
@@ -253,62 +270,59 @@ Public Class Main
         txtStatusSettings.Text = ""
     End Sub
 
-    Private Sub tabBoxedJobs_Enter(sender As Object, e As EventArgs) Handles tabBoxedJobs.Enter
-        'Get box jobs into UI
-        txtboxtargetcomputer.Text = txtdefaultcomputer.Text
-        Dim boxnames As Dictionary(Of String, String) = GetListofBoxedJobs()
-        For Each item In boxnames
-            lstBoxedJobs.Items.Add(item.Key & "*" & item.Value)
-        Next
+    Private Sub tabBoxedJobs_Enter(sender As Object, e As EventArgs)
+
     End Sub
 
 
     Private Sub btnSaveAsBox_Click(sender As Object, e As EventArgs) Handles btnSaveAsBox.Click
         'Save Boxed Job
         'Show the Save File Dialog
-        sfdBox.ShowDialog()
-        'New Box
-        Dim sbox As New BoxedJob
+        sfdBox.InitialDirectory = My.Application.Info.DirectoryPath & "\BoxedJobs"
+        If sfdBox.ShowDialog() = 1 Then
+            'New Box
+            Dim sbox As New BoxedJob
 
-        'Set Box Variables
-        sbox.BoxJobName = sfdBox.FileName
-        sbox.R1JobName = txtJobName.Text
-        sbox.R1Template = txtTemplateName.Text
-        sbox.R1Project = txtProjectName.Text
+            'Set Box Variables
+            sbox.BoxJobName = sfdBox.FileName
+            sbox.R1JobName = txtJobName.Text
+            sbox.R1Template = txtTemplateName.Text
+            sbox.R1Project = txtProjectName.Text
 
-        'Process IDs
-        Dim pids() As String = New String() {}
-        Dim pidlist As List(Of String) = StoreRemKillIDList
-        For Each item In pidlist
-            pids.Add(item)
-        Next
-        sbox.R1_AR_PIDS = pids
+            'Process IDs
+            Dim pids() As String = New String() {}
+            Dim pidlist As List(Of String) = StoreRemKillIDList
+            For Each item In pidlist
+                pids.Add(item)
+            Next
+            sbox.R1_AR_PIDS = pids
 
-        'Process Names
-        Dim processnames() As String = New String() {}
-        Dim pnamelist As List(Of String) = StoreRemKillNameList
-        For Each item In pnamelist
-            processnames.Add(item)
-        Next
-        sbox.R1_AR_ProcessNames = processnames
+            'Process Names
+            Dim processnames() As String = New String() {}
+            Dim pnamelist As List(Of String) = StoreRemKillNameList
+            For Each item In pnamelist
+                processnames.Add(item)
+            Next
+            sbox.R1_AR_ProcessNames = processnames
 
-        'Send Options
-        Dim ar_send() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile = StoreRemSendList.toarray
-        sbox.R1_AR_Send = ar_send
+            'Send Options
+            Dim ar_send() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile = StoreRemSendList.toarray
+            sbox.R1_AR_Send = ar_send
 
-        'Execute Options
-        Dim ar_exec() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute = StoreRemExecList.toarray
-        sbox.R1_AR_Execute = ar_exec
+            'Execute Options
+            Dim ar_exec() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute = StoreRemExecList.toarray
+            sbox.R1_AR_Execute = ar_exec
 
-        'Erase Options
-        Dim ar_erase() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase = StoreRemDelList.toarray
-        sbox.R1_AR_Erase = ar_erase
+            'Erase Options
+            Dim ar_erase() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase = StoreRemDelList.toarray
+            sbox.R1_AR_Erase = ar_erase
 
-        'Filters
-        sbox.R1Filter = Jobs.BuildFilterJSON(StoreInFiltList, StoreExFiltList)
+            'Filters
+            sbox.R1Filter = Jobs.BuildFilterJSON(StoreInFiltList, StoreExFiltList)
 
-        'Save Job
-        BoxedJobs.SaveBoxedJob(sfdBox.FileName, sbox)
+            'Save Job
+            BoxedJobs.SaveBoxedJob(sfdBox.FileName, sbox)
+        End If
     End Sub
 
     Private Sub btnLoadFromBox_Click(sender As Object, e As EventArgs) Handles btnLoadFromBox.Click
@@ -1085,4 +1099,15 @@ Public Class Main
     End Sub
 
 
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
+
+    End Sub
+
+  
+
+    Private Sub btnShowJSON_Click(sender As Object, e As EventArgs) Handles btnShowJSON.Click
+        MsgBox("Press Ctrl+C to copy." & vbCrLf & Jobs.BuildFilterJSON(StoreInFiltList, StoreExFiltList))
+    End Sub
+
+  
 End Class
