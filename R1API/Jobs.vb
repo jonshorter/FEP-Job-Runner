@@ -208,28 +208,38 @@ Module Jobs
             Main.statuslabel.BackColor = Color.DarkRed
             Main.statuslabel.ForeColor = Color.White
 
-            'No Endpoint
-            If e.Error.Message.Contains("There was no endpoint listening") Then
-                Main.statuslabel.Text = "Invalid Server Name or Address"
-                'Job Target Required
-            ElseIf e.Error.Message.Contains("computerNames or shareName must be provided") Then
-                Main.statuslabel.Text = "A job target must be specificed. Computer or Network Share."
-                'Bad API Username/Pass
-            ElseIf e.Error.Message.Contains("Bad username or password") Then
-                Main.statuslabel.Text = "Bad API Username or Password!"
-                'Can't find job template
-            ElseIf e.Error.Message.Contains("Unable to retrieve template") Then
-                Main.statuslabel.Text = e.Error.Message.Replace("Server was unable to process request. --->", "").ToString
-                'Bad project name
-            ElseIf e.Error.Message.Contains("Invalid Project Name") Then
-                Main.statuslabel.Text = e.Error.Message.Replace("Server was unable to process request. --->", "").ToString
-                'Catch others - display error
-            Else
-                Main.statuslabel.Text = e.Error.Message.ToString
-            End If
+            Select Case True
+                'Invalid server
+                Case e.Error.Message.Contains("There was no endpoint listening")
+                    Main.statuslabel.Text = "Invalid Server Name or Address"
+                    'Job Target Required
+                Case e.Error.Message.Contains("computerNames or shareName must be provided")
+                    Main.statuslabel.Text = "A job target must be specificed. Computer or Network Share."
+                    'Bad API Username/Pass
+                Case e.Error.Message.Contains("Bad username or password")
+                    Main.statuslabel.Text = "Bad API Username or Password!"
+                    'Can't find job template
+                Case e.Error.Message.Contains("Unable to retrieve template")
+                    Main.statuslabel.Text = e.Error.Message.Replace("Server was unable to process request. --->", "").ToString
+                    'Bad project name
+                Case e.Error.Message.Contains("Invalid Project Name")
+                    Main.statuslabel.Text = e.Error.Message.Replace("Server was unable to process request. --->", "").ToString
+                    'Script on job completion error
+                Case e.Error.Message.Contains("ScriptFileName,ImpersonationUsername and  ImpersonationPassword are Required")
+                    Main.statuslabel.Text = e.Error.Message.Replace("Server was unable to process request. --->", "").ToString
+                    'Catch others - display error
+                Case Else
+                    Main.statuslabel.Text = e.Error.Message.Replace("Server was unable to process request. --->", "").ToString
+            End Select
+
+
         End If
     End Sub
-
+    Public Sub ResetStatusBar()
+        Main.statuslabel.Text = ""
+        Main.statuslabel.BackColor = Control.DefaultBackColor
+        Main.statuslabel.ForeColor = Color.Black
+    End Sub
     Public Sub RunFromTemplateName(ByVal srvname As String, ByVal templatename As String, ByVal JobName As String, ByVal ProjectName As String, ByVal APIUser As String, ByVal APIPass As String, ByVal cnames() As String, ByVal snames() As String, ByVal filter As String, ByVal pids() As String, ByVal processnames() As String, ByVal remediatesendfile() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile, ByVal remediateexecute() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute, ByVal remediateerase() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase)
         'Submit a job via the API
 
