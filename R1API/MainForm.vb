@@ -14,9 +14,9 @@ Public Class Main
 
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnExecute.Click
+        ResetStatusBar()
         'Set label color and text
-        statuslabel.BackColor = Control.DefaultBackColor
-        statuslabel.ForeColor = Color.Black
+      
         statuslabel.Text = "Submitting Job..."
         'Get Computers
         Dim cnames(lstComputerTargets.Items.Count - 1) As String
@@ -240,6 +240,7 @@ Public Class Main
     End Sub
 
     Private Sub btnSaveSettings_Click(sender As Object, e As EventArgs) Handles btnSaveSettings.Click
+        ResetStatusBar()
         'Save Settings to my.settings
         My.Settings.bypasscert = chkbypasscerts.Checked
         My.Settings.defaultcomputer = txtdefaultcomputer.Text
@@ -276,6 +277,7 @@ Public Class Main
 
 
     Private Sub btnSaveAsBox_Click(sender As Object, e As EventArgs) Handles btnSaveAsBox.Click
+        ResetStatusBar()
         'Save Boxed Job
         'Show the Save File Dialog
         sfdBox.InitialDirectory = My.Application.Info.DirectoryPath & "\BoxedJobs"
@@ -326,6 +328,7 @@ Public Class Main
     End Sub
 
     Private Sub btnLoadFromBox_Click(sender As Object, e As EventArgs) Handles btnLoadFromBox.Click
+        ResetStatusBar()
         ofdBox.ShowDialog()
         Dim fname = ofdBox.FileName
 
@@ -1064,13 +1067,16 @@ Public Class Main
     End Sub
 
     Private Sub btn_FEEvent_Click(sender As Object, e As EventArgs) Handles btn_FEEvent.Click
-        statuslabel.Text = ""
+        ResetStatusBar()
+
         Dim fevent = FireEye.GenerateFEEvent(cmbFEAlertType.Text)
         FireEye.SendEvent(FireEye.FEventtoJson(fevent))
+      
     End Sub
 
     Private Sub btnPANWSend_Click(sender As Object, e As EventArgs) Handles btnPANWSend.Click
         'panwlistener.Main()
+        ResetStatusBar()
         Dim panwthreat As New PANW.PANWThreat
         panwthreat.P8Destination_IP = txtPANWTarget.Text
         panwthreat.P4Subtype = cmbPANWAlert.Text
@@ -1106,6 +1112,7 @@ Public Class Main
   
 
     Private Sub btnShowJSON_Click(sender As Object, e As EventArgs) Handles btnShowJSON.Click
+        ResetStatusBar()
         MsgBox("Press Ctrl+C to copy." & vbCrLf & Jobs.BuildFilterJSON(StoreInFiltList, StoreExFiltList))
     End Sub
 
