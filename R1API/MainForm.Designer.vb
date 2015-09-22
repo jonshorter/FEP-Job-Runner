@@ -36,6 +36,8 @@ Partial Class Main
         Me.Label7 = New System.Windows.Forms.Label()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.grpReqSet = New System.Windows.Forms.GroupBox()
+        Me.rdoversion57 = New System.Windows.Forms.RadioButton()
+        Me.rdoversion55 = New System.Windows.Forms.RadioButton()
         Me.grpOptDefSet = New System.Windows.Forms.GroupBox()
         Me.chkbypasscerts = New System.Windows.Forms.CheckBox()
         Me.txtdefaultshare = New System.Windows.Forms.TextBox()
@@ -162,8 +164,7 @@ Partial Class Main
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.statuslabel = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.rdoversion55 = New System.Windows.Forms.RadioButton()
-        Me.rdoversion57 = New System.Windows.Forms.RadioButton()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.GroupBox4.SuspendLayout()
         Me.grpReqSet.SuspendLayout()
         Me.grpOptDefSet.SuspendLayout()
@@ -198,6 +199,7 @@ Partial Class Main
         Me.tabPANW.SuspendLayout()
         Me.tabAbout.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnExecute
@@ -305,8 +307,7 @@ Partial Class Main
         '
         'grpReqSet
         '
-        Me.grpReqSet.Controls.Add(Me.rdoversion57)
-        Me.grpReqSet.Controls.Add(Me.rdoversion55)
+        Me.grpReqSet.Controls.Add(Me.GroupBox2)
         Me.grpReqSet.Controls.Add(Me.Label7)
         Me.grpReqSet.Controls.Add(Me.Label4)
         Me.grpReqSet.Controls.Add(Me.Label5)
@@ -319,6 +320,29 @@ Partial Class Main
         Me.grpReqSet.TabIndex = 29
         Me.grpReqSet.TabStop = False
         Me.grpReqSet.Text = "Required Settings"
+        '
+        'rdoversion57
+        '
+        Me.rdoversion57.AutoSize = True
+        Me.rdoversion57.Location = New System.Drawing.Point(6, 45)
+        Me.rdoversion57.Name = "rdoversion57"
+        Me.rdoversion57.Size = New System.Drawing.Size(44, 17)
+        Me.rdoversion57.TabIndex = 19
+        Me.rdoversion57.TabStop = True
+        Me.rdoversion57.Text = "/R1"
+        Me.rdoversion57.UseVisualStyleBackColor = True
+        '
+        'rdoversion55
+        '
+        Me.rdoversion55.AutoSize = True
+        Me.rdoversion55.Checked = True
+        Me.rdoversion55.Location = New System.Drawing.Point(6, 19)
+        Me.rdoversion55.Name = "rdoversion55"
+        Me.rdoversion55.Size = New System.Drawing.Size(103, 17)
+        Me.rdoversion55.TabIndex = 18
+        Me.rdoversion55.TabStop = True
+        Me.rdoversion55.Text = "/ADG.Map.Web"
+        Me.rdoversion55.UseVisualStyleBackColor = True
         '
         'grpOptDefSet
         '
@@ -1586,28 +1610,16 @@ Partial Class Main
         Me.statuslabel.Spring = True
         Me.statuslabel.Text = "statuslabel"
         '
-        'rdoversion55
+        'GroupBox2
         '
-        Me.rdoversion55.AutoSize = True
-        Me.rdoversion55.Checked = True
-        Me.rdoversion55.Location = New System.Drawing.Point(420, 19)
-        Me.rdoversion55.Name = "rdoversion55"
-        Me.rdoversion55.Size = New System.Drawing.Size(99, 17)
-        Me.rdoversion55.TabIndex = 18
-        Me.rdoversion55.TabStop = True
-        Me.rdoversion55.Text = "Resolution1 5.5"
-        Me.rdoversion55.UseVisualStyleBackColor = True
-        '
-        'rdoversion57
-        '
-        Me.rdoversion57.AutoSize = True
-        Me.rdoversion57.Location = New System.Drawing.Point(420, 49)
-        Me.rdoversion57.Name = "rdoversion57"
-        Me.rdoversion57.Size = New System.Drawing.Size(99, 17)
-        Me.rdoversion57.TabIndex = 19
-        Me.rdoversion57.TabStop = True
-        Me.rdoversion57.Text = "Resolution1 5.7"
-        Me.rdoversion57.UseVisualStyleBackColor = True
+        Me.GroupBox2.Controls.Add(Me.rdoversion57)
+        Me.GroupBox2.Controls.Add(Me.rdoversion55)
+        Me.GroupBox2.Location = New System.Drawing.Point(420, 20)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(152, 70)
+        Me.GroupBox2.TabIndex = 20
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Website Address:"
         '
         'Main
         '
@@ -1674,6 +1686,8 @@ Partial Class Main
         Me.tabAbout.PerformLayout()
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1819,5 +1833,6 @@ Partial Class Main
     Friend WithEvents btnShowJSON As System.Windows.Forms.Button
     Friend WithEvents rdoversion57 As System.Windows.Forms.RadioButton
     Friend WithEvents rdoversion55 As System.Windows.Forms.RadioButton
+    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
 
 End Class
