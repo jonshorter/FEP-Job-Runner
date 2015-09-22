@@ -1655,7 +1655,7 @@ Partial Class Main
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "Main"
-        Me.Text = "R1 Job Runner"
+        Me.Text = "R1 Job Runner Version:"
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
         Me.grpReqSet.ResumeLayout(False)
