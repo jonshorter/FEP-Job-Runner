@@ -187,15 +187,15 @@ Namespace My
             End Set
         End Property
         
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("55")>  _
-        Public Property version() As Integer
+        <Global.System.Configuration.UserScopedSettingAttribute(), _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.Configuration.DefaultSettingValueAttribute("R1")> _
+        Public Property websitepath() As String
             Get
-                Return CType(Me("version"),Integer)
+                Return CType(Me("websitepath"), String)
             End Get
-            Set
-                Me("version") = value
+            Set(value As String)
+                Me("websitepath") = value
             End Set
         End Property
     End Class
