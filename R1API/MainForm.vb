@@ -133,7 +133,7 @@ Public Class Main
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
         'First Run-Generate default templates
-
+        Me.Text = "R1 Job Runner Version: " & My.Application.Info.Version.ToString
         If My.Settings.firstrun = True Then
             'Set templates
             My.Settings.templatename.Clear()
@@ -203,13 +203,20 @@ Public Class Main
         Next
         txtTemplateName.Text = My.Settings.templatenameselect
 
-        Dim ver As Integer = My.Settings.version
-        If ver = "55" Then
-            rdoversion55.Checked = True
-            rdoversion57.Checked = False
+        Dim websitepath As String = My.Settings.websitepath
+        If websitepath = "ADG.Map.Web" Then
+            rdoadgmap.Checked = True
+            rdor1.Checked = False
+            rdocustom.Checked = False
+        ElseIf websitepath = "R1" Then
+            rdoadgmap.Checked = False
+            rdor1.Checked = True
+            rdocustom.Checked = False
         Else
-            rdoversion55.Checked = False
-            rdoversion57.Checked = True
+            rdocustom.Checked = True
+            rdor1.Checked = False
+            rdoadgmap.Checked = False
+            txtcustomwebaddress.Text = My.Settings.websitepath
         End If
 
         'Set the job stores
@@ -255,10 +262,12 @@ Public Class Main
             My.Settings.templatename.Add(item.ToString)
         Next
         My.Settings.templatenameselect = txtDefaultTemplateName.Text
-        If rdoversion55.Checked = True Then
-            My.Settings.version = "55"
+        If rdoadgmap.Checked = True Then
+            My.Settings.websitepath = "ADG.Map.Web"
+        ElseIf rdor1.Checked = True Then
+            My.Settings.websitepath = "R1"
         Else
-            My.Settings.version = "57"
+            My.Settings.websitepath = txtcustomwebaddress.Text
         End If
 
         My.Settings.Save()
@@ -1085,6 +1094,8 @@ Public Class Main
     End Sub
 
     Private Sub tabMenu_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabMenu.SelectedIndexChanged
+
+        btnSaveSettings_Click(e, e)
         statuslabel.Text = ""
     End Sub
 
@@ -1116,5 +1127,23 @@ Public Class Main
         MsgBox("Press Ctrl+C to copy." & vbCrLf & Jobs.BuildFilterJSON(StoreInFiltList, StoreExFiltList))
     End Sub
 
-  
+
+
+    Private Sub txtcustomwebaddress_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtcustomwebaddress.KeyPress
+
+        If Char.IsLetterOrDigit(e.KeyChar) Or Char.IsControl(e.KeyChar) Then
+            e.Handled = False
+        Else
+            e.Handled = True
+        End If
+    End Sub
+
+
+    Private Sub rdocustom_CheckedChanged(sender As Object, e As EventArgs) Handles rdocustom.CheckedChanged
+        If rdocustom.Checked = True Then
+            txtcustomwebaddress.Enabled = True
+        Else
+            txtcustomwebaddress.Enabled = False
+        End If
+    End Sub
 End Class

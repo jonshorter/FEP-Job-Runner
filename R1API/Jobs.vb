@@ -256,12 +256,8 @@ Module Jobs
         JobsServiceBinding.Name = "JobsServiceSoap"
         'Set servername
 
-        Dim endpointaddress As String = ""
-        If Main.rdoversion55.Checked = True Then
-            endpointaddress = "https://" & srvname & "/adg.map.web/services/api/JobsService.asmx"
-        Else
-            endpointaddress = "https://" & srvname & "/r1/services/api/JobsService.asmx"
-        End If
+        Dim endpointaddress As String = "https://" & srvname & "/" & My.Settings.websitepath & "/services/api/JobsService.asmx"
+
 
         Dim servername As New System.ServiceModel.EndpointAddress(endpointaddress)
 

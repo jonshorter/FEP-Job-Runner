@@ -36,6 +36,11 @@ Partial Class Main
         Me.Label7 = New System.Windows.Forms.Label()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.grpReqSet = New System.Windows.Forms.GroupBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.txtcustomwebaddress = New System.Windows.Forms.TextBox()
+        Me.rdocustom = New System.Windows.Forms.RadioButton()
+        Me.rdor1 = New System.Windows.Forms.RadioButton()
+        Me.rdoadgmap = New System.Windows.Forms.RadioButton()
         Me.grpOptDefSet = New System.Windows.Forms.GroupBox()
         Me.chkbypasscerts = New System.Windows.Forms.CheckBox()
         Me.txtdefaultshare = New System.Windows.Forms.TextBox()
@@ -162,10 +167,9 @@ Partial Class Main
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.statuslabel = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.rdoversion55 = New System.Windows.Forms.RadioButton()
-        Me.rdoversion57 = New System.Windows.Forms.RadioButton()
         Me.GroupBox4.SuspendLayout()
         Me.grpReqSet.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.grpOptDefSet.SuspendLayout()
         Me.tabSubMenu.SuspendLayout()
         Me.tabJobInfo.SuspendLayout()
@@ -305,8 +309,7 @@ Partial Class Main
         '
         'grpReqSet
         '
-        Me.grpReqSet.Controls.Add(Me.rdoversion57)
-        Me.grpReqSet.Controls.Add(Me.rdoversion55)
+        Me.grpReqSet.Controls.Add(Me.GroupBox2)
         Me.grpReqSet.Controls.Add(Me.Label7)
         Me.grpReqSet.Controls.Add(Me.Label4)
         Me.grpReqSet.Controls.Add(Me.Label5)
@@ -319,6 +322,61 @@ Partial Class Main
         Me.grpReqSet.TabIndex = 29
         Me.grpReqSet.TabStop = False
         Me.grpReqSet.Text = "Required Settings"
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.txtcustomwebaddress)
+        Me.GroupBox2.Controls.Add(Me.rdocustom)
+        Me.GroupBox2.Controls.Add(Me.rdor1)
+        Me.GroupBox2.Controls.Add(Me.rdoadgmap)
+        Me.GroupBox2.Location = New System.Drawing.Point(420, 10)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(178, 90)
+        Me.GroupBox2.TabIndex = 20
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Website Address:"
+        '
+        'txtcustomwebaddress
+        '
+        Me.txtcustomwebaddress.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtcustomwebaddress.Enabled = False
+        Me.txtcustomwebaddress.Location = New System.Drawing.Point(23, 64)
+        Me.txtcustomwebaddress.Name = "txtcustomwebaddress"
+        Me.txtcustomwebaddress.Size = New System.Drawing.Size(149, 20)
+        Me.txtcustomwebaddress.TabIndex = 21
+        '
+        'rdocustom
+        '
+        Me.rdocustom.AutoSize = True
+        Me.rdocustom.Location = New System.Drawing.Point(6, 67)
+        Me.rdocustom.Name = "rdocustom"
+        Me.rdocustom.Size = New System.Drawing.Size(14, 13)
+        Me.rdocustom.TabIndex = 20
+        Me.rdocustom.TabStop = True
+        Me.rdocustom.UseVisualStyleBackColor = True
+        '
+        'rdor1
+        '
+        Me.rdor1.AutoSize = True
+        Me.rdor1.Location = New System.Drawing.Point(6, 43)
+        Me.rdor1.Name = "rdor1"
+        Me.rdor1.Size = New System.Drawing.Size(39, 17)
+        Me.rdor1.TabIndex = 19
+        Me.rdor1.TabStop = True
+        Me.rdor1.Text = "R1"
+        Me.rdor1.UseVisualStyleBackColor = True
+        '
+        'rdoadgmap
+        '
+        Me.rdoadgmap.AutoSize = True
+        Me.rdoadgmap.Checked = True
+        Me.rdoadgmap.Location = New System.Drawing.Point(6, 19)
+        Me.rdoadgmap.Name = "rdoadgmap"
+        Me.rdoadgmap.Size = New System.Drawing.Size(98, 17)
+        Me.rdoadgmap.TabIndex = 18
+        Me.rdoadgmap.TabStop = True
+        Me.rdoadgmap.Text = "ADG.Map.Web"
+        Me.rdoadgmap.UseVisualStyleBackColor = True
         '
         'grpOptDefSet
         '
@@ -1586,29 +1644,6 @@ Partial Class Main
         Me.statuslabel.Spring = True
         Me.statuslabel.Text = "statuslabel"
         '
-        'rdoversion55
-        '
-        Me.rdoversion55.AutoSize = True
-        Me.rdoversion55.Checked = True
-        Me.rdoversion55.Location = New System.Drawing.Point(420, 19)
-        Me.rdoversion55.Name = "rdoversion55"
-        Me.rdoversion55.Size = New System.Drawing.Size(99, 17)
-        Me.rdoversion55.TabIndex = 18
-        Me.rdoversion55.TabStop = True
-        Me.rdoversion55.Text = "Resolution1 5.5"
-        Me.rdoversion55.UseVisualStyleBackColor = True
-        '
-        'rdoversion57
-        '
-        Me.rdoversion57.AutoSize = True
-        Me.rdoversion57.Location = New System.Drawing.Point(420, 49)
-        Me.rdoversion57.Name = "rdoversion57"
-        Me.rdoversion57.Size = New System.Drawing.Size(99, 17)
-        Me.rdoversion57.TabIndex = 19
-        Me.rdoversion57.TabStop = True
-        Me.rdoversion57.Text = "Resolution1 5.7"
-        Me.rdoversion57.UseVisualStyleBackColor = True
-        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1625,6 +1660,8 @@ Partial Class Main
         Me.GroupBox4.PerformLayout()
         Me.grpReqSet.ResumeLayout(False)
         Me.grpReqSet.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.grpOptDefSet.ResumeLayout(False)
         Me.grpOptDefSet.PerformLayout()
         Me.tabSubMenu.ResumeLayout(False)
@@ -1817,7 +1854,10 @@ Partial Class Main
     Friend WithEvents grpReqSet As System.Windows.Forms.GroupBox
     Friend WithEvents grpOptDefSet As System.Windows.Forms.GroupBox
     Friend WithEvents btnShowJSON As System.Windows.Forms.Button
-    Friend WithEvents rdoversion57 As System.Windows.Forms.RadioButton
-    Friend WithEvents rdoversion55 As System.Windows.Forms.RadioButton
+    Friend WithEvents rdor1 As System.Windows.Forms.RadioButton
+    Friend WithEvents rdoadgmap As System.Windows.Forms.RadioButton
+    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Friend WithEvents rdocustom As System.Windows.Forms.RadioButton
+    Friend WithEvents txtcustomwebaddress As System.Windows.Forms.TextBox
 
 End Class

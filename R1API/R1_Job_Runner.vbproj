@@ -51,7 +51,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>r1icon.ico</ApplicationIcon>
+    <ApplicationIcon>r1branding.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -156,7 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Newtonsoft.Json.dll" />
-    <Content Include="r1icon.ico" />
+    <Content Include="r1branding.ico" />
     <None Include="Service References\JobsService\R1_Job_Runner.JobsService.RunJobFromTemplateNameResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
