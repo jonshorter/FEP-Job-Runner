@@ -134,7 +134,7 @@ Public Class Main
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
         'First Run-Generate default templates
         Me.Text = "R1 Job Runner Version: " & My.Application.Info.Version.ToString
-        If My.Settings.firstrun = True Then
+        If My.Settings.firstrun = True Or My.Settings.templatename Is Nothing Then
             'Set templates
             My.Settings.templatename.Clear()
             My.Settings.templatename.Add("coll-evtx")
@@ -1145,5 +1145,28 @@ Public Class Main
         Else
             txtcustomwebaddress.Enabled = False
         End If
+    End Sub
+
+    Private Sub Label30_Click(sender As Object, e As EventArgs) Handles Label30.Click
+
+    End Sub
+
+    Private Sub btnXPSSend_Click(sender As Object, e As EventArgs) Handles btnXPSSend.Click
+        'panwlistener.Main()
+        ResetStatusBar()
+        Dim xpsThreat As New XPS.XPSThreat
+
+        xpsThreat.Srcaddr = "10.0.1.24"
+        xpsThreat.Dstaddr = Me.txtXPSTarget.Text
+        xpsThreat.HostIp = Me.txtXPSTarget.Text
+        xpsThreat.Action = "alert"
+        xpsThreat.MalwareName = "Super Bad Backdoor"
+        xpsThreat.MalwareType = "BACKDOOR"
+        xpsThreat.Rule = "Malware Detection Engine"
+        xpsThreat.Severity = "critical"
+
+        Dim xpststr As String = XPS.XPSThreatTOCSV(xpsThreat)
+        Debug.Print(xpststr)
+        XPS.SendEvent(xpststr)
     End Sub
 End Class

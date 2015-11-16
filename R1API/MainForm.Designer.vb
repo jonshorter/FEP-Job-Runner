@@ -167,6 +167,16 @@ Partial Class Main
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.statuslabel = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.Label30 = New System.Windows.Forms.Label()
+        Me.panwPort = New System.Windows.Forms.NumericUpDown()
+        Me.tabXPS = New System.Windows.Forms.TabPage()
+        Me.xpsPort = New System.Windows.Forms.NumericUpDown()
+        Me.Label38 = New System.Windows.Forms.Label()
+        Me.Label39 = New System.Windows.Forms.Label()
+        Me.cmbXPSAlert = New System.Windows.Forms.ComboBox()
+        Me.txtXPSTarget = New System.Windows.Forms.TextBox()
+        Me.Label40 = New System.Windows.Forms.Label()
+        Me.btnXPSSend = New System.Windows.Forms.Button()
         Me.GroupBox4.SuspendLayout()
         Me.grpReqSet.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -202,6 +212,9 @@ Partial Class Main
         Me.tabPANW.SuspendLayout()
         Me.tabAbout.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
+        CType(Me.panwPort, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabXPS.SuspendLayout()
+        CType(Me.xpsPort, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnExecute
@@ -1385,6 +1398,7 @@ Partial Class Main
         Me.tabMenu.Controls.Add(Me.tabJobExecution)
         Me.tabMenu.Controls.Add(Me.tabFireEye)
         Me.tabMenu.Controls.Add(Me.tabPANW)
+        Me.tabMenu.Controls.Add(Me.tabXPS)
         Me.tabMenu.Controls.Add(Me.tabAbout)
         Me.tabMenu.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tabMenu.Location = New System.Drawing.Point(0, 0)
@@ -1533,6 +1547,8 @@ Partial Class Main
         '
         'tabPANW
         '
+        Me.tabPANW.Controls.Add(Me.panwPort)
+        Me.tabPANW.Controls.Add(Me.Label30)
         Me.tabPANW.Controls.Add(Me.Label35)
         Me.tabPANW.Controls.Add(Me.cmbPANWAlert)
         Me.tabPANW.Controls.Add(Me.txtPANWTarget)
@@ -1548,7 +1564,7 @@ Partial Class Main
         'Label35
         '
         Me.Label35.AutoSize = True
-        Me.Label35.Location = New System.Drawing.Point(42, 44)
+        Me.Label35.Location = New System.Drawing.Point(42, 70)
         Me.Label35.Name = "Label35"
         Me.Label35.Size = New System.Drawing.Size(58, 13)
         Me.Label35.TabIndex = 9
@@ -1559,14 +1575,14 @@ Partial Class Main
         Me.cmbPANWAlert.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbPANWAlert.FormattingEnabled = True
         Me.cmbPANWAlert.Items.AddRange(New Object() {"VIRUS", "FILE", "FLOOD", "URL"})
-        Me.cmbPANWAlert.Location = New System.Drawing.Point(106, 41)
+        Me.cmbPANWAlert.Location = New System.Drawing.Point(130, 67)
         Me.cmbPANWAlert.Name = "cmbPANWAlert"
         Me.cmbPANWAlert.Size = New System.Drawing.Size(176, 21)
         Me.cmbPANWAlert.TabIndex = 8
         '
         'txtPANWTarget
         '
-        Me.txtPANWTarget.Location = New System.Drawing.Point(106, 15)
+        Me.txtPANWTarget.Location = New System.Drawing.Point(130, 41)
         Me.txtPANWTarget.Name = "txtPANWTarget"
         Me.txtPANWTarget.Size = New System.Drawing.Size(176, 20)
         Me.txtPANWTarget.TabIndex = 7
@@ -1574,7 +1590,7 @@ Partial Class Main
         'Label36
         '
         Me.Label36.AutoSize = True
-        Me.Label36.Location = New System.Drawing.Point(8, 18)
+        Me.Label36.Location = New System.Drawing.Point(8, 44)
         Me.Label36.Name = "Label36"
         Me.Label36.Size = New System.Drawing.Size(92, 13)
         Me.Label36.TabIndex = 6
@@ -1582,7 +1598,7 @@ Partial Class Main
         '
         'btnPANWSend
         '
-        Me.btnPANWSend.Location = New System.Drawing.Point(106, 68)
+        Me.btnPANWSend.Location = New System.Drawing.Point(130, 94)
         Me.btnPANWSend.Name = "btnPANWSend"
         Me.btnPANWSend.Size = New System.Drawing.Size(139, 23)
         Me.btnPANWSend.TabIndex = 0
@@ -1643,6 +1659,103 @@ Partial Class Main
         Me.statuslabel.Size = New System.Drawing.Size(71, 17)
         Me.statuslabel.Spring = True
         Me.statuslabel.Text = "statuslabel"
+        '
+        'Label30
+        '
+        Me.Label30.AutoSize = True
+        Me.Label30.Location = New System.Drawing.Point(8, 18)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(122, 13)
+        Me.Label30.TabIndex = 10
+        Me.Label30.Text = "R1 PANW Listener Port:"
+        '
+        'panwPort
+        '
+        Me.panwPort.Location = New System.Drawing.Point(130, 16)
+        Me.panwPort.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
+        Me.panwPort.Name = "panwPort"
+        Me.panwPort.Size = New System.Drawing.Size(120, 20)
+        Me.panwPort.TabIndex = 11
+        Me.panwPort.Value = New Decimal(New Integer() {514, 0, 0, 0})
+        '
+        'tabXPS
+        '
+        Me.tabXPS.Controls.Add(Me.xpsPort)
+        Me.tabXPS.Controls.Add(Me.Label38)
+        Me.tabXPS.Controls.Add(Me.Label39)
+        Me.tabXPS.Controls.Add(Me.cmbXPSAlert)
+        Me.tabXPS.Controls.Add(Me.txtXPSTarget)
+        Me.tabXPS.Controls.Add(Me.Label40)
+        Me.tabXPS.Controls.Add(Me.btnXPSSend)
+        Me.tabXPS.Location = New System.Drawing.Point(4, 25)
+        Me.tabXPS.Name = "tabXPS"
+        Me.tabXPS.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabXPS.Size = New System.Drawing.Size(628, 546)
+        Me.tabXPS.TabIndex = 6
+        Me.tabXPS.Text = "XPS"
+        Me.tabXPS.UseVisualStyleBackColor = True
+        '
+        'xpsPort
+        '
+        Me.xpsPort.Location = New System.Drawing.Point(130, 16)
+        Me.xpsPort.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
+        Me.xpsPort.Name = "xpsPort"
+        Me.xpsPort.Size = New System.Drawing.Size(120, 20)
+        Me.xpsPort.TabIndex = 18
+        Me.xpsPort.Value = New Decimal(New Integer() {514, 0, 0, 0})
+        '
+        'Label38
+        '
+        Me.Label38.AutoSize = True
+        Me.Label38.Location = New System.Drawing.Point(8, 18)
+        Me.Label38.Name = "Label38"
+        Me.Label38.Size = New System.Drawing.Size(110, 13)
+        Me.Label38.TabIndex = 17
+        Me.Label38.Text = "R1 XPS Listener Port:"
+        '
+        'Label39
+        '
+        Me.Label39.AutoSize = True
+        Me.Label39.Location = New System.Drawing.Point(42, 70)
+        Me.Label39.Name = "Label39"
+        Me.Label39.Size = New System.Drawing.Size(58, 13)
+        Me.Label39.TabIndex = 16
+        Me.Label39.Text = "Alert Type:"
+        '
+        'cmbXPSAlert
+        '
+        Me.cmbXPSAlert.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbXPSAlert.FormattingEnabled = True
+        Me.cmbXPSAlert.Items.AddRange(New Object() {"VIRUS", "FILE", "FLOOD", "URL"})
+        Me.cmbXPSAlert.Location = New System.Drawing.Point(130, 67)
+        Me.cmbXPSAlert.Name = "cmbXPSAlert"
+        Me.cmbXPSAlert.Size = New System.Drawing.Size(176, 21)
+        Me.cmbXPSAlert.TabIndex = 15
+        '
+        'txtXPSTarget
+        '
+        Me.txtXPSTarget.Location = New System.Drawing.Point(130, 41)
+        Me.txtXPSTarget.Name = "txtXPSTarget"
+        Me.txtXPSTarget.Size = New System.Drawing.Size(176, 20)
+        Me.txtXPSTarget.TabIndex = 14
+        '
+        'Label40
+        '
+        Me.Label40.AutoSize = True
+        Me.Label40.Location = New System.Drawing.Point(8, 44)
+        Me.Label40.Name = "Label40"
+        Me.Label40.Size = New System.Drawing.Size(92, 13)
+        Me.Label40.TabIndex = 13
+        Me.Label40.Text = "Target Hostname:"
+        '
+        'btnXPSSend
+        '
+        Me.btnXPSSend.Location = New System.Drawing.Point(130, 94)
+        Me.btnXPSSend.Name = "btnXPSSend"
+        Me.btnXPSSend.Size = New System.Drawing.Size(139, 23)
+        Me.btnXPSSend.TabIndex = 12
+        Me.btnXPSSend.Text = "Send XPS SysLog Alert"
+        Me.btnXPSSend.UseVisualStyleBackColor = True
         '
         'Main
         '
@@ -1711,6 +1824,10 @@ Partial Class Main
         Me.tabAbout.PerformLayout()
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
+        CType(Me.panwPort, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabXPS.ResumeLayout(False)
+        Me.tabXPS.PerformLayout()
+        CType(Me.xpsPort, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1859,5 +1976,15 @@ Partial Class Main
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents rdocustom As System.Windows.Forms.RadioButton
     Friend WithEvents txtcustomwebaddress As System.Windows.Forms.TextBox
+    Friend WithEvents panwPort As System.Windows.Forms.NumericUpDown
+    Friend WithEvents Label30 As System.Windows.Forms.Label
+    Friend WithEvents tabXPS As System.Windows.Forms.TabPage
+    Friend WithEvents xpsPort As System.Windows.Forms.NumericUpDown
+    Friend WithEvents Label38 As System.Windows.Forms.Label
+    Friend WithEvents Label39 As System.Windows.Forms.Label
+    Friend WithEvents cmbXPSAlert As System.Windows.Forms.ComboBox
+    Friend WithEvents txtXPSTarget As System.Windows.Forms.TextBox
+    Friend WithEvents Label40 As System.Windows.Forms.Label
+    Friend WithEvents btnXPSSend As System.Windows.Forms.Button
 
 End Class
