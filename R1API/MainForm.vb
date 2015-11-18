@@ -12,8 +12,9 @@ Public Class Main
     Public StoreRemKillIDList
     'Declare Automation Job
     Public autojobs
+    Public xpsbg_listen
 
-    Public xpsbgworker
+
 
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnExecute.Click
@@ -1079,21 +1080,26 @@ Public Class Main
     End Sub
 
     Private Sub btn_FEEvent_Click(sender As Object, e As EventArgs) Handles btn_FEEvent.Click
-        ResetStatusBar()
-
-        Dim fevent = FireEye.GenerateFEEvent(cmbFEAlertType.Text)
-        FireEye.SendEvent(FireEye.FEventtoJson(fevent))
-
+        Try
+            ResetStatusBar()
+            Dim fevent = FireEye.GenerateFEEvent(cmbFEAlertType.Text)
+            FireEye.SendEvent(FireEye.FEventtoJson(fevent))
+        Catch ex As Exception
+            Debug.WriteLine(ex.Message)
+        End Try
     End Sub
 
     Private Sub btnPANWSend_Click(sender As Object, e As EventArgs) Handles btnPANWSend.Click
-        'panwlistener.Main()
-        ResetStatusBar()
-        Dim panwthreat As New PANW.PANWThreat
-        panwthreat.P8Destination_IP = txtPANWTarget.Text
-        panwthreat.P4Subtype = cmbPANWAlert.Text
-        Dim panwtstr As String = PANW.ThreatTOCSV(panwthreat)
-        PANW.SendEvent(panwtstr)
+        Try
+            ResetStatusBar()
+            Dim panwthreat As New PANW.PANWThreat
+            panwthreat.P8Destination_IP = txtPANWTarget.Text
+            panwthreat.P4Subtype = cmbPANWAlert.Text
+            Dim panwtstr As String = PANW.ThreatTOCSV(panwthreat)
+            PANW.SendEvent(panwtstr)
+        Catch ex As Exception
+            Debug.WriteLine(ex.Message)
+        End Try
     End Sub
 
     Private Sub tabMenu_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabMenu.SelectedIndexChanged
@@ -1119,9 +1125,6 @@ Public Class Main
     End Sub
 
 
-    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
-
-    End Sub
 
 
 
@@ -1150,53 +1153,65 @@ Public Class Main
         End If
     End Sub
 
-    Private Sub Label30_Click(sender As Object, e As EventArgs) Handles Label30.Click
 
-    End Sub
 
     Private Sub btnXPSSend_Click(sender As Object, e As EventArgs) Handles btnXPSSend.Click
+        Try
+            ResetStatusBar()
+            Dim xpsThreat As New XPS.XPSThreat
 
-        ResetStatusBar()
-        Dim xpsThreat As New XPS.XPSThreat
-
-        xpsThreat.Dstaddr = Me.txtXPSTarget.Text
-        xpsThreat.HostIp = Me.txtXPSTarget.Text
-        xpsThreat.Action = "alert"
-        xpsThreat.MalwareName = "R1.Job_Runner.Malware"
-        xpsThreat.MalwareType = "Malware"
-        xpsThreat.Rule = "Malware Detection Engine"
-        ' xpsThreat.Alertuuid = Guid.Parse("f74165f2-8d4d-11e5-9b44-000c293c4056")
-        xpsThreat.Severity = Me.cmbXPSSeverity.SelectedItem.ToString
-        Dim xpststr As String = XPS.XPSThreatTOCSV(xpsThreat)
-        Debug.Print(xpststr)
-        XPS.SendEvent(xpststr)
-
+            xpsThreat.Dstaddr = Me.txtXPSTarget.Text
+            xpsThreat.HostIp = Me.txtXPSTarget.Text
+            xpsThreat.Action = "alert"
+            If txtXPSMalware.Text = "" Then
+                xpsThreat.MalwareName = "Super.Evil.Malware"
+            Else
+                xpsThreat.MalwareName = txtXPSMalware.Text
+            End If
+            xpsThreat.MalwareType = "Malware"
+            xpsThreat.Rule = "Malware Detection Engine"
+            xpsThreat.Severity = Me.cmbXPSSeverity.SelectedItem.ToString
+            Dim xpststr As String = XPS.XPSThreatTOCSV(xpsThreat)
+            Debug.Print(xpststr)
+            XPS.SendEvent(xpststr)
+        Catch Ex As Exception
+            Debug.WriteLine(Ex.Message)
+        End Try
     End Sub
 
 
 
     Private Sub tabXPS_Enter(sender As Object, e As EventArgs) Handles tabXPS.Enter
         cmbXPSSeverity.SelectedItem = "Critical"
+        Dim txtbox3text As String = "The XPS CP Sim simulates R1 queries to XPS to get malware reports and kick off validated threatscans. The XPS CP Sim defaults to port 8448, and requires elevated privileges to place an SSL certificate in the keystore for https communication. After starting the XPS CP Sim, configure the R1 XPS connector to point to " & My.Computer.Name & ":8448. The XPS CP Sim will accept any username/password combination as long as they are not the same."
+        TextBox3.Text = txtbox3text
     End Sub
 
     Private Sub btnStartXPSListener_Click(sender As Object, e As EventArgs) Handles btnStartXPSListener.Click
 
         If bgwork_xpslisten.IsBusy = True Then
-
-            bgwork_xpslisten.CancelAsync()
+        
             Try
-                Dim stoplistener = HttpWebRequest.Create("https://" & My.Computer.Name.ToString & ":8448/query?QUIT=STOP")
+                bgwork_xpslisten.CancelAsync()
+                Dim stoplistener As HttpWebRequest = HttpWebRequest.Create("https://" & My.Computer.Name.ToString & ":" & xps_sim_Port.Value & "/query?QUIT=STOP")
+                stoplistener.KeepAlive = False
+                stoplistener.ProtocolVersion = HttpVersion.Version10
+                stoplistener.ServicePoint.ConnectionLimit = 1
                 ServicePointManager.ServerCertificateValidationCallback = AddressOf ValidateRemoteCertificate
                 stoplistener.Method = "GET"
                 stoplistener.GetResponse()
             Catch ex As Exception
+                Debug.WriteLine(ex.Message)
             End Try
-
         Else
             Try
-                btnStartXPSListener.Text = "Stop Demo XPS Listener"
-                lbldemoxpsstatus.Text = "Demo XPS Status: Started"
-                bgwork_xpslisten.RunWorkerAsync()
+                btnStartXPSListener.Text = "Stop XPS CP Sim"
+                lbldemoxpsstatus.Text = "XPS CP Sim Status: Started"
+                xps_sim_Port.Enabled = False
+                XPSListener.GenKey()
+                Dim listen As HttpListener = XPSListener.CreateListener(XPSListener.CreatePrefixes(xps_sim_Port.Value))
+                xpsbg_listen = listen
+                bgwork_xpslisten.RunWorkerAsync(listen)
             Catch ex As Exception
                 Debug.WriteLine(ex.Message)
             End Try
@@ -1211,23 +1226,17 @@ Public Class Main
 
 
     Private Sub bgwork_xpslisten_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwork_xpslisten.DoWork
-        XPSListener.GenKey()
-        ' XPSListener.StartListener()
-        Dim listen As HttpListener = XPSListener.CreateListener(XPSListener.CreatePrefixes)
+
+
+        '   Dim listen As HttpListener = XPSListener.CreateListener(XPSListener.CreatePrefixes(xps_sim_Port.Value))
+        Dim listen As HttpListener = e.Argument
         Try
             ' Start the listener to begin listening for requests.
+
             listen.Start()
 
-            Console.WriteLine("Listening...")
-            While bgwork_xpslisten.CancellationPending = False
-                ' Set the number of requests this application will handle.
-                'Dim numRequestsToBeHandled As Integer = 100
-
-                '      For i As Integer = 0 To numRequestsToBeHandled
-
-                If bgwork_xpslisten.CancellationPending = True Then
-                    listen.Close()
-                End If
+            Console.WriteLine("Listening on " & listen.Prefixes(0))
+            While listen.IsListening = True
                 Dim response As HttpListenerResponse = Nothing
                 Try
                     Dim responseString As String = ""
@@ -1236,24 +1245,35 @@ Public Class Main
                     ' Note: GetContext blocks while waiting for a request.
                     Dim context As HttpListenerContext = listen.GetContext()
 
-                    Debug.WriteLine(context.Request.QueryString.Item(context.Request.QueryString.Count - 1))
-                    If context.Request.QueryString.Count > 2 Then
-                        Debug.WriteLine(context.Request.QueryString.Item(context.Request.QueryString.Count - 2))
-                    End If
 
                     If context.Request.QueryString.Count < 2 Then
-                        If context.Request.QueryString.Item(context.Request.QueryString.Count - 1) = "STOP" Then
-                            Debug.WriteLine("STOP")
+                        If context.Request.QueryString.Count = 0 Then
+                            'General browse no parameters....respond gracefully
                             response = context.Response
                             response.StatusCode = 200
-                            response.StatusDescription = "STOP"
-                            responseString = "STOP"
+                            response.StatusDescription = "Success"
+                            responseString = "<html><body>R1JobRunner - XPS CP Sim </br> LISTENING!!</body></html>"
                             buffer = System.Text.Encoding.UTF8.GetBytes(responseString)
                             response.ContentLength64 = buffer.Length
                             output = response.OutputStream
                             output.Write(buffer, 0, buffer.Length)
+                        Else
+                            'Check for stop command and END
+                            If context.Request.QueryString.Item(context.Request.QueryString.Count - 1) = "STOP" Then
+                                Debug.WriteLine("STOP")
+                                response = context.Response
+                                response.StatusCode = 200
+                                response.StatusDescription = "STOP"
+                                responseString = "STOP"
+                                buffer = System.Text.Encoding.UTF8.GetBytes(responseString)
+                                response.ContentLength64 = buffer.Length
+                                output = response.OutputStream
+                                output.Write(buffer, 0, buffer.Length)
+                                listen.Close()
+                            End If
                         End If
                     Else
+                        'Response for initial Auth query
                         If context.Request.QueryString.Item(context.Request.QueryString.Count - 1) = context.Request.QueryString.Item(context.Request.QueryString.Count - 2) Then
                             response = context.Response
                             response.StatusCode = 400
@@ -1264,23 +1284,19 @@ Public Class Main
                             output = response.OutputStream
                             output.Write(buffer, 0, buffer.Length)
                         Else
-                            ' Create the response.
+                            'Response for report query
+
                             response = context.Response
-                            ' responseString = My.Resources.analysis.ToString
-                            '"<html>Could not retrieve JSON report data </html>"
-                            ' buffer = System.Text.Encoding.UTF8.GetBytes(responseString)
-                            ' response.ContentLength64 = buffer.Length
                             IO.File.WriteAllBytes("analysis.json", My.Resources.analysis)
                             Debug.WriteLine(IO.File.ReadAllText("analysis.json"))
                             buffer = System.Text.Encoding.UTF8.GetBytes(IO.File.ReadAllText("analysis.json"))
                             response.ContentLength64 = buffer.Length
                             output = response.OutputStream
                             output.Write(buffer, 0, buffer.Length)
+                            IO.File.Delete("analysis.json")
                         End If
 
                     End If
-
-
 
                 Catch ex As HttpListenerException
                     Console.WriteLine(ex.Message)
@@ -1290,7 +1306,7 @@ Public Class Main
                     End If
                 End Try
             End While
-            ' Next
+
         Catch ex As HttpListenerException
             Console.WriteLine(ex.Message)
         Finally
@@ -1301,16 +1317,21 @@ Public Class Main
     End Sub
 
     Private Sub bgwork_xpslisten_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwork_xpslisten.ProgressChanged
-
+  
     End Sub
 
     Private Sub bgwork_xpslisten_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwork_xpslisten.RunWorkerCompleted
         XPSListener.EndListener()
-        btnStartXPSListener.Text = "Start Demo XPS Listener"
-        lbldemoxpsstatus.Text = "Demo XPS Status: Not Started"
+        btnStartXPSListener.Text = "Start XPS CP Sim"
+        lbldemoxpsstatus.Text = "XPS CP Sim Status: Not Started"
+        xps_sim_Port.Enabled = True
     End Sub
 
-    Private Sub TextBox3_TextChanged(sender As Object, e As EventArgs) Handles TextBox3.TextChanged
 
+    Private Sub txtFELink2_Click(sender As Object, e As EventArgs) Handles txtFELink2.Click
+        Dim sinfo As New ProcessStartInfo(txtFELink.Text)
+        Process.Start(sinfo)
     End Sub
+
+ 
 End Class

@@ -109,6 +109,7 @@ Module PANW
             Main.statuslabel.Text = "PANW Syslog Threat Event Sent"
         Catch ex As Exception
             Main.statuslabel.Text = ex.Message
+            Debug.WriteLine(ex.Message)
         End Try
     End Sub
 

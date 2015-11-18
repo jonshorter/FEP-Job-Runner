@@ -164,7 +164,14 @@ Partial Class Main
         Me.Label36 = New System.Windows.Forms.Label()
         Me.btnPANWSend = New System.Windows.Forms.Button()
         Me.tabXPS = New System.Windows.Forms.TabPage()
+        Me.txtXPSMalware = New System.Windows.Forms.TextBox()
+        Me.Label42 = New System.Windows.Forms.Label()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.txtFELink2 = New System.Windows.Forms.TextBox()
+        Me.Label39 = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.lbldemoxpsstatus = New System.Windows.Forms.Label()
         Me.btnStartXPSListener = New System.Windows.Forms.Button()
         Me.Label41 = New System.Windows.Forms.Label()
         Me.cmbXPSSeverity = New System.Windows.Forms.ComboBox()
@@ -180,10 +187,8 @@ Partial Class Main
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.statuslabel = New System.Windows.Forms.ToolStripStatusLabel()
         Me.bgwork_xpslisten = New System.ComponentModel.BackgroundWorker()
-        Me.lbldemoxpsstatus = New System.Windows.Forms.Label()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.Label39 = New System.Windows.Forms.Label()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.Label43 = New System.Windows.Forms.Label()
+        Me.xps_sim_Port = New System.Windows.Forms.NumericUpDown()
         Me.GroupBox4.SuspendLayout()
         Me.grpReqSet.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -219,10 +224,12 @@ Partial Class Main
         Me.tabPANW.SuspendLayout()
         CType(Me.panwPort, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabXPS.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox3.SuspendLayout()
         CType(Me.xpsPort, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabAbout.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
+        CType(Me.xps_sim_Port, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnExecute
@@ -1633,8 +1640,11 @@ Partial Class Main
         '
         'tabXPS
         '
+        Me.tabXPS.Controls.Add(Me.txtXPSMalware)
+        Me.tabXPS.Controls.Add(Me.Label42)
+        Me.tabXPS.Controls.Add(Me.PictureBox1)
         Me.tabXPS.Controls.Add(Me.TextBox3)
-        Me.tabXPS.Controls.Add(Me.TextBox2)
+        Me.tabXPS.Controls.Add(Me.txtFELink2)
         Me.tabXPS.Controls.Add(Me.Label39)
         Me.tabXPS.Controls.Add(Me.GroupBox3)
         Me.tabXPS.Controls.Add(Me.Label41)
@@ -1652,24 +1662,96 @@ Partial Class Main
         Me.tabXPS.Text = "XPS"
         Me.tabXPS.UseVisualStyleBackColor = True
         '
+        'txtXPSMalware
+        '
+        Me.txtXPSMalware.Location = New System.Drawing.Point(130, 96)
+        Me.txtXPSMalware.Name = "txtXPSMalware"
+        Me.txtXPSMalware.Size = New System.Drawing.Size(176, 20)
+        Me.txtXPSMalware.TabIndex = 29
+        Me.txtXPSMalware.Text = "Super.Evil.Malware"
+        '
+        'Label42
+        '
+        Me.Label42.AutoSize = True
+        Me.Label42.Location = New System.Drawing.Point(33, 99)
+        Me.Label42.Name = "Label42"
+        Me.Label42.Size = New System.Drawing.Size(81, 13)
+        Me.Label42.TabIndex = 28
+        Me.Label42.Text = "Malware Name:"
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(57, 315)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(502, 168)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        Me.PictureBox1.TabIndex = 27
+        Me.PictureBox1.TabStop = False
+        '
+        'TextBox3
+        '
+        Me.TextBox3.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.TextBox3.Location = New System.Drawing.Point(355, 122)
+        Me.TextBox3.Multiline = True
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.ReadOnly = True
+        Me.TextBox3.Size = New System.Drawing.Size(204, 187)
+        Me.TextBox3.TabIndex = 26
+        Me.TextBox3.Text = resources.GetString("TextBox3.Text")
+        '
+        'txtFELink2
+        '
+        Me.txtFELink2.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtFELink2.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.txtFELink2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFELink2.Location = New System.Drawing.Point(29, 214)
+        Me.txtFELink2.Name = "txtFELink2"
+        Me.txtFELink2.ReadOnly = True
+        Me.txtFELink2.Size = New System.Drawing.Size(320, 13)
+        Me.txtFELink2.TabIndex = 25
+        Me.txtFELink2.TabStop = False
+        Me.txtFELink2.Text = "http://fedeploycheck.fireeye.com/appliance-test/test-infection.exe"
+        '
+        'Label39
+        '
+        Me.Label39.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label39.Location = New System.Drawing.Point(33, 173)
+        Me.Label39.Name = "Label39"
+        Me.Label39.Size = New System.Drawing.Size(300, 38)
+        Me.Label39.TabIndex = 24
+        Me.Label39.Text = "To generate a verified hit from a test XPS ThreatScan download the following EXE " & _
+    "to your target." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.xps_sim_Port)
+        Me.GroupBox3.Controls.Add(Me.Label43)
         Me.GroupBox3.Controls.Add(Me.lbldemoxpsstatus)
         Me.GroupBox3.Controls.Add(Me.btnStartXPSListener)
         Me.GroupBox3.Location = New System.Drawing.Point(355, 14)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(204, 74)
+        Me.GroupBox3.Size = New System.Drawing.Size(204, 102)
         Me.GroupBox3.TabIndex = 23
         Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Demo XPS Listener"
+        Me.GroupBox3.Text = "XPS CP Sim"
+        '
+        'lbldemoxpsstatus
+        '
+        Me.lbldemoxpsstatus.AutoSize = True
+        Me.lbldemoxpsstatus.Location = New System.Drawing.Point(18, 82)
+        Me.lbldemoxpsstatus.Name = "lbldemoxpsstatus"
+        Me.lbldemoxpsstatus.Size = New System.Drawing.Size(158, 13)
+        Me.lbldemoxpsstatus.TabIndex = 22
+        Me.lbldemoxpsstatus.Text = "XPS CP Sim Status: Not Started"
         '
         'btnStartXPSListener
         '
-        Me.btnStartXPSListener.Location = New System.Drawing.Point(6, 19)
+        Me.btnStartXPSListener.Location = New System.Drawing.Point(32, 51)
         Me.btnStartXPSListener.Name = "btnStartXPSListener"
         Me.btnStartXPSListener.Size = New System.Drawing.Size(131, 23)
         Me.btnStartXPSListener.TabIndex = 21
-        Me.btnStartXPSListener.Text = "Start Demo Listener"
+        Me.btnStartXPSListener.Text = "Start XPS CP Sim"
         Me.btnStartXPSListener.UseVisualStyleBackColor = True
         '
         'Label41
@@ -1727,7 +1809,7 @@ Partial Class Main
         '
         'btnXPSSend
         '
-        Me.btnXPSSend.Location = New System.Drawing.Point(130, 94)
+        Me.btnXPSSend.Location = New System.Drawing.Point(130, 122)
         Me.btnXPSSend.Name = "btnXPSSend"
         Me.btnXPSSend.Size = New System.Drawing.Size(139, 23)
         Me.btnXPSSend.TabIndex = 12
@@ -1794,48 +1876,24 @@ Partial Class Main
         Me.bgwork_xpslisten.WorkerReportsProgress = True
         Me.bgwork_xpslisten.WorkerSupportsCancellation = True
         '
-        'lbldemoxpsstatus
+        'Label43
         '
-        Me.lbldemoxpsstatus.AutoSize = True
-        Me.lbldemoxpsstatus.Location = New System.Drawing.Point(6, 53)
-        Me.lbldemoxpsstatus.Name = "lbldemoxpsstatus"
-        Me.lbldemoxpsstatus.Size = New System.Drawing.Size(152, 13)
-        Me.lbldemoxpsstatus.TabIndex = 22
-        Me.lbldemoxpsstatus.Text = "Demo XPS Status: Not Started"
+        Me.Label43.AutoSize = True
+        Me.Label43.Location = New System.Drawing.Point(6, 25)
+        Me.Label43.Name = "Label43"
+        Me.Label43.Size = New System.Drawing.Size(90, 13)
+        Me.Label43.TabIndex = 23
+        Me.Label43.Text = "XPS CP Sim Port:"
         '
-        'TextBox2
+        'xps_sim_Port
         '
-        Me.TextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox2.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(29, 243)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.ReadOnly = True
-        Me.TextBox2.Size = New System.Drawing.Size(540, 16)
-        Me.TextBox2.TabIndex = 25
-        Me.TextBox2.TabStop = False
-        Me.TextBox2.Text = "http://fedeploycheck.fireeye.com/appliance-test/test-infection.exe"
-        '
-        'Label39
-        '
-        Me.Label39.AutoSize = True
-        Me.Label39.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label39.Location = New System.Drawing.Point(26, 216)
-        Me.Label39.Name = "Label39"
-        Me.Label39.Size = New System.Drawing.Size(526, 15)
-        Me.Label39.TabIndex = 24
-        Me.Label39.Text = "To generate a verified hit from a test XPS ThreatScan download the following EXE " & _
-    "to your target." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
-        '
-        'TextBox3
-        '
-        Me.TextBox3.Location = New System.Drawing.Point(351, 99)
-        Me.TextBox3.Multiline = True
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.ReadOnly = True
-        Me.TextBox3.Size = New System.Drawing.Size(269, 105)
-        Me.TextBox3.TabIndex = 26
-        Me.TextBox3.Text = resources.GetString("TextBox3.Text")
+        Me.xps_sim_Port.Location = New System.Drawing.Point(102, 23)
+        Me.xps_sim_Port.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
+        Me.xps_sim_Port.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.xps_sim_Port.Name = "xps_sim_Port"
+        Me.xps_sim_Port.Size = New System.Drawing.Size(96, 20)
+        Me.xps_sim_Port.TabIndex = 24
+        Me.xps_sim_Port.Value = New Decimal(New Integer() {8448, 0, 0, 0})
         '
         'Main
         '
@@ -1903,6 +1961,7 @@ Partial Class Main
         CType(Me.panwPort, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabXPS.ResumeLayout(False)
         Me.tabXPS.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
         CType(Me.xpsPort, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1910,6 +1969,7 @@ Partial Class Main
         Me.tabAbout.PerformLayout()
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
+        CType(Me.xps_sim_Port, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2072,8 +2132,13 @@ Partial Class Main
     Friend WithEvents bgwork_xpslisten As System.ComponentModel.BackgroundWorker
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents lbldemoxpsstatus As System.Windows.Forms.Label
-    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFELink2 As System.Windows.Forms.TextBox
     Friend WithEvents Label39 As System.Windows.Forms.Label
     Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
+    Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
+    Friend WithEvents txtXPSMalware As System.Windows.Forms.TextBox
+    Friend WithEvents Label42 As System.Windows.Forms.Label
+    Friend WithEvents xps_sim_Port As System.Windows.Forms.NumericUpDown
+    Friend WithEvents Label43 As System.Windows.Forms.Label
 
 End Class
