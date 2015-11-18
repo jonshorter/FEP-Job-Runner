@@ -1,4 +1,5 @@
-﻿
+﻿Imports System.Net
+
 
 Public Class Main
     'Delcare Stores for Job Filters/Options
@@ -12,11 +13,13 @@ Public Class Main
     'Declare Automation Job
     Public autojobs
 
+    Public xpsbgworker
+
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnExecute.Click
         ResetStatusBar()
         'Set label color and text
-      
+
         statuslabel.Text = "Submitting Job..."
         'Get Computers
         Dim cnames(lstComputerTargets.Items.Count - 1) As String
@@ -64,11 +67,11 @@ Public Class Main
 
         'Agent Remediation - Erase File
         Dim remediateerase() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase = StoreRemDelList.toarray
-    
+
 
         'Agent Remediation - Execute
         Dim remediateexecute() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute = StoreRemExecList.toarray
-     
+
 
         'Agent Remediation - Kill by PID
         Dim pids() As String = New String() {}
@@ -76,7 +79,7 @@ Public Class Main
         For Each item In pidlist
             pids.Add(item)
         Next
-        
+
 
         'Agent Remediation - Kill by Process Name
         Dim processnames() As String = New String() {}
@@ -84,7 +87,7 @@ Public Class Main
         For Each item In pnamelist
             processnames.Add(item)
         Next
-     
+
 
         'Kick off the job
         Jobs.RunFromTemplateName(txtServer.Text, templatename, txtJobName.Text, txtProjectName.Text, txtApiUser.Text, txtAPIPass.Text, cnames, snames, filter, pids, processnames, remediatesendfile, remediateexecute, remediateerase)
@@ -1080,7 +1083,7 @@ Public Class Main
 
         Dim fevent = FireEye.GenerateFEEvent(cmbFEAlertType.Text)
         FireEye.SendEvent(FireEye.FEventtoJson(fevent))
-      
+
     End Sub
 
     Private Sub btnPANWSend_Click(sender As Object, e As EventArgs) Handles btnPANWSend.Click
@@ -1120,7 +1123,7 @@ Public Class Main
 
     End Sub
 
-  
+
 
     Private Sub btnShowJSON_Click(sender As Object, e As EventArgs) Handles btnShowJSON.Click
         ResetStatusBar()
@@ -1152,21 +1155,162 @@ Public Class Main
     End Sub
 
     Private Sub btnXPSSend_Click(sender As Object, e As EventArgs) Handles btnXPSSend.Click
-        'panwlistener.Main()
+
         ResetStatusBar()
         Dim xpsThreat As New XPS.XPSThreat
 
-        xpsThreat.Srcaddr = "10.0.1.24"
         xpsThreat.Dstaddr = Me.txtXPSTarget.Text
         xpsThreat.HostIp = Me.txtXPSTarget.Text
         xpsThreat.Action = "alert"
-        xpsThreat.MalwareName = "Super Bad Backdoor"
-        xpsThreat.MalwareType = "BACKDOOR"
+        xpsThreat.MalwareName = "R1.Job_Runner.Malware"
+        xpsThreat.MalwareType = "Malware"
         xpsThreat.Rule = "Malware Detection Engine"
-        xpsThreat.Severity = "critical"
-
+        ' xpsThreat.Alertuuid = Guid.Parse("f74165f2-8d4d-11e5-9b44-000c293c4056")
+        xpsThreat.Severity = Me.cmbXPSSeverity.SelectedItem.ToString
         Dim xpststr As String = XPS.XPSThreatTOCSV(xpsThreat)
         Debug.Print(xpststr)
         XPS.SendEvent(xpststr)
+
+    End Sub
+
+
+
+    Private Sub tabXPS_Enter(sender As Object, e As EventArgs) Handles tabXPS.Enter
+        cmbXPSSeverity.SelectedItem = "Critical"
+    End Sub
+
+    Private Sub btnStartXPSListener_Click(sender As Object, e As EventArgs) Handles btnStartXPSListener.Click
+
+        If bgwork_xpslisten.IsBusy = True Then
+
+            bgwork_xpslisten.CancelAsync()
+            Try
+                Dim stoplistener = HttpWebRequest.Create("https://" & My.Computer.Name.ToString & ":8448/query?QUIT=STOP")
+                ServicePointManager.ServerCertificateValidationCallback = AddressOf ValidateRemoteCertificate
+                stoplistener.Method = "GET"
+                stoplistener.GetResponse()
+            Catch ex As Exception
+            End Try
+
+        Else
+            Try
+                btnStartXPSListener.Text = "Stop Demo XPS Listener"
+                lbldemoxpsstatus.Text = "Demo XPS Status: Started"
+                bgwork_xpslisten.RunWorkerAsync()
+            Catch ex As Exception
+                Debug.WriteLine(ex.Message)
+            End Try
+        End If
+
+
+    End Sub
+
+    Private Sub bgwork_xpslisten_Disposed(sender As Object, e As EventArgs) Handles bgwork_xpslisten.Disposed
+        XPSListener.EndListener()
+    End Sub
+
+
+    Private Sub bgwork_xpslisten_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwork_xpslisten.DoWork
+        XPSListener.GenKey()
+        ' XPSListener.StartListener()
+        Dim listen As HttpListener = XPSListener.CreateListener(XPSListener.CreatePrefixes)
+        Try
+            ' Start the listener to begin listening for requests.
+            listen.Start()
+
+            Console.WriteLine("Listening...")
+            While bgwork_xpslisten.CancellationPending = False
+                ' Set the number of requests this application will handle.
+                'Dim numRequestsToBeHandled As Integer = 100
+
+                '      For i As Integer = 0 To numRequestsToBeHandled
+
+                If bgwork_xpslisten.CancellationPending = True Then
+                    listen.Close()
+                End If
+                Dim response As HttpListenerResponse = Nothing
+                Try
+                    Dim responseString As String = ""
+                    Dim buffer() As Byte
+                    Dim output As System.IO.Stream
+                    ' Note: GetContext blocks while waiting for a request.
+                    Dim context As HttpListenerContext = listen.GetContext()
+
+                    Debug.WriteLine(context.Request.QueryString.Item(context.Request.QueryString.Count - 1))
+                    If context.Request.QueryString.Count > 2 Then
+                        Debug.WriteLine(context.Request.QueryString.Item(context.Request.QueryString.Count - 2))
+                    End If
+
+                    If context.Request.QueryString.Count < 2 Then
+                        If context.Request.QueryString.Item(context.Request.QueryString.Count - 1) = "STOP" Then
+                            Debug.WriteLine("STOP")
+                            response = context.Response
+                            response.StatusCode = 200
+                            response.StatusDescription = "STOP"
+                            responseString = "STOP"
+                            buffer = System.Text.Encoding.UTF8.GetBytes(responseString)
+                            response.ContentLength64 = buffer.Length
+                            output = response.OutputStream
+                            output.Write(buffer, 0, buffer.Length)
+                        End If
+                    Else
+                        If context.Request.QueryString.Item(context.Request.QueryString.Count - 1) = context.Request.QueryString.Item(context.Request.QueryString.Count - 2) Then
+                            response = context.Response
+                            response.StatusCode = 400
+                            response.StatusDescription = "ERROR"
+                            responseString = "Access Denied"
+                            buffer = System.Text.Encoding.UTF8.GetBytes(responseString)
+                            response.ContentLength64 = buffer.Length
+                            output = response.OutputStream
+                            output.Write(buffer, 0, buffer.Length)
+                        Else
+                            ' Create the response.
+                            response = context.Response
+                            ' responseString = My.Resources.analysis.ToString
+                            '"<html>Could not retrieve JSON report data </html>"
+                            ' buffer = System.Text.Encoding.UTF8.GetBytes(responseString)
+                            ' response.ContentLength64 = buffer.Length
+                            IO.File.WriteAllBytes("analysis.json", My.Resources.analysis)
+                            Debug.WriteLine(IO.File.ReadAllText("analysis.json"))
+                            buffer = System.Text.Encoding.UTF8.GetBytes(IO.File.ReadAllText("analysis.json"))
+                            response.ContentLength64 = buffer.Length
+                            output = response.OutputStream
+                            output.Write(buffer, 0, buffer.Length)
+                        End If
+
+                    End If
+
+
+
+                Catch ex As HttpListenerException
+                    Console.WriteLine(ex.Message)
+                Finally
+                    If response IsNot Nothing Then
+                        response.Close()
+                    End If
+                End Try
+            End While
+            ' Next
+        Catch ex As HttpListenerException
+            Console.WriteLine(ex.Message)
+        Finally
+            ' Stop listening for requests.
+            listen.Close()
+            Console.WriteLine("Done Listening...")
+        End Try
+    End Sub
+
+    Private Sub bgwork_xpslisten_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwork_xpslisten.ProgressChanged
+
+    End Sub
+
+    Private Sub bgwork_xpslisten_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwork_xpslisten.RunWorkerCompleted
+        XPSListener.EndListener()
+        btnStartXPSListener.Text = "Start Demo XPS Listener"
+        lbldemoxpsstatus.Text = "Demo XPS Status: Not Started"
+    End Sub
+
+    Private Sub TextBox3_TextChanged(sender As Object, e As EventArgs) Handles TextBox3.TextChanged
+
     End Sub
 End Class

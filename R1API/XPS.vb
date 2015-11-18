@@ -6,25 +6,13 @@ Imports System.Net.Sockets
 Module XPS
 
     '<33>Nov 12 11:45:15 xps ,bfb696b3-895c-11e5-a92b-000c2947b169,10.0.1.28,10.0.1.204,alert,Backdoor.Generic.WebShell.fss1,BACKDOOR,Malware Detection Engine,critical,2015-11-12 11:45:15,10.0.1.204
-    'if (strArray[4].ToUpper() == "ALERT")
-    ' {
-    '   ThreatEvent threatEvent = new ThreatEvent()
-    '   {
-    '     ApplianceId = applianceId,
-    '     ThreatType = strArray[6].ToUpper(),
-    '     AlertName = strArray[7],
-    '     MalwareName = this.PrepareMalwarePayloadFileName(strArray[5]),
-    '     EventId = strArray[1],
-    '     Severity = strArray[8].ToUpper(),
-    '     Action = strArray[4].ToUpper(),
-    '     Occurred = strArray[9],
-    '     UniqueId = strArray[1],
-    '     Target = strArray[10]
-    '   };
+
     Public Class XPSThreat
-        Public Property Header = "<33>" & DateTime.Now & " xps"
+
+        'Public Property Header = "<33>" & DateTime.Now & " xps"
+        Public Property Header = "<33>" & DateTime.Now & " " & Dns.GetHostByName(My.Computer.Name).HostName.ToString
         Public Property Alertuuid As Guid = Guid.NewGuid
-        Public Property Srcaddr As String
+        Public Property Srcaddr As String = Dns.GetHostByName(My.Computer.Name).AddressList(0).ToString
         Public Property Dstaddr As String
         Public Property Action As String
         Public Property MalwareName As String
