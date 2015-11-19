@@ -135,7 +135,21 @@ Public Class Main
         End With
     End Sub
 
+    Private Sub Main_Disposed(sender As Object, e As EventArgs) Handles Me.Disposed
+        Try
+            IO.File.Delete("Newtonsoft.Json.dll")
+        Catch ex As Exception
+        End Try
+    End Sub
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
+        Try
+            'Put JSON.Newtonsoft Down
+            Dim b As Byte() = My.Resources.Newtonsoft_Json
+            IO.File.WriteAllBytes("Newtonsoft.Json.dll", b)
+        Catch ex As Exception
+        End Try
+
         'First Run-Generate default templates
         Me.Text = "R1 Job Runner Version: " & My.Application.Info.Version.ToString
         If My.Settings.firstrun = True Or My.Settings.templatename Is Nothing Then
@@ -168,7 +182,7 @@ Public Class Main
         End If
 
         'End First Run
-      
+
 
         'Set Target to Agent 
         rdoagent.Checked = True

@@ -73,6 +73,16 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Byte[].
         '''</summary>
+        Friend ReadOnly Property Newtonsoft_Json() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Newtonsoft_Json", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
         Friend ReadOnly Property panw_listen_certificate() As Byte()
             Get
                 Dim obj As Object = ResourceManager.GetObject("panw_listen_certificate", resourceCulture)
