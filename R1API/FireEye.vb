@@ -142,16 +142,16 @@ Module FireEye
             Using sr As New StreamReader(response.GetResponseStream)
                 Dim rstring As String = sr.ReadToEnd
                 If rstring = "" Then
-                    Main.statuslabel.Text = "FireEye Event Submitted"
+                    Main.lblFEStatus.Text = "FireEye Event Submitted"
                 Else
-                    Main.statuslabel.Text = "Error Submitting FireEye Event"
+                    Main.lblFEStatus.Text = "Error Submitting FireEye Event"
                 End If
             End Using
         Catch we As System.Net.WebException
-            Main.statuslabel.Text = we.Message
+            Main.lblFEStatus.Text = we.Message
 
         Catch ex As Exception
-            Main.statuslabel.Text = ex.Message
+            Main.lblFEStatus.Text = ex.Message
 
 
         End Try

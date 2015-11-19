@@ -2,17 +2,17 @@
 Imports System.IO
 Imports System.Net
 Imports System.Globalization
-Module XPSListener
+Module PANWListener
 
     Public Sub GenKey()
         Try
-            IO.File.WriteAllBytes("xps_listen_certificate.pfx", My.Resources.xps_listen_certificate)
+            IO.File.WriteAllBytes("panw_listen_certificate.pfx", My.Resources.panw_listen_certificate)
 
             Dim certload As New X509Certificate2
 
-            certload.Import("xps_listen_certificate.pfx", "", X509KeyStorageFlags.MachineKeySet)
+            certload.Import("panw_listen_certificate.pfx", "", X509KeyStorageFlags.MachineKeySet)
 
-            IO.File.Delete("xps_listen_certificate.pfx")
+            IO.File.Delete("panw_listen_certificate.pfx")
 
             Debug.WriteLine("Cert Hash:" & certload.GetCertHashString)
             Dim xstore As New X509Store(StoreName.My, StoreLocation.LocalMachine)
@@ -21,8 +21,8 @@ Module XPSListener
             xstore.Close()
             Dim appguid As String = New Guid(CType(Main.GetType.Assembly.GetCustomAttributes(GetType(Runtime.InteropServices.GuidAttribute), False)(0), Runtime.InteropServices.GuidAttribute).Value).ToString
             Dim netshproc As New Process
-            Debug.WriteLine("netsh http add sslcert ipport=0.0.0.0:" & Main.xps_sim_Port.Value & " certhash=" & certload.GetCertHashString & " appid={" & appguid & "}")
-            Dim netshprocStartInfo As New ProcessStartInfo("cmd.exe", "/c netsh http add sslcert ipport=0.0.0.0:" & Main.xps_sim_Port.Value & " certhash=" & certload.GetCertHashString & " appid={" & appguid & "}")
+            Debug.WriteLine("netsh http add sslcert ipport=0.0.0.0:" & Main.panw_sim_port.Value & " certhash=" & certload.GetCertHashString & " appid={" & appguid & "}")
+            Dim netshprocStartInfo As New ProcessStartInfo("cmd.exe", "/c netsh http add sslcert ipport=0.0.0.0:" & Main.panw_sim_port.Value & " certhash=" & certload.GetCertHashString & " appid={" & appguid & "}")
             netshprocStartInfo.WindowStyle = ProcessWindowStyle.Hidden
             netshprocStartInfo.UseShellExecute = False
             netshprocStartInfo.RedirectStandardError = True
@@ -42,8 +42,8 @@ Module XPSListener
         Try
             Dim appguid As String = New Guid(CType(Main.GetType.Assembly.GetCustomAttributes(GetType(Runtime.InteropServices.GuidAttribute), False)(0), Runtime.InteropServices.GuidAttribute).Value).ToString
             Dim netshproc As New Process
-            Debug.WriteLine("netsh http delete sslcert ipport=0.0.0.0:" & Main.xps_sim_Port.Value)
-            Dim netshprocStartInfo As New ProcessStartInfo("cmd.exe", "/c netsh http delete sslcert ipport=0.0.0.0:" & Main.xps_sim_Port.Value)
+            Debug.WriteLine("netsh http delete sslcert ipport=0.0.0.0:" & Main.panw_sim_port.Value)
+            Dim netshprocStartInfo As New ProcessStartInfo("cmd.exe", "/c netsh http delete sslcert ipport=0.0.0.0:" & Main.panw_sim_port.Value)
             netshprocStartInfo.WindowStyle = ProcessWindowStyle.Hidden
             netshprocStartInfo.UseShellExecute = False
             netshprocStartInfo.RedirectStandardError = True
@@ -67,7 +67,7 @@ Module XPSListener
     End Function
 
     Public Function CreateListener(ByVal prefixes)
-  
+
         ' URI prefixes are required,
         If prefixes Is Nothing OrElse prefixes.Length = 0 Then
             Throw New ArgumentException("prefixes")
@@ -82,5 +82,5 @@ Module XPSListener
         Return listener
     End Function
 
-  
+
 End Module

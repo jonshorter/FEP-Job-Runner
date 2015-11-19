@@ -187,14 +187,14 @@ Namespace My
             End Set
         End Property
         
-        <Global.System.Configuration.UserScopedSettingAttribute(), _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.Configuration.DefaultSettingValueAttribute("R1")> _
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("R1")>  _
         Public Property websitepath() As String
             Get
-                Return CType(Me("websitepath"), String)
+                Return CType(Me("websitepath"),String)
             End Get
-            Set(value As String)
+            Set
                 Me("websitepath") = value
             End Set
         End Property

@@ -195,85 +195,96 @@ Module Jobs
     End Function
 
     Private Sub JobSubCallBack(ByVal send As Object, ByVal e As JobsService.RunJobFromTemplateNameCompletedEventArgs)
-        'Receives the Async Job Completed Event
+        Try
+            'Receives the Async Job Completed Event
 
-        'If no errors, then update the status as Job submitted + GUID
-        If e.Error Is Nothing Then
-            Main.statuslabel.Text = "Job Submitted: " & e.Result.RunJobFromTemplateNameResult.ToString
-
-          
-        Else
-            'Errors!
-            'Set the status label to draw attention
-            Main.statuslabel.BackColor = Color.DarkRed
-            Main.statuslabel.ForeColor = Color.White
-
-            Select Case True
-                'Invalid server
-                Case e.Error.Message.Contains("There was no endpoint listening")
-                    Main.statuslabel.Text = "Invalid Server Name or Address"
-                    'Job Target Required
-                Case e.Error.Message.Contains("computerNames or shareName must be provided")
-                    Main.statuslabel.Text = "A job target must be specificed. Computer or Network Share."
-                    'Bad API Username/Pass
-                Case e.Error.Message.Contains("Bad username or password")
-                    Main.statuslabel.Text = "Bad API Username or Password!"
-                    'Can't find job template
-                Case e.Error.Message.Contains("Unable to retrieve template")
-                    Main.statuslabel.Text = e.Error.Message.Replace("Server was unable to process request. --->", "").ToString
-                    'Bad project name
-                Case e.Error.Message.Contains("Invalid Project Name")
-                    Main.statuslabel.Text = e.Error.Message.Replace("Server was unable to process request. --->", "").ToString
-                    'Script on job completion error
-                Case e.Error.Message.Contains("ScriptFileName,ImpersonationUsername and  ImpersonationPassword are Required")
-                    Main.statuslabel.Text = e.Error.Message.Replace("Server was unable to process request. --->", "").ToString
-                    'Catch others - display error
-                Case Else
-                    Main.statuslabel.Text = e.Error.Message.Replace("Server was unable to process request. --->", "").ToString
-            End Select
+            'If no errors, then update the status as Job submitted + GUID
+            If e.Error Is Nothing Then
+                Main.lblJobStatus.Text = "Job Submitted: " & e.Result.RunJobFromTemplateNameResult.ToString
 
 
-        End If
+            Else
+                'Errors!
+                'Set the status label to draw attention
+                Main.lblJobStatus.BackColor = Color.DarkRed
+                Main.lblJobStatus.ForeColor = Color.White
+
+                Select Case True
+                    'Invalid server
+                    Case e.Error.Message.Contains("There was no endpoint listening")
+                        Main.lblJobStatus.Text = "Invalid Server Name or Address"
+                        'Job Target Required
+                    Case e.Error.Message.Contains("computerNames or shareName must be provided")
+                        Main.lblJobStatus.Text = "A job target must be specificed. Computer or Network Share."
+                        'Bad API Username/Pass
+                    Case e.Error.Message.Contains("Bad username or password")
+                        Main.lblJobStatus.Text = "Bad API Username or Password!"
+                        'Can't find job template
+                    Case e.Error.Message.Contains("Unable to retrieve template")
+                        Main.lblJobStatus.Text = e.Error.Message.Replace("Server was unable to process request. --->", "").ToString
+                        'Bad project name
+                    Case e.Error.Message.Contains("Invalid Project Name")
+                        Main.lblJobStatus.Text = e.Error.Message.Replace("Server was unable to process request. --->", "").ToString
+                        'Script on job completion error
+                    Case e.Error.Message.Contains("ScriptFileName,ImpersonationUsername and  ImpersonationPassword are Required")
+                        Main.lblJobStatus.Text = e.Error.Message.Replace("Server was unable to process request. --->", "").ToString
+                        'Catch others - display error
+                    Case Else
+                        Main.lblJobStatus.Text = e.Error.Message.Replace("Server was unable to process request. --->", "").ToString
+                End Select
+
+
+            End If
+        Catch ex As Exception
+            Main.lblJobStatus.Text = ex.Message
+        End Try
     End Sub
     Public Sub ResetStatusBar()
-        Main.statuslabel.Text = ""
-        Main.statuslabel.BackColor = Control.DefaultBackColor
-        Main.statuslabel.ForeColor = Color.Black
+        Main.lblJobStatus.Text = ""
+        Main.lblJobStatus.ForeColor = Color.Black
+        Main.lblJobStatus.BackColor = Control.DefaultBackColor
+        Main.lblXPSStatus.Text = ""
+        Main.lblPANWStatus.Text = ""
+        Main.lblFEStatus.Text = ""
     End Sub
     Public Sub RunFromTemplateName(ByVal srvname As String, ByVal templatename As String, ByVal JobName As String, ByVal ProjectName As String, ByVal APIUser As String, ByVal APIPass As String, ByVal cnames() As String, ByVal snames() As String, ByVal filter As String, ByVal pids() As String, ByVal processnames() As String, ByVal remediatesendfile() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile, ByVal remediateexecute() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute, ByVal remediateerase() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase)
-        'Submit a job via the API
+        Try
+            'Submit a job via the API
 
-        If Main.chkbypasscerts.Checked Then
-            'Ignore self-signed / bad certificates
-            ServicePointManager.ServerCertificateValidationCallback = AddressOf ValidateRemoteCertificate
-        End If
+            If Main.chkbypasscerts.Checked Then
+                'Ignore self-signed / bad certificates
+                ServicePointManager.ServerCertificateValidationCallback = AddressOf ValidateRemoteCertificate
+            End If
 
-        'Create a new job request
-        Dim js As New JobsService.RunJobFromTemplateNameRequest(templatename, JobName, ProjectName, APIUser, APIPass, cnames, snames, pids, processnames, remediatesendfile, remediateexecute, remediateerase, filter, filter, "ISModuleArcSight", "6732A1F0-7FAC-4D25-AACB-3BD0B8E8D146", "Module specific string")
+            'Create a new job request
+            Dim js As New JobsService.RunJobFromTemplateNameRequest(templatename, JobName, ProjectName, APIUser, APIPass, cnames, snames, pids, processnames, remediatesendfile, remediateexecute, remediateerase, filter, filter, "ISModuleArcSight", "6732A1F0-7FAC-4D25-AACB-3BD0B8E8D146", "Module specific string")
 
-        'Jobs Service Binding
-        Dim JobsServiceBinding As New System.ServiceModel.BasicHttpBinding(ServiceModel.BasicHttpSecurityMode.Transport)
-        JobsServiceBinding.Name = "JobsServiceSoap"
-        'Set servername
+            'Jobs Service Binding
+            Dim JobsServiceBinding As New System.ServiceModel.BasicHttpBinding(ServiceModel.BasicHttpSecurityMode.Transport)
+            JobsServiceBinding.Name = "JobsServiceSoap"
+            'Set servername
 
-        Dim endpointaddress As String = "https://" & srvname & "/" & My.Settings.websitepath & "/services/api/JobsService.asmx"
-
-
-        Dim servername As New System.ServiceModel.EndpointAddress(endpointaddress)
+            Dim endpointaddress As String = "https://" & srvname & "/" & My.Settings.websitepath & "/services/api/JobsService.asmx"
 
 
-        'Create a new soap client
-        Dim jsserv As New JobsService.JobsServiceSoapClient(JobsServiceBinding, servername)
-        'Set address
-        jsserv.Endpoint.Address = servername
-        'Open the connection
-        jsserv.Open()
+            Dim servername As New System.ServiceModel.EndpointAddress(endpointaddress)
 
-        'Make a handler for the Async job
-        AddHandler jsserv.RunJobFromTemplateNameCompleted, AddressOf JobSubCallBack
 
-        'Run the job asynchronously
-        jsserv.RunJobFromTemplateNameAsync(js)
+            'Create a new soap client
+            Dim jsserv As New JobsService.JobsServiceSoapClient(JobsServiceBinding, servername)
+            'Set address
+            jsserv.Endpoint.Address = servername
+            'Open the connection
+            jsserv.Open()
+
+            'Make a handler for the Async job
+            AddHandler jsserv.RunJobFromTemplateNameCompleted, AddressOf JobSubCallBack
+
+            'Run the job asynchronously
+            jsserv.RunJobFromTemplateNameAsync(js)
+        Catch ex As Exception
+            Main.lblJobStatus.Text = ex.Message
+        End Try
 
     End Sub
 

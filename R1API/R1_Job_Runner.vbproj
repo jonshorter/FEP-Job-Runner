@@ -24,6 +24,7 @@
     </DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -126,6 +127,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="PANWListener.vb" />
     <Compile Include="XPSListener.vb" />
   </ItemGroup>
   <ItemGroup>
@@ -156,7 +158,10 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+    <None Include="panw_listen_certificate.pfx" />
     <None Include="Service References\JobsService\JobsService.wsdl" />
+    <None Include="wildfire.response" />
+    <None Include="wildfire_fetest.response" />
     <None Include="xps_listen_certificate.pfx" />
   </ItemGroup>
   <ItemGroup>

@@ -144,10 +144,12 @@ Partial Class Main
         Me.tabMenu = New System.Windows.Forms.TabControl()
         Me.tabSettings = New System.Windows.Forms.TabPage()
         Me.tabJobExecution = New System.Windows.Forms.TabPage()
+        Me.lblJobStatus = New System.Windows.Forms.Label()
         Me.btnShowJSON = New System.Windows.Forms.Button()
         Me.btnLoadFromBox = New System.Windows.Forms.Button()
         Me.btnSaveAsBox = New System.Windows.Forms.Button()
         Me.tabFireEye = New System.Windows.Forms.TabPage()
+        Me.lblFEStatus = New System.Windows.Forms.Label()
         Me.txtFELink = New System.Windows.Forms.TextBox()
         Me.Label37 = New System.Windows.Forms.Label()
         Me.Label34 = New System.Windows.Forms.Label()
@@ -156,6 +158,16 @@ Partial Class Main
         Me.Label33 = New System.Windows.Forms.Label()
         Me.btn_FEEvent = New System.Windows.Forms.Button()
         Me.tabPANW = New System.Windows.Forms.TabPage()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.txtPANWSim = New System.Windows.Forms.TextBox()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.Label45 = New System.Windows.Forms.Label()
+        Me.lblPANWStatus = New System.Windows.Forms.Label()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.panw_sim_port = New System.Windows.Forms.NumericUpDown()
+        Me.Label44 = New System.Windows.Forms.Label()
+        Me.lblwildfirestatus = New System.Windows.Forms.Label()
+        Me.btn_WildfireStart = New System.Windows.Forms.Button()
         Me.panwPort = New System.Windows.Forms.NumericUpDown()
         Me.Label30 = New System.Windows.Forms.Label()
         Me.Label35 = New System.Windows.Forms.Label()
@@ -164,13 +176,16 @@ Partial Class Main
         Me.Label36 = New System.Windows.Forms.Label()
         Me.btnPANWSend = New System.Windows.Forms.Button()
         Me.tabXPS = New System.Windows.Forms.TabPage()
+        Me.lblXPSStatus = New System.Windows.Forms.Label()
         Me.txtXPSMalware = New System.Windows.Forms.TextBox()
         Me.Label42 = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.txtXPSSIM = New System.Windows.Forms.TextBox()
         Me.txtFELink2 = New System.Windows.Forms.TextBox()
         Me.Label39 = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.xps_sim_Port = New System.Windows.Forms.NumericUpDown()
+        Me.Label43 = New System.Windows.Forms.Label()
         Me.lbldemoxpsstatus = New System.Windows.Forms.Label()
         Me.btnStartXPSListener = New System.Windows.Forms.Button()
         Me.Label41 = New System.Windows.Forms.Label()
@@ -184,11 +199,8 @@ Partial Class Main
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.ofdBox = New System.Windows.Forms.OpenFileDialog()
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
-        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
-        Me.statuslabel = New System.Windows.Forms.ToolStripStatusLabel()
         Me.bgwork_xpslisten = New System.ComponentModel.BackgroundWorker()
-        Me.Label43 = New System.Windows.Forms.Label()
-        Me.xps_sim_Port = New System.Windows.Forms.NumericUpDown()
+        Me.bgwork_panwlisten = New System.ComponentModel.BackgroundWorker()
         Me.GroupBox4.SuspendLayout()
         Me.grpReqSet.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -222,14 +234,16 @@ Partial Class Main
         Me.tabJobExecution.SuspendLayout()
         Me.tabFireEye.SuspendLayout()
         Me.tabPANW.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox5.SuspendLayout()
+        CType(Me.panw_sim_port, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.panwPort, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabXPS.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox3.SuspendLayout()
+        CType(Me.xps_sim_Port, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.xpsPort, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabAbout.SuspendLayout()
-        Me.StatusStrip1.SuspendLayout()
-        CType(Me.xps_sim_Port, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnExecute
@@ -1419,7 +1433,7 @@ Partial Class Main
         Me.tabMenu.Location = New System.Drawing.Point(0, 0)
         Me.tabMenu.Name = "tabMenu"
         Me.tabMenu.SelectedIndex = 0
-        Me.tabMenu.Size = New System.Drawing.Size(636, 575)
+        Me.tabMenu.Size = New System.Drawing.Size(636, 595)
         Me.tabMenu.TabIndex = 21
         '
         'tabSettings
@@ -1428,13 +1442,14 @@ Partial Class Main
         Me.tabSettings.Location = New System.Drawing.Point(4, 25)
         Me.tabSettings.Name = "tabSettings"
         Me.tabSettings.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabSettings.Size = New System.Drawing.Size(628, 546)
+        Me.tabSettings.Size = New System.Drawing.Size(628, 566)
         Me.tabSettings.TabIndex = 1
         Me.tabSettings.Text = "Settings"
         Me.tabSettings.UseVisualStyleBackColor = True
         '
         'tabJobExecution
         '
+        Me.tabJobExecution.Controls.Add(Me.lblJobStatus)
         Me.tabJobExecution.Controls.Add(Me.btnShowJSON)
         Me.tabJobExecution.Controls.Add(Me.btnLoadFromBox)
         Me.tabJobExecution.Controls.Add(Me.btnSaveAsBox)
@@ -1443,10 +1458,23 @@ Partial Class Main
         Me.tabJobExecution.Location = New System.Drawing.Point(4, 25)
         Me.tabJobExecution.Name = "tabJobExecution"
         Me.tabJobExecution.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabJobExecution.Size = New System.Drawing.Size(628, 546)
+        Me.tabJobExecution.Size = New System.Drawing.Size(628, 566)
         Me.tabJobExecution.TabIndex = 0
         Me.tabJobExecution.Text = "Job Execution"
         Me.tabJobExecution.UseVisualStyleBackColor = True
+        '
+        'lblJobStatus
+        '
+        Me.lblJobStatus.AutoSize = True
+        Me.lblJobStatus.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.lblJobStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblJobStatus.Location = New System.Drawing.Point(3, 547)
+        Me.lblJobStatus.MaximumSize = New System.Drawing.Size(500, 0)
+        Me.lblJobStatus.MinimumSize = New System.Drawing.Size(500, 0)
+        Me.lblJobStatus.Name = "lblJobStatus"
+        Me.lblJobStatus.Size = New System.Drawing.Size(500, 16)
+        Me.lblJobStatus.TabIndex = 33
+        Me.lblJobStatus.Text = "lblJobStatus"
         '
         'btnShowJSON
         '
@@ -1477,6 +1505,7 @@ Partial Class Main
         '
         'tabFireEye
         '
+        Me.tabFireEye.Controls.Add(Me.lblFEStatus)
         Me.tabFireEye.Controls.Add(Me.txtFELink)
         Me.tabFireEye.Controls.Add(Me.Label37)
         Me.tabFireEye.Controls.Add(Me.Label34)
@@ -1487,17 +1516,27 @@ Partial Class Main
         Me.tabFireEye.Location = New System.Drawing.Point(4, 25)
         Me.tabFireEye.Name = "tabFireEye"
         Me.tabFireEye.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabFireEye.Size = New System.Drawing.Size(628, 546)
+        Me.tabFireEye.Size = New System.Drawing.Size(628, 566)
         Me.tabFireEye.TabIndex = 4
         Me.tabFireEye.Text = "FireEye"
         Me.tabFireEye.UseVisualStyleBackColor = True
+        '
+        'lblFEStatus
+        '
+        Me.lblFEStatus.AutoSize = True
+        Me.lblFEStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblFEStatus.Location = New System.Drawing.Point(42, 104)
+        Me.lblFEStatus.Name = "lblFEStatus"
+        Me.lblFEStatus.Size = New System.Drawing.Size(76, 16)
+        Me.lblFEStatus.TabIndex = 32
+        Me.lblFEStatus.Text = "lblFEStatus"
         '
         'txtFELink
         '
         Me.txtFELink.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtFELink.Cursor = System.Windows.Forms.Cursors.Hand
         Me.txtFELink.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFELink.Location = New System.Drawing.Point(28, 144)
+        Me.txtFELink.Location = New System.Drawing.Point(25, 173)
         Me.txtFELink.Name = "txtFELink"
         Me.txtFELink.ReadOnly = True
         Me.txtFELink.Size = New System.Drawing.Size(540, 16)
@@ -1509,7 +1548,7 @@ Partial Class Main
         '
         Me.Label37.AutoSize = True
         Me.Label37.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label37.Location = New System.Drawing.Point(25, 117)
+        Me.Label37.Location = New System.Drawing.Point(22, 146)
         Me.Label37.Name = "Label37"
         Me.Label37.Size = New System.Drawing.Size(543, 15)
         Me.Label37.TabIndex = 6
@@ -1562,6 +1601,12 @@ Partial Class Main
         '
         'tabPANW
         '
+        Me.tabPANW.Controls.Add(Me.PictureBox2)
+        Me.tabPANW.Controls.Add(Me.txtPANWSim)
+        Me.tabPANW.Controls.Add(Me.TextBox4)
+        Me.tabPANW.Controls.Add(Me.Label45)
+        Me.tabPANW.Controls.Add(Me.lblPANWStatus)
+        Me.tabPANW.Controls.Add(Me.GroupBox5)
         Me.tabPANW.Controls.Add(Me.panwPort)
         Me.tabPANW.Controls.Add(Me.Label30)
         Me.tabPANW.Controls.Add(Me.Label35)
@@ -1571,10 +1616,114 @@ Partial Class Main
         Me.tabPANW.Controls.Add(Me.btnPANWSend)
         Me.tabPANW.Location = New System.Drawing.Point(4, 25)
         Me.tabPANW.Name = "tabPANW"
-        Me.tabPANW.Size = New System.Drawing.Size(628, 546)
+        Me.tabPANW.Size = New System.Drawing.Size(628, 566)
         Me.tabPANW.TabIndex = 5
         Me.tabPANW.Text = "PANW"
         Me.tabPANW.UseVisualStyleBackColor = True
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
+        Me.PictureBox2.Location = New System.Drawing.Point(44, 311)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(516, 147)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        Me.PictureBox2.TabIndex = 35
+        Me.PictureBox2.TabStop = False
+        '
+        'txtPANWSim
+        '
+        Me.txtPANWSim.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtPANWSim.Location = New System.Drawing.Point(354, 122)
+        Me.txtPANWSim.Multiline = True
+        Me.txtPANWSim.Name = "txtPANWSim"
+        Me.txtPANWSim.ReadOnly = True
+        Me.txtPANWSim.Size = New System.Drawing.Size(204, 187)
+        Me.txtPANWSim.TabIndex = 34
+        Me.txtPANWSim.Text = resources.GetString("txtPANWSim.Text")
+        '
+        'TextBox4
+        '
+        Me.TextBox4.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.TextBox4.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.TextBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox4.Location = New System.Drawing.Point(28, 219)
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.ReadOnly = True
+        Me.TextBox4.Size = New System.Drawing.Size(320, 13)
+        Me.TextBox4.TabIndex = 33
+        Me.TextBox4.TabStop = False
+        Me.TextBox4.Text = "http://fedeploycheck.fireeye.com/appliance-test/test-infection.exe"
+        '
+        'Label45
+        '
+        Me.Label45.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label45.Location = New System.Drawing.Point(32, 178)
+        Me.Label45.Name = "Label45"
+        Me.Label45.Size = New System.Drawing.Size(300, 38)
+        Me.Label45.TabIndex = 32
+        Me.Label45.Text = "To generate a verified hit from a test PANW" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " ThreatScan download the following E" & _
+    "XE to your target." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        '
+        'lblPANWStatus
+        '
+        Me.lblPANWStatus.AutoSize = True
+        Me.lblPANWStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPANWStatus.Location = New System.Drawing.Point(42, 134)
+        Me.lblPANWStatus.Name = "lblPANWStatus"
+        Me.lblPANWStatus.Size = New System.Drawing.Size(100, 16)
+        Me.lblPANWStatus.TabIndex = 31
+        Me.lblPANWStatus.Text = "lblPANWStatus"
+        '
+        'GroupBox5
+        '
+        Me.GroupBox5.Controls.Add(Me.panw_sim_port)
+        Me.GroupBox5.Controls.Add(Me.Label44)
+        Me.GroupBox5.Controls.Add(Me.lblwildfirestatus)
+        Me.GroupBox5.Controls.Add(Me.btn_WildfireStart)
+        Me.GroupBox5.Location = New System.Drawing.Point(356, 14)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(204, 102)
+        Me.GroupBox5.TabIndex = 24
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "PANW Wildfire Sim"
+        '
+        'panw_sim_port
+        '
+        Me.panw_sim_port.Location = New System.Drawing.Point(102, 23)
+        Me.panw_sim_port.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
+        Me.panw_sim_port.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.panw_sim_port.Name = "panw_sim_port"
+        Me.panw_sim_port.Size = New System.Drawing.Size(96, 20)
+        Me.panw_sim_port.TabIndex = 24
+        Me.panw_sim_port.Value = New Decimal(New Integer() {8449, 0, 0, 0})
+        '
+        'Label44
+        '
+        Me.Label44.AutoSize = True
+        Me.Label44.Location = New System.Drawing.Point(6, 25)
+        Me.Label44.Name = "Label44"
+        Me.Label44.Size = New System.Drawing.Size(87, 13)
+        Me.Label44.TabIndex = 23
+        Me.Label44.Text = "Wildfire Sim Port:"
+        '
+        'lblwildfirestatus
+        '
+        Me.lblwildfirestatus.AutoSize = True
+        Me.lblwildfirestatus.Location = New System.Drawing.Point(18, 82)
+        Me.lblwildfirestatus.Name = "lblwildfirestatus"
+        Me.lblwildfirestatus.Size = New System.Drawing.Size(155, 13)
+        Me.lblwildfirestatus.TabIndex = 22
+        Me.lblwildfirestatus.Text = "Wildfire Sim Status: Not Started"
+        '
+        'btn_WildfireStart
+        '
+        Me.btn_WildfireStart.Location = New System.Drawing.Point(32, 51)
+        Me.btn_WildfireStart.Name = "btn_WildfireStart"
+        Me.btn_WildfireStart.Size = New System.Drawing.Size(131, 23)
+        Me.btn_WildfireStart.TabIndex = 21
+        Me.btn_WildfireStart.Text = "Start Wildfire Sim"
+        Me.btn_WildfireStart.UseVisualStyleBackColor = True
         '
         'panwPort
         '
@@ -1607,7 +1756,7 @@ Partial Class Main
         '
         Me.cmbPANWAlert.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbPANWAlert.FormattingEnabled = True
-        Me.cmbPANWAlert.Items.AddRange(New Object() {"VIRUS", "FILE", "FLOOD", "URL"})
+        Me.cmbPANWAlert.Items.AddRange(New Object() {"WILDFIRE", "VIRUS", "FILE", "FLOOD", "URL"})
         Me.cmbPANWAlert.Location = New System.Drawing.Point(130, 67)
         Me.cmbPANWAlert.Name = "cmbPANWAlert"
         Me.cmbPANWAlert.Size = New System.Drawing.Size(176, 21)
@@ -1640,10 +1789,11 @@ Partial Class Main
         '
         'tabXPS
         '
+        Me.tabXPS.Controls.Add(Me.lblXPSStatus)
         Me.tabXPS.Controls.Add(Me.txtXPSMalware)
         Me.tabXPS.Controls.Add(Me.Label42)
         Me.tabXPS.Controls.Add(Me.PictureBox1)
-        Me.tabXPS.Controls.Add(Me.TextBox3)
+        Me.tabXPS.Controls.Add(Me.txtXPSSIM)
         Me.tabXPS.Controls.Add(Me.txtFELink2)
         Me.tabXPS.Controls.Add(Me.Label39)
         Me.tabXPS.Controls.Add(Me.GroupBox3)
@@ -1657,10 +1807,20 @@ Partial Class Main
         Me.tabXPS.Location = New System.Drawing.Point(4, 25)
         Me.tabXPS.Name = "tabXPS"
         Me.tabXPS.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabXPS.Size = New System.Drawing.Size(628, 546)
+        Me.tabXPS.Size = New System.Drawing.Size(628, 566)
         Me.tabXPS.TabIndex = 6
         Me.tabXPS.Text = "XPS"
         Me.tabXPS.UseVisualStyleBackColor = True
+        '
+        'lblXPSStatus
+        '
+        Me.lblXPSStatus.AutoSize = True
+        Me.lblXPSStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblXPSStatus.Location = New System.Drawing.Point(33, 154)
+        Me.lblXPSStatus.Name = "lblXPSStatus"
+        Me.lblXPSStatus.Size = New System.Drawing.Size(85, 16)
+        Me.lblXPSStatus.TabIndex = 30
+        Me.lblXPSStatus.Text = "lblXPSStatus"
         '
         'txtXPSMalware
         '
@@ -1689,23 +1849,23 @@ Partial Class Main
         Me.PictureBox1.TabIndex = 27
         Me.PictureBox1.TabStop = False
         '
-        'TextBox3
+        'txtXPSSIM
         '
-        Me.TextBox3.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox3.Location = New System.Drawing.Point(355, 122)
-        Me.TextBox3.Multiline = True
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.ReadOnly = True
-        Me.TextBox3.Size = New System.Drawing.Size(204, 187)
-        Me.TextBox3.TabIndex = 26
-        Me.TextBox3.Text = resources.GetString("TextBox3.Text")
+        Me.txtXPSSIM.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtXPSSIM.Location = New System.Drawing.Point(355, 122)
+        Me.txtXPSSIM.Multiline = True
+        Me.txtXPSSIM.Name = "txtXPSSIM"
+        Me.txtXPSSIM.ReadOnly = True
+        Me.txtXPSSIM.Size = New System.Drawing.Size(204, 187)
+        Me.txtXPSSIM.TabIndex = 26
+        Me.txtXPSSIM.Text = resources.GetString("txtXPSSIM.Text")
         '
         'txtFELink2
         '
         Me.txtFELink2.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtFELink2.Cursor = System.Windows.Forms.Cursors.Hand
         Me.txtFELink2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFELink2.Location = New System.Drawing.Point(29, 214)
+        Me.txtFELink2.Location = New System.Drawing.Point(29, 223)
         Me.txtFELink2.Name = "txtFELink2"
         Me.txtFELink2.ReadOnly = True
         Me.txtFELink2.Size = New System.Drawing.Size(320, 13)
@@ -1716,7 +1876,7 @@ Partial Class Main
         'Label39
         '
         Me.Label39.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label39.Location = New System.Drawing.Point(33, 173)
+        Me.Label39.Location = New System.Drawing.Point(33, 182)
         Me.Label39.Name = "Label39"
         Me.Label39.Size = New System.Drawing.Size(300, 38)
         Me.Label39.TabIndex = 24
@@ -1735,6 +1895,25 @@ Partial Class Main
         Me.GroupBox3.TabIndex = 23
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "XPS CP Sim"
+        '
+        'xps_sim_Port
+        '
+        Me.xps_sim_Port.Location = New System.Drawing.Point(102, 23)
+        Me.xps_sim_Port.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
+        Me.xps_sim_Port.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.xps_sim_Port.Name = "xps_sim_Port"
+        Me.xps_sim_Port.Size = New System.Drawing.Size(96, 20)
+        Me.xps_sim_Port.TabIndex = 24
+        Me.xps_sim_Port.Value = New Decimal(New Integer() {8448, 0, 0, 0})
+        '
+        'Label43
+        '
+        Me.Label43.AutoSize = True
+        Me.Label43.Location = New System.Drawing.Point(6, 25)
+        Me.Label43.Name = "Label43"
+        Me.Label43.Size = New System.Drawing.Size(90, 13)
+        Me.Label43.TabIndex = 23
+        Me.Label43.Text = "XPS CP Sim Port:"
         '
         'lbldemoxpsstatus
         '
@@ -1821,7 +2000,7 @@ Partial Class Main
         Me.tabAbout.Controls.Add(Me.TextBox1)
         Me.tabAbout.Location = New System.Drawing.Point(4, 25)
         Me.tabAbout.Name = "tabAbout"
-        Me.tabAbout.Size = New System.Drawing.Size(628, 546)
+        Me.tabAbout.Size = New System.Drawing.Size(628, 566)
         Me.tabAbout.TabIndex = 3
         Me.tabAbout.Text = "About"
         Me.tabAbout.UseVisualStyleBackColor = True
@@ -1836,7 +2015,7 @@ Partial Class Main
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(628, 546)
+        Me.TextBox1.Size = New System.Drawing.Size(628, 566)
         Me.TextBox1.TabIndex = 0
         Me.TextBox1.Text = resources.GetString("TextBox1.Text")
         '
@@ -1852,55 +2031,21 @@ Partial Class Main
         Me.sfdBox.Filter = "Box Files|*.json"
         Me.sfdBox.InitialDirectory = "My.Application.Info.DirectoryPath & ""\BoxedJobs"""
         '
-        'StatusStrip1
-        '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.statuslabel})
-        Me.StatusStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 553)
-        Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(636, 22)
-        Me.StatusStrip1.SizingGrip = False
-        Me.StatusStrip1.TabIndex = 24
-        Me.StatusStrip1.Text = "StatusStrip1"
-        '
-        'statuslabel
-        '
-        Me.statuslabel.Font = New System.Drawing.Font("Tahoma", 10.0!)
-        Me.statuslabel.Name = "statuslabel"
-        Me.statuslabel.Size = New System.Drawing.Size(71, 17)
-        Me.statuslabel.Spring = True
-        Me.statuslabel.Text = "statuslabel"
-        '
         'bgwork_xpslisten
         '
         Me.bgwork_xpslisten.WorkerReportsProgress = True
         Me.bgwork_xpslisten.WorkerSupportsCancellation = True
         '
-        'Label43
+        'bgwork_panwlisten
         '
-        Me.Label43.AutoSize = True
-        Me.Label43.Location = New System.Drawing.Point(6, 25)
-        Me.Label43.Name = "Label43"
-        Me.Label43.Size = New System.Drawing.Size(90, 13)
-        Me.Label43.TabIndex = 23
-        Me.Label43.Text = "XPS CP Sim Port:"
-        '
-        'xps_sim_Port
-        '
-        Me.xps_sim_Port.Location = New System.Drawing.Point(102, 23)
-        Me.xps_sim_Port.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
-        Me.xps_sim_Port.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.xps_sim_Port.Name = "xps_sim_Port"
-        Me.xps_sim_Port.Size = New System.Drawing.Size(96, 20)
-        Me.xps_sim_Port.TabIndex = 24
-        Me.xps_sim_Port.Value = New Decimal(New Integer() {8448, 0, 0, 0})
+        Me.bgwork_panwlisten.WorkerReportsProgress = True
+        Me.bgwork_panwlisten.WorkerSupportsCancellation = True
         '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(636, 575)
-        Me.Controls.Add(Me.StatusStrip1)
+        Me.ClientSize = New System.Drawing.Size(636, 595)
         Me.Controls.Add(Me.tabMenu)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -1954,24 +2099,26 @@ Partial Class Main
         Me.tabMenu.ResumeLayout(False)
         Me.tabSettings.ResumeLayout(False)
         Me.tabJobExecution.ResumeLayout(False)
+        Me.tabJobExecution.PerformLayout()
         Me.tabFireEye.ResumeLayout(False)
         Me.tabFireEye.PerformLayout()
         Me.tabPANW.ResumeLayout(False)
         Me.tabPANW.PerformLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox5.ResumeLayout(False)
+        Me.GroupBox5.PerformLayout()
+        CType(Me.panw_sim_port, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.panwPort, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabXPS.ResumeLayout(False)
         Me.tabXPS.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
+        CType(Me.xps_sim_Port, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.xpsPort, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabAbout.ResumeLayout(False)
         Me.tabAbout.PerformLayout()
-        Me.StatusStrip1.ResumeLayout(False)
-        Me.StatusStrip1.PerformLayout()
-        CType(Me.xps_sim_Port, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents btnExecute As System.Windows.Forms.Button
@@ -2098,8 +2245,7 @@ Partial Class Main
     Friend WithEvents btn_FEEvent As System.Windows.Forms.Button
     Friend WithEvents txtFETarget As System.Windows.Forms.TextBox
     Friend WithEvents Label33 As System.Windows.Forms.Label
-    Friend WithEvents StatusStrip1 As System.Windows.Forms.StatusStrip
-    Friend WithEvents statuslabel As System.Windows.Forms.ToolStripStatusLabel
+
     Friend WithEvents tabPANW As System.Windows.Forms.TabPage
     Friend WithEvents btnPANWSend As System.Windows.Forms.Button
     Friend WithEvents Label34 As System.Windows.Forms.Label
@@ -2134,11 +2280,25 @@ Partial Class Main
     Friend WithEvents lbldemoxpsstatus As System.Windows.Forms.Label
     Friend WithEvents txtFELink2 As System.Windows.Forms.TextBox
     Friend WithEvents Label39 As System.Windows.Forms.Label
-    Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
+    Friend WithEvents txtXPSSIM As System.Windows.Forms.TextBox
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
     Friend WithEvents txtXPSMalware As System.Windows.Forms.TextBox
     Friend WithEvents Label42 As System.Windows.Forms.Label
     Friend WithEvents xps_sim_Port As System.Windows.Forms.NumericUpDown
     Friend WithEvents Label43 As System.Windows.Forms.Label
+    Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
+    Friend WithEvents panw_sim_port As System.Windows.Forms.NumericUpDown
+    Friend WithEvents Label44 As System.Windows.Forms.Label
+    Friend WithEvents lblwildfirestatus As System.Windows.Forms.Label
+    Friend WithEvents btn_WildfireStart As System.Windows.Forms.Button
+    Friend WithEvents bgwork_panwlisten As System.ComponentModel.BackgroundWorker
+    Friend WithEvents lblXPSStatus As System.Windows.Forms.Label
+    Friend WithEvents lblPANWStatus As System.Windows.Forms.Label
+    Friend WithEvents lblFEStatus As System.Windows.Forms.Label
+    Friend WithEvents lblJobStatus As System.Windows.Forms.Label
+    Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
+    Friend WithEvents txtPANWSim As System.Windows.Forms.TextBox
+    Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
+    Friend WithEvents Label45 As System.Windows.Forms.Label
 
 End Class

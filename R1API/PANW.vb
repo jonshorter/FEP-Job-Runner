@@ -66,8 +66,8 @@ Module PANW
         Public Property P41Content_Type = ""
         Public Property P42PCAP_ID = ""
         '43 MD5
-        Public Property P43Filedigest = "943c1eb59d2179a5e6fbef1a4124c154"
-        Public Property P44Cloud = "ca-s1.wildfire.paloaltonetworks.com"
+        Public Property P43Filedigest = "47f9fdc617f8c98a6732be534d8dbe9a"
+        Public Property P44Cloud = "wildfire.paloaltonetworks.com"
     End Class
 
     Public Function ThreatTOCSV(threat As PANWThreat) As String
@@ -106,9 +106,9 @@ Module PANW
             bytCommand = Encoding.ASCII.GetBytes(PANWEvent)
             Dim pRet = udpClient.Send(bytCommand, bytCommand.Length)
             Console.WriteLine("No of bytes sent " & pRet)
-            Main.statuslabel.Text = "PANW Syslog Threat Event Sent"
+            Main.lblPANWStatus.Text = "PANW Syslog Threat Event Sent"
         Catch ex As Exception
-            Main.statuslabel.Text = ex.Message
+            Main.lblPANWStatus.Text = ex.Message
             Debug.WriteLine(ex.Message)
         End Try
     End Sub
