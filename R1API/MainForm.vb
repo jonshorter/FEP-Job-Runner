@@ -1,4 +1,5 @@
 ﻿Imports System.Net
+Imports System.Security
 
 
 Public Class Main
@@ -14,6 +15,9 @@ Public Class Main
     Public autojobs
     Public xpsbg_listen
     Public panwbg_listen
+    'SecureString for API Password
+    Public apipass As SecureString
+
 
 
 
@@ -89,11 +93,8 @@ Public Class Main
             processnames.Add(item)
         Next
 
-
         'Kick off the job
-        Jobs.RunFromTemplateName(txtServer.Text, templatename, txtJobName.Text, txtProjectName.Text, txtApiUser.Text, txtAPIPass.Text, cnames, snames, filter, pids, processnames, remediatesendfile, remediateexecute, remediateerase)
-
-
+        Jobs.RunFromTemplateName(txtServer.Text, templatename, txtJobName.Text, txtProjectName.Text, txtApiUser.Text, ToInsecureString(apipass), cnames, snames, filter, pids, processnames, remediatesendfile, remediateexecute, remediateerase)
 
     End Sub
 
@@ -176,6 +177,10 @@ Public Class Main
             My.Settings.templatename.Add("Vol-Quick")
             My.Settings.templatename.Add("Vol-Quick-Cerb")
             My.Settings.templatename.Add("Vol-Quick-Sched")
+
+            'Set Blank Password
+            My.Settings.apipassword = EncryptString(ToSecureString(""))
+
             'Turn first run off
             My.Settings.firstrun = False
             My.Settings.Save()
@@ -202,7 +207,8 @@ Public Class Main
         txtComputerTarget.Text = txtdefaultcomputer.Text
         txtdefaultshare.Text = My.Settings.defaultshare
         txtNetSharePath.Text = txtdefaultshare.Text
-        txtAPIPass.Text = My.Settings.apipassword
+        apipass = DecryptString(My.Settings.apipassword)
+        txtAPIPass.Text = apipass.ToString
         txtApiUser.Text = My.Settings.apiusername
         txtDefaultJobName.Text = My.Settings.jobname
         txtJobName.Text = txtDefaultJobName.Text
@@ -270,7 +276,18 @@ Public Class Main
         My.Settings.defaultcomputer = txtdefaultcomputer.Text
         My.Settings.defaultshare = txtdefaultshare.Text
         My.Settings.apiusername = txtApiUser.Text
-        My.Settings.apipassword = txtAPIPass.Text
+        'My.Settings.apipassword = txtAPIPass.Text
+        'My.Settings.apipassword = EncryptString(ToSecureString(txtAPIPass.Text))
+        If Not txtAPIPass.Text = apipass.ToString Then
+            Dim ppass = MsgBox("Save New Password?", MsgBoxStyle.YesNo, "Save Password")
+            If ppass = MsgBoxResult.Yes Then
+                My.Settings.apipassword = EncryptString(ToSecureString(txtAPIPass.Text))
+                Me.apipass = DecryptString(My.Settings.apipassword)
+                txtAPIPass.Text = apipass.ToString
+            Else
+                txtAPIPass.Text = apipass.ToString
+            End If
+        End If
         My.Settings.jobname = txtDefaultJobName.Text
         My.Settings.projectname = txtDefaultProjectName.Text
         My.Settings.webserver = txtServer.Text
@@ -294,6 +311,7 @@ Public Class Main
 
     Private Sub tabSettings_Enter(sender As Object, e As EventArgs) Handles tabSettings.Enter
         'Clear the text when the tab is entered
+        txtAPIPass.Text = apipass.ToString
         txtStatusSettings.Text = ""
     End Sub
 
@@ -1204,7 +1222,7 @@ Public Class Main
     Private Sub btnStartXPSListener_Click(sender As Object, e As EventArgs) Handles btnStartXPSListener.Click
 
         If bgwork_xpslisten.IsBusy = True Then
-        
+
             Try
                 bgwork_xpslisten.CancelAsync()
                 Dim stoplistener As HttpWebRequest = HttpWebRequest.Create("https://" & My.Computer.Name.ToString & ":" & xps_sim_Port.Value & "/query?QUIT=STOP")
@@ -1327,7 +1345,7 @@ Public Class Main
     End Sub
 
     Private Sub bgwork_xpslisten_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwork_xpslisten.ProgressChanged
-  
+
     End Sub
 
     Private Sub bgwork_xpslisten_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwork_xpslisten.RunWorkerCompleted
@@ -1403,8 +1421,20 @@ Public Class Main
                             Dim reader As System.IO.StreamReader = New System.IO.StreamReader(body, encoding)
                             Dim fullbody As String = reader.ReadToEnd
                             Dim var() = fullbody.Split("&")
+                            Dim varapikey As String = ""
+                            Dim varmd5hash As String = ""
+                            For Each item In var
+                                Select Case True
+                                    Case item.Contains("apikey")
+                                        varapikey = item.Split("=")(1)
+                                    Case item.Contains("md5")
+                                        varmd5hash = item.Split("=")(1)
+                                End Select
+
+                            Next
                             'If the API key is our default give 401 Unauthorized
-                            If var(1) = "apikey=abcdef0123456789fedcba9876543210" Then
+                            '     If var(1) = "apikey=abcdef0123456789fedcba9876543210" Then
+                            If varapikey = "abcdef0123456789fedcba9876543210" Then
                                 'Configuration request
                                 response = context.Response
                                 response.StatusCode = 401
@@ -1413,7 +1443,8 @@ Public Class Main
                                 response.ContentLength64 = buffer.Length
                                 output = response.OutputStream
                                 output.Write(buffer, 0, buffer.Length)
-                            ElseIf var(0) = "47f9fdc617f8c98a6732be534d8dbe9a" Then
+                                '   ElseIf var(0) = "47f9fdc617f8c98a6732be534d8dbe9a" Then
+                            ElseIf varmd5hash = "47f9fdc617f8c98a6732be534d8dbe9a" Then
                                 'MD5 = FE Infection provide FE report
                                 'Report request
                                 response = context.Response
@@ -1503,28 +1534,11 @@ Public Class Main
         panw_sim_port.Enabled = True
     End Sub
 
-    Private Sub StatusStrip1_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs)
-
-    End Sub
-
-    Private Sub txtFELink2_TextChanged(sender As Object, e As EventArgs) Handles txtFELink2.TextChanged
-
-    End Sub
 
     Private Sub TextBox4_Click(sender As Object, e As EventArgs) Handles TextBox4.Click
         Dim sinfo As New ProcessStartInfo(txtFELink.Text)
         Process.Start(sinfo)
     End Sub
 
-    Private Sub TextBox4_TextChanged(sender As Object, e As EventArgs) Handles TextBox4.TextChanged
 
-    End Sub
-
-    Private Sub tabXPS_Click(sender As Object, e As EventArgs) Handles tabXPS.Click
-
-    End Sub
-
-    Private Sub tabPANW_Click(sender As Object, e As EventArgs) Handles tabPANW.Click
-
-    End Sub
 End Class

@@ -24,6 +24,7 @@ Module XPSListener
             Debug.WriteLine("netsh http add sslcert ipport=0.0.0.0:" & Main.xps_sim_Port.Value & " certhash=" & certload.GetCertHashString & " appid={" & appguid & "}")
             Dim netshprocStartInfo As New ProcessStartInfo("cmd.exe", "/c netsh http add sslcert ipport=0.0.0.0:" & Main.xps_sim_Port.Value & " certhash=" & certload.GetCertHashString & " appid={" & appguid & "}")
             netshprocStartInfo.WindowStyle = ProcessWindowStyle.Hidden
+            netshprocStartInfo.CreateNoWindow = True
             netshprocStartInfo.UseShellExecute = False
             netshprocStartInfo.RedirectStandardError = True
             netshprocStartInfo.RedirectStandardOutput = True
@@ -46,6 +47,7 @@ Module XPSListener
             Dim netshprocStartInfo As New ProcessStartInfo("cmd.exe", "/c netsh http delete sslcert ipport=0.0.0.0:" & Main.xps_sim_Port.Value)
             netshprocStartInfo.WindowStyle = ProcessWindowStyle.Hidden
             netshprocStartInfo.UseShellExecute = False
+            netshprocStartInfo.CreateNoWindow = True
             netshprocStartInfo.RedirectStandardError = True
             netshprocStartInfo.RedirectStandardOutput = True
             netshproc.StartInfo = netshprocStartInfo

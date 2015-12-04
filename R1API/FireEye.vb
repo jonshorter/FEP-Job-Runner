@@ -121,13 +121,13 @@ Module FireEye
 
             request = HttpWebRequest.Create("https://" & Main.txtServer.Text & "/" & My.Settings.websitepath & "/ThirdPartyIntegration/ThirdPartyIntegrationHandler/FireEye")
          
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
+            '    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
 
             request.ContentType = "text/json"
             request.Method = "POST"
             request.Accept = "text/json"
             'Set basic auth details
-            Dim credsend As String = "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(Main.txtApiUser.Text & ":" & Main.txtAPIPass.Text))
+            Dim credsend As String = "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(Main.txtApiUser.Text & ":" & ToInsecureString(Main.apipass)))
             request.Headers.Add("Authorization", credsend)
             'Send request
             Using sw As New StreamWriter(request.GetRequestStream)
