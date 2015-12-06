@@ -1110,7 +1110,11 @@ Public Class Main
     Private Sub btn_FEEvent_Click(sender As Object, e As EventArgs) Handles btn_FEEvent.Click
         Try
             ResetStatusBar()
-            Dim fevent = FireEye.GenerateFEEvent(cmbFEAlertType.Text)
+            Dim fevent As FireEye.FireEye_Event = FireEye.GenerateFEEvent(cmbFEAlertType.Text)
+            'If the MD5 provided isnt blank, use it. Otherwise it defaults to the FETest MD5.
+            If Not String.IsNullOrWhiteSpace(txtFireEyeMalwareMD5.Text) Then
+                fevent.alert.explanation.malwaredetected.malware.md5sum = Me.txtFireEyeMalwareMD5.Text
+            End If
             FireEye.SendEvent(FireEye.FEventtoJson(fevent))
         Catch ex As Exception
             Debug.WriteLine(ex.Message)
@@ -1123,6 +1127,9 @@ Public Class Main
             Dim panwthreat As New PANW.PANWThreat
             panwthreat.P8Destination_IP = txtPANWTarget.Text
             panwthreat.P4Subtype = cmbPANWAlert.Text.ToLower
+            If Not String.IsNullOrWhiteSpace(txtPANWMalwareMD5.Text) Then
+                panwthreat.P43Filedigest = txtPANWMalwareMD5.Text
+            End If
             Dim panwtstr As String = PANW.ThreatTOCSV(panwthreat)
             PANW.SendEvent(panwtstr)
         Catch ex As Exception
@@ -1313,15 +1320,17 @@ Public Class Main
                             output.Write(buffer, 0, buffer.Length)
                         Else
                             'Response for report query
-
                             response = context.Response
-                            IO.File.WriteAllBytes("analysis.json", My.Resources.analysis)
-                            Debug.WriteLine(IO.File.ReadAllText("analysis.json"))
-                            buffer = System.Text.Encoding.UTF8.GetBytes(IO.File.ReadAllText("analysis.json"))
+                            If Not String.IsNullOrWhiteSpace(txtFireEyeMalwareMD5.Text) Then
+                                'Use Specified MD5
+                                buffer = System.Text.Encoding.UTF8.GetBytes(XPS.XPS_MDE_Response_ToJSON(XPS.GenerateXPS_MDE_Response(Me.txtXPSMalwareMD5.Text)))
+                            Else
+                                'Else use FETest MD5
+                                buffer = System.Text.Encoding.UTF8.GetBytes(XPS.XPS_MDE_Response_ToJSON(XPS.GenerateXPS_MDE_Response("47f9fdc617f8c98a6732be534d8dbe9a")))
+                            End If
                             response.ContentLength64 = buffer.Length
                             output = response.OutputStream
                             output.Write(buffer, 0, buffer.Length)
-                            IO.File.Delete("analysis.json")
                         End If
 
                     End If
@@ -1423,7 +1432,7 @@ Public Class Main
                             Dim var() = fullbody.Split("&")
                             Dim varapikey As String = ""
                             Dim varmd5hash As String = ""
-                            For Each item In var
+                            For Each item In var 'Split out variables
                                 Select Case True
                                     Case item.Contains("apikey")
                                         varapikey = item.Split("=")(1)
@@ -1432,8 +1441,8 @@ Public Class Main
                                 End Select
 
                             Next
-                            'If the API key is our default give 401 Unauthorized
-                            '     If var(1) = "apikey=abcdef0123456789fedcba9876543210" Then
+                            'If the API key is the R1 test key give 401 Unauthorized
+
                             If varapikey = "abcdef0123456789fedcba9876543210" Then
                                 'Configuration request
                                 response = context.Response
@@ -1443,27 +1452,9 @@ Public Class Main
                                 response.ContentLength64 = buffer.Length
                                 output = response.OutputStream
                                 output.Write(buffer, 0, buffer.Length)
-                                '   ElseIf var(0) = "47f9fdc617f8c98a6732be534d8dbe9a" Then
-                            ElseIf varmd5hash = "47f9fdc617f8c98a6732be534d8dbe9a" Then
-                                'MD5 = FE Infection provide FE report
-                                'Report request
-                                response = context.Response
-                                response.StatusCode = 200
-                                response.StatusDescription = "OK"
-                                response.ContentType = "text/xml; charset=utf-8"
-                                response.ContentEncoding = System.Text.Encoding.UTF8
-                                response.KeepAlive = True
-                                response.SendChunked = True
-                                IO.File.WriteAllBytes("wildfire_fe.response", My.Resources.wildfire_fetest)
-                                '        Debug.WriteLine(IO.File.ReadAllText("analysis.json"))
-                                buffer = System.Text.Encoding.UTF8.GetBytes(IO.File.ReadAllText("wildfire_fe.response"))
-                                response.ContentLength64 = buffer.Length
-                                output = response.OutputStream
-                                output.Write(buffer, 0, buffer.Length)
-                                IO.File.Delete("wildfire_fe.response")
                             Else
-                                'Else provide sample report
-                                'Report request
+                                'Provide a report containing whatever MD5 is requested from R1
+
                                 response = context.Response
                                 response.StatusCode = 200
                                 response.StatusDescription = "OK"
@@ -1471,13 +1462,11 @@ Public Class Main
                                 response.ContentEncoding = System.Text.Encoding.UTF8
                                 response.KeepAlive = True
                                 response.SendChunked = True
-                                IO.File.WriteAllBytes("wildfire.response", My.Resources.wildfire)
-                                '        Debug.WriteLine(IO.File.ReadAllText("analysis.json"))
-                                buffer = System.Text.Encoding.UTF8.GetBytes(IO.File.ReadAllText("wildfire.response"))
+                                buffer = System.Text.Encoding.UTF8.GetBytes(PANW.PANWResponseToXML(PANW.GeneratePANWResponse(varmd5hash)))
                                 response.ContentLength64 = buffer.Length
                                 output = response.OutputStream
                                 output.Write(buffer, 0, buffer.Length)
-                                IO.File.Delete("wildfire.response")
+                     
 
                             End If
                         End If
@@ -1541,4 +1530,11 @@ Public Class Main
     End Sub
 
 
+    Private Sub Label37_Click(sender As Object, e As EventArgs) Handles Label37.Click
+
+    End Sub
+
+    Private Sub Button1_Click_2(sender As Object, e As EventArgs)
+        MsgBox(PANW.PANWResponseToXML(PANW.GeneratePANWResponse("ssdfsdfds")))
+    End Sub
 End Class

@@ -148,7 +148,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="analysis.json" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -162,8 +161,6 @@
     <None Include="App.config" />
     <None Include="panw_listen_certificate.pfx" />
     <None Include="Service References\JobsService\JobsService.wsdl" />
-    <None Include="wildfire.response" />
-    <None Include="wildfire_fetest.response" />
     <None Include="xps_listen_certificate.pfx" />
   </ItemGroup>
   <ItemGroup>

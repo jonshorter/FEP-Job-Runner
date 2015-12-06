@@ -2,8 +2,9 @@
 Imports System.Text
 Imports System.IO
 Imports System.Net.Sockets
+Imports System.Xml.Serialization
 
-Module PANW
+Public Module PANW
 
     Public Class PANWThreat
         'Possible Date
@@ -83,14 +84,14 @@ Module PANW
                 Case "P44Cloud"
                     Dim value As String = Convert.ToString(field.GetValue(threat))
                     sb.Append(value)
-          
+
                 Case Else
                     Dim value As String = Convert.ToString(field.GetValue(threat))
                     sb.Append(value)
                     '... followed by the separator
                     sb.Append(separator)
             End Select
-  
+
         Next
 
         Return sb.ToString()
@@ -113,6 +114,93 @@ Module PANW
         End Try
     End Sub
 
+    Public Class wildfire
+        Public Property version As String = "2.0"
+        Public Property file_info As New wildfire_fileinfo
+        Public Property task_info As New wildfire_taskinfo
+    End Class
+    Public Class wildfire_fileinfo
+        Public Property sha1 As String = ""
+        Public Property sha256 As String = ""
+        Public Property md5 As String = "47f9fdc617f8c98a6732be534d8dbe9a"
+        Public Property filetype As String = "PE"
+        Public Property size As Integer = 28672
+        Public Property malware As String = "yes"
+    End Class
+    Public Class wildfire_taskinfo
+        Public Property report As New wildfire_taskinfo_report
+    End Class
 
+    Public Class wildfire_taskinfo_report
+        Public Property version As String = "0.1"
+        Public Property task As String = "71286573"
+        Public Property sha256 As String = ""
+        Public Property md5 As String = "47f9fdc617f8c98a6732be534d8dbe9a"
+        Public Property malware As String = "yes"
+        Public Property summary As New wildfire_taskinfo_report_summary
+        Public Property process As New wildfire_taskinfo_report_process
+        Public Property file
+        Public Property registry
+        Public Property network As New wildfire_taskinfo_report_network
+    End Class
+    Public Class wildfire_taskinfo_report_summary
+        Public Property entry As String = "Spawned new processess"
+    End Class
+    Public Class wildfire_taskinfo_report_process
+        Public Property process_created As String = ""
+        Public Property process_created_child_pid As String = ""
+        Public Property process_created_child_process_image As String = ""
+        Public Property process_created_parent_pid As String = ""
+        Public Property process_created_parent_process_image As String = ""
+        Public Property process_terminated As String = ""
+        Public Property process_terminated_child_pid As String = ""
+        Public Property process_terminated_child_process_image As String = ""
+        Public Property process_terminated_parent_pid As String = ""
+        Public Property process_terminated_parent_process_image As String = ""
+    End Class
+    Public Class wildfire_taskinfo_report_network
+        Public Property tcpconnection As String = ""
+        Public Property tcpconnection_ip As String = ""
+        Public Property tcpconnection_pid As String = ""
+        Public Property tcpconnection_port As String = ""
+        Public Property tcpconnection_process_image As String = ""
+        Public Property dns As String = ""
+        Public Property dns_query As String = ""
+        Public Property dns_type As String = ""
+        Public Property url As String = ""
+        Public Property url_host As String = ""
+        Public Property url_method As String = ""
+        Public Property url_uri As String = ""
+        Public Property url_user_agent As String = ""
+    End Class
+    Public Function GeneratePANWResponse(ByVal CustomMD5 As String)
+        'Create a new default event
+        Dim panw_response As New wildfire
+
+        panw_response.file_info.md5 = CustomMD5
+        panw_response.task_info.report.md5 = CustomMD5
+
+        Return panw_response
+    End Function
+
+    Public Function PANWResponseToXML(ByVal PANWResponse As wildfire)
+        'Convert to JSON from FEEvent
+        Dim xstr As String
+        Dim xser As New XmlSerializer(GetType(PANW.wildfire))
+
+        Using txtWriter As New StringWriter
+            Using xWriter As Xml.XmlWriter = Xml.XmlWriter.Create(txtWriter)
+                xser.Serialize(xWriter, PANWResponse)
+            End Using
+            xstr = txtWriter.ToString
+        End Using
+
+        'Fix messed up headers
+        xstr = xstr.Replace("tcpconnection", "tcp-connection")
+
+
+
+        Return xstr
+    End Function
 
 End Module

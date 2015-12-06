@@ -2,6 +2,7 @@
 Imports System.Text
 Imports System.IO
 Imports System.Net.Sockets
+Imports Newtonsoft.Json
 
 Module XPS
 
@@ -34,8 +35,8 @@ Module XPS
 
 
         For Each field In threatfields
-         
-                    Dim value As String = Convert.ToString(field.GetValue(threat))
+
+            Dim value As String = Convert.ToString(field.GetValue(threat))
             Select Case field.Name
                 '  Case "Time"
                 '     sb.Append(Format("yyyy-mm-dd HH:mm:ss tt", value))
@@ -71,6 +72,261 @@ Module XPS
 
     End Sub
 
+    Public Class XPSAlert
+        Public metadata As New XPSAlert_Metadata
+        Public warnings As New XPSAlert_Warnings
+        Public iocs As New XPSAlert_Iocs
+        Public dynamic As New XPSAlert_Dynamic
+        Public network As New XPSAlert_Network
+        Public artifacts As New XPSAlert_Artifacts
+        Public disk As New XPSAlert_Disk
+        Public annotations As New XPSAlert_Annotations
+        Public version As Integer = 2
+    End Class
 
+    Public Class XPSAlert_Metadata
+        Public general_details As New XPSAlert_Metadata_GeneralDetails
+        Public sandcastle_env As New XPSAlert_Metadata_Sandcastle
+        Public malware_desc As New List(Of XPSAlert_Metadata_MalwareDesc)
+    End Class
+
+    Public Class XPSAlert_Metadata_GeneralDetails
+        Public sandbox_version As String = "pilot-d"
+        Public report_created As Long = 1445331205
+        Public sandbox_id As String = "phl-work-19"
+    End Class
+
+    Public Class XPSAlert_Metadata_Sandcastle
+        Public analysis_end As Long = 1445331205
+        Public analysis_start As Long = 1445330785
+        Public run_time As Integer = 420
+        Public sample_executed As Long = 1445330855
+        Public sandcastle As String = "3.4.8.7553.e23eb1d-1"
+        Public current_os As String = "2600.xpsp.080413-2111"
+        Public controlsubject As String = "winxp-x86-amd-2015.09.22"
+        Public vm_id As String = "7cbe1d148cfd346d8b8b246ce47f17b1"
+        Public vm As String = "winxp-x86"
+     
+    End Class
+    Public Class XPSAlert_Metadata_MalwareDesc
+        Public filename As String = "0026019878.exe"
+        Public size As Long = 28672
+        Public md5 As String = "47f9fdc617f8c98a6732be534d8dbe9a"
+        Public sha1 As String = "x"
+        Public sha256 As String = "x"
+        Public magic As String = "PE32 executable (console) Intel 80386, for MS Windows"
+        Public type As String = "exe"
+    End Class
+
+    Public Class XPSAlert_Warnings
+        Public Property code As String
+        Public Property title As String
+        Public Property description As String
+        Public Property data As Object()
+    End Class
+
+    Public Class XPSAlert_Iocs
+        Public Property category As String()
+        Public Property hits As Integer
+        Public Property severity As Integer
+        Public Property title As String
+        Public Property data As Datum()
+        Public Property tags As String()
+        Public Property truncated As Boolean
+        Public Property confidence As Integer
+        Public Property ioc As String
+        Public Property description As String
+    End Class
+    Public Class Datum
+        Public Property Query_Data As String
+        Public Property Query_ID As Integer
+        Public Property Answer_Type As String
+        Public Property Answer_Data As String
+        Public Property TTL As Integer
+    End Class
+    Public Class XPSAlert_Dynamic
+        Public Property processes As List(Of XPSAlert_Dynamic_Process)
+
+    End Class
+    Public Class XPSAlert_Dynamic_Process
+        Public Property registry_keys_read As Object()
+        Public Property pid As Integer
+        Public Property kpid As String
+        Public Property runtime_dlls As Object()
+        Public Property files_deleted As Object()
+        Public Property mutants_created As Object()
+        Public Property files_created As Object()
+        Public Property sockets_accepted As Object()
+        Public Property errors As Object()
+        Public Property monitored As Boolean
+        Public Property registry_keys_deleted As Object()
+        Public Property mutants_opened As Object()
+        Public Property memory As Memory()
+        Public Property [new] As Boolean
+        Public Property ppid As Object
+        Public Property proc As Boolean
+        Public Property registry_keys_opened As Object()
+        Public Property parent As Object
+        Public Property startup_info As StartupInfo
+        Public Property process_name As String
+        Public Property sockets_bound As Object()
+        Public Property sockets_connected As Object()
+        Public Property threads As Object()
+        Public Property startup_dlls As Object()
+        Public Property analyzed_because As String
+        Public Property files_modified As Object()
+        Public Property registry_keys_created As Object()
+        Public Property children As Object()
+        Public Property registry_keys_modified As Object()
+        Public Property sockets_listening As Object()
+        Public Property files_read As Object()
+        Public Property time As Object
+    End Class
+    Public Class Entry
+        Public Property size As String
+        Public Property base_address As String
+    End Class
+    Public Class StartupInfo
+        Public Property shell_info As String
+        Public Property desktop_info As String
+        Public Property current_directory As String
+        Public Property command_line As String
+        Public Property upid As Integer
+        Public Property uthread As Integer
+        Public Property image_pathname As String
+        Public Property dll_path As String
+        Public Property runtime_data As String
+        Public Property tid As String
+        Public Property window_title As String
+    End Class
+    Public Class Memory
+        Public Property protect As String()
+        Public Property process As Object
+        Public Property allocation_type As String()
+        Public Property entry As Entry()
+        Public Property zero_bits As Integer
+        Public Property process_handle As String
+    End Class
+    Public Class XPSAlert_Network
+        Public Property network As List(Of network_item)
+    End Class
+    Public Class network_item
+        Public Property protocol As String
+        Public Property packets As Integer
+        Public Property bytes As Integer
+        Public Property ts_begin As Double
+        Public Property ts_end As Double
+        Public Property src As String
+        Public Property src_port As Integer
+        Public Property dst As String
+        Public Property dst_port As Integer
+        Public Property transport As String
+        Public Property decoded As Object
+    End Class
+
+    Public Class XPSAlert_Artifacts
+        Public Property artifacts As List(Of artifact_item)
+    End Class
+    Public Class artifact_item
+        Public Property origin As String = "submitted"
+        Public Property path As String = ""
+        Public Property magictype As String = "PE32 executable (console) Intel 80386, for MS Windows"
+        Public Property mimetype As String = "application/x-dosexec; charset=binary"
+        Public Property type As String = "exe"
+        Public Property antivirus As Antivirus
+        Public Property createdtime As Double = 1445331204.8384709
+        Public Property size As Integer = 28672
+        Public Property sha1 As String = ""
+        Public Property md5 As String = "47f9fdc617f8c98a6732be534d8dbe9a"
+        Public Property sha256 As String = ""
+        Public Property forensics As Forensics
+        Public Property relation As Relation
+        Public Property read_by As Object()
+        Public Property created_by As Object()
+        Public Property modified_by As Object()
+        Public Property executed_from As Object()
+    End Class
+    Public Class Antivirus
+    End Class
+
+    Public Class Forensics
+    End Class
+
+    Public Class Relation
+    End Class
+    Public Class XPSAlert_Disk
+        Public Property mbr As Mbr
+        Public Property partition_tables As PartitionTables
+    End Class
+    Public Class PartitionTables
+        Public Property orig As Orig()
+        Public Property curr As Curr()
+        Public Property changed As Boolean
+        Public Property changes As Changes
+    End Class
+    Public Class Orig
+        Public Property start As Integer
+        Public Property type As Integer
+        Public Property size As Integer
+    End Class
+    Public Class Hashes
+        Public Property orig As Orig
+        Public Property curr As Curr
+    End Class
+
+    Public Class Contents
+        Public Property orig As String
+        Public Property curr As String
+    End Class
+
+    Public Class Mbr
+        Public Property hashes As Hashes
+        Public Property contents As Contents
+        Public Property changed As Boolean
+    End Class
+    Public Class Curr
+        Public Property start As Integer
+        Public Property type As Integer
+        Public Property size As Integer
+    End Class
+
+    Public Class Changes
+    End Class
+    Public Class XPSAlert_Annotations
+        Public Property network As List(Of XPSAlert_Annotations_NetworkItem)
+    End Class
+    Public Class XPSAlert_Annotations_NetworkItem
+        Public Property city As Object
+        Public Property country As Object
+        Public Property region As Object
+        Public Property ts As Double
+        Public Property org As Object
+        Public Property reversedns As Object
+        Public Property asn As Object
+        Public Property tg_structured As Boolean
+    End Class
+
+    Public Function GenerateXPS_MDE_Response(ByVal CustomMD5 As String)
+        'Create a new default event
+        Dim xps_event As New XPSAlert
+        Dim malware As New XPSAlert_Metadata_MalwareDesc
+        xps_event.metadata.malware_desc.Add(malware)
+        xps_event.metadata.malware_desc(0).md5 = CustomMD5
+        Return xps_event
+    End Function
+
+    Public Function XPS_MDE_Response_ToJSON(ByVal XPSAlert As XPS.XPSAlert)
+        'Convert to JSON from FEEvent
+        Dim jstr As String = JsonConvert.SerializeObject(XPSAlert)
+
+        'Fix messed up headers
+        jstr = jstr.Replace("magictype", "magic-type")
+        jstr = jstr.Replace("mimetype", "mime-type")
+        jstr = jstr.Replace("createdtime", "created-time")
+        jstr = jstr.Replace("reversedns", "reverse-dns")
+
+        'Return JSON STring
+        Return jstr
+    End Function
 
 End Module

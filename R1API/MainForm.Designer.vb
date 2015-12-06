@@ -201,6 +201,12 @@ Partial Class Main
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
         Me.bgwork_xpslisten = New System.ComponentModel.BackgroundWorker()
         Me.bgwork_panwlisten = New System.ComponentModel.BackgroundWorker()
+        Me.txtXPSMalwareMD5 = New System.Windows.Forms.TextBox()
+        Me.Label46 = New System.Windows.Forms.Label()
+        Me.txtFireEyeMalwareMD5 = New System.Windows.Forms.TextBox()
+        Me.Label47 = New System.Windows.Forms.Label()
+        Me.txtPANWMalwareMD5 = New System.Windows.Forms.TextBox()
+        Me.Label48 = New System.Windows.Forms.Label()
         Me.GroupBox4.SuspendLayout()
         Me.grpReqSet.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -1635,6 +1641,8 @@ Partial Class Main
         '
         'tabFireEye
         '
+        Me.tabFireEye.Controls.Add(Me.txtFireEyeMalwareMD5)
+        Me.tabFireEye.Controls.Add(Me.Label47)
         Me.tabFireEye.Controls.Add(Me.lblFEStatus)
         Me.tabFireEye.Controls.Add(Me.txtFELink)
         Me.tabFireEye.Controls.Add(Me.Label37)
@@ -1656,7 +1664,7 @@ Partial Class Main
         '
         Me.lblFEStatus.AutoSize = True
         Me.lblFEStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFEStatus.Location = New System.Drawing.Point(56, 128)
+        Me.lblFEStatus.Location = New System.Drawing.Point(56, 162)
         Me.lblFEStatus.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFEStatus.Name = "lblFEStatus"
         Me.lblFEStatus.Size = New System.Drawing.Size(95, 20)
@@ -1668,7 +1676,7 @@ Partial Class Main
         Me.txtFELink.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtFELink.Cursor = System.Windows.Forms.Cursors.Hand
         Me.txtFELink.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFELink.Location = New System.Drawing.Point(33, 213)
+        Me.txtFELink.Location = New System.Drawing.Point(14, 290)
         Me.txtFELink.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFELink.Name = "txtFELink"
         Me.txtFELink.ReadOnly = True
@@ -1679,15 +1687,14 @@ Partial Class Main
         '
         'Label37
         '
-        Me.Label37.AutoSize = True
         Me.Label37.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label37.Location = New System.Drawing.Point(29, 180)
+        Me.Label37.Location = New System.Drawing.Point(8, 211)
         Me.Label37.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label37.Name = "Label37"
-        Me.Label37.Size = New System.Drawing.Size(660, 18)
+        Me.Label37.Size = New System.Drawing.Size(450, 64)
         Me.Label37.TabIndex = 6
         Me.Label37.Text = "To generate a verified hit from a test FireEye ThreatScan download the following " & _
-    "EXE to your target."
+    "EXE to your target, or enter a Custom MD5 Hash above." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         '
         'Label34
         '
@@ -1730,7 +1737,7 @@ Partial Class Main
         '
         'btn_FEEvent
         '
-        Me.btn_FEEvent.Location = New System.Drawing.Point(141, 84)
+        Me.btn_FEEvent.Location = New System.Drawing.Point(141, 118)
         Me.btn_FEEvent.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_FEEvent.Name = "btn_FEEvent"
         Me.btn_FEEvent.Size = New System.Drawing.Size(156, 28)
@@ -1740,6 +1747,8 @@ Partial Class Main
         '
         'tabPANW
         '
+        Me.tabPANW.Controls.Add(Me.txtPANWMalwareMD5)
+        Me.tabPANW.Controls.Add(Me.Label48)
         Me.tabPANW.Controls.Add(Me.PictureBox2)
         Me.tabPANW.Controls.Add(Me.txtPANWSim)
         Me.tabPANW.Controls.Add(Me.TextBox4)
@@ -1789,7 +1798,7 @@ Partial Class Main
         Me.TextBox4.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBox4.Cursor = System.Windows.Forms.Cursors.Hand
         Me.TextBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox4.Location = New System.Drawing.Point(37, 270)
+        Me.TextBox4.Location = New System.Drawing.Point(37, 336)
         Me.TextBox4.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox4.Name = "TextBox4"
         Me.TextBox4.ReadOnly = True
@@ -1801,19 +1810,19 @@ Partial Class Main
         'Label45
         '
         Me.Label45.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label45.Location = New System.Drawing.Point(43, 219)
+        Me.Label45.Location = New System.Drawing.Point(43, 269)
         Me.Label45.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label45.Name = "Label45"
-        Me.Label45.Size = New System.Drawing.Size(400, 47)
+        Me.Label45.Size = New System.Drawing.Size(400, 63)
         Me.Label45.TabIndex = 32
         Me.Label45.Text = "To generate a verified hit from a test PANW" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " ThreatScan download the following E" & _
-    "XE to your target." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+    "XE to your target, or enter a custom MD5 Hash above." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         '
         'lblPANWStatus
         '
         Me.lblPANWStatus.AutoSize = True
         Me.lblPANWStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPANWStatus.Location = New System.Drawing.Point(56, 165)
+        Me.lblPANWStatus.Location = New System.Drawing.Point(56, 215)
         Me.lblPANWStatus.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblPANWStatus.Name = "lblPANWStatus"
         Me.lblPANWStatus.Size = New System.Drawing.Size(124, 20)
@@ -1937,7 +1946,7 @@ Partial Class Main
         '
         'btnPANWSend
         '
-        Me.btnPANWSend.Location = New System.Drawing.Point(173, 116)
+        Me.btnPANWSend.Location = New System.Drawing.Point(173, 150)
         Me.btnPANWSend.Margin = New System.Windows.Forms.Padding(4)
         Me.btnPANWSend.Name = "btnPANWSend"
         Me.btnPANWSend.Size = New System.Drawing.Size(185, 28)
@@ -1947,6 +1956,8 @@ Partial Class Main
         '
         'tabXPS
         '
+        Me.tabXPS.Controls.Add(Me.txtXPSMalwareMD5)
+        Me.tabXPS.Controls.Add(Me.Label46)
         Me.tabXPS.Controls.Add(Me.lblXPSStatus)
         Me.tabXPS.Controls.Add(Me.txtXPSMalware)
         Me.tabXPS.Controls.Add(Me.Label42)
@@ -1975,7 +1986,7 @@ Partial Class Main
         '
         Me.lblXPSStatus.AutoSize = True
         Me.lblXPSStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblXPSStatus.Location = New System.Drawing.Point(44, 190)
+        Me.lblXPSStatus.Location = New System.Drawing.Point(44, 228)
         Me.lblXPSStatus.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblXPSStatus.Name = "lblXPSStatus"
         Me.lblXPSStatus.Size = New System.Drawing.Size(107, 20)
@@ -2029,7 +2040,7 @@ Partial Class Main
         Me.txtFELink2.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtFELink2.Cursor = System.Windows.Forms.Cursors.Hand
         Me.txtFELink2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFELink2.Location = New System.Drawing.Point(39, 274)
+        Me.txtFELink2.Location = New System.Drawing.Point(38, 337)
         Me.txtFELink2.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFELink2.Name = "txtFELink2"
         Me.txtFELink2.ReadOnly = True
@@ -2041,13 +2052,13 @@ Partial Class Main
         'Label39
         '
         Me.Label39.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label39.Location = New System.Drawing.Point(44, 224)
+        Me.Label39.Location = New System.Drawing.Point(44, 262)
         Me.Label39.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label39.Name = "Label39"
-        Me.Label39.Size = New System.Drawing.Size(400, 47)
+        Me.Label39.Size = New System.Drawing.Size(400, 71)
         Me.Label39.TabIndex = 24
         Me.Label39.Text = "To generate a verified hit from a test XPS ThreatScan download the following EXE " & _
-    "to your target." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+    "to your target, or enter a custom MD5 hash above." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         '
         'GroupBox3
         '
@@ -2166,7 +2177,7 @@ Partial Class Main
         '
         'btnXPSSend
         '
-        Me.btnXPSSend.Location = New System.Drawing.Point(173, 150)
+        Me.btnXPSSend.Location = New System.Drawing.Point(173, 188)
         Me.btnXPSSend.Margin = New System.Windows.Forms.Padding(4)
         Me.btnXPSSend.Name = "btnXPSSend"
         Me.btnXPSSend.Size = New System.Drawing.Size(185, 28)
@@ -2221,6 +2232,63 @@ Partial Class Main
         '
         Me.bgwork_panwlisten.WorkerReportsProgress = True
         Me.bgwork_panwlisten.WorkerSupportsCancellation = True
+        '
+        'txtXPSMalwareMD5
+        '
+        Me.txtXPSMalwareMD5.Location = New System.Drawing.Point(173, 150)
+        Me.txtXPSMalwareMD5.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtXPSMalwareMD5.Name = "txtXPSMalwareMD5"
+        Me.txtXPSMalwareMD5.Size = New System.Drawing.Size(233, 22)
+        Me.txtXPSMalwareMD5.TabIndex = 32
+        Me.txtXPSMalwareMD5.Text = "47f9fdc617f8c98a6732be534d8dbe9a"
+        '
+        'Label46
+        '
+        Me.Label46.AutoSize = True
+        Me.Label46.Location = New System.Drawing.Point(44, 154)
+        Me.Label46.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label46.Name = "Label46"
+        Me.Label46.Size = New System.Drawing.Size(97, 17)
+        Me.Label46.TabIndex = 31
+        Me.Label46.Text = "Malware MD5:"
+        '
+        'txtFireEyeMalwareMD5
+        '
+        Me.txtFireEyeMalwareMD5.Location = New System.Drawing.Point(141, 82)
+        Me.txtFireEyeMalwareMD5.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtFireEyeMalwareMD5.Name = "txtFireEyeMalwareMD5"
+        Me.txtFireEyeMalwareMD5.Size = New System.Drawing.Size(233, 22)
+        Me.txtFireEyeMalwareMD5.TabIndex = 34
+        Me.txtFireEyeMalwareMD5.Text = "47f9fdc617f8c98a6732be534d8dbe9a"
+        '
+        'Label47
+        '
+        Me.Label47.AutoSize = True
+        Me.Label47.Location = New System.Drawing.Point(36, 85)
+        Me.Label47.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label47.Name = "Label47"
+        Me.Label47.Size = New System.Drawing.Size(97, 17)
+        Me.Label47.TabIndex = 33
+        Me.Label47.Text = "Malware MD5:"
+        '
+        'txtPANWMalwareMD5
+        '
+        Me.txtPANWMalwareMD5.Location = New System.Drawing.Point(173, 118)
+        Me.txtPANWMalwareMD5.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtPANWMalwareMD5.Name = "txtPANWMalwareMD5"
+        Me.txtPANWMalwareMD5.Size = New System.Drawing.Size(233, 22)
+        Me.txtPANWMalwareMD5.TabIndex = 38
+        Me.txtPANWMalwareMD5.Text = "47f9fdc617f8c98a6732be534d8dbe9a"
+        '
+        'Label48
+        '
+        Me.Label48.AutoSize = True
+        Me.Label48.Location = New System.Drawing.Point(44, 122)
+        Me.Label48.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label48.Name = "Label48"
+        Me.Label48.Size = New System.Drawing.Size(97, 17)
+        Me.Label48.TabIndex = 37
+        Me.Label48.Text = "Malware MD5:"
         '
         'Main
         '
@@ -2482,5 +2550,11 @@ Partial Class Main
     Friend WithEvents txtPANWSim As System.Windows.Forms.TextBox
     Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
     Friend WithEvents Label45 As System.Windows.Forms.Label
+    Friend WithEvents txtXPSMalwareMD5 As System.Windows.Forms.TextBox
+    Friend WithEvents Label46 As System.Windows.Forms.Label
+    Friend WithEvents txtFireEyeMalwareMD5 As System.Windows.Forms.TextBox
+    Friend WithEvents Label47 As System.Windows.Forms.Label
+    Friend WithEvents txtPANWMalwareMD5 As System.Windows.Forms.TextBox
+    Friend WithEvents Label48 As System.Windows.Forms.Label
 
 End Class
