@@ -3,8 +3,9 @@ Imports System.Text
 Imports System.IO
 Imports System.Net.Sockets
 Imports Newtonsoft.Json
+Imports System.Security.Cryptography.X509Certificates
 
-Module XPS
+Public Module XPS
 
     '<33>Nov 12 11:45:15 xps ,bfb696b3-895c-11e5-a92b-000c2947b169,10.0.1.28,10.0.1.204,alert,Backdoor.Generic.WebShell.fss1,BACKDOOR,Malware Detection Engine,critical,2015-11-12 11:45:15,10.0.1.204
 
@@ -106,7 +107,7 @@ Module XPS
         Public controlsubject As String = "winxp-x86-amd-2015.09.22"
         Public vm_id As String = "7cbe1d148cfd346d8b8b246ce47f17b1"
         Public vm As String = "winxp-x86"
-     
+
     End Class
     Public Class XPSAlert_Metadata_MalwareDesc
         Public filename As String = "0026019878.exe"
@@ -328,5 +329,149 @@ Module XPS
         'Return JSON STring
         Return jstr
     End Function
+    Public Sub InstallCert()
+        Try
+            IO.File.WriteAllBytes("xps_listen_certificate.pfx", My.Resources.xps_listen_certificate)
+
+            Dim certload As New X509Certificate2
+
+            certload.Import("xps_listen_certificate.pfx", "", X509KeyStorageFlags.MachineKeySet)
+
+            IO.File.Delete("xps_listen_certificate.pfx")
+
+            Debug.WriteLine("Cert Hash:" & certload.GetCertHashString)
+            Dim xstore As New X509Store(StoreName.My, StoreLocation.LocalMachine)
+            xstore.Open(OpenFlags.ReadWrite)
+            xstore.Add(certload)
+            xstore.Close()
+            Dim appguid As String = New Guid(CType(Main.GetType.Assembly.GetCustomAttributes(GetType(Runtime.InteropServices.GuidAttribute), False)(0), Runtime.InteropServices.GuidAttribute).Value).ToString
+            Dim netshproc As New Process
+            Debug.WriteLine("netsh http add sslcert ipport=0.0.0.0:" & Main.xps_sim_Port.Value & " certhash=" & certload.GetCertHashString & " appid={" & appguid & "}")
+            Dim netshprocStartInfo As New ProcessStartInfo("cmd.exe", "/c netsh http add sslcert ipport=0.0.0.0:" & Main.xps_sim_Port.Value & " certhash=" & certload.GetCertHashString & " appid={" & appguid & "}")
+            netshprocStartInfo.WindowStyle = ProcessWindowStyle.Hidden
+            netshprocStartInfo.CreateNoWindow = True
+            netshprocStartInfo.UseShellExecute = False
+            netshprocStartInfo.RedirectStandardError = True
+            netshprocStartInfo.RedirectStandardOutput = True
+            netshproc.StartInfo = netshprocStartInfo
+            Debug.WriteLine("Running commands")
+            netshproc.Start()
+            Dim netshreader As IO.StreamReader = netshproc.StandardOutput
+            Debug.WriteLine(netshreader.ReadToEnd)
+        Catch ex As Exception
+            Debug.WriteLine(ex.Message)
+        End Try
+
+    End Sub
+
+    Public Sub RemoveCert()
+        Try
+            Dim appguid As String = New Guid(CType(Main.GetType.Assembly.GetCustomAttributes(GetType(Runtime.InteropServices.GuidAttribute), False)(0), Runtime.InteropServices.GuidAttribute).Value).ToString
+            Dim netshproc As New Process
+            Debug.WriteLine("netsh http delete sslcert ipport=0.0.0.0:" & Main.xps_sim_Port.Value)
+            Dim netshprocStartInfo As New ProcessStartInfo("cmd.exe", "/c netsh http delete sslcert ipport=0.0.0.0:" & Main.xps_sim_Port.Value)
+            netshprocStartInfo.WindowStyle = ProcessWindowStyle.Hidden
+            netshprocStartInfo.UseShellExecute = False
+            netshprocStartInfo.CreateNoWindow = True
+            netshprocStartInfo.RedirectStandardError = True
+            netshprocStartInfo.RedirectStandardOutput = True
+            netshproc.StartInfo = netshprocStartInfo
+            Debug.WriteLine("Running commands")
+            netshproc.Start()
+            Dim netshreader As IO.StreamReader = netshproc.StandardOutput
+            Debug.WriteLine(netshreader.ReadToEnd)
+        Catch ex As Exception
+            Debug.WriteLine(ex.Message)
+        End Try
+    End Sub
+
+    Public Class XPS_Sim
+        Public prefix As String = "https://*:" & Main.xps_sim_Port.Value & "/"
+        Public listener As HttpListener = New HttpListener
+
+        Public Sub Start()
+            listener.Prefixes.Add(prefix)
+            listener.Start()
+            listener.BeginGetContext(AddressOf Sim_Respond, listener)
+            Debug.WriteLine("XPS Sim Listening")
+
+        End Sub
+        Public Sub [Stop]()
+            listener.Stop()
+        End Sub
+
+        Public Sub Sim_Respond(ByVal ar As IAsyncResult)
+            If listener.IsListening Then
+                Dim response As HttpListenerResponse
+                Dim context = listener.EndGetContext(ar)
+                listener.BeginGetContext(AddressOf Sim_Respond, listener)
+                Try
+                    Dim responseString As String = ""
+                    Dim buffer() As Byte
+                    Dim output As System.IO.Stream
+                    ' Note: GetContext blocks while waiting for a request.
+
+                    If context.Request.QueryString.Count < 2 Then
+                        If context.Request.QueryString.Count = 0 Then
+                            'General browse no parameters....respond gracefully
+                            response = context.Response
+                            response.StatusCode = 200
+                            response.StatusDescription = "Success"
+                            responseString = "<html><body>R1JobRunner - XPS CP Sim </br> LISTENING!!</body></html>"
+                            buffer = System.Text.Encoding.UTF8.GetBytes(responseString)
+                            response.ContentLength64 = buffer.Length
+                            output = response.OutputStream
+                            output.Write(buffer, 0, buffer.Length)
+                        Else
+                            'Check for stop command and END
+                            If context.Request.QueryString.Item(context.Request.QueryString.Count - 1) = "STOP" Then
+                                Debug.WriteLine("STOP")
+                                response = context.Response
+                                response.StatusCode = 200
+                                response.StatusDescription = "STOP"
+                                responseString = "STOP"
+                                buffer = System.Text.Encoding.UTF8.GetBytes(responseString)
+                                response.ContentLength64 = buffer.Length
+                                output = response.OutputStream
+                                output.Write(buffer, 0, buffer.Length)
+                                [Stop]()
+                            End If
+                        End If
+                    Else
+                        'Response for initial Auth query
+                        If context.Request.QueryString.Item(context.Request.QueryString.Count - 1) = context.Request.QueryString.Item(context.Request.QueryString.Count - 2) Then
+                            response = context.Response
+                            response.StatusCode = 400
+                            response.StatusDescription = "ERROR"
+                            responseString = "Access Denied"
+                            buffer = System.Text.Encoding.UTF8.GetBytes(responseString)
+                            response.ContentLength64 = buffer.Length
+                            output = response.OutputStream
+                            output.Write(buffer, 0, buffer.Length)
+                        Else
+                            'Response for report query
+                            response = context.Response
+                            If Not String.IsNullOrWhiteSpace(Main.txtFireEyeMalwareMD5.Text) Then
+                                'Use Specified MD5
+                                buffer = System.Text.Encoding.UTF8.GetBytes(XPS.XPS_MDE_Response_ToJSON(XPS.GenerateXPS_MDE_Response(Main.txtXPSMalwareMD5.Text)))
+                            Else
+                                'Else use FETest MD5
+                                buffer = System.Text.Encoding.UTF8.GetBytes(XPS.XPS_MDE_Response_ToJSON(XPS.GenerateXPS_MDE_Response("47f9fdc617f8c98a6732be534d8dbe9a")))
+                            End If
+                            response.ContentLength64 = buffer.Length
+                            output = response.OutputStream
+                            output.Write(buffer, 0, buffer.Length)
+                        End If
+
+                    End If
+
+                Catch ex As HttpListenerException
+                    Console.WriteLine(ex.Message)
+                Finally
+
+                End Try
+            End If
+        End Sub
+    End Class
 
 End Module

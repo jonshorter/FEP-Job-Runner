@@ -149,6 +149,8 @@ Partial Class Main
         Me.btnLoadFromBox = New System.Windows.Forms.Button()
         Me.btnSaveAsBox = New System.Windows.Forms.Button()
         Me.tabFireEye = New System.Windows.Forms.TabPage()
+        Me.txtFireEyeMalwareMD5 = New System.Windows.Forms.TextBox()
+        Me.Label47 = New System.Windows.Forms.Label()
         Me.lblFEStatus = New System.Windows.Forms.Label()
         Me.txtFELink = New System.Windows.Forms.TextBox()
         Me.Label37 = New System.Windows.Forms.Label()
@@ -158,6 +160,8 @@ Partial Class Main
         Me.Label33 = New System.Windows.Forms.Label()
         Me.btn_FEEvent = New System.Windows.Forms.Button()
         Me.tabPANW = New System.Windows.Forms.TabPage()
+        Me.txtPANWMalwareMD5 = New System.Windows.Forms.TextBox()
+        Me.Label48 = New System.Windows.Forms.Label()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.txtPANWSim = New System.Windows.Forms.TextBox()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
@@ -176,6 +180,8 @@ Partial Class Main
         Me.Label36 = New System.Windows.Forms.Label()
         Me.btnPANWSend = New System.Windows.Forms.Button()
         Me.tabXPS = New System.Windows.Forms.TabPage()
+        Me.txtXPSMalwareMD5 = New System.Windows.Forms.TextBox()
+        Me.Label46 = New System.Windows.Forms.Label()
         Me.lblXPSStatus = New System.Windows.Forms.Label()
         Me.txtXPSMalware = New System.Windows.Forms.TextBox()
         Me.Label42 = New System.Windows.Forms.Label()
@@ -199,14 +205,6 @@ Partial Class Main
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.ofdBox = New System.Windows.Forms.OpenFileDialog()
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
-        Me.bgwork_xpslisten = New System.ComponentModel.BackgroundWorker()
-        Me.bgwork_panwlisten = New System.ComponentModel.BackgroundWorker()
-        Me.txtXPSMalwareMD5 = New System.Windows.Forms.TextBox()
-        Me.Label46 = New System.Windows.Forms.Label()
-        Me.txtFireEyeMalwareMD5 = New System.Windows.Forms.TextBox()
-        Me.Label47 = New System.Windows.Forms.Label()
-        Me.txtPANWMalwareMD5 = New System.Windows.Forms.TextBox()
-        Me.Label48 = New System.Windows.Forms.Label()
         Me.GroupBox4.SuspendLayout()
         Me.grpReqSet.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -1660,6 +1658,25 @@ Partial Class Main
         Me.tabFireEye.Text = "FireEye"
         Me.tabFireEye.UseVisualStyleBackColor = True
         '
+        'txtFireEyeMalwareMD5
+        '
+        Me.txtFireEyeMalwareMD5.Location = New System.Drawing.Point(141, 82)
+        Me.txtFireEyeMalwareMD5.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtFireEyeMalwareMD5.Name = "txtFireEyeMalwareMD5"
+        Me.txtFireEyeMalwareMD5.Size = New System.Drawing.Size(233, 22)
+        Me.txtFireEyeMalwareMD5.TabIndex = 34
+        Me.txtFireEyeMalwareMD5.Text = "47f9fdc617f8c98a6732be534d8dbe9a"
+        '
+        'Label47
+        '
+        Me.Label47.AutoSize = True
+        Me.Label47.Location = New System.Drawing.Point(36, 85)
+        Me.Label47.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label47.Name = "Label47"
+        Me.Label47.Size = New System.Drawing.Size(97, 17)
+        Me.Label47.TabIndex = 33
+        Me.Label47.Text = "Malware MD5:"
+        '
         'lblFEStatus
         '
         Me.lblFEStatus.AutoSize = True
@@ -1769,6 +1786,25 @@ Partial Class Main
         Me.tabPANW.TabIndex = 5
         Me.tabPANW.Text = "PANW"
         Me.tabPANW.UseVisualStyleBackColor = True
+        '
+        'txtPANWMalwareMD5
+        '
+        Me.txtPANWMalwareMD5.Location = New System.Drawing.Point(173, 118)
+        Me.txtPANWMalwareMD5.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtPANWMalwareMD5.Name = "txtPANWMalwareMD5"
+        Me.txtPANWMalwareMD5.Size = New System.Drawing.Size(233, 22)
+        Me.txtPANWMalwareMD5.TabIndex = 38
+        Me.txtPANWMalwareMD5.Text = "47f9fdc617f8c98a6732be534d8dbe9a"
+        '
+        'Label48
+        '
+        Me.Label48.AutoSize = True
+        Me.Label48.Location = New System.Drawing.Point(44, 122)
+        Me.Label48.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label48.Name = "Label48"
+        Me.Label48.Size = New System.Drawing.Size(97, 17)
+        Me.Label48.TabIndex = 37
+        Me.Label48.Text = "Malware MD5:"
         '
         'PictureBox2
         '
@@ -1981,6 +2017,25 @@ Partial Class Main
         Me.tabXPS.TabIndex = 6
         Me.tabXPS.Text = "XPS"
         Me.tabXPS.UseVisualStyleBackColor = True
+        '
+        'txtXPSMalwareMD5
+        '
+        Me.txtXPSMalwareMD5.Location = New System.Drawing.Point(173, 150)
+        Me.txtXPSMalwareMD5.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtXPSMalwareMD5.Name = "txtXPSMalwareMD5"
+        Me.txtXPSMalwareMD5.Size = New System.Drawing.Size(233, 22)
+        Me.txtXPSMalwareMD5.TabIndex = 32
+        Me.txtXPSMalwareMD5.Text = "47f9fdc617f8c98a6732be534d8dbe9a"
+        '
+        'Label46
+        '
+        Me.Label46.AutoSize = True
+        Me.Label46.Location = New System.Drawing.Point(44, 154)
+        Me.Label46.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label46.Name = "Label46"
+        Me.Label46.Size = New System.Drawing.Size(97, 17)
+        Me.Label46.TabIndex = 31
+        Me.Label46.Text = "Malware MD5:"
         '
         'lblXPSStatus
         '
@@ -2223,73 +2278,6 @@ Partial Class Main
         Me.sfdBox.Filter = "Box Files|*.json"
         Me.sfdBox.InitialDirectory = "My.Application.Info.DirectoryPath & ""\BoxedJobs"""
         '
-        'bgwork_xpslisten
-        '
-        Me.bgwork_xpslisten.WorkerReportsProgress = True
-        Me.bgwork_xpslisten.WorkerSupportsCancellation = True
-        '
-        'bgwork_panwlisten
-        '
-        Me.bgwork_panwlisten.WorkerReportsProgress = True
-        Me.bgwork_panwlisten.WorkerSupportsCancellation = True
-        '
-        'txtXPSMalwareMD5
-        '
-        Me.txtXPSMalwareMD5.Location = New System.Drawing.Point(173, 150)
-        Me.txtXPSMalwareMD5.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtXPSMalwareMD5.Name = "txtXPSMalwareMD5"
-        Me.txtXPSMalwareMD5.Size = New System.Drawing.Size(233, 22)
-        Me.txtXPSMalwareMD5.TabIndex = 32
-        Me.txtXPSMalwareMD5.Text = "47f9fdc617f8c98a6732be534d8dbe9a"
-        '
-        'Label46
-        '
-        Me.Label46.AutoSize = True
-        Me.Label46.Location = New System.Drawing.Point(44, 154)
-        Me.Label46.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label46.Name = "Label46"
-        Me.Label46.Size = New System.Drawing.Size(97, 17)
-        Me.Label46.TabIndex = 31
-        Me.Label46.Text = "Malware MD5:"
-        '
-        'txtFireEyeMalwareMD5
-        '
-        Me.txtFireEyeMalwareMD5.Location = New System.Drawing.Point(141, 82)
-        Me.txtFireEyeMalwareMD5.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtFireEyeMalwareMD5.Name = "txtFireEyeMalwareMD5"
-        Me.txtFireEyeMalwareMD5.Size = New System.Drawing.Size(233, 22)
-        Me.txtFireEyeMalwareMD5.TabIndex = 34
-        Me.txtFireEyeMalwareMD5.Text = "47f9fdc617f8c98a6732be534d8dbe9a"
-        '
-        'Label47
-        '
-        Me.Label47.AutoSize = True
-        Me.Label47.Location = New System.Drawing.Point(36, 85)
-        Me.Label47.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label47.Name = "Label47"
-        Me.Label47.Size = New System.Drawing.Size(97, 17)
-        Me.Label47.TabIndex = 33
-        Me.Label47.Text = "Malware MD5:"
-        '
-        'txtPANWMalwareMD5
-        '
-        Me.txtPANWMalwareMD5.Location = New System.Drawing.Point(173, 118)
-        Me.txtPANWMalwareMD5.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtPANWMalwareMD5.Name = "txtPANWMalwareMD5"
-        Me.txtPANWMalwareMD5.Size = New System.Drawing.Size(233, 22)
-        Me.txtPANWMalwareMD5.TabIndex = 38
-        Me.txtPANWMalwareMD5.Text = "47f9fdc617f8c98a6732be534d8dbe9a"
-        '
-        'Label48
-        '
-        Me.Label48.AutoSize = True
-        Me.Label48.Location = New System.Drawing.Point(44, 122)
-        Me.Label48.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label48.Name = "Label48"
-        Me.Label48.Size = New System.Drawing.Size(97, 17)
-        Me.Label48.TabIndex = 37
-        Me.Label48.Text = "Malware MD5:"
-        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -2525,7 +2513,6 @@ Partial Class Main
     Friend WithEvents Label41 As System.Windows.Forms.Label
     Friend WithEvents cmbXPSSeverity As System.Windows.Forms.ComboBox
     Friend WithEvents btnStartXPSListener As System.Windows.Forms.Button
-    Friend WithEvents bgwork_xpslisten As System.ComponentModel.BackgroundWorker
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents lbldemoxpsstatus As System.Windows.Forms.Label
     Friend WithEvents txtFELink2 As System.Windows.Forms.TextBox
@@ -2541,7 +2528,6 @@ Partial Class Main
     Friend WithEvents Label44 As System.Windows.Forms.Label
     Friend WithEvents lblwildfirestatus As System.Windows.Forms.Label
     Friend WithEvents btn_WildfireStart As System.Windows.Forms.Button
-    Friend WithEvents bgwork_panwlisten As System.ComponentModel.BackgroundWorker
     Friend WithEvents lblXPSStatus As System.Windows.Forms.Label
     Friend WithEvents lblPANWStatus As System.Windows.Forms.Label
     Friend WithEvents lblFEStatus As System.Windows.Forms.Label

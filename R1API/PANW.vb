@@ -3,6 +3,7 @@ Imports System.Text
 Imports System.IO
 Imports System.Net.Sockets
 Imports System.Xml.Serialization
+Imports System.Security.Cryptography.X509Certificates
 
 Public Module PANW
 
@@ -202,5 +203,170 @@ Public Module PANW
 
         Return xstr
     End Function
+    Public Sub InstallCert()
+        Try
+            IO.File.WriteAllBytes("panw_listen_certificate.pfx", My.Resources.panw_listen_certificate)
 
+            Dim certload As New X509Certificate2
+
+            certload.Import("panw_listen_certificate.pfx", "", X509KeyStorageFlags.MachineKeySet)
+
+            IO.File.Delete("panw_listen_certificate.pfx")
+
+            Debug.WriteLine("Cert Hash:" & certload.GetCertHashString)
+            Dim xstore As New X509Store(StoreName.My, StoreLocation.LocalMachine)
+            xstore.Open(OpenFlags.ReadWrite)
+            xstore.Add(certload)
+            xstore.Close()
+            Dim appguid As String = New Guid(CType(Main.GetType.Assembly.GetCustomAttributes(GetType(Runtime.InteropServices.GuidAttribute), False)(0), Runtime.InteropServices.GuidAttribute).Value).ToString
+            Dim netshproc As New Process
+            Debug.WriteLine("netsh http add sslcert ipport=0.0.0.0:" & Main.panw_sim_port.Value & " certhash=" & certload.GetCertHashString & " appid={" & appguid & "}")
+            Dim netshprocStartInfo As New ProcessStartInfo("cmd.exe", "/c netsh http add sslcert ipport=0.0.0.0:" & Main.panw_sim_port.Value & " certhash=" & certload.GetCertHashString & " appid={" & appguid & "}")
+            netshprocStartInfo.WindowStyle = ProcessWindowStyle.Hidden
+            netshprocStartInfo.UseShellExecute = False
+            netshprocStartInfo.CreateNoWindow = True
+            netshprocStartInfo.RedirectStandardError = True
+            netshprocStartInfo.RedirectStandardOutput = True
+            netshproc.StartInfo = netshprocStartInfo
+            Debug.WriteLine("Running commands")
+            netshproc.Start()
+            Dim netshreader As IO.StreamReader = netshproc.StandardOutput
+            Debug.WriteLine(netshreader.ReadToEnd)
+        Catch ex As Exception
+            Debug.WriteLine(ex.Message)
+        End Try
+
+    End Sub
+
+    Public Sub RemoveCert()
+        Try
+            Dim appguid As String = New Guid(CType(Main.GetType.Assembly.GetCustomAttributes(GetType(Runtime.InteropServices.GuidAttribute), False)(0), Runtime.InteropServices.GuidAttribute).Value).ToString
+            Dim netshproc As New Process
+            Debug.WriteLine("netsh http delete sslcert ipport=0.0.0.0:" & Main.panw_sim_port.Value)
+            Dim netshprocStartInfo As New ProcessStartInfo("cmd.exe", "/c netsh http delete sslcert ipport=0.0.0.0:" & Main.panw_sim_port.Value)
+            netshprocStartInfo.WindowStyle = ProcessWindowStyle.Hidden
+            netshprocStartInfo.CreateNoWindow = True
+            netshprocStartInfo.UseShellExecute = False
+            netshprocStartInfo.RedirectStandardError = True
+            netshprocStartInfo.RedirectStandardOutput = True
+            netshproc.StartInfo = netshprocStartInfo
+            Debug.WriteLine("Running commands")
+            netshproc.Start()
+            Dim netshreader As IO.StreamReader = netshproc.StandardOutput
+            Debug.WriteLine(netshreader.ReadToEnd)
+        Catch ex As Exception
+            Debug.WriteLine(ex.Message)
+        End Try
+    End Sub
+
+    Public Class PANW_Sim
+        Public prefix As String = "https://*:" & Main.panw_sim_port.Value & "/"
+        Public listener As HttpListener = New HttpListener
+
+        Public Sub Start()
+            listener.Prefixes.Add(prefix)
+            listener.Start()
+            listener.BeginGetContext(AddressOf Sim_Respond, listener)
+            Debug.WriteLine("PANW Sim Listening")
+
+        End Sub
+        Public Sub [Stop]()
+            listener.Stop()
+        End Sub
+
+        Public Sub Sim_Respond(ByVal ar As IAsyncResult)
+            If listener.IsListening Then
+                Dim response As HttpListenerResponse
+                Dim context = listener.EndGetContext(ar)
+                listener.BeginGetContext(AddressOf Sim_Respond, listener)
+                Try
+                    Dim responseString As String = ""
+                    Dim buffer() As Byte
+                    Dim output As System.IO.Stream
+                    ' Note: GetContext blocks while waiting for a request.
+
+
+                    If context.Request.RawUrl = "/get-report-xml" Then
+                        If context.Request.HasEntityBody = True Then
+                            Dim body As System.IO.Stream = context.Request.InputStream
+                            Dim encoding As System.Text.Encoding = context.Request.ContentEncoding
+                            Dim reader As System.IO.StreamReader = New System.IO.StreamReader(body, encoding)
+                            Dim fullbody As String = reader.ReadToEnd
+                            Dim var() = fullbody.Split("&")
+                            Dim varapikey As String = ""
+                            Dim varmd5hash As String = ""
+                            For Each item In var 'Split out variables
+                                Select Case True
+                                    Case item.Contains("apikey")
+                                        varapikey = item.Split("=")(1)
+                                    Case item.Contains("md5")
+                                        varmd5hash = item.Split("=")(1)
+                                End Select
+
+                            Next
+                            'If the API key is the R1 test key give 401 Unauthorized
+
+                            If varapikey = "abcdef0123456789fedcba9876543210" Then
+                                'Configuration request
+                                response = context.Response
+                                response.StatusCode = 401
+                                response.StatusDescription = "Invalid API Key"
+                                buffer = System.Text.Encoding.UTF8.GetBytes(responseString)
+                                response.ContentLength64 = buffer.Length
+                                output = response.OutputStream
+                                output.Write(buffer, 0, buffer.Length)
+                            Else
+                                'Provide a report containing whatever MD5 is requested from R1
+
+                                response = context.Response
+                                response.StatusCode = 200
+                                response.StatusDescription = "OK"
+                                response.ContentType = "text/xml; charset=utf-8"
+                                response.ContentEncoding = System.Text.Encoding.UTF8
+                                response.KeepAlive = True
+                                response.SendChunked = True
+                                buffer = System.Text.Encoding.UTF8.GetBytes(PANW.PANWResponseToXML(PANW.GeneratePANWResponse(varmd5hash)))
+                                response.ContentLength64 = buffer.Length
+                                output = response.OutputStream
+                                output.Write(buffer, 0, buffer.Length)
+
+
+                            End If
+                        End If
+                    Else
+                        If context.Request.QueryString.Count = 1 Then
+                            'Check for stop command and END
+                            If context.Request.QueryString.Item(context.Request.QueryString.Count - 1) = "STOP" Then
+                                Debug.WriteLine("STOP")
+                                response = context.Response
+                                response.StatusCode = 200
+                                response.StatusDescription = "STOP"
+                                responseString = "STOP"
+                                buffer = System.Text.Encoding.UTF8.GetBytes(responseString)
+                                response.ContentLength64 = buffer.Length
+                                output = response.OutputStream
+                                output.Write(buffer, 0, buffer.Length)
+                                [Stop]()
+
+                            End If
+                        Else
+                            'General browse no parameters....respond gracefully
+                            response = context.Response
+                            response.StatusCode = 200
+                            response.StatusDescription = "Success"
+                            responseString = "<html><body>R1JobRunner - Wildfire Sim </br> LISTENING!!</body></html>"
+                            buffer = System.Text.Encoding.UTF8.GetBytes(responseString)
+                            response.ContentLength64 = buffer.Length
+                            output = response.OutputStream
+                            output.Write(buffer, 0, buffer.Length)
+                        End If
+                    End If
+                Catch ex As HttpListenerException
+                    Console.WriteLine(ex.Message)
+                Finally
+                  
+                End Try
+            End If
+        End Sub
+    End Class
 End Module

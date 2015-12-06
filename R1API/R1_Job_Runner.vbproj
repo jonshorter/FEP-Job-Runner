@@ -129,8 +129,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="PANWListener.vb" />
-    <Compile Include="XPSListener.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AgentorShareDialog.resx">

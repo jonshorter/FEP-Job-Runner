@@ -17,7 +17,9 @@ Public Class Main
     Public panwbg_listen
     'SecureString for API Password
     Public apipass As SecureString
-
+    'Stores ThreadInfo
+    Public xps_sim_var As XPS.XPS_Sim
+    Public panw_sim_var As PANW.PANW_Sim
 
 
 
@@ -1148,11 +1150,8 @@ Public Class Main
         cmbFEAlertType.SelectedIndex = 0
     End Sub
 
-
-
     Private Sub tabPANW_Enter(sender As Object, e As EventArgs) Handles tabPANW.Enter
         cmbPANWAlert.SelectedIndex = 0
-
         Dim panwsimtxt As String = "The Wildfire Sim simulates R1 queries to Wildfire to get malware reports and kick off validated threatscans. The Wildfire Sim defaults to port 8449, and requires elevated privileges to place an SSL certificate in the keystore for https communication. After starting the Wildfire Sim, configure the R1 XPS connector to point to https://" & My.Computer.Name & ":8449. The Wildfire Sim will accept any API Key."
         txtPANWSim.Text = panwsimtxt
     End Sub
@@ -1162,16 +1161,10 @@ Public Class Main
         Process.Start(sinfo)
     End Sub
 
-
-
-
-
     Private Sub btnShowJSON_Click(sender As Object, e As EventArgs) Handles btnShowJSON.Click
         ResetStatusBar()
         MsgBox("Press Ctrl+C to copy." & vbCrLf & Jobs.BuildFilterJSON(StoreInFiltList, StoreExFiltList))
     End Sub
-
-
 
     Private Sub txtcustomwebaddress_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtcustomwebaddress.KeyPress
 
@@ -1182,7 +1175,6 @@ Public Class Main
         End If
     End Sub
 
-
     Private Sub rdocustom_CheckedChanged(sender As Object, e As EventArgs) Handles rdocustom.CheckedChanged
         If rdocustom.Checked = True Then
             txtcustomwebaddress.Enabled = True
@@ -1190,8 +1182,6 @@ Public Class Main
             txtcustomwebaddress.Enabled = False
         End If
     End Sub
-
-
 
     Private Sub btnXPSSend_Click(sender As Object, e As EventArgs) Handles btnXPSSend.Click
         Try
@@ -1201,7 +1191,7 @@ Public Class Main
             xpsThreat.Dstaddr = Me.txtXPSTarget.Text
             xpsThreat.HostIp = Me.txtXPSTarget.Text
             xpsThreat.Action = "alert"
-            If txtXPSMalware.Text = "" Then
+            If String.IsNullOrWhiteSpace(txtXPSMalware.Text) Then
                 xpsThreat.MalwareName = "Super.Evil.Malware"
             Else
                 xpsThreat.MalwareName = txtXPSMalware.Text
@@ -1227,143 +1217,34 @@ Public Class Main
     End Sub
 
     Private Sub btnStartXPSListener_Click(sender As Object, e As EventArgs) Handles btnStartXPSListener.Click
-
-        If bgwork_xpslisten.IsBusy = True Then
-
-            Try
-                bgwork_xpslisten.CancelAsync()
-                Dim stoplistener As HttpWebRequest = HttpWebRequest.Create("https://" & My.Computer.Name.ToString & ":" & xps_sim_Port.Value & "/query?QUIT=STOP")
-                stoplistener.KeepAlive = False
-                stoplistener.ProtocolVersion = HttpVersion.Version10
-                stoplistener.ServicePoint.ConnectionLimit = 1
-                ServicePointManager.ServerCertificateValidationCallback = AddressOf ValidateRemoteCertificate
-                stoplistener.Method = "GET"
-                stoplistener.GetResponse()
-            Catch ex As Exception
-                Debug.WriteLine(ex.Message)
-            End Try
-        Else
-            Try
-                btnStartXPSListener.Text = "Stop XPS CP Sim"
-                lbldemoxpsstatus.Text = "XPS CP Sim Status: Started"
-                xps_sim_Port.Enabled = False
-                XPSListener.GenKey()
-                Dim listen As HttpListener = XPSListener.CreateListener(XPSListener.CreatePrefixes(xps_sim_Port.Value))
-                xpsbg_listen = listen
-                bgwork_xpslisten.RunWorkerAsync(listen)
-            Catch ex As Exception
-                Debug.WriteLine(ex.Message)
-            End Try
-        End If
-
-
-    End Sub
-
-    Private Sub bgwork_xpslisten_Disposed(sender As Object, e As EventArgs) Handles bgwork_xpslisten.Disposed
-        XPSListener.EndListener()
-    End Sub
-
-
-    Private Sub bgwork_xpslisten_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwork_xpslisten.DoWork
-
-        Dim listen As HttpListener = e.Argument
-        Try
-            ' Start the listener to begin listening for requests.
-            listen.Start()
-            Console.WriteLine("XPS CP Sim Listening on " & listen.Prefixes(0))
-            While listen.IsListening = True
-                Dim response As HttpListenerResponse = Nothing
+        Select Case btnStartXPSListener.Text
+            Case "Start XPS CP Sim"
                 Try
-                    Dim responseString As String = ""
-                    Dim buffer() As Byte
-                    Dim output As System.IO.Stream
-                    ' Note: GetContext blocks while waiting for a request.
-                    Dim context As HttpListenerContext = listen.GetContext()
+                    btnStartXPSListener.Text = "Stop XPS CP Sim"
+                    lbldemoxpsstatus.Text = "XPS CP Sim Status: Started"
+                    xps_sim_Port.Enabled = False
+                    XPS.InstallCert()
+                    xps_sim_var = New XPS.XPS_Sim
+                    xps_sim_var.Start()
+                Catch ex As Exception
 
-
-                    If context.Request.QueryString.Count < 2 Then
-                        If context.Request.QueryString.Count = 0 Then
-                            'General browse no parameters....respond gracefully
-                            response = context.Response
-                            response.StatusCode = 200
-                            response.StatusDescription = "Success"
-                            responseString = "<html><body>R1JobRunner - XPS CP Sim </br> LISTENING!!</body></html>"
-                            buffer = System.Text.Encoding.UTF8.GetBytes(responseString)
-                            response.ContentLength64 = buffer.Length
-                            output = response.OutputStream
-                            output.Write(buffer, 0, buffer.Length)
-                        Else
-                            'Check for stop command and END
-                            If context.Request.QueryString.Item(context.Request.QueryString.Count - 1) = "STOP" Then
-                                Debug.WriteLine("STOP")
-                                response = context.Response
-                                response.StatusCode = 200
-                                response.StatusDescription = "STOP"
-                                responseString = "STOP"
-                                buffer = System.Text.Encoding.UTF8.GetBytes(responseString)
-                                response.ContentLength64 = buffer.Length
-                                output = response.OutputStream
-                                output.Write(buffer, 0, buffer.Length)
-                                listen.Close()
-                            End If
-                        End If
-                    Else
-                        'Response for initial Auth query
-                        If context.Request.QueryString.Item(context.Request.QueryString.Count - 1) = context.Request.QueryString.Item(context.Request.QueryString.Count - 2) Then
-                            response = context.Response
-                            response.StatusCode = 400
-                            response.StatusDescription = "ERROR"
-                            responseString = "Access Denied"
-                            buffer = System.Text.Encoding.UTF8.GetBytes(responseString)
-                            response.ContentLength64 = buffer.Length
-                            output = response.OutputStream
-                            output.Write(buffer, 0, buffer.Length)
-                        Else
-                            'Response for report query
-                            response = context.Response
-                            If Not String.IsNullOrWhiteSpace(txtFireEyeMalwareMD5.Text) Then
-                                'Use Specified MD5
-                                buffer = System.Text.Encoding.UTF8.GetBytes(XPS.XPS_MDE_Response_ToJSON(XPS.GenerateXPS_MDE_Response(Me.txtXPSMalwareMD5.Text)))
-                            Else
-                                'Else use FETest MD5
-                                buffer = System.Text.Encoding.UTF8.GetBytes(XPS.XPS_MDE_Response_ToJSON(XPS.GenerateXPS_MDE_Response("47f9fdc617f8c98a6732be534d8dbe9a")))
-                            End If
-                            response.ContentLength64 = buffer.Length
-                            output = response.OutputStream
-                            output.Write(buffer, 0, buffer.Length)
-                        End If
-
-                    End If
-
-                Catch ex As HttpListenerException
-                    Console.WriteLine(ex.Message)
-                Finally
-                    If response IsNot Nothing Then
-                        response.Close()
-                    End If
                 End Try
-            End While
+            Case "Stop XPS CP Sim"
+                Try
 
-        Catch ex As HttpListenerException
-            Console.WriteLine(ex.Message)
-        Finally
-            ' Stop listening for requests.
-            listen.Close()
-            Console.WriteLine("XPS CP Sim Done Listening...")
-        End Try
+                    xps_sim_var.Stop()
+                    XPS.RemoveCert()
+                    btnStartXPSListener.Text = "Start XPS CP Sim"
+                    lbldemoxpsstatus.Text = "XPS CP Sim Status: Not Started"
+                    xps_sim_Port.Enabled = True
+
+
+                Catch ex As Exception
+
+                End Try
+        End Select
+
     End Sub
-
-    Private Sub bgwork_xpslisten_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwork_xpslisten.ProgressChanged
-
-    End Sub
-
-    Private Sub bgwork_xpslisten_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwork_xpslisten.RunWorkerCompleted
-        XPSListener.EndListener()
-        btnStartXPSListener.Text = "Start XPS CP Sim"
-        lbldemoxpsstatus.Text = "XPS CP Sim Status: Not Started"
-        xps_sim_Port.Enabled = True
-    End Sub
-
 
     Private Sub txtFELink2_Click(sender As Object, e As EventArgs) Handles txtFELink2.Click
         Dim sinfo As New ProcessStartInfo(txtFELink.Text)
@@ -1372,155 +1253,33 @@ Public Class Main
 
 
     Private Sub btn_WildfireStart_Click(sender As Object, e As EventArgs) Handles btn_WildfireStart.Click
-
-        If bgwork_panwlisten.IsBusy = True Then
-
-            Try
-                bgwork_panwlisten.CancelAsync()
-                Dim stoplistener As HttpWebRequest = HttpWebRequest.Create("https://" & My.Computer.Name.ToString & ":" & panw_sim_port.Value & "/?QUIT=STOP")
-                stoplistener.KeepAlive = False
-                stoplistener.ProtocolVersion = HttpVersion.Version10
-                stoplistener.ServicePoint.ConnectionLimit = 1
-                ServicePointManager.ServerCertificateValidationCallback = AddressOf ValidateRemoteCertificate
-                stoplistener.Method = "GET"
-                stoplistener.GetResponse()
-            Catch ex As Exception
-                Debug.WriteLine(ex.Message)
-            End Try
-        Else
-            Try
-                btn_WildfireStart.Text = "Stop Wildfire Sim"
-                lblwildfirestatus.Text = "Wildfire Sim Status: Started"
-                panw_sim_port.Enabled = False
-                PANWListener.GenKey()
-                Dim listen As HttpListener = PANWListener.CreateListener(PANWListener.CreatePrefixes(panw_sim_port.Value))
-                panwbg_listen = listen
-                bgwork_panwlisten.RunWorkerAsync(listen)
-            Catch ex As Exception
-                Debug.WriteLine(ex.Message)
-            End Try
-        End If
-
-    End Sub
-
-    Private Sub bgwork_panwlisten_Disposed(sender As Object, e As EventArgs) Handles bgwork_panwlisten.Disposed
-        PANWListener.EndListener()
-    End Sub
-
-    Private Sub bgwork_panwlisten_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwork_panwlisten.DoWork
-
-        Dim listen As HttpListener = e.Argument
-        Try
-            ' Start the listener to begin listening for requests.
-            listen.Start()
-            Console.WriteLine("Wildfire Sim Listening on " & listen.Prefixes(0))
-            While listen.IsListening = True
-                Dim response As HttpListenerResponse = Nothing
+        Select Case btn_WildfireStart.Text
+            Case "Start Wildfire Sim"
                 Try
-                    Dim responseString As String = ""
-                    Dim buffer() As Byte
-                    Dim output As System.IO.Stream
-                    ' Note: GetContext blocks while waiting for a request.
-                    Dim context As HttpListenerContext = listen.GetContext()
+                    btn_WildfireStart.Text = "Stop Wildfire Sim"
+                    lblwildfirestatus.Text = "Wildfire Sim Status: Started"
+                    panw_sim_port.Enabled = False
+                    PANW.InstallCert()
+                    panw_sim_var = New PANW.PANW_Sim
+                    panw_sim_var.Start()
+                Catch ex As Exception
 
-                    If context.Request.RawUrl = "/get-report-xml" Then
-                        If context.Request.HasEntityBody = True Then
-                            Dim body As System.IO.Stream = context.Request.InputStream
-                            Dim encoding As System.Text.Encoding = context.Request.ContentEncoding
-                            Dim reader As System.IO.StreamReader = New System.IO.StreamReader(body, encoding)
-                            Dim fullbody As String = reader.ReadToEnd
-                            Dim var() = fullbody.Split("&")
-                            Dim varapikey As String = ""
-                            Dim varmd5hash As String = ""
-                            For Each item In var 'Split out variables
-                                Select Case True
-                                    Case item.Contains("apikey")
-                                        varapikey = item.Split("=")(1)
-                                    Case item.Contains("md5")
-                                        varmd5hash = item.Split("=")(1)
-                                End Select
-
-                            Next
-                            'If the API key is the R1 test key give 401 Unauthorized
-
-                            If varapikey = "abcdef0123456789fedcba9876543210" Then
-                                'Configuration request
-                                response = context.Response
-                                response.StatusCode = 401
-                                response.StatusDescription = "Invalid API Key"
-                                buffer = System.Text.Encoding.UTF8.GetBytes(responseString)
-                                response.ContentLength64 = buffer.Length
-                                output = response.OutputStream
-                                output.Write(buffer, 0, buffer.Length)
-                            Else
-                                'Provide a report containing whatever MD5 is requested from R1
-
-                                response = context.Response
-                                response.StatusCode = 200
-                                response.StatusDescription = "OK"
-                                response.ContentType = "text/xml; charset=utf-8"
-                                response.ContentEncoding = System.Text.Encoding.UTF8
-                                response.KeepAlive = True
-                                response.SendChunked = True
-                                buffer = System.Text.Encoding.UTF8.GetBytes(PANW.PANWResponseToXML(PANW.GeneratePANWResponse(varmd5hash)))
-                                response.ContentLength64 = buffer.Length
-                                output = response.OutputStream
-                                output.Write(buffer, 0, buffer.Length)
-                     
-
-                            End If
-                        End If
-                    Else
-                        If context.Request.QueryString.Count = 1 Then
-                            'Check for stop command and END
-                            If context.Request.QueryString.Item(context.Request.QueryString.Count - 1) = "STOP" Then
-                                Debug.WriteLine("STOP")
-                                response = context.Response
-                                response.StatusCode = 200
-                                response.StatusDescription = "STOP"
-                                responseString = "STOP"
-                                buffer = System.Text.Encoding.UTF8.GetBytes(responseString)
-                                response.ContentLength64 = buffer.Length
-                                output = response.OutputStream
-                                output.Write(buffer, 0, buffer.Length)
-                                listen.Close()
-
-                            End If
-                        Else
-                            'General browse no parameters....respond gracefully
-                            response = context.Response
-                            response.StatusCode = 200
-                            response.StatusDescription = "Success"
-                            responseString = "<html><body>R1JobRunner - Wildfire Sim </br> LISTENING!!</body></html>"
-                            buffer = System.Text.Encoding.UTF8.GetBytes(responseString)
-                            response.ContentLength64 = buffer.Length
-                            output = response.OutputStream
-                            output.Write(buffer, 0, buffer.Length)
-                        End If
-                    End If
-                Catch ex As HttpListenerException
-                    Console.WriteLine(ex.Message)
-                Finally
-                    If response IsNot Nothing Then
-                        response.Close()
-                    End If
                 End Try
-            End While
+            Case "Stop Wildfire Sim"
+                Try
 
-        Catch ex As HttpListenerException
-            Console.WriteLine(ex.Message)
-        Finally
-            ' Stop listening for requests.
-            listen.Close()
-            Console.WriteLine("Wildfire Sim Done Listening...")
-        End Try
-    End Sub
+                    panw_sim_var.Stop()
+                   
+                    PANW.RemoveCert()
+                    btn_WildfireStart.Text = "Start Wildfire Sim"
+                    lblwildfirestatus.Text = "Wildfire Sim Status: Not Started"
+                    panw_sim_port.Enabled = True
 
-    Private Sub bgwork_panwlisten_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwork_panwlisten.RunWorkerCompleted
-        PANWListener.EndListener()
-        btn_WildfireStart.Text = "Start Wildfire Sim"
-        lblwildfirestatus.Text = "Wildfire Sim Status: Not Started"
-        panw_sim_port.Enabled = True
+                Catch ex As Exception
+
+                End Try
+        End Select
+
     End Sub
 
 
@@ -1529,12 +1288,4 @@ Public Class Main
         Process.Start(sinfo)
     End Sub
 
-
-    Private Sub Label37_Click(sender As Object, e As EventArgs) Handles Label37.Click
-
-    End Sub
-
-    Private Sub Button1_Click_2(sender As Object, e As EventArgs)
-        MsgBox(PANW.PANWResponseToXML(PANW.GeneratePANWResponse("ssdfsdfds")))
-    End Sub
 End Class
