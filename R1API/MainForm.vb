@@ -268,7 +268,7 @@ Public Class Main
 
         If chkUpdates.Checked Then
             Try
-                CheckForUpdates()
+                CheckForUpdates(True)
             Catch ex As Exception
             End Try
         End If
@@ -1311,14 +1311,14 @@ Public Class Main
 
     Private Sub btnUpdateCheck(sender As Object, e As EventArgs) Handles btn_CheckForUpdates.Click
         Try
-            CheckForUpdates()
+            CheckForUpdates(False)
         Catch ex As Exception
         End Try
     End Sub
 
     Private Sub Button1_Click_2(sender As Object, e As EventArgs) Handles Button1.Click
         Try
-            CheckForUpdates()
+            CheckForUpdates(False)
         Catch ex As Exception
         End Try
     End Sub

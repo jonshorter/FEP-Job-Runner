@@ -4,7 +4,7 @@ Imports Newtonsoft.Json
 Imports System.Text.RegularExpressions
 
 Module JobRunner_Functions
-    Public Sub CheckForUpdates()
+    Public Sub CheckForUpdates(Silent As Boolean)
         Dim updateclient As New WebClient
         Dim pageHTML As String
         Dim responseData As Byte()
@@ -39,7 +39,7 @@ Module JobRunner_Functions
                                     If url.Contains("R1_Job_Runner.exe") Then
                                         link = url
                                     End If
-                                  
+
                             End Select
                         Next
                     Next
@@ -51,10 +51,12 @@ Module JobRunner_Functions
 
             Dim maintext = "Version " & version & " is now available." & vbCrLf & "---------------" & vbCrLf & _
                     description & vbCrLf & "---------------" & vbCrLf
-
-
             Dim updatedialog As New UpdateDialog(maintext, "New Version Available", link)
             Dim result = updatedialog.ShowDialog
+        Else
+            If Not Silent = True Then
+                MsgBox("No Updates Available. Your version is the lastest.", MsgBoxStyle.Information, "No Updates Available")
+            End If
         End If
 
     End Sub
