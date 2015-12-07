@@ -1,8 +1,14 @@
 ﻿Imports System.Net
 Imports System.Security
+Imports System.Runtime.InteropServices
+
 
 
 Public Class Main
+
+
+
+
     'Delcare Stores for Job Filters/Options
     Public StoreInFiltList
     Public StoreExFiltList
@@ -138,12 +144,16 @@ Public Class Main
         End With
     End Sub
 
-    Private Sub Main_Disposed(sender As Object, e As EventArgs) Handles Me.Disposed
+    Private Sub Main_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
         Try
+  
             IO.File.Delete("Newtonsoft.Json.dll")
         Catch ex As Exception
+            Debug.WriteLine(ex.Message)
         End Try
     End Sub
+
+
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
         Try
@@ -185,7 +195,7 @@ Public Class Main
 
             'Updates on
             My.Settings.updatecheck = True
-       
+
 
             'Turn first run off
             My.Settings.firstrun = False
@@ -1290,7 +1300,7 @@ Public Class Main
                 Try
 
                     panw_sim_var.Stop()
-                   
+
                     PANW.RemoveCert()
                     btn_WildfireStart.Text = "Start Wildfire Sim"
                     lblwildfirestatus.Text = "Wildfire Sim Status: Not Started"

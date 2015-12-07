@@ -5,13 +5,15 @@ Imports System.Text.RegularExpressions
 
 Module JobRunner_Functions
     Public Sub CheckForUpdates(Silent As Boolean)
-        Dim updateclient As New WebClient
-        Dim pageHTML As String
-        Dim responseData As Byte()
-        updateclient.Headers.Add("User-Agent", "R1-Job-Runner")
-        responseData = updateclient.DownloadData("https://api.github.com/repos/bmartin5692/R1-Job-Runner/releases/latest")
-        pageHTML = System.Text.Encoding.ASCII.GetString(responseData)
-        Dim releaseInfo = Newtonsoft.Json.JsonConvert.DeserializeObject(pageHTML)
+        Try
+            Dim updateclient As New WebClient
+            Dim pageHTML As String
+            Dim responseData As Byte()
+            updateclient.Headers.Add("User-Agent", "R1-Job-Runner")
+            responseData = updateclient.DownloadData("https://api.github.com/repos/bmartin5692/R1-Job-Runner/releases/latest")
+            pageHTML = System.Text.Encoding.ASCII.GetString(responseData)
+            Dim releaseInfo = Newtonsoft.Json.JsonConvert.DeserializeObject(pageHTML)
+       
         Dim version As String = ""
         Dim description As String = ""
         Dim link As String = ""
@@ -55,10 +57,12 @@ Module JobRunner_Functions
             Dim result = updatedialog.ShowDialog
         Else
             If Not Silent = True Then
-                MsgBox("No Updates Available. Your version is the lastest.", MsgBoxStyle.Information, "No Updates Available")
+                MsgBox("No Updates Available. Your version is the latest.", MsgBoxStyle.Information, "No Updates Available")
             End If
         End If
-
+        Catch ex As Exception
+            Debug.WriteLine(ex.Message)
+        End Try
     End Sub
 
   
