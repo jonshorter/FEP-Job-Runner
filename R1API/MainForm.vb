@@ -183,12 +183,17 @@ Public Class Main
             'Set Blank Password
             My.Settings.apipassword = EncryptString(ToSecureString(""))
 
+            'Updates on
+            My.Settings.updatecheck = True
+       
+
             'Turn first run off
             My.Settings.firstrun = False
             My.Settings.Save()
         End If
 
         'End First Run
+
 
 
         'Set Target to Agent 
@@ -209,8 +214,13 @@ Public Class Main
         txtComputerTarget.Text = txtdefaultcomputer.Text
         txtdefaultshare.Text = My.Settings.defaultshare
         txtNetSharePath.Text = txtdefaultshare.Text
-        apipass = DecryptString(My.Settings.apipassword)
-        txtAPIPass.Text = apipass.ToString
+        If Not String.IsNullOrWhiteSpace(My.Settings.apipassword) Then
+            apipass = DecryptString(My.Settings.apipassword)
+            txtAPIPass.Text = apipass.ToString
+        Else
+            apipass = ToSecureString("")
+            txtAPIPass.Text = apipass.ToString
+        End If
         txtApiUser.Text = My.Settings.apiusername
         txtDefaultJobName.Text = My.Settings.jobname
         txtJobName.Text = txtDefaultJobName.Text
@@ -244,6 +254,9 @@ Public Class Main
             txtcustomwebaddress.Text = My.Settings.websitepath
         End If
 
+        'Update Check settings
+        chkUpdates.Checked = My.Settings.updatecheck
+
         'Set the job stores
         StoreInFiltList = New List(Of InclusionFilter)
         StoreExFiltList = New List(Of ExclusionFilter)
@@ -253,6 +266,12 @@ Public Class Main
         StoreRemKillNameList = New List(Of String)
         StoreRemKillIDList = New List(Of String)
 
+        If chkUpdates.Checked Then
+            Try
+                CheckForUpdates()
+            Catch ex As Exception
+            End Try
+        End If
 
 
     End Sub
@@ -305,6 +324,8 @@ Public Class Main
         Else
             My.Settings.websitepath = txtcustomwebaddress.Text
         End If
+
+        My.Settings.updatecheck = chkUpdates.Checked
 
         My.Settings.Save()
         txtStatusSettings.Text = "Settings Saved"
@@ -1288,4 +1309,17 @@ Public Class Main
         Process.Start(sinfo)
     End Sub
 
+    Private Sub btnUpdateCheck(sender As Object, e As EventArgs) Handles btn_CheckForUpdates.Click
+        Try
+            CheckForUpdates()
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Sub Button1_Click_2(sender As Object, e As EventArgs) Handles Button1.Click
+        Try
+            CheckForUpdates()
+        Catch ex As Exception
+        End Try
+    End Sub
 End Class

@@ -42,6 +42,7 @@ Partial Class Main
         Me.rdor1 = New System.Windows.Forms.RadioButton()
         Me.rdoadgmap = New System.Windows.Forms.RadioButton()
         Me.grpOptDefSet = New System.Windows.Forms.GroupBox()
+        Me.btn_CheckForUpdates = New System.Windows.Forms.Button()
         Me.chkbypasscerts = New System.Windows.Forms.CheckBox()
         Me.txtdefaultshare = New System.Windows.Forms.TextBox()
         Me.Label29 = New System.Windows.Forms.Label()
@@ -205,6 +206,9 @@ Partial Class Main
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.ofdBox = New System.Windows.Forms.OpenFileDialog()
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.chkUpdates = New System.Windows.Forms.CheckBox()
         Me.GroupBox4.SuspendLayout()
         Me.grpReqSet.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -248,6 +252,7 @@ Partial Class Main
         CType(Me.xps_sim_Port, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.xpsPort, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabAbout.SuspendLayout()
+        Me.GroupBox6.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnExecute
@@ -447,6 +452,7 @@ Partial Class Main
         '
         'grpOptDefSet
         '
+        Me.grpOptDefSet.Controls.Add(Me.GroupBox6)
         Me.grpOptDefSet.Controls.Add(Me.Label2)
         Me.grpOptDefSet.Controls.Add(Me.Label3)
         Me.grpOptDefSet.Controls.Add(Me.chkbypasscerts)
@@ -466,6 +472,15 @@ Partial Class Main
         Me.grpOptDefSet.TabIndex = 28
         Me.grpOptDefSet.TabStop = False
         Me.grpOptDefSet.Text = "Optional Default Settings"
+        '
+        'btn_CheckForUpdates
+        '
+        Me.btn_CheckForUpdates.Location = New System.Drawing.Point(55, 70)
+        Me.btn_CheckForUpdates.Name = "btn_CheckForUpdates"
+        Me.btn_CheckForUpdates.Size = New System.Drawing.Size(149, 32)
+        Me.btn_CheckForUpdates.TabIndex = 27
+        Me.btn_CheckForUpdates.Text = "Check for Updates"
+        Me.btn_CheckForUpdates.UseVisualStyleBackColor = True
         '
         'chkbypasscerts
         '
@@ -2242,6 +2257,7 @@ Partial Class Main
         '
         'tabAbout
         '
+        Me.tabAbout.Controls.Add(Me.Button1)
         Me.tabAbout.Controls.Add(Me.TextBox1)
         Me.tabAbout.Location = New System.Drawing.Point(4, 28)
         Me.tabAbout.Margin = New System.Windows.Forms.Padding(4)
@@ -2277,6 +2293,36 @@ Partial Class Main
         Me.sfdBox.DefaultExt = "json"
         Me.sfdBox.Filter = "Box Files|*.json"
         Me.sfdBox.InitialDirectory = "My.Application.Info.DirectoryPath & ""\BoxedJobs"""
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(343, 173)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(149, 32)
+        Me.Button1.TabIndex = 28
+        Me.Button1.Text = "Check for Updates"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'GroupBox6
+        '
+        Me.GroupBox6.Controls.Add(Me.chkUpdates)
+        Me.GroupBox6.Controls.Add(Me.btn_CheckForUpdates)
+        Me.GroupBox6.Location = New System.Drawing.Point(536, 66)
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.GroupBox6.Size = New System.Drawing.Size(251, 108)
+        Me.GroupBox6.TabIndex = 28
+        Me.GroupBox6.TabStop = False
+        Me.GroupBox6.Text = "Updates"
+        '
+        'chkUpdates
+        '
+        Me.chkUpdates.AutoSize = True
+        Me.chkUpdates.Location = New System.Drawing.Point(19, 29)
+        Me.chkUpdates.Name = "chkUpdates"
+        Me.chkUpdates.Size = New System.Drawing.Size(208, 21)
+        Me.chkUpdates.TabIndex = 28
+        Me.chkUpdates.Text = "Check For Updates On Start"
+        Me.chkUpdates.UseVisualStyleBackColor = True
         '
         'Main
         '
@@ -2356,6 +2402,8 @@ Partial Class Main
         CType(Me.xpsPort, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabAbout.ResumeLayout(False)
         Me.tabAbout.PerformLayout()
+        Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBox6.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -2542,5 +2590,9 @@ Partial Class Main
     Friend WithEvents Label47 As System.Windows.Forms.Label
     Friend WithEvents txtPANWMalwareMD5 As System.Windows.Forms.TextBox
     Friend WithEvents Label48 As System.Windows.Forms.Label
+    Friend WithEvents btn_CheckForUpdates As System.Windows.Forms.Button
+    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
+    Friend WithEvents chkUpdates As System.Windows.Forms.CheckBox
 
 End Class

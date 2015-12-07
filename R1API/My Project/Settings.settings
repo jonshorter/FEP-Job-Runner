@@ -39,5 +39,8 @@
     <Setting Name="websitepath" Type="System.String" Scope="User">
       <Value Profile="(Default)">R1</Value>
     </Setting>
+    <Setting Name="updatecheck" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
