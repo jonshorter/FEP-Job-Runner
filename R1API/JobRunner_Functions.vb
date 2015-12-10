@@ -3,8 +3,26 @@ Imports System.IO
 Imports Newtonsoft.Json
 Imports System.Text.RegularExpressions
 Imports System.Security.Cryptography.X509Certificates
+Imports R1SimpleRestClient
 
 Module JobRunner_Functions
+
+
+    Public Sub GetJobTemplates()
+        Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
+        Dim auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
+        Dim templates As List(Of R1SimpleRestClient.Models.Templates) = r1rest.Functions.Templates.GetTemplates(auth, Main.txtServer.Text)
+        Main.txtTemplateName.Items.Clear()
+        For Each template In templates
+            If template.isSystemJob = False Then
+                Main.txtTemplateName.Items.Add(template.name)
+            End If
+        Next
+
+    End Sub
+
+
+
     Public Sub CheckForUpdates(Silent As Boolean)
         Try
             Dim updateclient As New WebClient

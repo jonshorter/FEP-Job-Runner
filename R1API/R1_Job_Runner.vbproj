@@ -68,6 +68,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Downloads\Json60r8\Bin\Net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\..\R1-RestAPI-Net\R1SimpleRestClient\bin\Debug\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Security" />
@@ -194,6 +197,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\JobsService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\R1-RestAPI-Net\R1SimpleRestClient\R1SimpleRestClient.vbproj">
+      <Project>{458007ce-d492-4d53-baa8-a5e04b4ddbc8}</Project>
+      <Name>R1SimpleRestClient</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

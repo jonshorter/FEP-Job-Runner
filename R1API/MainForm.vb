@@ -171,26 +171,7 @@ Public Class Main
             'Set templates
             My.Settings.templatename.Clear()
             My.Settings.templatename.Add("coll-evtx")
-            My.Settings.templatename.Add("Drop Process by PID")
-            My.Settings.templatename.Add("ETM Relative Time Query")
-            My.Settings.templatename.Add("EXE-Metadata-Cerb")
-            My.Settings.templatename.Add("Lockdown NIC")
-            My.Settings.templatename.Add("LockdownEnableNIC")
-            My.Settings.templatename.Add("Memory Acquisition")
-            My.Settings.templatename.Add("Memory Analysis")
-            My.Settings.templatename.Add("Registry-Autostart")
-            My.Settings.templatename.Add("Registry-Full")
-            My.Settings.templatename.Add("Remediate-Name")
-            My.Settings.templatename.Add("Remediate-PID")
-            My.Settings.templatename.Add("Small-exes-Cerb")
-            My.Settings.templatename.Add("Software Inventory")
-            My.Settings.templatename.Add("Vol-Deep")
-            My.Settings.templatename.Add("Vol-Deep-Cerb")
-            My.Settings.templatename.Add("Vol-Hidden-Cerb")
-            My.Settings.templatename.Add("Vol-Hidden-Injected")
-            My.Settings.templatename.Add("Vol-Quick")
-            My.Settings.templatename.Add("Vol-Quick-Cerb")
-            My.Settings.templatename.Add("Vol-Quick-Sched")
+          
 
             'Set Blank Password
             My.Settings.apipassword = EncryptString(ToSecureString(""))
@@ -807,6 +788,8 @@ Public Class Main
         'Job Info Loaded - Set text boxes to default values from settings
         txtComputerTarget.Text = txtdefaultcomputer.Text
         txtNetSharePath.Text = txtdefaultshare.Text
+      
+
     End Sub
 
     Private Sub btnAddRemOption_Click(sender As Object, e As EventArgs) Handles btnAddRemOption.Click
@@ -1327,4 +1310,10 @@ Public Class Main
     End Sub
 
   
+
+    Private Sub tabJobExecution_Enter(sender As Object, e As EventArgs) Handles tabJobExecution.Enter
+        If rdor1.Checked = True Then
+            JobRunner_Functions.GetJobTemplates()
+        End If
+    End Sub
 End Class
