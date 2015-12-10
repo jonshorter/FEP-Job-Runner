@@ -107,7 +107,8 @@ Public Module PANW
             udpClient.Connect(Main.txtServer.Text, PANWPORT)
             bytCommand = Encoding.ASCII.GetBytes(PANWEvent)
             Dim pRet = udpClient.Send(bytCommand, bytCommand.Length)
-            Console.WriteLine("No of bytes sent " & pRet)
+            'Console.WriteLine("No of bytes sent " & pRet)
+            Debug.WriteLine("PANW SysLog Event Sent")
             Main.lblPANWStatus.Text = "PANW Syslog Threat Event Sent"
         Catch ex As Exception
             Main.lblPANWStatus.Text = ex.Message
@@ -203,75 +204,24 @@ Public Module PANW
 
         Return xstr
     End Function
-    Public Sub InstallCert()
-        Try
-            IO.File.WriteAllBytes("panw_listen_certificate.pfx", My.Resources.panw_listen_certificate)
-
-            Dim certload As New X509Certificate2
-
-            certload.Import("panw_listen_certificate.pfx", "", X509KeyStorageFlags.MachineKeySet)
-
-            IO.File.Delete("panw_listen_certificate.pfx")
-
-            Debug.WriteLine("Cert Hash:" & certload.GetCertHashString)
-            Dim xstore As New X509Store(StoreName.My, StoreLocation.LocalMachine)
-            xstore.Open(OpenFlags.ReadWrite)
-            xstore.Add(certload)
-            xstore.Close()
-            Dim appguid As String = New Guid(CType(Main.GetType.Assembly.GetCustomAttributes(GetType(Runtime.InteropServices.GuidAttribute), False)(0), Runtime.InteropServices.GuidAttribute).Value).ToString
-            Dim netshproc As New Process
-            Debug.WriteLine("netsh http add sslcert ipport=0.0.0.0:" & Main.panw_sim_port.Value & " certhash=" & certload.GetCertHashString & " appid={" & appguid & "}")
-            Dim netshprocStartInfo As New ProcessStartInfo("cmd.exe", "/c netsh http add sslcert ipport=0.0.0.0:" & Main.panw_sim_port.Value & " certhash=" & certload.GetCertHashString & " appid={" & appguid & "}")
-            netshprocStartInfo.WindowStyle = ProcessWindowStyle.Hidden
-            netshprocStartInfo.UseShellExecute = False
-            netshprocStartInfo.CreateNoWindow = True
-            netshprocStartInfo.RedirectStandardError = True
-            netshprocStartInfo.RedirectStandardOutput = True
-            netshproc.StartInfo = netshprocStartInfo
-            Debug.WriteLine("Running commands")
-            netshproc.Start()
-            Dim netshreader As IO.StreamReader = netshproc.StandardOutput
-            Debug.WriteLine(netshreader.ReadToEnd)
-        Catch ex As Exception
-            Debug.WriteLine(ex.Message)
-        End Try
-
-    End Sub
-
-    Public Sub RemoveCert()
-        Try
-            Dim appguid As String = New Guid(CType(Main.GetType.Assembly.GetCustomAttributes(GetType(Runtime.InteropServices.GuidAttribute), False)(0), Runtime.InteropServices.GuidAttribute).Value).ToString
-            Dim netshproc As New Process
-            Debug.WriteLine("netsh http delete sslcert ipport=0.0.0.0:" & Main.panw_sim_port.Value)
-            Dim netshprocStartInfo As New ProcessStartInfo("cmd.exe", "/c netsh http delete sslcert ipport=0.0.0.0:" & Main.panw_sim_port.Value)
-            netshprocStartInfo.WindowStyle = ProcessWindowStyle.Hidden
-            netshprocStartInfo.CreateNoWindow = True
-            netshprocStartInfo.UseShellExecute = False
-            netshprocStartInfo.RedirectStandardError = True
-            netshprocStartInfo.RedirectStandardOutput = True
-            netshproc.StartInfo = netshprocStartInfo
-            Debug.WriteLine("Running commands")
-            netshproc.Start()
-            Dim netshreader As IO.StreamReader = netshproc.StandardOutput
-            Debug.WriteLine(netshreader.ReadToEnd)
-        Catch ex As Exception
-            Debug.WriteLine(ex.Message)
-        End Try
-    End Sub
+   
 
     Public Class PANW_Sim
         Public prefix As String = "https://*:" & Main.panw_sim_port.Value & "/"
         Public listener As HttpListener = New HttpListener
 
         Public Sub Start()
+            CertLoad()
+            AssociateCertToListener(Main.sim_selfcert)
             listener.Prefixes.Add(prefix)
             listener.Start()
             listener.BeginGetContext(AddressOf Sim_Respond, listener)
-            Debug.WriteLine("PANW Sim Listening")
+            Debug.WriteLine("PANW Sim Listening at " & prefix)
 
         End Sub
         Public Sub [Stop]()
             listener.Stop()
+            DeAssociateCertToListener()
         End Sub
 
         Public Sub Sim_Respond(ByVal ar As IAsyncResult)
@@ -315,6 +265,7 @@ Public Module PANW
                                 response.ContentLength64 = buffer.Length
                                 output = response.OutputStream
                                 output.Write(buffer, 0, buffer.Length)
+                                Debug.WriteLine("PANW Config Request")
                             Else
                                 'Provide a report containing whatever MD5 is requested from R1
 
@@ -329,7 +280,7 @@ Public Module PANW
                                 response.ContentLength64 = buffer.Length
                                 output = response.OutputStream
                                 output.Write(buffer, 0, buffer.Length)
-
+                                Debug.WriteLine("PANW MD5 Response")
 
                             End If
                         End If
@@ -337,7 +288,7 @@ Public Module PANW
                         If context.Request.QueryString.Count = 1 Then
                             'Check for stop command and END
                             If context.Request.QueryString.Item(context.Request.QueryString.Count - 1) = "STOP" Then
-                                Debug.WriteLine("STOP")
+                                Debug.WriteLine("PANW STOP")
                                 response = context.Response
                                 response.StatusCode = 200
                                 response.StatusDescription = "STOP"
@@ -359,6 +310,7 @@ Public Module PANW
                             response.ContentLength64 = buffer.Length
                             output = response.OutputStream
                             output.Write(buffer, 0, buffer.Length)
+                            Debug.WriteLine("PANW General Website")
                         End If
                     End If
                 Catch ex As HttpListenerException
@@ -367,6 +319,78 @@ Public Module PANW
                   
                 End Try
             End If
+        End Sub
+        Private Sub CertLoad()
+            Dim selfcertmy = JobRunner_Functions.CheckMyStoreForSelfSigned
+            Dim selfcertroot = JobRunner_Functions.CheckRootStoreForSelfSigned
+            If selfcertmy.Count > 0 Then
+                Select Case selfcertroot.Count
+                    Case 0
+                        JobRunner_Functions.MoveSelfFromMyToRoot(selfcertmy(0))
+                        Main.sim_selfcert = selfcertmy(0)
+                        Debug.WriteLine("My Exists, Moving to Root")
+                    Case 1
+                        If selfcertmy(0) = selfcertroot(0) Then
+                            Main.sim_selfcert = selfcertroot(0)
+                            Debug.WriteLine("My = Root, Using")
+                        Else
+                            JobRunner_Functions.DeleteRootSelfSigned(selfcertroot(0))
+                            JobRunner_Functions.MoveSelfFromMyToRoot(selfcertmy(0))
+                            Main.sim_selfcert = selfcertmy(0)
+                            Debug.WriteLine("My <> Root. Deleting and Moving")
+                        End If
+                    Case Else
+                        'Just use 0 in root
+                        Main.sim_selfcert = selfcertroot(0)
+                        Debug.WriteLine("Using Root 0")
+                End Select
+            Else
+                Dim selfcert = JobRunner_Functions.CreateSelfInMy()
+                JobRunner_Functions.MoveSelfFromMyToRoot(selfcert.GetCertHashString)
+                Main.sim_selfcert = selfcert.GetCertHashString
+                Debug.WriteLine("No Certs. Creating and Using New")
+            End If
+        End Sub
+        Private Sub AssociateCertToListener(ByVal certhash As String)
+            Try
+                Dim appguid As String = New Guid(CType(Main.GetType.Assembly.GetCustomAttributes(GetType(Runtime.InteropServices.GuidAttribute), False)(0), Runtime.InteropServices.GuidAttribute).Value).ToString
+                Dim netshproc As New Process
+                Debug.WriteLine("netsh http add sslcert ipport=0.0.0.0:" & Main.panw_sim_port.Value & " certhash=" & certhash & " appid={" & appguid & "}")
+                Dim netshprocStartInfo As New ProcessStartInfo("cmd.exe", "/c netsh http add sslcert ipport=0.0.0.0:" & Main.panw_sim_port.Value & " certhash=" & certhash & " appid={" & appguid & "}")
+                netshprocStartInfo.WindowStyle = ProcessWindowStyle.Hidden
+                netshprocStartInfo.CreateNoWindow = True
+                netshprocStartInfo.UseShellExecute = False
+                netshprocStartInfo.RedirectStandardError = True
+                netshprocStartInfo.RedirectStandardOutput = True
+                netshproc.StartInfo = netshprocStartInfo
+                Debug.WriteLine("Running commands")
+                netshproc.Start()
+                Dim netshreader As IO.StreamReader = netshproc.StandardOutput
+                Debug.WriteLine(netshreader.ReadToEnd)
+            Catch ex As Exception
+                Debug.WriteLine(ex.Message)
+            End Try
+        End Sub
+
+        Private Sub DeAssociateCertToListener()
+            Try
+                Dim appguid As String = New Guid(CType(Main.GetType.Assembly.GetCustomAttributes(GetType(Runtime.InteropServices.GuidAttribute), False)(0), Runtime.InteropServices.GuidAttribute).Value).ToString
+                Dim netshproc As New Process
+                Debug.WriteLine("netsh http delete sslcert ipport=0.0.0.0:" & Main.panw_sim_port.Value)
+                Dim netshprocStartInfo As New ProcessStartInfo("cmd.exe", "/c netsh http delete sslcert ipport=0.0.0.0:" & Main.panw_sim_port.Value)
+                netshprocStartInfo.WindowStyle = ProcessWindowStyle.Hidden
+                netshprocStartInfo.UseShellExecute = False
+                netshprocStartInfo.CreateNoWindow = True
+                netshprocStartInfo.RedirectStandardError = True
+                netshprocStartInfo.RedirectStandardOutput = True
+                netshproc.StartInfo = netshprocStartInfo
+                Debug.WriteLine("Running commands")
+                netshproc.Start()
+                Dim netshreader As IO.StreamReader = netshproc.StandardOutput
+                Debug.WriteLine(netshreader.ReadToEnd)
+            Catch ex As Exception
+                Debug.WriteLine(ex.Message)
+            End Try
         End Sub
     End Class
 End Module

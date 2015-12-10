@@ -26,6 +26,9 @@ Public Class Main
     'Stores ThreadInfo
     Public xps_sim_var As XPS.XPS_Sim
     Public panw_sim_var As PANW.PANW_Sim
+    'Self-Signed Cert
+    Public sim_selfcert As String = ""
+
 
 
 
@@ -146,7 +149,6 @@ Public Class Main
 
     Private Sub Main_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
         Try
-  
             IO.File.Delete("Newtonsoft.Json.dll")
         Catch ex As Exception
             Debug.WriteLine(ex.Message)
@@ -1231,7 +1233,7 @@ Public Class Main
             xpsThreat.Rule = "Malware Detection Engine"
             xpsThreat.Severity = Me.cmbXPSSeverity.SelectedItem.ToString
             Dim xpststr As String = XPS.XPSThreatTOCSV(xpsThreat)
-            Debug.Print(xpststr)
+
             XPS.SendEvent(xpststr)
 
         Catch Ex As Exception
@@ -1254,24 +1256,19 @@ Public Class Main
                     btnStartXPSListener.Text = "Stop XPS CP Sim"
                     lbldemoxpsstatus.Text = "XPS CP Sim Status: Started"
                     xps_sim_Port.Enabled = False
-                    XPS.InstallCert()
                     xps_sim_var = New XPS.XPS_Sim
                     xps_sim_var.Start()
                 Catch ex As Exception
-
+                    Debug.WriteLine(ex.Message)
                 End Try
             Case "Stop XPS CP Sim"
                 Try
-
                     xps_sim_var.Stop()
-                    XPS.RemoveCert()
                     btnStartXPSListener.Text = "Start XPS CP Sim"
                     lbldemoxpsstatus.Text = "XPS CP Sim Status: Not Started"
                     xps_sim_Port.Enabled = True
-
-
                 Catch ex As Exception
-
+                    Debug.WriteLine(ex.Message)
                 End Try
         End Select
 
@@ -1290,24 +1287,20 @@ Public Class Main
                     btn_WildfireStart.Text = "Stop Wildfire Sim"
                     lblwildfirestatus.Text = "Wildfire Sim Status: Started"
                     panw_sim_port.Enabled = False
-                    PANW.InstallCert()
                     panw_sim_var = New PANW.PANW_Sim
                     panw_sim_var.Start()
                 Catch ex As Exception
-
+                    Debug.WriteLine(ex.Message)
                 End Try
             Case "Stop Wildfire Sim"
                 Try
-
                     panw_sim_var.Stop()
-
-                    PANW.RemoveCert()
                     btn_WildfireStart.Text = "Start Wildfire Sim"
                     lblwildfirestatus.Text = "Wildfire Sim Status: Not Started"
                     panw_sim_port.Enabled = True
 
                 Catch ex As Exception
-
+                    Debug.WriteLine(ex.Message)
                 End Try
         End Select
 
@@ -1332,4 +1325,6 @@ Public Class Main
         Catch ex As Exception
         End Try
     End Sub
+
+  
 End Class

@@ -64,7 +64,8 @@ Public Module XPS
             udpClient.Connect(Main.txtServer.Text, XPSPort)
             bytCommand = Encoding.ASCII.GetBytes(XPSEvent)
             Dim pRet = udpClient.Send(bytCommand, bytCommand.Length)
-            Console.WriteLine("No of bytes sent " & pRet)
+            ' Console.WriteLine("No of bytes sent " & pRet)
+            Debug.WriteLine("XPS SysLog Event Sent")
             Main.lblXPSStatus.Text = "XPS Syslog Malware Event Sent"
 
         Catch ex As Exception
@@ -329,75 +330,25 @@ Public Module XPS
         'Return JSON STring
         Return jstr
     End Function
-    Public Sub InstallCert()
-        Try
-            IO.File.WriteAllBytes("xps_listen_certificate.pfx", My.Resources.xps_listen_certificate)
 
-            Dim certload As New X509Certificate2
-
-            certload.Import("xps_listen_certificate.pfx", "", X509KeyStorageFlags.MachineKeySet)
-
-            IO.File.Delete("xps_listen_certificate.pfx")
-
-            Debug.WriteLine("Cert Hash:" & certload.GetCertHashString)
-            Dim xstore As New X509Store(StoreName.My, StoreLocation.LocalMachine)
-            xstore.Open(OpenFlags.ReadWrite)
-            xstore.Add(certload)
-            xstore.Close()
-            Dim appguid As String = New Guid(CType(Main.GetType.Assembly.GetCustomAttributes(GetType(Runtime.InteropServices.GuidAttribute), False)(0), Runtime.InteropServices.GuidAttribute).Value).ToString
-            Dim netshproc As New Process
-            Debug.WriteLine("netsh http add sslcert ipport=0.0.0.0:" & Main.xps_sim_Port.Value & " certhash=" & certload.GetCertHashString & " appid={" & appguid & "}")
-            Dim netshprocStartInfo As New ProcessStartInfo("cmd.exe", "/c netsh http add sslcert ipport=0.0.0.0:" & Main.xps_sim_Port.Value & " certhash=" & certload.GetCertHashString & " appid={" & appguid & "}")
-            netshprocStartInfo.WindowStyle = ProcessWindowStyle.Hidden
-            netshprocStartInfo.CreateNoWindow = True
-            netshprocStartInfo.UseShellExecute = False
-            netshprocStartInfo.RedirectStandardError = True
-            netshprocStartInfo.RedirectStandardOutput = True
-            netshproc.StartInfo = netshprocStartInfo
-            Debug.WriteLine("Running commands")
-            netshproc.Start()
-            Dim netshreader As IO.StreamReader = netshproc.StandardOutput
-            Debug.WriteLine(netshreader.ReadToEnd)
-        Catch ex As Exception
-            Debug.WriteLine(ex.Message)
-        End Try
-
-    End Sub
-
-    Public Sub RemoveCert()
-        Try
-            Dim appguid As String = New Guid(CType(Main.GetType.Assembly.GetCustomAttributes(GetType(Runtime.InteropServices.GuidAttribute), False)(0), Runtime.InteropServices.GuidAttribute).Value).ToString
-            Dim netshproc As New Process
-            Debug.WriteLine("netsh http delete sslcert ipport=0.0.0.0:" & Main.xps_sim_Port.Value)
-            Dim netshprocStartInfo As New ProcessStartInfo("cmd.exe", "/c netsh http delete sslcert ipport=0.0.0.0:" & Main.xps_sim_Port.Value)
-            netshprocStartInfo.WindowStyle = ProcessWindowStyle.Hidden
-            netshprocStartInfo.UseShellExecute = False
-            netshprocStartInfo.CreateNoWindow = True
-            netshprocStartInfo.RedirectStandardError = True
-            netshprocStartInfo.RedirectStandardOutput = True
-            netshproc.StartInfo = netshprocStartInfo
-            Debug.WriteLine("Running commands")
-            netshproc.Start()
-            Dim netshreader As IO.StreamReader = netshproc.StandardOutput
-            Debug.WriteLine(netshreader.ReadToEnd)
-        Catch ex As Exception
-            Debug.WriteLine(ex.Message)
-        End Try
-    End Sub
 
     Public Class XPS_Sim
         Public prefix As String = "https://*:" & Main.xps_sim_Port.Value & "/"
         Public listener As HttpListener = New HttpListener
+        Public certhash As String = ""
 
         Public Sub Start()
+            CertLoad()
+            AssociateCertToListener(Main.sim_selfcert)
             listener.Prefixes.Add(prefix)
             listener.Start()
             listener.BeginGetContext(AddressOf Sim_Respond, listener)
-            Debug.WriteLine("XPS Sim Listening")
+            Debug.WriteLine("XPS Sim Listening " & prefix)
 
         End Sub
         Public Sub [Stop]()
             listener.Stop()
+            DeAssociateCertToListener()
         End Sub
 
         Public Sub Sim_Respond(ByVal ar As IAsyncResult)
@@ -422,10 +373,11 @@ Public Module XPS
                             response.ContentLength64 = buffer.Length
                             output = response.OutputStream
                             output.Write(buffer, 0, buffer.Length)
+                            Debug.WriteLine("XPS General Website")
                         Else
                             'Check for stop command and END
                             If context.Request.QueryString.Item(context.Request.QueryString.Count - 1) = "STOP" Then
-                                Debug.WriteLine("STOP")
+                                Debug.WriteLine("XPS STOP")
                                 response = context.Response
                                 response.StatusCode = 200
                                 response.StatusDescription = "STOP"
@@ -448,15 +400,18 @@ Public Module XPS
                             response.ContentLength64 = buffer.Length
                             output = response.OutputStream
                             output.Write(buffer, 0, buffer.Length)
+                            Debug.WriteLine("XPS Auth Request")
                         Else
                             'Response for report query
                             response = context.Response
                             If Not String.IsNullOrWhiteSpace(Main.txtFireEyeMalwareMD5.Text) Then
                                 'Use Specified MD5
                                 buffer = System.Text.Encoding.UTF8.GetBytes(XPS.XPS_MDE_Response_ToJSON(XPS.GenerateXPS_MDE_Response(Main.txtXPSMalwareMD5.Text)))
+                                Debug.WriteLine("XPS Response with Custom MD5")
                             Else
                                 'Else use FETest MD5
                                 buffer = System.Text.Encoding.UTF8.GetBytes(XPS.XPS_MDE_Response_ToJSON(XPS.GenerateXPS_MDE_Response("47f9fdc617f8c98a6732be534d8dbe9a")))
+                                Debug.WriteLine("XPS Response with FE MD5")
                             End If
                             response.ContentLength64 = buffer.Length
                             output = response.OutputStream
@@ -471,6 +426,79 @@ Public Module XPS
 
                 End Try
             End If
+        End Sub
+        Private Sub CertLoad()
+            Dim selfcertmy = JobRunner_Functions.CheckMyStoreForSelfSigned
+            Dim selfcertroot = JobRunner_Functions.CheckRootStoreForSelfSigned
+            If selfcertmy.Count > 0 Then
+                Select Case selfcertroot.Count
+                    Case 0
+                        JobRunner_Functions.MoveSelfFromMyToRoot(selfcertmy(0))
+                        Main.sim_selfcert = selfcertmy(0)
+                        Debug.WriteLine("My Exists, Moving to Root")
+                    Case 1
+                        If selfcertmy(0) = selfcertroot(0) Then
+                            Main.sim_selfcert = selfcertroot(0)
+                            Debug.WriteLine("My = Root, Using")
+                        Else
+                            JobRunner_Functions.DeleteRootSelfSigned(selfcertroot(0))
+                            JobRunner_Functions.MoveSelfFromMyToRoot(selfcertmy(0))
+                            Main.sim_selfcert = selfcertmy(0)
+                            Debug.WriteLine("My <> Root. Deleting and Moving")
+                        End If
+                    Case Else
+                        'Just use 0 in root
+                        Main.sim_selfcert = selfcertroot(0)
+                        Debug.WriteLine("Using Root 0")
+                End Select
+            Else
+                Dim selfcert = JobRunner_Functions.CreateSelfInMy()
+                JobRunner_Functions.MoveSelfFromMyToRoot(selfcert.GetCertHashString)
+                Main.sim_selfcert = selfcert.GetCertHashString
+                Debug.WriteLine("No Certs. Creating and Using New")
+            End If
+        End Sub
+
+        Private Sub AssociateCertToListener(ByVal certhash As String)
+            Try
+                Dim appguid As String = New Guid(CType(Main.GetType.Assembly.GetCustomAttributes(GetType(Runtime.InteropServices.GuidAttribute), False)(0), Runtime.InteropServices.GuidAttribute).Value).ToString
+                Dim netshproc As New Process
+                Debug.WriteLine("netsh http add sslcert ipport=0.0.0.0:" & Main.xps_sim_Port.Value & " certhash=" & certhash & " appid={" & appguid & "}")
+                Dim netshprocStartInfo As New ProcessStartInfo("cmd.exe", "/c netsh http add sslcert ipport=0.0.0.0:" & Main.xps_sim_Port.Value & " certhash=" & certhash & " appid={" & appguid & "}")
+                netshprocStartInfo.WindowStyle = ProcessWindowStyle.Hidden
+                netshprocStartInfo.CreateNoWindow = True
+                netshprocStartInfo.UseShellExecute = False
+                netshprocStartInfo.RedirectStandardError = True
+                netshprocStartInfo.RedirectStandardOutput = True
+                netshproc.StartInfo = netshprocStartInfo
+                Debug.WriteLine("Running commands")
+                netshproc.Start()
+                Dim netshreader As IO.StreamReader = netshproc.StandardOutput
+                Debug.WriteLine(netshreader.ReadToEnd)
+            Catch ex As Exception
+                Debug.WriteLine(ex.Message)
+            End Try
+        End Sub
+
+        Private Sub DeAssociateCertToListener()
+            Try
+                Dim appguid As String = New Guid(CType(Main.GetType.Assembly.GetCustomAttributes(GetType(Runtime.InteropServices.GuidAttribute), False)(0), Runtime.InteropServices.GuidAttribute).Value).ToString
+                Dim netshproc As New Process
+                Debug.WriteLine("netsh http delete sslcert ipport=0.0.0.0:" & Main.xps_sim_Port.Value)
+                Dim netshprocStartInfo As New ProcessStartInfo("cmd.exe", "/c netsh http delete sslcert ipport=0.0.0.0:" & Main.xps_sim_Port.Value)
+                netshprocStartInfo.WindowStyle = ProcessWindowStyle.Hidden
+                netshprocStartInfo.UseShellExecute = False
+                netshprocStartInfo.CreateNoWindow = True
+                netshprocStartInfo.RedirectStandardError = True
+                netshprocStartInfo.RedirectStandardOutput = True
+                netshproc.StartInfo = netshprocStartInfo
+                Debug.WriteLine("Running commands")
+                netshproc.Start()
+                Dim netshreader As IO.StreamReader = netshproc.StandardOutput
+                Debug.WriteLine(netshreader.ReadToEnd)
+            Catch ex As Exception
+                Debug.WriteLine(ex.Message)
+            End Try
         End Sub
     End Class
 

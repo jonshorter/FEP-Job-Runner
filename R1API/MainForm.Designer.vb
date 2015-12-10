@@ -42,6 +42,8 @@ Partial Class Main
         Me.rdor1 = New System.Windows.Forms.RadioButton()
         Me.rdoadgmap = New System.Windows.Forms.RadioButton()
         Me.grpOptDefSet = New System.Windows.Forms.GroupBox()
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.chkUpdates = New System.Windows.Forms.CheckBox()
         Me.btn_CheckForUpdates = New System.Windows.Forms.Button()
         Me.chkbypasscerts = New System.Windows.Forms.CheckBox()
         Me.txtdefaultshare = New System.Windows.Forms.TextBox()
@@ -203,16 +205,15 @@ Partial Class Main
         Me.Label40 = New System.Windows.Forms.Label()
         Me.btnXPSSend = New System.Windows.Forms.Button()
         Me.tabAbout = New System.Windows.Forms.TabPage()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.ofdBox = New System.Windows.Forms.OpenFileDialog()
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
-        Me.chkUpdates = New System.Windows.Forms.CheckBox()
         Me.GroupBox4.SuspendLayout()
         Me.grpReqSet.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.grpOptDefSet.SuspendLayout()
+        Me.GroupBox6.SuspendLayout()
         Me.tabSubMenu.SuspendLayout()
         Me.tabJobInfo.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -252,7 +253,6 @@ Partial Class Main
         CType(Me.xps_sim_Port, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.xpsPort, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabAbout.SuspendLayout()
-        Me.GroupBox6.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnExecute
@@ -472,6 +472,27 @@ Partial Class Main
         Me.grpOptDefSet.TabIndex = 28
         Me.grpOptDefSet.TabStop = False
         Me.grpOptDefSet.Text = "Optional Default Settings"
+        '
+        'GroupBox6
+        '
+        Me.GroupBox6.Controls.Add(Me.chkUpdates)
+        Me.GroupBox6.Controls.Add(Me.btn_CheckForUpdates)
+        Me.GroupBox6.Location = New System.Drawing.Point(536, 66)
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.GroupBox6.Size = New System.Drawing.Size(251, 108)
+        Me.GroupBox6.TabIndex = 28
+        Me.GroupBox6.TabStop = False
+        Me.GroupBox6.Text = "Updates"
+        '
+        'chkUpdates
+        '
+        Me.chkUpdates.AutoSize = True
+        Me.chkUpdates.Location = New System.Drawing.Point(19, 29)
+        Me.chkUpdates.Name = "chkUpdates"
+        Me.chkUpdates.Size = New System.Drawing.Size(208, 21)
+        Me.chkUpdates.TabIndex = 28
+        Me.chkUpdates.Text = "Check For Updates On Start"
+        Me.chkUpdates.UseVisualStyleBackColor = True
         '
         'btn_CheckForUpdates
         '
@@ -2267,6 +2288,15 @@ Partial Class Main
         Me.tabAbout.Text = "About"
         Me.tabAbout.UseVisualStyleBackColor = True
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(343, 173)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(149, 32)
+        Me.Button1.TabIndex = 28
+        Me.Button1.Text = "Check for Updates"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'TextBox1
         '
         Me.TextBox1.BackColor = System.Drawing.SystemColors.Control
@@ -2294,36 +2324,6 @@ Partial Class Main
         Me.sfdBox.Filter = "Box Files|*.json"
         Me.sfdBox.InitialDirectory = "My.Application.Info.DirectoryPath & ""\BoxedJobs"""
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(343, 173)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(149, 32)
-        Me.Button1.TabIndex = 28
-        Me.Button1.Text = "Check for Updates"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'GroupBox6
-        '
-        Me.GroupBox6.Controls.Add(Me.chkUpdates)
-        Me.GroupBox6.Controls.Add(Me.btn_CheckForUpdates)
-        Me.GroupBox6.Location = New System.Drawing.Point(536, 66)
-        Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Size = New System.Drawing.Size(251, 108)
-        Me.GroupBox6.TabIndex = 28
-        Me.GroupBox6.TabStop = False
-        Me.GroupBox6.Text = "Updates"
-        '
-        'chkUpdates
-        '
-        Me.chkUpdates.AutoSize = True
-        Me.chkUpdates.Location = New System.Drawing.Point(19, 29)
-        Me.chkUpdates.Name = "chkUpdates"
-        Me.chkUpdates.Size = New System.Drawing.Size(208, 21)
-        Me.chkUpdates.TabIndex = 28
-        Me.chkUpdates.Text = "Check For Updates On Start"
-        Me.chkUpdates.UseVisualStyleBackColor = True
-        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -2344,6 +2344,8 @@ Partial Class Main
         Me.GroupBox2.PerformLayout()
         Me.grpOptDefSet.ResumeLayout(False)
         Me.grpOptDefSet.PerformLayout()
+        Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBox6.PerformLayout()
         Me.tabSubMenu.ResumeLayout(False)
         Me.tabJobInfo.ResumeLayout(False)
         Me.tabJobInfo.PerformLayout()
@@ -2402,8 +2404,6 @@ Partial Class Main
         CType(Me.xpsPort, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabAbout.ResumeLayout(False)
         Me.tabAbout.PerformLayout()
-        Me.GroupBox6.ResumeLayout(False)
-        Me.GroupBox6.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
