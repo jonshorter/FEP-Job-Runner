@@ -152,12 +152,6 @@ Partial Class Main
         Me.splitJobsRestJobs = New System.Windows.Forms.SplitContainer()
         Me.txtJobsSearch = New System.Windows.Forms.TextBox()
         Me.dgvJobsRestJobsList = New System.Windows.Forms.DataGridView()
-        Me.jobName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.jobStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.jobType = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.jobStart = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.jobEnd = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.jobID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.tabJobExecution = New System.Windows.Forms.TabPage()
         Me.lblJobStatus = New System.Windows.Forms.Label()
@@ -222,6 +216,15 @@ Partial Class Main
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.ofdBox = New System.Windows.Forms.OpenFileDialog()
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
+        Me.jobName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobRetry = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.jobCancel = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.jobType = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobStart = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobEnd = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobResultID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox4.SuspendLayout()
         Me.grpReqSet.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -1700,7 +1703,7 @@ Partial Class Main
         Me.dgvJobsRestJobsList.AllowUserToDeleteRows = False
         Me.dgvJobsRestJobsList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
         Me.dgvJobsRestJobsList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvJobsRestJobsList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.jobName, Me.jobStatus, Me.jobType, Me.jobStart, Me.jobEnd, Me.jobID})
+        Me.dgvJobsRestJobsList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.jobName, Me.jobStatus, Me.jobRetry, Me.jobCancel, Me.jobType, Me.jobStart, Me.jobEnd, Me.jobID, Me.jobResultID})
         Me.dgvJobsRestJobsList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvJobsRestJobsList.Location = New System.Drawing.Point(0, 0)
         Me.dgvJobsRestJobsList.Name = "dgvJobsRestJobsList"
@@ -1709,48 +1712,6 @@ Partial Class Main
         Me.dgvJobsRestJobsList.RowTemplate.Height = 24
         Me.dgvJobsRestJobsList.Size = New System.Drawing.Size(826, 625)
         Me.dgvJobsRestJobsList.TabIndex = 0
-        '
-        'jobName
-        '
-        Me.jobName.HeaderText = "Name"
-        Me.jobName.Name = "jobName"
-        Me.jobName.ReadOnly = True
-        Me.jobName.Width = 70
-        '
-        'jobStatus
-        '
-        Me.jobStatus.HeaderText = "Status"
-        Me.jobStatus.Name = "jobStatus"
-        Me.jobStatus.ReadOnly = True
-        Me.jobStatus.Width = 73
-        '
-        'jobType
-        '
-        Me.jobType.HeaderText = "Type"
-        Me.jobType.Name = "jobType"
-        Me.jobType.ReadOnly = True
-        Me.jobType.Width = 65
-        '
-        'jobStart
-        '
-        Me.jobStart.HeaderText = "Start"
-        Me.jobStart.Name = "jobStart"
-        Me.jobStart.ReadOnly = True
-        Me.jobStart.Width = 63
-        '
-        'jobEnd
-        '
-        Me.jobEnd.HeaderText = "End"
-        Me.jobEnd.Name = "jobEnd"
-        Me.jobEnd.ReadOnly = True
-        Me.jobEnd.Width = 58
-        '
-        'jobID
-        '
-        Me.jobID.HeaderText = "jobID"
-        Me.jobID.Name = "jobID"
-        Me.jobID.ReadOnly = True
-        Me.jobID.Width = 65
         '
         'TabPage2
         '
@@ -2474,6 +2435,72 @@ Partial Class Main
         Me.sfdBox.Filter = "Box Files|*.json"
         Me.sfdBox.InitialDirectory = "My.Application.Info.DirectoryPath & ""\BoxedJobs"""
         '
+        'jobName
+        '
+        Me.jobName.HeaderText = "Name"
+        Me.jobName.Name = "jobName"
+        Me.jobName.ReadOnly = True
+        Me.jobName.Width = 70
+        '
+        'jobStatus
+        '
+        Me.jobStatus.DividerWidth = 5
+        Me.jobStatus.HeaderText = "Status"
+        Me.jobStatus.Name = "jobStatus"
+        Me.jobStatus.ReadOnly = True
+        Me.jobStatus.Width = 78
+        '
+        'jobRetry
+        '
+        Me.jobRetry.DividerWidth = 5
+        Me.jobRetry.HeaderText = "Retry Job"
+        Me.jobRetry.Name = "jobRetry"
+        Me.jobRetry.ReadOnly = True
+        Me.jobRetry.Width = 80
+        '
+        'jobCancel
+        '
+        Me.jobCancel.DividerWidth = 5
+        Me.jobCancel.HeaderText = "Cancel Job"
+        Me.jobCancel.Name = "jobCancel"
+        Me.jobCancel.ReadOnly = True
+        Me.jobCancel.Width = 89
+        '
+        'jobType
+        '
+        Me.jobType.HeaderText = "Type"
+        Me.jobType.Name = "jobType"
+        Me.jobType.ReadOnly = True
+        Me.jobType.Width = 65
+        '
+        'jobStart
+        '
+        Me.jobStart.HeaderText = "Start"
+        Me.jobStart.Name = "jobStart"
+        Me.jobStart.ReadOnly = True
+        Me.jobStart.Width = 63
+        '
+        'jobEnd
+        '
+        Me.jobEnd.HeaderText = "End"
+        Me.jobEnd.Name = "jobEnd"
+        Me.jobEnd.ReadOnly = True
+        Me.jobEnd.Width = 58
+        '
+        'jobID
+        '
+        Me.jobID.HeaderText = "jobID"
+        Me.jobID.Name = "jobID"
+        Me.jobID.ReadOnly = True
+        Me.jobID.Width = 65
+        '
+        'jobResultID
+        '
+        Me.jobResultID.HeaderText = "ResultID"
+        Me.jobResultID.Name = "jobResultID"
+        Me.jobResultID.ReadOnly = True
+        Me.jobResultID.Width = 86
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -2761,9 +2788,12 @@ Partial Class Main
     Friend WithEvents dgvJobsRestJobsList As System.Windows.Forms.DataGridView
     Friend WithEvents jobName As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents jobStatus As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents jobRetry As System.Windows.Forms.DataGridViewButtonColumn
+    Friend WithEvents jobCancel As System.Windows.Forms.DataGridViewButtonColumn
     Friend WithEvents jobType As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents jobStart As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents jobEnd As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents jobID As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents jobResultID As System.Windows.Forms.DataGridViewTextBoxColumn
 
 End Class

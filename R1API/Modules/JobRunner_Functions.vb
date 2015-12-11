@@ -7,11 +7,6 @@ Imports R1SimpleRestClient
 
 Module JobRunner_Functions
 
-
-
-
-
-
     Public Sub CheckForUpdates(Silent As Boolean)
         Try
             Dim updateclient As New WebClient

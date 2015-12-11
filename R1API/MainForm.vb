@@ -1341,4 +1341,32 @@ Public Class Main
             txtJobsSearch.Text = "Search"
         End If
     End Sub
+
+    Private Sub tabJobsREST_Enter(sender As Object, e As EventArgs) Handles tabJobsREST.Enter
+        JobRunner_RestFunctions.GetJobList(txtJobsSearch.Text)
+
+    End Sub
+
+    Private Sub dgvJobsRestJobsList_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvJobsRestJobsList.CellClick
+        Try
+            If e.RowIndex > 0 Then
+                Select Case e.ColumnIndex
+
+                    Case 2 'Retry
+                        JobRunner_RestFunctions.RetryJob(dgvJobsRestJobsList.Rows.Item(e.RowIndex).Cells(7).Value.ToString, dgvJobsRestJobsList.Rows.Item(e.RowIndex).Cells(0).Value.ToString & " Retry")
+
+                    Case 3 'Cancel
+                        If dgvJobsRestJobsList.Rows.Item(e.RowIndex).Cells(3).Value.ToString = "Cancel" Then
+                            JobRunner_RestFunctions.CancelJob(dgvJobsRestJobsList.Rows.Item(e.RowIndex).Cells(8).Value.ToString, True)
+                        End If
+                End Select
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub dgvJobsRestJobsList_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvJobsRestJobsList.CellContentClick
+
+    End Sub
 End Class
