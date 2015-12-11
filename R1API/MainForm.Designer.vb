@@ -146,6 +146,19 @@ Partial Class Main
         Me.Label21 = New System.Windows.Forms.Label()
         Me.tabMenu = New System.Windows.Forms.TabControl()
         Me.tabSettings = New System.Windows.Forms.TabPage()
+        Me.tabJobsREST = New System.Windows.Forms.TabPage()
+        Me.tabControlJobsRest = New System.Windows.Forms.TabControl()
+        Me.tabJobsList = New System.Windows.Forms.TabPage()
+        Me.splitJobsRestJobs = New System.Windows.Forms.SplitContainer()
+        Me.txtJobsSearch = New System.Windows.Forms.TextBox()
+        Me.dgvJobsRestJobsList = New System.Windows.Forms.DataGridView()
+        Me.jobName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobType = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobStart = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobEnd = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.tabJobExecution = New System.Windows.Forms.TabPage()
         Me.lblJobStatus = New System.Windows.Forms.Label()
         Me.btnShowJSON = New System.Windows.Forms.Button()
@@ -240,6 +253,14 @@ Partial Class Main
         CType(Me.nmbremkillprocid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabMenu.SuspendLayout()
         Me.tabSettings.SuspendLayout()
+        Me.tabJobsREST.SuspendLayout()
+        Me.tabControlJobsRest.SuspendLayout()
+        Me.tabJobsList.SuspendLayout()
+        CType(Me.splitJobsRestJobs, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.splitJobsRestJobs.Panel1.SuspendLayout()
+        Me.splitJobsRestJobs.Panel2.SuspendLayout()
+        Me.splitJobsRestJobs.SuspendLayout()
+        CType(Me.dgvJobsRestJobsList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabJobExecution.SuspendLayout()
         Me.tabFireEye.SuspendLayout()
         Me.tabPANW.SuspendLayout()
@@ -1587,6 +1608,7 @@ Partial Class Main
         '
         Me.tabMenu.Appearance = System.Windows.Forms.TabAppearance.FlatButtons
         Me.tabMenu.Controls.Add(Me.tabSettings)
+        Me.tabMenu.Controls.Add(Me.tabJobsREST)
         Me.tabMenu.Controls.Add(Me.tabJobExecution)
         Me.tabMenu.Controls.Add(Me.tabFireEye)
         Me.tabMenu.Controls.Add(Me.tabPANW)
@@ -1612,6 +1634,134 @@ Partial Class Main
         Me.tabSettings.Text = "Settings"
         Me.tabSettings.UseVisualStyleBackColor = True
         '
+        'tabJobsREST
+        '
+        Me.tabJobsREST.Controls.Add(Me.tabControlJobsRest)
+        Me.tabJobsREST.Location = New System.Drawing.Point(4, 28)
+        Me.tabJobsREST.Name = "tabJobsREST"
+        Me.tabJobsREST.Size = New System.Drawing.Size(840, 700)
+        Me.tabJobsREST.TabIndex = 7
+        Me.tabJobsREST.Text = "Jobs REST"
+        Me.tabJobsREST.UseVisualStyleBackColor = True
+        '
+        'tabControlJobsRest
+        '
+        Me.tabControlJobsRest.Controls.Add(Me.tabJobsList)
+        Me.tabControlJobsRest.Controls.Add(Me.TabPage2)
+        Me.tabControlJobsRest.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tabControlJobsRest.Location = New System.Drawing.Point(0, 0)
+        Me.tabControlJobsRest.Name = "tabControlJobsRest"
+        Me.tabControlJobsRest.SelectedIndex = 0
+        Me.tabControlJobsRest.Size = New System.Drawing.Size(840, 700)
+        Me.tabControlJobsRest.TabIndex = 0
+        '
+        'tabJobsList
+        '
+        Me.tabJobsList.Controls.Add(Me.splitJobsRestJobs)
+        Me.tabJobsList.Location = New System.Drawing.Point(4, 25)
+        Me.tabJobsList.Name = "tabJobsList"
+        Me.tabJobsList.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabJobsList.Size = New System.Drawing.Size(832, 671)
+        Me.tabJobsList.TabIndex = 0
+        Me.tabJobsList.Text = "Jobs"
+        Me.tabJobsList.UseVisualStyleBackColor = True
+        '
+        'splitJobsRestJobs
+        '
+        Me.splitJobsRestJobs.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.splitJobsRestJobs.FixedPanel = System.Windows.Forms.FixedPanel.Panel1
+        Me.splitJobsRestJobs.Location = New System.Drawing.Point(3, 3)
+        Me.splitJobsRestJobs.Name = "splitJobsRestJobs"
+        Me.splitJobsRestJobs.Orientation = System.Windows.Forms.Orientation.Horizontal
+        '
+        'splitJobsRestJobs.Panel1
+        '
+        Me.splitJobsRestJobs.Panel1.Controls.Add(Me.txtJobsSearch)
+        '
+        'splitJobsRestJobs.Panel2
+        '
+        Me.splitJobsRestJobs.Panel2.Controls.Add(Me.dgvJobsRestJobsList)
+        Me.splitJobsRestJobs.Size = New System.Drawing.Size(826, 665)
+        Me.splitJobsRestJobs.SplitterDistance = 36
+        Me.splitJobsRestJobs.TabIndex = 2
+        '
+        'txtJobsSearch
+        '
+        Me.txtJobsSearch.AcceptsReturn = True
+        Me.txtJobsSearch.Location = New System.Drawing.Point(10, 6)
+        Me.txtJobsSearch.Name = "txtJobsSearch"
+        Me.txtJobsSearch.Size = New System.Drawing.Size(209, 22)
+        Me.txtJobsSearch.TabIndex = 0
+        Me.txtJobsSearch.Text = "Search"
+        '
+        'dgvJobsRestJobsList
+        '
+        Me.dgvJobsRestJobsList.AllowUserToAddRows = False
+        Me.dgvJobsRestJobsList.AllowUserToDeleteRows = False
+        Me.dgvJobsRestJobsList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
+        Me.dgvJobsRestJobsList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvJobsRestJobsList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.jobName, Me.jobStatus, Me.jobType, Me.jobStart, Me.jobEnd, Me.jobID})
+        Me.dgvJobsRestJobsList.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvJobsRestJobsList.Location = New System.Drawing.Point(0, 0)
+        Me.dgvJobsRestJobsList.Name = "dgvJobsRestJobsList"
+        Me.dgvJobsRestJobsList.ReadOnly = True
+        Me.dgvJobsRestJobsList.RowHeadersVisible = False
+        Me.dgvJobsRestJobsList.RowTemplate.Height = 24
+        Me.dgvJobsRestJobsList.Size = New System.Drawing.Size(826, 625)
+        Me.dgvJobsRestJobsList.TabIndex = 0
+        '
+        'jobName
+        '
+        Me.jobName.HeaderText = "Name"
+        Me.jobName.Name = "jobName"
+        Me.jobName.ReadOnly = True
+        Me.jobName.Width = 70
+        '
+        'jobStatus
+        '
+        Me.jobStatus.HeaderText = "Status"
+        Me.jobStatus.Name = "jobStatus"
+        Me.jobStatus.ReadOnly = True
+        Me.jobStatus.Width = 73
+        '
+        'jobType
+        '
+        Me.jobType.HeaderText = "Type"
+        Me.jobType.Name = "jobType"
+        Me.jobType.ReadOnly = True
+        Me.jobType.Width = 65
+        '
+        'jobStart
+        '
+        Me.jobStart.HeaderText = "Start"
+        Me.jobStart.Name = "jobStart"
+        Me.jobStart.ReadOnly = True
+        Me.jobStart.Width = 63
+        '
+        'jobEnd
+        '
+        Me.jobEnd.HeaderText = "End"
+        Me.jobEnd.Name = "jobEnd"
+        Me.jobEnd.ReadOnly = True
+        Me.jobEnd.Width = 58
+        '
+        'jobID
+        '
+        Me.jobID.HeaderText = "jobID"
+        Me.jobID.Name = "jobID"
+        Me.jobID.ReadOnly = True
+        Me.jobID.Width = 65
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Location = New System.Drawing.Point(4, 25)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(832, 671)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "TabPage2"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
         'tabJobExecution
         '
         Me.tabJobExecution.Controls.Add(Me.lblJobStatus)
@@ -1626,7 +1776,7 @@ Partial Class Main
         Me.tabJobExecution.Padding = New System.Windows.Forms.Padding(4)
         Me.tabJobExecution.Size = New System.Drawing.Size(840, 700)
         Me.tabJobExecution.TabIndex = 0
-        Me.tabJobExecution.Text = "Job Execution"
+        Me.tabJobExecution.Text = "JobsAPI Execution"
         Me.tabJobExecution.UseVisualStyleBackColor = True
         '
         'lblJobStatus
@@ -2333,7 +2483,6 @@ Partial Class Main
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(4)
-        Me.MaximizeBox = False
         Me.Name = "Main"
         Me.Text = "R1 Job Runner Version:"
         Me.GroupBox4.ResumeLayout(False)
@@ -2384,6 +2533,15 @@ Partial Class Main
         CType(Me.nmbremkillprocid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabMenu.ResumeLayout(False)
         Me.tabSettings.ResumeLayout(False)
+        Me.tabJobsREST.ResumeLayout(False)
+        Me.tabControlJobsRest.ResumeLayout(False)
+        Me.tabJobsList.ResumeLayout(False)
+        Me.splitJobsRestJobs.Panel1.ResumeLayout(False)
+        Me.splitJobsRestJobs.Panel1.PerformLayout()
+        Me.splitJobsRestJobs.Panel2.ResumeLayout(False)
+        CType(Me.splitJobsRestJobs, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.splitJobsRestJobs.ResumeLayout(False)
+        CType(Me.dgvJobsRestJobsList, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabJobExecution.ResumeLayout(False)
         Me.tabJobExecution.PerformLayout()
         Me.tabFireEye.ResumeLayout(False)
@@ -2594,5 +2752,18 @@ Partial Class Main
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
     Friend WithEvents chkUpdates As System.Windows.Forms.CheckBox
+    Friend WithEvents tabJobsREST As System.Windows.Forms.TabPage
+    Friend WithEvents tabControlJobsRest As System.Windows.Forms.TabControl
+    Friend WithEvents tabJobsList As System.Windows.Forms.TabPage
+    Friend WithEvents txtJobsSearch As System.Windows.Forms.TextBox
+    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
+    Friend WithEvents splitJobsRestJobs As System.Windows.Forms.SplitContainer
+    Friend WithEvents dgvJobsRestJobsList As System.Windows.Forms.DataGridView
+    Friend WithEvents jobName As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents jobStatus As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents jobType As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents jobStart As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents jobEnd As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents jobID As System.Windows.Forms.DataGridViewTextBoxColumn
 
 End Class

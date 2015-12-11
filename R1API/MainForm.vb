@@ -28,13 +28,15 @@ Public Class Main
     Public panw_sim_var As PANW.PANW_Sim
     'Self-Signed Cert
     Public sim_selfcert As String = ""
-
+    Public auth As New R1SimpleRestClient.Models.Response.AuthToken
 
 
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnExecute.Click
         ResetStatusBar()
         'Set label color and text
+
+
 
         lblJobStatus.Text = "Submitting Job..."
         'Get Computers
@@ -148,11 +150,11 @@ Public Class Main
     End Sub
 
     Private Sub Main_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
-        Try
-            IO.File.Delete("Newtonsoft.Json.dll")
-        Catch ex As Exception
-            Debug.WriteLine(ex.Message)
-        End Try
+        'Try
+        '    IO.File.Delete("Newtonsoft.Json.dll")
+        'Catch ex As Exception
+        '    Debug.WriteLine(ex.Message)
+        'End Try
     End Sub
 
 
@@ -1313,7 +1315,30 @@ Public Class Main
 
     Private Sub tabJobExecution_Enter(sender As Object, e As EventArgs) Handles tabJobExecution.Enter
         If rdor1.Checked = True Then
-            JobRunner_Functions.GetJobTemplates()
+            JobRunner_RestFunctions.GetJobTemplates()
+        End If
+    End Sub
+
+    Private Sub txtJobsSearch_Enter(sender As Object, e As EventArgs) Handles txtJobsSearch.Enter
+        If txtJobsSearch.Text = "Search" Then
+            txtJobsSearch.Text = ""
+        End If
+    End Sub
+
+    Private Sub tabJobsList_Enter(sender As Object, e As EventArgs) Handles tabJobsList.Enter
+        JobRunner_RestFunctions.GetJobList(txtJobsSearch.Text)
+    End Sub
+
+    Private Sub txtJobsSearch_KeyDown(sender As Object, e As KeyEventArgs) Handles txtJobsSearch.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            JobRunner_RestFunctions.GetJobList(txtJobsSearch.Text)
+        End If
+    End Sub
+
+    
+    Private Sub txtJobsSearch_Leave(sender As Object, e As EventArgs) Handles txtJobsSearch.Leave
+        If txtJobsSearch.Text = "" Then
+            txtJobsSearch.Text = "Search"
         End If
     End Sub
 End Class
