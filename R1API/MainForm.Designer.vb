@@ -152,7 +152,17 @@ Partial Class Main
         Me.splitJobsRestJobs = New System.Windows.Forms.SplitContainer()
         Me.txtJobsSearch = New System.Windows.Forms.TextBox()
         Me.dgvJobsRestJobsList = New System.Windows.Forms.DataGridView()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.jobName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobRetry = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.jobCancel = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.jobType = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobStart = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobEnd = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobResultID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobEndpointStatus = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.tabEndpointStatus = New System.Windows.Forms.TabPage()
         Me.tabJobExecution = New System.Windows.Forms.TabPage()
         Me.lblJobStatus = New System.Windows.Forms.Label()
         Me.btnShowJSON = New System.Windows.Forms.Button()
@@ -216,15 +226,16 @@ Partial Class Main
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.ofdBox = New System.Windows.Forms.OpenFileDialog()
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
-        Me.jobName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.jobStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.jobRetry = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.jobCancel = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.jobType = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.jobStart = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.jobEnd = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.jobID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.jobResultID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.lblepStatusTotal = New System.Windows.Forms.Label()
+        Me.lblepStatusInProgress = New System.Windows.Forms.Label()
+        Me.lblepstatusFailed = New System.Windows.Forms.Label()
+        Me.lblepstatusSuccessful = New System.Windows.Forms.Label()
+        Me.dgvEndpointStatusJobTargets = New System.Windows.Forms.DataGridView()
+        Me.endpoint = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Start = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Hits = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Action = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.GroupBox4.SuspendLayout()
         Me.grpReqSet.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -264,6 +275,7 @@ Partial Class Main
         Me.splitJobsRestJobs.Panel2.SuspendLayout()
         Me.splitJobsRestJobs.SuspendLayout()
         CType(Me.dgvJobsRestJobsList, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabEndpointStatus.SuspendLayout()
         Me.tabJobExecution.SuspendLayout()
         Me.tabFireEye.SuspendLayout()
         Me.tabPANW.SuspendLayout()
@@ -277,6 +289,7 @@ Partial Class Main
         CType(Me.xps_sim_Port, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.xpsPort, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabAbout.SuspendLayout()
+        CType(Me.dgvEndpointStatusJobTargets, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnExecute
@@ -1650,7 +1663,7 @@ Partial Class Main
         'tabControlJobsRest
         '
         Me.tabControlJobsRest.Controls.Add(Me.tabJobsList)
-        Me.tabControlJobsRest.Controls.Add(Me.TabPage2)
+        Me.tabControlJobsRest.Controls.Add(Me.tabEndpointStatus)
         Me.tabControlJobsRest.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tabControlJobsRest.Location = New System.Drawing.Point(0, 0)
         Me.tabControlJobsRest.Name = "tabControlJobsRest"
@@ -1666,7 +1679,7 @@ Partial Class Main
         Me.tabJobsList.Padding = New System.Windows.Forms.Padding(3)
         Me.tabJobsList.Size = New System.Drawing.Size(832, 671)
         Me.tabJobsList.TabIndex = 0
-        Me.tabJobsList.Text = "Jobs"
+        Me.tabJobsList.Text = "Job Status"
         Me.tabJobsList.UseVisualStyleBackColor = True
         '
         'splitJobsRestJobs
@@ -1701,9 +1714,9 @@ Partial Class Main
         '
         Me.dgvJobsRestJobsList.AllowUserToAddRows = False
         Me.dgvJobsRestJobsList.AllowUserToDeleteRows = False
-        Me.dgvJobsRestJobsList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
+        Me.dgvJobsRestJobsList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvJobsRestJobsList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvJobsRestJobsList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.jobName, Me.jobStatus, Me.jobRetry, Me.jobCancel, Me.jobType, Me.jobStart, Me.jobEnd, Me.jobID, Me.jobResultID})
+        Me.dgvJobsRestJobsList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.jobName, Me.jobStatus, Me.jobRetry, Me.jobCancel, Me.jobType, Me.jobStart, Me.jobEnd, Me.jobID, Me.jobResultID, Me.jobEndpointStatus})
         Me.dgvJobsRestJobsList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvJobsRestJobsList.Location = New System.Drawing.Point(0, 0)
         Me.dgvJobsRestJobsList.Name = "dgvJobsRestJobsList"
@@ -1713,15 +1726,86 @@ Partial Class Main
         Me.dgvJobsRestJobsList.Size = New System.Drawing.Size(826, 625)
         Me.dgvJobsRestJobsList.TabIndex = 0
         '
-        'TabPage2
+        'jobName
         '
-        Me.TabPage2.Location = New System.Drawing.Point(4, 25)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(832, 671)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "TabPage2"
-        Me.TabPage2.UseVisualStyleBackColor = True
+        Me.jobName.HeaderText = "Name"
+        Me.jobName.Name = "jobName"
+        Me.jobName.ReadOnly = True
+        '
+        'jobStatus
+        '
+        Me.jobStatus.DividerWidth = 5
+        Me.jobStatus.HeaderText = "Status"
+        Me.jobStatus.Name = "jobStatus"
+        Me.jobStatus.ReadOnly = True
+        '
+        'jobRetry
+        '
+        Me.jobRetry.DividerWidth = 5
+        Me.jobRetry.HeaderText = "Retry Job"
+        Me.jobRetry.Name = "jobRetry"
+        Me.jobRetry.ReadOnly = True
+        '
+        'jobCancel
+        '
+        Me.jobCancel.DividerWidth = 5
+        Me.jobCancel.HeaderText = "Cancel Job"
+        Me.jobCancel.Name = "jobCancel"
+        Me.jobCancel.ReadOnly = True
+        '
+        'jobType
+        '
+        Me.jobType.HeaderText = "Type"
+        Me.jobType.Name = "jobType"
+        Me.jobType.ReadOnly = True
+        '
+        'jobStart
+        '
+        Me.jobStart.HeaderText = "Start"
+        Me.jobStart.Name = "jobStart"
+        Me.jobStart.ReadOnly = True
+        '
+        'jobEnd
+        '
+        Me.jobEnd.DividerWidth = 5
+        Me.jobEnd.HeaderText = "End"
+        Me.jobEnd.Name = "jobEnd"
+        Me.jobEnd.ReadOnly = True
+        '
+        'jobID
+        '
+        Me.jobID.HeaderText = "jobID"
+        Me.jobID.Name = "jobID"
+        Me.jobID.ReadOnly = True
+        Me.jobID.Visible = False
+        '
+        'jobResultID
+        '
+        Me.jobResultID.HeaderText = "ResultID"
+        Me.jobResultID.Name = "jobResultID"
+        Me.jobResultID.ReadOnly = True
+        Me.jobResultID.Visible = False
+        '
+        'jobEndpointStatus
+        '
+        Me.jobEndpointStatus.HeaderText = "Endpoint Status"
+        Me.jobEndpointStatus.Name = "jobEndpointStatus"
+        Me.jobEndpointStatus.ReadOnly = True
+        '
+        'tabEndpointStatus
+        '
+        Me.tabEndpointStatus.Controls.Add(Me.dgvEndpointStatusJobTargets)
+        Me.tabEndpointStatus.Controls.Add(Me.lblepstatusSuccessful)
+        Me.tabEndpointStatus.Controls.Add(Me.lblepstatusFailed)
+        Me.tabEndpointStatus.Controls.Add(Me.lblepStatusInProgress)
+        Me.tabEndpointStatus.Controls.Add(Me.lblepStatusTotal)
+        Me.tabEndpointStatus.Location = New System.Drawing.Point(4, 25)
+        Me.tabEndpointStatus.Name = "tabEndpointStatus"
+        Me.tabEndpointStatus.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabEndpointStatus.Size = New System.Drawing.Size(832, 671)
+        Me.tabEndpointStatus.TabIndex = 1
+        Me.tabEndpointStatus.Text = "Endpoint Status"
+        Me.tabEndpointStatus.UseVisualStyleBackColor = True
         '
         'tabJobExecution
         '
@@ -2435,71 +2519,84 @@ Partial Class Main
         Me.sfdBox.Filter = "Box Files|*.json"
         Me.sfdBox.InitialDirectory = "My.Application.Info.DirectoryPath & ""\BoxedJobs"""
         '
-        'jobName
+        'lblepStatusTotal
         '
-        Me.jobName.HeaderText = "Name"
-        Me.jobName.Name = "jobName"
-        Me.jobName.ReadOnly = True
-        Me.jobName.Width = 70
+        Me.lblepStatusTotal.AutoSize = True
+        Me.lblepStatusTotal.Location = New System.Drawing.Point(39, 23)
+        Me.lblepStatusTotal.Name = "lblepStatusTotal"
+        Me.lblepStatusTotal.Size = New System.Drawing.Size(59, 17)
+        Me.lblepStatusTotal.TabIndex = 0
+        Me.lblepStatusTotal.Text = "Label49"
         '
-        'jobStatus
+        'lblepStatusInProgress
         '
-        Me.jobStatus.DividerWidth = 5
-        Me.jobStatus.HeaderText = "Status"
-        Me.jobStatus.Name = "jobStatus"
-        Me.jobStatus.ReadOnly = True
-        Me.jobStatus.Width = 78
+        Me.lblepStatusInProgress.AutoSize = True
+        Me.lblepStatusInProgress.Location = New System.Drawing.Point(158, 23)
+        Me.lblepStatusInProgress.Name = "lblepStatusInProgress"
+        Me.lblepStatusInProgress.Size = New System.Drawing.Size(59, 17)
+        Me.lblepStatusInProgress.TabIndex = 1
+        Me.lblepStatusInProgress.Text = "Label49"
         '
-        'jobRetry
+        'lblepstatusFailed
         '
-        Me.jobRetry.DividerWidth = 5
-        Me.jobRetry.HeaderText = "Retry Job"
-        Me.jobRetry.Name = "jobRetry"
-        Me.jobRetry.ReadOnly = True
-        Me.jobRetry.Width = 80
+        Me.lblepstatusFailed.AutoSize = True
+        Me.lblepstatusFailed.Location = New System.Drawing.Point(284, 23)
+        Me.lblepstatusFailed.Name = "lblepstatusFailed"
+        Me.lblepstatusFailed.Size = New System.Drawing.Size(59, 17)
+        Me.lblepstatusFailed.TabIndex = 2
+        Me.lblepstatusFailed.Text = "Label49"
         '
-        'jobCancel
+        'lblepstatusSuccessful
         '
-        Me.jobCancel.DividerWidth = 5
-        Me.jobCancel.HeaderText = "Cancel Job"
-        Me.jobCancel.Name = "jobCancel"
-        Me.jobCancel.ReadOnly = True
-        Me.jobCancel.Width = 89
+        Me.lblepstatusSuccessful.AutoSize = True
+        Me.lblepstatusSuccessful.Location = New System.Drawing.Point(412, 23)
+        Me.lblepstatusSuccessful.Name = "lblepstatusSuccessful"
+        Me.lblepstatusSuccessful.Size = New System.Drawing.Size(59, 17)
+        Me.lblepstatusSuccessful.TabIndex = 3
+        Me.lblepstatusSuccessful.Text = "Label49"
         '
-        'jobType
+        'dgvEndpointStatusJobTargets
         '
-        Me.jobType.HeaderText = "Type"
-        Me.jobType.Name = "jobType"
-        Me.jobType.ReadOnly = True
-        Me.jobType.Width = 65
+        Me.dgvEndpointStatusJobTargets.AllowUserToAddRows = False
+        Me.dgvEndpointStatusJobTargets.AllowUserToDeleteRows = False
+        Me.dgvEndpointStatusJobTargets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvEndpointStatusJobTargets.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.endpoint, Me.Start, Me.Status, Me.Hits, Me.Action})
+        Me.dgvEndpointStatusJobTargets.Location = New System.Drawing.Point(18, 60)
+        Me.dgvEndpointStatusJobTargets.Name = "dgvEndpointStatusJobTargets"
+        Me.dgvEndpointStatusJobTargets.ReadOnly = True
+        Me.dgvEndpointStatusJobTargets.RowTemplate.Height = 24
+        Me.dgvEndpointStatusJobTargets.Size = New System.Drawing.Size(783, 370)
+        Me.dgvEndpointStatusJobTargets.TabIndex = 4
         '
-        'jobStart
+        'endpoint
         '
-        Me.jobStart.HeaderText = "Start"
-        Me.jobStart.Name = "jobStart"
-        Me.jobStart.ReadOnly = True
-        Me.jobStart.Width = 63
+        Me.endpoint.HeaderText = "Endpoint"
+        Me.endpoint.Name = "endpoint"
+        Me.endpoint.ReadOnly = True
         '
-        'jobEnd
+        'Start
         '
-        Me.jobEnd.HeaderText = "End"
-        Me.jobEnd.Name = "jobEnd"
-        Me.jobEnd.ReadOnly = True
-        Me.jobEnd.Width = 58
+        Me.Start.HeaderText = "Start"
+        Me.Start.Name = "Start"
+        Me.Start.ReadOnly = True
         '
-        'jobID
+        'Status
         '
-        Me.jobID.HeaderText = "jobID"
-        Me.jobID.Name = "jobID"
-        Me.jobID.ReadOnly = True
-        Me.jobID.Width = 65
+        Me.Status.HeaderText = "Status"
+        Me.Status.Name = "Status"
+        Me.Status.ReadOnly = True
         '
-        'jobResultID
+        'Hits
         '
-        Me.jobResultID.HeaderText = "ResultID"
-        Me.jobResultID.Name = "jobResultID"
-        Me.jobResultID.ReadOnly = True
-        Me.jobResultID.Width = 86
+        Me.Hits.HeaderText = "Hits"
+        Me.Hits.Name = "Hits"
+        Me.Hits.ReadOnly = True
+        '
+        'Action
+        '
+        Me.Action.HeaderText = "Action"
+        Me.Action.Name = "Action"
+        Me.Action.ReadOnly = True
         '
         'Main
         '
@@ -2569,6 +2666,8 @@ Partial Class Main
         CType(Me.splitJobsRestJobs, System.ComponentModel.ISupportInitialize).EndInit()
         Me.splitJobsRestJobs.ResumeLayout(False)
         CType(Me.dgvJobsRestJobsList, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabEndpointStatus.ResumeLayout(False)
+        Me.tabEndpointStatus.PerformLayout()
         Me.tabJobExecution.ResumeLayout(False)
         Me.tabJobExecution.PerformLayout()
         Me.tabFireEye.ResumeLayout(False)
@@ -2589,6 +2688,7 @@ Partial Class Main
         CType(Me.xpsPort, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabAbout.ResumeLayout(False)
         Me.tabAbout.PerformLayout()
+        CType(Me.dgvEndpointStatusJobTargets, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -2783,7 +2883,7 @@ Partial Class Main
     Friend WithEvents tabControlJobsRest As System.Windows.Forms.TabControl
     Friend WithEvents tabJobsList As System.Windows.Forms.TabPage
     Friend WithEvents txtJobsSearch As System.Windows.Forms.TextBox
-    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
+    Friend WithEvents tabEndpointStatus As System.Windows.Forms.TabPage
     Friend WithEvents splitJobsRestJobs As System.Windows.Forms.SplitContainer
     Friend WithEvents dgvJobsRestJobsList As System.Windows.Forms.DataGridView
     Friend WithEvents jobName As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -2795,5 +2895,16 @@ Partial Class Main
     Friend WithEvents jobEnd As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents jobID As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents jobResultID As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents jobEndpointStatus As System.Windows.Forms.DataGridViewButtonColumn
+    Friend WithEvents lblepstatusSuccessful As System.Windows.Forms.Label
+    Friend WithEvents lblepstatusFailed As System.Windows.Forms.Label
+    Friend WithEvents lblepStatusInProgress As System.Windows.Forms.Label
+    Friend WithEvents lblepStatusTotal As System.Windows.Forms.Label
+    Friend WithEvents dgvEndpointStatusJobTargets As System.Windows.Forms.DataGridView
+    Friend WithEvents endpoint As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Start As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Status As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Hits As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Action As System.Windows.Forms.DataGridViewButtonColumn
 
 End Class

@@ -38,7 +38,7 @@ Module JobRunner_RestFunctions
             Else
                 CancelStatus = ""
             End If
-            Main.dgvJobsRestJobsList.Rows.Add(New String() {job.Name, job.Status, "Retry", CancelStatus, job.JobType, job.StartDate.ToString, job.EndDate.ToString, job.JobID.ToString, job.ResultID.ToString})
+            Main.dgvJobsRestJobsList.Rows.Add(New String() {job.Name, job.Status, "Retry", CancelStatus, job.JobType, job.StartDate.ToString, job.EndDate.ToString, job.JobID.ToString, job.ResultID.ToString, "Endpoint Status"})
         Next
     End Sub
 
@@ -62,5 +62,32 @@ Module JobRunner_RestFunctions
         End If
         Dim job = r1rest.Functions.Job.CancelJobResult(Main.auth, Main.txtServer.Text, JobResultID, CancelSchedule)
         GetJobList()
+    End Sub
+
+    Public Sub GetEndpointStatusCounts(ByVal JobResultID As String)
+        Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
+        If Main.auth.Data.Message <> "Authenticated" Then
+            Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
+        End If
+        Dim job = r1rest.Functions.Job.GetJobStatusCounts(Main.auth, Main.txtServer.Text, JobResultID)
+        Main.lblepStatusTotal.Text = "Total: " & job.Data.totalCount
+        Main.lblepStatusInProgress.Text = "In Progress: " & job.Data.runningCount
+        Main.lblepstatusFailed.Text = "Failed: " & job.Data.failedCount
+        Main.lblepstatusSuccessful.Text = "Successful: " & job.Data.completedCount
+    End Sub
+
+
+    Public Sub GetJobTargets(ByVal JobResultID As String)
+        Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
+        If Main.auth.Data.Message <> "Authenticated" Then
+            Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
+        End If
+        Dim jobtargets = r1rest.Functions.Job.GetJobTargets(Main.auth, Main.txtServer.Text, JobResultID)
+        Main.dgvEndpointStatusJobTargets.Rows.Clear()
+
+        For Each target In jobtargets.Data.targets
+
+            Main.dgvEndpointStatusJobTargets.Rows.Add(New String() {target.name, target.startDate, target.status, target.hits, "Action"})
+        Next
     End Sub
 End Module

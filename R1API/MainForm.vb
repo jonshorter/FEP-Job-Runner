@@ -6,7 +6,7 @@ Imports System.Runtime.InteropServices
 
 Public Class Main
 
-
+    Public RestTabs As List(Of TabPage)
 
 
     'Delcare Stores for Job Filters/Options
@@ -166,6 +166,7 @@ Public Class Main
             IO.File.WriteAllBytes("Newtonsoft.Json.dll", b)
         Catch ex As Exception
         End Try
+
 
         'First Run-Generate default templates
         Me.Text = "R1 Job Runner Version: " & My.Application.Info.Version.ToString
@@ -1325,9 +1326,9 @@ Public Class Main
         End If
     End Sub
 
-    Private Sub tabJobsList_Enter(sender As Object, e As EventArgs) Handles tabJobsList.Enter
-        JobRunner_RestFunctions.GetJobList(txtJobsSearch.Text)
-    End Sub
+  
+
+   
 
     Private Sub txtJobsSearch_KeyDown(sender As Object, e As KeyEventArgs) Handles txtJobsSearch.KeyDown
         If e.KeyCode = Keys.Enter Then
@@ -1342,14 +1343,11 @@ Public Class Main
         End If
     End Sub
 
-    Private Sub tabJobsREST_Enter(sender As Object, e As EventArgs) Handles tabJobsREST.Enter
-        JobRunner_RestFunctions.GetJobList(txtJobsSearch.Text)
-
-    End Sub
+ 
 
     Private Sub dgvJobsRestJobsList_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvJobsRestJobsList.CellClick
         Try
-            If e.RowIndex > 0 Then
+            If e.RowIndex > -1 Then
                 Select Case e.ColumnIndex
 
                     Case 2 'Retry
@@ -1359,6 +1357,11 @@ Public Class Main
                         If dgvJobsRestJobsList.Rows.Item(e.RowIndex).Cells(3).Value.ToString = "Cancel" Then
                             JobRunner_RestFunctions.CancelJob(dgvJobsRestJobsList.Rows.Item(e.RowIndex).Cells(8).Value.ToString, True)
                         End If
+
+                    Case 9 'EndPoint Status
+                        tabEndpointStatus.Tag = dgvJobsRestJobsList.Rows.Item(e.RowIndex).Cells(8).Value.ToString
+                        tabControlJobsRest.SelectedTab = tabEndpointStatus
+
                 End Select
             End If
         Catch ex As Exception
@@ -1366,7 +1369,33 @@ Public Class Main
         End Try
     End Sub
 
-    Private Sub dgvJobsRestJobsList_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvJobsRestJobsList.CellContentClick
+
+    Private Sub tabControlJobsRest_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabControlJobsRest.SelectedIndexChanged
+        Select Case tabControlJobsRest.SelectedTab.Name
+            Case tabJobsList.Name
+                JobRunner_RestFunctions.GetJobList("")
+        End Select
+
+
+    End Sub
+
+
+
+    Private Sub tabJobsREST_Enter(sender As Object, e As EventArgs) Handles tabJobsREST.Enter
+        tabControlJobsRest.SelectedTab = tabJobsList
+        JobRunner_RestFunctions.GetJobList("")
+    End Sub
+
+   
+
+    Private Sub tabEndpointStatus_Enter(sender As Object, e As EventArgs) Handles tabEndpointStatus.Enter
+        If tabEndpointStatus.Tag <> "" Then
+            JobRunner_RestFunctions.GetEndpointStatusCounts(tabEndpointStatus.Tag)
+            JobRunner_RestFunctions.GetJobTargets(tabEndpointStatus.Tag)
+        End If
+    End Sub
+
+    Private Sub tabEndpointStatus_Click(sender As Object, e As EventArgs) Handles tabEndpointStatus.Click
 
     End Sub
 End Class
