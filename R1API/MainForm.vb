@@ -1427,10 +1427,22 @@ Public Class Main
   
 
     Private Sub btnNewProject_Click(sender As Object, e As EventArgs) Handles btnNewProject.Click
-        CreateProject.ShowDialog()
+        Dim projectcreate As New CreateEditProject("Create Project", True)
+        projectcreate.ShowDialog()
         JobRunner_RestFunctions.GetProjectList("")
     End Sub
 
 
   
+    Private Sub btnEditProject_Click(sender As Object, e As EventArgs) Handles btnEditProject.Click
+        Dim projectedit As New CreateEditProject("Edit Project", False, dgvProjectList.CurrentRow.Cells(5).Value)
+        projectedit.ShowDialog()
+        JobRunner_RestFunctions.GetProjectList("")
+    End Sub
+
+    Private Sub btnDeleteProject_Click(sender As Object, e As EventArgs) Handles btnDeleteProject.Click
+        If MsgBox("Delete Project " & dgvProjectList.CurrentRow.Cells(0).Value & "?", MsgBoxStyle.YesNoCancel, "Delete Project?") = MsgBoxResult.Yes Then
+            JobRunner_RestFunctions.DeleteProject(dgvProjectList.CurrentRow.Cells(5).Value)
+        End If
+    End Sub
 End Class

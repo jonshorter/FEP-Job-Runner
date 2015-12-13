@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class CreateProject
+Partial Class CreateEditProject
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -23,7 +23,7 @@ Partial Class CreateProject
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.btnCancel = New System.Windows.Forms.Button()
-        Me.btnCreate = New System.Windows.Forms.Button()
+        Me.btnCreateEdit = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.flowCreateProject = New System.Windows.Forms.FlowLayoutPanel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
@@ -33,9 +33,10 @@ Partial Class CreateProject
         Me.chkEnableThreatBridge = New System.Windows.Forms.CheckBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.panelProjectCreateLoading = New System.Windows.Forms.Panel()
-        Me.Label3 = New System.Windows.Forms.Label()
+        Me.lblWaitText = New System.Windows.Forms.Label()
         Me.progressCreateProject = New System.Windows.Forms.ProgressBar()
         Me.bgwCreateProject = New System.ComponentModel.BackgroundWorker()
+        Me.bgwEditProject = New System.ComponentModel.BackgroundWorker()
         Me.flowCreateProject.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -51,14 +52,14 @@ Partial Class CreateProject
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'btnCreate
+        'btnCreateEdit
         '
-        Me.btnCreate.Location = New System.Drawing.Point(239, 7)
-        Me.btnCreate.Name = "btnCreate"
-        Me.btnCreate.Size = New System.Drawing.Size(103, 38)
-        Me.btnCreate.TabIndex = 1
-        Me.btnCreate.Text = "Create"
-        Me.btnCreate.UseVisualStyleBackColor = True
+        Me.btnCreateEdit.Location = New System.Drawing.Point(239, 7)
+        Me.btnCreateEdit.Name = "btnCreateEdit"
+        Me.btnCreateEdit.Size = New System.Drawing.Size(103, 38)
+        Me.btnCreateEdit.TabIndex = 1
+        Me.btnCreateEdit.Text = "Create"
+        Me.btnCreateEdit.UseVisualStyleBackColor = True
         '
         'Label1
         '
@@ -137,7 +138,7 @@ Partial Class CreateProject
         'Panel1
         '
         Me.Panel1.Controls.Add(Me.btnCancel)
-        Me.Panel1.Controls.Add(Me.btnCreate)
+        Me.Panel1.Controls.Add(Me.btnCreateEdit)
         Me.Panel1.Location = New System.Drawing.Point(3, 148)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(350, 49)
@@ -145,7 +146,7 @@ Partial Class CreateProject
         '
         'panelProjectCreateLoading
         '
-        Me.panelProjectCreateLoading.Controls.Add(Me.Label3)
+        Me.panelProjectCreateLoading.Controls.Add(Me.lblWaitText)
         Me.panelProjectCreateLoading.Controls.Add(Me.progressCreateProject)
         Me.panelProjectCreateLoading.Dock = System.Windows.Forms.DockStyle.Fill
         Me.panelProjectCreateLoading.Location = New System.Drawing.Point(0, 0)
@@ -153,15 +154,15 @@ Partial Class CreateProject
         Me.panelProjectCreateLoading.Size = New System.Drawing.Size(357, 200)
         Me.panelProjectCreateLoading.TabIndex = 6
         '
-        'Label3
+        'lblWaitText
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(50, 75)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(259, 32)
-        Me.Label3.TabIndex = 1
-        Me.Label3.Text = "Creating Project....."
+        Me.lblWaitText.AutoSize = True
+        Me.lblWaitText.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblWaitText.Location = New System.Drawing.Point(50, 75)
+        Me.lblWaitText.Name = "lblWaitText"
+        Me.lblWaitText.Size = New System.Drawing.Size(259, 32)
+        Me.lblWaitText.TabIndex = 1
+        Me.lblWaitText.Text = "Creating Project....."
         '
         'progressCreateProject
         '
@@ -175,7 +176,10 @@ Partial Class CreateProject
         'bgwCreateProject
         '
         '
-        'CreateProject
+        'bgwEditProject
+        '
+        '
+        'CreateEditProject
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -185,10 +189,10 @@ Partial Class CreateProject
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "CreateProject"
+        Me.Name = "CreateEditProject"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Create Project"
+        Me.Text = "Create/Edit Project"
         Me.flowCreateProject.ResumeLayout(False)
         Me.flowCreateProject.PerformLayout()
         Me.TableLayoutPanel1.ResumeLayout(False)
@@ -201,7 +205,7 @@ Partial Class CreateProject
 
     End Sub
     Friend WithEvents btnCancel As System.Windows.Forms.Button
-    Friend WithEvents btnCreate As System.Windows.Forms.Button
+    Friend WithEvents btnCreateEdit As System.Windows.Forms.Button
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents flowCreateProject As System.Windows.Forms.FlowLayoutPanel
     Friend WithEvents txtNewProjectName As System.Windows.Forms.TextBox
@@ -211,7 +215,8 @@ Partial Class CreateProject
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents txtNewProjectDescription As System.Windows.Forms.TextBox
     Friend WithEvents panelProjectCreateLoading As System.Windows.Forms.Panel
-    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents lblWaitText As System.Windows.Forms.Label
     Friend WithEvents progressCreateProject As System.Windows.Forms.ProgressBar
     Friend WithEvents bgwCreateProject As System.ComponentModel.BackgroundWorker
+    Friend WithEvents bgwEditProject As System.ComponentModel.BackgroundWorker
 End Class

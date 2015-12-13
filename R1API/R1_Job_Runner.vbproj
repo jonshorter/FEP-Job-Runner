@@ -99,10 +99,10 @@
     <Compile Include="AgentorShareDialog.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CreateProject.Designer.vb">
-      <DependentUpon>CreateProject.vb</DependentUpon>
+    <Compile Include="CreateEditProject.Designer.vb">
+      <DependentUpon>CreateEditProject.vb</DependentUpon>
     </Compile>
-    <Compile Include="CreateProject.vb">
+    <Compile Include="CreateEditProject.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\BoxedJobs.vb" />
@@ -152,8 +152,8 @@
     <EmbeddedResource Include="AgentorShareDialog.resx">
       <DependentUpon>AgentorShareDialog.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CreateProject.resx">
-      <DependentUpon>CreateProject.vb</DependentUpon>
+    <EmbeddedResource Include="CreateEditProject.resx">
+      <DependentUpon>CreateEditProject.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.vb</DependentUpon>

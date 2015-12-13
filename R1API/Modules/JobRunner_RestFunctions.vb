@@ -76,6 +76,18 @@ Module JobRunner_RestFunctions
         End Try
     End Sub
 
+    Public Sub DeleteProject(ByVal ProjectID As String)
+        Try
+            Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
+            If Main.auth.Data.Message <> "Authenticated" Then
+                Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
+            End If
+            Dim job = r1rest.Functions.Project.DeleteProject(Main.auth, Main.txtServer.Text, ProjectID)
+            GetProjectList("")
+        Catch ex As Exception
+        End Try
+    End Sub
+
     Public Sub GetEndpointStatusCounts(ByVal JobResultID As String)
         Try
             Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
@@ -125,7 +137,7 @@ Module JobRunner_RestFunctions
             Main.dgvProjectList.Rows.Clear()
 
             For Each project As ProjectPresenter In projectlist.Data
-                Main.dgvProjectList.Rows.Add(New String() {project.Name, project.CreatedDate, project.CreatedByUsername, project.ModifiedDate, project.FtkCaseFolderPath})
+                Main.dgvProjectList.Rows.Add(New String() {project.Name, project.CreatedDate, project.CreatedByUsername, project.ModifiedDate, project.FtkCaseFolderPath, project.ProjectId})
             Next
         Catch ex As Exception
         End Try
@@ -178,5 +190,29 @@ Module JobRunner_RestFunctions
         Catch ex As Exception
         End Try
     End Sub
+
+
+    Public Sub EditProject(ByVal ProjectID As String, ByVal Name As String, ByVal Description As String, ByVal TBCheck As Boolean, ByVal Server As String, ByVal auth As AuthToken)
+        Try
+            Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
+
+            Dim proj As New ProjectPresenter
+            proj.ProjectId = ProjectID
+            proj.Name = Name
+            proj.Description = Description
+            proj.FeedCheckingEnabled = TBCheck
+            'proj.FtkCaseFolderPath = r1rest.Functions.Configuration.GetDefaultProjectsPath(auth, Server).Data
+            'proj.responsiveFilePath = r1rest.Functions.Configuration.GetDefaultJobDataPath(auth, Server).Data
+
+            Dim project = r1rest.Functions.Project.UpdateProject(auth, Server, proj)
+
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Public Function GetProjectDetails(ByVal ProjectID As String, ByVal Server As String, ByVal auth As AuthToken) As ApiResponse(Of ProjectPresenter)
+        Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
+        Return r1rest.Functions.Project.GetProjectDetails(auth, Server, ProjectID)
+    End Function
 
 End Module

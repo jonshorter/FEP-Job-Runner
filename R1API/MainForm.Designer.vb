@@ -155,11 +155,6 @@ Partial Class Main
         Me.btnNewProject = New System.Windows.Forms.Button()
         Me.txtSearchProject = New System.Windows.Forms.TextBox()
         Me.dgvProjectList = New System.Windows.Forms.DataGridView()
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CreationDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CreatedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LastModDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ProjectFolderPath = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tabJobsList = New System.Windows.Forms.TabPage()
         Me.splitJobsRestJobs = New System.Windows.Forms.SplitContainer()
         Me.txtJobsSearch = New System.Windows.Forms.TextBox()
@@ -250,6 +245,14 @@ Partial Class Main
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.ofdBox = New System.Windows.Forms.OpenFileDialog()
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
+        Me.btnEditProject = New System.Windows.Forms.Button()
+        Me.btnDeleteProject = New System.Windows.Forms.Button()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CreationDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CreatedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LastModDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProjectFolderPath = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProjectID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox4.SuspendLayout()
         Me.grpReqSet.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -1736,6 +1739,8 @@ Partial Class Main
         '
         'splitProjects.Panel1
         '
+        Me.splitProjects.Panel1.Controls.Add(Me.btnDeleteProject)
+        Me.splitProjects.Panel1.Controls.Add(Me.btnEditProject)
         Me.splitProjects.Panel1.Controls.Add(Me.btnNewProject)
         Me.splitProjects.Panel1.Controls.Add(Me.txtSearchProject)
         '
@@ -1748,9 +1753,10 @@ Partial Class Main
         '
         'btnNewProject
         '
+        Me.btnNewProject.AutoSize = True
         Me.btnNewProject.Location = New System.Drawing.Point(9, 8)
         Me.btnNewProject.Name = "btnNewProject"
-        Me.btnNewProject.Size = New System.Drawing.Size(50, 23)
+        Me.btnNewProject.Size = New System.Drawing.Size(50, 27)
         Me.btnNewProject.TabIndex = 2
         Me.btnNewProject.Text = "New"
         Me.btnNewProject.UseVisualStyleBackColor = True
@@ -1758,7 +1764,7 @@ Partial Class Main
         'txtSearchProject
         '
         Me.txtSearchProject.AcceptsReturn = True
-        Me.txtSearchProject.Location = New System.Drawing.Point(70, 9)
+        Me.txtSearchProject.Location = New System.Drawing.Point(214, 9)
         Me.txtSearchProject.Name = "txtSearchProject"
         Me.txtSearchProject.Size = New System.Drawing.Size(209, 22)
         Me.txtSearchProject.TabIndex = 1
@@ -1770,45 +1776,17 @@ Partial Class Main
         Me.dgvProjectList.AllowUserToDeleteRows = False
         Me.dgvProjectList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvProjectList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvProjectList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.CreationDate, Me.CreatedBy, Me.LastModDate, Me.ProjectFolderPath})
+        Me.dgvProjectList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.CreationDate, Me.CreatedBy, Me.LastModDate, Me.ProjectFolderPath, Me.ProjectID})
         Me.dgvProjectList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvProjectList.Location = New System.Drawing.Point(0, 0)
+        Me.dgvProjectList.MultiSelect = False
         Me.dgvProjectList.Name = "dgvProjectList"
         Me.dgvProjectList.ReadOnly = True
         Me.dgvProjectList.RowHeadersVisible = False
         Me.dgvProjectList.RowTemplate.Height = 24
+        Me.dgvProjectList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvProjectList.Size = New System.Drawing.Size(826, 623)
         Me.dgvProjectList.TabIndex = 1
-        '
-        'DataGridViewTextBoxColumn1
-        '
-        Me.DataGridViewTextBoxColumn1.HeaderText = "Project Name"
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        Me.DataGridViewTextBoxColumn1.ReadOnly = True
-        '
-        'CreationDate
-        '
-        Me.CreationDate.HeaderText = "Creation Date"
-        Me.CreationDate.Name = "CreationDate"
-        Me.CreationDate.ReadOnly = True
-        '
-        'CreatedBy
-        '
-        Me.CreatedBy.HeaderText = "Created By"
-        Me.CreatedBy.Name = "CreatedBy"
-        Me.CreatedBy.ReadOnly = True
-        '
-        'LastModDate
-        '
-        Me.LastModDate.HeaderText = "Last Modified Date"
-        Me.LastModDate.Name = "LastModDate"
-        Me.LastModDate.ReadOnly = True
-        '
-        'ProjectFolderPath
-        '
-        Me.ProjectFolderPath.HeaderText = "Project Folder Path"
-        Me.ProjectFolderPath.Name = "ProjectFolderPath"
-        Me.ProjectFolderPath.ReadOnly = True
         '
         'tabJobsList
         '
@@ -2769,6 +2747,63 @@ Partial Class Main
         Me.sfdBox.Filter = "Box Files|*.json"
         Me.sfdBox.InitialDirectory = "My.Application.Info.DirectoryPath & ""\BoxedJobs"""
         '
+        'btnEditProject
+        '
+        Me.btnEditProject.AutoSize = True
+        Me.btnEditProject.Location = New System.Drawing.Point(65, 8)
+        Me.btnEditProject.Name = "btnEditProject"
+        Me.btnEditProject.Size = New System.Drawing.Size(53, 27)
+        Me.btnEditProject.TabIndex = 3
+        Me.btnEditProject.Text = "Edit"
+        Me.btnEditProject.UseVisualStyleBackColor = True
+        '
+        'btnDeleteProject
+        '
+        Me.btnDeleteProject.AutoSize = True
+        Me.btnDeleteProject.Location = New System.Drawing.Point(124, 8)
+        Me.btnDeleteProject.Name = "btnDeleteProject"
+        Me.btnDeleteProject.Size = New System.Drawing.Size(59, 27)
+        Me.btnDeleteProject.TabIndex = 4
+        Me.btnDeleteProject.Text = "Delete"
+        Me.btnDeleteProject.UseVisualStyleBackColor = True
+        '
+        'DataGridViewTextBoxColumn1
+        '
+        Me.DataGridViewTextBoxColumn1.HeaderText = "Project Name"
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.DataGridViewTextBoxColumn1.ReadOnly = True
+        '
+        'CreationDate
+        '
+        Me.CreationDate.HeaderText = "Creation Date"
+        Me.CreationDate.Name = "CreationDate"
+        Me.CreationDate.ReadOnly = True
+        '
+        'CreatedBy
+        '
+        Me.CreatedBy.HeaderText = "Created By"
+        Me.CreatedBy.Name = "CreatedBy"
+        Me.CreatedBy.ReadOnly = True
+        '
+        'LastModDate
+        '
+        Me.LastModDate.HeaderText = "Last Modified Date"
+        Me.LastModDate.Name = "LastModDate"
+        Me.LastModDate.ReadOnly = True
+        '
+        'ProjectFolderPath
+        '
+        Me.ProjectFolderPath.HeaderText = "Project Folder Path"
+        Me.ProjectFolderPath.Name = "ProjectFolderPath"
+        Me.ProjectFolderPath.ReadOnly = True
+        '
+        'ProjectID
+        '
+        Me.ProjectID.HeaderText = "Project ID"
+        Me.ProjectID.Name = "ProjectID"
+        Me.ProjectID.ReadOnly = True
+        Me.ProjectID.Visible = False
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -3095,12 +3130,15 @@ Partial Class Main
     Friend WithEvents btnNewProject As System.Windows.Forms.Button
     Friend WithEvents txtSearchProject As System.Windows.Forms.TextBox
     Friend WithEvents dgvProjectList As System.Windows.Forms.DataGridView
+    Friend WithEvents tabAlerts As System.Windows.Forms.TabPage
+    Friend WithEvents flowTasks As System.Windows.Forms.FlowLayoutPanel
+    Friend WithEvents btnEditProject As System.Windows.Forms.Button
+    Friend WithEvents btnDeleteProject As System.Windows.Forms.Button
     Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents CreationDate As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents CreatedBy As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents LastModDate As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ProjectFolderPath As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents tabAlerts As System.Windows.Forms.TabPage
-    Friend WithEvents flowTasks As System.Windows.Forms.FlowLayoutPanel
+    Friend WithEvents ProjectID As System.Windows.Forms.DataGridViewTextBoxColumn
 
 End Class
