@@ -249,6 +249,7 @@ Partial Class Main
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.ofdBox = New System.Windows.Forms.OpenFileDialog()
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
+        Me.flowTasks = New System.Windows.Forms.FlowLayoutPanel()
         Me.GroupBox4.SuspendLayout()
         Me.grpReqSet.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -282,6 +283,7 @@ Partial Class Main
         Me.tabSettings.SuspendLayout()
         Me.tabJobsREST.SuspendLayout()
         Me.tabControlJobsRest.SuspendLayout()
+        Me.tabTasks.SuspendLayout()
         Me.tabProjects.SuspendLayout()
         CType(Me.splitProjects, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.splitProjects.Panel1.SuspendLayout()
@@ -1697,6 +1699,7 @@ Partial Class Main
         '
         'tabTasks
         '
+        Me.tabTasks.Controls.Add(Me.flowTasks)
         Me.tabTasks.Location = New System.Drawing.Point(4, 25)
         Me.tabTasks.Name = "tabTasks"
         Me.tabTasks.Size = New System.Drawing.Size(832, 671)
@@ -2758,6 +2761,14 @@ Partial Class Main
         Me.sfdBox.Filter = "Box Files|*.json"
         Me.sfdBox.InitialDirectory = "My.Application.Info.DirectoryPath & ""\BoxedJobs"""
         '
+        'flowTasks
+        '
+        Me.flowTasks.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.flowTasks.Location = New System.Drawing.Point(0, 0)
+        Me.flowTasks.Name = "flowTasks"
+        Me.flowTasks.Size = New System.Drawing.Size(832, 671)
+        Me.flowTasks.TabIndex = 0
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -2819,6 +2830,7 @@ Partial Class Main
         Me.tabSettings.ResumeLayout(False)
         Me.tabJobsREST.ResumeLayout(False)
         Me.tabControlJobsRest.ResumeLayout(False)
+        Me.tabTasks.ResumeLayout(False)
         Me.tabProjects.ResumeLayout(False)
         Me.splitProjects.Panel1.ResumeLayout(False)
         Me.splitProjects.Panel1.PerformLayout()
@@ -3089,5 +3101,6 @@ Partial Class Main
     Friend WithEvents LastModDate As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ProjectFolderPath As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents tabAlerts As System.Windows.Forms.TabPage
+    Friend WithEvents flowTasks As System.Windows.Forms.FlowLayoutPanel
 
 End Class

@@ -1,6 +1,7 @@
 ﻿Imports R1SimpleRestClient.Models.Job
 Imports R1SimpleRestClient.Models.Response
 Imports R1SimpleRestClient.Models.Project
+Imports R1SimpleRestClient.Models.Templates
 
 Module JobRunner_RestFunctions
     Public Sub GetJobTemplates()
@@ -125,6 +126,33 @@ Module JobRunner_RestFunctions
             For Each project As ProjectPresenter In projectlist.Data
                 Main.dgvProjectList.Rows.Add(New String() {project.Name, project.CreatedDate, project.CreatedByUsername, project.ModifiedDate, project.FtkCaseFolderPath})
             Next
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Public Sub GetTasks()
+        Try
+            Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
+            If Main.auth.Data.Message <> "Authenticated" Then
+                Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
+            End If
+            Dim categories As ApiResponse(Of List(Of Categories))
+
+            categories = r1rest.Functions.Templates.GetCategories(Main.auth, Main.txtServer.Text)
+
+            Main.flowTasks.Controls.Clear()
+
+            For Each category As Categories In categories.Data
+                Dim grp As New GroupBox
+                grp.Text = category.name
+                grp.Parent = Main.flowTasks
+                Dim lsttemplate As New ListBox
+                lsttemplate.Parent = grp
+                lsttemplate.Dock = DockStyle.Fill
+                For Each Template In category.templates
+                    lsttemplate.Items.Add(Template.name)
+                Next
+           Next
         Catch ex As Exception
         End Try
     End Sub

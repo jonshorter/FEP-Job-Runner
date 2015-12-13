@@ -1421,4 +1421,9 @@ Public Class Main
     Private Sub tabProjects_Enter(sender As Object, e As EventArgs) Handles tabProjects.Enter
         JobRunner_RestFunctions.GetProjectList("")
     End Sub
+
+
+    Private Sub tabTasks_Enter(sender As Object, e As EventArgs) Handles tabTasks.Enter
+        JobRunner_RestFunctions.GetTasks()
+    End Sub
 End Class
