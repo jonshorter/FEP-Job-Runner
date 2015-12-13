@@ -146,15 +146,23 @@ Partial Class Main
         Me.Label21 = New System.Windows.Forms.Label()
         Me.tabMenu = New System.Windows.Forms.TabControl()
         Me.tabSettings = New System.Windows.Forms.TabPage()
-        Me.tabJobsREST = New System.Windows.Forms.TabPage()
+        Me.tabRESTUI = New System.Windows.Forms.TabPage()
         Me.tabControlJobsRest = New System.Windows.Forms.TabControl()
         Me.tabTasks = New System.Windows.Forms.TabPage()
         Me.flowTasks = New System.Windows.Forms.FlowLayoutPanel()
         Me.tabProjects = New System.Windows.Forms.TabPage()
         Me.splitProjects = New System.Windows.Forms.SplitContainer()
+        Me.btnDeleteProject = New System.Windows.Forms.Button()
+        Me.btnEditProject = New System.Windows.Forms.Button()
         Me.btnNewProject = New System.Windows.Forms.Button()
         Me.txtSearchProject = New System.Windows.Forms.TextBox()
         Me.dgvProjectList = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CreationDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CreatedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LastModDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProjectFolderPath = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProjectID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tabJobsList = New System.Windows.Forms.TabPage()
         Me.splitJobsRestJobs = New System.Windows.Forms.SplitContainer()
         Me.txtJobsSearch = New System.Windows.Forms.TextBox()
@@ -245,14 +253,6 @@ Partial Class Main
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.ofdBox = New System.Windows.Forms.OpenFileDialog()
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
-        Me.btnEditProject = New System.Windows.Forms.Button()
-        Me.btnDeleteProject = New System.Windows.Forms.Button()
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CreationDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CreatedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LastModDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ProjectFolderPath = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ProjectID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox4.SuspendLayout()
         Me.grpReqSet.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -284,7 +284,7 @@ Partial Class Main
         CType(Me.nmbremkillprocid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabMenu.SuspendLayout()
         Me.tabSettings.SuspendLayout()
-        Me.tabJobsREST.SuspendLayout()
+        Me.tabRESTUI.SuspendLayout()
         Me.tabControlJobsRest.SuspendLayout()
         Me.tabTasks.SuspendLayout()
         Me.tabProjects.SuspendLayout()
@@ -1651,7 +1651,7 @@ Partial Class Main
         '
         Me.tabMenu.Appearance = System.Windows.Forms.TabAppearance.FlatButtons
         Me.tabMenu.Controls.Add(Me.tabSettings)
-        Me.tabMenu.Controls.Add(Me.tabJobsREST)
+        Me.tabMenu.Controls.Add(Me.tabRESTUI)
         Me.tabMenu.Controls.Add(Me.tabJobExecution)
         Me.tabMenu.Controls.Add(Me.tabFireEye)
         Me.tabMenu.Controls.Add(Me.tabPANW)
@@ -1677,15 +1677,15 @@ Partial Class Main
         Me.tabSettings.Text = "Settings"
         Me.tabSettings.UseVisualStyleBackColor = True
         '
-        'tabJobsREST
+        'tabRESTUI
         '
-        Me.tabJobsREST.Controls.Add(Me.tabControlJobsRest)
-        Me.tabJobsREST.Location = New System.Drawing.Point(4, 28)
-        Me.tabJobsREST.Name = "tabJobsREST"
-        Me.tabJobsREST.Size = New System.Drawing.Size(840, 700)
-        Me.tabJobsREST.TabIndex = 7
-        Me.tabJobsREST.Text = "Jobs REST"
-        Me.tabJobsREST.UseVisualStyleBackColor = True
+        Me.tabRESTUI.Controls.Add(Me.tabControlJobsRest)
+        Me.tabRESTUI.Location = New System.Drawing.Point(4, 28)
+        Me.tabRESTUI.Name = "tabRESTUI"
+        Me.tabRESTUI.Size = New System.Drawing.Size(840, 700)
+        Me.tabRESTUI.TabIndex = 7
+        Me.tabRESTUI.Text = "REST UI"
+        Me.tabRESTUI.UseVisualStyleBackColor = True
         '
         'tabControlJobsRest
         '
@@ -1712,6 +1712,8 @@ Partial Class Main
         '
         'flowTasks
         '
+        Me.flowTasks.AutoScroll = True
+        Me.flowTasks.AutoSize = True
         Me.flowTasks.Dock = System.Windows.Forms.DockStyle.Fill
         Me.flowTasks.Location = New System.Drawing.Point(0, 0)
         Me.flowTasks.Name = "flowTasks"
@@ -1751,6 +1753,26 @@ Partial Class Main
         Me.splitProjects.SplitterDistance = 38
         Me.splitProjects.TabIndex = 0
         '
+        'btnDeleteProject
+        '
+        Me.btnDeleteProject.AutoSize = True
+        Me.btnDeleteProject.Location = New System.Drawing.Point(124, 8)
+        Me.btnDeleteProject.Name = "btnDeleteProject"
+        Me.btnDeleteProject.Size = New System.Drawing.Size(59, 27)
+        Me.btnDeleteProject.TabIndex = 4
+        Me.btnDeleteProject.Text = "Delete"
+        Me.btnDeleteProject.UseVisualStyleBackColor = True
+        '
+        'btnEditProject
+        '
+        Me.btnEditProject.AutoSize = True
+        Me.btnEditProject.Location = New System.Drawing.Point(65, 8)
+        Me.btnEditProject.Name = "btnEditProject"
+        Me.btnEditProject.Size = New System.Drawing.Size(53, 27)
+        Me.btnEditProject.TabIndex = 3
+        Me.btnEditProject.Text = "Edit"
+        Me.btnEditProject.UseVisualStyleBackColor = True
+        '
         'btnNewProject
         '
         Me.btnNewProject.AutoSize = True
@@ -1787,6 +1809,43 @@ Partial Class Main
         Me.dgvProjectList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvProjectList.Size = New System.Drawing.Size(826, 623)
         Me.dgvProjectList.TabIndex = 1
+        '
+        'DataGridViewTextBoxColumn1
+        '
+        Me.DataGridViewTextBoxColumn1.HeaderText = "Project Name"
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.DataGridViewTextBoxColumn1.ReadOnly = True
+        '
+        'CreationDate
+        '
+        Me.CreationDate.HeaderText = "Creation Date"
+        Me.CreationDate.Name = "CreationDate"
+        Me.CreationDate.ReadOnly = True
+        '
+        'CreatedBy
+        '
+        Me.CreatedBy.HeaderText = "Created By"
+        Me.CreatedBy.Name = "CreatedBy"
+        Me.CreatedBy.ReadOnly = True
+        '
+        'LastModDate
+        '
+        Me.LastModDate.HeaderText = "Last Modified Date"
+        Me.LastModDate.Name = "LastModDate"
+        Me.LastModDate.ReadOnly = True
+        '
+        'ProjectFolderPath
+        '
+        Me.ProjectFolderPath.HeaderText = "Project Folder Path"
+        Me.ProjectFolderPath.Name = "ProjectFolderPath"
+        Me.ProjectFolderPath.ReadOnly = True
+        '
+        'ProjectID
+        '
+        Me.ProjectID.HeaderText = "Project ID"
+        Me.ProjectID.Name = "ProjectID"
+        Me.ProjectID.ReadOnly = True
+        Me.ProjectID.Visible = False
         '
         'tabJobsList
         '
@@ -2747,63 +2806,6 @@ Partial Class Main
         Me.sfdBox.Filter = "Box Files|*.json"
         Me.sfdBox.InitialDirectory = "My.Application.Info.DirectoryPath & ""\BoxedJobs"""
         '
-        'btnEditProject
-        '
-        Me.btnEditProject.AutoSize = True
-        Me.btnEditProject.Location = New System.Drawing.Point(65, 8)
-        Me.btnEditProject.Name = "btnEditProject"
-        Me.btnEditProject.Size = New System.Drawing.Size(53, 27)
-        Me.btnEditProject.TabIndex = 3
-        Me.btnEditProject.Text = "Edit"
-        Me.btnEditProject.UseVisualStyleBackColor = True
-        '
-        'btnDeleteProject
-        '
-        Me.btnDeleteProject.AutoSize = True
-        Me.btnDeleteProject.Location = New System.Drawing.Point(124, 8)
-        Me.btnDeleteProject.Name = "btnDeleteProject"
-        Me.btnDeleteProject.Size = New System.Drawing.Size(59, 27)
-        Me.btnDeleteProject.TabIndex = 4
-        Me.btnDeleteProject.Text = "Delete"
-        Me.btnDeleteProject.UseVisualStyleBackColor = True
-        '
-        'DataGridViewTextBoxColumn1
-        '
-        Me.DataGridViewTextBoxColumn1.HeaderText = "Project Name"
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        Me.DataGridViewTextBoxColumn1.ReadOnly = True
-        '
-        'CreationDate
-        '
-        Me.CreationDate.HeaderText = "Creation Date"
-        Me.CreationDate.Name = "CreationDate"
-        Me.CreationDate.ReadOnly = True
-        '
-        'CreatedBy
-        '
-        Me.CreatedBy.HeaderText = "Created By"
-        Me.CreatedBy.Name = "CreatedBy"
-        Me.CreatedBy.ReadOnly = True
-        '
-        'LastModDate
-        '
-        Me.LastModDate.HeaderText = "Last Modified Date"
-        Me.LastModDate.Name = "LastModDate"
-        Me.LastModDate.ReadOnly = True
-        '
-        'ProjectFolderPath
-        '
-        Me.ProjectFolderPath.HeaderText = "Project Folder Path"
-        Me.ProjectFolderPath.Name = "ProjectFolderPath"
-        Me.ProjectFolderPath.ReadOnly = True
-        '
-        'ProjectID
-        '
-        Me.ProjectID.HeaderText = "Project ID"
-        Me.ProjectID.Name = "ProjectID"
-        Me.ProjectID.ReadOnly = True
-        Me.ProjectID.Visible = False
-        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -2863,9 +2865,10 @@ Partial Class Main
         CType(Me.nmbremkillprocid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabMenu.ResumeLayout(False)
         Me.tabSettings.ResumeLayout(False)
-        Me.tabJobsREST.ResumeLayout(False)
+        Me.tabRESTUI.ResumeLayout(False)
         Me.tabControlJobsRest.ResumeLayout(False)
         Me.tabTasks.ResumeLayout(False)
+        Me.tabTasks.PerformLayout()
         Me.tabProjects.ResumeLayout(False)
         Me.splitProjects.Panel1.ResumeLayout(False)
         Me.splitProjects.Panel1.PerformLayout()
@@ -3096,7 +3099,7 @@ Partial Class Main
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
     Friend WithEvents chkUpdates As System.Windows.Forms.CheckBox
-    Friend WithEvents tabJobsREST As System.Windows.Forms.TabPage
+    Friend WithEvents tabRESTUI As System.Windows.Forms.TabPage
     Friend WithEvents tabControlJobsRest As System.Windows.Forms.TabControl
     Friend WithEvents tabJobsList As System.Windows.Forms.TabPage
     Friend WithEvents txtJobsSearch As System.Windows.Forms.TextBox

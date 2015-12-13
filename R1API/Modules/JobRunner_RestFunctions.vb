@@ -159,11 +159,20 @@ Module JobRunner_RestFunctions
                 Dim grp As New GroupBox
                 grp.Text = category.name
                 grp.Parent = Main.flowTasks
+                grp.MinimumSize = New Size(250, 100)
+                grp.MaximumSize = New Size(450, 350)
+                grp.AutoSize = False
+                grp.AutoSizeMode = AutoSizeMode.GrowAndShrink
+                grp.Size = New Size(275, 175)
                 Dim lsttemplate As New ListBox
+                AddHandler lsttemplate.DoubleClick, AddressOf TaskItemDo
+                lsttemplate.SelectionMode = SelectionMode.One
                 lsttemplate.Parent = grp
                 lsttemplate.Dock = DockStyle.Fill
+                lsttemplate.AutoSize = False
+                lsttemplate.Size = New Size(375, 325)
                 For Each Template In category.templates
-                    lsttemplate.Items.Add(Template.name)
+                    Dim item = lsttemplate.Items.Add(Template.name)
                 Next
             Next
 
@@ -171,6 +180,13 @@ Module JobRunner_RestFunctions
          
         Catch ex As Exception
         End Try
+    End Sub
+
+    Public Sub TaskItemDo(ByVal sender As ListBox, ByVal e As System.EventArgs)
+        If sender.SelectedItems.Count > 0 Then
+            JobFromTemplate.ShowDialog()
+            'MsgBox(sender.SelectedItem.ToString)
+        End If
     End Sub
 
     Public Sub CreateProject(ByVal Name As String, ByVal Description As String, ByVal TBCheck As Boolean, ByVal Server As String, ByVal auth As AuthToken)

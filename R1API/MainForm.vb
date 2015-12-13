@@ -1162,9 +1162,11 @@ Public Class Main
         btnSaveSettings_Click(e, e)
         lblJobStatus.Text = ""
 
-        If tabMenu.SelectedTab.Name = tabJobsREST.Name Then
-            JobRunner_RestFunctions.GetTasks()
-            flowTasks.Refresh()
+        If tabMenu.SelectedTab.Name = tabRESTUI.Name Then
+            JobRunner_RestFunctions.GetJobList("")
+            tabControlJobsRest.SelectedTab = tabJobsList
+            '  JobRunner_RestFunctions.GetTasks()
+            '  flowTasks.Refresh()
         End If
     End Sub
 
@@ -1444,5 +1446,13 @@ Public Class Main
         If MsgBox("Delete Project " & dgvProjectList.CurrentRow.Cells(0).Value & "?", MsgBoxStyle.YesNoCancel, "Delete Project?") = MsgBoxResult.Yes Then
             JobRunner_RestFunctions.DeleteProject(dgvProjectList.CurrentRow.Cells(5).Value)
         End If
+    End Sub
+
+    Private Sub txtSearchProject_TextChanged(sender As Object, e As EventArgs) Handles txtSearchProject.TextChanged
+
+    End Sub
+
+    Private Sub txtSearchProject_Validated(sender As Object, e As EventArgs) Handles txtSearchProject.Validated
+
     End Sub
 End Class
