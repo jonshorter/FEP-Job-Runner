@@ -6,8 +6,7 @@ Imports System.Runtime.InteropServices
 
 Public Class Main
 
-    Public RestTabs As List(Of TabPage)
-
+    Public JobsEndpointStatus
 
     'Delcare Stores for Job Filters/Options
     Public StoreInFiltList
@@ -1320,6 +1319,8 @@ Public Class Main
         End If
     End Sub
 
+
+
     Private Sub txtJobsSearch_Enter(sender As Object, e As EventArgs) Handles txtJobsSearch.Enter
         If txtJobsSearch.Text = "Search" Then
             txtJobsSearch.Text = ""
@@ -1359,8 +1360,12 @@ Public Class Main
                         End If
 
                     Case 9 'EndPoint Status
-                        tabEndpointStatus.Tag = dgvJobsRestJobsList.Rows.Item(e.RowIndex).Cells(8).Value.ToString
-                        tabControlJobsRest.SelectedTab = tabEndpointStatus
+                        JobsEndpointStatus = dgvJobsRestJobsList.Rows.Item(e.RowIndex).Cells(8).Value.ToString
+                        If JobsEndpointStatus <> "" Then
+                            JobRunner_RestFunctions.GetEndpointStatusCounts(JobsEndpointStatus)
+                            JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus)
+                        End If
+                        splitEndpointStatus.BringToFront()
 
                 End Select
             End If
@@ -1382,20 +1387,38 @@ Public Class Main
 
 
     Private Sub tabJobsREST_Enter(sender As Object, e As EventArgs) Handles tabJobsREST.Enter
-        tabControlJobsRest.SelectedTab = tabJobsList
+        splitJobsRestJobs.BringToFront()
         JobRunner_RestFunctions.GetJobList("")
     End Sub
 
-   
+    Private Sub btnBackFromEndpointStatus_Click(sender As Object, e As EventArgs) Handles btnBackFromEndpointStatus.Click
+        splitEndpointStatus.SendToBack()
+    End Sub
 
-    Private Sub tabEndpointStatus_Enter(sender As Object, e As EventArgs) Handles tabEndpointStatus.Enter
-        If tabEndpointStatus.Tag <> "" Then
-            JobRunner_RestFunctions.GetEndpointStatusCounts(tabEndpointStatus.Tag)
-            JobRunner_RestFunctions.GetJobTargets(tabEndpointStatus.Tag)
+
+
+    Private Sub txtSearchProject_Enter(sender As Object, e As EventArgs) Handles txtSearchProject.Enter
+        If txtSearchProject.Text = "Search" Then
+            txtSearchProject.Text = ""
         End If
     End Sub
 
-    Private Sub tabEndpointStatus_Click(sender As Object, e As EventArgs) Handles tabEndpointStatus.Click
+    Private Sub txtSearchProject_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSearchProject.KeyDown
 
+        If e.KeyCode = Keys.Enter Then
+            JobRunner_RestFunctions.GetProjectList(txtSearchProject.Text)
+        End If
+    End Sub
+
+
+  
+    Private Sub txtSearchProject_Leave(sender As Object, e As EventArgs) Handles txtSearchProject.Leave
+        If txtSearchProject.Text = "" Then
+            txtSearchProject.Text = "Search"
+        End If
+    End Sub
+
+    Private Sub tabProjects_Enter(sender As Object, e As EventArgs) Handles tabProjects.Enter
+        JobRunner_RestFunctions.GetProjectList("")
     End Sub
 End Class

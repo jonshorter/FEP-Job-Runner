@@ -148,6 +148,17 @@ Partial Class Main
         Me.tabSettings = New System.Windows.Forms.TabPage()
         Me.tabJobsREST = New System.Windows.Forms.TabPage()
         Me.tabControlJobsRest = New System.Windows.Forms.TabControl()
+        Me.tabTasks = New System.Windows.Forms.TabPage()
+        Me.tabProjects = New System.Windows.Forms.TabPage()
+        Me.splitProjects = New System.Windows.Forms.SplitContainer()
+        Me.btnNewProject = New System.Windows.Forms.Button()
+        Me.txtSearchProject = New System.Windows.Forms.TextBox()
+        Me.dgvProjectList = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CreationDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CreatedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LastModDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProjectFolderPath = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tabJobsList = New System.Windows.Forms.TabPage()
         Me.splitJobsRestJobs = New System.Windows.Forms.SplitContainer()
         Me.txtJobsSearch = New System.Windows.Forms.TextBox()
@@ -162,7 +173,19 @@ Partial Class Main
         Me.jobID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.jobResultID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.jobEndpointStatus = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.tabEndpointStatus = New System.Windows.Forms.TabPage()
+        Me.splitEndpointStatus = New System.Windows.Forms.SplitContainer()
+        Me.btnBackFromEndpointStatus = New System.Windows.Forms.Button()
+        Me.lblepstatusSuccessful = New System.Windows.Forms.Label()
+        Me.lblepstatusFailed = New System.Windows.Forms.Label()
+        Me.lblepStatusInProgress = New System.Windows.Forms.Label()
+        Me.lblepStatusTotal = New System.Windows.Forms.Label()
+        Me.dgvEndpointStatusJobTargets = New System.Windows.Forms.DataGridView()
+        Me.endpoint = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Start = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Hits = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Action = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.tabAlerts = New System.Windows.Forms.TabPage()
         Me.tabJobExecution = New System.Windows.Forms.TabPage()
         Me.lblJobStatus = New System.Windows.Forms.Label()
         Me.btnShowJSON = New System.Windows.Forms.Button()
@@ -226,16 +249,6 @@ Partial Class Main
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.ofdBox = New System.Windows.Forms.OpenFileDialog()
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
-        Me.lblepStatusTotal = New System.Windows.Forms.Label()
-        Me.lblepStatusInProgress = New System.Windows.Forms.Label()
-        Me.lblepstatusFailed = New System.Windows.Forms.Label()
-        Me.lblepstatusSuccessful = New System.Windows.Forms.Label()
-        Me.dgvEndpointStatusJobTargets = New System.Windows.Forms.DataGridView()
-        Me.endpoint = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Start = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Hits = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Action = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.GroupBox4.SuspendLayout()
         Me.grpReqSet.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -269,13 +282,23 @@ Partial Class Main
         Me.tabSettings.SuspendLayout()
         Me.tabJobsREST.SuspendLayout()
         Me.tabControlJobsRest.SuspendLayout()
+        Me.tabProjects.SuspendLayout()
+        CType(Me.splitProjects, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.splitProjects.Panel1.SuspendLayout()
+        Me.splitProjects.Panel2.SuspendLayout()
+        Me.splitProjects.SuspendLayout()
+        CType(Me.dgvProjectList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabJobsList.SuspendLayout()
         CType(Me.splitJobsRestJobs, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.splitJobsRestJobs.Panel1.SuspendLayout()
         Me.splitJobsRestJobs.Panel2.SuspendLayout()
         Me.splitJobsRestJobs.SuspendLayout()
         CType(Me.dgvJobsRestJobsList, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tabEndpointStatus.SuspendLayout()
+        CType(Me.splitEndpointStatus, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.splitEndpointStatus.Panel1.SuspendLayout()
+        Me.splitEndpointStatus.Panel2.SuspendLayout()
+        Me.splitEndpointStatus.SuspendLayout()
+        CType(Me.dgvEndpointStatusJobTargets, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabJobExecution.SuspendLayout()
         Me.tabFireEye.SuspendLayout()
         Me.tabPANW.SuspendLayout()
@@ -289,7 +312,6 @@ Partial Class Main
         CType(Me.xps_sim_Port, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.xpsPort, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabAbout.SuspendLayout()
-        CType(Me.dgvEndpointStatusJobTargets, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnExecute
@@ -1662,8 +1684,10 @@ Partial Class Main
         '
         'tabControlJobsRest
         '
+        Me.tabControlJobsRest.Controls.Add(Me.tabTasks)
+        Me.tabControlJobsRest.Controls.Add(Me.tabProjects)
         Me.tabControlJobsRest.Controls.Add(Me.tabJobsList)
-        Me.tabControlJobsRest.Controls.Add(Me.tabEndpointStatus)
+        Me.tabControlJobsRest.Controls.Add(Me.tabAlerts)
         Me.tabControlJobsRest.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tabControlJobsRest.Location = New System.Drawing.Point(0, 0)
         Me.tabControlJobsRest.Name = "tabControlJobsRest"
@@ -1671,9 +1695,114 @@ Partial Class Main
         Me.tabControlJobsRest.Size = New System.Drawing.Size(840, 700)
         Me.tabControlJobsRest.TabIndex = 0
         '
+        'tabTasks
+        '
+        Me.tabTasks.Location = New System.Drawing.Point(4, 25)
+        Me.tabTasks.Name = "tabTasks"
+        Me.tabTasks.Size = New System.Drawing.Size(832, 671)
+        Me.tabTasks.TabIndex = 2
+        Me.tabTasks.Text = "Tasks"
+        Me.tabTasks.UseVisualStyleBackColor = True
+        '
+        'tabProjects
+        '
+        Me.tabProjects.Controls.Add(Me.splitProjects)
+        Me.tabProjects.Location = New System.Drawing.Point(4, 25)
+        Me.tabProjects.Name = "tabProjects"
+        Me.tabProjects.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabProjects.Size = New System.Drawing.Size(832, 671)
+        Me.tabProjects.TabIndex = 1
+        Me.tabProjects.Text = "Projects"
+        Me.tabProjects.UseVisualStyleBackColor = True
+        '
+        'splitProjects
+        '
+        Me.splitProjects.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.splitProjects.IsSplitterFixed = True
+        Me.splitProjects.Location = New System.Drawing.Point(3, 3)
+        Me.splitProjects.Name = "splitProjects"
+        Me.splitProjects.Orientation = System.Windows.Forms.Orientation.Horizontal
+        '
+        'splitProjects.Panel1
+        '
+        Me.splitProjects.Panel1.Controls.Add(Me.btnNewProject)
+        Me.splitProjects.Panel1.Controls.Add(Me.txtSearchProject)
+        '
+        'splitProjects.Panel2
+        '
+        Me.splitProjects.Panel2.Controls.Add(Me.dgvProjectList)
+        Me.splitProjects.Size = New System.Drawing.Size(826, 665)
+        Me.splitProjects.SplitterDistance = 38
+        Me.splitProjects.TabIndex = 0
+        '
+        'btnNewProject
+        '
+        Me.btnNewProject.Location = New System.Drawing.Point(9, 8)
+        Me.btnNewProject.Name = "btnNewProject"
+        Me.btnNewProject.Size = New System.Drawing.Size(50, 23)
+        Me.btnNewProject.TabIndex = 2
+        Me.btnNewProject.Text = "New"
+        Me.btnNewProject.UseVisualStyleBackColor = True
+        '
+        'txtSearchProject
+        '
+        Me.txtSearchProject.AcceptsReturn = True
+        Me.txtSearchProject.Location = New System.Drawing.Point(70, 9)
+        Me.txtSearchProject.Name = "txtSearchProject"
+        Me.txtSearchProject.Size = New System.Drawing.Size(209, 22)
+        Me.txtSearchProject.TabIndex = 1
+        Me.txtSearchProject.Text = "Search"
+        '
+        'dgvProjectList
+        '
+        Me.dgvProjectList.AllowUserToAddRows = False
+        Me.dgvProjectList.AllowUserToDeleteRows = False
+        Me.dgvProjectList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvProjectList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvProjectList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.CreationDate, Me.CreatedBy, Me.LastModDate, Me.ProjectFolderPath})
+        Me.dgvProjectList.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvProjectList.Location = New System.Drawing.Point(0, 0)
+        Me.dgvProjectList.Name = "dgvProjectList"
+        Me.dgvProjectList.ReadOnly = True
+        Me.dgvProjectList.RowHeadersVisible = False
+        Me.dgvProjectList.RowTemplate.Height = 24
+        Me.dgvProjectList.Size = New System.Drawing.Size(826, 623)
+        Me.dgvProjectList.TabIndex = 1
+        '
+        'DataGridViewTextBoxColumn1
+        '
+        Me.DataGridViewTextBoxColumn1.HeaderText = "Project Name"
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.DataGridViewTextBoxColumn1.ReadOnly = True
+        '
+        'CreationDate
+        '
+        Me.CreationDate.HeaderText = "Creation Date"
+        Me.CreationDate.Name = "CreationDate"
+        Me.CreationDate.ReadOnly = True
+        '
+        'CreatedBy
+        '
+        Me.CreatedBy.HeaderText = "Created By"
+        Me.CreatedBy.Name = "CreatedBy"
+        Me.CreatedBy.ReadOnly = True
+        '
+        'LastModDate
+        '
+        Me.LastModDate.HeaderText = "Last Modified Date"
+        Me.LastModDate.Name = "LastModDate"
+        Me.LastModDate.ReadOnly = True
+        '
+        'ProjectFolderPath
+        '
+        Me.ProjectFolderPath.HeaderText = "Project Folder Path"
+        Me.ProjectFolderPath.Name = "ProjectFolderPath"
+        Me.ProjectFolderPath.ReadOnly = True
+        '
         'tabJobsList
         '
         Me.tabJobsList.Controls.Add(Me.splitJobsRestJobs)
+        Me.tabJobsList.Controls.Add(Me.splitEndpointStatus)
         Me.tabJobsList.Location = New System.Drawing.Point(4, 25)
         Me.tabJobsList.Name = "tabJobsList"
         Me.tabJobsList.Padding = New System.Windows.Forms.Padding(3)
@@ -1686,6 +1815,7 @@ Partial Class Main
         '
         Me.splitJobsRestJobs.Dock = System.Windows.Forms.DockStyle.Fill
         Me.splitJobsRestJobs.FixedPanel = System.Windows.Forms.FixedPanel.Panel1
+        Me.splitJobsRestJobs.IsSplitterFixed = True
         Me.splitJobsRestJobs.Location = New System.Drawing.Point(3, 3)
         Me.splitJobsRestJobs.Name = "splitJobsRestJobs"
         Me.splitJobsRestJobs.Orientation = System.Windows.Forms.Orientation.Horizontal
@@ -1792,20 +1922,129 @@ Partial Class Main
         Me.jobEndpointStatus.Name = "jobEndpointStatus"
         Me.jobEndpointStatus.ReadOnly = True
         '
-        'tabEndpointStatus
+        'splitEndpointStatus
         '
-        Me.tabEndpointStatus.Controls.Add(Me.dgvEndpointStatusJobTargets)
-        Me.tabEndpointStatus.Controls.Add(Me.lblepstatusSuccessful)
-        Me.tabEndpointStatus.Controls.Add(Me.lblepstatusFailed)
-        Me.tabEndpointStatus.Controls.Add(Me.lblepStatusInProgress)
-        Me.tabEndpointStatus.Controls.Add(Me.lblepStatusTotal)
-        Me.tabEndpointStatus.Location = New System.Drawing.Point(4, 25)
-        Me.tabEndpointStatus.Name = "tabEndpointStatus"
-        Me.tabEndpointStatus.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabEndpointStatus.Size = New System.Drawing.Size(832, 671)
-        Me.tabEndpointStatus.TabIndex = 1
-        Me.tabEndpointStatus.Text = "Endpoint Status"
-        Me.tabEndpointStatus.UseVisualStyleBackColor = True
+        Me.splitEndpointStatus.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.splitEndpointStatus.FixedPanel = System.Windows.Forms.FixedPanel.Panel1
+        Me.splitEndpointStatus.IsSplitterFixed = True
+        Me.splitEndpointStatus.Location = New System.Drawing.Point(3, 3)
+        Me.splitEndpointStatus.Name = "splitEndpointStatus"
+        Me.splitEndpointStatus.Orientation = System.Windows.Forms.Orientation.Horizontal
+        '
+        'splitEndpointStatus.Panel1
+        '
+        Me.splitEndpointStatus.Panel1.Controls.Add(Me.btnBackFromEndpointStatus)
+        Me.splitEndpointStatus.Panel1.Controls.Add(Me.lblepstatusSuccessful)
+        Me.splitEndpointStatus.Panel1.Controls.Add(Me.lblepstatusFailed)
+        Me.splitEndpointStatus.Panel1.Controls.Add(Me.lblepStatusInProgress)
+        Me.splitEndpointStatus.Panel1.Controls.Add(Me.lblepStatusTotal)
+        '
+        'splitEndpointStatus.Panel2
+        '
+        Me.splitEndpointStatus.Panel2.Controls.Add(Me.dgvEndpointStatusJobTargets)
+        Me.splitEndpointStatus.Size = New System.Drawing.Size(826, 665)
+        Me.splitEndpointStatus.SplitterDistance = 41
+        Me.splitEndpointStatus.TabIndex = 3
+        '
+        'btnBackFromEndpointStatus
+        '
+        Me.btnBackFromEndpointStatus.Location = New System.Drawing.Point(10, 7)
+        Me.btnBackFromEndpointStatus.Name = "btnBackFromEndpointStatus"
+        Me.btnBackFromEndpointStatus.Size = New System.Drawing.Size(115, 29)
+        Me.btnBackFromEndpointStatus.TabIndex = 13
+        Me.btnBackFromEndpointStatus.Text = "Back To Jobs"
+        Me.btnBackFromEndpointStatus.UseVisualStyleBackColor = True
+        '
+        'lblepstatusSuccessful
+        '
+        Me.lblepstatusSuccessful.AutoSize = True
+        Me.lblepstatusSuccessful.Location = New System.Drawing.Point(558, 11)
+        Me.lblepstatusSuccessful.Name = "lblepstatusSuccessful"
+        Me.lblepstatusSuccessful.Size = New System.Drawing.Size(84, 17)
+        Me.lblepstatusSuccessful.TabIndex = 12
+        Me.lblepstatusSuccessful.Text = "Successful: "
+        '
+        'lblepstatusFailed
+        '
+        Me.lblepstatusFailed.AutoSize = True
+        Me.lblepstatusFailed.Location = New System.Drawing.Point(443, 11)
+        Me.lblepstatusFailed.Name = "lblepstatusFailed"
+        Me.lblepstatusFailed.Size = New System.Drawing.Size(54, 17)
+        Me.lblepstatusFailed.TabIndex = 11
+        Me.lblepstatusFailed.Text = "Failed: "
+        '
+        'lblepStatusInProgress
+        '
+        Me.lblepStatusInProgress.AutoSize = True
+        Me.lblepStatusInProgress.Location = New System.Drawing.Point(294, 11)
+        Me.lblepStatusInProgress.Name = "lblepStatusInProgress"
+        Me.lblepStatusInProgress.Size = New System.Drawing.Size(88, 17)
+        Me.lblepStatusInProgress.TabIndex = 10
+        Me.lblepStatusInProgress.Text = "In Progress: "
+        '
+        'lblepStatusTotal
+        '
+        Me.lblepStatusTotal.AutoSize = True
+        Me.lblepStatusTotal.Location = New System.Drawing.Point(185, 11)
+        Me.lblepStatusTotal.Name = "lblepStatusTotal"
+        Me.lblepStatusTotal.Size = New System.Drawing.Size(48, 17)
+        Me.lblepStatusTotal.TabIndex = 9
+        Me.lblepStatusTotal.Text = "Total: "
+        '
+        'dgvEndpointStatusJobTargets
+        '
+        Me.dgvEndpointStatusJobTargets.AllowUserToAddRows = False
+        Me.dgvEndpointStatusJobTargets.AllowUserToDeleteRows = False
+        Me.dgvEndpointStatusJobTargets.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvEndpointStatusJobTargets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvEndpointStatusJobTargets.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.endpoint, Me.Start, Me.Status, Me.Hits, Me.Action})
+        Me.dgvEndpointStatusJobTargets.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvEndpointStatusJobTargets.Location = New System.Drawing.Point(0, 0)
+        Me.dgvEndpointStatusJobTargets.Name = "dgvEndpointStatusJobTargets"
+        Me.dgvEndpointStatusJobTargets.ReadOnly = True
+        Me.dgvEndpointStatusJobTargets.RowHeadersVisible = False
+        Me.dgvEndpointStatusJobTargets.RowTemplate.Height = 24
+        Me.dgvEndpointStatusJobTargets.Size = New System.Drawing.Size(826, 620)
+        Me.dgvEndpointStatusJobTargets.TabIndex = 9
+        '
+        'endpoint
+        '
+        Me.endpoint.HeaderText = "Endpoint"
+        Me.endpoint.Name = "endpoint"
+        Me.endpoint.ReadOnly = True
+        '
+        'Start
+        '
+        Me.Start.HeaderText = "Start"
+        Me.Start.Name = "Start"
+        Me.Start.ReadOnly = True
+        '
+        'Status
+        '
+        Me.Status.HeaderText = "Status"
+        Me.Status.Name = "Status"
+        Me.Status.ReadOnly = True
+        '
+        'Hits
+        '
+        Me.Hits.HeaderText = "Hits"
+        Me.Hits.Name = "Hits"
+        Me.Hits.ReadOnly = True
+        '
+        'Action
+        '
+        Me.Action.HeaderText = "Action"
+        Me.Action.Name = "Action"
+        Me.Action.ReadOnly = True
+        '
+        'tabAlerts
+        '
+        Me.tabAlerts.Location = New System.Drawing.Point(4, 25)
+        Me.tabAlerts.Name = "tabAlerts"
+        Me.tabAlerts.Size = New System.Drawing.Size(832, 671)
+        Me.tabAlerts.TabIndex = 3
+        Me.tabAlerts.Text = "Alerts"
+        Me.tabAlerts.UseVisualStyleBackColor = True
         '
         'tabJobExecution
         '
@@ -2519,85 +2758,6 @@ Partial Class Main
         Me.sfdBox.Filter = "Box Files|*.json"
         Me.sfdBox.InitialDirectory = "My.Application.Info.DirectoryPath & ""\BoxedJobs"""
         '
-        'lblepStatusTotal
-        '
-        Me.lblepStatusTotal.AutoSize = True
-        Me.lblepStatusTotal.Location = New System.Drawing.Point(39, 23)
-        Me.lblepStatusTotal.Name = "lblepStatusTotal"
-        Me.lblepStatusTotal.Size = New System.Drawing.Size(59, 17)
-        Me.lblepStatusTotal.TabIndex = 0
-        Me.lblepStatusTotal.Text = "Label49"
-        '
-        'lblepStatusInProgress
-        '
-        Me.lblepStatusInProgress.AutoSize = True
-        Me.lblepStatusInProgress.Location = New System.Drawing.Point(158, 23)
-        Me.lblepStatusInProgress.Name = "lblepStatusInProgress"
-        Me.lblepStatusInProgress.Size = New System.Drawing.Size(59, 17)
-        Me.lblepStatusInProgress.TabIndex = 1
-        Me.lblepStatusInProgress.Text = "Label49"
-        '
-        'lblepstatusFailed
-        '
-        Me.lblepstatusFailed.AutoSize = True
-        Me.lblepstatusFailed.Location = New System.Drawing.Point(284, 23)
-        Me.lblepstatusFailed.Name = "lblepstatusFailed"
-        Me.lblepstatusFailed.Size = New System.Drawing.Size(59, 17)
-        Me.lblepstatusFailed.TabIndex = 2
-        Me.lblepstatusFailed.Text = "Label49"
-        '
-        'lblepstatusSuccessful
-        '
-        Me.lblepstatusSuccessful.AutoSize = True
-        Me.lblepstatusSuccessful.Location = New System.Drawing.Point(412, 23)
-        Me.lblepstatusSuccessful.Name = "lblepstatusSuccessful"
-        Me.lblepstatusSuccessful.Size = New System.Drawing.Size(59, 17)
-        Me.lblepstatusSuccessful.TabIndex = 3
-        Me.lblepstatusSuccessful.Text = "Label49"
-        '
-        'dgvEndpointStatusJobTargets
-        '
-        Me.dgvEndpointStatusJobTargets.AllowUserToAddRows = False
-        Me.dgvEndpointStatusJobTargets.AllowUserToDeleteRows = False
-        Me.dgvEndpointStatusJobTargets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvEndpointStatusJobTargets.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.endpoint, Me.Start, Me.Status, Me.Hits, Me.Action})
-        Me.dgvEndpointStatusJobTargets.Location = New System.Drawing.Point(18, 60)
-        Me.dgvEndpointStatusJobTargets.Name = "dgvEndpointStatusJobTargets"
-        Me.dgvEndpointStatusJobTargets.ReadOnly = True
-        Me.dgvEndpointStatusJobTargets.RowTemplate.Height = 24
-        Me.dgvEndpointStatusJobTargets.Size = New System.Drawing.Size(783, 370)
-        Me.dgvEndpointStatusJobTargets.TabIndex = 4
-        '
-        'endpoint
-        '
-        Me.endpoint.HeaderText = "Endpoint"
-        Me.endpoint.Name = "endpoint"
-        Me.endpoint.ReadOnly = True
-        '
-        'Start
-        '
-        Me.Start.HeaderText = "Start"
-        Me.Start.Name = "Start"
-        Me.Start.ReadOnly = True
-        '
-        'Status
-        '
-        Me.Status.HeaderText = "Status"
-        Me.Status.Name = "Status"
-        Me.Status.ReadOnly = True
-        '
-        'Hits
-        '
-        Me.Hits.HeaderText = "Hits"
-        Me.Hits.Name = "Hits"
-        Me.Hits.ReadOnly = True
-        '
-        'Action
-        '
-        Me.Action.HeaderText = "Action"
-        Me.Action.Name = "Action"
-        Me.Action.ReadOnly = True
-        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -2659,6 +2819,13 @@ Partial Class Main
         Me.tabSettings.ResumeLayout(False)
         Me.tabJobsREST.ResumeLayout(False)
         Me.tabControlJobsRest.ResumeLayout(False)
+        Me.tabProjects.ResumeLayout(False)
+        Me.splitProjects.Panel1.ResumeLayout(False)
+        Me.splitProjects.Panel1.PerformLayout()
+        Me.splitProjects.Panel2.ResumeLayout(False)
+        CType(Me.splitProjects, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.splitProjects.ResumeLayout(False)
+        CType(Me.dgvProjectList, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabJobsList.ResumeLayout(False)
         Me.splitJobsRestJobs.Panel1.ResumeLayout(False)
         Me.splitJobsRestJobs.Panel1.PerformLayout()
@@ -2666,8 +2833,12 @@ Partial Class Main
         CType(Me.splitJobsRestJobs, System.ComponentModel.ISupportInitialize).EndInit()
         Me.splitJobsRestJobs.ResumeLayout(False)
         CType(Me.dgvJobsRestJobsList, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.tabEndpointStatus.ResumeLayout(False)
-        Me.tabEndpointStatus.PerformLayout()
+        Me.splitEndpointStatus.Panel1.ResumeLayout(False)
+        Me.splitEndpointStatus.Panel1.PerformLayout()
+        Me.splitEndpointStatus.Panel2.ResumeLayout(False)
+        CType(Me.splitEndpointStatus, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.splitEndpointStatus.ResumeLayout(False)
+        CType(Me.dgvEndpointStatusJobTargets, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabJobExecution.ResumeLayout(False)
         Me.tabJobExecution.PerformLayout()
         Me.tabFireEye.ResumeLayout(False)
@@ -2688,7 +2859,6 @@ Partial Class Main
         CType(Me.xpsPort, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabAbout.ResumeLayout(False)
         Me.tabAbout.PerformLayout()
-        CType(Me.dgvEndpointStatusJobTargets, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -2883,7 +3053,6 @@ Partial Class Main
     Friend WithEvents tabControlJobsRest As System.Windows.Forms.TabControl
     Friend WithEvents tabJobsList As System.Windows.Forms.TabPage
     Friend WithEvents txtJobsSearch As System.Windows.Forms.TextBox
-    Friend WithEvents tabEndpointStatus As System.Windows.Forms.TabPage
     Friend WithEvents splitJobsRestJobs As System.Windows.Forms.SplitContainer
     Friend WithEvents dgvJobsRestJobsList As System.Windows.Forms.DataGridView
     Friend WithEvents jobName As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -2896,6 +3065,7 @@ Partial Class Main
     Friend WithEvents jobID As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents jobResultID As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents jobEndpointStatus As System.Windows.Forms.DataGridViewButtonColumn
+    Friend WithEvents splitEndpointStatus As System.Windows.Forms.SplitContainer
     Friend WithEvents lblepstatusSuccessful As System.Windows.Forms.Label
     Friend WithEvents lblepstatusFailed As System.Windows.Forms.Label
     Friend WithEvents lblepStatusInProgress As System.Windows.Forms.Label
@@ -2906,5 +3076,18 @@ Partial Class Main
     Friend WithEvents Status As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Hits As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Action As System.Windows.Forms.DataGridViewButtonColumn
+    Friend WithEvents btnBackFromEndpointStatus As System.Windows.Forms.Button
+    Friend WithEvents tabTasks As System.Windows.Forms.TabPage
+    Friend WithEvents tabProjects As System.Windows.Forms.TabPage
+    Friend WithEvents splitProjects As System.Windows.Forms.SplitContainer
+    Friend WithEvents btnNewProject As System.Windows.Forms.Button
+    Friend WithEvents txtSearchProject As System.Windows.Forms.TextBox
+    Friend WithEvents dgvProjectList As System.Windows.Forms.DataGridView
+    Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents CreationDate As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents CreatedBy As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents LastModDate As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ProjectFolderPath As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents tabAlerts As System.Windows.Forms.TabPage
 
 End Class

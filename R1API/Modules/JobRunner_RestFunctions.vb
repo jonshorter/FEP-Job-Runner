@@ -1,5 +1,6 @@
 ﻿Imports R1SimpleRestClient.Models.Job
 Imports R1SimpleRestClient.Models.Response
+Imports R1SimpleRestClient.Models.Project
 
 Module JobRunner_RestFunctions
     Public Sub GetJobTemplates()
@@ -18,76 +19,114 @@ Module JobRunner_RestFunctions
     End Sub
 
     Public Sub GetJobList(Optional Search As String = "")
-        Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
-        If Main.auth.Data.Message <> "Authenticated" Then
-            Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
-        End If
-        Dim jobslist As ApiResponse(Of JobData)
-        If Not Search = "" Or Search = "Search" Then
-            jobslist = r1rest.Functions.Job.GetAllJobs(Main.auth, Main.txtServer.Text, , , , Search)
-        Else
-            jobslist = r1rest.Functions.Job.GetAllJobs(Main.auth, Main.txtServer.Text)
-        End If
-
-        Main.dgvJobsRestJobsList.Rows.Clear()
-
-        For Each job As JobInfo In jobslist.Data.jobs
-            Dim CancelStatus
-            If job.Status = "Running" Then
-                CancelStatus = "Cancel"
-            Else
-                CancelStatus = ""
+        Try
+            Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
+            If Main.auth.Data.Message <> "Authenticated" Then
+                Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
             End If
-            Main.dgvJobsRestJobsList.Rows.Add(New String() {job.Name, job.Status, "Retry", CancelStatus, job.JobType, job.StartDate.ToString, job.EndDate.ToString, job.JobID.ToString, job.ResultID.ToString, "Endpoint Status"})
-        Next
+            Dim jobslist As ApiResponse(Of JobData)
+            If Not Search = "" Or Search = "Search" Then
+                jobslist = r1rest.Functions.Job.GetAllJobs(Main.auth, Main.txtServer.Text, , , , Search)
+            Else
+                jobslist = r1rest.Functions.Job.GetAllJobs(Main.auth, Main.txtServer.Text)
+            End If
+
+            Main.dgvJobsRestJobsList.Rows.Clear()
+
+            For Each job As JobInfo In jobslist.Data.jobs
+                Dim CancelStatus
+                If job.Status = "Running" Then
+                    CancelStatus = "Cancel"
+                Else
+                    CancelStatus = ""
+                End If
+                Main.dgvJobsRestJobsList.Rows.Add(New String() {job.Name, job.Status, "Retry", CancelStatus, job.JobType, job.StartDate.ToString, job.EndDate.ToString, job.JobID.ToString, job.ResultID.ToString, "Status"})
+            Next
+        Catch ex As Exception
+        End Try
     End Sub
 
     Public Sub RetryJob(ByVal JobID As String, ByVal NewJobName As String)
-        Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
-        If Main.auth.Data.Message <> "Authenticated" Then
-            Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
-        End If
-        Dim ResubmitJob As New R1SimpleRestClient.Models.Job2.ResubmitJobOptions
-        ResubmitJob.JobID = JobID
-        ResubmitJob.NewJobName = NewJobName
-        ResubmitJob.ResubmissionType = R1SimpleRestClient.Models.Job2.ResubmitType.All
-        Dim job = r1rest.Functions.Job.ResubmitJob(Main.auth, Main.txtServer.Text, ResubmitJob)
-        GetJobList()
+        Try
+            Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
+            If Main.auth.Data.Message <> "Authenticated" Then
+                Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
+            End If
+            Dim ResubmitJob As New R1SimpleRestClient.Models.Job2.ResubmitJobOptions
+            ResubmitJob.JobID = JobID
+            ResubmitJob.NewJobName = NewJobName
+            ResubmitJob.ResubmissionType = R1SimpleRestClient.Models.Job2.ResubmitType.All
+            Dim job = r1rest.Functions.Job.ResubmitJob(Main.auth, Main.txtServer.Text, ResubmitJob)
+            GetJobList()
+        Catch ex As Exception
+        End Try
     End Sub
 
     Public Sub CancelJob(ByVal JobResultID As String, ByVal CancelSchedule As Boolean)
-        Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
-        If Main.auth.Data.Message <> "Authenticated" Then
-            Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
-        End If
-        Dim job = r1rest.Functions.Job.CancelJobResult(Main.auth, Main.txtServer.Text, JobResultID, CancelSchedule)
-        GetJobList()
+        Try
+            Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
+            If Main.auth.Data.Message <> "Authenticated" Then
+                Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
+            End If
+            Dim job = r1rest.Functions.Job.CancelJobResult(Main.auth, Main.txtServer.Text, JobResultID, CancelSchedule)
+            GetJobList()
+        Catch ex As Exception
+        End Try
     End Sub
 
     Public Sub GetEndpointStatusCounts(ByVal JobResultID As String)
-        Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
-        If Main.auth.Data.Message <> "Authenticated" Then
-            Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
-        End If
-        Dim job = r1rest.Functions.Job.GetJobStatusCounts(Main.auth, Main.txtServer.Text, JobResultID)
-        Main.lblepStatusTotal.Text = "Total: " & job.Data.totalCount
-        Main.lblepStatusInProgress.Text = "In Progress: " & job.Data.runningCount
-        Main.lblepstatusFailed.Text = "Failed: " & job.Data.failedCount
-        Main.lblepstatusSuccessful.Text = "Successful: " & job.Data.completedCount
+        Try
+            Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
+            If Main.auth.Data.Message <> "Authenticated" Then
+                Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
+            End If
+            Dim job = r1rest.Functions.Job.GetJobStatusCounts(Main.auth, Main.txtServer.Text, JobResultID)
+            Main.lblepStatusTotal.Text = "Total: " & job.Data.totalCount
+            Main.lblepStatusInProgress.Text = "In Progress: " & job.Data.runningCount
+            Main.lblepstatusFailed.Text = "Failed: " & job.Data.failedCount
+            Main.lblepstatusSuccessful.Text = "Successful: " & job.Data.completedCount
+        Catch ex As Exception
+        End Try
     End Sub
 
 
     Public Sub GetJobTargets(ByVal JobResultID As String)
-        Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
-        If Main.auth.Data.Message <> "Authenticated" Then
-            Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
-        End If
-        Dim jobtargets = r1rest.Functions.Job.GetJobTargets(Main.auth, Main.txtServer.Text, JobResultID)
-        Main.dgvEndpointStatusJobTargets.Rows.Clear()
+        Try
+            Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
+            If Main.auth.Data.Message <> "Authenticated" Then
+                Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
+            End If
+            Dim jobtargets = r1rest.Functions.Job.GetJobTargets(Main.auth, Main.txtServer.Text, JobResultID)
+            Main.dgvEndpointStatusJobTargets.Rows.Clear()
 
-        For Each target In jobtargets.Data.targets
+            For Each target In jobtargets.Data.targets
 
-            Main.dgvEndpointStatusJobTargets.Rows.Add(New String() {target.name, target.startDate, target.status, target.hits, "Action"})
-        Next
+                Main.dgvEndpointStatusJobTargets.Rows.Add(New String() {target.name, target.startDate, target.status, target.hits, "Action"})
+            Next
+        Catch ex As Exception
+        End Try
     End Sub
+
+    Public Sub GetProjectList(Optional Search As String = "")
+        Try
+            Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
+            If Main.auth.Data.Message <> "Authenticated" Then
+                Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
+            End If
+            Dim projectlist As ApiResponse(Of List(Of ProjectPresenter))
+            If Not Search = "" Or Search = "Search" Then
+                projectlist = r1rest.Functions.Project.GetProjectList(Main.auth, Main.txtServer.Text, Search)
+            Else
+                projectlist = r1rest.Functions.Project.GetProjectList(Main.auth, Main.txtServer.Text)
+            End If
+
+            Main.dgvProjectList.Rows.Clear()
+
+            For Each project As ProjectPresenter In projectlist.Data
+                Main.dgvProjectList.Rows.Add(New String() {project.Name, project.CreatedDate, project.CreatedByUsername, project.ModifiedDate, project.FtkCaseFolderPath})
+            Next
+        Catch ex As Exception
+        End Try
+    End Sub
+
 End Module
