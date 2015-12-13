@@ -149,6 +149,7 @@ Partial Class Main
         Me.tabJobsREST = New System.Windows.Forms.TabPage()
         Me.tabControlJobsRest = New System.Windows.Forms.TabControl()
         Me.tabTasks = New System.Windows.Forms.TabPage()
+        Me.flowTasks = New System.Windows.Forms.FlowLayoutPanel()
         Me.tabProjects = New System.Windows.Forms.TabPage()
         Me.splitProjects = New System.Windows.Forms.SplitContainer()
         Me.btnNewProject = New System.Windows.Forms.Button()
@@ -249,7 +250,6 @@ Partial Class Main
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.ofdBox = New System.Windows.Forms.OpenFileDialog()
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
-        Me.flowTasks = New System.Windows.Forms.FlowLayoutPanel()
         Me.GroupBox4.SuspendLayout()
         Me.grpReqSet.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -1707,6 +1707,14 @@ Partial Class Main
         Me.tabTasks.Text = "Tasks"
         Me.tabTasks.UseVisualStyleBackColor = True
         '
+        'flowTasks
+        '
+        Me.flowTasks.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.flowTasks.Location = New System.Drawing.Point(0, 0)
+        Me.flowTasks.Name = "flowTasks"
+        Me.flowTasks.Size = New System.Drawing.Size(832, 671)
+        Me.flowTasks.TabIndex = 0
+        '
         'tabProjects
         '
         Me.tabProjects.Controls.Add(Me.splitProjects)
@@ -2760,14 +2768,6 @@ Partial Class Main
         Me.sfdBox.DefaultExt = "json"
         Me.sfdBox.Filter = "Box Files|*.json"
         Me.sfdBox.InitialDirectory = "My.Application.Info.DirectoryPath & ""\BoxedJobs"""
-        '
-        'flowTasks
-        '
-        Me.flowTasks.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.flowTasks.Location = New System.Drawing.Point(0, 0)
-        Me.flowTasks.Name = "flowTasks"
-        Me.flowTasks.Size = New System.Drawing.Size(832, 671)
-        Me.flowTasks.TabIndex = 0
         '
         'Main
         '

@@ -1161,6 +1161,11 @@ Public Class Main
 
         btnSaveSettings_Click(e, e)
         lblJobStatus.Text = ""
+
+        If tabMenu.SelectedTab.Name = tabJobsREST.Name Then
+            JobRunner_RestFunctions.GetTasks()
+            flowTasks.Refresh()
+        End If
     End Sub
 
 
@@ -1379,17 +1384,18 @@ Public Class Main
         Select Case tabControlJobsRest.SelectedTab.Name
             Case tabJobsList.Name
                 JobRunner_RestFunctions.GetJobList("")
+
+            Case tabTasks.Name
+                JobRunner_RestFunctions.GetTasks()
+                flowTasks.Refresh()
+            Case tabProjects.Name
+                JobRunner_RestFunctions.GetProjectList("")
+              
         End Select
 
 
     End Sub
 
-
-
-    Private Sub tabJobsREST_Enter(sender As Object, e As EventArgs) Handles tabJobsREST.Enter
-        splitJobsRestJobs.BringToFront()
-        JobRunner_RestFunctions.GetJobList("")
-    End Sub
 
     Private Sub btnBackFromEndpointStatus_Click(sender As Object, e As EventArgs) Handles btnBackFromEndpointStatus.Click
         splitEndpointStatus.SendToBack()
@@ -1418,12 +1424,13 @@ Public Class Main
         End If
     End Sub
 
-    Private Sub tabProjects_Enter(sender As Object, e As EventArgs) Handles tabProjects.Enter
+  
+
+    Private Sub btnNewProject_Click(sender As Object, e As EventArgs) Handles btnNewProject.Click
+        CreateProject.ShowDialog()
         JobRunner_RestFunctions.GetProjectList("")
     End Sub
 
 
-    Private Sub tabTasks_Enter(sender As Object, e As EventArgs) Handles tabTasks.Enter
-        JobRunner_RestFunctions.GetTasks()
-    End Sub
+  
 End Class

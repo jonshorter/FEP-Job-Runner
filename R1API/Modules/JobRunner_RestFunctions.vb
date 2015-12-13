@@ -2,6 +2,7 @@
 Imports R1SimpleRestClient.Models.Response
 Imports R1SimpleRestClient.Models.Project
 Imports R1SimpleRestClient.Models.Templates
+Imports System.Security
 
 Module JobRunner_RestFunctions
     Public Sub GetJobTemplates()
@@ -152,7 +153,28 @@ Module JobRunner_RestFunctions
                 For Each Template In category.templates
                     lsttemplate.Items.Add(Template.name)
                 Next
-           Next
+            Next
+
+            Main.flowTasks.Refresh()
+         
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Public Sub CreateProject(ByVal Name As String, ByVal Description As String, ByVal TBCheck As Boolean, ByVal Server As String, ByVal auth As AuthToken)
+        Try
+            Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
+
+            Dim proj As New SimpleNewProject
+            proj.name = Name
+            proj.description = Description
+            proj.feedCheckingEnabled = TBCheck
+            proj.processingMode = R1SimpleRestClient.Models.Enums.ProcessModeEnum.Security
+            proj.ftkCaseFolderPath = r1rest.Functions.Configuration.GetDefaultProjectsPath(auth, Server).Data
+            proj.responsiveFilePath = r1rest.Functions.Configuration.GetDefaultJobDataPath(auth, Server).Data
+
+            Dim project = r1rest.Functions.Project.CreateProjectSimple(auth, Server, proj)
+
         Catch ex As Exception
         End Try
     End Sub
