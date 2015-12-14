@@ -255,6 +255,21 @@ Partial Class Main
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
         Me.splitAlerts = New System.Windows.Forms.SplitContainer()
         Me.dgvAlerts = New System.Windows.Forms.DataGridView()
+        Me.artifactName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.createDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.severity = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.target = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.source = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.project = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.confidence = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.threatScore = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.tblAlertBreakdown = New System.Windows.Forms.TableLayoutPanel()
+        Me.flowAlertBreakdown = New System.Windows.Forms.FlowLayoutPanel()
+        Me.lblTotalNumberAlerts = New System.Windows.Forms.Label()
+        Me.flowTotalResponses = New System.Windows.Forms.FlowLayoutPanel()
+        Me.lblTotalNumberofResponses = New System.Windows.Forms.Label()
+        Me.lblResponseTime = New System.Windows.Forms.Label()
+        Me.flowResponseTime = New System.Windows.Forms.FlowLayoutPanel()
         Me.GroupBox4.SuspendLayout()
         Me.grpReqSet.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -322,8 +337,10 @@ Partial Class Main
         Me.tabAbout.SuspendLayout()
         CType(Me.splitAlerts, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.splitAlerts.Panel1.SuspendLayout()
+        Me.splitAlerts.Panel2.SuspendLayout()
         Me.splitAlerts.SuspendLayout()
         CType(Me.dgvAlerts, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tblAlertBreakdown.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnExecute
@@ -2824,6 +2841,10 @@ Partial Class Main
         'splitAlerts.Panel1
         '
         Me.splitAlerts.Panel1.Controls.Add(Me.dgvAlerts)
+        '
+        'splitAlerts.Panel2
+        '
+        Me.splitAlerts.Panel2.Controls.Add(Me.tblAlertBreakdown)
         Me.splitAlerts.Size = New System.Drawing.Size(832, 671)
         Me.splitAlerts.SplitterDistance = 277
         Me.splitAlerts.TabIndex = 0
@@ -2832,14 +2853,144 @@ Partial Class Main
         '
         Me.dgvAlerts.AllowUserToAddRows = False
         Me.dgvAlerts.AllowUserToDeleteRows = False
+        Me.dgvAlerts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvAlerts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvAlerts.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.artifactName, Me.createDate, Me.severity, Me.target, Me.source, Me.project, Me.confidence, Me.threatScore})
         Me.dgvAlerts.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvAlerts.Location = New System.Drawing.Point(0, 0)
         Me.dgvAlerts.Name = "dgvAlerts"
         Me.dgvAlerts.ReadOnly = True
+        Me.dgvAlerts.RowHeadersVisible = False
         Me.dgvAlerts.RowTemplate.Height = 24
         Me.dgvAlerts.Size = New System.Drawing.Size(832, 277)
         Me.dgvAlerts.TabIndex = 0
+        '
+        'artifactName
+        '
+        Me.artifactName.HeaderText = "Name"
+        Me.artifactName.Name = "artifactName"
+        Me.artifactName.ReadOnly = True
+        '
+        'createDate
+        '
+        Me.createDate.HeaderText = "Date"
+        Me.createDate.Name = "createDate"
+        Me.createDate.ReadOnly = True
+        '
+        'severity
+        '
+        Me.severity.HeaderText = "Severity"
+        Me.severity.Name = "severity"
+        Me.severity.ReadOnly = True
+        '
+        'target
+        '
+        Me.target.HeaderText = "Target"
+        Me.target.Name = "target"
+        Me.target.ReadOnly = True
+        '
+        'source
+        '
+        Me.source.HeaderText = "Source"
+        Me.source.Name = "source"
+        Me.source.ReadOnly = True
+        '
+        'project
+        '
+        Me.project.HeaderText = "Project"
+        Me.project.Name = "project"
+        Me.project.ReadOnly = True
+        '
+        'confidence
+        '
+        Me.confidence.HeaderText = "Confidence"
+        Me.confidence.Name = "confidence"
+        Me.confidence.ReadOnly = True
+        '
+        'threatScore
+        '
+        Me.threatScore.HeaderText = "Threat Score"
+        Me.threatScore.Name = "threatScore"
+        Me.threatScore.ReadOnly = True
+        '
+        'tblAlertBreakdown
+        '
+        Me.tblAlertBreakdown.AutoSize = True
+        Me.tblAlertBreakdown.ColumnCount = 2
+        Me.tblAlertBreakdown.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 210.0!))
+        Me.tblAlertBreakdown.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tblAlertBreakdown.Controls.Add(Me.flowResponseTime, 1, 2)
+        Me.tblAlertBreakdown.Controls.Add(Me.lblResponseTime, 0, 2)
+        Me.tblAlertBreakdown.Controls.Add(Me.lblTotalNumberofResponses, 0, 1)
+        Me.tblAlertBreakdown.Controls.Add(Me.flowTotalResponses, 1, 1)
+        Me.tblAlertBreakdown.Controls.Add(Me.lblTotalNumberAlerts, 0, 0)
+        Me.tblAlertBreakdown.Controls.Add(Me.flowAlertBreakdown, 1, 0)
+        Me.tblAlertBreakdown.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblAlertBreakdown.Location = New System.Drawing.Point(0, 0)
+        Me.tblAlertBreakdown.Name = "tblAlertBreakdown"
+        Me.tblAlertBreakdown.RowCount = 3
+        Me.tblAlertBreakdown.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.tblAlertBreakdown.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.tblAlertBreakdown.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.tblAlertBreakdown.Size = New System.Drawing.Size(832, 390)
+        Me.tblAlertBreakdown.TabIndex = 4
+        '
+        'flowAlertBreakdown
+        '
+        Me.flowAlertBreakdown.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.flowAlertBreakdown.Location = New System.Drawing.Point(213, 3)
+        Me.flowAlertBreakdown.Name = "flowAlertBreakdown"
+        Me.flowAlertBreakdown.Size = New System.Drawing.Size(765, 124)
+        Me.flowAlertBreakdown.TabIndex = 4
+        '
+        'lblTotalNumberAlerts
+        '
+        Me.lblTotalNumberAlerts.AutoSize = True
+        Me.lblTotalNumberAlerts.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblTotalNumberAlerts.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTotalNumberAlerts.Location = New System.Drawing.Point(3, 0)
+        Me.lblTotalNumberAlerts.Name = "lblTotalNumberAlerts"
+        Me.lblTotalNumberAlerts.Size = New System.Drawing.Size(204, 130)
+        Me.lblTotalNumberAlerts.TabIndex = 5
+        Me.lblTotalNumberAlerts.Text = "Total Number Of Alerts:"
+        '
+        'flowTotalResponses
+        '
+        Me.flowTotalResponses.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.flowTotalResponses.Location = New System.Drawing.Point(213, 133)
+        Me.flowTotalResponses.Name = "flowTotalResponses"
+        Me.flowTotalResponses.Size = New System.Drawing.Size(765, 124)
+        Me.flowTotalResponses.TabIndex = 7
+        '
+        'lblTotalNumberofResponses
+        '
+        Me.lblTotalNumberofResponses.AutoSize = True
+        Me.lblTotalNumberofResponses.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblTotalNumberofResponses.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTotalNumberofResponses.Location = New System.Drawing.Point(3, 130)
+        Me.lblTotalNumberofResponses.Name = "lblTotalNumberofResponses"
+        Me.lblTotalNumberofResponses.Size = New System.Drawing.Size(204, 130)
+        Me.lblTotalNumberofResponses.TabIndex = 8
+        Me.lblTotalNumberofResponses.Text = "Total Number of Responses:"
+        '
+        'lblResponseTime
+        '
+        Me.lblResponseTime.AutoSize = True
+        Me.lblResponseTime.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblResponseTime.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblResponseTime.Location = New System.Drawing.Point(3, 260)
+        Me.lblResponseTime.Name = "lblResponseTime"
+        Me.lblResponseTime.Size = New System.Drawing.Size(204, 130)
+        Me.lblResponseTime.TabIndex = 9
+        Me.lblResponseTime.Text = "Response Time:"
+        '
+        'flowResponseTime
+        '
+        Me.flowResponseTime.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.flowResponseTime.Location = New System.Drawing.Point(213, 263)
+        Me.flowResponseTime.Name = "flowResponseTime"
+        Me.flowResponseTime.Size = New System.Drawing.Size(765, 124)
+        Me.flowResponseTime.TabIndex = 10
         '
         'Main
         '
@@ -2946,9 +3097,13 @@ Partial Class Main
         Me.tabAbout.ResumeLayout(False)
         Me.tabAbout.PerformLayout()
         Me.splitAlerts.Panel1.ResumeLayout(False)
+        Me.splitAlerts.Panel2.ResumeLayout(False)
+        Me.splitAlerts.Panel2.PerformLayout()
         CType(Me.splitAlerts, System.ComponentModel.ISupportInitialize).EndInit()
         Me.splitAlerts.ResumeLayout(False)
         CType(Me.dgvAlerts, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tblAlertBreakdown.ResumeLayout(False)
+        Me.tblAlertBreakdown.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -3185,5 +3340,20 @@ Partial Class Main
     Friend WithEvents ProjectID As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents splitAlerts As System.Windows.Forms.SplitContainer
     Friend WithEvents dgvAlerts As System.Windows.Forms.DataGridView
+    Friend WithEvents artifactName As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents createDate As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents severity As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents target As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents source As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents project As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents confidence As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents threatScore As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents tblAlertBreakdown As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents lblTotalNumberofResponses As System.Windows.Forms.Label
+    Friend WithEvents flowTotalResponses As System.Windows.Forms.FlowLayoutPanel
+    Friend WithEvents lblTotalNumberAlerts As System.Windows.Forms.Label
+    Friend WithEvents flowAlertBreakdown As System.Windows.Forms.FlowLayoutPanel
+    Friend WithEvents flowResponseTime As System.Windows.Forms.FlowLayoutPanel
+    Friend WithEvents lblResponseTime As System.Windows.Forms.Label
 
 End Class

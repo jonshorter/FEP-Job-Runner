@@ -3,6 +3,7 @@ Imports R1SimpleRestClient.Models.Response
 Imports R1SimpleRestClient.Models.Project
 Imports R1SimpleRestClient.Models.Templates
 Imports System.Security
+Imports R1SimpleRestClient.Models.Alert
 
 Module JobRunner_RestFunctions
     Public Sub GetJobTemplates()
@@ -210,7 +211,7 @@ Module JobRunner_RestFunctions
             Next
 
             Main.flowTasks.Refresh()
-         
+
         Catch ex As Exception
         End Try
     End Sub
@@ -318,6 +319,62 @@ Module JobRunner_RestFunctions
 
         Catch ex As Exception
         End Try
+    End Sub
+
+    Public Sub LoadAlerts()
+        Try
+            Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
+            If Main.auth.Data.Message <> "Authenticated" Then
+                Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
+            End If
+
+            Dim Alerts As AlertsWithCounts = r1rest.Functions.Alert.GetAlertsWithCounts(Main.auth, Main.txtServer.Text)
+            Main.dgvAlerts.Rows.Clear()
+            For Each alert As AlertDataDetails In Alerts.entities
+                Main.dgvAlerts.Rows.Add(New String() {alert.artifactName, alert.createDate, alert.severity, alert.target, alert.source, alert.caseName, alert.confidence, alert.virusTotalMax})
+            Next
+
+ 
+            Dim alertSrcBreakdowns As List(Of AlertSourceBreakdownResult) = r1rest.Functions.Alert.GetAlertSourceBreakdown(Main.auth, Main.txtServer.Text)
+            Dim totalcount As Integer = 0
+            For Each alertSrc As AlertSourceBreakdownResult In alertSrcBreakdowns
+                Dim alertlabel As New Label
+                alertlabel.Parent = Main.flowAlertBreakdown
+                alertlabel.AutoSize = True
+                alertlabel.Dock = DockStyle.Fill
+                alertlabel.Font = New Font(alertlabel.Font.FontFamily, 11)
+                alertlabel.Text = alertSrc.Count & "  (" & alertSrc.Percent & "%)" & vbCrLf & alertSrc.Name
+                totalcount += alertSrc.Count
+            Next
+            Main.lblTotalNumberAlerts.Text = "Total Number of Alerts: " & totalcount
+
+
+            Main.lblTotalNumberofResponses.Text = "Total Number of Responses: " & r1rest.Functions.Alert.GetTotalResponses(Main.auth, Main.txtServer.Text)
+            Dim responselabel As New Label
+            responselabel.Parent = Main.flowTotalResponses
+            responselabel.AutoSize = True
+            responselabel.Dock = DockStyle.Fill
+            responselabel.Font = New Font(responselabel.Font.FontFamily, 11)
+            responselabel.Text = r1rest.Functions.Alert.GetTotalAutomatedResponses(Main.auth, Main.txtServer.Text) & vbCrLf & "Automated Responses"
+
+
+
+            Dim meantime As List(Of MeanTimeStatistics) = r1rest.Functions.Alert.GetMeanTimeStatistics(Main.auth, Main.txtServer.Text)
+            If meantime.Count > 0 Then
+                Dim timelabel As New Label
+                timelabel.Parent = Main.flowResponseTime
+                timelabel.AutoSize = True
+                timelabel.Dock = DockStyle.Fill
+                timelabel.Font = New Font(responselabel.Font.FontFamily, 11)
+                timelabel.Text = meantime(0).meanTime & vbCrLf & "Mean Time"
+            Else
+
+            End If
+
+
+        Catch ex As Exception
+        End Try
+
     End Sub
 
 End Module

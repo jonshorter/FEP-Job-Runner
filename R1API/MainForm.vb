@@ -1392,7 +1392,10 @@ Public Class Main
                 flowTasks.Refresh()
             Case tabProjects.Name
                 JobRunner_RestFunctions.GetProjectList("")
-              
+
+            Case tabAlerts.Name
+                JobRunner_RestFunctions.LoadAlerts()
+
         End Select
 
 
@@ -1461,6 +1464,18 @@ Public Class Main
     End Sub
 
     Private Sub dgvAlerts_CellContentClick(sender As Object, e As DataGridViewCellEventArgs)
+
+    End Sub
+
+    Private Sub dgvAlerts_CellContentClick_1(sender As Object, e As DataGridViewCellEventArgs) Handles dgvAlerts.CellContentClick
+
+    End Sub
+
+    Private Sub flowAlertBreakdown_Paint(sender As Object, e As PaintEventArgs)
+
+    End Sub
+
+    Private Sub tblAlertBreakdown_Paint(sender As Object, e As PaintEventArgs) Handles tblAlertBreakdown.Paint
 
     End Sub
 End Class
