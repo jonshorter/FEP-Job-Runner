@@ -76,6 +76,17 @@ Module JobRunner_RestFunctions
         End Try
     End Sub
 
+    Public Function TemplateIDFromTemplateName(ByVal TemplateName As String)
+
+        Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
+        If Main.auth.Data.Message <> "Authenticated" Then
+            Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
+        End If
+        Return r1rest.Functions.Templates.GetTemplateIdByName(Main.auth, Main.txtServer.Text, TemplateName)
+
+
+    End Function
+
     Public Sub DeleteProject(ByVal ProjectID As String)
         Try
             Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
@@ -143,6 +154,28 @@ Module JobRunner_RestFunctions
         End Try
     End Sub
 
+    Public Sub GetProjectList_JobFromTemplate(Optional Search As String = "")
+        Try
+            Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
+            If Main.auth.Data.Message <> "Authenticated" Then
+                Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
+            End If
+            Dim projectlist As ApiResponse(Of List(Of ProjectPresenter))
+            If Not Search = "" Or Search = "Search" Then
+                projectlist = r1rest.Functions.Project.GetProjectList(Main.auth, Main.txtServer.Text, Search)
+            Else
+                projectlist = r1rest.Functions.Project.GetProjectList(Main.auth, Main.txtServer.Text)
+            End If
+
+            JobFromTemplate.dgvProjectList.Rows.Clear()
+
+            For Each project As ProjectPresenter In projectlist.Data
+                JobFromTemplate.dgvProjectList.Rows.Add(New String() {project.Name, project.CreatedDate, project.CreatedByUsername, project.ModifiedDate, project.FtkCaseFolderPath, project.ProjectId})
+            Next
+        Catch ex As Exception
+        End Try
+    End Sub
+
     Public Sub GetTasks()
         Try
             Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
@@ -184,6 +217,7 @@ Module JobRunner_RestFunctions
 
     Public Sub TaskItemDo(ByVal sender As ListBox, ByVal e As System.EventArgs)
         If sender.SelectedItems.Count > 0 Then
+            JobFromTemplate.templateID = JobRunner_RestFunctions.TemplateIDFromTemplateName(sender.SelectedItem.ToString)
             JobFromTemplate.ShowDialog()
             'MsgBox(sender.SelectedItem.ToString)
         End If
@@ -230,5 +264,60 @@ Module JobRunner_RestFunctions
         Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
         Return r1rest.Functions.Project.GetProjectDetails(auth, Server, ProjectID)
     End Function
+
+    Public Sub GetGroups_JobFromTemplate()
+        JobFromTemplate.treeGroups.Nodes.Clear()
+        Dim rc As New R1SimpleRestClient.R1SimpleRestClient
+        Dim groups As R1SimpleRestClient.Models.Groups = rc.Functions.Groups.GetGroups(Main.auth, Main.txtServer.Text).Data
+        Dim topnode As TreeNode = JobFromTemplate.treeGroups.Nodes.Add(groups.name)
+        topnode.Name = groups.name
+        topnode.Tag = groups.id
+        For Each group In groups.children
+            Dim x As TreeNode = topnode.Nodes.Add(group.name)
+            x.Name = group.name
+            x.Tag = group.id
+            GetAllChildrenGroups(x.Name, group)
+        Next
+    End Sub
+
+    Private Sub GetAllChildrenGroups(parent As String, children As R1SimpleRestClient.Models.Groups)
+        Dim subnode() As TreeNode = JobFromTemplate.treeGroups.Nodes.Find(parent, True)
+        If subnode.Count > 0 Then
+            For Each subgroup In children.children
+                Dim y As TreeNode = subnode(0).Nodes.Add(subgroup.name)
+                y.Name = subgroup.name
+                y.Tag = subgroup.id
+                GetAllChildrenGroups(y.Name, subgroup)
+            Next
+        End If
+    End Sub
+
+
+    Public Sub GetGroupComputer_JobFromTemplate(ByVal GroupID As String, Optional count As Integer = 100, Optional start As Integer = 0, Optional Search As String = "")
+        Try
+            Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
+            If Main.auth.Data.Message <> "Authenticated" Then
+                Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
+            End If
+            Dim endpoints = r1rest.Functions.Computers.GetGroupComputers(Main.auth, Main.txtServer.Text, GroupID, count, start, Search)
+            JobFromTemplate.dgvTargetEndpoints.Rows.Clear()
+            For Each endpoint In endpoints.Data.computers
+                JobFromTemplate.dgvTargetEndpoints.Rows.Add(New String() {False, endpoint.computerName, endpoint.ipAddressLastContacted, endpoint.agentOS, endpoint.agentLastContacted, endpoint.computerId})
+            Next
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Public Sub CreateFromTemplate(ByVal Job As R1SimpleRestClient.Models.Job2.JobFromTemplate)
+        Try
+            Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
+            If Main.auth.Data.Message <> "Authenticated" Then
+                Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
+            End If
+            r1rest.Functions.Job.CreateJobFromTemplate(Main.auth, Main.txtServer.Text, Job, True)
+
+        Catch ex As Exception
+        End Try
+    End Sub
 
 End Module

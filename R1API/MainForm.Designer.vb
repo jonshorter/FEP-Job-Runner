@@ -253,6 +253,8 @@ Partial Class Main
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.ofdBox = New System.Windows.Forms.OpenFileDialog()
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
+        Me.splitAlerts = New System.Windows.Forms.SplitContainer()
+        Me.dgvAlerts = New System.Windows.Forms.DataGridView()
         Me.GroupBox4.SuspendLayout()
         Me.grpReqSet.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -304,6 +306,7 @@ Partial Class Main
         Me.splitEndpointStatus.Panel2.SuspendLayout()
         Me.splitEndpointStatus.SuspendLayout()
         CType(Me.dgvEndpointStatusJobTargets, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabAlerts.SuspendLayout()
         Me.tabJobExecution.SuspendLayout()
         Me.tabFireEye.SuspendLayout()
         Me.tabPANW.SuspendLayout()
@@ -317,6 +320,10 @@ Partial Class Main
         CType(Me.xps_sim_Port, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.xpsPort, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabAbout.SuspendLayout()
+        CType(Me.splitAlerts, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.splitAlerts.Panel1.SuspendLayout()
+        Me.splitAlerts.SuspendLayout()
+        CType(Me.dgvAlerts, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnExecute
@@ -2087,6 +2094,7 @@ Partial Class Main
         '
         'tabAlerts
         '
+        Me.tabAlerts.Controls.Add(Me.splitAlerts)
         Me.tabAlerts.Location = New System.Drawing.Point(4, 25)
         Me.tabAlerts.Name = "tabAlerts"
         Me.tabAlerts.Size = New System.Drawing.Size(832, 671)
@@ -2806,6 +2814,33 @@ Partial Class Main
         Me.sfdBox.Filter = "Box Files|*.json"
         Me.sfdBox.InitialDirectory = "My.Application.Info.DirectoryPath & ""\BoxedJobs"""
         '
+        'splitAlerts
+        '
+        Me.splitAlerts.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.splitAlerts.Location = New System.Drawing.Point(0, 0)
+        Me.splitAlerts.Name = "splitAlerts"
+        Me.splitAlerts.Orientation = System.Windows.Forms.Orientation.Horizontal
+        '
+        'splitAlerts.Panel1
+        '
+        Me.splitAlerts.Panel1.Controls.Add(Me.dgvAlerts)
+        Me.splitAlerts.Size = New System.Drawing.Size(832, 671)
+        Me.splitAlerts.SplitterDistance = 277
+        Me.splitAlerts.TabIndex = 0
+        '
+        'dgvAlerts
+        '
+        Me.dgvAlerts.AllowUserToAddRows = False
+        Me.dgvAlerts.AllowUserToDeleteRows = False
+        Me.dgvAlerts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvAlerts.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvAlerts.Location = New System.Drawing.Point(0, 0)
+        Me.dgvAlerts.Name = "dgvAlerts"
+        Me.dgvAlerts.ReadOnly = True
+        Me.dgvAlerts.RowTemplate.Height = 24
+        Me.dgvAlerts.Size = New System.Drawing.Size(832, 277)
+        Me.dgvAlerts.TabIndex = 0
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -2889,6 +2924,7 @@ Partial Class Main
         CType(Me.splitEndpointStatus, System.ComponentModel.ISupportInitialize).EndInit()
         Me.splitEndpointStatus.ResumeLayout(False)
         CType(Me.dgvEndpointStatusJobTargets, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabAlerts.ResumeLayout(False)
         Me.tabJobExecution.ResumeLayout(False)
         Me.tabJobExecution.PerformLayout()
         Me.tabFireEye.ResumeLayout(False)
@@ -2909,6 +2945,10 @@ Partial Class Main
         CType(Me.xpsPort, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabAbout.ResumeLayout(False)
         Me.tabAbout.PerformLayout()
+        Me.splitAlerts.Panel1.ResumeLayout(False)
+        CType(Me.splitAlerts, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.splitAlerts.ResumeLayout(False)
+        CType(Me.dgvAlerts, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -3143,5 +3183,7 @@ Partial Class Main
     Friend WithEvents LastModDate As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ProjectFolderPath As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ProjectID As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents splitAlerts As System.Windows.Forms.SplitContainer
+    Friend WithEvents dgvAlerts As System.Windows.Forms.DataGridView
 
 End Class

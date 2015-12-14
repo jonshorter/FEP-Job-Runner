@@ -1455,4 +1455,12 @@ Public Class Main
     Private Sub txtSearchProject_Validated(sender As Object, e As EventArgs) Handles txtSearchProject.Validated
 
     End Sub
+
+    Private Sub flowTasks_Paint(sender As Object, e As PaintEventArgs) Handles flowTasks.Paint
+
+    End Sub
+
+    Private Sub dgvAlerts_CellContentClick(sender As Object, e As DataGridViewCellEventArgs)
+
+    End Sub
 End Class

@@ -40,7 +40,22 @@ Partial Class JobFromTemplate
         Me.ProjectFolderPath = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ProjectID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tabTargets = New System.Windows.Forms.TabPage()
+        Me.splitTargetsSelect = New System.Windows.Forms.SplitContainer()
+        Me.treeGroups = New System.Windows.Forms.TreeView()
+        Me.splitTargetEndpoints = New System.Windows.Forms.SplitContainer()
+        Me.txtSearchEndpoint = New System.Windows.Forms.TextBox()
+        Me.dgvTargetEndpoints = New System.Windows.Forms.DataGridView()
         Me.tabSchedule = New System.Windows.Forms.TabPage()
+        Me.CheckEndpoint = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.EndpointName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IPAddress = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.OperatingSystem = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LastContact = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.targetID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.flowSchedule = New System.Windows.Forms.FlowLayoutPanel()
+        Me.grpScheduleOptions = New System.Windows.Forms.GroupBox()
+        Me.rdoSchedule_Immediate = New System.Windows.Forms.RadioButton()
+        Me.rdoSchedule_Schedule = New System.Windows.Forms.RadioButton()
         CType(Me.splitJobFromTemplate, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.splitJobFromTemplate.Panel1.SuspendLayout()
         Me.splitJobFromTemplate.Panel2.SuspendLayout()
@@ -52,6 +67,19 @@ Partial Class JobFromTemplate
         Me.splitProjects.Panel2.SuspendLayout()
         Me.splitProjects.SuspendLayout()
         CType(Me.dgvProjectList, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabTargets.SuspendLayout()
+        CType(Me.splitTargetsSelect, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.splitTargetsSelect.Panel1.SuspendLayout()
+        Me.splitTargetsSelect.Panel2.SuspendLayout()
+        Me.splitTargetsSelect.SuspendLayout()
+        CType(Me.splitTargetEndpoints, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.splitTargetEndpoints.Panel1.SuspendLayout()
+        Me.splitTargetEndpoints.Panel2.SuspendLayout()
+        Me.splitTargetEndpoints.SuspendLayout()
+        CType(Me.dgvTargetEndpoints, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabSchedule.SuspendLayout()
+        Me.flowSchedule.SuspendLayout()
+        Me.grpScheduleOptions.SuspendLayout()
         Me.SuspendLayout()
         '
         'splitJobFromTemplate
@@ -237,6 +265,7 @@ Partial Class JobFromTemplate
         '
         'tabTargets
         '
+        Me.tabTargets.Controls.Add(Me.splitTargetsSelect)
         Me.tabTargets.Location = New System.Drawing.Point(4, 28)
         Me.tabTargets.Name = "tabTargets"
         Me.tabTargets.Padding = New System.Windows.Forms.Padding(3)
@@ -245,8 +274,84 @@ Partial Class JobFromTemplate
         Me.tabTargets.Text = "Targets"
         Me.tabTargets.UseVisualStyleBackColor = True
         '
+        'splitTargetsSelect
+        '
+        Me.splitTargetsSelect.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.splitTargetsSelect.FixedPanel = System.Windows.Forms.FixedPanel.Panel1
+        Me.splitTargetsSelect.IsSplitterFixed = True
+        Me.splitTargetsSelect.Location = New System.Drawing.Point(3, 3)
+        Me.splitTargetsSelect.Name = "splitTargetsSelect"
+        '
+        'splitTargetsSelect.Panel1
+        '
+        Me.splitTargetsSelect.Panel1.AutoScroll = True
+        Me.splitTargetsSelect.Panel1.Controls.Add(Me.treeGroups)
+        Me.splitTargetsSelect.Panel1MinSize = 175
+        '
+        'splitTargetsSelect.Panel2
+        '
+        Me.splitTargetsSelect.Panel2.Controls.Add(Me.splitTargetEndpoints)
+        Me.splitTargetsSelect.Size = New System.Drawing.Size(806, 469)
+        Me.splitTargetsSelect.SplitterDistance = 175
+        Me.splitTargetsSelect.TabIndex = 0
+        '
+        'treeGroups
+        '
+        Me.treeGroups.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.treeGroups.Location = New System.Drawing.Point(0, 0)
+        Me.treeGroups.Name = "treeGroups"
+        Me.treeGroups.Size = New System.Drawing.Size(175, 469)
+        Me.treeGroups.TabIndex = 0
+        '
+        'splitTargetEndpoints
+        '
+        Me.splitTargetEndpoints.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.splitTargetEndpoints.IsSplitterFixed = True
+        Me.splitTargetEndpoints.Location = New System.Drawing.Point(0, 0)
+        Me.splitTargetEndpoints.Name = "splitTargetEndpoints"
+        Me.splitTargetEndpoints.Orientation = System.Windows.Forms.Orientation.Horizontal
+        '
+        'splitTargetEndpoints.Panel1
+        '
+        Me.splitTargetEndpoints.Panel1.Controls.Add(Me.txtSearchEndpoint)
+        Me.splitTargetEndpoints.Panel1MinSize = 40
+        '
+        'splitTargetEndpoints.Panel2
+        '
+        Me.splitTargetEndpoints.Panel2.Controls.Add(Me.dgvTargetEndpoints)
+        Me.splitTargetEndpoints.Size = New System.Drawing.Size(627, 469)
+        Me.splitTargetEndpoints.SplitterDistance = 40
+        Me.splitTargetEndpoints.TabIndex = 2
+        '
+        'txtSearchEndpoint
+        '
+        Me.txtSearchEndpoint.AcceptsReturn = True
+        Me.txtSearchEndpoint.Location = New System.Drawing.Point(10, 9)
+        Me.txtSearchEndpoint.Name = "txtSearchEndpoint"
+        Me.txtSearchEndpoint.Size = New System.Drawing.Size(209, 22)
+        Me.txtSearchEndpoint.TabIndex = 1
+        Me.txtSearchEndpoint.Text = "Search"
+        '
+        'dgvTargetEndpoints
+        '
+        Me.dgvTargetEndpoints.AllowUserToAddRows = False
+        Me.dgvTargetEndpoints.AllowUserToDeleteRows = False
+        Me.dgvTargetEndpoints.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvTargetEndpoints.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvTargetEndpoints.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CheckEndpoint, Me.EndpointName, Me.IPAddress, Me.OperatingSystem, Me.LastContact, Me.targetID})
+        Me.dgvTargetEndpoints.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvTargetEndpoints.Location = New System.Drawing.Point(0, 0)
+        Me.dgvTargetEndpoints.MultiSelect = False
+        Me.dgvTargetEndpoints.Name = "dgvTargetEndpoints"
+        Me.dgvTargetEndpoints.RowHeadersVisible = False
+        Me.dgvTargetEndpoints.RowTemplate.Height = 24
+        Me.dgvTargetEndpoints.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvTargetEndpoints.Size = New System.Drawing.Size(627, 425)
+        Me.dgvTargetEndpoints.TabIndex = 1
+        '
         'tabSchedule
         '
+        Me.tabSchedule.Controls.Add(Me.flowSchedule)
         Me.tabSchedule.Location = New System.Drawing.Point(4, 28)
         Me.tabSchedule.Name = "tabSchedule"
         Me.tabSchedule.Size = New System.Drawing.Size(812, 475)
@@ -254,13 +359,100 @@ Partial Class JobFromTemplate
         Me.tabSchedule.Text = "Schedule"
         Me.tabSchedule.UseVisualStyleBackColor = True
         '
+        'CheckEndpoint
+        '
+        Me.CheckEndpoint.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.CheckEndpoint.FillWeight = 1.0!
+        Me.CheckEndpoint.HeaderText = "Select"
+        Me.CheckEndpoint.Name = "CheckEndpoint"
+        Me.CheckEndpoint.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.CheckEndpoint.Width = 63
+        '
+        'EndpointName
+        '
+        Me.EndpointName.FillWeight = 112.3096!
+        Me.EndpointName.HeaderText = "Endpoint Name"
+        Me.EndpointName.Name = "EndpointName"
+        Me.EndpointName.ReadOnly = True
+        '
+        'IPAddress
+        '
+        Me.IPAddress.FillWeight = 112.3096!
+        Me.IPAddress.HeaderText = "IP Address"
+        Me.IPAddress.Name = "IPAddress"
+        Me.IPAddress.ReadOnly = True
+        '
+        'OperatingSystem
+        '
+        Me.OperatingSystem.FillWeight = 112.3096!
+        Me.OperatingSystem.HeaderText = "Operating System"
+        Me.OperatingSystem.Name = "OperatingSystem"
+        Me.OperatingSystem.ReadOnly = True
+        '
+        'LastContact
+        '
+        Me.LastContact.FillWeight = 112.3096!
+        Me.LastContact.HeaderText = "Last Contact"
+        Me.LastContact.Name = "LastContact"
+        Me.LastContact.ReadOnly = True
+        '
+        'targetID
+        '
+        Me.targetID.HeaderText = "TargetID"
+        Me.targetID.Name = "targetID"
+        Me.targetID.ReadOnly = True
+        Me.targetID.Visible = False
+        '
+        'flowSchedule
+        '
+        Me.flowSchedule.Controls.Add(Me.grpScheduleOptions)
+        Me.flowSchedule.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.flowSchedule.Location = New System.Drawing.Point(0, 0)
+        Me.flowSchedule.Name = "flowSchedule"
+        Me.flowSchedule.Size = New System.Drawing.Size(812, 475)
+        Me.flowSchedule.TabIndex = 0
+        '
+        'grpScheduleOptions
+        '
+        Me.grpScheduleOptions.AutoSize = True
+        Me.grpScheduleOptions.Controls.Add(Me.rdoSchedule_Schedule)
+        Me.grpScheduleOptions.Controls.Add(Me.rdoSchedule_Immediate)
+        Me.grpScheduleOptions.Location = New System.Drawing.Point(3, 3)
+        Me.grpScheduleOptions.Name = "grpScheduleOptions"
+        Me.grpScheduleOptions.Size = New System.Drawing.Size(458, 87)
+        Me.grpScheduleOptions.TabIndex = 0
+        Me.grpScheduleOptions.TabStop = False
+        Me.grpScheduleOptions.Text = "Scheduling Options:"
+        '
+        'rdoSchedule_Immediate
+        '
+        Me.rdoSchedule_Immediate.AutoSize = True
+        Me.rdoSchedule_Immediate.Checked = True
+        Me.rdoSchedule_Immediate.Location = New System.Drawing.Point(40, 45)
+        Me.rdoSchedule_Immediate.Name = "rdoSchedule_Immediate"
+        Me.rdoSchedule_Immediate.Size = New System.Drawing.Size(158, 21)
+        Me.rdoSchedule_Immediate.TabIndex = 0
+        Me.rdoSchedule_Immediate.TabStop = True
+        Me.rdoSchedule_Immediate.Text = "Immediate Execution"
+        Me.rdoSchedule_Immediate.UseVisualStyleBackColor = True
+        '
+        'rdoSchedule_Schedule
+        '
+        Me.rdoSchedule_Schedule.AutoSize = True
+        Me.rdoSchedule_Schedule.Location = New System.Drawing.Point(291, 45)
+        Me.rdoSchedule_Schedule.Name = "rdoSchedule_Schedule"
+        Me.rdoSchedule_Schedule.Size = New System.Drawing.Size(161, 21)
+        Me.rdoSchedule_Schedule.TabIndex = 1
+        Me.rdoSchedule_Schedule.TabStop = True
+        Me.rdoSchedule_Schedule.Text = "Scheduled Execution"
+        Me.rdoSchedule_Schedule.UseVisualStyleBackColor = True
+        '
         'JobFromTemplate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(820, 561)
         Me.Controls.Add(Me.splitJobFromTemplate)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "JobFromTemplate"
@@ -279,6 +471,22 @@ Partial Class JobFromTemplate
         CType(Me.splitProjects, System.ComponentModel.ISupportInitialize).EndInit()
         Me.splitProjects.ResumeLayout(False)
         CType(Me.dgvProjectList, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabTargets.ResumeLayout(False)
+        Me.splitTargetsSelect.Panel1.ResumeLayout(False)
+        Me.splitTargetsSelect.Panel2.ResumeLayout(False)
+        CType(Me.splitTargetsSelect, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.splitTargetsSelect.ResumeLayout(False)
+        Me.splitTargetEndpoints.Panel1.ResumeLayout(False)
+        Me.splitTargetEndpoints.Panel1.PerformLayout()
+        Me.splitTargetEndpoints.Panel2.ResumeLayout(False)
+        CType(Me.splitTargetEndpoints, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.splitTargetEndpoints.ResumeLayout(False)
+        CType(Me.dgvTargetEndpoints, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabSchedule.ResumeLayout(False)
+        Me.flowSchedule.ResumeLayout(False)
+        Me.flowSchedule.PerformLayout()
+        Me.grpScheduleOptions.ResumeLayout(False)
+        Me.grpScheduleOptions.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -301,4 +509,19 @@ Partial Class JobFromTemplate
     Friend WithEvents LastModDate As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ProjectFolderPath As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ProjectID As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents splitTargetsSelect As System.Windows.Forms.SplitContainer
+    Friend WithEvents treeGroups As System.Windows.Forms.TreeView
+    Friend WithEvents splitTargetEndpoints As System.Windows.Forms.SplitContainer
+    Friend WithEvents txtSearchEndpoint As System.Windows.Forms.TextBox
+    Friend WithEvents dgvTargetEndpoints As System.Windows.Forms.DataGridView
+    Friend WithEvents CheckEndpoint As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents EndpointName As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents IPAddress As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents OperatingSystem As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents LastContact As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents targetID As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents flowSchedule As System.Windows.Forms.FlowLayoutPanel
+    Friend WithEvents grpScheduleOptions As System.Windows.Forms.GroupBox
+    Friend WithEvents rdoSchedule_Schedule As System.Windows.Forms.RadioButton
+    Friend WithEvents rdoSchedule_Immediate As System.Windows.Forms.RadioButton
 End Class
