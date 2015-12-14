@@ -1,10 +1,12 @@
 ﻿Imports System.Net
 Imports System.Security
 Imports System.Runtime.InteropServices
-
+Imports R1SimpleRestClient.Models.Response
 
 
 Public Class Main
+
+    Public auth As New R1SimpleRestClient.Models.Response.AuthToken
 
     Public JobsEndpointStatus
 
@@ -27,7 +29,7 @@ Public Class Main
     Public panw_sim_var As PANW.PANW_Sim
     'Self-Signed Cert
     Public sim_selfcert As String = ""
-    Public auth As New R1SimpleRestClient.Models.Response.AuthToken
+
 
 
 
@@ -173,7 +175,7 @@ Public Class Main
             'Set templates
             My.Settings.templatename.Clear()
             My.Settings.templatename.Add("coll-evtx")
-          
+
 
             'Set Blank Password
             My.Settings.apipassword = EncryptString(ToSecureString(""))
@@ -267,7 +269,7 @@ Public Class Main
             Catch ex As Exception
             End Try
         End If
-
+        Me.auth = New R1SimpleRestClient.Models.Response.AuthToken
 
     End Sub
 
@@ -287,11 +289,15 @@ Public Class Main
 
     Private Sub btnSaveSettings_Click(sender As Object, e As EventArgs) Handles btnSaveSettings.Click
         ResetStatusBar()
+
         'Save Settings to my.settings
         My.Settings.bypasscert = chkbypasscerts.Checked
         My.Settings.defaultcomputer = txtdefaultcomputer.Text
         My.Settings.defaultshare = txtdefaultshare.Text
-        My.Settings.apiusername = txtApiUser.Text
+        If Not My.Settings.apiusername = txtApiUser.Text Then
+            My.Settings.apiusername = txtApiUser.Text
+            Me.auth = New AuthToken
+        End If
         'My.Settings.apipassword = txtAPIPass.Text
         'My.Settings.apipassword = EncryptString(ToSecureString(txtAPIPass.Text))
         If Not txtAPIPass.Text = apipass.ToString Then
@@ -300,6 +306,7 @@ Public Class Main
                 My.Settings.apipassword = EncryptString(ToSecureString(txtAPIPass.Text))
                 Me.apipass = DecryptString(My.Settings.apipassword)
                 txtAPIPass.Text = apipass.ToString
+                Me.auth = New AuthToken
             Else
                 txtAPIPass.Text = apipass.ToString
             End If
@@ -790,7 +797,7 @@ Public Class Main
         'Job Info Loaded - Set text boxes to default values from settings
         txtComputerTarget.Text = txtdefaultcomputer.Text
         txtNetSharePath.Text = txtdefaultshare.Text
-      
+
 
     End Sub
 
@@ -1163,10 +1170,15 @@ Public Class Main
         lblJobStatus.Text = ""
 
         If tabMenu.SelectedTab.Name = tabRESTUI.Name Then
-            JobRunner_RestFunctions.GetJobList("")
-            tabControlJobsRest.SelectedTab = tabJobsList
-            '  JobRunner_RestFunctions.GetTasks()
-            '  flowTasks.Refresh()
+            Dim authobj = JobRunner_RestFunctions.R1Auth
+            If authobj.Data.Message = "Authenticated" Then
+
+                JobRunner_RestFunctions.GetJobList("")
+                tabControlJobsRest.SelectedTab = tabJobsList
+            Else
+                MsgBox(authobj.Data.Message)
+                tabMenu.SelectedTab = tabSettings
+            End If
         End If
     End Sub
 
@@ -1318,12 +1330,21 @@ Public Class Main
         End Try
     End Sub
 
-  
+
 
     Private Sub tabJobExecution_Enter(sender As Object, e As EventArgs) Handles tabJobExecution.Enter
-        If rdor1.Checked = True Then
+
+        Dim authobj = JobRunner_RestFunctions.R1Auth
+        If authobj.Data.Message = "Authenticated" Then
+
             JobRunner_RestFunctions.GetJobTemplates()
+
+        Else
+            MsgBox(authobj.Data.Message)
+            tabMenu.SelectedTab = tabSettings
         End If
+
+
     End Sub
 
 
@@ -1334,9 +1355,9 @@ Public Class Main
         End If
     End Sub
 
-  
 
-   
+
+
 
     Private Sub txtJobsSearch_KeyDown(sender As Object, e As KeyEventArgs) Handles txtJobsSearch.KeyDown
         If e.KeyCode = Keys.Enter Then
@@ -1344,30 +1365,33 @@ Public Class Main
         End If
     End Sub
 
-    
+
     Private Sub txtJobsSearch_Leave(sender As Object, e As EventArgs) Handles txtJobsSearch.Leave
         If txtJobsSearch.Text = "" Then
             txtJobsSearch.Text = "Search"
         End If
     End Sub
 
- 
+
 
     Private Sub dgvJobsRestJobsList_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvJobsRestJobsList.CellClick
         Try
             If e.RowIndex > -1 Then
+                Dim jobname = dgvJobsRestJobsList.Rows.Item(e.RowIndex).Cells(0).Value.ToString
+                Dim jobid = dgvJobsRestJobsList.Rows.Item(e.RowIndex).Cells(7).Value.ToString
+                Dim resultid = dgvJobsRestJobsList.Rows.Item(e.RowIndex).Cells(8).Value.ToString
                 Select Case e.ColumnIndex
 
                     Case 2 'Retry
-                        JobRunner_RestFunctions.RetryJob(dgvJobsRestJobsList.Rows.Item(e.RowIndex).Cells(7).Value.ToString, dgvJobsRestJobsList.Rows.Item(e.RowIndex).Cells(0).Value.ToString & " Retry")
+                        JobRunner_RestFunctions.RetryJob(jobid, jobname & " Retry")
 
                     Case 3 'Cancel
                         If dgvJobsRestJobsList.Rows.Item(e.RowIndex).Cells(3).Value.ToString = "Cancel" Then
-                            JobRunner_RestFunctions.CancelJob(dgvJobsRestJobsList.Rows.Item(e.RowIndex).Cells(8).Value.ToString, True)
+                            JobRunner_RestFunctions.CancelJob(resultid, True)
                         End If
 
                     Case 9 'EndPoint Status
-                        JobsEndpointStatus = dgvJobsRestJobsList.Rows.Item(e.RowIndex).Cells(8).Value.ToString
+                        JobsEndpointStatus = resultid
                         If JobsEndpointStatus <> "" Then
                             JobRunner_RestFunctions.GetEndpointStatusCounts(JobsEndpointStatus)
                             JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus)
@@ -1422,14 +1446,14 @@ Public Class Main
     End Sub
 
 
-  
+
     Private Sub txtSearchProject_Leave(sender As Object, e As EventArgs) Handles txtSearchProject.Leave
         If txtSearchProject.Text = "" Then
             txtSearchProject.Text = "Search"
         End If
     End Sub
 
-  
+
 
     Private Sub btnNewProject_Click(sender As Object, e As EventArgs) Handles btnNewProject.Click
         Dim projectcreate As New CreateEditProject("Create Project", True)
@@ -1438,7 +1462,7 @@ Public Class Main
     End Sub
 
 
-  
+
     Private Sub btnEditProject_Click(sender As Object, e As EventArgs) Handles btnEditProject.Click
         Dim projectedit As New CreateEditProject("Edit Project", False, dgvProjectList.CurrentRow.Cells(5).Value)
         projectedit.ShowDialog()
@@ -1451,5 +1475,37 @@ Public Class Main
         End If
     End Sub
 
-   
+
+    Private Sub dgvJobsRestJobsList_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvJobsRestJobsList.CellContentClick
+
+    End Sub
+
+    Private Sub dgvEndpointStatusJobTargets_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvEndpointStatusJobTargets.CellClick
+        Try
+            If e.RowIndex > -1 Then
+                Dim id = dgvEndpointStatusJobTargets.Rows.Item(e.RowIndex).Cells(4).Value.ToString
+                Dim status = dgvEndpointStatusJobTargets.Rows.Item(e.RowIndex).Cells(2).Value.ToString
+                Dim actionbutton = dgvEndpointStatusJobTargets.Rows.Item(e.RowIndex).Cells(5).Value.ToString
+                Select Case e.ColumnIndex
+
+                    Case 5 'Cancel
+                        If actionbutton = "Cancel" Then
+                            Dim cancellist As New List(Of String)
+                            cancellist.Add(id)
+                            JobRunner_RestFunctions.CancelJobTarget(cancellist)
+                            JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus)
+                        End If
+                    Case 6 'Review
+                        Process.Start("https://" & txtServer.Text & "/r1/#/reviewpage?ShowAgentPivot=false&ShowJobPivot=false&JobTargetResultID=" & id)
+
+                End Select
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub dgvEndpointStatusJobTargets_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvEndpointStatusJobTargets.CellContentClick
+
+    End Sub
 End Class

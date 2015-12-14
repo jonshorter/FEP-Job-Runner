@@ -1,7 +1,7 @@
 ﻿Imports R1SimpleRestClient.Models.Job
 
 Public Class JobFromTemplate
-    Public Property templateID As String
+    Public Property JobTemplateID As String
     Public Property SelectedProjectID As String
     Public Property NewJobTargets As New List(Of String)
     Private Property CurrentTabName As String
@@ -35,7 +35,7 @@ Public Class JobFromTemplate
                         Dim job As New R1SimpleRestClient.Models.Job2.JobFromTemplate
                         job.ComputerTargets = NewJobTargets
                         job.ProjectId = SelectedProjectID
-                        job.TemplateId = templateID
+                        job.TemplateId = JobTemplateID
                         JobRunner_RestFunctions.CreateFromTemplate(job)
                         Me.Close()
                         Main.tabControlJobsRest.SelectedTab = Main.tabJobsList
@@ -108,6 +108,7 @@ Public Class JobFromTemplate
     End Sub
 
     Private Sub JobFromTemplate_Load(sender As Object, e As EventArgs) Handles Me.Load
+        Debug.WriteLine(JobTemplateID)
         JobRunner_RestFunctions.GetProjectList_JobFromTemplate("")
         tabControlJobFromTemplate.SelectedTab = tabProject
         CurrentTabName = tabControlJobFromTemplate.SelectedTab.Name
@@ -152,4 +153,6 @@ Public Class JobFromTemplate
             txtSearchEndpoint.Text = "Search"
         End If
     End Sub
+
+
 End Class

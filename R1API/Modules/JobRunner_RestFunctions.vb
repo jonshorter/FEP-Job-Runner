@@ -6,6 +6,19 @@ Imports System.Security
 Imports R1SimpleRestClient.Models.Alert
 
 Module JobRunner_RestFunctions
+    Public Function R1Auth() As AuthToken
+
+        If Main.auth.Data.Message <> "Authenticated" Then
+            Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
+            Dim newauth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
+            Main.auth = newauth
+            Return newauth
+        Else
+            Return Main.auth
+        End If
+
+    End Function
+
     Public Sub GetJobTemplates()
         Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
         If Main.auth.Data.Message <> "Authenticated" Then
@@ -77,16 +90,19 @@ Module JobRunner_RestFunctions
         End Try
     End Sub
 
-    Public Function TemplateIDFromTemplateName(ByVal TemplateName As String)
+    Public Sub CancelJobTarget(ByVal JobTargetResultID As List(Of String))
+        Try
+            Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
+            If Main.auth.Data.Message <> "Authenticated" Then
+                Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
+            End If
+            Dim job = r1rest.Functions.Job.CancelJobTargetResults(Main.auth, Main.txtServer.Text, JobTargetResultID)
 
-        Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
-        If Main.auth.Data.Message <> "Authenticated" Then
-            Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
-        End If
-        Return r1rest.Functions.Templates.GetTemplateIdByName(Main.auth, Main.txtServer.Text, TemplateName)
+        Catch ex As Exception
+        End Try
+    End Sub
 
 
-    End Function
 
     Public Sub DeleteProject(ByVal ProjectID As String)
         Try
@@ -126,8 +142,12 @@ Module JobRunner_RestFunctions
             Main.dgvEndpointStatusJobTargets.Rows.Clear()
 
             For Each target In jobtargets.Data.targets
+                Dim actionstatus As String = "Cancel"
+                If target.status = "Cancelled" Or target.status = "Cancelling" Or target.status = "Completed" Or target.status = "Failed" Then
+                    actionstatus = ""
+                End If
+                Dim targetrow = Main.dgvEndpointStatusJobTargets.Rows.Add(New String() {target.name, target.startDate, target.status, target.hits, target.jobTargetResultId, actionstatus, "Review"})
 
-                Main.dgvEndpointStatusJobTargets.Rows.Add(New String() {target.name, target.startDate, target.status, target.hits, "Action"})
             Next
         Catch ex As Exception
         End Try
@@ -198,15 +218,21 @@ Module JobRunner_RestFunctions
                 grp.AutoSize = False
                 grp.AutoSizeMode = AutoSizeMode.GrowAndShrink
                 grp.Size = New Size(275, 175)
-                Dim lsttemplate As New ListBox
+                Dim lsttemplate As New ListView
                 AddHandler lsttemplate.DoubleClick, AddressOf TaskItemDo
-                lsttemplate.SelectionMode = SelectionMode.One
+                lsttemplate.MultiSelect = False
                 lsttemplate.Parent = grp
                 lsttemplate.Dock = DockStyle.Fill
                 lsttemplate.AutoSize = False
                 lsttemplate.Size = New Size(375, 325)
+                lsttemplate.View = View.Details
+
+                Dim col1 = lsttemplate.Columns.Add("Template Name")
+                col1.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
+                col1.Width = 375
                 For Each Template In category.templates
                     Dim item = lsttemplate.Items.Add(Template.name)
+                    item.Tag = Template.templateId
                 Next
             Next
 
@@ -216,11 +242,12 @@ Module JobRunner_RestFunctions
         End Try
     End Sub
 
-    Public Sub TaskItemDo(ByVal sender As ListBox, ByVal e As System.EventArgs)
+    Public Sub TaskItemDo(ByVal sender As ListView, ByVal e As System.EventArgs)
         If sender.SelectedItems.Count > 0 Then
-            JobFromTemplate.templateID = JobRunner_RestFunctions.TemplateIDFromTemplateName(sender.SelectedItem.ToString)
+
+            JobFromTemplate.JobTemplateID = sender.SelectedItems(0).Tag
             JobFromTemplate.ShowDialog()
-            'MsgBox(sender.SelectedItem.ToString)
+
         End If
     End Sub
 
@@ -334,7 +361,7 @@ Module JobRunner_RestFunctions
                 Main.dgvAlerts.Rows.Add(New String() {alert.artifactName, alert.createDate, alert.severity, alert.target, alert.source, alert.caseName, alert.confidence, alert.virusTotalMax})
             Next
 
- 
+
             Dim alertSrcBreakdowns As List(Of AlertSourceBreakdownResult) = r1rest.Functions.Alert.GetAlertSourceBreakdown(Main.auth, Main.txtServer.Text)
             Dim totalcount As Integer = 0
             For Each alertSrc As AlertSourceBreakdownResult In alertSrcBreakdowns
