@@ -1389,7 +1389,7 @@ Public Class Main
 
             Case tabTasks.Name
                 JobRunner_RestFunctions.GetTasks()
-                flowTasks.Refresh()
+
             Case tabProjects.Name
                 JobRunner_RestFunctions.GetProjectList("")
 
@@ -1451,31 +1451,5 @@ Public Class Main
         End If
     End Sub
 
-    Private Sub txtSearchProject_TextChanged(sender As Object, e As EventArgs) Handles txtSearchProject.TextChanged
-
-    End Sub
-
-    Private Sub txtSearchProject_Validated(sender As Object, e As EventArgs) Handles txtSearchProject.Validated
-
-    End Sub
-
-    Private Sub flowTasks_Paint(sender As Object, e As PaintEventArgs) Handles flowTasks.Paint
-
-    End Sub
-
-    Private Sub dgvAlerts_CellContentClick(sender As Object, e As DataGridViewCellEventArgs)
-
-    End Sub
-
-    Private Sub dgvAlerts_CellContentClick_1(sender As Object, e As DataGridViewCellEventArgs) Handles dgvAlerts.CellContentClick
-
-    End Sub
-
-    Private Sub flowAlertBreakdown_Paint(sender As Object, e As PaintEventArgs)
-
-    End Sub
-
-    Private Sub tblAlertBreakdown_Paint(sender As Object, e As PaintEventArgs) Handles tblAlertBreakdown.Paint
-
-    End Sub
+   
 End Class

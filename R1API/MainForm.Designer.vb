@@ -516,6 +516,7 @@ Partial Class Main
         'rdor1
         '
         Me.rdor1.AutoSize = True
+        Me.rdor1.Checked = True
         Me.rdor1.Location = New System.Drawing.Point(8, 53)
         Me.rdor1.Margin = New System.Windows.Forms.Padding(4)
         Me.rdor1.Name = "rdor1"
@@ -528,13 +529,11 @@ Partial Class Main
         'rdoadgmap
         '
         Me.rdoadgmap.AutoSize = True
-        Me.rdoadgmap.Checked = True
         Me.rdoadgmap.Location = New System.Drawing.Point(8, 23)
         Me.rdoadgmap.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoadgmap.Name = "rdoadgmap"
         Me.rdoadgmap.Size = New System.Drawing.Size(123, 21)
         Me.rdoadgmap.TabIndex = 18
-        Me.rdoadgmap.TabStop = True
         Me.rdoadgmap.Text = "ADG.Map.Web"
         Me.rdoadgmap.UseVisualStyleBackColor = True
         '
@@ -1686,7 +1685,7 @@ Partial Class Main
         Me.tabMenu.Margin = New System.Windows.Forms.Padding(4)
         Me.tabMenu.Name = "tabMenu"
         Me.tabMenu.SelectedIndex = 0
-        Me.tabMenu.Size = New System.Drawing.Size(848, 732)
+        Me.tabMenu.Size = New System.Drawing.Size(840, 732)
         Me.tabMenu.TabIndex = 21
         '
         'tabSettings
@@ -1696,7 +1695,7 @@ Partial Class Main
         Me.tabSettings.Margin = New System.Windows.Forms.Padding(4)
         Me.tabSettings.Name = "tabSettings"
         Me.tabSettings.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabSettings.Size = New System.Drawing.Size(840, 700)
+        Me.tabSettings.Size = New System.Drawing.Size(832, 700)
         Me.tabSettings.TabIndex = 1
         Me.tabSettings.Text = "Settings"
         Me.tabSettings.UseVisualStyleBackColor = True
@@ -1706,7 +1705,7 @@ Partial Class Main
         Me.tabRESTUI.Controls.Add(Me.tabControlJobsRest)
         Me.tabRESTUI.Location = New System.Drawing.Point(4, 28)
         Me.tabRESTUI.Name = "tabRESTUI"
-        Me.tabRESTUI.Size = New System.Drawing.Size(840, 700)
+        Me.tabRESTUI.Size = New System.Drawing.Size(832, 700)
         Me.tabRESTUI.TabIndex = 7
         Me.tabRESTUI.Text = "REST UI"
         Me.tabRESTUI.UseVisualStyleBackColor = True
@@ -1721,7 +1720,7 @@ Partial Class Main
         Me.tabControlJobsRest.Location = New System.Drawing.Point(0, 0)
         Me.tabControlJobsRest.Name = "tabControlJobsRest"
         Me.tabControlJobsRest.SelectedIndex = 0
-        Me.tabControlJobsRest.Size = New System.Drawing.Size(840, 700)
+        Me.tabControlJobsRest.Size = New System.Drawing.Size(832, 700)
         Me.tabControlJobsRest.TabIndex = 0
         '
         'tabTasks
@@ -1878,7 +1877,7 @@ Partial Class Main
         Me.tabJobsList.Location = New System.Drawing.Point(4, 25)
         Me.tabJobsList.Name = "tabJobsList"
         Me.tabJobsList.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabJobsList.Size = New System.Drawing.Size(832, 671)
+        Me.tabJobsList.Size = New System.Drawing.Size(824, 671)
         Me.tabJobsList.TabIndex = 0
         Me.tabJobsList.Text = "Job Status"
         Me.tabJobsList.UseVisualStyleBackColor = True
@@ -1899,7 +1898,7 @@ Partial Class Main
         'splitJobsRestJobs.Panel2
         '
         Me.splitJobsRestJobs.Panel2.Controls.Add(Me.dgvJobsRestJobsList)
-        Me.splitJobsRestJobs.Size = New System.Drawing.Size(826, 665)
+        Me.splitJobsRestJobs.Size = New System.Drawing.Size(818, 665)
         Me.splitJobsRestJobs.SplitterDistance = 36
         Me.splitJobsRestJobs.TabIndex = 2
         '
@@ -1925,7 +1924,7 @@ Partial Class Main
         Me.dgvJobsRestJobsList.ReadOnly = True
         Me.dgvJobsRestJobsList.RowHeadersVisible = False
         Me.dgvJobsRestJobsList.RowTemplate.Height = 24
-        Me.dgvJobsRestJobsList.Size = New System.Drawing.Size(826, 625)
+        Me.dgvJobsRestJobsList.Size = New System.Drawing.Size(818, 625)
         Me.dgvJobsRestJobsList.TabIndex = 0
         '
         'jobName
@@ -2014,7 +2013,7 @@ Partial Class Main
         'splitEndpointStatus.Panel2
         '
         Me.splitEndpointStatus.Panel2.Controls.Add(Me.dgvEndpointStatusJobTargets)
-        Me.splitEndpointStatus.Size = New System.Drawing.Size(826, 665)
+        Me.splitEndpointStatus.Size = New System.Drawing.Size(818, 665)
         Me.splitEndpointStatus.SplitterDistance = 41
         Me.splitEndpointStatus.TabIndex = 3
         '
@@ -2076,7 +2075,7 @@ Partial Class Main
         Me.dgvEndpointStatusJobTargets.ReadOnly = True
         Me.dgvEndpointStatusJobTargets.RowHeadersVisible = False
         Me.dgvEndpointStatusJobTargets.RowTemplate.Height = 24
-        Me.dgvEndpointStatusJobTargets.Size = New System.Drawing.Size(826, 620)
+        Me.dgvEndpointStatusJobTargets.Size = New System.Drawing.Size(818, 620)
         Me.dgvEndpointStatusJobTargets.TabIndex = 9
         '
         'endpoint
@@ -2114,7 +2113,7 @@ Partial Class Main
         Me.tabAlerts.Controls.Add(Me.splitAlerts)
         Me.tabAlerts.Location = New System.Drawing.Point(4, 25)
         Me.tabAlerts.Name = "tabAlerts"
-        Me.tabAlerts.Size = New System.Drawing.Size(832, 671)
+        Me.tabAlerts.Size = New System.Drawing.Size(807, 671)
         Me.tabAlerts.TabIndex = 3
         Me.tabAlerts.Text = "Alerts"
         Me.tabAlerts.UseVisualStyleBackColor = True
@@ -2131,7 +2130,7 @@ Partial Class Main
         Me.tabJobExecution.Margin = New System.Windows.Forms.Padding(4)
         Me.tabJobExecution.Name = "tabJobExecution"
         Me.tabJobExecution.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabJobExecution.Size = New System.Drawing.Size(840, 700)
+        Me.tabJobExecution.Size = New System.Drawing.Size(832, 700)
         Me.tabJobExecution.TabIndex = 0
         Me.tabJobExecution.Text = "JobsAPI Execution"
         Me.tabJobExecution.UseVisualStyleBackColor = True
@@ -2196,7 +2195,7 @@ Partial Class Main
         Me.tabFireEye.Margin = New System.Windows.Forms.Padding(4)
         Me.tabFireEye.Name = "tabFireEye"
         Me.tabFireEye.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabFireEye.Size = New System.Drawing.Size(840, 700)
+        Me.tabFireEye.Size = New System.Drawing.Size(832, 700)
         Me.tabFireEye.TabIndex = 4
         Me.tabFireEye.Text = "FireEye"
         Me.tabFireEye.UseVisualStyleBackColor = True
@@ -2325,7 +2324,7 @@ Partial Class Main
         Me.tabPANW.Location = New System.Drawing.Point(4, 28)
         Me.tabPANW.Margin = New System.Windows.Forms.Padding(4)
         Me.tabPANW.Name = "tabPANW"
-        Me.tabPANW.Size = New System.Drawing.Size(840, 700)
+        Me.tabPANW.Size = New System.Drawing.Size(832, 700)
         Me.tabPANW.TabIndex = 5
         Me.tabPANW.Text = "PANW"
         Me.tabPANW.UseVisualStyleBackColor = True
@@ -2556,7 +2555,7 @@ Partial Class Main
         Me.tabXPS.Margin = New System.Windows.Forms.Padding(4)
         Me.tabXPS.Name = "tabXPS"
         Me.tabXPS.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabXPS.Size = New System.Drawing.Size(840, 700)
+        Me.tabXPS.Size = New System.Drawing.Size(832, 700)
         Me.tabXPS.TabIndex = 6
         Me.tabXPS.Text = "XPS"
         Me.tabXPS.UseVisualStyleBackColor = True
@@ -2790,7 +2789,7 @@ Partial Class Main
         Me.tabAbout.Location = New System.Drawing.Point(4, 28)
         Me.tabAbout.Margin = New System.Windows.Forms.Padding(4)
         Me.tabAbout.Name = "tabAbout"
-        Me.tabAbout.Size = New System.Drawing.Size(840, 700)
+        Me.tabAbout.Size = New System.Drawing.Size(832, 700)
         Me.tabAbout.TabIndex = 3
         Me.tabAbout.Text = "About"
         Me.tabAbout.UseVisualStyleBackColor = True
@@ -2815,7 +2814,7 @@ Partial Class Main
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(840, 700)
+        Me.TextBox1.Size = New System.Drawing.Size(832, 700)
         Me.TextBox1.TabIndex = 0
         Me.TextBox1.Text = resources.GetString("TextBox1.Text")
         '
@@ -2845,7 +2844,7 @@ Partial Class Main
         'splitAlerts.Panel2
         '
         Me.splitAlerts.Panel2.Controls.Add(Me.tblAlertBreakdown)
-        Me.splitAlerts.Size = New System.Drawing.Size(832, 671)
+        Me.splitAlerts.Size = New System.Drawing.Size(807, 671)
         Me.splitAlerts.SplitterDistance = 277
         Me.splitAlerts.TabIndex = 0
         '
@@ -2862,7 +2861,7 @@ Partial Class Main
         Me.dgvAlerts.ReadOnly = True
         Me.dgvAlerts.RowHeadersVisible = False
         Me.dgvAlerts.RowTemplate.Height = 24
-        Me.dgvAlerts.Size = New System.Drawing.Size(832, 277)
+        Me.dgvAlerts.Size = New System.Drawing.Size(807, 277)
         Me.dgvAlerts.TabIndex = 0
         '
         'artifactName
@@ -2915,10 +2914,9 @@ Partial Class Main
         '
         'tblAlertBreakdown
         '
-        Me.tblAlertBreakdown.AutoSize = True
         Me.tblAlertBreakdown.ColumnCount = 2
         Me.tblAlertBreakdown.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 210.0!))
-        Me.tblAlertBreakdown.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tblAlertBreakdown.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.tblAlertBreakdown.Controls.Add(Me.flowResponseTime, 1, 2)
         Me.tblAlertBreakdown.Controls.Add(Me.lblResponseTime, 0, 2)
         Me.tblAlertBreakdown.Controls.Add(Me.lblTotalNumberofResponses, 0, 1)
@@ -2930,9 +2928,9 @@ Partial Class Main
         Me.tblAlertBreakdown.Name = "tblAlertBreakdown"
         Me.tblAlertBreakdown.RowCount = 3
         Me.tblAlertBreakdown.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.tblAlertBreakdown.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.tblAlertBreakdown.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.tblAlertBreakdown.Size = New System.Drawing.Size(832, 390)
+        Me.tblAlertBreakdown.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
+        Me.tblAlertBreakdown.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
+        Me.tblAlertBreakdown.Size = New System.Drawing.Size(807, 390)
         Me.tblAlertBreakdown.TabIndex = 4
         '
         'flowAlertBreakdown
@@ -2940,7 +2938,7 @@ Partial Class Main
         Me.flowAlertBreakdown.Dock = System.Windows.Forms.DockStyle.Fill
         Me.flowAlertBreakdown.Location = New System.Drawing.Point(213, 3)
         Me.flowAlertBreakdown.Name = "flowAlertBreakdown"
-        Me.flowAlertBreakdown.Size = New System.Drawing.Size(765, 124)
+        Me.flowAlertBreakdown.Size = New System.Drawing.Size(591, 123)
         Me.flowAlertBreakdown.TabIndex = 4
         '
         'lblTotalNumberAlerts
@@ -2950,16 +2948,16 @@ Partial Class Main
         Me.lblTotalNumberAlerts.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTotalNumberAlerts.Location = New System.Drawing.Point(3, 0)
         Me.lblTotalNumberAlerts.Name = "lblTotalNumberAlerts"
-        Me.lblTotalNumberAlerts.Size = New System.Drawing.Size(204, 130)
+        Me.lblTotalNumberAlerts.Size = New System.Drawing.Size(204, 129)
         Me.lblTotalNumberAlerts.TabIndex = 5
         Me.lblTotalNumberAlerts.Text = "Total Number Of Alerts:"
         '
         'flowTotalResponses
         '
         Me.flowTotalResponses.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.flowTotalResponses.Location = New System.Drawing.Point(213, 133)
+        Me.flowTotalResponses.Location = New System.Drawing.Point(213, 132)
         Me.flowTotalResponses.Name = "flowTotalResponses"
-        Me.flowTotalResponses.Size = New System.Drawing.Size(765, 124)
+        Me.flowTotalResponses.Size = New System.Drawing.Size(591, 124)
         Me.flowTotalResponses.TabIndex = 7
         '
         'lblTotalNumberofResponses
@@ -2967,7 +2965,7 @@ Partial Class Main
         Me.lblTotalNumberofResponses.AutoSize = True
         Me.lblTotalNumberofResponses.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblTotalNumberofResponses.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTotalNumberofResponses.Location = New System.Drawing.Point(3, 130)
+        Me.lblTotalNumberofResponses.Location = New System.Drawing.Point(3, 129)
         Me.lblTotalNumberofResponses.Name = "lblTotalNumberofResponses"
         Me.lblTotalNumberofResponses.Size = New System.Drawing.Size(204, 130)
         Me.lblTotalNumberofResponses.TabIndex = 8
@@ -2978,25 +2976,25 @@ Partial Class Main
         Me.lblResponseTime.AutoSize = True
         Me.lblResponseTime.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblResponseTime.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblResponseTime.Location = New System.Drawing.Point(3, 260)
+        Me.lblResponseTime.Location = New System.Drawing.Point(3, 259)
         Me.lblResponseTime.Name = "lblResponseTime"
-        Me.lblResponseTime.Size = New System.Drawing.Size(204, 130)
+        Me.lblResponseTime.Size = New System.Drawing.Size(204, 131)
         Me.lblResponseTime.TabIndex = 9
         Me.lblResponseTime.Text = "Response Time:"
         '
         'flowResponseTime
         '
         Me.flowResponseTime.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.flowResponseTime.Location = New System.Drawing.Point(213, 263)
+        Me.flowResponseTime.Location = New System.Drawing.Point(213, 262)
         Me.flowResponseTime.Name = "flowResponseTime"
-        Me.flowResponseTime.Size = New System.Drawing.Size(765, 124)
+        Me.flowResponseTime.Size = New System.Drawing.Size(591, 125)
         Me.flowResponseTime.TabIndex = 10
         '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(848, 732)
+        Me.ClientSize = New System.Drawing.Size(840, 732)
         Me.Controls.Add(Me.tabMenu)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -3098,7 +3096,6 @@ Partial Class Main
         Me.tabAbout.PerformLayout()
         Me.splitAlerts.Panel1.ResumeLayout(False)
         Me.splitAlerts.Panel2.ResumeLayout(False)
-        Me.splitAlerts.Panel2.PerformLayout()
         CType(Me.splitAlerts, System.ComponentModel.ISupportInitialize).EndInit()
         Me.splitAlerts.ResumeLayout(False)
         CType(Me.dgvAlerts, System.ComponentModel.ISupportInitialize).EndInit()
