@@ -34,6 +34,16 @@ Module JobRunner_RestFunctions
 
     End Sub
 
+    Public Function GetTemplateInfo(ByVal templateid As String) As ApiResponse(Of TemplateInformation)
+        Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
+        If Main.auth.Data.Message <> "Authenticated" Then
+            Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
+        End If
+        Return r1rest.Functions.Templates.GetTemplate(Main.auth, Main.txtServer.Text, templateid)
+
+
+    End Function
+
     Public Sub GetJobList(Optional Search As String = "")
         Try
             Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
@@ -357,6 +367,10 @@ Module JobRunner_RestFunctions
 
             Dim Alerts As AlertsWithCounts = r1rest.Functions.Alert.GetAlertsWithCounts(Main.auth, Main.txtServer.Text)
             Main.dgvAlerts.Rows.Clear()
+            Main.flowAlertBreakdown.Controls.Clear()
+            Main.flowResponseTime.Controls.Clear()
+            Main.flowTotalResponses.Controls.Clear()
+
             For Each alert As AlertDataDetails In Alerts.entities
                 Main.dgvAlerts.Rows.Add(New String() {alert.artifactName, alert.createDate, alert.severity, alert.target, alert.source, alert.caseName, alert.confidence, alert.virusTotalMax})
             Next

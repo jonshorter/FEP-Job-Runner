@@ -313,7 +313,10 @@ Public Class Main
         End If
         My.Settings.jobname = txtDefaultJobName.Text
         My.Settings.projectname = txtDefaultProjectName.Text
-        My.Settings.webserver = txtServer.Text
+        If Not My.Settings.webserver = txtServer.Text Then
+            My.Settings.webserver = txtServer.Text
+            Me.auth = New AuthToken
+        End If
         My.Settings.templatename.Clear()
         For Each item In txtDefaultTemplateName.Items
             My.Settings.templatename.Add(item.ToString)
@@ -1166,20 +1169,7 @@ Public Class Main
 
     Private Sub tabMenu_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabMenu.SelectedIndexChanged
 
-        btnSaveSettings_Click(e, e)
-        lblJobStatus.Text = ""
-
-        If tabMenu.SelectedTab.Name = tabRESTUI.Name Then
-            Dim authobj = JobRunner_RestFunctions.R1Auth
-            If authobj.Data.Message = "Authenticated" Then
-
-                JobRunner_RestFunctions.GetJobList("")
-                tabControlJobsRest.SelectedTab = tabJobsList
-            Else
-                MsgBox(authobj.Data.Message)
-                tabMenu.SelectedTab = tabSettings
-            End If
-        End If
+     
     End Sub
 
 
@@ -1507,5 +1497,22 @@ Public Class Main
 
     Private Sub dgvEndpointStatusJobTargets_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvEndpointStatusJobTargets.CellContentClick
 
+    End Sub
+
+    Private Sub tabMenu_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles tabMenu.Selecting
+        btnSaveSettings_Click(e, e)
+        lblJobStatus.Text = ""
+
+        If tabMenu.SelectedTab.Name = tabRESTUI.Name Then
+            Dim authobj = JobRunner_RestFunctions.R1Auth
+            If authobj.Data.Message = "Authenticated" Then
+
+                JobRunner_RestFunctions.GetJobList("")
+                tabControlJobsRest.SelectedTab = tabJobsList
+            Else
+                MsgBox(authobj.Data.Message)
+                tabMenu.SelectedTab = tabSettings
+            End If
+        End If
     End Sub
 End Class

@@ -1,10 +1,12 @@
 ﻿Imports R1SimpleRestClient.Models.Job
+Imports R1SimpleRestClient.Models.Templates
 
 Public Class JobFromTemplate
     Public Property JobTemplateID As String
     Public Property SelectedProjectID As String
     Public Property NewJobTargets As New List(Of String)
     Private Property CurrentTabName As String
+    Private Property TemplateInfo As TemplateInformation
 
     Private Sub btnJobFromTemplateCancel_Click(sender As Object, e As EventArgs) Handles btnJobFromTemplateCancel.Click
         Me.Close()
@@ -13,11 +15,26 @@ Public Class JobFromTemplate
     Private Sub btnJobFromTemplateNext_Click(sender As Object, e As EventArgs) Handles btnJobFromTemplateNext.Click
         Select Case tabControlJobFromTemplate.SelectedTab.Name
             Case tabProject.Name
-                SelectedProjectID = dgvProjectList.SelectedRows(0).Cells(5).Value
+                If tabControlJobFromTemplate.TabPages.Contains(tabThreatFilters) Then
+                    SelectedProjectID = dgvProjectList.SelectedRows(0).Cells(5).Value
+                    CurrentTabName = tabThreatFilters.Name
+                    tabControlJobFromTemplate.SelectedTab = tabThreatFilters
+                    lblJobFromTemplateMenuText.Text = "Select the IOCs for the scan"
+                Else
+                    SelectedProjectID = dgvProjectList.SelectedRows(0).Cells(5).Value
+                    CurrentTabName = tabTargets.Name
+                    tabControlJobFromTemplate.SelectedTab = tabTargets
+                    GetGroups_JobFromTemplate()
+                    lblJobFromTemplateMenuText.Text = "Select the target endpoints"
+                End If
+
+            Case tabThreatFilters.Name
                 CurrentTabName = tabTargets.Name
                 tabControlJobFromTemplate.SelectedTab = tabTargets
                 GetGroups_JobFromTemplate()
                 lblJobFromTemplateMenuText.Text = "Select the target endpoints"
+
+
             Case tabTargets.Name
                 NewJobTargets.Clear()
                 For Each item As DataGridViewRow In dgvTargetEndpoints.Rows
@@ -52,12 +69,30 @@ Public Class JobFromTemplate
     Private Sub btnJobFromTemplatePrevious_Click(sender As Object, e As EventArgs) Handles btnJobFromTemplatePrevious.Click
         Select Case tabControlJobFromTemplate.SelectedTab.Name
             Case tabProject.Name
+                If tabControlJobFromTemplate.TabPages.Contains(tabThreatFilters) Then
 
-            Case tabTargets.Name
+                Else
+
+                End If
+
+            Case tabThreatFilters.Name
                 CurrentTabName = tabProject.Name
                 tabControlJobFromTemplate.SelectedTab = tabProject
-   
                 lblJobFromTemplateMenuText.Text = "Pick the project to store the data"
+
+            Case tabTargets.Name
+                If tabControlJobFromTemplate.TabPages.Contains(tabThreatFilters) Then
+                    CurrentTabName = tabThreatFilters.Name
+                    tabControlJobFromTemplate.SelectedTab = tabThreatFilters
+                    lblJobFromTemplateMenuText.Text = "Select the IOCs for the scan"
+                Else
+                    CurrentTabName = tabProject.Name
+                    tabControlJobFromTemplate.SelectedTab = tabProject
+                    lblJobFromTemplateMenuText.Text = "Pick the project to store the data"
+                End If
+
+
+             
 
             Case tabSchedule.Name
                 CurrentTabName = tabTargets.Name
@@ -107,14 +142,29 @@ Public Class JobFromTemplate
 
     End Sub
 
+    Private Sub JobFromTemplate_Enter(sender As Object, e As EventArgs) Handles Me.Enter
+ 
+    End Sub
+
+    Private Sub JobFromTemplate_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        Me.Dispose()
+    End Sub
+
     Private Sub JobFromTemplate_Load(sender As Object, e As EventArgs) Handles Me.Load
-        Debug.WriteLine(JobTemplateID)
+        tabControlJobFromTemplate.TabPages.Remove(tabThreatFilters)
+        TemplateInfo = JobRunner_RestFunctions.GetTemplateInfo(JobTemplateID).Data
         JobRunner_RestFunctions.GetProjectList_JobFromTemplate("")
         tabControlJobFromTemplate.SelectedTab = tabProject
         CurrentTabName = tabControlJobFromTemplate.SelectedTab.Name
+
+        'Check for threatscan
+        If TemplateInfo.jobType = 16 Then
+            tabControlJobFromTemplate.TabPages.Insert(1, tabThreatFilters)
+        End If
+
     End Sub
 
-   
+
 
 
     Private Sub tabControlJobFromTemplate_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles tabControlJobFromTemplate.Selecting
@@ -123,7 +173,7 @@ Public Class JobFromTemplate
         End If
     End Sub
 
- 
+
 
     Private Sub treeGroups_NodeMouseClick(sender As Object, e As TreeNodeMouseClickEventArgs) Handles treeGroups.NodeMouseClick
         GetGroupComputer_JobFromTemplate(e.Node.Tag)
@@ -155,4 +205,7 @@ Public Class JobFromTemplate
     End Sub
 
 
+    Private Sub JobFromTemplate_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+
+    End Sub
 End Class

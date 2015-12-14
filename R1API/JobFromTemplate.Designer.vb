@@ -45,17 +45,18 @@ Partial Class JobFromTemplate
         Me.splitTargetEndpoints = New System.Windows.Forms.SplitContainer()
         Me.txtSearchEndpoint = New System.Windows.Forms.TextBox()
         Me.dgvTargetEndpoints = New System.Windows.Forms.DataGridView()
-        Me.tabSchedule = New System.Windows.Forms.TabPage()
         Me.CheckEndpoint = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.EndpointName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.IPAddress = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OperatingSystem = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LastContact = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.targetID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.tabSchedule = New System.Windows.Forms.TabPage()
         Me.flowSchedule = New System.Windows.Forms.FlowLayoutPanel()
         Me.grpScheduleOptions = New System.Windows.Forms.GroupBox()
-        Me.rdoSchedule_Immediate = New System.Windows.Forms.RadioButton()
         Me.rdoSchedule_Schedule = New System.Windows.Forms.RadioButton()
+        Me.rdoSchedule_Immediate = New System.Windows.Forms.RadioButton()
+        Me.tabThreatFilters = New System.Windows.Forms.TabPage()
         CType(Me.splitJobFromTemplate, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.splitJobFromTemplate.Panel1.SuspendLayout()
         Me.splitJobFromTemplate.Panel2.SuspendLayout()
@@ -148,6 +149,7 @@ Partial Class JobFromTemplate
         Me.tabControlJobFromTemplate.Controls.Add(Me.tabProject)
         Me.tabControlJobFromTemplate.Controls.Add(Me.tabTargets)
         Me.tabControlJobFromTemplate.Controls.Add(Me.tabSchedule)
+        Me.tabControlJobFromTemplate.Controls.Add(Me.tabThreatFilters)
         Me.tabControlJobFromTemplate.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tabControlJobFromTemplate.Location = New System.Drawing.Point(0, 0)
         Me.tabControlJobFromTemplate.Multiline = True
@@ -349,16 +351,6 @@ Partial Class JobFromTemplate
         Me.dgvTargetEndpoints.Size = New System.Drawing.Size(627, 425)
         Me.dgvTargetEndpoints.TabIndex = 1
         '
-        'tabSchedule
-        '
-        Me.tabSchedule.Controls.Add(Me.flowSchedule)
-        Me.tabSchedule.Location = New System.Drawing.Point(4, 28)
-        Me.tabSchedule.Name = "tabSchedule"
-        Me.tabSchedule.Size = New System.Drawing.Size(812, 475)
-        Me.tabSchedule.TabIndex = 2
-        Me.tabSchedule.Text = "Schedule"
-        Me.tabSchedule.UseVisualStyleBackColor = True
-        '
         'CheckEndpoint
         '
         Me.CheckEndpoint.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
@@ -403,6 +395,16 @@ Partial Class JobFromTemplate
         Me.targetID.ReadOnly = True
         Me.targetID.Visible = False
         '
+        'tabSchedule
+        '
+        Me.tabSchedule.Controls.Add(Me.flowSchedule)
+        Me.tabSchedule.Location = New System.Drawing.Point(4, 28)
+        Me.tabSchedule.Name = "tabSchedule"
+        Me.tabSchedule.Size = New System.Drawing.Size(812, 475)
+        Me.tabSchedule.TabIndex = 2
+        Me.tabSchedule.Text = "Schedule"
+        Me.tabSchedule.UseVisualStyleBackColor = True
+        '
         'flowSchedule
         '
         Me.flowSchedule.Controls.Add(Me.grpScheduleOptions)
@@ -424,6 +426,17 @@ Partial Class JobFromTemplate
         Me.grpScheduleOptions.TabStop = False
         Me.grpScheduleOptions.Text = "Scheduling Options:"
         '
+        'rdoSchedule_Schedule
+        '
+        Me.rdoSchedule_Schedule.AutoSize = True
+        Me.rdoSchedule_Schedule.Location = New System.Drawing.Point(291, 45)
+        Me.rdoSchedule_Schedule.Name = "rdoSchedule_Schedule"
+        Me.rdoSchedule_Schedule.Size = New System.Drawing.Size(161, 21)
+        Me.rdoSchedule_Schedule.TabIndex = 1
+        Me.rdoSchedule_Schedule.TabStop = True
+        Me.rdoSchedule_Schedule.Text = "Scheduled Execution"
+        Me.rdoSchedule_Schedule.UseVisualStyleBackColor = True
+        '
         'rdoSchedule_Immediate
         '
         Me.rdoSchedule_Immediate.AutoSize = True
@@ -436,16 +449,15 @@ Partial Class JobFromTemplate
         Me.rdoSchedule_Immediate.Text = "Immediate Execution"
         Me.rdoSchedule_Immediate.UseVisualStyleBackColor = True
         '
-        'rdoSchedule_Schedule
+        'tabThreatFilters
         '
-        Me.rdoSchedule_Schedule.AutoSize = True
-        Me.rdoSchedule_Schedule.Location = New System.Drawing.Point(291, 45)
-        Me.rdoSchedule_Schedule.Name = "rdoSchedule_Schedule"
-        Me.rdoSchedule_Schedule.Size = New System.Drawing.Size(161, 21)
-        Me.rdoSchedule_Schedule.TabIndex = 1
-        Me.rdoSchedule_Schedule.TabStop = True
-        Me.rdoSchedule_Schedule.Text = "Scheduled Execution"
-        Me.rdoSchedule_Schedule.UseVisualStyleBackColor = True
+        Me.tabThreatFilters.Location = New System.Drawing.Point(4, 28)
+        Me.tabThreatFilters.Name = "tabThreatFilters"
+        Me.tabThreatFilters.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabThreatFilters.Size = New System.Drawing.Size(812, 475)
+        Me.tabThreatFilters.TabIndex = 3
+        Me.tabThreatFilters.Text = "Threat Filters"
+        Me.tabThreatFilters.UseVisualStyleBackColor = True
         '
         'JobFromTemplate
         '
@@ -524,4 +536,5 @@ Partial Class JobFromTemplate
     Friend WithEvents grpScheduleOptions As System.Windows.Forms.GroupBox
     Friend WithEvents rdoSchedule_Schedule As System.Windows.Forms.RadioButton
     Friend WithEvents rdoSchedule_Immediate As System.Windows.Forms.RadioButton
+    Friend WithEvents tabThreatFilters As System.Windows.Forms.TabPage
 End Class
