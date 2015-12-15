@@ -1388,6 +1388,9 @@ Public Class Main
                         End If
                         splitEndpointStatus.BringToFront()
 
+                    Case 10 'Result
+                        Process.Start("https://" & txtServer.Text & "/r1/#/reviewpage?JobResultID=" & resultid & "&ShowAgentPivot=false&ShowJobPivot=false")
+                   
                 End Select
             End If
         Catch ex As Exception

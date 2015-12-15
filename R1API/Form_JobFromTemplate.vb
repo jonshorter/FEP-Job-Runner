@@ -268,4 +268,8 @@ Public Class Form_JobFromTemplate
             txtSearchThreatFilters.Text = "Search"
         End If
     End Sub
+
+    Private Sub dgvThreatFilters_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvThreatFilters.CellContentClick
+
+    End Sub
 End Class

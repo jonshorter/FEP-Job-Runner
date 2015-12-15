@@ -167,16 +167,6 @@ Partial Class Main
         Me.splitJobsRestJobs = New System.Windows.Forms.SplitContainer()
         Me.txtJobsSearch = New System.Windows.Forms.TextBox()
         Me.dgvJobsRestJobsList = New System.Windows.Forms.DataGridView()
-        Me.jobName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.jobStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.jobRetry = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.jobCancel = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.jobType = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.jobStart = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.jobEnd = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.jobID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.jobResultID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.jobEndpointStatus = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.splitEndpointStatus = New System.Windows.Forms.SplitContainer()
         Me.btnBackFromEndpointStatus = New System.Windows.Forms.Button()
         Me.lblepstatusSuccessful = New System.Windows.Forms.Label()
@@ -272,6 +262,17 @@ Partial Class Main
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.ofdBox = New System.Windows.Forms.OpenFileDialog()
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
+        Me.jobName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobRetry = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.jobCancel = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.jobType = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobStart = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobEnd = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobResultID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobEndpointStatus = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.Result = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.GroupBox4.SuspendLayout()
         Me.grpReqSet.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -1919,7 +1920,7 @@ Partial Class Main
         Me.dgvJobsRestJobsList.AllowUserToDeleteRows = False
         Me.dgvJobsRestJobsList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvJobsRestJobsList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvJobsRestJobsList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.jobName, Me.jobStatus, Me.jobRetry, Me.jobCancel, Me.jobType, Me.jobStart, Me.jobEnd, Me.jobID, Me.jobResultID, Me.jobEndpointStatus})
+        Me.dgvJobsRestJobsList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.jobName, Me.jobStatus, Me.jobRetry, Me.jobCancel, Me.jobType, Me.jobStart, Me.jobEnd, Me.jobID, Me.jobResultID, Me.jobEndpointStatus, Me.Result})
         Me.dgvJobsRestJobsList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvJobsRestJobsList.Location = New System.Drawing.Point(0, 0)
         Me.dgvJobsRestJobsList.Name = "dgvJobsRestJobsList"
@@ -1928,92 +1929,6 @@ Partial Class Main
         Me.dgvJobsRestJobsList.RowTemplate.Height = 24
         Me.dgvJobsRestJobsList.Size = New System.Drawing.Size(818, 625)
         Me.dgvJobsRestJobsList.TabIndex = 0
-        '
-        'jobName
-        '
-        Me.jobName.FillWeight = 21.22523!
-        Me.jobName.HeaderText = "Name"
-        Me.jobName.Name = "jobName"
-        Me.jobName.ReadOnly = True
-        '
-        'jobStatus
-        '
-        Me.jobStatus.DividerWidth = 5
-        Me.jobStatus.FillWeight = 21.22523!
-        Me.jobStatus.HeaderText = "Status"
-        Me.jobStatus.Name = "jobStatus"
-        Me.jobStatus.ReadOnly = True
-        '
-        'jobRetry
-        '
-        Me.jobRetry.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.jobRetry.DividerWidth = 5
-        Me.jobRetry.FillWeight = 1.198895!
-        Me.jobRetry.HeaderText = "Retry Job"
-        Me.jobRetry.MinimumWidth = 80
-        Me.jobRetry.Name = "jobRetry"
-        Me.jobRetry.ReadOnly = True
-        Me.jobRetry.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.jobRetry.Width = 80
-        '
-        'jobCancel
-        '
-        Me.jobCancel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.jobCancel.DividerWidth = 5
-        Me.jobCancel.FillWeight = 2.0!
-        Me.jobCancel.HeaderText = "Cancel Job"
-        Me.jobCancel.MinimumWidth = 80
-        Me.jobCancel.Name = "jobCancel"
-        Me.jobCancel.ReadOnly = True
-        Me.jobCancel.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.jobCancel.Width = 80
-        '
-        'jobType
-        '
-        Me.jobType.FillWeight = 21.22523!
-        Me.jobType.HeaderText = "Type"
-        Me.jobType.Name = "jobType"
-        Me.jobType.ReadOnly = True
-        '
-        'jobStart
-        '
-        Me.jobStart.FillWeight = 21.22523!
-        Me.jobStart.HeaderText = "Start"
-        Me.jobStart.Name = "jobStart"
-        Me.jobStart.ReadOnly = True
-        '
-        'jobEnd
-        '
-        Me.jobEnd.DividerWidth = 5
-        Me.jobEnd.FillWeight = 21.22523!
-        Me.jobEnd.HeaderText = "End"
-        Me.jobEnd.Name = "jobEnd"
-        Me.jobEnd.ReadOnly = True
-        '
-        'jobID
-        '
-        Me.jobID.HeaderText = "jobID"
-        Me.jobID.Name = "jobID"
-        Me.jobID.ReadOnly = True
-        Me.jobID.Visible = False
-        '
-        'jobResultID
-        '
-        Me.jobResultID.HeaderText = "ResultID"
-        Me.jobResultID.Name = "jobResultID"
-        Me.jobResultID.ReadOnly = True
-        Me.jobResultID.Visible = False
-        '
-        'jobEndpointStatus
-        '
-        Me.jobEndpointStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.jobEndpointStatus.FillWeight = 2.0!
-        Me.jobEndpointStatus.HeaderText = "Endpoint Status"
-        Me.jobEndpointStatus.MinimumWidth = 80
-        Me.jobEndpointStatus.Name = "jobEndpointStatus"
-        Me.jobEndpointStatus.ReadOnly = True
-        Me.jobEndpointStatus.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.jobEndpointStatus.Width = 80
         '
         'splitEndpointStatus
         '
@@ -3038,6 +2953,103 @@ Partial Class Main
         Me.sfdBox.Filter = "Box Files|*.json"
         Me.sfdBox.InitialDirectory = "My.Application.Info.DirectoryPath & ""\BoxedJobs"""
         '
+        'jobName
+        '
+        Me.jobName.FillWeight = 21.22523!
+        Me.jobName.HeaderText = "Name"
+        Me.jobName.Name = "jobName"
+        Me.jobName.ReadOnly = True
+        '
+        'jobStatus
+        '
+        Me.jobStatus.DividerWidth = 5
+        Me.jobStatus.FillWeight = 21.22523!
+        Me.jobStatus.HeaderText = "Status"
+        Me.jobStatus.Name = "jobStatus"
+        Me.jobStatus.ReadOnly = True
+        '
+        'jobRetry
+        '
+        Me.jobRetry.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.jobRetry.DividerWidth = 5
+        Me.jobRetry.FillWeight = 1.198895!
+        Me.jobRetry.HeaderText = "Retry Job"
+        Me.jobRetry.MinimumWidth = 80
+        Me.jobRetry.Name = "jobRetry"
+        Me.jobRetry.ReadOnly = True
+        Me.jobRetry.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.jobRetry.Width = 80
+        '
+        'jobCancel
+        '
+        Me.jobCancel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.jobCancel.DividerWidth = 5
+        Me.jobCancel.FillWeight = 2.0!
+        Me.jobCancel.HeaderText = "Cancel Job"
+        Me.jobCancel.MinimumWidth = 80
+        Me.jobCancel.Name = "jobCancel"
+        Me.jobCancel.ReadOnly = True
+        Me.jobCancel.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.jobCancel.Width = 80
+        '
+        'jobType
+        '
+        Me.jobType.FillWeight = 21.22523!
+        Me.jobType.HeaderText = "Type"
+        Me.jobType.Name = "jobType"
+        Me.jobType.ReadOnly = True
+        '
+        'jobStart
+        '
+        Me.jobStart.FillWeight = 21.22523!
+        Me.jobStart.HeaderText = "Start"
+        Me.jobStart.Name = "jobStart"
+        Me.jobStart.ReadOnly = True
+        '
+        'jobEnd
+        '
+        Me.jobEnd.DividerWidth = 5
+        Me.jobEnd.FillWeight = 21.22523!
+        Me.jobEnd.HeaderText = "End"
+        Me.jobEnd.Name = "jobEnd"
+        Me.jobEnd.ReadOnly = True
+        '
+        'jobID
+        '
+        Me.jobID.HeaderText = "jobID"
+        Me.jobID.Name = "jobID"
+        Me.jobID.ReadOnly = True
+        Me.jobID.Visible = False
+        '
+        'jobResultID
+        '
+        Me.jobResultID.HeaderText = "ResultID"
+        Me.jobResultID.Name = "jobResultID"
+        Me.jobResultID.ReadOnly = True
+        Me.jobResultID.Visible = False
+        '
+        'jobEndpointStatus
+        '
+        Me.jobEndpointStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.jobEndpointStatus.FillWeight = 2.0!
+        Me.jobEndpointStatus.HeaderText = "Endpoint Status"
+        Me.jobEndpointStatus.MinimumWidth = 80
+        Me.jobEndpointStatus.Name = "jobEndpointStatus"
+        Me.jobEndpointStatus.ReadOnly = True
+        Me.jobEndpointStatus.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.jobEndpointStatus.Width = 80
+        '
+        'Result
+        '
+        Me.Result.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.Result.FillWeight = 2.0!
+        Me.Result.HeaderText = "Result"
+        Me.Result.MinimumWidth = 75
+        Me.Result.Name = "Result"
+        Me.Result.ReadOnly = True
+        Me.Result.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.Result.Width = 75
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -3385,6 +3397,13 @@ Partial Class Main
     Friend WithEvents flowAlertBreakdown As System.Windows.Forms.FlowLayoutPanel
     Friend WithEvents flowResponseTime As System.Windows.Forms.FlowLayoutPanel
     Friend WithEvents lblResponseTime As System.Windows.Forms.Label
+    Friend WithEvents endpoint As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Start As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Status As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Hits As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents EndPointID As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Action As System.Windows.Forms.DataGridViewButtonColumn
+    Friend WithEvents Review As System.Windows.Forms.DataGridViewButtonColumn
     Friend WithEvents jobName As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents jobStatus As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents jobRetry As System.Windows.Forms.DataGridViewButtonColumn
@@ -3395,12 +3414,6 @@ Partial Class Main
     Friend WithEvents jobID As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents jobResultID As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents jobEndpointStatus As System.Windows.Forms.DataGridViewButtonColumn
-    Friend WithEvents endpoint As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Start As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Status As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Hits As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents EndPointID As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Action As System.Windows.Forms.DataGridViewButtonColumn
-    Friend WithEvents Review As System.Windows.Forms.DataGridViewButtonColumn
+    Friend WithEvents Result As System.Windows.Forms.DataGridViewButtonColumn
 
 End Class

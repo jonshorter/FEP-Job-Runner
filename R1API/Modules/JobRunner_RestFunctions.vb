@@ -69,7 +69,7 @@ Module JobRunner_RestFunctions
                 Else
                     CancelStatus = ""
                 End If
-                Main.dgvJobsRestJobsList.Rows.Add(New String() {job.Name, job.Status, "Retry", CancelStatus, job.JobType, job.StartDate.ToString, job.EndDate.ToString, job.JobID.ToString, job.ResultID.ToString, "Status"})
+                Main.dgvJobsRestJobsList.Rows.Add(New String() {job.Name, job.Status, "Retry", CancelStatus, job.JobType, job.StartDate.ToString, job.EndDate.ToString, job.JobID.ToString, job.ResultID.ToString, "Status", "Result"})
             Next
         Catch ex As Exception
         End Try
