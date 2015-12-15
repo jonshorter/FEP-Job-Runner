@@ -170,6 +170,7 @@ Public Class Form_JobFromTemplate
                         '------------------No Targets
                         MsgBox("No job targets have been selected. Please go to the previous section and select targets.", MsgBoxStyle.Exclamation, "No Targets Selected")
                         CurrentTabName = tabTargets.Name
+                        btnJobFromTemplateNext.Text = "Next"
                         tabControlJobFromTemplate.SelectedTab = tabTargets
                     End If
                 End If
@@ -273,10 +274,14 @@ Public Class Form_JobFromTemplate
         tabControlJobFromTemplate.SelectedTab = tabProject
         CurrentTabName = tabControlJobFromTemplate.SelectedTab.Name
 
+        chkEnableRecurrence.Checked = False
+        rdoRecurStart_Hourly.Checked = True
+        panel_RecurHourly.Visible = True
+
         'Check for threatscan
         If TemplateInfo.jobType = 16 Then
             tabControlJobFromTemplate.TabPages.Insert(1, tabThreatFilters)
-
+            chkIncrementalCollection.Visible = True
             splitThreatFilterAdvanced.Panel2Collapsed = True
             splitThreatFilters.Size = New Size(1016, 469)
             splitThreatFilterAdvanced.Size = New Size(1000, 45)
@@ -561,5 +566,126 @@ Public Class Form_JobFromTemplate
 
     Private Sub dtpTime_ValueChanged(sender As Object, e As EventArgs) Handles dtpTime.ValueChanged
         txtThreatCreate.Text = dtpDate.Value.ToShortDateString & " " & dtpTime.Value.ToShortTimeString
+    End Sub
+
+    Private Sub rdoSchedule_Schedule_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSchedule_Schedule.CheckedChanged
+        Select Case rdoSchedule_Schedule.Checked
+            Case True
+                grpSchedule_StartDate.Visible = True
+                grpRecurrence.Visible = True
+            Case False
+                grpSchedule_StartDate.Visible = False
+                grpRecurrence.Visible = False
+        End Select
+    End Sub
+
+    Private Sub rdoRecurEnd_NoEnd_CheckedChanged(sender As Object, e As EventArgs) Handles rdoRecurEnd_NoEnd.CheckedChanged
+        Select Case rdoRecurEnd_NoEnd.Checked
+            Case True
+                dtpRecurEndBy.Visible = False
+                nmbRecurEndOccurences.Visible = False
+                lblRecurEndOccurences.Visible = False
+        End Select
+    End Sub
+
+    Private Sub rdoRecurEnd_After_CheckedChanged(sender As Object, e As EventArgs) Handles rdoRecurEnd_After.CheckedChanged
+        Select Case rdoRecurEnd_After.Checked
+            Case True
+                dtpRecurEndBy.Visible = False
+                nmbRecurEndOccurences.Visible = True
+                lblRecurEndOccurences.Visible = True
+        End Select
+    End Sub
+
+    Private Sub rdoRecurEnd_EndBy_CheckedChanged(sender As Object, e As EventArgs) Handles rdoRecurEnd_EndBy.CheckedChanged
+        Select Case rdoRecurEnd_EndBy.Checked
+            Case True
+                dtpRecurEndBy.Visible = True
+                nmbRecurEndOccurences.Visible = False
+                lblRecurEndOccurences.Visible = False
+        End Select
+    End Sub
+
+    Private Sub rdoRecurStart_Minute_CheckedChanged(sender As Object, e As EventArgs) Handles rdoRecurStart_Minute.CheckedChanged
+        Select Case rdoRecurStart_Minute.Checked
+            Case True
+                panel_RecurMinute.Visible = True
+                panel_RecurHourly.Visible = False
+                panel_recurDaily.Visible = False
+                panel_RecurWeekly.Visible = False
+                panel_RecurMonthly.Visible = False
+                panel_RecurYearly.Visible = False
+        End Select
+    End Sub
+
+    Private Sub rdoRecurStart_Hourly_CheckedChanged(sender As Object, e As EventArgs) Handles rdoRecurStart_Hourly.CheckedChanged
+        Select Case rdoRecurStart_Hourly.Checked
+            Case True
+                panel_RecurMinute.Visible = False
+                panel_RecurHourly.Visible = True
+                panel_recurDaily.Visible = False
+                panel_RecurWeekly.Visible = False
+                panel_RecurMonthly.Visible = False
+                panel_RecurYearly.Visible = False
+        End Select
+    End Sub
+
+    Private Sub rdoRecurStart_Daily_CheckedChanged(sender As Object, e As EventArgs) Handles rdoRecurStart_Daily.CheckedChanged
+        Select Case rdoRecurStart_Daily.Checked
+            Case True
+                panel_RecurMinute.Visible = False
+                panel_RecurHourly.Visible = False
+                panel_recurDaily.Visible = True
+                panel_RecurWeekly.Visible = False
+                panel_RecurMonthly.Visible = False
+                panel_RecurYearly.Visible = False
+        End Select
+    End Sub
+
+    Private Sub rdoRecurStart_Weekly_CheckedChanged(sender As Object, e As EventArgs) Handles rdoRecurStart_Weekly.CheckedChanged
+        Select Case rdoRecurStart_Weekly.Checked
+            Case True
+                panel_RecurMinute.Visible = False
+                panel_RecurHourly.Visible = False
+                panel_recurDaily.Visible = False
+                panel_RecurWeekly.Visible = True
+                panel_RecurMonthly.Visible = False
+                panel_RecurYearly.Visible = False
+        End Select
+    End Sub
+
+    Private Sub rdoRecurStart_Monthly_CheckedChanged(sender As Object, e As EventArgs) Handles rdoRecurStart_Monthly.CheckedChanged
+        Select Case rdoRecurStart_Monthly.Checked
+            Case True
+                panel_RecurMinute.Visible = False
+                panel_RecurHourly.Visible = False
+                panel_recurDaily.Visible = False
+                panel_RecurWeekly.Visible = False
+                panel_RecurMonthly.Visible = True
+                panel_RecurYearly.Visible = False
+        End Select
+    End Sub
+
+    Private Sub rdoRecurStart_Yearly_CheckedChanged(sender As Object, e As EventArgs) Handles rdoRecurStart_Yearly.CheckedChanged
+        Select Case rdoRecurStart_Yearly.Checked
+            Case True
+                panel_RecurMinute.Visible = False
+                panel_RecurHourly.Visible = False
+                panel_recurDaily.Visible = False
+                panel_RecurWeekly.Visible = False
+                panel_RecurMonthly.Visible = False
+                panel_RecurYearly.Visible = True
+        End Select
+    End Sub
+
+    Private Sub chkEnableRecurrence_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableRecurrence.CheckedChanged
+        Select Case chkEnableRecurrence.Checked
+            Case True
+                grpRecurrenceStart.Visible = True
+                grpRecurrenceEnd.Visible = True
+            Case False
+                grpRecurrenceStart.Visible = False
+                grpRecurrenceEnd.Visible = False
+        End Select
     End Sub
 End Class

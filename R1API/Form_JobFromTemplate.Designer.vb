@@ -107,6 +107,44 @@ Partial Class Form_JobFromTemplate
         Me.grpRecurrence = New System.Windows.Forms.GroupBox()
         Me.chkEnableRecurrence = New System.Windows.Forms.CheckBox()
         Me.chkIncrementalCollection = New System.Windows.Forms.CheckBox()
+        Me.grpRecurrenceStart = New System.Windows.Forms.GroupBox()
+        Me.grpRecurrenceEnd = New System.Windows.Forms.GroupBox()
+        Me.rdoRecurEnd_NoEnd = New System.Windows.Forms.RadioButton()
+        Me.rdoRecurEnd_After = New System.Windows.Forms.RadioButton()
+        Me.rdoRecurEnd_EndBy = New System.Windows.Forms.RadioButton()
+        Me.nmbRecurEndOccurences = New System.Windows.Forms.NumericUpDown()
+        Me.lblRecurEndOccurences = New System.Windows.Forms.Label()
+        Me.dtpRecurEndBy = New System.Windows.Forms.DateTimePicker()
+        Me.rdoRecurStart_Daily = New System.Windows.Forms.RadioButton()
+        Me.rdoRecurStart_Hourly = New System.Windows.Forms.RadioButton()
+        Me.rdoRecurStart_Minute = New System.Windows.Forms.RadioButton()
+        Me.rdoRecurStart_Yearly = New System.Windows.Forms.RadioButton()
+        Me.rdoRecurStart_Monthly = New System.Windows.Forms.RadioButton()
+        Me.rdoRecurStart_Weekly = New System.Windows.Forms.RadioButton()
+        Me.panel_RecurMinute = New System.Windows.Forms.Panel()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.cmb_RecurMinutes = New System.Windows.Forms.ComboBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.panel_RecurHourly = New System.Windows.Forms.Panel()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.cmb_RecurHours = New System.Windows.Forms.ComboBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.panel_recurDaily = New System.Windows.Forms.Panel()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.nmb_RecurDays = New System.Windows.Forms.NumericUpDown()
+        Me.panel_RecurWeekly = New System.Windows.Forms.Panel()
+        Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.panel_RecurMonthly = New System.Windows.Forms.Panel()
+        Me.NumericUpDown2 = New System.Windows.Forms.NumericUpDown()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.panel_RecurYearly = New System.Windows.Forms.Panel()
+        Me.NumericUpDown3 = New System.Windows.Forms.NumericUpDown()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
         CType(Me.splitJobFromTemplate, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.splitJobFromTemplate.Panel1.SuspendLayout()
         Me.splitJobFromTemplate.Panel2.SuspendLayout()
@@ -147,6 +185,19 @@ Partial Class Form_JobFromTemplate
         CType(Me.dgvThreatFilters, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.flowThreatScanAllFilter.SuspendLayout()
         Me.grpRecurrence.SuspendLayout()
+        Me.grpRecurrenceStart.SuspendLayout()
+        Me.grpRecurrenceEnd.SuspendLayout()
+        CType(Me.nmbRecurEndOccurences, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.panel_RecurMinute.SuspendLayout()
+        Me.panel_RecurHourly.SuspendLayout()
+        Me.panel_recurDaily.SuspendLayout()
+        CType(Me.nmb_RecurDays, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.panel_RecurWeekly.SuspendLayout()
+        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.panel_RecurMonthly.SuspendLayout()
+        CType(Me.NumericUpDown2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.panel_RecurYearly.SuspendLayout()
+        CType(Me.NumericUpDown3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'splitJobFromTemplate
@@ -169,7 +220,7 @@ Partial Class Form_JobFromTemplate
         'splitJobFromTemplate.Panel2
         '
         Me.splitJobFromTemplate.Panel2.Controls.Add(Me.tabControlJobFromTemplate)
-        Me.splitJobFromTemplate.Size = New System.Drawing.Size(1030, 561)
+        Me.splitJobFromTemplate.Size = New System.Drawing.Size(1030, 633)
         Me.splitJobFromTemplate.TabIndex = 0
         '
         'lblJobFromTemplateMenuText
@@ -221,7 +272,7 @@ Partial Class Form_JobFromTemplate
         Me.tabControlJobFromTemplate.Multiline = True
         Me.tabControlJobFromTemplate.Name = "tabControlJobFromTemplate"
         Me.tabControlJobFromTemplate.SelectedIndex = 0
-        Me.tabControlJobFromTemplate.Size = New System.Drawing.Size(1030, 507)
+        Me.tabControlJobFromTemplate.Size = New System.Drawing.Size(1030, 579)
         Me.tabControlJobFromTemplate.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight
         Me.tabControlJobFromTemplate.TabIndex = 0
         '
@@ -466,7 +517,7 @@ Partial Class Form_JobFromTemplate
         Me.tabSchedule.Controls.Add(Me.flowSchedule)
         Me.tabSchedule.Location = New System.Drawing.Point(4, 28)
         Me.tabSchedule.Name = "tabSchedule"
-        Me.tabSchedule.Size = New System.Drawing.Size(1022, 475)
+        Me.tabSchedule.Size = New System.Drawing.Size(1022, 547)
         Me.tabSchedule.TabIndex = 2
         Me.tabSchedule.Text = "Schedule"
         Me.tabSchedule.UseVisualStyleBackColor = True
@@ -479,7 +530,7 @@ Partial Class Form_JobFromTemplate
         Me.flowSchedule.Dock = System.Windows.Forms.DockStyle.Fill
         Me.flowSchedule.Location = New System.Drawing.Point(0, 0)
         Me.flowSchedule.Name = "flowSchedule"
-        Me.flowSchedule.Size = New System.Drawing.Size(1022, 475)
+        Me.flowSchedule.Size = New System.Drawing.Size(1022, 547)
         Me.flowSchedule.TabIndex = 0
         '
         'grpScheduleOptions
@@ -487,10 +538,9 @@ Partial Class Form_JobFromTemplate
         Me.grpScheduleOptions.AutoSize = True
         Me.grpScheduleOptions.Controls.Add(Me.rdoSchedule_Schedule)
         Me.grpScheduleOptions.Controls.Add(Me.rdoSchedule_Immediate)
-        Me.flowSchedule.SetFlowBreak(Me.grpScheduleOptions, True)
         Me.grpScheduleOptions.Location = New System.Drawing.Point(3, 3)
         Me.grpScheduleOptions.Name = "grpScheduleOptions"
-        Me.grpScheduleOptions.Size = New System.Drawing.Size(458, 87)
+        Me.grpScheduleOptions.Size = New System.Drawing.Size(359, 72)
         Me.grpScheduleOptions.TabIndex = 0
         Me.grpScheduleOptions.TabStop = False
         Me.grpScheduleOptions.Text = "Scheduling Options:"
@@ -498,7 +548,7 @@ Partial Class Form_JobFromTemplate
         'rdoSchedule_Schedule
         '
         Me.rdoSchedule_Schedule.AutoSize = True
-        Me.rdoSchedule_Schedule.Location = New System.Drawing.Point(291, 45)
+        Me.rdoSchedule_Schedule.Location = New System.Drawing.Point(192, 30)
         Me.rdoSchedule_Schedule.Name = "rdoSchedule_Schedule"
         Me.rdoSchedule_Schedule.Size = New System.Drawing.Size(161, 21)
         Me.rdoSchedule_Schedule.TabIndex = 1
@@ -510,7 +560,7 @@ Partial Class Form_JobFromTemplate
         '
         Me.rdoSchedule_Immediate.AutoSize = True
         Me.rdoSchedule_Immediate.Checked = True
-        Me.rdoSchedule_Immediate.Location = New System.Drawing.Point(40, 45)
+        Me.rdoSchedule_Immediate.Location = New System.Drawing.Point(13, 30)
         Me.rdoSchedule_Immediate.Name = "rdoSchedule_Immediate"
         Me.rdoSchedule_Immediate.Size = New System.Drawing.Size(158, 21)
         Me.rdoSchedule_Immediate.TabIndex = 0
@@ -520,13 +570,17 @@ Partial Class Form_JobFromTemplate
         '
         'grpSchedule_StartDate
         '
+        Me.grpSchedule_StartDate.AutoSize = True
+        Me.grpSchedule_StartDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.grpSchedule_StartDate.Controls.Add(Me.DateTimePicker1)
-        Me.grpSchedule_StartDate.Location = New System.Drawing.Point(3, 96)
+        Me.flowSchedule.SetFlowBreak(Me.grpSchedule_StartDate, True)
+        Me.grpSchedule_StartDate.Location = New System.Drawing.Point(368, 3)
         Me.grpSchedule_StartDate.Name = "grpSchedule_StartDate"
-        Me.grpSchedule_StartDate.Size = New System.Drawing.Size(458, 83)
+        Me.grpSchedule_StartDate.Size = New System.Drawing.Size(227, 73)
         Me.grpSchedule_StartDate.TabIndex = 1
         Me.grpSchedule_StartDate.TabStop = False
         Me.grpSchedule_StartDate.Text = "Start Date and Time"
+        Me.grpSchedule_StartDate.Visible = False
         '
         'DateTimePicker1
         '
@@ -1003,14 +1057,19 @@ Partial Class Form_JobFromTemplate
         '
         'grpRecurrence
         '
+        Me.grpRecurrence.AutoSize = True
+        Me.grpRecurrence.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.grpRecurrence.Controls.Add(Me.grpRecurrenceEnd)
+        Me.grpRecurrence.Controls.Add(Me.grpRecurrenceStart)
         Me.grpRecurrence.Controls.Add(Me.chkIncrementalCollection)
         Me.grpRecurrence.Controls.Add(Me.chkEnableRecurrence)
-        Me.grpRecurrence.Location = New System.Drawing.Point(467, 96)
+        Me.grpRecurrence.Location = New System.Drawing.Point(3, 82)
         Me.grpRecurrence.Name = "grpRecurrence"
-        Me.grpRecurrence.Size = New System.Drawing.Size(200, 100)
+        Me.grpRecurrence.Size = New System.Drawing.Size(622, 436)
         Me.grpRecurrence.TabIndex = 2
         Me.grpRecurrence.TabStop = False
         Me.grpRecurrence.Text = "Recurrence:"
+        Me.grpRecurrence.Visible = False
         '
         'chkEnableRecurrence
         '
@@ -1025,18 +1084,405 @@ Partial Class Form_JobFromTemplate
         'chkIncrementalCollection
         '
         Me.chkIncrementalCollection.AutoSize = True
-        Me.chkIncrementalCollection.Location = New System.Drawing.Point(6, 73)
+        Me.chkIncrementalCollection.Location = New System.Drawing.Point(6, 394)
         Me.chkIncrementalCollection.Name = "chkIncrementalCollection"
         Me.chkIncrementalCollection.Size = New System.Drawing.Size(168, 21)
         Me.chkIncrementalCollection.TabIndex = 1
         Me.chkIncrementalCollection.Text = "Incremental Collection"
         Me.chkIncrementalCollection.UseVisualStyleBackColor = True
+        Me.chkIncrementalCollection.Visible = False
+        '
+        'grpRecurrenceStart
+        '
+        Me.grpRecurrenceStart.Controls.Add(Me.rdoRecurStart_Yearly)
+        Me.grpRecurrenceStart.Controls.Add(Me.rdoRecurStart_Monthly)
+        Me.grpRecurrenceStart.Controls.Add(Me.rdoRecurStart_Weekly)
+        Me.grpRecurrenceStart.Controls.Add(Me.rdoRecurStart_Daily)
+        Me.grpRecurrenceStart.Controls.Add(Me.rdoRecurStart_Hourly)
+        Me.grpRecurrenceStart.Controls.Add(Me.rdoRecurStart_Minute)
+        Me.grpRecurrenceStart.Controls.Add(Me.panel_RecurHourly)
+        Me.grpRecurrenceStart.Controls.Add(Me.panel_RecurYearly)
+        Me.grpRecurrenceStart.Controls.Add(Me.panel_RecurMonthly)
+        Me.grpRecurrenceStart.Controls.Add(Me.panel_RecurWeekly)
+        Me.grpRecurrenceStart.Controls.Add(Me.panel_recurDaily)
+        Me.grpRecurrenceStart.Controls.Add(Me.panel_RecurMinute)
+        Me.grpRecurrenceStart.Location = New System.Drawing.Point(12, 57)
+        Me.grpRecurrenceStart.Name = "grpRecurrenceStart"
+        Me.grpRecurrenceStart.Size = New System.Drawing.Size(604, 188)
+        Me.grpRecurrenceStart.TabIndex = 2
+        Me.grpRecurrenceStart.TabStop = False
+        Me.grpRecurrenceStart.Text = "Start"
+        Me.grpRecurrenceStart.Visible = False
+        '
+        'grpRecurrenceEnd
+        '
+        Me.grpRecurrenceEnd.AutoSize = True
+        Me.grpRecurrenceEnd.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.grpRecurrenceEnd.Controls.Add(Me.dtpRecurEndBy)
+        Me.grpRecurrenceEnd.Controls.Add(Me.lblRecurEndOccurences)
+        Me.grpRecurrenceEnd.Controls.Add(Me.nmbRecurEndOccurences)
+        Me.grpRecurrenceEnd.Controls.Add(Me.rdoRecurEnd_EndBy)
+        Me.grpRecurrenceEnd.Controls.Add(Me.rdoRecurEnd_After)
+        Me.grpRecurrenceEnd.Controls.Add(Me.rdoRecurEnd_NoEnd)
+        Me.grpRecurrenceEnd.Location = New System.Drawing.Point(12, 251)
+        Me.grpRecurrenceEnd.Name = "grpRecurrenceEnd"
+        Me.grpRecurrenceEnd.Size = New System.Drawing.Size(353, 128)
+        Me.grpRecurrenceEnd.TabIndex = 3
+        Me.grpRecurrenceEnd.TabStop = False
+        Me.grpRecurrenceEnd.Text = "End"
+        Me.grpRecurrenceEnd.Visible = False
+        '
+        'rdoRecurEnd_NoEnd
+        '
+        Me.rdoRecurEnd_NoEnd.AutoSize = True
+        Me.rdoRecurEnd_NoEnd.Location = New System.Drawing.Point(16, 31)
+        Me.rdoRecurEnd_NoEnd.Name = "rdoRecurEnd_NoEnd"
+        Me.rdoRecurEnd_NoEnd.Size = New System.Drawing.Size(107, 21)
+        Me.rdoRecurEnd_NoEnd.TabIndex = 0
+        Me.rdoRecurEnd_NoEnd.Text = "No end date"
+        Me.rdoRecurEnd_NoEnd.UseVisualStyleBackColor = True
+        '
+        'rdoRecurEnd_After
+        '
+        Me.rdoRecurEnd_After.AutoSize = True
+        Me.rdoRecurEnd_After.Checked = True
+        Me.rdoRecurEnd_After.Location = New System.Drawing.Point(16, 58)
+        Me.rdoRecurEnd_After.Name = "rdoRecurEnd_After"
+        Me.rdoRecurEnd_After.Size = New System.Drawing.Size(87, 21)
+        Me.rdoRecurEnd_After.TabIndex = 1
+        Me.rdoRecurEnd_After.TabStop = True
+        Me.rdoRecurEnd_After.Text = "End after"
+        Me.rdoRecurEnd_After.UseVisualStyleBackColor = True
+        '
+        'rdoRecurEnd_EndBy
+        '
+        Me.rdoRecurEnd_EndBy.AutoSize = True
+        Me.rdoRecurEnd_EndBy.Location = New System.Drawing.Point(16, 85)
+        Me.rdoRecurEnd_EndBy.Name = "rdoRecurEnd_EndBy"
+        Me.rdoRecurEnd_EndBy.Size = New System.Drawing.Size(73, 21)
+        Me.rdoRecurEnd_EndBy.TabIndex = 2
+        Me.rdoRecurEnd_EndBy.Text = "End by"
+        Me.rdoRecurEnd_EndBy.UseVisualStyleBackColor = True
+        '
+        'nmbRecurEndOccurences
+        '
+        Me.nmbRecurEndOccurences.AutoSize = True
+        Me.nmbRecurEndOccurences.Location = New System.Drawing.Point(141, 55)
+        Me.nmbRecurEndOccurences.Maximum = New Decimal(New Integer() {1000000000, 0, 0, 0})
+        Me.nmbRecurEndOccurences.Name = "nmbRecurEndOccurences"
+        Me.nmbRecurEndOccurences.Size = New System.Drawing.Size(96, 22)
+        Me.nmbRecurEndOccurences.TabIndex = 3
+        '
+        'lblRecurEndOccurences
+        '
+        Me.lblRecurEndOccurences.AutoSize = True
+        Me.lblRecurEndOccurences.Location = New System.Drawing.Point(237, 57)
+        Me.lblRecurEndOccurences.Name = "lblRecurEndOccurences"
+        Me.lblRecurEndOccurences.Size = New System.Drawing.Size(91, 17)
+        Me.lblRecurEndOccurences.TabIndex = 4
+        Me.lblRecurEndOccurences.Text = "occurence(s)"
+        '
+        'dtpRecurEndBy
+        '
+        Me.dtpRecurEndBy.CustomFormat = "MM/dd/yyyy HH:mm:ss"
+        Me.dtpRecurEndBy.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpRecurEndBy.Location = New System.Drawing.Point(141, 85)
+        Me.dtpRecurEndBy.Name = "dtpRecurEndBy"
+        Me.dtpRecurEndBy.Size = New System.Drawing.Size(206, 22)
+        Me.dtpRecurEndBy.TabIndex = 5
+        '
+        'rdoRecurStart_Daily
+        '
+        Me.rdoRecurStart_Daily.AutoSize = True
+        Me.rdoRecurStart_Daily.Location = New System.Drawing.Point(7, 75)
+        Me.rdoRecurStart_Daily.Name = "rdoRecurStart_Daily"
+        Me.rdoRecurStart_Daily.Size = New System.Drawing.Size(60, 21)
+        Me.rdoRecurStart_Daily.TabIndex = 5
+        Me.rdoRecurStart_Daily.Text = "Daily"
+        Me.rdoRecurStart_Daily.UseVisualStyleBackColor = True
+        '
+        'rdoRecurStart_Hourly
+        '
+        Me.rdoRecurStart_Hourly.AutoSize = True
+        Me.rdoRecurStart_Hourly.Checked = True
+        Me.rdoRecurStart_Hourly.Location = New System.Drawing.Point(7, 48)
+        Me.rdoRecurStart_Hourly.Name = "rdoRecurStart_Hourly"
+        Me.rdoRecurStart_Hourly.Size = New System.Drawing.Size(70, 21)
+        Me.rdoRecurStart_Hourly.TabIndex = 4
+        Me.rdoRecurStart_Hourly.Text = "Hourly"
+        Me.rdoRecurStart_Hourly.UseVisualStyleBackColor = True
+        '
+        'rdoRecurStart_Minute
+        '
+        Me.rdoRecurStart_Minute.AutoSize = True
+        Me.rdoRecurStart_Minute.Location = New System.Drawing.Point(7, 21)
+        Me.rdoRecurStart_Minute.Name = "rdoRecurStart_Minute"
+        Me.rdoRecurStart_Minute.Size = New System.Drawing.Size(71, 21)
+        Me.rdoRecurStart_Minute.TabIndex = 3
+        Me.rdoRecurStart_Minute.Text = "Minute"
+        Me.rdoRecurStart_Minute.UseVisualStyleBackColor = True
+        '
+        'rdoRecurStart_Yearly
+        '
+        Me.rdoRecurStart_Yearly.AutoSize = True
+        Me.rdoRecurStart_Yearly.Location = New System.Drawing.Point(6, 156)
+        Me.rdoRecurStart_Yearly.Name = "rdoRecurStart_Yearly"
+        Me.rdoRecurStart_Yearly.Size = New System.Drawing.Size(69, 21)
+        Me.rdoRecurStart_Yearly.TabIndex = 8
+        Me.rdoRecurStart_Yearly.Text = "Yearly"
+        Me.rdoRecurStart_Yearly.UseVisualStyleBackColor = True
+        '
+        'rdoRecurStart_Monthly
+        '
+        Me.rdoRecurStart_Monthly.AutoSize = True
+        Me.rdoRecurStart_Monthly.Location = New System.Drawing.Point(6, 129)
+        Me.rdoRecurStart_Monthly.Name = "rdoRecurStart_Monthly"
+        Me.rdoRecurStart_Monthly.Size = New System.Drawing.Size(78, 21)
+        Me.rdoRecurStart_Monthly.TabIndex = 7
+        Me.rdoRecurStart_Monthly.Text = "Monthly"
+        Me.rdoRecurStart_Monthly.UseVisualStyleBackColor = True
+        '
+        'rdoRecurStart_Weekly
+        '
+        Me.rdoRecurStart_Weekly.AutoSize = True
+        Me.rdoRecurStart_Weekly.Location = New System.Drawing.Point(6, 102)
+        Me.rdoRecurStart_Weekly.Name = "rdoRecurStart_Weekly"
+        Me.rdoRecurStart_Weekly.Size = New System.Drawing.Size(75, 21)
+        Me.rdoRecurStart_Weekly.TabIndex = 6
+        Me.rdoRecurStart_Weekly.Text = "Weekly"
+        Me.rdoRecurStart_Weekly.UseVisualStyleBackColor = True
+        '
+        'panel_RecurMinute
+        '
+        Me.panel_RecurMinute.Controls.Add(Me.Label7)
+        Me.panel_RecurMinute.Controls.Add(Me.cmb_RecurMinutes)
+        Me.panel_RecurMinute.Controls.Add(Me.Label6)
+        Me.panel_RecurMinute.Location = New System.Drawing.Point(96, 18)
+        Me.panel_RecurMinute.Name = "panel_RecurMinute"
+        Me.panel_RecurMinute.Size = New System.Drawing.Size(495, 161)
+        Me.panel_RecurMinute.TabIndex = 9
+        Me.panel_RecurMinute.Visible = False
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(42, 32)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(44, 17)
+        Me.Label6.TabIndex = 0
+        Me.Label6.Text = "Every"
+        '
+        'cmb_RecurMinutes
+        '
+        Me.cmb_RecurMinutes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmb_RecurMinutes.FormattingEnabled = True
+        Me.cmb_RecurMinutes.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "10", "12", "15", "20", "30"})
+        Me.cmb_RecurMinutes.Location = New System.Drawing.Point(92, 30)
+        Me.cmb_RecurMinutes.Name = "cmb_RecurMinutes"
+        Me.cmb_RecurMinutes.Size = New System.Drawing.Size(92, 24)
+        Me.cmb_RecurMinutes.TabIndex = 1
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(190, 34)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(67, 17)
+        Me.Label7.TabIndex = 2
+        Me.Label7.Text = "Minute(s)"
+        '
+        'panel_RecurHourly
+        '
+        Me.panel_RecurHourly.Controls.Add(Me.Label8)
+        Me.panel_RecurHourly.Controls.Add(Me.cmb_RecurHours)
+        Me.panel_RecurHourly.Controls.Add(Me.Label9)
+        Me.panel_RecurHourly.Location = New System.Drawing.Point(96, 16)
+        Me.panel_RecurHourly.Name = "panel_RecurHourly"
+        Me.panel_RecurHourly.Size = New System.Drawing.Size(495, 161)
+        Me.panel_RecurHourly.TabIndex = 10
+        Me.panel_RecurHourly.Visible = False
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(190, 34)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(56, 17)
+        Me.Label8.TabIndex = 2
+        Me.Label8.Text = "Hour(s)"
+        '
+        'cmb_RecurHours
+        '
+        Me.cmb_RecurHours.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmb_RecurHours.FormattingEnabled = True
+        Me.cmb_RecurHours.Items.AddRange(New Object() {"1", "2", "3", "4", "6", "8", "12"})
+        Me.cmb_RecurHours.Location = New System.Drawing.Point(92, 30)
+        Me.cmb_RecurHours.Name = "cmb_RecurHours"
+        Me.cmb_RecurHours.Size = New System.Drawing.Size(92, 24)
+        Me.cmb_RecurHours.TabIndex = 1
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(42, 32)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(44, 17)
+        Me.Label9.TabIndex = 0
+        Me.Label9.Text = "Every"
+        '
+        'panel_recurDaily
+        '
+        Me.panel_recurDaily.Controls.Add(Me.nmb_RecurDays)
+        Me.panel_recurDaily.Controls.Add(Me.Label10)
+        Me.panel_recurDaily.Controls.Add(Me.Label11)
+        Me.panel_recurDaily.Location = New System.Drawing.Point(96, 15)
+        Me.panel_recurDaily.Name = "panel_recurDaily"
+        Me.panel_recurDaily.Size = New System.Drawing.Size(495, 161)
+        Me.panel_recurDaily.TabIndex = 10
+        Me.panel_recurDaily.Visible = False
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(190, 34)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(50, 17)
+        Me.Label10.TabIndex = 2
+        Me.Label10.Text = "Day(s)"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(42, 32)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(44, 17)
+        Me.Label11.TabIndex = 0
+        Me.Label11.Text = "Every"
+        '
+        'nmb_RecurDays
+        '
+        Me.nmb_RecurDays.Location = New System.Drawing.Point(92, 32)
+        Me.nmb_RecurDays.Maximum = New Decimal(New Integer() {365, 0, 0, 0})
+        Me.nmb_RecurDays.Name = "nmb_RecurDays"
+        Me.nmb_RecurDays.Size = New System.Drawing.Size(92, 22)
+        Me.nmb_RecurDays.TabIndex = 3
+        '
+        'panel_RecurWeekly
+        '
+        Me.panel_RecurWeekly.Controls.Add(Me.NumericUpDown1)
+        Me.panel_RecurWeekly.Controls.Add(Me.Label12)
+        Me.panel_RecurWeekly.Controls.Add(Me.Label13)
+        Me.panel_RecurWeekly.Location = New System.Drawing.Point(99, 13)
+        Me.panel_RecurWeekly.Name = "panel_RecurWeekly"
+        Me.panel_RecurWeekly.Size = New System.Drawing.Size(495, 161)
+        Me.panel_RecurWeekly.TabIndex = 11
+        Me.panel_RecurWeekly.Visible = False
+        '
+        'NumericUpDown1
+        '
+        Me.NumericUpDown1.Location = New System.Drawing.Point(92, 32)
+        Me.NumericUpDown1.Maximum = New Decimal(New Integer() {365, 0, 0, 0})
+        Me.NumericUpDown1.Name = "NumericUpDown1"
+        Me.NumericUpDown1.Size = New System.Drawing.Size(92, 22)
+        Me.NumericUpDown1.TabIndex = 3
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(190, 34)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(85, 17)
+        Me.Label12.TabIndex = 2
+        Me.Label12.Text = "Week(s) on:"
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(42, 32)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(44, 17)
+        Me.Label13.TabIndex = 0
+        Me.Label13.Text = "Every"
+        '
+        'panel_RecurMonthly
+        '
+        Me.panel_RecurMonthly.Controls.Add(Me.NumericUpDown2)
+        Me.panel_RecurMonthly.Controls.Add(Me.Label14)
+        Me.panel_RecurMonthly.Controls.Add(Me.Label15)
+        Me.panel_RecurMonthly.Location = New System.Drawing.Point(96, 13)
+        Me.panel_RecurMonthly.Name = "panel_RecurMonthly"
+        Me.panel_RecurMonthly.Size = New System.Drawing.Size(495, 161)
+        Me.panel_RecurMonthly.TabIndex = 12
+        Me.panel_RecurMonthly.Visible = False
+        '
+        'NumericUpDown2
+        '
+        Me.NumericUpDown2.Location = New System.Drawing.Point(92, 32)
+        Me.NumericUpDown2.Maximum = New Decimal(New Integer() {365, 0, 0, 0})
+        Me.NumericUpDown2.Name = "NumericUpDown2"
+        Me.NumericUpDown2.Size = New System.Drawing.Size(92, 22)
+        Me.NumericUpDown2.TabIndex = 3
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(190, 34)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(57, 17)
+        Me.Label14.TabIndex = 2
+        Me.Label14.Text = "Monthly"
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(42, 32)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(44, 17)
+        Me.Label15.TabIndex = 0
+        Me.Label15.Text = "Every"
+        '
+        'panel_RecurYearly
+        '
+        Me.panel_RecurYearly.Controls.Add(Me.NumericUpDown3)
+        Me.panel_RecurYearly.Controls.Add(Me.Label16)
+        Me.panel_RecurYearly.Controls.Add(Me.Label17)
+        Me.panel_RecurYearly.Location = New System.Drawing.Point(96, 12)
+        Me.panel_RecurYearly.Name = "panel_RecurYearly"
+        Me.panel_RecurYearly.Size = New System.Drawing.Size(495, 161)
+        Me.panel_RecurYearly.TabIndex = 13
+        Me.panel_RecurYearly.Visible = False
+        '
+        'NumericUpDown3
+        '
+        Me.NumericUpDown3.Location = New System.Drawing.Point(92, 32)
+        Me.NumericUpDown3.Maximum = New Decimal(New Integer() {365, 0, 0, 0})
+        Me.NumericUpDown3.Name = "NumericUpDown3"
+        Me.NumericUpDown3.Size = New System.Drawing.Size(92, 22)
+        Me.NumericUpDown3.TabIndex = 3
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(190, 34)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(45, 17)
+        Me.Label16.TabIndex = 2
+        Me.Label16.Text = "YEAR"
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(42, 32)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(44, 17)
+        Me.Label17.TabIndex = 0
+        Me.Label17.Text = "Every"
         '
         'Form_JobFromTemplate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1030, 561)
+        Me.ClientSize = New System.Drawing.Size(1030, 633)
         Me.Controls.Add(Me.splitJobFromTemplate)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -1094,6 +1540,27 @@ Partial Class Form_JobFromTemplate
         Me.flowThreatScanAllFilter.PerformLayout()
         Me.grpRecurrence.ResumeLayout(False)
         Me.grpRecurrence.PerformLayout()
+        Me.grpRecurrenceStart.ResumeLayout(False)
+        Me.grpRecurrenceStart.PerformLayout()
+        Me.grpRecurrenceEnd.ResumeLayout(False)
+        Me.grpRecurrenceEnd.PerformLayout()
+        CType(Me.nmbRecurEndOccurences, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.panel_RecurMinute.ResumeLayout(False)
+        Me.panel_RecurMinute.PerformLayout()
+        Me.panel_RecurHourly.ResumeLayout(False)
+        Me.panel_RecurHourly.PerformLayout()
+        Me.panel_recurDaily.ResumeLayout(False)
+        Me.panel_recurDaily.PerformLayout()
+        CType(Me.nmb_RecurDays, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.panel_RecurWeekly.ResumeLayout(False)
+        Me.panel_RecurWeekly.PerformLayout()
+        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.panel_RecurMonthly.ResumeLayout(False)
+        Me.panel_RecurMonthly.PerformLayout()
+        CType(Me.NumericUpDown2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.panel_RecurYearly.ResumeLayout(False)
+        Me.panel_RecurYearly.PerformLayout()
+        CType(Me.NumericUpDown3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1182,4 +1649,42 @@ Partial Class Form_JobFromTemplate
     Friend WithEvents grpRecurrence As System.Windows.Forms.GroupBox
     Friend WithEvents chkEnableRecurrence As System.Windows.Forms.CheckBox
     Friend WithEvents chkIncrementalCollection As System.Windows.Forms.CheckBox
+    Friend WithEvents grpRecurrenceEnd As System.Windows.Forms.GroupBox
+    Friend WithEvents grpRecurrenceStart As System.Windows.Forms.GroupBox
+    Friend WithEvents rdoRecurEnd_EndBy As System.Windows.Forms.RadioButton
+    Friend WithEvents rdoRecurEnd_After As System.Windows.Forms.RadioButton
+    Friend WithEvents rdoRecurEnd_NoEnd As System.Windows.Forms.RadioButton
+    Friend WithEvents lblRecurEndOccurences As System.Windows.Forms.Label
+    Friend WithEvents nmbRecurEndOccurences As System.Windows.Forms.NumericUpDown
+    Friend WithEvents dtpRecurEndBy As System.Windows.Forms.DateTimePicker
+    Friend WithEvents rdoRecurStart_Yearly As System.Windows.Forms.RadioButton
+    Friend WithEvents rdoRecurStart_Monthly As System.Windows.Forms.RadioButton
+    Friend WithEvents rdoRecurStart_Weekly As System.Windows.Forms.RadioButton
+    Friend WithEvents rdoRecurStart_Daily As System.Windows.Forms.RadioButton
+    Friend WithEvents rdoRecurStart_Hourly As System.Windows.Forms.RadioButton
+    Friend WithEvents rdoRecurStart_Minute As System.Windows.Forms.RadioButton
+    Friend WithEvents panel_RecurHourly As System.Windows.Forms.Panel
+    Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents cmb_RecurHours As System.Windows.Forms.ComboBox
+    Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents panel_RecurMinute As System.Windows.Forms.Panel
+    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents cmb_RecurMinutes As System.Windows.Forms.ComboBox
+    Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents panel_recurDaily As System.Windows.Forms.Panel
+    Friend WithEvents nmb_RecurDays As System.Windows.Forms.NumericUpDown
+    Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents Label11 As System.Windows.Forms.Label
+    Friend WithEvents panel_RecurMonthly As System.Windows.Forms.Panel
+    Friend WithEvents panel_RecurYearly As System.Windows.Forms.Panel
+    Friend WithEvents NumericUpDown3 As System.Windows.Forms.NumericUpDown
+    Friend WithEvents Label16 As System.Windows.Forms.Label
+    Friend WithEvents Label17 As System.Windows.Forms.Label
+    Friend WithEvents NumericUpDown2 As System.Windows.Forms.NumericUpDown
+    Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents Label15 As System.Windows.Forms.Label
+    Friend WithEvents panel_RecurWeekly As System.Windows.Forms.Panel
+    Friend WithEvents NumericUpDown1 As System.Windows.Forms.NumericUpDown
+    Friend WithEvents Label12 As System.Windows.Forms.Label
+    Friend WithEvents Label13 As System.Windows.Forms.Label
 End Class
