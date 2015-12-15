@@ -56,9 +56,28 @@ Partial Class Form_JobFromTemplate
         Me.grpScheduleOptions = New System.Windows.Forms.GroupBox()
         Me.rdoSchedule_Schedule = New System.Windows.Forms.RadioButton()
         Me.rdoSchedule_Immediate = New System.Windows.Forms.RadioButton()
+        Me.grpSchedule_StartDate = New System.Windows.Forms.GroupBox()
+        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.tabThreatFilters = New System.Windows.Forms.TabPage()
         Me.splitThreatFilters = New System.Windows.Forms.SplitContainer()
+        Me.splitThreatFilterAdvanced = New System.Windows.Forms.SplitContainer()
+        Me.btnThreatFiltersAdvanced = New System.Windows.Forms.Button()
+        Me.grpThreatSelection = New System.Windows.Forms.GroupBox()
+        Me.rdoIOCSelected = New System.Windows.Forms.RadioButton()
+        Me.rdoIOCAll = New System.Windows.Forms.RadioButton()
         Me.txtSearchThreatFilters = New System.Windows.Forms.TextBox()
+        Me.flowThreatScanOptions = New System.Windows.Forms.FlowLayoutPanel()
+        Me.grpThreatScanAdvanced = New System.Windows.Forms.GroupBox()
+        Me.cmbYARAFileHash = New System.Windows.Forms.ComboBox()
+        Me.cmbFileHash = New System.Windows.Forms.ComboBox()
+        Me.txtYARAHashSize = New System.Windows.Forms.TextBox()
+        Me.txtHashSize = New System.Windows.Forms.TextBox()
+        Me.chkThreatScanArchives = New System.Windows.Forms.CheckBox()
+        Me.chkDisableFileHashYaraLarger = New System.Windows.Forms.CheckBox()
+        Me.chkPerformStringSearch = New System.Windows.Forms.CheckBox()
+        Me.chkFileHashDisableLarger = New System.Windows.Forms.CheckBox()
+        Me.chkDisableFileHashing = New System.Windows.Forms.CheckBox()
+        Me.flowThreatScanArchivesList = New System.Windows.Forms.FlowLayoutPanel()
         Me.dgvThreatFilters = New System.Windows.Forms.DataGridView()
         Me.Selected = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.FilterName = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -72,6 +91,19 @@ Partial Class Form_JobFromTemplate
         Me.Group = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Tags = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FilterID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.flowThreatScanAllFilter = New System.Windows.Forms.FlowLayoutPanel()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtThreatAuthor = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.txtThreatCategory = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.txtThreatGroup = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtThreatSource = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.dtpDate = New System.Windows.Forms.DateTimePicker()
+        Me.txtThreatCreate = New System.Windows.Forms.TextBox()
+        Me.dtpTime = New System.Windows.Forms.DateTimePicker()
         CType(Me.splitJobFromTemplate, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.splitJobFromTemplate.Panel1.SuspendLayout()
         Me.splitJobFromTemplate.Panel2.SuspendLayout()
@@ -96,12 +128,21 @@ Partial Class Form_JobFromTemplate
         Me.tabSchedule.SuspendLayout()
         Me.flowSchedule.SuspendLayout()
         Me.grpScheduleOptions.SuspendLayout()
+        Me.grpSchedule_StartDate.SuspendLayout()
         Me.tabThreatFilters.SuspendLayout()
         CType(Me.splitThreatFilters, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.splitThreatFilters.Panel1.SuspendLayout()
         Me.splitThreatFilters.Panel2.SuspendLayout()
         Me.splitThreatFilters.SuspendLayout()
+        CType(Me.splitThreatFilterAdvanced, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.splitThreatFilterAdvanced.Panel1.SuspendLayout()
+        Me.splitThreatFilterAdvanced.Panel2.SuspendLayout()
+        Me.splitThreatFilterAdvanced.SuspendLayout()
+        Me.grpThreatSelection.SuspendLayout()
+        Me.flowThreatScanOptions.SuspendLayout()
+        Me.grpThreatScanAdvanced.SuspendLayout()
         CType(Me.dgvThreatFilters, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.flowThreatScanAllFilter.SuspendLayout()
         Me.SuspendLayout()
         '
         'splitJobFromTemplate
@@ -124,7 +165,7 @@ Partial Class Form_JobFromTemplate
         'splitJobFromTemplate.Panel2
         '
         Me.splitJobFromTemplate.Panel2.Controls.Add(Me.tabControlJobFromTemplate)
-        Me.splitJobFromTemplate.Size = New System.Drawing.Size(820, 561)
+        Me.splitJobFromTemplate.Size = New System.Drawing.Size(1030, 561)
         Me.splitJobFromTemplate.TabIndex = 0
         '
         'lblJobFromTemplateMenuText
@@ -176,7 +217,7 @@ Partial Class Form_JobFromTemplate
         Me.tabControlJobFromTemplate.Multiline = True
         Me.tabControlJobFromTemplate.Name = "tabControlJobFromTemplate"
         Me.tabControlJobFromTemplate.SelectedIndex = 0
-        Me.tabControlJobFromTemplate.Size = New System.Drawing.Size(820, 507)
+        Me.tabControlJobFromTemplate.Size = New System.Drawing.Size(1030, 507)
         Me.tabControlJobFromTemplate.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight
         Me.tabControlJobFromTemplate.TabIndex = 0
         '
@@ -186,7 +227,7 @@ Partial Class Form_JobFromTemplate
         Me.tabProject.Location = New System.Drawing.Point(4, 28)
         Me.tabProject.Name = "tabProject"
         Me.tabProject.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabProject.Size = New System.Drawing.Size(812, 475)
+        Me.tabProject.Size = New System.Drawing.Size(1022, 475)
         Me.tabProject.TabIndex = 0
         Me.tabProject.Text = "Project"
         Me.tabProject.UseVisualStyleBackColor = True
@@ -208,7 +249,7 @@ Partial Class Form_JobFromTemplate
         'splitProjects.Panel2
         '
         Me.splitProjects.Panel2.Controls.Add(Me.dgvProjectList)
-        Me.splitProjects.Size = New System.Drawing.Size(806, 469)
+        Me.splitProjects.Size = New System.Drawing.Size(1016, 469)
         Me.splitProjects.SplitterDistance = 40
         Me.splitProjects.TabIndex = 1
         '
@@ -246,7 +287,7 @@ Partial Class Form_JobFromTemplate
         Me.dgvProjectList.RowHeadersVisible = False
         Me.dgvProjectList.RowTemplate.Height = 24
         Me.dgvProjectList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvProjectList.Size = New System.Drawing.Size(806, 425)
+        Me.dgvProjectList.Size = New System.Drawing.Size(1016, 425)
         Me.dgvProjectList.TabIndex = 1
         '
         'DataGridViewTextBoxColumn1
@@ -292,7 +333,7 @@ Partial Class Form_JobFromTemplate
         Me.tabTargets.Location = New System.Drawing.Point(4, 28)
         Me.tabTargets.Name = "tabTargets"
         Me.tabTargets.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabTargets.Size = New System.Drawing.Size(812, 475)
+        Me.tabTargets.Size = New System.Drawing.Size(1022, 475)
         Me.tabTargets.TabIndex = 1
         Me.tabTargets.Text = "Targets"
         Me.tabTargets.UseVisualStyleBackColor = True
@@ -314,7 +355,7 @@ Partial Class Form_JobFromTemplate
         'splitTargetsSelect.Panel2
         '
         Me.splitTargetsSelect.Panel2.Controls.Add(Me.splitTargetEndpoints)
-        Me.splitTargetsSelect.Size = New System.Drawing.Size(806, 469)
+        Me.splitTargetsSelect.Size = New System.Drawing.Size(1016, 469)
         Me.splitTargetsSelect.SplitterDistance = 175
         Me.splitTargetsSelect.TabIndex = 0
         '
@@ -342,7 +383,7 @@ Partial Class Form_JobFromTemplate
         'splitTargetEndpoints.Panel2
         '
         Me.splitTargetEndpoints.Panel2.Controls.Add(Me.dgvTargetEndpoints)
-        Me.splitTargetEndpoints.Size = New System.Drawing.Size(627, 469)
+        Me.splitTargetEndpoints.Size = New System.Drawing.Size(837, 469)
         Me.splitTargetEndpoints.SplitterDistance = 40
         Me.splitTargetEndpoints.TabIndex = 2
         '
@@ -369,7 +410,7 @@ Partial Class Form_JobFromTemplate
         Me.dgvTargetEndpoints.RowHeadersVisible = False
         Me.dgvTargetEndpoints.RowTemplate.Height = 24
         Me.dgvTargetEndpoints.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvTargetEndpoints.Size = New System.Drawing.Size(627, 425)
+        Me.dgvTargetEndpoints.Size = New System.Drawing.Size(837, 425)
         Me.dgvTargetEndpoints.TabIndex = 1
         '
         'CheckEndpoint
@@ -421,7 +462,7 @@ Partial Class Form_JobFromTemplate
         Me.tabSchedule.Controls.Add(Me.flowSchedule)
         Me.tabSchedule.Location = New System.Drawing.Point(4, 28)
         Me.tabSchedule.Name = "tabSchedule"
-        Me.tabSchedule.Size = New System.Drawing.Size(812, 475)
+        Me.tabSchedule.Size = New System.Drawing.Size(1022, 475)
         Me.tabSchedule.TabIndex = 2
         Me.tabSchedule.Text = "Schedule"
         Me.tabSchedule.UseVisualStyleBackColor = True
@@ -429,10 +470,11 @@ Partial Class Form_JobFromTemplate
         'flowSchedule
         '
         Me.flowSchedule.Controls.Add(Me.grpScheduleOptions)
+        Me.flowSchedule.Controls.Add(Me.grpSchedule_StartDate)
         Me.flowSchedule.Dock = System.Windows.Forms.DockStyle.Fill
         Me.flowSchedule.Location = New System.Drawing.Point(0, 0)
         Me.flowSchedule.Name = "flowSchedule"
-        Me.flowSchedule.Size = New System.Drawing.Size(812, 475)
+        Me.flowSchedule.Size = New System.Drawing.Size(1022, 475)
         Me.flowSchedule.TabIndex = 0
         '
         'grpScheduleOptions
@@ -440,6 +482,7 @@ Partial Class Form_JobFromTemplate
         Me.grpScheduleOptions.AutoSize = True
         Me.grpScheduleOptions.Controls.Add(Me.rdoSchedule_Schedule)
         Me.grpScheduleOptions.Controls.Add(Me.rdoSchedule_Immediate)
+        Me.flowSchedule.SetFlowBreak(Me.grpScheduleOptions, True)
         Me.grpScheduleOptions.Location = New System.Drawing.Point(3, 3)
         Me.grpScheduleOptions.Name = "grpScheduleOptions"
         Me.grpScheduleOptions.Size = New System.Drawing.Size(458, 87)
@@ -470,13 +513,31 @@ Partial Class Form_JobFromTemplate
         Me.rdoSchedule_Immediate.Text = "Immediate Execution"
         Me.rdoSchedule_Immediate.UseVisualStyleBackColor = True
         '
+        'grpSchedule_StartDate
+        '
+        Me.grpSchedule_StartDate.Controls.Add(Me.DateTimePicker1)
+        Me.grpSchedule_StartDate.Location = New System.Drawing.Point(3, 96)
+        Me.grpSchedule_StartDate.Name = "grpSchedule_StartDate"
+        Me.grpSchedule_StartDate.Size = New System.Drawing.Size(458, 83)
+        Me.grpSchedule_StartDate.TabIndex = 1
+        Me.grpSchedule_StartDate.TabStop = False
+        Me.grpSchedule_StartDate.Text = "Start Date and Time"
+        '
+        'DateTimePicker1
+        '
+        Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Time
+        Me.DateTimePicker1.Location = New System.Drawing.Point(6, 30)
+        Me.DateTimePicker1.Name = "DateTimePicker1"
+        Me.DateTimePicker1.Size = New System.Drawing.Size(259, 22)
+        Me.DateTimePicker1.TabIndex = 0
+        '
         'tabThreatFilters
         '
         Me.tabThreatFilters.Controls.Add(Me.splitThreatFilters)
         Me.tabThreatFilters.Location = New System.Drawing.Point(4, 28)
         Me.tabThreatFilters.Name = "tabThreatFilters"
         Me.tabThreatFilters.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabThreatFilters.Size = New System.Drawing.Size(812, 475)
+        Me.tabThreatFilters.Size = New System.Drawing.Size(1022, 475)
         Me.tabThreatFilters.TabIndex = 3
         Me.tabThreatFilters.Text = "Threat Filters"
         Me.tabThreatFilters.UseVisualStyleBackColor = True
@@ -484,31 +545,230 @@ Partial Class Form_JobFromTemplate
         'splitThreatFilters
         '
         Me.splitThreatFilters.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.splitThreatFilters.IsSplitterFixed = True
         Me.splitThreatFilters.Location = New System.Drawing.Point(3, 3)
+        Me.splitThreatFilters.MinimumSize = New System.Drawing.Size(1016, 469)
         Me.splitThreatFilters.Name = "splitThreatFilters"
         Me.splitThreatFilters.Orientation = System.Windows.Forms.Orientation.Horizontal
         '
         'splitThreatFilters.Panel1
         '
-        Me.splitThreatFilters.Panel1.Controls.Add(Me.txtSearchThreatFilters)
+        Me.splitThreatFilters.Panel1.Controls.Add(Me.splitThreatFilterAdvanced)
         Me.splitThreatFilters.Panel1MinSize = 40
         '
         'splitThreatFilters.Panel2
         '
         Me.splitThreatFilters.Panel2.Controls.Add(Me.dgvThreatFilters)
-        Me.splitThreatFilters.Size = New System.Drawing.Size(806, 469)
-        Me.splitThreatFilters.SplitterDistance = 40
+        Me.splitThreatFilters.Size = New System.Drawing.Size(1016, 469)
+        Me.splitThreatFilters.SplitterDistance = 380
         Me.splitThreatFilters.TabIndex = 2
+        '
+        'splitThreatFilterAdvanced
+        '
+        Me.splitThreatFilterAdvanced.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.splitThreatFilterAdvanced.Location = New System.Drawing.Point(0, 0)
+        Me.splitThreatFilterAdvanced.MinimumSize = New System.Drawing.Size(1016, 266)
+        Me.splitThreatFilterAdvanced.Name = "splitThreatFilterAdvanced"
+        Me.splitThreatFilterAdvanced.Orientation = System.Windows.Forms.Orientation.Horizontal
+        '
+        'splitThreatFilterAdvanced.Panel1
+        '
+        Me.splitThreatFilterAdvanced.Panel1.Controls.Add(Me.btnThreatFiltersAdvanced)
+        Me.splitThreatFilterAdvanced.Panel1.Controls.Add(Me.grpThreatSelection)
+        Me.splitThreatFilterAdvanced.Panel1.Controls.Add(Me.txtSearchThreatFilters)
+        Me.splitThreatFilterAdvanced.Panel1MinSize = 40
+        '
+        'splitThreatFilterAdvanced.Panel2
+        '
+        Me.splitThreatFilterAdvanced.Panel2.Controls.Add(Me.flowThreatScanOptions)
+        Me.splitThreatFilterAdvanced.Size = New System.Drawing.Size(1016, 380)
+        Me.splitThreatFilterAdvanced.SplitterDistance = 62
+        Me.splitThreatFilterAdvanced.TabIndex = 4
+        '
+        'btnThreatFiltersAdvanced
+        '
+        Me.btnThreatFiltersAdvanced.Location = New System.Drawing.Point(528, 5)
+        Me.btnThreatFiltersAdvanced.Name = "btnThreatFiltersAdvanced"
+        Me.btnThreatFiltersAdvanced.Size = New System.Drawing.Size(119, 28)
+        Me.btnThreatFiltersAdvanced.TabIndex = 6
+        Me.btnThreatFiltersAdvanced.Text = "Advanced"
+        Me.btnThreatFiltersAdvanced.UseVisualStyleBackColor = True
+        '
+        'grpThreatSelection
+        '
+        Me.grpThreatSelection.Controls.Add(Me.rdoIOCSelected)
+        Me.grpThreatSelection.Controls.Add(Me.rdoIOCAll)
+        Me.grpThreatSelection.Location = New System.Drawing.Point(269, -1)
+        Me.grpThreatSelection.Name = "grpThreatSelection"
+        Me.grpThreatSelection.Size = New System.Drawing.Size(234, 35)
+        Me.grpThreatSelection.TabIndex = 5
+        Me.grpThreatSelection.TabStop = False
+        '
+        'rdoIOCSelected
+        '
+        Me.rdoIOCSelected.AutoSize = True
+        Me.rdoIOCSelected.Location = New System.Drawing.Point(110, 7)
+        Me.rdoIOCSelected.Name = "rdoIOCSelected"
+        Me.rdoIOCSelected.Size = New System.Drawing.Size(118, 21)
+        Me.rdoIOCSelected.TabIndex = 1
+        Me.rdoIOCSelected.Text = "Selected IOCs"
+        Me.rdoIOCSelected.UseVisualStyleBackColor = True
+        '
+        'rdoIOCAll
+        '
+        Me.rdoIOCAll.AutoSize = True
+        Me.rdoIOCAll.Checked = True
+        Me.rdoIOCAll.Location = New System.Drawing.Point(6, 7)
+        Me.rdoIOCAll.Name = "rdoIOCAll"
+        Me.rdoIOCAll.Size = New System.Drawing.Size(78, 21)
+        Me.rdoIOCAll.TabIndex = 0
+        Me.rdoIOCAll.TabStop = True
+        Me.rdoIOCAll.Text = "All IOCs"
+        Me.rdoIOCAll.UseVisualStyleBackColor = True
         '
         'txtSearchThreatFilters
         '
         Me.txtSearchThreatFilters.AcceptsReturn = True
-        Me.txtSearchThreatFilters.Location = New System.Drawing.Point(5, 9)
+        Me.txtSearchThreatFilters.Location = New System.Drawing.Point(33, 5)
         Me.txtSearchThreatFilters.Name = "txtSearchThreatFilters"
         Me.txtSearchThreatFilters.Size = New System.Drawing.Size(209, 22)
-        Me.txtSearchThreatFilters.TabIndex = 1
+        Me.txtSearchThreatFilters.TabIndex = 4
         Me.txtSearchThreatFilters.Text = "Search"
+        '
+        'flowThreatScanOptions
+        '
+        Me.flowThreatScanOptions.Controls.Add(Me.grpThreatScanAdvanced)
+        Me.flowThreatScanOptions.Controls.Add(Me.flowThreatScanArchivesList)
+        Me.flowThreatScanOptions.Controls.Add(Me.flowThreatScanAllFilter)
+        Me.flowThreatScanOptions.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.flowThreatScanOptions.Location = New System.Drawing.Point(0, 0)
+        Me.flowThreatScanOptions.Name = "flowThreatScanOptions"
+        Me.flowThreatScanOptions.Size = New System.Drawing.Size(1016, 314)
+        Me.flowThreatScanOptions.TabIndex = 0
+        '
+        'grpThreatScanAdvanced
+        '
+        Me.grpThreatScanAdvanced.Controls.Add(Me.cmbYARAFileHash)
+        Me.grpThreatScanAdvanced.Controls.Add(Me.cmbFileHash)
+        Me.grpThreatScanAdvanced.Controls.Add(Me.txtYARAHashSize)
+        Me.grpThreatScanAdvanced.Controls.Add(Me.txtHashSize)
+        Me.grpThreatScanAdvanced.Controls.Add(Me.chkThreatScanArchives)
+        Me.grpThreatScanAdvanced.Controls.Add(Me.chkDisableFileHashYaraLarger)
+        Me.grpThreatScanAdvanced.Controls.Add(Me.chkPerformStringSearch)
+        Me.grpThreatScanAdvanced.Controls.Add(Me.chkFileHashDisableLarger)
+        Me.grpThreatScanAdvanced.Controls.Add(Me.chkDisableFileHashing)
+        Me.flowThreatScanOptions.SetFlowBreak(Me.grpThreatScanAdvanced, True)
+        Me.grpThreatScanAdvanced.Location = New System.Drawing.Point(3, 3)
+        Me.grpThreatScanAdvanced.Name = "grpThreatScanAdvanced"
+        Me.grpThreatScanAdvanced.Size = New System.Drawing.Size(997, 92)
+        Me.grpThreatScanAdvanced.TabIndex = 1
+        Me.grpThreatScanAdvanced.TabStop = False
+        Me.grpThreatScanAdvanced.Text = "Threat Scan Options"
+        '
+        'cmbYARAFileHash
+        '
+        Me.cmbYARAFileHash.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbYARAFileHash.Enabled = False
+        Me.cmbYARAFileHash.FormattingEnabled = True
+        Me.cmbYARAFileHash.Items.AddRange(New Object() {"KB", "MB"})
+        Me.cmbYARAFileHash.Location = New System.Drawing.Point(648, 55)
+        Me.cmbYARAFileHash.Name = "cmbYARAFileHash"
+        Me.cmbYARAFileHash.Size = New System.Drawing.Size(72, 24)
+        Me.cmbYARAFileHash.TabIndex = 8
+        '
+        'cmbFileHash
+        '
+        Me.cmbFileHash.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbFileHash.Enabled = False
+        Me.cmbFileHash.FormattingEnabled = True
+        Me.cmbFileHash.Items.AddRange(New Object() {"KB", "MB"})
+        Me.cmbFileHash.Location = New System.Drawing.Point(648, 17)
+        Me.cmbFileHash.Name = "cmbFileHash"
+        Me.cmbFileHash.Size = New System.Drawing.Size(72, 24)
+        Me.cmbFileHash.TabIndex = 7
+        '
+        'txtYARAHashSize
+        '
+        Me.txtYARAHashSize.Enabled = False
+        Me.txtYARAHashSize.Location = New System.Drawing.Point(571, 55)
+        Me.txtYARAHashSize.Name = "txtYARAHashSize"
+        Me.txtYARAHashSize.ShortcutsEnabled = False
+        Me.txtYARAHashSize.Size = New System.Drawing.Size(71, 22)
+        Me.txtYARAHashSize.TabIndex = 6
+        '
+        'txtHashSize
+        '
+        Me.txtHashSize.Enabled = False
+        Me.txtHashSize.Location = New System.Drawing.Point(571, 19)
+        Me.txtHashSize.Name = "txtHashSize"
+        Me.txtHashSize.ShortcutsEnabled = False
+        Me.txtHashSize.Size = New System.Drawing.Size(71, 22)
+        Me.txtHashSize.TabIndex = 5
+        '
+        'chkThreatScanArchives
+        '
+        Me.chkThreatScanArchives.AutoSize = True
+        Me.chkThreatScanArchives.Location = New System.Drawing.Point(6, 57)
+        Me.chkThreatScanArchives.Name = "chkThreatScanArchives"
+        Me.chkThreatScanArchives.Size = New System.Drawing.Size(276, 21)
+        Me.chkThreatScanArchives.TabIndex = 4
+        Me.chkThreatScanArchives.Text = "Examine files in archives (.zip, .tar, etc)"
+        Me.chkThreatScanArchives.UseVisualStyleBackColor = True
+        '
+        'chkDisableFileHashYaraLarger
+        '
+        Me.chkDisableFileHashYaraLarger.AutoSize = True
+        Me.chkDisableFileHashYaraLarger.Location = New System.Drawing.Point(331, 57)
+        Me.chkDisableFileHashYaraLarger.Name = "chkDisableFileHashYaraLarger"
+        Me.chkDisableFileHashYaraLarger.Size = New System.Drawing.Size(249, 21)
+        Me.chkDisableFileHashYaraLarger.TabIndex = 3
+        Me.chkDisableFileHashYaraLarger.Text = "Disable YARA for files larger than: "
+        Me.chkDisableFileHashYaraLarger.UseVisualStyleBackColor = True
+        '
+        'chkPerformStringSearch
+        '
+        Me.chkPerformStringSearch.AutoSize = True
+        Me.chkPerformStringSearch.Checked = True
+        Me.chkPerformStringSearch.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkPerformStringSearch.Location = New System.Drawing.Point(768, 12)
+        Me.chkPerformStringSearch.Name = "chkPerformStringSearch"
+        Me.chkPerformStringSearch.Size = New System.Drawing.Size(223, 21)
+        Me.chkPerformStringSearch.TabIndex = 2
+        Me.chkPerformStringSearch.Text = "Perform String Content Search"
+        Me.chkPerformStringSearch.UseVisualStyleBackColor = True
+        '
+        'chkFileHashDisableLarger
+        '
+        Me.chkFileHashDisableLarger.AutoSize = True
+        Me.chkFileHashDisableLarger.Enabled = False
+        Me.chkFileHashDisableLarger.Location = New System.Drawing.Point(331, 21)
+        Me.chkFileHashDisableLarger.Name = "chkFileHashDisableLarger"
+        Me.chkFileHashDisableLarger.Size = New System.Drawing.Size(234, 21)
+        Me.chkFileHashDisableLarger.TabIndex = 1
+        Me.chkFileHashDisableLarger.Text = "Disable only for files larger than:"
+        Me.chkFileHashDisableLarger.UseVisualStyleBackColor = True
+        '
+        'chkDisableFileHashing
+        '
+        Me.chkDisableFileHashing.AutoSize = True
+        Me.chkDisableFileHashing.Location = New System.Drawing.Point(6, 21)
+        Me.chkDisableFileHashing.Name = "chkDisableFileHashing"
+        Me.chkDisableFileHashing.Size = New System.Drawing.Size(159, 21)
+        Me.chkDisableFileHashing.TabIndex = 0
+        Me.chkDisableFileHashing.Text = "Disable File Hashing"
+        Me.chkDisableFileHashing.UseVisualStyleBackColor = True
+        '
+        'flowThreatScanArchivesList
+        '
+        Me.flowThreatScanArchivesList.AutoScroll = True
+        Me.flowThreatScanArchivesList.AutoSize = True
+        Me.flowThreatScanArchivesList.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.flowThreatScanOptions.SetFlowBreak(Me.flowThreatScanArchivesList, True)
+        Me.flowThreatScanArchivesList.Location = New System.Drawing.Point(3, 101)
+        Me.flowThreatScanArchivesList.MinimumSize = New System.Drawing.Size(1000, 100)
+        Me.flowThreatScanArchivesList.Name = "flowThreatScanArchivesList"
+        Me.flowThreatScanArchivesList.Size = New System.Drawing.Size(1000, 100)
+        Me.flowThreatScanArchivesList.TabIndex = 2
+        Me.flowThreatScanArchivesList.Visible = False
         '
         'dgvThreatFilters
         '
@@ -524,7 +784,7 @@ Partial Class Form_JobFromTemplate
         Me.dgvThreatFilters.RowHeadersVisible = False
         Me.dgvThreatFilters.RowTemplate.Height = 24
         Me.dgvThreatFilters.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvThreatFilters.Size = New System.Drawing.Size(806, 425)
+        Me.dgvThreatFilters.Size = New System.Drawing.Size(1016, 85)
         Me.dgvThreatFilters.TabIndex = 1
         '
         'Selected
@@ -610,11 +870,136 @@ Partial Class Form_JobFromTemplate
         Me.FilterID.Name = "FilterID"
         Me.FilterID.Visible = False
         '
+        'flowThreatScanAllFilter
+        '
+        Me.flowThreatScanAllFilter.AutoScroll = True
+        Me.flowThreatScanAllFilter.AutoSize = True
+        Me.flowThreatScanAllFilter.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.flowThreatScanAllFilter.Controls.Add(Me.Label1)
+        Me.flowThreatScanAllFilter.Controls.Add(Me.txtThreatAuthor)
+        Me.flowThreatScanAllFilter.Controls.Add(Me.Label2)
+        Me.flowThreatScanAllFilter.Controls.Add(Me.txtThreatCategory)
+        Me.flowThreatScanAllFilter.Controls.Add(Me.Label3)
+        Me.flowThreatScanAllFilter.Controls.Add(Me.txtThreatGroup)
+        Me.flowThreatScanAllFilter.Controls.Add(Me.Label4)
+        Me.flowThreatScanAllFilter.Controls.Add(Me.txtThreatSource)
+        Me.flowThreatScanAllFilter.Controls.Add(Me.Label5)
+        Me.flowThreatScanAllFilter.Controls.Add(Me.txtThreatCreate)
+        Me.flowThreatScanAllFilter.Controls.Add(Me.dtpDate)
+        Me.flowThreatScanAllFilter.Controls.Add(Me.dtpTime)
+        Me.flowThreatScanAllFilter.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.flowThreatScanAllFilter.Location = New System.Drawing.Point(3, 207)
+        Me.flowThreatScanAllFilter.MinimumSize = New System.Drawing.Size(1000, 100)
+        Me.flowThreatScanAllFilter.Name = "flowThreatScanAllFilter"
+        Me.flowThreatScanAllFilter.Size = New System.Drawing.Size(1000, 100)
+        Me.flowThreatScanAllFilter.TabIndex = 3
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(3, 0)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(90, 17)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "Authored By:"
+        '
+        'txtThreatAuthor
+        '
+        Me.txtThreatAuthor.Location = New System.Drawing.Point(99, 3)
+        Me.txtThreatAuthor.Name = "txtThreatAuthor"
+        Me.txtThreatAuthor.Size = New System.Drawing.Size(140, 22)
+        Me.txtThreatAuthor.TabIndex = 1
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(245, 0)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(69, 17)
+        Me.Label2.TabIndex = 2
+        Me.Label2.Text = "Category:"
+        '
+        'txtThreatCategory
+        '
+        Me.txtThreatCategory.Location = New System.Drawing.Point(320, 3)
+        Me.txtThreatCategory.Name = "txtThreatCategory"
+        Me.txtThreatCategory.Size = New System.Drawing.Size(140, 22)
+        Me.txtThreatCategory.TabIndex = 3
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(466, 0)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(52, 17)
+        Me.Label3.TabIndex = 4
+        Me.Label3.Text = "Group:"
+        '
+        'txtThreatGroup
+        '
+        Me.txtThreatGroup.Location = New System.Drawing.Point(524, 3)
+        Me.txtThreatGroup.Name = "txtThreatGroup"
+        Me.txtThreatGroup.Size = New System.Drawing.Size(140, 22)
+        Me.txtThreatGroup.TabIndex = 5
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(670, 0)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(57, 17)
+        Me.Label4.TabIndex = 6
+        Me.Label4.Text = "Source:"
+        '
+        'txtThreatSource
+        '
+        Me.flowThreatScanAllFilter.SetFlowBreak(Me.txtThreatSource, True)
+        Me.txtThreatSource.Location = New System.Drawing.Point(733, 3)
+        Me.txtThreatSource.Name = "txtThreatSource"
+        Me.txtThreatSource.Size = New System.Drawing.Size(140, 22)
+        Me.txtThreatSource.TabIndex = 7
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(3, 28)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(139, 17)
+        Me.Label5.TabIndex = 8
+        Me.Label5.Text = "Earliest Create Date:"
+        '
+        'dtpDate
+        '
+        Me.dtpDate.CustomFormat = "X"
+        Me.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpDate.Location = New System.Drawing.Point(334, 31)
+        Me.dtpDate.Name = "dtpDate"
+        Me.dtpDate.Size = New System.Drawing.Size(115, 22)
+        Me.dtpDate.TabIndex = 9
+        '
+        'txtThreatCreate
+        '
+        Me.txtThreatCreate.Location = New System.Drawing.Point(148, 31)
+        Me.txtThreatCreate.Name = "txtThreatCreate"
+        Me.txtThreatCreate.ReadOnly = True
+        Me.txtThreatCreate.Size = New System.Drawing.Size(180, 22)
+        Me.txtThreatCreate.TabIndex = 10
+        '
+        'dtpTime
+        '
+        Me.dtpTime.CustomFormat = "X"
+        Me.dtpTime.Format = System.Windows.Forms.DateTimePickerFormat.Time
+        Me.dtpTime.Location = New System.Drawing.Point(455, 31)
+        Me.dtpTime.Name = "dtpTime"
+        Me.dtpTime.ShowUpDown = True
+        Me.dtpTime.Size = New System.Drawing.Size(119, 22)
+        Me.dtpTime.TabIndex = 11
+        '
         'Form_JobFromTemplate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(820, 561)
+        Me.ClientSize = New System.Drawing.Size(1030, 561)
         Me.Controls.Add(Me.splitJobFromTemplate)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -650,13 +1035,26 @@ Partial Class Form_JobFromTemplate
         Me.flowSchedule.PerformLayout()
         Me.grpScheduleOptions.ResumeLayout(False)
         Me.grpScheduleOptions.PerformLayout()
+        Me.grpSchedule_StartDate.ResumeLayout(False)
         Me.tabThreatFilters.ResumeLayout(False)
         Me.splitThreatFilters.Panel1.ResumeLayout(False)
-        Me.splitThreatFilters.Panel1.PerformLayout()
         Me.splitThreatFilters.Panel2.ResumeLayout(False)
         CType(Me.splitThreatFilters, System.ComponentModel.ISupportInitialize).EndInit()
         Me.splitThreatFilters.ResumeLayout(False)
+        Me.splitThreatFilterAdvanced.Panel1.ResumeLayout(False)
+        Me.splitThreatFilterAdvanced.Panel1.PerformLayout()
+        Me.splitThreatFilterAdvanced.Panel2.ResumeLayout(False)
+        CType(Me.splitThreatFilterAdvanced, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.splitThreatFilterAdvanced.ResumeLayout(False)
+        Me.grpThreatSelection.ResumeLayout(False)
+        Me.grpThreatSelection.PerformLayout()
+        Me.flowThreatScanOptions.ResumeLayout(False)
+        Me.flowThreatScanOptions.PerformLayout()
+        Me.grpThreatScanAdvanced.ResumeLayout(False)
+        Me.grpThreatScanAdvanced.PerformLayout()
         CType(Me.dgvThreatFilters, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.flowThreatScanAllFilter.ResumeLayout(False)
+        Me.flowThreatScanAllFilter.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -696,7 +1094,6 @@ Partial Class Form_JobFromTemplate
     Friend WithEvents rdoSchedule_Immediate As System.Windows.Forms.RadioButton
     Friend WithEvents tabThreatFilters As System.Windows.Forms.TabPage
     Friend WithEvents splitThreatFilters As System.Windows.Forms.SplitContainer
-    Friend WithEvents txtSearchThreatFilters As System.Windows.Forms.TextBox
     Friend WithEvents dgvThreatFilters As System.Windows.Forms.DataGridView
     Friend WithEvents Selected As System.Windows.Forms.DataGridViewCheckBoxColumn
     Friend WithEvents FilterName As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -710,4 +1107,37 @@ Partial Class Form_JobFromTemplate
     Friend WithEvents Group As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Tags As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents FilterID As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents grpSchedule_StartDate As System.Windows.Forms.GroupBox
+    Friend WithEvents DateTimePicker1 As System.Windows.Forms.DateTimePicker
+    Friend WithEvents splitThreatFilterAdvanced As System.Windows.Forms.SplitContainer
+    Friend WithEvents btnThreatFiltersAdvanced As System.Windows.Forms.Button
+    Friend WithEvents grpThreatSelection As System.Windows.Forms.GroupBox
+    Friend WithEvents rdoIOCSelected As System.Windows.Forms.RadioButton
+    Friend WithEvents rdoIOCAll As System.Windows.Forms.RadioButton
+    Friend WithEvents txtSearchThreatFilters As System.Windows.Forms.TextBox
+    Friend WithEvents flowThreatScanOptions As System.Windows.Forms.FlowLayoutPanel
+    Friend WithEvents grpThreatScanAdvanced As System.Windows.Forms.GroupBox
+    Friend WithEvents cmbYARAFileHash As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbFileHash As System.Windows.Forms.ComboBox
+    Friend WithEvents txtYARAHashSize As System.Windows.Forms.TextBox
+    Friend WithEvents txtHashSize As System.Windows.Forms.TextBox
+    Friend WithEvents chkThreatScanArchives As System.Windows.Forms.CheckBox
+    Friend WithEvents chkDisableFileHashYaraLarger As System.Windows.Forms.CheckBox
+    Friend WithEvents chkPerformStringSearch As System.Windows.Forms.CheckBox
+    Friend WithEvents chkFileHashDisableLarger As System.Windows.Forms.CheckBox
+    Friend WithEvents chkDisableFileHashing As System.Windows.Forms.CheckBox
+    Friend WithEvents flowThreatScanArchivesList As System.Windows.Forms.FlowLayoutPanel
+    Friend WithEvents flowThreatScanAllFilter As System.Windows.Forms.FlowLayoutPanel
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents txtThreatAuthor As System.Windows.Forms.TextBox
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents txtThreatCategory As System.Windows.Forms.TextBox
+    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents txtThreatGroup As System.Windows.Forms.TextBox
+    Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents txtThreatSource As System.Windows.Forms.TextBox
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents dtpDate As System.Windows.Forms.DateTimePicker
+    Friend WithEvents txtThreatCreate As System.Windows.Forms.TextBox
+    Friend WithEvents dtpTime As System.Windows.Forms.DateTimePicker
 End Class
