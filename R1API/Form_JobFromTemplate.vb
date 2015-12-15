@@ -523,10 +523,10 @@ Public Class Form_JobFromTemplate
     End Sub
 
     Private Sub dtpThreatCreateDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpDate.ValueChanged
-        txtThreatCreate.Text = dtpDate.Value & " " & dtpTime.Value
+        txtThreatCreate.Text = dtpDate.Value.ToShortDateString & " " & dtpTime.Value.ToShortTimeString
     End Sub
 
     Private Sub dtpTime_ValueChanged(sender As Object, e As EventArgs) Handles dtpTime.ValueChanged
-        txtThreatCreate.Text = dtpDate.Value & " " & dtpTime.Value
+        txtThreatCreate.Text = dtpDate.Value.ToShortDateString & " " & dtpTime.Value.ToShortTimeString
     End Sub
 End Class

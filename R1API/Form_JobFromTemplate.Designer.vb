@@ -970,8 +970,8 @@ Partial Class Form_JobFromTemplate
         '
         'dtpDate
         '
-        Me.dtpDate.CustomFormat = "X"
-        Me.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpDate.CustomFormat = "MM/dd/yyyy"
+        Me.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpDate.Location = New System.Drawing.Point(334, 31)
         Me.dtpDate.Name = "dtpDate"
         Me.dtpDate.Size = New System.Drawing.Size(115, 22)
