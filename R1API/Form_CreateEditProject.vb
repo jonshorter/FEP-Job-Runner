@@ -1,4 +1,4 @@
-﻿Public Class CreateEditProject
+﻿Public Class Form_CreateEditProject
     Private Property EditProjectID As String
     Public Sub New(ByVal title As String, ByVal Mode As Boolean, Optional ProjectID As String = "")
         InitializeComponent()
@@ -92,7 +92,7 @@
     End Sub
 
     Private Sub CreateProject_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-    
+
     End Sub
 
     Private Sub bgwEditProject_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwEditProject.DoWork

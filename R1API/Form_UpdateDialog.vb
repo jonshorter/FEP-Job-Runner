@@ -1,4 +1,4 @@
-﻿Public Class UpdateDialog
+﻿Public Class Form_UpdateDialog
 
     Private Sub UpdateDialog_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 

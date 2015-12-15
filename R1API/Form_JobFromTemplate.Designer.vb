@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class JobFromTemplate
+Partial Class Form_JobFromTemplate
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -57,6 +57,21 @@ Partial Class JobFromTemplate
         Me.rdoSchedule_Schedule = New System.Windows.Forms.RadioButton()
         Me.rdoSchedule_Immediate = New System.Windows.Forms.RadioButton()
         Me.tabThreatFilters = New System.Windows.Forms.TabPage()
+        Me.splitThreatFilters = New System.Windows.Forms.SplitContainer()
+        Me.txtSearchThreatFilters = New System.Windows.Forms.TextBox()
+        Me.dgvThreatFilters = New System.Windows.Forms.DataGridView()
+        Me.Selected = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.FilterName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.View = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.Description = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Source = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AuthoredDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Author = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Type = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Category = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Group = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Tags = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FilterID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.splitJobFromTemplate, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.splitJobFromTemplate.Panel1.SuspendLayout()
         Me.splitJobFromTemplate.Panel2.SuspendLayout()
@@ -81,6 +96,12 @@ Partial Class JobFromTemplate
         Me.tabSchedule.SuspendLayout()
         Me.flowSchedule.SuspendLayout()
         Me.grpScheduleOptions.SuspendLayout()
+        Me.tabThreatFilters.SuspendLayout()
+        CType(Me.splitThreatFilters, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.splitThreatFilters.Panel1.SuspendLayout()
+        Me.splitThreatFilters.Panel2.SuspendLayout()
+        Me.splitThreatFilters.SuspendLayout()
+        CType(Me.dgvThreatFilters, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'splitJobFromTemplate
@@ -451,6 +472,7 @@ Partial Class JobFromTemplate
         '
         'tabThreatFilters
         '
+        Me.tabThreatFilters.Controls.Add(Me.splitThreatFilters)
         Me.tabThreatFilters.Location = New System.Drawing.Point(4, 28)
         Me.tabThreatFilters.Name = "tabThreatFilters"
         Me.tabThreatFilters.Padding = New System.Windows.Forms.Padding(3)
@@ -459,7 +481,136 @@ Partial Class JobFromTemplate
         Me.tabThreatFilters.Text = "Threat Filters"
         Me.tabThreatFilters.UseVisualStyleBackColor = True
         '
-        'JobFromTemplate
+        'splitThreatFilters
+        '
+        Me.splitThreatFilters.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.splitThreatFilters.IsSplitterFixed = True
+        Me.splitThreatFilters.Location = New System.Drawing.Point(3, 3)
+        Me.splitThreatFilters.Name = "splitThreatFilters"
+        Me.splitThreatFilters.Orientation = System.Windows.Forms.Orientation.Horizontal
+        '
+        'splitThreatFilters.Panel1
+        '
+        Me.splitThreatFilters.Panel1.Controls.Add(Me.txtSearchThreatFilters)
+        Me.splitThreatFilters.Panel1MinSize = 40
+        '
+        'splitThreatFilters.Panel2
+        '
+        Me.splitThreatFilters.Panel2.Controls.Add(Me.dgvThreatFilters)
+        Me.splitThreatFilters.Size = New System.Drawing.Size(806, 469)
+        Me.splitThreatFilters.SplitterDistance = 40
+        Me.splitThreatFilters.TabIndex = 2
+        '
+        'txtSearchThreatFilters
+        '
+        Me.txtSearchThreatFilters.AcceptsReturn = True
+        Me.txtSearchThreatFilters.Location = New System.Drawing.Point(5, 9)
+        Me.txtSearchThreatFilters.Name = "txtSearchThreatFilters"
+        Me.txtSearchThreatFilters.Size = New System.Drawing.Size(209, 22)
+        Me.txtSearchThreatFilters.TabIndex = 1
+        Me.txtSearchThreatFilters.Text = "Search"
+        '
+        'dgvThreatFilters
+        '
+        Me.dgvThreatFilters.AllowUserToAddRows = False
+        Me.dgvThreatFilters.AllowUserToDeleteRows = False
+        Me.dgvThreatFilters.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvThreatFilters.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvThreatFilters.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Selected, Me.FilterName, Me.View, Me.Description, Me.Source, Me.AuthoredDate, Me.Author, Me.Type, Me.Category, Me.Group, Me.Tags, Me.FilterID})
+        Me.dgvThreatFilters.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvThreatFilters.Location = New System.Drawing.Point(0, 0)
+        Me.dgvThreatFilters.MultiSelect = False
+        Me.dgvThreatFilters.Name = "dgvThreatFilters"
+        Me.dgvThreatFilters.RowHeadersVisible = False
+        Me.dgvThreatFilters.RowTemplate.Height = 24
+        Me.dgvThreatFilters.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvThreatFilters.Size = New System.Drawing.Size(806, 425)
+        Me.dgvThreatFilters.TabIndex = 1
+        '
+        'Selected
+        '
+        Me.Selected.FillWeight = 71.43088!
+        Me.Selected.HeaderText = "Select"
+        Me.Selected.Name = "Selected"
+        '
+        'FilterName
+        '
+        Me.FilterName.FillWeight = 71.43088!
+        Me.FilterName.HeaderText = "Name"
+        Me.FilterName.Name = "FilterName"
+        Me.FilterName.ReadOnly = True
+        '
+        'View
+        '
+        Me.View.FillWeight = 1.0!
+        Me.View.HeaderText = "View"
+        Me.View.MinimumWidth = 45
+        Me.View.Name = "View"
+        Me.View.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'Description
+        '
+        Me.Description.FillWeight = 71.43088!
+        Me.Description.HeaderText = "Description"
+        Me.Description.Name = "Description"
+        Me.Description.ReadOnly = True
+        '
+        'Source
+        '
+        Me.Source.FillWeight = 71.43088!
+        Me.Source.HeaderText = "Source"
+        Me.Source.Name = "Source"
+        Me.Source.ReadOnly = True
+        '
+        'AuthoredDate
+        '
+        Me.AuthoredDate.FillWeight = 71.43088!
+        Me.AuthoredDate.HeaderText = "Authored Date"
+        Me.AuthoredDate.Name = "AuthoredDate"
+        Me.AuthoredDate.ReadOnly = True
+        '
+        'Author
+        '
+        Me.Author.FillWeight = 71.43088!
+        Me.Author.HeaderText = "Authored By"
+        Me.Author.Name = "Author"
+        Me.Author.ReadOnly = True
+        '
+        'Type
+        '
+        Me.Type.FillWeight = 71.43088!
+        Me.Type.HeaderText = "Type"
+        Me.Type.Name = "Type"
+        Me.Type.ReadOnly = True
+        '
+        'Category
+        '
+        Me.Category.FillWeight = 71.43088!
+        Me.Category.HeaderText = "Category"
+        Me.Category.Name = "Category"
+        Me.Category.ReadOnly = True
+        '
+        'Group
+        '
+        Me.Group.FillWeight = 71.43088!
+        Me.Group.HeaderText = "Group"
+        Me.Group.Name = "Group"
+        Me.Group.ReadOnly = True
+        '
+        'Tags
+        '
+        Me.Tags.FillWeight = 71.43088!
+        Me.Tags.HeaderText = "Tags"
+        Me.Tags.Name = "Tags"
+        Me.Tags.ReadOnly = True
+        '
+        'FilterID
+        '
+        Me.FilterID.HeaderText = "Filter ID"
+        Me.FilterID.Name = "FilterID"
+        Me.FilterID.Visible = False
+        '
+        'Form_JobFromTemplate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -467,7 +618,7 @@ Partial Class JobFromTemplate
         Me.Controls.Add(Me.splitJobFromTemplate)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "JobFromTemplate"
+        Me.Name = "Form_JobFromTemplate"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Job From Template"
         Me.splitJobFromTemplate.Panel1.ResumeLayout(False)
@@ -499,6 +650,13 @@ Partial Class JobFromTemplate
         Me.flowSchedule.PerformLayout()
         Me.grpScheduleOptions.ResumeLayout(False)
         Me.grpScheduleOptions.PerformLayout()
+        Me.tabThreatFilters.ResumeLayout(False)
+        Me.splitThreatFilters.Panel1.ResumeLayout(False)
+        Me.splitThreatFilters.Panel1.PerformLayout()
+        Me.splitThreatFilters.Panel2.ResumeLayout(False)
+        CType(Me.splitThreatFilters, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.splitThreatFilters.ResumeLayout(False)
+        CType(Me.dgvThreatFilters, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -537,4 +695,19 @@ Partial Class JobFromTemplate
     Friend WithEvents rdoSchedule_Schedule As System.Windows.Forms.RadioButton
     Friend WithEvents rdoSchedule_Immediate As System.Windows.Forms.RadioButton
     Friend WithEvents tabThreatFilters As System.Windows.Forms.TabPage
+    Friend WithEvents splitThreatFilters As System.Windows.Forms.SplitContainer
+    Friend WithEvents txtSearchThreatFilters As System.Windows.Forms.TextBox
+    Friend WithEvents dgvThreatFilters As System.Windows.Forms.DataGridView
+    Friend WithEvents Selected As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents FilterName As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents View As System.Windows.Forms.DataGridViewButtonColumn
+    Friend WithEvents Description As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Source As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents AuthoredDate As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Author As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Type As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Category As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Group As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Tags As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FilterID As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

@@ -52,7 +52,7 @@ Public Class Main
 
         'API Limitation, choose agent or shares
         If snames.Length >= 1 And cnames.Length >= 1 Then
-            Dim result As DialogResult = AgentorShareDialog.ShowDialog()
+            Dim result As DialogResult = Form_AgentorShareDialog.ShowDialog()
 
             'Choose Agent
             If result = DialogResult.OK Then
@@ -1446,7 +1446,7 @@ Public Class Main
 
 
     Private Sub btnNewProject_Click(sender As Object, e As EventArgs) Handles btnNewProject.Click
-        Dim projectcreate As New CreateEditProject("Create Project", True)
+        Dim projectcreate As New Form_CreateEditProject("Create Project", True)
         projectcreate.ShowDialog()
         JobRunner_RestFunctions.GetProjectList("")
     End Sub
@@ -1454,7 +1454,7 @@ Public Class Main
 
 
     Private Sub btnEditProject_Click(sender As Object, e As EventArgs) Handles btnEditProject.Click
-        Dim projectedit As New CreateEditProject("Edit Project", False, dgvProjectList.CurrentRow.Cells(5).Value)
+        Dim projectedit As New Form_CreateEditProject("Edit Project", False, dgvProjectList.CurrentRow.Cells(5).Value)
         projectedit.ShowDialog()
         JobRunner_RestFunctions.GetProjectList("")
     End Sub

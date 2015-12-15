@@ -56,7 +56,7 @@ Module JobRunner_Functions
 
                 Dim maintext = "Version " & version & " is now available." & vbCrLf & "---------------" & vbCrLf & _
                         description & vbCrLf & "---------------" & vbCrLf
-                Dim updatedialog As New UpdateDialog(maintext, "New Version Available", link)
+                Dim updatedialog As New Form_UpdateDialog(maintext, "New Version Available", link)
                 Dim result = updatedialog.ShowDialog
             Else
                 If Not Silent = True Then

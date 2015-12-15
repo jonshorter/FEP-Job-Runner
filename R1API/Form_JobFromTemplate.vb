@@ -1,12 +1,15 @@
 ﻿Imports R1SimpleRestClient.Models.Job
 Imports R1SimpleRestClient.Models.Templates
+Imports R1SimpleRestClient.Models.Response
+Imports R1SimpleRestClient.Models
 
-Public Class JobFromTemplate
+Public Class Form_JobFromTemplate
     Public Property JobTemplateID As String
     Public Property SelectedProjectID As String
-    Public Property NewJobTargets As New List(Of String)
+    Private Property NewJobTargets As New List(Of String)
     Private Property CurrentTabName As String
     Private Property TemplateInfo As TemplateInformation
+    Private Property SelectedThreatFilters As New List(Of Integer)
 
     Private Sub btnJobFromTemplateCancel_Click(sender As Object, e As EventArgs) Handles btnJobFromTemplateCancel.Click
         Me.Close()
@@ -20,12 +23,14 @@ Public Class JobFromTemplate
                     CurrentTabName = tabThreatFilters.Name
                     tabControlJobFromTemplate.SelectedTab = tabThreatFilters
                     lblJobFromTemplateMenuText.Text = "Select the IOCs for the scan"
+                    JobRunner_RestFunctions.GetThreatFilterList_JobFromTemplate("")
                 Else
                     SelectedProjectID = dgvProjectList.SelectedRows(0).Cells(5).Value
                     CurrentTabName = tabTargets.Name
                     tabControlJobFromTemplate.SelectedTab = tabTargets
                     GetGroups_JobFromTemplate()
                     lblJobFromTemplateMenuText.Text = "Select the target endpoints"
+
                 End If
 
             Case tabThreatFilters.Name
@@ -33,7 +38,12 @@ Public Class JobFromTemplate
                 tabControlJobFromTemplate.SelectedTab = tabTargets
                 GetGroups_JobFromTemplate()
                 lblJobFromTemplateMenuText.Text = "Select the target endpoints"
-
+                SelectedThreatFilters.Clear()
+                For Each item As DataGridViewRow In dgvThreatFilters.Rows
+                    If item.Cells(0).Value = True Then
+                        SelectedThreatFilters.Add(item.Cells(11).Value)
+                    End If
+                Next
 
             Case tabTargets.Name
                 NewJobTargets.Clear()
@@ -49,13 +59,36 @@ Public Class JobFromTemplate
             Case tabSchedule.Name
                 If btnJobFromTemplateNext.Text = "Start" Then
                     If NewJobTargets.Count > 0 Then
-                        Dim job As New R1SimpleRestClient.Models.Job2.JobFromTemplate
-                        job.ComputerTargets = NewJobTargets
-                        job.ProjectId = SelectedProjectID
-                        job.TemplateId = JobTemplateID
-                        JobRunner_RestFunctions.CreateFromTemplate(job)
-                        Me.Close()
-                        Main.tabControlJobsRest.SelectedTab = Main.tabJobsList
+                        If TemplateInfo.jobType = 16 Then
+                            Dim job As New R1SimpleRestClient.Models.Job2.JobFromTemplate
+                            job.ComputerTargets = NewJobTargets
+                            job.ProjectId = SelectedProjectID
+                            job.TemplateId = JobTemplateID
+                            Dim tsjob As ApiResponse(Of String) = JobRunner_RestFunctions.CreateFromTemplate(job, False)
+                            Dim tsoptions As New Job2.ThreatScanJobOptions
+                            tsoptions.threatScanSelection = 1
+                            tsoptions.enableArchiveDrillDown = False
+                            tsoptions.archiveDrillDownExtensions = "zip,gzip,tar,jar,tgz,rar,gz,bz2,7z,msg,pdf,pst"
+                            tsoptions.enableIgnoreIOCFileSize = False
+                            tsoptions.enableIgnoreYARAFileSize = True
+                            tsoptions.disableHashing = False
+                            tsoptions.disableStringContentSearch = False
+                            tsoptions.threatFilters = SelectedThreatFilters.ToArray
+
+
+                            JobRunner_RestFunctions.SetThreatScanOptions(tsjob.Data, tsoptions)
+                            JobRunner_RestFunctions.GetSetJobStatus(tsjob.Data, Enums.JobAction.Execute)
+                            Me.Close()
+                            Main.tabControlJobsRest.SelectedTab = Main.tabJobsList
+                        Else
+                            Dim job As New R1SimpleRestClient.Models.Job2.JobFromTemplate
+                            job.ComputerTargets = NewJobTargets
+                            job.ProjectId = SelectedProjectID
+                            job.TemplateId = JobTemplateID
+                            JobRunner_RestFunctions.CreateFromTemplate(job, True)
+                            Me.Close()
+                            Main.tabControlJobsRest.SelectedTab = Main.tabJobsList
+                        End If
                     Else
                         MsgBox("No job targets have been selected. Please go to the previous section and select targets.", MsgBoxStyle.Exclamation, "No Targets Selected")
                         CurrentTabName = tabTargets.Name
@@ -85,6 +118,7 @@ Public Class JobFromTemplate
                     CurrentTabName = tabThreatFilters.Name
                     tabControlJobFromTemplate.SelectedTab = tabThreatFilters
                     lblJobFromTemplateMenuText.Text = "Select the IOCs for the scan"
+                    JobRunner_RestFunctions.GetThreatFilterList_JobFromTemplate()
                 Else
                     CurrentTabName = tabProject.Name
                     tabControlJobFromTemplate.SelectedTab = tabProject
@@ -92,7 +126,7 @@ Public Class JobFromTemplate
                 End If
 
 
-             
+
 
             Case tabSchedule.Name
                 CurrentTabName = tabTargets.Name
@@ -104,12 +138,12 @@ Public Class JobFromTemplate
         End Select
     End Sub
 
-    Private Sub splitProjects_Panel1_Paint(sender As Object, e As PaintEventArgs) Handles splitProjects.Panel1.Paint, splitTargetEndpoints.Panel1.Paint
+    Private Sub splitProjects_Panel1_Paint(sender As Object, e As PaintEventArgs) Handles splitProjects.Panel1.Paint, splitTargetEndpoints.Panel1.Paint, splitThreatFilters.Panel1.Paint
 
     End Sub
 
     Private Sub btnNewProject_Click(sender As Object, e As EventArgs) Handles btnNewProject.Click
-        Dim projectcreate As New CreateEditProject("Create Project", True)
+        Dim projectcreate As New Form_CreateEditProject("Create Project", True)
         projectcreate.ShowDialog()
         JobRunner_RestFunctions.GetProjectList_JobFromTemplate("")
     End Sub
@@ -143,7 +177,7 @@ Public Class JobFromTemplate
     End Sub
 
     Private Sub JobFromTemplate_Enter(sender As Object, e As EventArgs) Handles Me.Enter
- 
+
     End Sub
 
     Private Sub JobFromTemplate_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
@@ -207,5 +241,31 @@ Public Class JobFromTemplate
 
     Private Sub JobFromTemplate_Shown(sender As Object, e As EventArgs) Handles Me.Shown
 
+    End Sub
+
+    Private Sub txtSearchThreatFilters_TextChanged(sender As Object, e As EventArgs) Handles txtSearchThreatFilters.TextChanged
+
+    End Sub
+
+
+    Private Sub txtSearchThreatFilters_Enter(sender As Object, e As EventArgs) Handles txtSearchThreatFilters.Enter
+        If txtSearchThreatFilters.Text = "Search" Then
+            txtSearchThreatFilters.Text = ""
+        End If
+    End Sub
+
+    Private Sub txtSearchThreatFilters_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSearchThreatFilters.KeyDown
+
+        If e.KeyCode = Keys.Enter Then
+            JobRunner_RestFunctions.GetThreatFilterList_JobFromTemplate(txtSearchThreatFilters.Text)
+        End If
+    End Sub
+
+
+
+    Private Sub txtSearchThreatFilters_Leave(sender As Object, e As EventArgs) Handles txtSearchThreatFilters.Leave
+        If txtSearchThreatFilters.Text = "" Then
+            txtSearchThreatFilters.Text = "Search"
+        End If
     End Sub
 End Class

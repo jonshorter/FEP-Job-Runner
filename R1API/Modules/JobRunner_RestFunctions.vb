@@ -4,6 +4,9 @@ Imports R1SimpleRestClient.Models.Project
 Imports R1SimpleRestClient.Models.Templates
 Imports System.Security
 Imports R1SimpleRestClient.Models.Alert
+Imports R1SimpleRestClient.Models.ThreatFilters
+Imports R1SimpleRestClient.Models.Enums
+Imports R1SimpleRestClient.Models
 
 Module JobRunner_RestFunctions
     Public Function R1Auth() As AuthToken
@@ -198,11 +201,39 @@ Module JobRunner_RestFunctions
                 projectlist = r1rest.Functions.Project.GetProjectList(Main.auth, Main.txtServer.Text)
             End If
 
-            JobFromTemplate.dgvProjectList.Rows.Clear()
+            Form_JobFromTemplate.dgvProjectList.Rows.Clear()
 
             For Each project As ProjectPresenter In projectlist.Data
-                JobFromTemplate.dgvProjectList.Rows.Add(New String() {project.Name, project.CreatedDate, project.CreatedByUsername, project.ModifiedDate, project.FtkCaseFolderPath, project.ProjectId})
+                Form_JobFromTemplate.dgvProjectList.Rows.Add(New String() {project.Name, project.CreatedDate, project.CreatedByUsername, project.ModifiedDate, project.FtkCaseFolderPath, project.ProjectId})
             Next
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Public Sub GetThreatFilterList_JobFromTemplate(Optional Search As String = "")
+        Try
+            Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
+            If Main.auth.Data.Message <> "Authenticated" Then
+                Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
+            End If
+            Dim threatfilterlist As ApiResponse(Of List(Of ThreatFilterInfo))
+
+            If String.IsNullOrWhiteSpace(Search) Or Search = "" Or Search = "Search" Then
+                threatfilterlist = r1rest.Functions.ThreatFilters.GetThreatFilters(Main.auth, Main.txtServer.Text, 1, 50)
+            Else
+                Dim srch As String = "(FilterName.Contains(""" & Search & """)) OR (Description.Contains(""" & Search & """)) OR (Source.Contains(""" & Search & _
+                                 """)) OR (AuthoredBy.Contains(""" & Search & """)) OR (Category.Contains(""" & Search & """)) OR (Groups.Contains(""" & Search & """)) OR (Tags.Contains(""" & Search & """))"
+                threatfilterlist = r1rest.Functions.ThreatFilters.GetThreatFilters(Main.auth, Main.txtServer.Text, 1, 50, srch)
+            End If
+
+
+
+            Form_JobFromTemplate.dgvThreatFilters.Rows.Clear()
+            If threatfilterlist.Data.Count > 0 Then
+                For Each tfilter In threatfilterlist.Data
+                    Form_JobFromTemplate.dgvThreatFilters.Rows.Add(New String() {False, tfilter.Name, "View", tfilter.Description, tfilter.Source, tfilter.AuthoredDate, tfilter.AuthoredBy, tfilter.FilterType.ToString, tfilter.Category, tfilter.Groups, tfilter.Tags, tfilter.FilterId})
+                Next
+            End If
         Catch ex As Exception
         End Try
     End Sub
@@ -255,8 +286,8 @@ Module JobRunner_RestFunctions
     Public Sub TaskItemDo(ByVal sender As ListView, ByVal e As System.EventArgs)
         If sender.SelectedItems.Count > 0 Then
 
-            JobFromTemplate.JobTemplateID = sender.SelectedItems(0).Tag
-            JobFromTemplate.ShowDialog()
+            Form_JobFromTemplate.JobTemplateID = sender.SelectedItems(0).Tag
+            Form_JobFromTemplate.ShowDialog()
 
         End If
     End Sub
@@ -304,10 +335,10 @@ Module JobRunner_RestFunctions
     End Function
 
     Public Sub GetGroups_JobFromTemplate()
-        JobFromTemplate.treeGroups.Nodes.Clear()
+        Form_JobFromTemplate.treeGroups.Nodes.Clear()
         Dim rc As New R1SimpleRestClient.R1SimpleRestClient
         Dim groups As R1SimpleRestClient.Models.Groups = rc.Functions.Groups.GetGroups(Main.auth, Main.txtServer.Text).Data
-        Dim topnode As TreeNode = JobFromTemplate.treeGroups.Nodes.Add(groups.name)
+        Dim topnode As TreeNode = Form_JobFromTemplate.treeGroups.Nodes.Add(groups.name)
         topnode.Name = groups.name
         topnode.Tag = groups.id
         For Each group In groups.children
@@ -319,7 +350,7 @@ Module JobRunner_RestFunctions
     End Sub
 
     Private Sub GetAllChildrenGroups(parent As String, children As R1SimpleRestClient.Models.Groups)
-        Dim subnode() As TreeNode = JobFromTemplate.treeGroups.Nodes.Find(parent, True)
+        Dim subnode() As TreeNode = Form_JobFromTemplate.treeGroups.Nodes.Find(parent, True)
         If subnode.Count > 0 Then
             For Each subgroup In children.children
                 Dim y As TreeNode = subnode(0).Nodes.Add(subgroup.name)
@@ -338,25 +369,52 @@ Module JobRunner_RestFunctions
                 Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
             End If
             Dim endpoints = r1rest.Functions.Computers.GetGroupComputers(Main.auth, Main.txtServer.Text, GroupID, count, start, Search)
-            JobFromTemplate.dgvTargetEndpoints.Rows.Clear()
+            Form_JobFromTemplate.dgvTargetEndpoints.Rows.Clear()
             For Each endpoint In endpoints.Data.computers
-                JobFromTemplate.dgvTargetEndpoints.Rows.Add(New String() {False, endpoint.computerName, endpoint.ipAddressLastContacted, endpoint.agentOS, endpoint.agentLastContacted, endpoint.computerId})
+                Form_JobFromTemplate.dgvTargetEndpoints.Rows.Add(New String() {False, endpoint.computerName, endpoint.ipAddressLastContacted, endpoint.agentOS, endpoint.agentLastContacted, endpoint.computerId})
             Next
         Catch ex As Exception
         End Try
     End Sub
 
-    Public Sub CreateFromTemplate(ByVal Job As R1SimpleRestClient.Models.Job2.JobFromTemplate)
+    Public Function CreateFromTemplate(ByVal Job As R1SimpleRestClient.Models.Job2.JobFromTemplate, ByVal Execute As Boolean)
         Try
             Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
             If Main.auth.Data.Message <> "Authenticated" Then
                 Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
             End If
-            r1rest.Functions.Job.CreateJobFromTemplate(Main.auth, Main.txtServer.Text, Job, True)
+            Return r1rest.Functions.Job.CreateJobFromTemplate(Main.auth, Main.txtServer.Text, Job, Execute)
 
         Catch ex As Exception
+            Return ex.Message
         End Try
-    End Sub
+    End Function
+
+    Public Function GetSetJobStatus(ByVal JobID As String, ByVal Status As JobAction)
+        Try
+            Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
+            If Main.auth.Data.Message <> "Authenticated" Then
+                Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
+            End If
+            Return r1rest.Functions.Job.GetSetJobStatus(Main.auth, Main.txtServer.Text, JobID, Status)
+
+        Catch ex As Exception
+            Return ex.Message
+        End Try
+    End Function
+
+    Public Function SetThreatScanOptions(ByVal JobID As String, ByVal Options As Job2.ThreatScanJobOptions)
+        Try
+            Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
+            If Main.auth.Data.Message <> "Authenticated" Then
+                Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
+            End If
+            Return r1rest.Functions.Job.ThreatScanOptioms(Main.auth, Main.txtServer.Text, JobID, Options)
+
+        Catch ex As Exception
+            Return ex.Message
+        End Try
+    End Function
 
     Public Sub LoadAlerts()
         Try
