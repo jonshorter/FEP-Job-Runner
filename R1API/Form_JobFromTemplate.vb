@@ -11,6 +11,7 @@ Public Class Form_JobFromTemplate
     Private Property CurrentTabName As String
     Private Property TemplateInfo As TemplateInformation
     Private Property SelectedThreatFilters As New List(Of Integer)
+    Private Property RecurStart As String = ""
 
     Private Sub btnJobFromTemplateCancel_Click(sender As Object, e As EventArgs) Handles btnJobFromTemplateCancel.Click
         Me.Close()
@@ -65,9 +66,38 @@ Public Class Form_JobFromTemplate
                         If rdoSchedule_Immediate.Checked = False Then
                             Select Case chkEnableRecurrence.Checked
                                 Case True '-----------Set Recurrence Options
+                                    JobSchedule.InitialDateTime = dtpScheduleStart.Value
+                                    If rdoRecurEnd_After.Checked Then
+                                        JobSchedule.RecurrenceRange = Job2.RecurrenceRangeEnum.EndAfterInstances
+                                        JobSchedule.MaxRecurrenceCount = nmbRecurEndOccurences.Value
+                                    ElseIf rdoRecurEnd_EndBy.Checked Then
+                                        JobSchedule.RecurrenceRange = Job2.RecurrenceRangeEnum.EndOnDate
+                                        JobSchedule.EndDateTime = dtpRecurEndBy.Value
+                                    ElseIf rdoRecurEnd_NoEnd.Checked Then
+                                        JobSchedule.RecurrenceRange = Job2.RecurrenceRangeEnum.NoEndDate
+                                    End If
+                                    Select Case RecurStart
+                                        Case rdoRecurStart_Minute.Name
+                                            JobSchedule.Period = cmb_RecurMinutes.SelectedItem
+                                            JobSchedule.TimeUnit = Job2.TimeUnitEnum.Minute
+                                            JobSchedule.Ordinal = 0
+                                            JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.DayOfMonth
+                                            JobSchedule.Weekday = Nothing
+                                        Case rdoRecurStart_Hourly.Name
+                                            JobSchedule.Period = cmb_RecurHours.SelectedItem
+                                            JobSchedule.TimeUnit = Job2.TimeUnitEnum.Hour
+                                        Case rdoRecurStart_Daily.Name
+                                            JobSchedule.Period = nmb_RecurDays.Value
+                                            JobSchedule.TimeUnit = Job2.TimeUnitEnum.Day
+                                        Case rdoRecurStart_Weekly.Name
 
+                                        Case rdoRecurStart_Monthly.Name
+
+                                        Case rdoRecurStart_Yearly.Name
+
+                                    End Select
                                 Case False '------------No Recurrence Options
-                                    JobSchedule.InitialDateTime = DateTimePicker1.Value
+                                    JobSchedule.InitialDateTime = dtpScheduleStart.Value
                                     JobSchedule.Period = 1
                                     JobSchedule.RecurrenceRange = Job2.RecurrenceRangeEnum.InitialOnly
                             End Select
@@ -276,7 +306,11 @@ Public Class Form_JobFromTemplate
 
         chkEnableRecurrence.Checked = False
         rdoRecurStart_Hourly.Checked = True
+        RecurStart = rdoRecurStart_Hourly.Name
         panel_RecurHourly.Visible = True
+        cmb_RecurHours.SelectedItem = "1"
+        cmb_RecurMinutes.SelectedItem = "1"
+        nmb_RecurDays.Value = 1
 
         'Check for threatscan
         If TemplateInfo.jobType = 16 Then
@@ -380,7 +414,7 @@ Public Class Form_JobFromTemplate
 
     End Sub
 
-    Private Sub DateTimePicker1_ValueChanged(sender As Object, e As EventArgs) Handles DateTimePicker1.ValueChanged
+    Private Sub DateTimePicker1_ValueChanged(sender As Object, e As EventArgs) Handles dtpScheduleStart.ValueChanged
 
     End Sub
 
@@ -610,6 +644,7 @@ Public Class Form_JobFromTemplate
         Select Case rdoRecurStart_Minute.Checked
             Case True
                 panel_RecurMinute.Visible = True
+                RecurStart = rdoRecurStart_Minute.Name
                 panel_RecurHourly.Visible = False
                 panel_recurDaily.Visible = False
                 panel_RecurWeekly.Visible = False
@@ -623,6 +658,7 @@ Public Class Form_JobFromTemplate
             Case True
                 panel_RecurMinute.Visible = False
                 panel_RecurHourly.Visible = True
+                RecurStart = rdoRecurStart_Hourly.Name
                 panel_recurDaily.Visible = False
                 panel_RecurWeekly.Visible = False
                 panel_RecurMonthly.Visible = False
@@ -636,6 +672,7 @@ Public Class Form_JobFromTemplate
                 panel_RecurMinute.Visible = False
                 panel_RecurHourly.Visible = False
                 panel_recurDaily.Visible = True
+                RecurStart = rdoRecurStart_Daily.Name
                 panel_RecurWeekly.Visible = False
                 panel_RecurMonthly.Visible = False
                 panel_RecurYearly.Visible = False
@@ -649,6 +686,7 @@ Public Class Form_JobFromTemplate
                 panel_RecurHourly.Visible = False
                 panel_recurDaily.Visible = False
                 panel_RecurWeekly.Visible = True
+                RecurStart = rdoRecurStart_Weekly.Name
                 panel_RecurMonthly.Visible = False
                 panel_RecurYearly.Visible = False
         End Select
@@ -662,6 +700,7 @@ Public Class Form_JobFromTemplate
                 panel_recurDaily.Visible = False
                 panel_RecurWeekly.Visible = False
                 panel_RecurMonthly.Visible = True
+                RecurStart = rdoRecurStart_Monthly.Name
                 panel_RecurYearly.Visible = False
         End Select
     End Sub
@@ -675,6 +714,7 @@ Public Class Form_JobFromTemplate
                 panel_RecurWeekly.Visible = False
                 panel_RecurMonthly.Visible = False
                 panel_RecurYearly.Visible = True
+                RecurStart = rdoRecurStart_Yearly.Name
         End Select
     End Sub
 

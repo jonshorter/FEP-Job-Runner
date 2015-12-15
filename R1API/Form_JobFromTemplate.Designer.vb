@@ -57,7 +57,7 @@ Partial Class Form_JobFromTemplate
         Me.rdoSchedule_Schedule = New System.Windows.Forms.RadioButton()
         Me.rdoSchedule_Immediate = New System.Windows.Forms.RadioButton()
         Me.grpSchedule_StartDate = New System.Windows.Forms.GroupBox()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
+        Me.dtpScheduleStart = New System.Windows.Forms.DateTimePicker()
         Me.tabThreatFilters = New System.Windows.Forms.TabPage()
         Me.splitThreatFilters = New System.Windows.Forms.SplitContainer()
         Me.splitThreatFilterAdvanced = New System.Windows.Forms.SplitContainer()
@@ -572,7 +572,7 @@ Partial Class Form_JobFromTemplate
         '
         Me.grpSchedule_StartDate.AutoSize = True
         Me.grpSchedule_StartDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.grpSchedule_StartDate.Controls.Add(Me.DateTimePicker1)
+        Me.grpSchedule_StartDate.Controls.Add(Me.dtpScheduleStart)
         Me.flowSchedule.SetFlowBreak(Me.grpSchedule_StartDate, True)
         Me.grpSchedule_StartDate.Location = New System.Drawing.Point(368, 3)
         Me.grpSchedule_StartDate.Name = "grpSchedule_StartDate"
@@ -582,14 +582,14 @@ Partial Class Form_JobFromTemplate
         Me.grpSchedule_StartDate.Text = "Start Date and Time"
         Me.grpSchedule_StartDate.Visible = False
         '
-        'DateTimePicker1
+        'dtpScheduleStart
         '
-        Me.DateTimePicker1.CustomFormat = "MM/dd/yyy HH:mm:ss"
-        Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DateTimePicker1.Location = New System.Drawing.Point(6, 30)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(215, 22)
-        Me.DateTimePicker1.TabIndex = 0
+        Me.dtpScheduleStart.CustomFormat = "MM/dd/yyy HH:mm:ss"
+        Me.dtpScheduleStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpScheduleStart.Location = New System.Drawing.Point(6, 30)
+        Me.dtpScheduleStart.Name = "dtpScheduleStart"
+        Me.dtpScheduleStart.Size = New System.Drawing.Size(215, 22)
+        Me.dtpScheduleStart.TabIndex = 0
         '
         'tabThreatFilters
         '
@@ -1065,7 +1065,7 @@ Partial Class Form_JobFromTemplate
         Me.grpRecurrence.Controls.Add(Me.chkEnableRecurrence)
         Me.grpRecurrence.Location = New System.Drawing.Point(3, 82)
         Me.grpRecurrence.Name = "grpRecurrence"
-        Me.grpRecurrence.Size = New System.Drawing.Size(622, 436)
+        Me.grpRecurrence.Size = New System.Drawing.Size(622, 400)
         Me.grpRecurrence.TabIndex = 2
         Me.grpRecurrence.TabStop = False
         Me.grpRecurrence.Text = "Recurrence:"
@@ -1084,7 +1084,7 @@ Partial Class Form_JobFromTemplate
         'chkIncrementalCollection
         '
         Me.chkIncrementalCollection.AutoSize = True
-        Me.chkIncrementalCollection.Location = New System.Drawing.Point(6, 394)
+        Me.chkIncrementalCollection.Location = New System.Drawing.Point(175, 30)
         Me.chkIncrementalCollection.Name = "chkIncrementalCollection"
         Me.chkIncrementalCollection.Size = New System.Drawing.Size(168, 21)
         Me.chkIncrementalCollection.TabIndex = 1
@@ -1100,12 +1100,12 @@ Partial Class Form_JobFromTemplate
         Me.grpRecurrenceStart.Controls.Add(Me.rdoRecurStart_Daily)
         Me.grpRecurrenceStart.Controls.Add(Me.rdoRecurStart_Hourly)
         Me.grpRecurrenceStart.Controls.Add(Me.rdoRecurStart_Minute)
+        Me.grpRecurrenceStart.Controls.Add(Me.panel_recurDaily)
+        Me.grpRecurrenceStart.Controls.Add(Me.panel_RecurMinute)
         Me.grpRecurrenceStart.Controls.Add(Me.panel_RecurHourly)
         Me.grpRecurrenceStart.Controls.Add(Me.panel_RecurYearly)
         Me.grpRecurrenceStart.Controls.Add(Me.panel_RecurMonthly)
         Me.grpRecurrenceStart.Controls.Add(Me.panel_RecurWeekly)
-        Me.grpRecurrenceStart.Controls.Add(Me.panel_recurDaily)
-        Me.grpRecurrenceStart.Controls.Add(Me.panel_RecurMinute)
         Me.grpRecurrenceStart.Location = New System.Drawing.Point(12, 57)
         Me.grpRecurrenceStart.Name = "grpRecurrenceStart"
         Me.grpRecurrenceStart.Size = New System.Drawing.Size(604, 188)
@@ -1363,9 +1363,11 @@ Partial Class Form_JobFromTemplate
         '
         Me.nmb_RecurDays.Location = New System.Drawing.Point(92, 32)
         Me.nmb_RecurDays.Maximum = New Decimal(New Integer() {365, 0, 0, 0})
+        Me.nmb_RecurDays.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nmb_RecurDays.Name = "nmb_RecurDays"
         Me.nmb_RecurDays.Size = New System.Drawing.Size(92, 22)
         Me.nmb_RecurDays.TabIndex = 3
+        Me.nmb_RecurDays.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'panel_RecurWeekly
         '
@@ -1614,7 +1616,7 @@ Partial Class Form_JobFromTemplate
     Friend WithEvents Tags As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents FilterID As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents grpSchedule_StartDate As System.Windows.Forms.GroupBox
-    Friend WithEvents DateTimePicker1 As System.Windows.Forms.DateTimePicker
+    Friend WithEvents dtpScheduleStart As System.Windows.Forms.DateTimePicker
     Friend WithEvents splitThreatFilterAdvanced As System.Windows.Forms.SplitContainer
     Friend WithEvents btnThreatFiltersAdvanced As System.Windows.Forms.Button
     Friend WithEvents grpThreatSelection As System.Windows.Forms.GroupBox
