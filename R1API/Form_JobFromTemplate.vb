@@ -60,12 +60,27 @@ Public Class Form_JobFromTemplate
             Case tabSchedule.Name
                 If btnJobFromTemplateNext.Text = "Start" Then
                     If NewJobTargets.Count > 0 Then
+                        Dim JobSchedule As New Job2.SchedulerEventCore
+                        '-----------------Setup JobSchedule
+                        If rdoSchedule_Immediate.Checked = False Then
+                            Select Case chkEnableRecurrence.Checked
+                                Case True '-----------Set Recurrence Options
+
+                                Case False '------------No Recurrence Options
+                                    JobSchedule.InitialDateTime = DateTimePicker1.Value
+                                    JobSchedule.Period = 1
+                                    JobSchedule.RecurrenceRange = Job2.RecurrenceRangeEnum.InitialOnly
+                            End Select
+                        End If
+                        '----------------------------Threat Scan Job
                         If TemplateInfo.jobType = 16 Then
                             Dim job As New R1SimpleRestClient.Models.Job2.JobFromTemplate
                             job.ComputerTargets = NewJobTargets
                             job.ProjectId = SelectedProjectID
                             job.TemplateId = JobTemplateID
+                            '------------Submit Job From Template Dont Execute
                             Dim tsjob As ApiResponse(Of String) = JobRunner_RestFunctions.CreateFromTemplate(job, False)
+                            '-------------Define TS Options
                             Dim tsoptions As New Job2.ThreatScanJobOptions
                             If rdoIOCAll.Checked Then
                                 tsoptions.threatScanSelection = 0
@@ -120,25 +135,43 @@ Public Class Form_JobFromTemplate
                                 End Select
                             End If
 
-
+                            '---------------Set TS Options on Job
                             JobRunner_RestFunctions.SetThreatScanOptions(tsjob.Data, tsoptions)
-                            JobRunner_RestFunctions.GetSetJobStatus(tsjob.Data, Enums.JobAction.Execute)
+                            '--------------If Scheduled Set Schedule and Approve, Else Execute
+                            If JobSchedule.InitialDateTime <> Nothing Then
+                                JobRunner_RestFunctions.SetJobSchedule(tsjob.Data, chkIncrementalCollection.Checked, JobSchedule)
+                                JobRunner_RestFunctions.GetSetJobStatus(tsjob.Data, Enums.JobAction.Approve)
+                            Else '---------No Schedule Execute
+                                JobRunner_RestFunctions.GetSetJobStatus(tsjob.Data, Enums.JobAction.Execute)
+                            End If
+
                             Me.Close()
                             Main.tabControlJobsRest.SelectedTab = Main.tabJobsList
                         Else
+
+                            '------------------------------Normal Job                       
                             Dim job As New R1SimpleRestClient.Models.Job2.JobFromTemplate
                             job.ComputerTargets = NewJobTargets
                             job.ProjectId = SelectedProjectID
                             job.TemplateId = JobTemplateID
-                            JobRunner_RestFunctions.CreateFromTemplate(job, True)
+                            '--------------If Scheduled Set Schedule and Approve, Else Execute
+                            If JobSchedule.InitialDateTime <> Nothing Then
+                                Dim schJob = JobRunner_RestFunctions.CreateFromTemplate(job, False)
+                                JobRunner_RestFunctions.SetJobSchedule(schJob.Data, False, JobSchedule)
+                                JobRunner_RestFunctions.GetSetJobStatus(schJob.Data, Enums.JobAction.Approve)
+                            Else '---------No Schedule Execute
+                                JobRunner_RestFunctions.CreateFromTemplate(job, True)
+                            End If
+
                             Me.Close()
                             Main.tabControlJobsRest.SelectedTab = Main.tabJobsList
                         End If
-                        Else
-                            MsgBox("No job targets have been selected. Please go to the previous section and select targets.", MsgBoxStyle.Exclamation, "No Targets Selected")
-                            CurrentTabName = tabTargets.Name
-                            tabControlJobFromTemplate.SelectedTab = tabTargets
-                        End If
+                    Else
+                        '------------------No Targets
+                        MsgBox("No job targets have been selected. Please go to the previous section and select targets.", MsgBoxStyle.Exclamation, "No Targets Selected")
+                        CurrentTabName = tabTargets.Name
+                        tabControlJobFromTemplate.SelectedTab = tabTargets
+                    End If
                 End If
 
         End Select

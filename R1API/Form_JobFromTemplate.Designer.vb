@@ -104,6 +104,9 @@ Partial Class Form_JobFromTemplate
         Me.dtpDate = New System.Windows.Forms.DateTimePicker()
         Me.txtThreatCreate = New System.Windows.Forms.TextBox()
         Me.dtpTime = New System.Windows.Forms.DateTimePicker()
+        Me.grpRecurrence = New System.Windows.Forms.GroupBox()
+        Me.chkEnableRecurrence = New System.Windows.Forms.CheckBox()
+        Me.chkIncrementalCollection = New System.Windows.Forms.CheckBox()
         CType(Me.splitJobFromTemplate, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.splitJobFromTemplate.Panel1.SuspendLayout()
         Me.splitJobFromTemplate.Panel2.SuspendLayout()
@@ -143,6 +146,7 @@ Partial Class Form_JobFromTemplate
         Me.grpThreatScanAdvanced.SuspendLayout()
         CType(Me.dgvThreatFilters, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.flowThreatScanAllFilter.SuspendLayout()
+        Me.grpRecurrence.SuspendLayout()
         Me.SuspendLayout()
         '
         'splitJobFromTemplate
@@ -471,6 +475,7 @@ Partial Class Form_JobFromTemplate
         '
         Me.flowSchedule.Controls.Add(Me.grpScheduleOptions)
         Me.flowSchedule.Controls.Add(Me.grpSchedule_StartDate)
+        Me.flowSchedule.Controls.Add(Me.grpRecurrence)
         Me.flowSchedule.Dock = System.Windows.Forms.DockStyle.Fill
         Me.flowSchedule.Location = New System.Drawing.Point(0, 0)
         Me.flowSchedule.Name = "flowSchedule"
@@ -525,10 +530,11 @@ Partial Class Form_JobFromTemplate
         '
         'DateTimePicker1
         '
-        Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Time
+        Me.DateTimePicker1.CustomFormat = "MM/dd/yyy HH:mm:ss"
+        Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DateTimePicker1.Location = New System.Drawing.Point(6, 30)
         Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(259, 22)
+        Me.DateTimePicker1.Size = New System.Drawing.Size(215, 22)
         Me.DateTimePicker1.TabIndex = 0
         '
         'tabThreatFilters
@@ -995,6 +1001,37 @@ Partial Class Form_JobFromTemplate
         Me.dtpTime.Size = New System.Drawing.Size(119, 22)
         Me.dtpTime.TabIndex = 11
         '
+        'grpRecurrence
+        '
+        Me.grpRecurrence.Controls.Add(Me.chkIncrementalCollection)
+        Me.grpRecurrence.Controls.Add(Me.chkEnableRecurrence)
+        Me.grpRecurrence.Location = New System.Drawing.Point(467, 96)
+        Me.grpRecurrence.Name = "grpRecurrence"
+        Me.grpRecurrence.Size = New System.Drawing.Size(200, 100)
+        Me.grpRecurrence.TabIndex = 2
+        Me.grpRecurrence.TabStop = False
+        Me.grpRecurrence.Text = "Recurrence:"
+        '
+        'chkEnableRecurrence
+        '
+        Me.chkEnableRecurrence.AutoSize = True
+        Me.chkEnableRecurrence.Location = New System.Drawing.Point(6, 30)
+        Me.chkEnableRecurrence.Name = "chkEnableRecurrence"
+        Me.chkEnableRecurrence.Size = New System.Drawing.Size(152, 21)
+        Me.chkEnableRecurrence.TabIndex = 0
+        Me.chkEnableRecurrence.Text = "Enable Recurrence"
+        Me.chkEnableRecurrence.UseVisualStyleBackColor = True
+        '
+        'chkIncrementalCollection
+        '
+        Me.chkIncrementalCollection.AutoSize = True
+        Me.chkIncrementalCollection.Location = New System.Drawing.Point(6, 73)
+        Me.chkIncrementalCollection.Name = "chkIncrementalCollection"
+        Me.chkIncrementalCollection.Size = New System.Drawing.Size(168, 21)
+        Me.chkIncrementalCollection.TabIndex = 1
+        Me.chkIncrementalCollection.Text = "Incremental Collection"
+        Me.chkIncrementalCollection.UseVisualStyleBackColor = True
+        '
         'Form_JobFromTemplate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -1055,6 +1092,8 @@ Partial Class Form_JobFromTemplate
         CType(Me.dgvThreatFilters, System.ComponentModel.ISupportInitialize).EndInit()
         Me.flowThreatScanAllFilter.ResumeLayout(False)
         Me.flowThreatScanAllFilter.PerformLayout()
+        Me.grpRecurrence.ResumeLayout(False)
+        Me.grpRecurrence.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1140,4 +1179,7 @@ Partial Class Form_JobFromTemplate
     Friend WithEvents dtpDate As System.Windows.Forms.DateTimePicker
     Friend WithEvents txtThreatCreate As System.Windows.Forms.TextBox
     Friend WithEvents dtpTime As System.Windows.Forms.DateTimePicker
+    Friend WithEvents grpRecurrence As System.Windows.Forms.GroupBox
+    Friend WithEvents chkEnableRecurrence As System.Windows.Forms.CheckBox
+    Friend WithEvents chkIncrementalCollection As System.Windows.Forms.CheckBox
 End Class

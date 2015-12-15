@@ -416,6 +416,19 @@ Module JobRunner_RestFunctions
         End Try
     End Function
 
+    Public Function SetJobSchedule(ByVal JobID As String, ByVal IsIncremental As Boolean, ByVal Schedule As Job2.SchedulerEventCore)
+        Try
+            Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
+            If Main.auth.Data.Message <> "Authenticated" Then
+                Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
+            End If
+            Return r1rest.Functions.Job.SetJobSchedule(Main.auth, Main.txtServer.Text, JobID, IsIncremental, Schedule)
+
+        Catch ex As Exception
+            Return ex.Message
+        End Try
+    End Function
+
     Public Sub LoadAlerts()
         Try
             Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
