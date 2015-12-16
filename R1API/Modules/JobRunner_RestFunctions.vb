@@ -267,7 +267,7 @@ Module JobRunner_RestFunctions
                 lsttemplate.AutoSize = False
                 lsttemplate.Size = New Size(375, 325)
                 lsttemplate.View = View.Details
-
+                lsttemplate.FullRowSelect = True
                 Dim col1 = lsttemplate.Columns.Add("Template Name")
                 col1.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
                 col1.Width = 375
@@ -447,8 +447,27 @@ Module JobRunner_RestFunctions
             Next
 
 
+           
+            Dim responsecount = r1rest.Functions.Alert.GetTotalResponses(Main.auth, Main.txtServer.Text)
+            Main.lblTotalNumberofResponses.Text = "Total Number of Responses: " & responsecount
+            Dim autoresponselabel As New Label
+            autoresponselabel.Parent = Main.flowTotalResponses
+            autoresponselabel.AutoSize = True
+            autoresponselabel.Dock = DockStyle.Fill
+            autoresponselabel.Font = New Font(autoresponselabel.Font.FontFamily, 11)
+            Dim autoresponsecount = r1rest.Functions.Alert.GetTotalAutomatedResponses(Main.auth, Main.txtServer.Text)
+            autoresponselabel.Text = autoresponsecount & vbCrLf & "Automated Responses"
+            Dim manualresponselabel As New Label
+            manualresponselabel.Parent = Main.flowTotalResponses
+            manualresponselabel.AutoSize = True
+            manualresponselabel.Dock = DockStyle.Fill
+            manualresponselabel.Font = New Font(manualresponselabel.Font.FontFamily, 11)
+            manualresponselabel.Text = responsecount - autoresponsecount & vbCrLf & "Manual Responses"
+
             Dim alertSrcBreakdowns As List(Of AlertSourceBreakdownResult) = r1rest.Functions.Alert.GetAlertSourceBreakdown(Main.auth, Main.txtServer.Text)
             Dim totalcount As Integer = 0
+            Dim proactivecount As Integer = 0
+
             For Each alertSrc As AlertSourceBreakdownResult In alertSrcBreakdowns
                 Dim alertlabel As New Label
                 alertlabel.Parent = Main.flowAlertBreakdown
@@ -457,28 +476,39 @@ Module JobRunner_RestFunctions
                 alertlabel.Font = New Font(alertlabel.Font.FontFamily, 11)
                 alertlabel.Text = alertSrc.Count & "  (" & alertSrc.Percent & "%)" & vbCrLf & alertSrc.Name
                 totalcount += alertSrc.Count
+                If alertSrc.Name.Contains("Validated") Then
+                    proactivecount += alertSrc.Count
+                End If
             Next
             Main.lblTotalNumberAlerts.Text = "Total Number of Alerts: " & totalcount
-
-
-            Main.lblTotalNumberofResponses.Text = "Total Number of Responses: " & r1rest.Functions.Alert.GetTotalResponses(Main.auth, Main.txtServer.Text)
-            Dim responselabel As New Label
-            responselabel.Parent = Main.flowTotalResponses
-            responselabel.AutoSize = True
-            responselabel.Dock = DockStyle.Fill
-            responselabel.Font = New Font(responselabel.Font.FontFamily, 11)
-            responselabel.Text = r1rest.Functions.Alert.GetTotalAutomatedResponses(Main.auth, Main.txtServer.Text) & vbCrLf & "Automated Responses"
-
-
+            Dim proactivehunt As New Label
+            proactivehunt.Parent = Main.flowTotalResponses
+            proactivehunt.AutoSize = True
+            proactivehunt.Dock = DockStyle.Fill
+            proactivehunt.Font = New Font(manualresponselabel.Font.FontFamily, 11)
+            proactivehunt.Text = proactivecount & vbCrLf & "Proactive Hunting Validation Count"
 
             Dim meantime As List(Of MeanTimeStatistics) = r1rest.Functions.Alert.GetMeanTimeStatistics(Main.auth, Main.txtServer.Text)
             If meantime.Count > 0 Then
-                Dim timelabel As New Label
-                timelabel.Parent = Main.flowResponseTime
-                timelabel.AutoSize = True
-                timelabel.Dock = DockStyle.Fill
-                timelabel.Font = New Font(responselabel.Font.FontFamily, 11)
-                timelabel.Text = meantime(0).meanTime & vbCrLf & "Mean Time"
+                For Each time In meantime
+                    Dim timelabel As New Label
+                    timelabel.Parent = Main.flowResponseTime
+                    timelabel.AutoSize = True
+                    timelabel.Dock = DockStyle.Fill
+                    timelabel.Font = New Font(timelabel.Font.FontFamily, 11)
+                    Select Case time.responseTimeType
+                        Case MeanResponseTimeType.MeanTimeToRemediate
+                            timelabel.Text = time.meanTime & vbCrLf & "Average Time to Remediate"
+                        Case MeanResponseTimeType.MeanTimeToResolve
+                            timelabel.Text = time.meanTime & vbCrLf & "Average Time to Resolve"
+                        Case MeanResponseTimeType.MeanTimeToResponse
+                            timelabel.Text = time.meanTime & vbCrLf & "Average Time to Reponse"
+                        Case MeanResponseTimeType.MeanTimeToValidate
+                            timelabel.Text = time.meanTime & vbCrLf & "Average Time to Validate"
+                    End Select
+
+                Next
+              
             Else
 
             End If
