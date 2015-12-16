@@ -93,22 +93,22 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form_AgentorShareDialog.Designer.vb">
+    <Compile Include="Forms\Form_AgentorShareDialog.Designer.vb">
       <DependentUpon>Form_AgentorShareDialog.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form_AgentorShareDialog.vb">
+    <Compile Include="Forms\Form_AgentorShareDialog.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_CreateEditProject.Designer.vb">
+    <Compile Include="Forms\Form_CreateEditProject.Designer.vb">
       <DependentUpon>Form_CreateEditProject.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form_CreateEditProject.vb">
+    <Compile Include="Forms\Form_CreateEditProject.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_JobFromTemplate.Designer.vb">
+    <Compile Include="Forms\Form_JobFromTemplate.Designer.vb">
       <DependentUpon>Form_JobFromTemplate.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form_JobFromTemplate.vb">
+    <Compile Include="Forms\Form_JobFromTemplate.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\BoxedJobs.vb" />
@@ -116,10 +116,10 @@
     <Compile Include="Modules\JobRunner_RestFunctions.vb" />
     <Compile Include="Sims\FireEye.vb" />
     <Compile Include="Modules\JobRunner_Functions.vb" />
-    <Compile Include="Form_Main.vb">
+    <Compile Include="Forms\Form_Main.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Main.Designer.vb">
+    <Compile Include="Forms\Form_Main.Designer.vb">
       <DependentUpon>Form_Main.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
@@ -140,10 +140,10 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Modules\SecuredStrings.vb" />
-    <Compile Include="Form_UpdateDialog.Designer.vb">
+    <Compile Include="Forms\Form_UpdateDialog.Designer.vb">
       <DependentUpon>Form_UpdateDialog.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form_UpdateDialog.vb">
+    <Compile Include="Forms\Form_UpdateDialog.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Sims\XPS.vb" />
@@ -155,16 +155,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Form_AgentorShareDialog.resx">
+    <EmbeddedResource Include="Forms\Form_AgentorShareDialog.resx">
       <DependentUpon>Form_AgentorShareDialog.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_CreateEditProject.resx">
+    <EmbeddedResource Include="Forms\Form_CreateEditProject.resx">
       <DependentUpon>Form_CreateEditProject.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_JobFromTemplate.resx">
+    <EmbeddedResource Include="Forms\Form_JobFromTemplate.resx">
       <DependentUpon>Form_JobFromTemplate.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Main.resx">
+    <EmbeddedResource Include="Forms\Form_Main.resx">
       <DependentUpon>Form_Main.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -174,7 +174,7 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_UpdateDialog.resx">
+    <EmbeddedResource Include="Forms\Form_UpdateDialog.resx">
       <DependentUpon>Form_UpdateDialog.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

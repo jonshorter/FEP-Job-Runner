@@ -22,6 +22,7 @@ Partial Class Form_JobFromTemplate
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_JobFromTemplate))
         Me.splitJobFromTemplate = New System.Windows.Forms.SplitContainer()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.btnJobFromTemplateCancel = New System.Windows.Forms.Button()
@@ -1752,6 +1753,7 @@ Partial Class Form_JobFromTemplate
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1030, 633)
         Me.Controls.Add(Me.splitJobFromTemplate)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form_JobFromTemplate"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Job From Template"

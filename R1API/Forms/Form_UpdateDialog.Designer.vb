@@ -22,6 +22,7 @@ Partial Class Form_UpdateDialog
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_UpdateDialog))
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -80,7 +81,7 @@ Partial Class Form_UpdateDialog
         Me.Panel1.Size = New System.Drawing.Size(459, 49)
         Me.Panel1.TabIndex = 3
         '
-        'UpdateDialog
+        'Form_UpdateDialog
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -88,9 +89,10 @@ Partial Class Form_UpdateDialog
         Me.ClientSize = New System.Drawing.Size(482, 83)
         Me.Controls.Add(Me.FlowLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "UpdateDialog"
+        Me.Name = "Form_UpdateDialog"
         Me.Text = "UpdateDialog"
         Me.FlowLayoutPanel1.ResumeLayout(False)
         Me.FlowLayoutPanel1.PerformLayout()

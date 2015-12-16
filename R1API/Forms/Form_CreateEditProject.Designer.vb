@@ -22,6 +22,7 @@ Partial Class Form_CreateEditProject
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_CreateEditProject))
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnCreateEdit = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -179,7 +180,7 @@ Partial Class Form_CreateEditProject
         'bgwEditProject
         '
         '
-        'CreateEditProject
+        'Form_CreateEditProject
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -187,10 +188,10 @@ Partial Class Form_CreateEditProject
         Me.Controls.Add(Me.flowCreateProject)
         Me.Controls.Add(Me.panelProjectCreateLoading)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "CreateEditProject"
-        Me.ShowIcon = False
+        Me.Name = "Form_CreateEditProject"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Create/Edit Project"
         Me.flowCreateProject.ResumeLayout(False)
