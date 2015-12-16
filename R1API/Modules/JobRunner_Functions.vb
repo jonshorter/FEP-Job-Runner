@@ -92,6 +92,9 @@ Module JobRunner_Functions
                 End If
             Else
                 'There may be releases, but they don't include R1_Job_Runner executable attached.
+                If Not Silent = True Then
+                    MsgBox("No Updates Available. Your have the latest version available.", MsgBoxStyle.Information, "No Updates Available")
+                End If
             End If
 
         Catch ex As Exception
