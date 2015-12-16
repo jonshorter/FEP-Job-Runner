@@ -39,7 +39,7 @@ Partial Class Form_AgentorShareDialog
         Me.TableLayoutPanel1.Controls.Add(Me.OK_Button, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Cancel_Button, 1, 0)
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(193, 161)
-        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
@@ -50,7 +50,7 @@ Partial Class Form_AgentorShareDialog
         '
         Me.OK_Button.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.OK_Button.Location = New System.Drawing.Point(4, 4)
-        Me.OK_Button.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.OK_Button.Margin = New System.Windows.Forms.Padding(4)
         Me.OK_Button.Name = "OK_Button"
         Me.OK_Button.Size = New System.Drawing.Size(89, 28)
         Me.OK_Button.TabIndex = 0
@@ -61,7 +61,7 @@ Partial Class Form_AgentorShareDialog
         Me.Cancel_Button.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Cancel_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Cancel_Button.Location = New System.Drawing.Point(101, 4)
-        Me.Cancel_Button.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Cancel_Button.Margin = New System.Windows.Forms.Padding(4)
         Me.Cancel_Button.Name = "Cancel_Button"
         Me.Cancel_Button.Size = New System.Drawing.Size(89, 28)
         Me.Cancel_Button.TabIndex = 1
@@ -73,7 +73,7 @@ Partial Class Form_AgentorShareDialog
         Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox1.Location = New System.Drawing.Point(16, 15)
-        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ReadOnly = True
@@ -92,7 +92,7 @@ Partial Class Form_AgentorShareDialog
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "Form_AgentorShareDialog"

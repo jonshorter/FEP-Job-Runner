@@ -292,7 +292,7 @@ Partial Class Form_JobFromTemplate
         Me.btnJobFromTemplateNext.Location = New System.Drawing.Point(479, 3)
         Me.btnJobFromTemplateNext.Name = "btnJobFromTemplateNext"
         Me.btnJobFromTemplateNext.Size = New System.Drawing.Size(85, 35)
-        Me.btnJobFromTemplateNext.TabIndex = 6
+        Me.btnJobFromTemplateNext.TabIndex = 0
         Me.btnJobFromTemplateNext.Text = "Next"
         Me.btnJobFromTemplateNext.UseVisualStyleBackColor = True
         '
@@ -380,7 +380,7 @@ Partial Class Form_JobFromTemplate
         Me.dgvProjectList.RowTemplate.Height = 24
         Me.dgvProjectList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvProjectList.Size = New System.Drawing.Size(1016, 507)
-        Me.dgvProjectList.TabIndex = 1
+        Me.dgvProjectList.TabIndex = 0
         '
         'DataGridViewTextBoxColumn1
         '
@@ -485,7 +485,7 @@ Partial Class Form_JobFromTemplate
         Me.txtSearchEndpoint.Location = New System.Drawing.Point(10, 9)
         Me.txtSearchEndpoint.Name = "txtSearchEndpoint"
         Me.txtSearchEndpoint.Size = New System.Drawing.Size(209, 22)
-        Me.txtSearchEndpoint.TabIndex = 1
+        Me.txtSearchEndpoint.TabIndex = 0
         Me.txtSearchEndpoint.Text = "Search"
         '
         'dgvTargetEndpoints
@@ -504,7 +504,7 @@ Partial Class Form_JobFromTemplate
         Me.dgvTargetEndpoints.RowTemplate.Height = 24
         Me.dgvTargetEndpoints.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvTargetEndpoints.Size = New System.Drawing.Size(837, 507)
-        Me.dgvTargetEndpoints.TabIndex = 1
+        Me.dgvTargetEndpoints.TabIndex = 0
         '
         'tabSchedule
         '
@@ -614,7 +614,7 @@ Partial Class Form_JobFromTemplate
         Me.grpRecurrenceEnd.Location = New System.Drawing.Point(12, 251)
         Me.grpRecurrenceEnd.Name = "grpRecurrenceEnd"
         Me.grpRecurrenceEnd.Size = New System.Drawing.Size(340, 128)
-        Me.grpRecurrenceEnd.TabIndex = 3
+        Me.grpRecurrenceEnd.TabIndex = 1
         Me.grpRecurrenceEnd.TabStop = False
         Me.grpRecurrenceEnd.Text = "End"
         Me.grpRecurrenceEnd.Visible = False
@@ -778,7 +778,7 @@ Partial Class Form_JobFromTemplate
         Me.panel_RecurWeekly.Location = New System.Drawing.Point(99, 13)
         Me.panel_RecurWeekly.Name = "panel_RecurWeekly"
         Me.panel_RecurWeekly.Size = New System.Drawing.Size(495, 161)
-        Me.panel_RecurWeekly.TabIndex = 11
+        Me.panel_RecurWeekly.TabIndex = 0
         Me.panel_RecurWeekly.Visible = False
         '
         'chkRecurWeekly_Saturday
@@ -1299,7 +1299,7 @@ Partial Class Form_JobFromTemplate
         Me.btnThreatFiltersAdvanced.Location = New System.Drawing.Point(528, 5)
         Me.btnThreatFiltersAdvanced.Name = "btnThreatFiltersAdvanced"
         Me.btnThreatFiltersAdvanced.Size = New System.Drawing.Size(119, 28)
-        Me.btnThreatFiltersAdvanced.TabIndex = 6
+        Me.btnThreatFiltersAdvanced.TabIndex = 2
         Me.btnThreatFiltersAdvanced.Text = "Advanced"
         Me.btnThreatFiltersAdvanced.UseVisualStyleBackColor = True
         '
@@ -1310,7 +1310,7 @@ Partial Class Form_JobFromTemplate
         Me.grpThreatSelection.Location = New System.Drawing.Point(269, -1)
         Me.grpThreatSelection.Name = "grpThreatSelection"
         Me.grpThreatSelection.Size = New System.Drawing.Size(234, 35)
-        Me.grpThreatSelection.TabIndex = 5
+        Me.grpThreatSelection.TabIndex = 1
         Me.grpThreatSelection.TabStop = False
         '
         'rdoIOCSelected
@@ -1341,7 +1341,7 @@ Partial Class Form_JobFromTemplate
         Me.txtSearchThreatFilters.Location = New System.Drawing.Point(33, 5)
         Me.txtSearchThreatFilters.Name = "txtSearchThreatFilters"
         Me.txtSearchThreatFilters.Size = New System.Drawing.Size(209, 22)
-        Me.txtSearchThreatFilters.TabIndex = 4
+        Me.txtSearchThreatFilters.TabIndex = 0
         Me.txtSearchThreatFilters.Text = "Search"
         '
         'flowThreatScanOptions
@@ -1370,7 +1370,7 @@ Partial Class Form_JobFromTemplate
         Me.grpThreatScanAdvanced.Location = New System.Drawing.Point(3, 3)
         Me.grpThreatScanAdvanced.Name = "grpThreatScanAdvanced"
         Me.grpThreatScanAdvanced.Size = New System.Drawing.Size(997, 92)
-        Me.grpThreatScanAdvanced.TabIndex = 1
+        Me.grpThreatScanAdvanced.TabIndex = 0
         Me.grpThreatScanAdvanced.TabStop = False
         Me.grpThreatScanAdvanced.Text = "Threat Scan Options"
         '
@@ -1477,7 +1477,7 @@ Partial Class Form_JobFromTemplate
         Me.flowThreatScanArchivesList.MinimumSize = New System.Drawing.Size(1000, 100)
         Me.flowThreatScanArchivesList.Name = "flowThreatScanArchivesList"
         Me.flowThreatScanArchivesList.Size = New System.Drawing.Size(1000, 100)
-        Me.flowThreatScanArchivesList.TabIndex = 2
+        Me.flowThreatScanArchivesList.TabIndex = 1
         Me.flowThreatScanArchivesList.Visible = False
         '
         'flowThreatScanAllFilter
@@ -1502,7 +1502,7 @@ Partial Class Form_JobFromTemplate
         Me.flowThreatScanAllFilter.MinimumSize = New System.Drawing.Size(1000, 100)
         Me.flowThreatScanAllFilter.Name = "flowThreatScanAllFilter"
         Me.flowThreatScanAllFilter.Size = New System.Drawing.Size(1000, 100)
-        Me.flowThreatScanAllFilter.TabIndex = 3
+        Me.flowThreatScanAllFilter.TabIndex = 2
         '
         'Label1
         '
@@ -1620,7 +1620,7 @@ Partial Class Form_JobFromTemplate
         Me.dgvThreatFilters.RowTemplate.Height = 24
         Me.dgvThreatFilters.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvThreatFilters.Size = New System.Drawing.Size(1016, 100)
-        Me.dgvThreatFilters.TabIndex = 1
+        Me.dgvThreatFilters.TabIndex = 0
         '
         'Selected
         '

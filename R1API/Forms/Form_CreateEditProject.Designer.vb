@@ -107,7 +107,7 @@ Partial Class Form_CreateEditProject
         Me.txtNewProjectName.Location = New System.Drawing.Point(113, 3)
         Me.txtNewProjectName.Name = "txtNewProjectName"
         Me.txtNewProjectName.Size = New System.Drawing.Size(234, 22)
-        Me.txtNewProjectName.TabIndex = 4
+        Me.txtNewProjectName.TabIndex = 0
         '
         'Label2
         '
@@ -124,7 +124,7 @@ Partial Class Form_CreateEditProject
         Me.txtNewProjectDescription.Multiline = True
         Me.txtNewProjectDescription.Name = "txtNewProjectDescription"
         Me.txtNewProjectDescription.Size = New System.Drawing.Size(234, 69)
-        Me.txtNewProjectDescription.TabIndex = 6
+        Me.txtNewProjectDescription.TabIndex = 1
         '
         'chkEnableThreatBridge
         '
@@ -132,7 +132,7 @@ Partial Class Form_CreateEditProject
         Me.chkEnableThreatBridge.Location = New System.Drawing.Point(3, 121)
         Me.chkEnableThreatBridge.Name = "chkEnableThreatBridge"
         Me.chkEnableThreatBridge.Size = New System.Drawing.Size(213, 21)
-        Me.chkEnableThreatBridge.TabIndex = 7
+        Me.chkEnableThreatBridge.TabIndex = 0
         Me.chkEnableThreatBridge.Text = "Enable ThreatBridge Alerting"
         Me.chkEnableThreatBridge.UseVisualStyleBackColor = True
         '

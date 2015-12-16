@@ -57,7 +57,7 @@ Partial Class Form_UpdateDialog
         Me.Label1.MaximumSize = New System.Drawing.Size(500, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(51, 17)
-        Me.Label1.TabIndex = 2
+        Me.Label1.TabIndex = 0
         Me.Label1.Text = "Label1"
         '
         'FlowLayoutPanel1
@@ -79,7 +79,7 @@ Partial Class Form_UpdateDialog
         Me.Panel1.Location = New System.Drawing.Point(3, 20)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(459, 49)
-        Me.Panel1.TabIndex = 3
+        Me.Panel1.TabIndex = 1
         '
         'Form_UpdateDialog
         '

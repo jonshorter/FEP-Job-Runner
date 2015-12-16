@@ -361,7 +361,8 @@ Partial Class Main
         Me.btnExecute.Margin = New System.Windows.Forms.Padding(4)
         Me.btnExecute.Name = "btnExecute"
         Me.btnExecute.Size = New System.Drawing.Size(100, 28)
-        Me.btnExecute.TabIndex = 0
+        Me.btnExecute.TabIndex = 1
+        Me.btnExecute.TabStop = False
         Me.btnExecute.Text = "Execute Job"
         Me.btnExecute.UseVisualStyleBackColor = True
         '
@@ -747,7 +748,7 @@ Partial Class Main
         Me.tabSubMenu.Name = "tabSubMenu"
         Me.tabSubMenu.SelectedIndex = 0
         Me.tabSubMenu.Size = New System.Drawing.Size(821, 590)
-        Me.tabSubMenu.TabIndex = 19
+        Me.tabSubMenu.TabIndex = 0
         '
         'tabJobInfo
         '
@@ -777,7 +778,7 @@ Partial Class Main
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox1.Size = New System.Drawing.Size(803, 272)
-        Me.GroupBox1.TabIndex = 27
+        Me.GroupBox1.TabIndex = 3
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Job Targets"
         '
@@ -839,6 +840,7 @@ Partial Class Main
         Me.lstNetShare.Name = "lstNetShare"
         Me.lstNetShare.Size = New System.Drawing.Size(355, 106)
         Me.lstNetShare.TabIndex = 4
+        Me.lstNetShare.TabStop = False
         '
         'txtNetSharePath
         '
@@ -865,6 +867,7 @@ Partial Class Main
         Me.btnRemoveNetShare.Name = "btnRemoveNetShare"
         Me.btnRemoveNetShare.Size = New System.Drawing.Size(100, 28)
         Me.btnRemoveNetShare.TabIndex = 3
+        Me.btnRemoveNetShare.TabStop = False
         Me.btnRemoveNetShare.Text = "Remove"
         Me.btnRemoveNetShare.UseVisualStyleBackColor = True
         '
@@ -880,7 +883,7 @@ Partial Class Main
         Me.grpagent.Name = "grpagent"
         Me.grpagent.Padding = New System.Windows.Forms.Padding(4)
         Me.grpagent.Size = New System.Drawing.Size(292, 198)
-        Me.grpagent.TabIndex = 10
+        Me.grpagent.TabIndex = 0
         Me.grpagent.TabStop = False
         Me.grpagent.Text = "Computer Targets"
         '
@@ -902,6 +905,7 @@ Partial Class Main
         Me.lstComputerTargets.Name = "lstComputerTargets"
         Me.lstComputerTargets.Size = New System.Drawing.Size(159, 106)
         Me.lstComputerTargets.TabIndex = 4
+        Me.lstComputerTargets.TabStop = False
         '
         'txtComputerTarget
         '
@@ -909,7 +913,7 @@ Partial Class Main
         Me.txtComputerTarget.Margin = New System.Windows.Forms.Padding(4)
         Me.txtComputerTarget.Name = "txtComputerTarget"
         Me.txtComputerTarget.Size = New System.Drawing.Size(159, 22)
-        Me.txtComputerTarget.TabIndex = 5
+        Me.txtComputerTarget.TabIndex = 0
         '
         'btnAddComputer
         '
@@ -917,7 +921,7 @@ Partial Class Main
         Me.btnAddComputer.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAddComputer.Name = "btnAddComputer"
         Me.btnAddComputer.Size = New System.Drawing.Size(100, 28)
-        Me.btnAddComputer.TabIndex = 2
+        Me.btnAddComputer.TabIndex = 1
         Me.btnAddComputer.Text = "Add Computer"
         Me.btnAddComputer.UseVisualStyleBackColor = True
         '
@@ -928,6 +932,7 @@ Partial Class Main
         Me.btnRemoveComputer.Name = "btnRemoveComputer"
         Me.btnRemoveComputer.Size = New System.Drawing.Size(100, 28)
         Me.btnRemoveComputer.TabIndex = 3
+        Me.btnRemoveComputer.TabStop = False
         Me.btnRemoveComputer.Text = "Remove"
         Me.btnRemoveComputer.UseVisualStyleBackColor = True
         '
@@ -942,7 +947,7 @@ Partial Class Main
         Me.txtTemplateName.Name = "txtTemplateName"
         Me.txtTemplateName.Size = New System.Drawing.Size(312, 24)
         Me.txtTemplateName.Sorted = True
-        Me.txtTemplateName.TabIndex = 26
+        Me.txtTemplateName.TabIndex = 2
         '
         'Label25
         '
@@ -960,7 +965,7 @@ Partial Class Main
         Me.txtJobName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtJobName.Name = "txtJobName"
         Me.txtJobName.Size = New System.Drawing.Size(312, 22)
-        Me.txtJobName.TabIndex = 22
+        Me.txtJobName.TabIndex = 0
         '
         'Label26
         '
@@ -978,7 +983,7 @@ Partial Class Main
         Me.txtProjectName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtProjectName.Name = "txtProjectName"
         Me.txtProjectName.Size = New System.Drawing.Size(312, 22)
-        Me.txtProjectName.TabIndex = 23
+        Me.txtProjectName.TabIndex = 1
         '
         'Label27
         '
@@ -1061,9 +1066,10 @@ Partial Class Main
         Me.splitInclusion.Panel2.Controls.Add(Me.btnRemoveInclFilterfromList)
         Me.splitInclusion.Panel2.Controls.Add(Me.btnAddInclFilterToList)
         Me.splitInclusion.Size = New System.Drawing.Size(787, 509)
-        Me.splitInclusion.SplitterDistance = 216
+        Me.splitInclusion.SplitterDistance = 272
         Me.splitInclusion.SplitterWidth = 10
-        Me.splitInclusion.TabIndex = 14
+        Me.splitInclusion.TabIndex = 0
+        Me.splitInclusion.TabStop = False
         '
         'txtinclkeywords
         '
@@ -1072,7 +1078,7 @@ Partial Class Main
         Me.txtinclkeywords.Multiline = True
         Me.txtinclkeywords.Name = "txtinclkeywords"
         Me.txtinclkeywords.Size = New System.Drawing.Size(443, 128)
-        Me.txtinclkeywords.TabIndex = 2
+        Me.txtinclkeywords.TabIndex = 6
         '
         'rdoinclregexsearch
         '
@@ -1092,7 +1098,7 @@ Partial Class Main
         Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(84, 17)
-        Me.Label8.TabIndex = 0
+        Me.Label8.TabIndex = 7
         Me.Label8.Text = "Filter Name:"
         '
         'rdoinclsimplesearch
@@ -1103,7 +1109,7 @@ Partial Class Main
         Me.rdoinclsimplesearch.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoinclsimplesearch.Name = "rdoinclsimplesearch"
         Me.rdoinclsimplesearch.Size = New System.Drawing.Size(120, 21)
-        Me.rdoinclsimplesearch.TabIndex = 12
+        Me.rdoinclsimplesearch.TabIndex = 4
         Me.rdoinclsimplesearch.TabStop = True
         Me.rdoinclsimplesearch.Text = "Simple Search"
         Me.rdoinclsimplesearch.UseVisualStyleBackColor = True
@@ -1114,7 +1120,7 @@ Partial Class Main
         Me.txtinclfiltername.Margin = New System.Windows.Forms.Padding(4)
         Me.txtinclfiltername.Name = "txtinclfiltername"
         Me.txtinclfiltername.Size = New System.Drawing.Size(245, 22)
-        Me.txtinclfiltername.TabIndex = 1
+        Me.txtinclfiltername.TabIndex = 0
         '
         'chkinclsearchfilename
         '
@@ -1123,7 +1129,7 @@ Partial Class Main
         Me.chkinclsearchfilename.Margin = New System.Windows.Forms.Padding(4)
         Me.chkinclsearchfilename.Name = "chkinclsearchfilename"
         Me.chkinclsearchfilename.Size = New System.Drawing.Size(171, 21)
-        Me.chkinclsearchfilename.TabIndex = 10
+        Me.chkinclsearchfilename.TabIndex = 5
         Me.chkinclsearchfilename.Text = "Search FileName Only"
         Me.chkinclsearchfilename.UseVisualStyleBackColor = True
         '
@@ -1154,7 +1160,7 @@ Partial Class Main
         Me.txtinclpathcontains.Multiline = True
         Me.txtinclpathcontains.Name = "txtinclpathcontains"
         Me.txtinclpathcontains.Size = New System.Drawing.Size(641, 24)
-        Me.txtinclpathcontains.TabIndex = 4
+        Me.txtinclpathcontains.TabIndex = 2
         '
         'txtinclmd5hash
         '
@@ -1163,7 +1169,7 @@ Partial Class Main
         Me.txtinclmd5hash.Multiline = True
         Me.txtinclmd5hash.Name = "txtinclmd5hash"
         Me.txtinclmd5hash.Size = New System.Drawing.Size(301, 128)
-        Me.txtinclmd5hash.TabIndex = 8
+        Me.txtinclmd5hash.TabIndex = 3
         '
         'Label10
         '
@@ -1181,7 +1187,7 @@ Partial Class Main
         Me.txtinclextensions.Margin = New System.Windows.Forms.Padding(4)
         Me.txtinclextensions.Name = "txtinclextensions"
         Me.txtinclextensions.Size = New System.Drawing.Size(297, 22)
-        Me.txtinclextensions.TabIndex = 7
+        Me.txtinclextensions.TabIndex = 1
         '
         'Label11
         '
@@ -1190,7 +1196,7 @@ Partial Class Main
         Me.Label11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(80, 17)
-        Me.Label11.TabIndex = 6
+        Me.Label11.TabIndex = 9
         Me.Label11.Text = "Extensions:"
         '
         'btnSaveIncFilterChanges
@@ -1199,7 +1205,8 @@ Partial Class Main
         Me.btnSaveIncFilterChanges.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSaveIncFilterChanges.Name = "btnSaveIncFilterChanges"
         Me.btnSaveIncFilterChanges.Size = New System.Drawing.Size(100, 28)
-        Me.btnSaveIncFilterChanges.TabIndex = 5
+        Me.btnSaveIncFilterChanges.TabIndex = 1
+        Me.btnSaveIncFilterChanges.TabStop = False
         Me.btnSaveIncFilterChanges.Text = "Save"
         Me.btnSaveIncFilterChanges.UseVisualStyleBackColor = True
         '
@@ -1228,7 +1235,8 @@ Partial Class Main
         Me.btnRemoveInclFilterfromList.Margin = New System.Windows.Forms.Padding(4)
         Me.btnRemoveInclFilterfromList.Name = "btnRemoveInclFilterfromList"
         Me.btnRemoveInclFilterfromList.Size = New System.Drawing.Size(100, 28)
-        Me.btnRemoveInclFilterfromList.TabIndex = 1
+        Me.btnRemoveInclFilterfromList.TabIndex = 2
+        Me.btnRemoveInclFilterfromList.TabStop = False
         Me.btnRemoveInclFilterfromList.Text = "Remove"
         Me.btnRemoveInclFilterfromList.UseVisualStyleBackColor = True
         '
@@ -1285,7 +1293,8 @@ Partial Class Main
         Me.SplitExclusion.Size = New System.Drawing.Size(787, 509)
         Me.SplitExclusion.SplitterDistance = 266
         Me.SplitExclusion.SplitterWidth = 10
-        Me.SplitExclusion.TabIndex = 18
+        Me.SplitExclusion.TabIndex = 0
+        Me.SplitExclusion.TabStop = False
         '
         'Label15
         '
@@ -1313,7 +1322,7 @@ Partial Class Main
         Me.txtexclfiltername.Margin = New System.Windows.Forms.Padding(4)
         Me.txtexclfiltername.Name = "txtexclfiltername"
         Me.txtexclfiltername.Size = New System.Drawing.Size(245, 22)
-        Me.txtexclfiltername.TabIndex = 9
+        Me.txtexclfiltername.TabIndex = 0
         '
         'txtexclmd5hash
         '
@@ -1322,7 +1331,7 @@ Partial Class Main
         Me.txtexclmd5hash.Multiline = True
         Me.txtexclmd5hash.Name = "txtexclmd5hash"
         Me.txtexclmd5hash.Size = New System.Drawing.Size(301, 128)
-        Me.txtexclmd5hash.TabIndex = 16
+        Me.txtexclmd5hash.TabIndex = 3
         '
         'txtexclpathcontains
         '
@@ -1331,7 +1340,7 @@ Partial Class Main
         Me.txtexclpathcontains.Multiline = True
         Me.txtexclpathcontains.Name = "txtexclpathcontains"
         Me.txtexclpathcontains.Size = New System.Drawing.Size(641, 24)
-        Me.txtexclpathcontains.TabIndex = 12
+        Me.txtexclpathcontains.TabIndex = 2
         '
         'txtexclextensions
         '
@@ -1339,7 +1348,7 @@ Partial Class Main
         Me.txtexclextensions.Margin = New System.Windows.Forms.Padding(4)
         Me.txtexclextensions.Name = "txtexclextensions"
         Me.txtexclextensions.Size = New System.Drawing.Size(297, 22)
-        Me.txtexclextensions.TabIndex = 15
+        Me.txtexclextensions.TabIndex = 1
         '
         'Label13
         '
@@ -1367,7 +1376,8 @@ Partial Class Main
         Me.btnsaveexclusionfilterchanges.Margin = New System.Windows.Forms.Padding(4)
         Me.btnsaveexclusionfilterchanges.Name = "btnsaveexclusionfilterchanges"
         Me.btnsaveexclusionfilterchanges.Size = New System.Drawing.Size(100, 28)
-        Me.btnsaveexclusionfilterchanges.TabIndex = 10
+        Me.btnsaveexclusionfilterchanges.TabIndex = 1
+        Me.btnsaveexclusionfilterchanges.TabStop = False
         Me.btnsaveexclusionfilterchanges.Text = "Save"
         Me.btnsaveexclusionfilterchanges.UseVisualStyleBackColor = True
         '
@@ -1396,7 +1406,8 @@ Partial Class Main
         Me.btnremoveexclusionfilterfromlist.Margin = New System.Windows.Forms.Padding(4)
         Me.btnremoveexclusionfilterfromlist.Name = "btnremoveexclusionfilterfromlist"
         Me.btnremoveexclusionfilterfromlist.Size = New System.Drawing.Size(100, 28)
-        Me.btnremoveexclusionfilterfromlist.TabIndex = 7
+        Me.btnremoveexclusionfilterfromlist.TabIndex = 2
+        Me.btnremoveexclusionfilterfromlist.TabStop = False
         Me.btnremoveexclusionfilterfromlist.Text = "Remove"
         Me.btnremoveexclusionfilterfromlist.UseVisualStyleBackColor = True
         '
@@ -1406,7 +1417,7 @@ Partial Class Main
         Me.btnaddexclusionfiltertolist.Margin = New System.Windows.Forms.Padding(4)
         Me.btnaddexclusionfiltertolist.Name = "btnaddexclusionfiltertolist"
         Me.btnaddexclusionfiltertolist.Size = New System.Drawing.Size(100, 28)
-        Me.btnaddexclusionfiltertolist.TabIndex = 6
+        Me.btnaddexclusionfiltertolist.TabIndex = 0
         Me.btnaddexclusionfiltertolist.Text = "Add"
         Me.btnaddexclusionfiltertolist.UseVisualStyleBackColor = True
         '
@@ -1451,7 +1462,7 @@ Partial Class Main
         Me.btnAddRemOption.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAddRemOption.Name = "btnAddRemOption"
         Me.btnAddRemOption.Size = New System.Drawing.Size(100, 28)
-        Me.btnAddRemOption.TabIndex = 2
+        Me.btnAddRemOption.TabIndex = 0
         Me.btnAddRemOption.Text = "Add"
         Me.btnAddRemOption.UseVisualStyleBackColor = True
         '
@@ -1518,7 +1529,7 @@ Partial Class Main
         Me.chkremsendexecute.Margin = New System.Windows.Forms.Padding(4)
         Me.chkremsendexecute.Name = "chkremsendexecute"
         Me.chkremsendexecute.Size = New System.Drawing.Size(80, 21)
-        Me.chkremsendexecute.TabIndex = 25
+        Me.chkremsendexecute.TabIndex = 2
         Me.chkremsendexecute.Text = "Execute"
         Me.chkremsendexecute.UseVisualStyleBackColor = True
         Me.chkremsendexecute.Visible = False
@@ -1540,7 +1551,7 @@ Partial Class Main
         Me.txtremsenddest.Margin = New System.Windows.Forms.Padding(4)
         Me.txtremsenddest.Name = "txtremsenddest"
         Me.txtremsenddest.Size = New System.Drawing.Size(312, 22)
-        Me.txtremsenddest.TabIndex = 22
+        Me.txtremsenddest.TabIndex = 1
         '
         'Label17
         '
@@ -1558,7 +1569,7 @@ Partial Class Main
         Me.txtremsendsource.Margin = New System.Windows.Forms.Padding(4)
         Me.txtremsendsource.Name = "txtremsendsource"
         Me.txtremsendsource.Size = New System.Drawing.Size(312, 22)
-        Me.txtremsendsource.TabIndex = 20
+        Me.txtremsendsource.TabIndex = 0
         '
         'Label16
         '
@@ -1591,7 +1602,7 @@ Partial Class Main
         Me.txtremexecargs.Margin = New System.Windows.Forms.Padding(4)
         Me.txtremexecargs.Name = "txtremexecargs"
         Me.txtremexecargs.Size = New System.Drawing.Size(312, 22)
-        Me.txtremexecargs.TabIndex = 24
+        Me.txtremexecargs.TabIndex = 1
         '
         'Label19
         '
@@ -1609,7 +1620,7 @@ Partial Class Main
         Me.txtremexecpath.Margin = New System.Windows.Forms.Padding(4)
         Me.txtremexecpath.Name = "txtremexecpath"
         Me.txtremexecpath.Size = New System.Drawing.Size(312, 22)
-        Me.txtremexecpath.TabIndex = 22
+        Me.txtremexecpath.TabIndex = 0
         '
         'Label18
         '
@@ -1639,7 +1650,7 @@ Partial Class Main
         Me.txtremdelfilepath.Margin = New System.Windows.Forms.Padding(4)
         Me.txtremdelfilepath.Name = "txtremdelfilepath"
         Me.txtremdelfilepath.Size = New System.Drawing.Size(312, 22)
-        Me.txtremdelfilepath.TabIndex = 24
+        Me.txtremdelfilepath.TabIndex = 0
         '
         'Label20
         '
@@ -1686,7 +1697,7 @@ Partial Class Main
         Me.rdoPID.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoPID.Name = "rdoPID"
         Me.rdoPID.Size = New System.Drawing.Size(97, 21)
-        Me.rdoPID.TabIndex = 16
+        Me.rdoPID.TabIndex = 0
         Me.rdoPID.TabStop = True
         Me.rdoPID.Text = "Process ID"
         Me.rdoPID.UseVisualStyleBackColor = True
@@ -1697,7 +1708,7 @@ Partial Class Main
         Me.txtremkillprocname.Margin = New System.Windows.Forms.Padding(4)
         Me.txtremkillprocname.Name = "txtremkillprocname"
         Me.txtremkillprocname.Size = New System.Drawing.Size(312, 22)
-        Me.txtremkillprocname.TabIndex = 14
+        Me.txtremkillprocname.TabIndex = 2
         '
         'Label22
         '
@@ -1716,7 +1727,7 @@ Partial Class Main
         Me.nmbremkillprocid.Maximum = New Decimal(New Integer() {999999999, 0, 0, 0})
         Me.nmbremkillprocid.Name = "nmbremkillprocid"
         Me.nmbremkillprocid.Size = New System.Drawing.Size(101, 22)
-        Me.nmbremkillprocid.TabIndex = 13
+        Me.nmbremkillprocid.TabIndex = 1
         '
         'Label21
         '
@@ -2500,6 +2511,7 @@ Partial Class Main
         Me.btnShowJSON.Name = "btnShowJSON"
         Me.btnShowJSON.Size = New System.Drawing.Size(100, 28)
         Me.btnShowJSON.TabIndex = 23
+        Me.btnShowJSON.TabStop = False
         Me.btnShowJSON.Text = "Show JSON"
         Me.btnShowJSON.UseVisualStyleBackColor = True
         '
@@ -2510,6 +2522,7 @@ Partial Class Main
         Me.btnLoadFromBox.Name = "btnLoadFromBox"
         Me.btnLoadFromBox.Size = New System.Drawing.Size(120, 28)
         Me.btnLoadFromBox.TabIndex = 22
+        Me.btnLoadFromBox.TabStop = False
         Me.btnLoadFromBox.Text = "Load From Box"
         Me.btnLoadFromBox.UseVisualStyleBackColor = True
         '
@@ -2520,6 +2533,7 @@ Partial Class Main
         Me.btnSaveAsBox.Name = "btnSaveAsBox"
         Me.btnSaveAsBox.Size = New System.Drawing.Size(100, 28)
         Me.btnSaveAsBox.TabIndex = 21
+        Me.btnSaveAsBox.TabStop = False
         Me.btnSaveAsBox.Text = "Save as Box"
         Me.btnSaveAsBox.UseVisualStyleBackColor = True
         '
@@ -2550,7 +2564,7 @@ Partial Class Main
         Me.txtFireEyeMalwareMD5.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFireEyeMalwareMD5.Name = "txtFireEyeMalwareMD5"
         Me.txtFireEyeMalwareMD5.Size = New System.Drawing.Size(233, 22)
-        Me.txtFireEyeMalwareMD5.TabIndex = 34
+        Me.txtFireEyeMalwareMD5.TabIndex = 2
         Me.txtFireEyeMalwareMD5.Text = "47f9fdc617f8c98a6732be534d8dbe9a"
         '
         'Label47
@@ -2618,7 +2632,7 @@ Partial Class Main
         Me.cmbFEAlertType.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbFEAlertType.Name = "cmbFEAlertType"
         Me.cmbFEAlertType.Size = New System.Drawing.Size(233, 24)
-        Me.cmbFEAlertType.TabIndex = 4
+        Me.cmbFEAlertType.TabIndex = 1
         '
         'txtFETarget
         '
@@ -2626,7 +2640,7 @@ Partial Class Main
         Me.txtFETarget.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFETarget.Name = "txtFETarget"
         Me.txtFETarget.Size = New System.Drawing.Size(233, 22)
-        Me.txtFETarget.TabIndex = 3
+        Me.txtFETarget.TabIndex = 0
         '
         'Label33
         '
@@ -2644,7 +2658,7 @@ Partial Class Main
         Me.btn_FEEvent.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_FEEvent.Name = "btn_FEEvent"
         Me.btn_FEEvent.Size = New System.Drawing.Size(156, 28)
-        Me.btn_FEEvent.TabIndex = 0
+        Me.btn_FEEvent.TabIndex = 3
         Me.btn_FEEvent.Text = "Send FireEye Event"
         Me.btn_FEEvent.UseVisualStyleBackColor = True
         '
@@ -2679,7 +2693,7 @@ Partial Class Main
         Me.txtPANWMalwareMD5.Margin = New System.Windows.Forms.Padding(4)
         Me.txtPANWMalwareMD5.Name = "txtPANWMalwareMD5"
         Me.txtPANWMalwareMD5.Size = New System.Drawing.Size(233, 22)
-        Me.txtPANWMalwareMD5.TabIndex = 38
+        Me.txtPANWMalwareMD5.TabIndex = 3
         Me.txtPANWMalwareMD5.Text = "47f9fdc617f8c98a6732be534d8dbe9a"
         '
         'Label48
@@ -2713,6 +2727,7 @@ Partial Class Main
         Me.txtPANWSim.ReadOnly = True
         Me.txtPANWSim.Size = New System.Drawing.Size(272, 230)
         Me.txtPANWSim.TabIndex = 34
+        Me.txtPANWSim.TabStop = False
         Me.txtPANWSim.Text = resources.GetString("txtPANWSim.Text")
         '
         'TextBox4
@@ -2774,7 +2789,7 @@ Partial Class Main
         Me.panw_sim_port.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.panw_sim_port.Name = "panw_sim_port"
         Me.panw_sim_port.Size = New System.Drawing.Size(128, 22)
-        Me.panw_sim_port.TabIndex = 24
+        Me.panw_sim_port.TabIndex = 0
         Me.panw_sim_port.Value = New Decimal(New Integer() {8449, 0, 0, 0})
         '
         'Label44
@@ -2803,7 +2818,7 @@ Partial Class Main
         Me.btn_WildfireStart.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_WildfireStart.Name = "btn_WildfireStart"
         Me.btn_WildfireStart.Size = New System.Drawing.Size(175, 28)
-        Me.btn_WildfireStart.TabIndex = 21
+        Me.btn_WildfireStart.TabIndex = 1
         Me.btn_WildfireStart.Text = "Start Wildfire Sim"
         Me.btn_WildfireStart.UseVisualStyleBackColor = True
         '
@@ -2814,7 +2829,7 @@ Partial Class Main
         Me.panwPort.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
         Me.panwPort.Name = "panwPort"
         Me.panwPort.Size = New System.Drawing.Size(160, 22)
-        Me.panwPort.TabIndex = 11
+        Me.panwPort.TabIndex = 0
         Me.panwPort.Value = New Decimal(New Integer() {514, 0, 0, 0})
         '
         'Label30
@@ -2846,7 +2861,7 @@ Partial Class Main
         Me.cmbPANWAlert.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbPANWAlert.Name = "cmbPANWAlert"
         Me.cmbPANWAlert.Size = New System.Drawing.Size(233, 24)
-        Me.cmbPANWAlert.TabIndex = 8
+        Me.cmbPANWAlert.TabIndex = 2
         '
         'txtPANWTarget
         '
@@ -2854,7 +2869,7 @@ Partial Class Main
         Me.txtPANWTarget.Margin = New System.Windows.Forms.Padding(4)
         Me.txtPANWTarget.Name = "txtPANWTarget"
         Me.txtPANWTarget.Size = New System.Drawing.Size(233, 22)
-        Me.txtPANWTarget.TabIndex = 7
+        Me.txtPANWTarget.TabIndex = 1
         '
         'Label36
         '
@@ -2872,7 +2887,7 @@ Partial Class Main
         Me.btnPANWSend.Margin = New System.Windows.Forms.Padding(4)
         Me.btnPANWSend.Name = "btnPANWSend"
         Me.btnPANWSend.Size = New System.Drawing.Size(185, 28)
-        Me.btnPANWSend.TabIndex = 0
+        Me.btnPANWSend.TabIndex = 4
         Me.btnPANWSend.Text = "Send PANW SysLog Alert"
         Me.btnPANWSend.UseVisualStyleBackColor = True
         '
@@ -2910,7 +2925,7 @@ Partial Class Main
         Me.txtXPSMalwareMD5.Margin = New System.Windows.Forms.Padding(4)
         Me.txtXPSMalwareMD5.Name = "txtXPSMalwareMD5"
         Me.txtXPSMalwareMD5.Size = New System.Drawing.Size(233, 22)
-        Me.txtXPSMalwareMD5.TabIndex = 32
+        Me.txtXPSMalwareMD5.TabIndex = 4
         Me.txtXPSMalwareMD5.Text = "47f9fdc617f8c98a6732be534d8dbe9a"
         '
         'Label46
@@ -2940,7 +2955,7 @@ Partial Class Main
         Me.txtXPSMalware.Margin = New System.Windows.Forms.Padding(4)
         Me.txtXPSMalware.Name = "txtXPSMalware"
         Me.txtXPSMalware.Size = New System.Drawing.Size(233, 22)
-        Me.txtXPSMalware.TabIndex = 29
+        Me.txtXPSMalware.TabIndex = 3
         Me.txtXPSMalware.Text = "Super.Evil.Malware"
         '
         'Label42
@@ -2974,6 +2989,7 @@ Partial Class Main
         Me.txtXPSSIM.ReadOnly = True
         Me.txtXPSSIM.Size = New System.Drawing.Size(272, 230)
         Me.txtXPSSIM.TabIndex = 26
+        Me.txtXPSSIM.TabStop = False
         Me.txtXPSSIM.Text = resources.GetString("txtXPSSIM.Text")
         '
         'txtFELink2
@@ -3024,7 +3040,7 @@ Partial Class Main
         Me.xps_sim_Port.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.xps_sim_Port.Name = "xps_sim_Port"
         Me.xps_sim_Port.Size = New System.Drawing.Size(128, 22)
-        Me.xps_sim_Port.TabIndex = 24
+        Me.xps_sim_Port.TabIndex = 0
         Me.xps_sim_Port.Value = New Decimal(New Integer() {8448, 0, 0, 0})
         '
         'Label43
@@ -3053,7 +3069,7 @@ Partial Class Main
         Me.btnStartXPSListener.Margin = New System.Windows.Forms.Padding(4)
         Me.btnStartXPSListener.Name = "btnStartXPSListener"
         Me.btnStartXPSListener.Size = New System.Drawing.Size(175, 28)
-        Me.btnStartXPSListener.TabIndex = 21
+        Me.btnStartXPSListener.TabIndex = 1
         Me.btnStartXPSListener.Text = "Start XPS CP Sim"
         Me.btnStartXPSListener.UseVisualStyleBackColor = True
         '
@@ -3076,7 +3092,7 @@ Partial Class Main
         Me.cmbXPSSeverity.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbXPSSeverity.Name = "cmbXPSSeverity"
         Me.cmbXPSSeverity.Size = New System.Drawing.Size(233, 24)
-        Me.cmbXPSSeverity.TabIndex = 19
+        Me.cmbXPSSeverity.TabIndex = 2
         '
         'xpsPort
         '
@@ -3085,7 +3101,7 @@ Partial Class Main
         Me.xpsPort.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
         Me.xpsPort.Name = "xpsPort"
         Me.xpsPort.Size = New System.Drawing.Size(160, 22)
-        Me.xpsPort.TabIndex = 18
+        Me.xpsPort.TabIndex = 0
         Me.xpsPort.Value = New Decimal(New Integer() {514, 0, 0, 0})
         '
         'Label38
@@ -3104,7 +3120,7 @@ Partial Class Main
         Me.txtXPSTarget.Margin = New System.Windows.Forms.Padding(4)
         Me.txtXPSTarget.Name = "txtXPSTarget"
         Me.txtXPSTarget.Size = New System.Drawing.Size(233, 22)
-        Me.txtXPSTarget.TabIndex = 14
+        Me.txtXPSTarget.TabIndex = 1
         '
         'Label40
         '
@@ -3122,7 +3138,7 @@ Partial Class Main
         Me.btnXPSSend.Margin = New System.Windows.Forms.Padding(4)
         Me.btnXPSSend.Name = "btnXPSSend"
         Me.btnXPSSend.Size = New System.Drawing.Size(185, 28)
-        Me.btnXPSSend.TabIndex = 12
+        Me.btnXPSSend.TabIndex = 5
         Me.btnXPSSend.Text = "Send XPS SysLog Alert"
         Me.btnXPSSend.UseVisualStyleBackColor = True
         '
@@ -3143,7 +3159,7 @@ Partial Class Main
         Me.Button1.Location = New System.Drawing.Point(343, 173)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(149, 32)
-        Me.Button1.TabIndex = 28
+        Me.Button1.TabIndex = 0
         Me.Button1.Text = "Check for Updates"
         Me.Button1.UseVisualStyleBackColor = True
         '
@@ -3160,6 +3176,7 @@ Partial Class Main
         Me.TextBox1.ReadOnly = True
         Me.TextBox1.Size = New System.Drawing.Size(832, 700)
         Me.TextBox1.TabIndex = 0
+        Me.TextBox1.TabStop = False
         Me.TextBox1.Text = resources.GetString("TextBox1.Text")
         '
         'ofdBox
