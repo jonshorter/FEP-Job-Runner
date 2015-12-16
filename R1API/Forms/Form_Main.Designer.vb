@@ -381,7 +381,7 @@ Partial Class Main
         Me.txtDefaultJobName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtDefaultJobName.Name = "txtDefaultJobName"
         Me.txtDefaultJobName.Size = New System.Drawing.Size(312, 22)
-        Me.txtDefaultJobName.TabIndex = 8
+        Me.txtDefaultJobName.TabIndex = 0
         '
         'txtDefaultProjectName
         '
@@ -389,7 +389,7 @@ Partial Class Main
         Me.txtDefaultProjectName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtDefaultProjectName.Name = "txtDefaultProjectName"
         Me.txtDefaultProjectName.Size = New System.Drawing.Size(312, 22)
-        Me.txtDefaultProjectName.TabIndex = 9
+        Me.txtDefaultProjectName.TabIndex = 1
         '
         'Label3
         '
@@ -407,7 +407,7 @@ Partial Class Main
         Me.txtApiUser.Margin = New System.Windows.Forms.Padding(4)
         Me.txtApiUser.Name = "txtApiUser"
         Me.txtApiUser.Size = New System.Drawing.Size(311, 22)
-        Me.txtApiUser.TabIndex = 11
+        Me.txtApiUser.TabIndex = 1
         '
         'Label4
         '
@@ -438,7 +438,7 @@ Partial Class Main
         Me.txtAPIPass.Name = "txtAPIPass"
         Me.txtAPIPass.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtAPIPass.Size = New System.Drawing.Size(312, 22)
-        Me.txtAPIPass.TabIndex = 14
+        Me.txtAPIPass.TabIndex = 2
         '
         'txtServer
         '
@@ -446,7 +446,7 @@ Partial Class Main
         Me.txtServer.Margin = New System.Windows.Forms.Padding(4)
         Me.txtServer.Name = "txtServer"
         Me.txtServer.Size = New System.Drawing.Size(312, 22)
-        Me.txtServer.TabIndex = 17
+        Me.txtServer.TabIndex = 0
         '
         'Label7
         '
@@ -472,7 +472,7 @@ Partial Class Main
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox4.Size = New System.Drawing.Size(821, 462)
-        Me.GroupBox4.TabIndex = 19
+        Me.GroupBox4.TabIndex = 0
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Settings"
         '
@@ -493,7 +493,7 @@ Partial Class Main
         Me.grpReqSet.Name = "grpReqSet"
         Me.grpReqSet.Padding = New System.Windows.Forms.Padding(4)
         Me.grpReqSet.Size = New System.Drawing.Size(805, 182)
-        Me.grpReqSet.TabIndex = 29
+        Me.grpReqSet.TabIndex = 0
         Me.grpReqSet.TabStop = False
         Me.grpReqSet.Text = "Required Settings"
         '
@@ -505,7 +505,7 @@ Partial Class Main
         Me.chkRestAPI.Location = New System.Drawing.Point(560, 139)
         Me.chkRestAPI.Name = "chkRestAPI"
         Me.chkRestAPI.Size = New System.Drawing.Size(182, 21)
-        Me.chkRestAPI.TabIndex = 21
+        Me.chkRestAPI.TabIndex = 4
         Me.chkRestAPI.Text = "Enable RestAPI (5.8.1+)"
         Me.tooltip.SetToolTip(Me.chkRestAPI, "Enable the Rest API. This is only supported in R1 v5.8.1 and up.")
         Me.chkRestAPI.UseVisualStyleBackColor = True
@@ -521,7 +521,7 @@ Partial Class Main
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox2.Size = New System.Drawing.Size(237, 111)
-        Me.GroupBox2.TabIndex = 20
+        Me.GroupBox2.TabIndex = 3
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Website Address:"
         Me.tooltip.SetToolTip(Me.GroupBox2, "Select the trailing website address. 5.8 and up use R1.")
@@ -556,7 +556,7 @@ Partial Class Main
         Me.rdor1.Margin = New System.Windows.Forms.Padding(4)
         Me.rdor1.Name = "rdor1"
         Me.rdor1.Size = New System.Drawing.Size(47, 21)
-        Me.rdor1.TabIndex = 19
+        Me.rdor1.TabIndex = 0
         Me.rdor1.TabStop = True
         Me.rdor1.Text = "R1"
         Me.tooltip.SetToolTip(Me.rdor1, "Default for 5.8 and up.")
@@ -596,7 +596,7 @@ Partial Class Main
         Me.grpOptDefSet.Name = "grpOptDefSet"
         Me.grpOptDefSet.Padding = New System.Windows.Forms.Padding(4)
         Me.grpOptDefSet.Size = New System.Drawing.Size(794, 198)
-        Me.grpOptDefSet.TabIndex = 28
+        Me.grpOptDefSet.TabIndex = 1
         Me.grpOptDefSet.TabStop = False
         Me.grpOptDefSet.Text = "Optional Default Settings"
         '
@@ -605,7 +605,7 @@ Partial Class Main
         Me.btnLoadDefaultTemplateName.Location = New System.Drawing.Point(492, 152)
         Me.btnLoadDefaultTemplateName.Name = "btnLoadDefaultTemplateName"
         Me.btnLoadDefaultTemplateName.Size = New System.Drawing.Size(38, 23)
-        Me.btnLoadDefaultTemplateName.TabIndex = 29
+        Me.btnLoadDefaultTemplateName.TabIndex = 5
         Me.btnLoadDefaultTemplateName.Text = "..."
         Me.btnLoadDefaultTemplateName.UseVisualStyleBackColor = True
         '
@@ -616,7 +616,7 @@ Partial Class Main
         Me.GroupBox6.Location = New System.Drawing.Point(536, 66)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.Size = New System.Drawing.Size(251, 108)
-        Me.GroupBox6.TabIndex = 28
+        Me.GroupBox6.TabIndex = 7
         Me.GroupBox6.TabStop = False
         Me.GroupBox6.Text = "Updates"
         '
@@ -626,7 +626,7 @@ Partial Class Main
         Me.chkUpdates.Location = New System.Drawing.Point(19, 29)
         Me.chkUpdates.Name = "chkUpdates"
         Me.chkUpdates.Size = New System.Drawing.Size(208, 21)
-        Me.chkUpdates.TabIndex = 28
+        Me.chkUpdates.TabIndex = 0
         Me.chkUpdates.Text = "Check For Updates On Start"
         Me.tooltip.SetToolTip(Me.chkUpdates, "Check for updates to Job Runner on start.")
         Me.chkUpdates.UseVisualStyleBackColor = True
@@ -647,7 +647,7 @@ Partial Class Main
         Me.chkbypasscerts.Margin = New System.Windows.Forms.Padding(4)
         Me.chkbypasscerts.Name = "chkbypasscerts"
         Me.chkbypasscerts.Size = New System.Drawing.Size(188, 21)
-        Me.chkbypasscerts.TabIndex = 26
+        Me.chkbypasscerts.TabIndex = 6
         Me.chkbypasscerts.Text = "ByPass Invalid Certificate"
         Me.tooltip.SetToolTip(Me.chkbypasscerts, "Warning! Allows Job Runner to ignore invalid Website certificates, such as self-s" & _
         "igned certificates.. ")
@@ -659,7 +659,7 @@ Partial Class Main
         Me.txtdefaultshare.Margin = New System.Windows.Forms.Padding(4)
         Me.txtdefaultshare.Name = "txtdefaultshare"
         Me.txtdefaultshare.Size = New System.Drawing.Size(312, 22)
-        Me.txtdefaultshare.TabIndex = 24
+        Me.txtdefaultshare.TabIndex = 3
         '
         'Label29
         '
@@ -687,7 +687,7 @@ Partial Class Main
         Me.txtdefaultcomputer.Margin = New System.Windows.Forms.Padding(4)
         Me.txtdefaultcomputer.Name = "txtdefaultcomputer"
         Me.txtdefaultcomputer.Size = New System.Drawing.Size(312, 22)
-        Me.txtdefaultcomputer.TabIndex = 22
+        Me.txtdefaultcomputer.TabIndex = 2
         '
         'txtDefaultTemplateName
         '
@@ -699,7 +699,7 @@ Partial Class Main
         Me.txtDefaultTemplateName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtDefaultTemplateName.Name = "txtDefaultTemplateName"
         Me.txtDefaultTemplateName.Size = New System.Drawing.Size(312, 24)
-        Me.txtDefaultTemplateName.TabIndex = 20
+        Me.txtDefaultTemplateName.TabIndex = 4
         Me.txtDefaultTemplateName.Text = "coll-evtx"
         '
         'Label28
@@ -722,7 +722,8 @@ Partial Class Main
         Me.txtStatusSettings.Name = "txtStatusSettings"
         Me.txtStatusSettings.ReadOnly = True
         Me.txtStatusSettings.Size = New System.Drawing.Size(643, 19)
-        Me.txtStatusSettings.TabIndex = 27
+        Me.txtStatusSettings.TabIndex = 0
+        Me.txtStatusSettings.TabStop = False
         Me.txtStatusSettings.Text = "Status"
         '
         'btnSaveSettings
@@ -731,7 +732,7 @@ Partial Class Main
         Me.btnSaveSettings.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSaveSettings.Name = "btnSaveSettings"
         Me.btnSaveSettings.Size = New System.Drawing.Size(128, 28)
-        Me.btnSaveSettings.TabIndex = 21
+        Me.btnSaveSettings.TabIndex = 2
         Me.btnSaveSettings.Text = "Save Settings"
         Me.btnSaveSettings.UseVisualStyleBackColor = True
         '
@@ -1743,7 +1744,7 @@ Partial Class Main
         Me.tabMenu.Name = "tabMenu"
         Me.tabMenu.SelectedIndex = 0
         Me.tabMenu.Size = New System.Drawing.Size(840, 732)
-        Me.tabMenu.TabIndex = 21
+        Me.tabMenu.TabIndex = 0
         '
         'tabSettings
         '
