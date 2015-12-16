@@ -7,6 +7,8 @@ Imports R1SimpleRestClient.Models.Response
 Public Class Main
 
     Public auth As New R1SimpleRestClient.Models.Response.AuthToken
+    Public r1timeout As System.Timers.Timer
+
 
     Public JobsEndpointStatus
 
@@ -158,6 +160,16 @@ Public Class Main
         'End Try
     End Sub
 
+    Public Sub R1TimeoutUp(ByVal obj As Object, ByVal e As EventArgs)
+        Me.auth.Data.Message = "Timeout"
+    End Sub
+    Public Function R1TimeOutTimer()
+        Dim r1time As New System.Timers.Timer
+        AddHandler r1time.Elapsed, AddressOf R1TimeoutUp
+        r1time.Interval = 1500000
+        r1time.autoreset = True
+        Return r1time
+    End Function
 
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -168,6 +180,8 @@ Public Class Main
         Catch ex As Exception
         End Try
 
+        'Generate a timer for timeouts from RestUI
+        r1timeout = R1TimeOutTimer()
 
         'First Run-Generate default templates
         Me.Text = "R1 Job Runner Version: " & My.Application.Info.Version.ToString
@@ -321,7 +335,12 @@ Public Class Main
         For Each item In txtDefaultTemplateName.Items
             My.Settings.templatename.Add(item.ToString)
         Next
-        My.Settings.templatenameselect = txtDefaultTemplateName.Text
+        If txtDefaultTemplateName.SelectedItem Is Nothing Then
+            My.Settings.templatenameselect = txtDefaultTemplateName.Text
+        Else
+            My.Settings.templatenameselect = txtDefaultTemplateName.SelectedItem
+        End If
+
         If rdoadgmap.Checked = True Then
             My.Settings.websitepath = "ADG.Map.Web"
         ElseIf rdor1.Checked = True Then
@@ -1323,16 +1342,40 @@ Public Class Main
 
 
     Private Sub tabJobExecution_Enter(sender As Object, e As EventArgs) Handles tabJobExecution.Enter
+        If chkRestAPI.Checked Then
+            Dim authobj = JobRunner_RestFunctions.R1Auth
+            If authobj.Data.Message = "Authenticated" Then
+                JobRunner_RestFunctions.GetJobTemplates()
+                r1timeout.Start()
+                If My.Settings.templatenameselect <> "" Then
+                    If txtTemplateName.Items.Contains(My.Settings.templatenameselect) Then
+                        txtTemplateName.SelectedItem = My.Settings.templatenameselect
+                    Else
+                        txtTemplateName.Items.Add(My.Settings.templatenameselect)
+                        txtTemplateName.SelectedItem = My.Settings.templatenameselect
+                    End If
+                Else
+                    txtTemplateName.SelectedIndex = 0
+                End If
+            Else
+                MsgBox(authobj.Data.Message)
+                tabMenu.SelectedTab = tabSettings
+            End If
+            Else
+                txtTemplateName.Items.Clear()
+                txtTemplateName.Items.Add("coll-evtx")
+                If My.Settings.templatenameselect <> "" Then
+                If txtTemplateName.Items.Contains(My.Settings.templatenameselect) Then
+                    txtTemplateName.SelectedItem = My.Settings.templatenameselect
+                Else
+                    txtTemplateName.Items.Add(My.Settings.templatenameselect)
+                    txtTemplateName.SelectedItem = My.Settings.templatenameselect
+                End If
+                Else
 
-        Dim authobj = JobRunner_RestFunctions.R1Auth
-        If authobj.Data.Message = "Authenticated" Then
-
-            JobRunner_RestFunctions.GetJobTemplates()
-
-        Else
-            MsgBox(authobj.Data.Message)
-            tabMenu.SelectedTab = tabSettings
-        End If
+                    txtTemplateName.SelectedIndex = 0
+                End If
+            End If
 
 
     End Sub
@@ -1510,7 +1553,7 @@ Public Class Main
         If tabMenu.SelectedTab.Name = tabRESTUI.Name Then
             Dim authobj = JobRunner_RestFunctions.R1Auth
             If authobj.Data.Message = "Authenticated" Then
-
+                r1timeout.Start()
                 JobRunner_RestFunctions.GetJobList("")
                 tabControlJobsRest.SelectedTab = tabJobsList
             Else
@@ -1546,6 +1589,94 @@ Public Class Main
     Private Sub txtSearchEndpointStatus_Leave(sender As Object, e As EventArgs) Handles txtSearchEndpointStatus.Leave
         If txtSearchEndpointStatus.Text = "" Then
             txtSearchEndpointStatus.Text = "Search"
+        End If
+    End Sub
+
+    Private Sub rdoadgmap_CheckedChanged(sender As Object, e As EventArgs) Handles rdoadgmap.CheckedChanged
+        Select Case rdoadgmap.Checked
+            Case True
+                chkRestAPI.Checked = False
+                chkRestAPI.Enabled = False
+            Case False
+                chkRestAPI.Checked = True
+                chkRestAPI.Enabled = True
+        End Select
+    End Sub
+
+    Private Sub rdor1_CheckedChanged(sender As Object, e As EventArgs) Handles rdor1.CheckedChanged
+        Select Case rdor1.Checked
+            Case True
+                chkRestAPI.Enabled = True
+        End Select
+    End Sub
+
+    Private Sub chkRestAPI_CheckedChanged(sender As Object, e As EventArgs) Handles chkRestAPI.CheckedChanged
+        Select Case chkRestAPI.Checked
+            Case True '----Checked SHOW RESTUI
+                Select Case tabMenu.TabPages.Contains(tabRESTUI)
+                    Case True
+                    Case False
+                        tabMenu.TabPages.Insert(1, tabRESTUI)
+                End Select
+            Case False '---Unchecked HIDE RESTUI
+                Select Case tabMenu.TabPages.Contains(tabRESTUI)
+                    Case True
+                        tabMenu.TabPages.Remove(tabRESTUI)
+                    Case False
+
+                End Select
+        End Select
+    End Sub
+
+    Private Sub txtDefaultTemplateName_DropDown(sender As Object, e As EventArgs) Handles txtDefaultTemplateName.DropDown
+  
+    End Sub
+
+    Private Sub txtDefaultTemplateName_GotFocus(sender As Object, e As EventArgs) Handles txtDefaultTemplateName.GotFocus
+       
+    End Sub
+
+    Private Sub txtDefaultTemplateName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles txtDefaultTemplateName.SelectedIndexChanged
+     
+    End Sub
+
+    Private Sub btnLoadDefaultTemplateName_Click(sender As Object, e As EventArgs) Handles btnLoadDefaultTemplateName.Click
+
+        If chkRestAPI.Checked = True Then
+            Dim authobj = JobRunner_RestFunctions.R1Auth
+            If authobj.Data.Message = "Authenticated" Then
+                JobRunner_RestFunctions.GetJobTemplates()
+                r1timeout.Start()
+                txtDefaultTemplateName.Items.Clear()
+                Dim tempitems(txtTemplateName.Items.Count - 1)
+                txtTemplateName.Items.CopyTo(tempitems, 0)
+                txtDefaultTemplateName.Items.AddRange(tempitems)
+                If My.Settings.templatenameselect <> "" Then
+                    If txtDefaultTemplateName.Items.Contains(My.Settings.templatenameselect) Then
+                        txtDefaultTemplateName.SelectedItem = My.Settings.templatenameselect
+                    Else
+                        txtDefaultTemplateName.Items.Add(My.Settings.templatenameselect)
+                        txtDefaultTemplateName.SelectedItem = My.Settings.templatenameselect
+                    End If
+                End If
+            Else
+                MsgBox(authobj.Data.Message)
+                tabMenu.SelectedTab = tabSettings
+            End If
+        Else
+            txtDefaultTemplateName.Items.Clear()
+            txtDefaultTemplateName.Items.Add("coll-evtx")
+            If My.Settings.templatenameselect <> "" Then
+                If txtDefaultTemplateName.Items.Contains(My.Settings.templatenameselect) Then
+                    txtDefaultTemplateName.SelectedItem = My.Settings.templatenameselect
+                Else
+                    txtDefaultTemplateName.Items.Add(My.Settings.templatenameselect)
+                    txtDefaultTemplateName.SelectedItem = My.Settings.templatenameselect
+                End If
+            Else
+                txtDefaultTemplateName.SelectedIndex = 0
+            End If
+
         End If
     End Sub
 End Class

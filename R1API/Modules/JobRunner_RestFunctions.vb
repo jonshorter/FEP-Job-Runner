@@ -15,6 +15,7 @@ Module JobRunner_RestFunctions
             Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
             Dim newauth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
             Main.auth = newauth
+            Main.r1timeout.Start()
             Return newauth
         Else
             Return Main.auth
@@ -27,6 +28,7 @@ Module JobRunner_RestFunctions
         If Main.auth.Data.Message <> "Authenticated" Then
             Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
         End If
+        Main.r1timeout.Start()
         Dim templates = r1rest.Functions.Templates.GetTemplates(Main.auth, Main.txtServer.Text)
         Main.txtTemplateName.Items.Clear()
         For Each template In templates.Data
@@ -42,6 +44,7 @@ Module JobRunner_RestFunctions
         If Main.auth.Data.Message <> "Authenticated" Then
             Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
         End If
+        Main.r1timeout.Start()
         Return r1rest.Functions.Templates.GetTemplate(Main.auth, Main.txtServer.Text, templateid)
 
 
@@ -53,6 +56,7 @@ Module JobRunner_RestFunctions
             If Main.auth.Data.Message <> "Authenticated" Then
                 Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
             End If
+            Main.r1timeout.Start()
             Dim jobslist As ApiResponse(Of JobData)
             If Not Search = "" Or Search = "Search" Then
                 jobslist = r1rest.Functions.Job.GetAllJobs(Main.auth, Main.txtServer.Text, , 90000, , Search)
@@ -81,6 +85,7 @@ Module JobRunner_RestFunctions
             If Main.auth.Data.Message <> "Authenticated" Then
                 Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
             End If
+            Main.r1timeout.Start()
             Dim ResubmitJob As New R1SimpleRestClient.Models.Job2.ResubmitJobOptions
             ResubmitJob.JobID = JobID
             ResubmitJob.NewJobName = NewJobName
@@ -97,6 +102,7 @@ Module JobRunner_RestFunctions
             If Main.auth.Data.Message <> "Authenticated" Then
                 Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
             End If
+            Main.r1timeout.Start()
             Dim job = r1rest.Functions.Job.CancelJobResult(Main.auth, Main.txtServer.Text, JobResultID, CancelSchedule)
             GetJobList()
         Catch ex As Exception
@@ -109,6 +115,7 @@ Module JobRunner_RestFunctions
             If Main.auth.Data.Message <> "Authenticated" Then
                 Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
             End If
+            Main.r1timeout.Start()
             Dim job = r1rest.Functions.Job.CancelJobTargetResults(Main.auth, Main.txtServer.Text, JobTargetResultID)
 
         Catch ex As Exception
@@ -123,6 +130,7 @@ Module JobRunner_RestFunctions
             If Main.auth.Data.Message <> "Authenticated" Then
                 Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
             End If
+            Main.r1timeout.Start()
             Dim job = r1rest.Functions.Project.DeleteProject(Main.auth, Main.txtServer.Text, ProjectID)
             GetProjectList("")
         Catch ex As Exception
@@ -135,6 +143,7 @@ Module JobRunner_RestFunctions
             If Main.auth.Data.Message <> "Authenticated" Then
                 Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
             End If
+            Main.r1timeout.Start()
             Dim job = r1rest.Functions.Job.GetJobStatusCounts(Main.auth, Main.txtServer.Text, JobResultID)
             Main.lblepStatusTotal.Text = "Total: " & job.Data.totalCount
             Main.lblepStatusInProgress.Text = "In Progress: " & job.Data.runningCount
@@ -151,6 +160,7 @@ Module JobRunner_RestFunctions
             If Main.auth.Data.Message <> "Authenticated" Then
                 Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
             End If
+            Main.r1timeout.Start()
             Dim jobtargets = r1rest.Functions.Job.GetJobTargets(Main.auth, Main.txtServer.Text, JobResultID, , , , Search)
             Main.dgvEndpointStatusJobTargets.Rows.Clear()
             Main.lblJobName.Text = jobtargets.Data.jobName
@@ -172,6 +182,7 @@ Module JobRunner_RestFunctions
             If Main.auth.Data.Message <> "Authenticated" Then
                 Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
             End If
+            Main.r1timeout.Start()
             Dim projectlist As ApiResponse(Of List(Of ProjectPresenter))
             If Not Search = "" Or Search = "Search" Then
                 projectlist = r1rest.Functions.Project.GetProjectList(Main.auth, Main.txtServer.Text, Search)
@@ -194,6 +205,7 @@ Module JobRunner_RestFunctions
             If Main.auth.Data.Message <> "Authenticated" Then
                 Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
             End If
+            Main.r1timeout.Start()
             Dim projectlist As ApiResponse(Of List(Of ProjectPresenter))
             If Not Search = "" Or Search = "Search" Then
                 projectlist = r1rest.Functions.Project.GetProjectList(Main.auth, Main.txtServer.Text, Search)
@@ -216,6 +228,7 @@ Module JobRunner_RestFunctions
             If Main.auth.Data.Message <> "Authenticated" Then
                 Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
             End If
+            Main.r1timeout.Start()
             Dim threatfilterlist As ApiResponse(Of List(Of ThreatFilterInfo))
 
             If String.IsNullOrWhiteSpace(Search) Or Search = "" Or Search = "Search" Then
@@ -244,6 +257,7 @@ Module JobRunner_RestFunctions
             If Main.auth.Data.Message <> "Authenticated" Then
                 Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
             End If
+            Main.r1timeout.Start()
             Dim categories As ApiResponse(Of List(Of Categories))
 
             categories = r1rest.Functions.Templates.GetCategories(Main.auth, Main.txtServer.Text)
@@ -295,7 +309,7 @@ Module JobRunner_RestFunctions
     Public Sub CreateProject(ByVal Name As String, ByVal Description As String, ByVal TBCheck As Boolean, ByVal Server As String, ByVal auth As AuthToken)
         Try
             Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
-
+            Main.r1timeout.Start()
             Dim proj As New SimpleNewProject
             proj.name = Name
             proj.description = Description
@@ -314,7 +328,7 @@ Module JobRunner_RestFunctions
     Public Sub EditProject(ByVal ProjectID As String, ByVal Name As String, ByVal Description As String, ByVal TBCheck As Boolean, ByVal Server As String, ByVal auth As AuthToken)
         Try
             Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
-
+            Main.r1timeout.Start()
             Dim proj As New ProjectPresenter
             proj.ProjectId = ProjectID
             proj.Name = Name
@@ -331,12 +345,14 @@ Module JobRunner_RestFunctions
 
     Public Function GetProjectDetails(ByVal ProjectID As String, ByVal Server As String, ByVal auth As AuthToken) As ApiResponse(Of ProjectPresenter)
         Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
+        Main.r1timeout.Start()
         Return r1rest.Functions.Project.GetProjectDetails(auth, Server, ProjectID)
     End Function
 
     Public Sub GetGroups_JobFromTemplate()
         Form_JobFromTemplate.treeGroups.Nodes.Clear()
         Dim rc As New R1SimpleRestClient.R1SimpleRestClient
+        Main.r1timeout.Start()
         Dim groups As R1SimpleRestClient.Models.Groups = rc.Functions.Groups.GetGroups(Main.auth, Main.txtServer.Text).Data
         Dim topnode As TreeNode = Form_JobFromTemplate.treeGroups.Nodes.Add(groups.name)
         topnode.Name = groups.name
@@ -368,7 +384,9 @@ Module JobRunner_RestFunctions
             If Main.auth.Data.Message <> "Authenticated" Then
                 Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
             End If
+            Main.r1timeout.Start()
             Dim endpoints = r1rest.Functions.Computers.GetGroupComputers(Main.auth, Main.txtServer.Text, GroupID, count, start, Search)
+
             Form_JobFromTemplate.dgvTargetEndpoints.Rows.Clear()
             For Each endpoint In endpoints.Data.computers
                 Form_JobFromTemplate.dgvTargetEndpoints.Rows.Add(New String() {False, endpoint.computerName, endpoint.ipAddressLastContacted, endpoint.agentOS, endpoint.agentLastContacted, endpoint.computerId})
@@ -383,6 +401,7 @@ Module JobRunner_RestFunctions
             If Main.auth.Data.Message <> "Authenticated" Then
                 Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
             End If
+            Main.r1timeout.Start()
             Return r1rest.Functions.Job.CreateJobFromTemplate(Main.auth, Main.txtServer.Text, Job, Execute)
 
         Catch ex As Exception
@@ -396,6 +415,7 @@ Module JobRunner_RestFunctions
             If Main.auth.Data.Message <> "Authenticated" Then
                 Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
             End If
+            Main.r1timeout.Start()
             Return r1rest.Functions.Job.GetSetJobStatus(Main.auth, Main.txtServer.Text, JobID, Status)
 
         Catch ex As Exception
@@ -409,6 +429,7 @@ Module JobRunner_RestFunctions
             If Main.auth.Data.Message <> "Authenticated" Then
                 Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
             End If
+            Main.r1timeout.Start()
             Return r1rest.Functions.Job.ThreatScanOptioms(Main.auth, Main.txtServer.Text, JobID, Options)
 
         Catch ex As Exception
@@ -422,6 +443,7 @@ Module JobRunner_RestFunctions
             If Main.auth.Data.Message <> "Authenticated" Then
                 Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
             End If
+            Main.r1timeout.Start()
             Return r1rest.Functions.Job.SetJobSchedule(Main.auth, Main.txtServer.Text, JobID, IsIncremental, Schedule)
 
         Catch ex As Exception
@@ -435,7 +457,7 @@ Module JobRunner_RestFunctions
             If Main.auth.Data.Message <> "Authenticated" Then
                 Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
             End If
-
+            Main.r1timeout.Start()
             Dim Alerts As AlertsWithCounts = r1rest.Functions.Alert.GetAlertsWithCounts(Main.auth, Main.txtServer.Text)
             Main.dgvAlerts.Rows.Clear()
             Main.flowAlertBreakdown.Controls.Clear()

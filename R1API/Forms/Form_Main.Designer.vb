@@ -22,6 +22,7 @@ Partial Class Main
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Main))
         Me.btnExecute = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -36,6 +37,7 @@ Partial Class Main
         Me.Label7 = New System.Windows.Forms.Label()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.grpReqSet = New System.Windows.Forms.GroupBox()
+        Me.chkRestAPI = New System.Windows.Forms.CheckBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.txtcustomwebaddress = New System.Windows.Forms.TextBox()
         Me.rdocustom = New System.Windows.Forms.RadioButton()
@@ -277,6 +279,8 @@ Partial Class Main
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.ofdBox = New System.Windows.Forms.OpenFileDialog()
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
+        Me.tooltip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btnLoadDefaultTemplateName = New System.Windows.Forms.Button()
         Me.GroupBox4.SuspendLayout()
         Me.grpReqSet.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -414,6 +418,7 @@ Partial Class Main
         Me.Label4.Size = New System.Drawing.Size(107, 17)
         Me.Label4.TabIndex = 12
         Me.Label4.Text = "API Username*:"
+        Me.tooltip.SetToolTip(Me.Label4, "The Username to use for interaction with R1.")
         '
         'Label5
         '
@@ -424,6 +429,7 @@ Partial Class Main
         Me.Label5.Size = New System.Drawing.Size(103, 17)
         Me.Label5.TabIndex = 13
         Me.Label5.Text = "API Password*:"
+        Me.tooltip.SetToolTip(Me.Label5, "The password for the user.")
         '
         'txtAPIPass
         '
@@ -451,6 +457,7 @@ Partial Class Main
         Me.Label7.Size = New System.Drawing.Size(160, 17)
         Me.Label7.TabIndex = 16
         Me.Label7.Text = "Web Server Hostname*:"
+        Me.tooltip.SetToolTip(Me.Label7, "The webserver hostname where R1 resides.")
         '
         'GroupBox4
         '
@@ -469,6 +476,7 @@ Partial Class Main
         '
         'grpReqSet
         '
+        Me.grpReqSet.Controls.Add(Me.chkRestAPI)
         Me.grpReqSet.Controls.Add(Me.GroupBox2)
         Me.grpReqSet.Controls.Add(Me.Label7)
         Me.grpReqSet.Controls.Add(Me.Label4)
@@ -480,10 +488,23 @@ Partial Class Main
         Me.grpReqSet.Margin = New System.Windows.Forms.Padding(4)
         Me.grpReqSet.Name = "grpReqSet"
         Me.grpReqSet.Padding = New System.Windows.Forms.Padding(4)
-        Me.grpReqSet.Size = New System.Drawing.Size(805, 123)
+        Me.grpReqSet.Size = New System.Drawing.Size(805, 167)
         Me.grpReqSet.TabIndex = 29
         Me.grpReqSet.TabStop = False
         Me.grpReqSet.Text = "Required Settings"
+        '
+        'chkRestAPI
+        '
+        Me.chkRestAPI.AutoSize = True
+        Me.chkRestAPI.Checked = True
+        Me.chkRestAPI.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkRestAPI.Location = New System.Drawing.Point(560, 139)
+        Me.chkRestAPI.Name = "chkRestAPI"
+        Me.chkRestAPI.Size = New System.Drawing.Size(182, 21)
+        Me.chkRestAPI.TabIndex = 21
+        Me.chkRestAPI.Text = "Enable RestAPI (5.8.1+)"
+        Me.tooltip.SetToolTip(Me.chkRestAPI, "Enable the Rest API. This is only supported in R1 v5.8.1 and up.")
+        Me.chkRestAPI.UseVisualStyleBackColor = True
         '
         'GroupBox2
         '
@@ -499,6 +520,7 @@ Partial Class Main
         Me.GroupBox2.TabIndex = 20
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Website Address:"
+        Me.tooltip.SetToolTip(Me.GroupBox2, "Select the trailing website address. 5.8 and up use R1.")
         '
         'txtcustomwebaddress
         '
@@ -519,6 +541,7 @@ Partial Class Main
         Me.rdocustom.Size = New System.Drawing.Size(17, 16)
         Me.rdocustom.TabIndex = 20
         Me.rdocustom.TabStop = True
+        Me.tooltip.SetToolTip(Me.rdocustom, "Specify a custom website path.")
         Me.rdocustom.UseVisualStyleBackColor = True
         '
         'rdor1
@@ -532,6 +555,7 @@ Partial Class Main
         Me.rdor1.TabIndex = 19
         Me.rdor1.TabStop = True
         Me.rdor1.Text = "R1"
+        Me.tooltip.SetToolTip(Me.rdor1, "Default for 5.8 and up.")
         Me.rdor1.UseVisualStyleBackColor = True
         '
         'rdoadgmap
@@ -543,10 +567,12 @@ Partial Class Main
         Me.rdoadgmap.Size = New System.Drawing.Size(123, 21)
         Me.rdoadgmap.TabIndex = 18
         Me.rdoadgmap.Text = "ADG.Map.Web"
+        Me.tooltip.SetToolTip(Me.rdoadgmap, "Select for versions below 5.7.")
         Me.rdoadgmap.UseVisualStyleBackColor = True
         '
         'grpOptDefSet
         '
+        Me.grpOptDefSet.Controls.Add(Me.btnLoadDefaultTemplateName)
         Me.grpOptDefSet.Controls.Add(Me.GroupBox6)
         Me.grpOptDefSet.Controls.Add(Me.Label2)
         Me.grpOptDefSet.Controls.Add(Me.Label3)
@@ -559,11 +585,11 @@ Partial Class Main
         Me.grpOptDefSet.Controls.Add(Me.txtdefaultcomputer)
         Me.grpOptDefSet.Controls.Add(Me.txtDefaultTemplateName)
         Me.grpOptDefSet.Controls.Add(Me.Label28)
-        Me.grpOptDefSet.Location = New System.Drawing.Point(8, 154)
+        Me.grpOptDefSet.Location = New System.Drawing.Point(8, 209)
         Me.grpOptDefSet.Margin = New System.Windows.Forms.Padding(4)
         Me.grpOptDefSet.Name = "grpOptDefSet"
         Me.grpOptDefSet.Padding = New System.Windows.Forms.Padding(4)
-        Me.grpOptDefSet.Size = New System.Drawing.Size(805, 185)
+        Me.grpOptDefSet.Size = New System.Drawing.Size(805, 182)
         Me.grpOptDefSet.TabIndex = 28
         Me.grpOptDefSet.TabStop = False
         Me.grpOptDefSet.Text = "Optional Default Settings"
@@ -587,6 +613,7 @@ Partial Class Main
         Me.chkUpdates.Size = New System.Drawing.Size(208, 21)
         Me.chkUpdates.TabIndex = 28
         Me.chkUpdates.Text = "Check For Updates On Start"
+        Me.tooltip.SetToolTip(Me.chkUpdates, "Check for updates to Job Runner on start.")
         Me.chkUpdates.UseVisualStyleBackColor = True
         '
         'btn_CheckForUpdates
@@ -607,6 +634,8 @@ Partial Class Main
         Me.chkbypasscerts.Size = New System.Drawing.Size(188, 21)
         Me.chkbypasscerts.TabIndex = 26
         Me.chkbypasscerts.Text = "ByPass Invalid Certificate"
+        Me.tooltip.SetToolTip(Me.chkbypasscerts, "Warning! Allows Job Runner to ignore invalid Website certificates, such as self-s" & _
+        "igned certificates.. ")
         Me.chkbypasscerts.UseVisualStyleBackColor = True
         '
         'txtdefaultshare
@@ -647,6 +676,8 @@ Partial Class Main
         '
         'txtDefaultTemplateName
         '
+        Me.txtDefaultTemplateName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.txtDefaultTemplateName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.txtDefaultTemplateName.FormattingEnabled = True
         Me.txtDefaultTemplateName.Items.AddRange(New Object() {"coll-evtx"})
         Me.txtDefaultTemplateName.Location = New System.Drawing.Point(173, 151)
@@ -671,7 +702,7 @@ Partial Class Main
         Me.txtStatusSettings.BackColor = System.Drawing.SystemColors.Control
         Me.txtStatusSettings.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtStatusSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtStatusSettings.Location = New System.Drawing.Point(8, 350)
+        Me.txtStatusSettings.Location = New System.Drawing.Point(8, 399)
         Me.txtStatusSettings.Margin = New System.Windows.Forms.Padding(4)
         Me.txtStatusSettings.Name = "txtStatusSettings"
         Me.txtStatusSettings.ReadOnly = True
@@ -681,7 +712,7 @@ Partial Class Main
         '
         'btnSaveSettings
         '
-        Me.btnSaveSettings.Location = New System.Drawing.Point(685, 346)
+        Me.btnSaveSettings.Location = New System.Drawing.Point(685, 395)
         Me.btnSaveSettings.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSaveSettings.Name = "btnSaveSettings"
         Me.btnSaveSettings.Size = New System.Drawing.Size(128, 28)
@@ -886,12 +917,15 @@ Partial Class Main
         '
         'txtTemplateName
         '
+        Me.txtTemplateName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.txtTemplateName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.txtTemplateName.FormattingEnabled = True
         Me.txtTemplateName.Items.AddRange(New Object() {"coll-evtx", "Drop Process by PID", "ETM Relative Time Query", "EXE-Metadata-Cerb", "Lockdown NIC", "LockdownEnableNIC", "Memory Acquisition", "Memory Analysis", "Registry-Autostart", "Registry-Full", "Remediate-Name", "Remediate-PID", "Small-exes-Cerb", "Software Inventory", "Vol-Deep", "Vol-Deep-Cerb", "Vol-Hidden-Cerb", "Vol-Hidden-Injected", "Vol-Quick", "Vol-Quick-Cerb", "Vol-Quick-Sched"})
         Me.txtTemplateName.Location = New System.Drawing.Point(161, 76)
         Me.txtTemplateName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtTemplateName.Name = "txtTemplateName"
         Me.txtTemplateName.Size = New System.Drawing.Size(312, 24)
+        Me.txtTemplateName.Sorted = True
         Me.txtTemplateName.TabIndex = 26
         '
         'Label25
@@ -3121,6 +3155,15 @@ Partial Class Main
         Me.sfdBox.Filter = "Box Files|*.json"
         Me.sfdBox.InitialDirectory = "My.Application.Info.DirectoryPath & ""\BoxedJobs"""
         '
+        'btnLoadDefaultTemplateName
+        '
+        Me.btnLoadDefaultTemplateName.Location = New System.Drawing.Point(492, 152)
+        Me.btnLoadDefaultTemplateName.Name = "btnLoadDefaultTemplateName"
+        Me.btnLoadDefaultTemplateName.Size = New System.Drawing.Size(38, 23)
+        Me.btnLoadDefaultTemplateName.TabIndex = 29
+        Me.btnLoadDefaultTemplateName.Text = "..."
+        Me.btnLoadDefaultTemplateName.UseVisualStyleBackColor = True
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -3492,5 +3535,8 @@ Partial Class Main
     Friend WithEvents lblepStatusInProgress As System.Windows.Forms.Label
     Friend WithEvents lblepstatusFailed As System.Windows.Forms.Label
     Friend WithEvents lblepstatusSuccessful As System.Windows.Forms.Label
+    Friend WithEvents chkRestAPI As System.Windows.Forms.CheckBox
+    Friend WithEvents tooltip As System.Windows.Forms.ToolTip
+    Friend WithEvents btnLoadDefaultTemplateName As System.Windows.Forms.Button
 
 End Class
