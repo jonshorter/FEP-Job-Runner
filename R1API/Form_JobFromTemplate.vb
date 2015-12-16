@@ -3,6 +3,7 @@ Imports R1SimpleRestClient.Models.Templates
 Imports R1SimpleRestClient.Models.Response
 Imports R1SimpleRestClient.Models
 Imports System.Text
+Imports System.Globalization
 
 Public Class Form_JobFromTemplate
     Public Property JobTemplateID As String
@@ -67,34 +68,61 @@ Public Class Form_JobFromTemplate
                             Select Case chkEnableRecurrence.Checked
                                 Case True '-----------Set Recurrence Options
                                     JobSchedule.InitialDateTime = dtpScheduleStart.Value
-                                    If rdoRecurEnd_After.Checked Then
+                                    If rdoRecurEnd_After.Checked Then '----------End After X Occurences
                                         JobSchedule.RecurrenceRange = Job2.RecurrenceRangeEnum.EndAfterInstances
                                         JobSchedule.MaxRecurrenceCount = nmbRecurEndOccurences.Value
-                                    ElseIf rdoRecurEnd_EndBy.Checked Then
+                                    ElseIf rdoRecurEnd_EndBy.Checked Then '-----------End By Date
                                         JobSchedule.RecurrenceRange = Job2.RecurrenceRangeEnum.EndOnDate
                                         JobSchedule.EndDateTime = dtpRecurEndBy.Value
-                                    ElseIf rdoRecurEnd_NoEnd.Checked Then
+                                    ElseIf rdoRecurEnd_NoEnd.Checked Then '--------------No End
                                         JobSchedule.RecurrenceRange = Job2.RecurrenceRangeEnum.NoEndDate
                                     End If
                                     Select Case RecurStart
-                                        Case rdoRecurStart_Minute.Name
-                                            JobSchedule.Period = cmb_RecurMinutes.SelectedItem
+                                        Case rdoRecurStart_Minute.Name '--------Minute
                                             JobSchedule.TimeUnit = Job2.TimeUnitEnum.Minute
-                                            JobSchedule.Ordinal = 0
-                                            JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.DayOfMonth
-                                            JobSchedule.Weekday = Nothing
-                                        Case rdoRecurStart_Hourly.Name
-                                            JobSchedule.Period = cmb_RecurHours.SelectedItem
+                                            JobSchedule.Period = cmb_RecurMinutes.SelectedItem
+                                        Case rdoRecurStart_Hourly.Name '---------Hourly
                                             JobSchedule.TimeUnit = Job2.TimeUnitEnum.Hour
-                                        Case rdoRecurStart_Daily.Name
-                                            JobSchedule.Period = nmb_RecurDays.Value
+                                            JobSchedule.Period = cmb_RecurHours.SelectedItem
+                                        Case rdoRecurStart_Daily.Name '----------Daily
                                             JobSchedule.TimeUnit = Job2.TimeUnitEnum.Day
-                                        Case rdoRecurStart_Weekly.Name
-
-                                        Case rdoRecurStart_Monthly.Name
-
-                                        Case rdoRecurStart_Yearly.Name
-
+                                            JobSchedule.Period = nmb_RecurDays.Value
+                                        Case rdoRecurStart_Weekly.Name '-------------Weekly
+                                            JobSchedule.TimeUnit = Job2.TimeUnitEnum.Week
+                                        Case rdoRecurStart_Monthly.Name '-------------Monthly
+                                            JobSchedule.TimeUnit = Job2.TimeUnitEnum.Month
+                                        Case rdoRecurStart_Yearly.Name '--------------Yearly
+                                            JobSchedule.TimeUnit = Job2.TimeUnitEnum.Year
+                                            If rdoRecurYear_Every.Checked = True Then
+                                                JobSchedule.OrdinalMonth = DateTime.ParseExact(cmbRecurYear_EveryMonth.SelectedItem, "MMMM", CultureInfo.CurrentCulture).Month
+                                                JobSchedule.Ordinal = nmbRecurYear_Day.Value
+                                                JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.DayOfMonth
+                                                JobSchedule.Period = 1
+                                            Else
+                                                JobSchedule.OrdinalMonth = DateTime.ParseExact(cmbRecurYear_TheMonth.SelectedItem, "MMMM", CultureInfo.CurrentCulture).Month
+                                                Select Case cmbRecurYear_TheFirstDay.SelectedItem.ToString
+                                                    Case "First"
+                                                        JobSchedule.Ordinal = 1
+                                                    Case "Second"
+                                                        JobSchedule.Ordinal = 2
+                                                    Case "Third"
+                                                        JobSchedule.Ordinal = 3
+                                                    Case "Fourth"
+                                                        JobSchedule.Ordinal = 4
+                                                End Select
+                                                Select Case cmbRecurYear_TheSelectDay.SelectedItem
+                                                    Case "Day"
+                                                        JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.Day
+                                                    Case "Weekday"
+                                                        JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.Weekday
+                                                    Case "Weekend"
+                                                        JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.WeekendDay
+                                                    Case Else
+                                                        JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.DayOfWeek
+                                                        JobSchedule.OrdinalDayOfWeek = [Enum].Parse(GetType(DayOfWeek), cmbRecurYear_TheSelectDay.SelectedItem)
+                                                End Select
+                                                JobSchedule.Period = 1
+                                            End If
                                     End Select
                                 Case False '------------No Recurrence Options
                                     JobSchedule.InitialDateTime = dtpScheduleStart.Value
@@ -311,6 +339,10 @@ Public Class Form_JobFromTemplate
         cmb_RecurHours.SelectedItem = "1"
         cmb_RecurMinutes.SelectedItem = "1"
         nmb_RecurDays.Value = 1
+        cmbRecurYear_EveryMonth.SelectedItem = "January"
+        cmbRecurYear_TheFirstDay.SelectedItem = "First"
+        cmbRecurYear_TheMonth.SelectedItem = "January"
+        cmbRecurYear_TheSelectDay.SelectedItem = "Day"
 
         'Check for threatscan
         If TemplateInfo.jobType = 16 Then
@@ -389,13 +421,13 @@ Public Class Form_JobFromTemplate
     End Sub
 
 
-    Private Sub txtSearchThreatFilters_Enter(sender As Object, e As EventArgs)
+    Private Sub txtSearchThreatFilters_Enter(sender As Object, e As EventArgs) Handles txtSearchThreatFilters.Enter
         If txtSearchThreatFilters.Text = "Search" Then
             txtSearchThreatFilters.Text = ""
         End If
     End Sub
 
-    Private Sub txtSearchThreatFilters_KeyDown(sender As Object, e As KeyEventArgs)
+    Private Sub txtSearchThreatFilters_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSearchThreatFilters.KeyDown
 
         If e.KeyCode = Keys.Enter Then
             JobRunner_RestFunctions.GetThreatFilterList_JobFromTemplate(txtSearchThreatFilters.Text)
@@ -404,7 +436,7 @@ Public Class Form_JobFromTemplate
 
 
 
-    Private Sub txtSearchThreatFilters_Leave(sender As Object, e As EventArgs)
+    Private Sub txtSearchThreatFilters_Leave(sender As Object, e As EventArgs) Handles txtSearchThreatFilters.Leave
         If txtSearchThreatFilters.Text = "" Then
             txtSearchThreatFilters.Text = "Search"
         End If
@@ -727,5 +759,9 @@ Public Class Form_JobFromTemplate
                 grpRecurrenceStart.Visible = False
                 grpRecurrenceEnd.Visible = False
         End Select
+    End Sub
+
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbRecurYear_TheFirstDay.SelectedIndexChanged
+
     End Sub
 End Class
