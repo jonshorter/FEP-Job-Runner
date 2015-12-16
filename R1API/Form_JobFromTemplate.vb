@@ -91,16 +91,13 @@ Public Class Form_JobFromTemplate
                                             JobSchedule.TimeUnit = Job2.TimeUnitEnum.Week
                                         Case rdoRecurStart_Monthly.Name '-------------Monthly
                                             JobSchedule.TimeUnit = Job2.TimeUnitEnum.Month
-                                        Case rdoRecurStart_Yearly.Name '--------------Yearly
-                                            JobSchedule.TimeUnit = Job2.TimeUnitEnum.Year
-                                            If rdoRecurYear_Every.Checked = True Then
-                                                JobSchedule.OrdinalMonth = DateTime.ParseExact(cmbRecurYear_EveryMonth.SelectedItem, "MMMM", CultureInfo.CurrentCulture).Month
-                                                JobSchedule.Ordinal = nmbRecurYear_Day.Value
+                                            If rdoRecurMonth_Day.Checked = True Then
+                                                JobSchedule.Period = nmbRecurMonth_DayMonth.Value
                                                 JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.DayOfMonth
-                                                JobSchedule.Period = 1
+                                                JobSchedule.Ordinal = nmbRecurMonth_Day.Value
                                             Else
-                                                JobSchedule.OrdinalMonth = DateTime.ParseExact(cmbRecurYear_TheMonth.SelectedItem, "MMMM", CultureInfo.CurrentCulture).Month
-                                                Select Case cmbRecurYear_TheFirstDay.SelectedItem.ToString
+                                                JobSchedule.Period = nmbRecurMonth_TheMonth.Value
+                                                Select Case cmbRecurMonth_TheFirstDay.SelectedItem.ToString
                                                     Case "First"
                                                         JobSchedule.Ordinal = 1
                                                     Case "Second"
@@ -110,7 +107,7 @@ Public Class Form_JobFromTemplate
                                                     Case "Fourth"
                                                         JobSchedule.Ordinal = 4
                                                 End Select
-                                                Select Case cmbRecurYear_TheSelectDay.SelectedItem
+                                                Select Case cmbRecurMonth_TheSelectDay.SelectedItem
                                                     Case "Day"
                                                         JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.Day
                                                     Case "Weekday"
@@ -119,10 +116,41 @@ Public Class Form_JobFromTemplate
                                                         JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.WeekendDay
                                                     Case Else
                                                         JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.DayOfWeek
-                                                        JobSchedule.OrdinalDayOfWeek = [Enum].Parse(GetType(DayOfWeek), cmbRecurYear_TheSelectDay.SelectedItem)
+                                                        JobSchedule.OrdinalDayOfWeek = [Enum].Parse(GetType(DayOfWeek), cmbRecurMonth_TheSelectDay.SelectedItem)
                                                 End Select
-                                                JobSchedule.Period = 1
-                                            End If
+                                           End If
+                                        Case rdoRecurStart_Yearly.Name '--------------Yearly
+                        JobSchedule.TimeUnit = Job2.TimeUnitEnum.Year
+                        If rdoRecurYear_Every.Checked = True Then
+                            JobSchedule.OrdinalMonth = DateTime.ParseExact(cmbRecurYear_EveryMonth.SelectedItem, "MMMM", CultureInfo.CurrentCulture).Month
+                            JobSchedule.Ordinal = nmbRecurYear_Day.Value
+                            JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.DayOfMonth
+                            JobSchedule.Period = 1
+                        Else
+                            JobSchedule.OrdinalMonth = DateTime.ParseExact(cmbRecurYear_TheMonth.SelectedItem, "MMMM", CultureInfo.CurrentCulture).Month
+                            Select Case cmbRecurYear_TheFirstDay.SelectedItem.ToString
+                                Case "First"
+                                    JobSchedule.Ordinal = 1
+                                Case "Second"
+                                    JobSchedule.Ordinal = 2
+                                Case "Third"
+                                    JobSchedule.Ordinal = 3
+                                Case "Fourth"
+                                    JobSchedule.Ordinal = 4
+                            End Select
+                            Select Case cmbRecurYear_TheSelectDay.SelectedItem
+                                Case "Day"
+                                    JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.Day
+                                Case "Weekday"
+                                    JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.Weekday
+                                Case "Weekend"
+                                    JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.WeekendDay
+                                Case Else
+                                    JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.DayOfWeek
+                                    JobSchedule.OrdinalDayOfWeek = [Enum].Parse(GetType(DayOfWeek), cmbRecurYear_TheSelectDay.SelectedItem)
+                            End Select
+                            JobSchedule.Period = 1
+                        End If
                                     End Select
                                 Case False '------------No Recurrence Options
                                     JobSchedule.InitialDateTime = dtpScheduleStart.Value
@@ -343,6 +371,8 @@ Public Class Form_JobFromTemplate
         cmbRecurYear_TheFirstDay.SelectedItem = "First"
         cmbRecurYear_TheMonth.SelectedItem = "January"
         cmbRecurYear_TheSelectDay.SelectedItem = "Day"
+        cmbRecurMonth_TheFirstDay.SelectedItem = "First"
+        cmbRecurMonth_TheSelectDay.SelectedItem = "Day"
 
         'Check for threatscan
         If TemplateInfo.jobType = 16 Then
