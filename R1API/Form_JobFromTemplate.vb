@@ -132,39 +132,39 @@ Public Class Form_JobFromTemplate
                                                         JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.DayOfWeek
                                                         JobSchedule.OrdinalDayOfWeek = [Enum].Parse(GetType(DayOfWeek), cmbRecurMonth_TheSelectDay.SelectedItem)
                                                 End Select
-                                           End If
+                                            End If
                                         Case rdoRecurStart_Yearly.Name '--------------Yearly
-                        JobSchedule.TimeUnit = Job2.TimeUnitEnum.Year
-                        If rdoRecurYear_Every.Checked = True Then
-                            JobSchedule.OrdinalMonth = DateTime.ParseExact(cmbRecurYear_EveryMonth.SelectedItem, "MMMM", CultureInfo.CurrentCulture).Month
-                            JobSchedule.Ordinal = nmbRecurYear_Day.Value
-                            JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.DayOfMonth
-                            JobSchedule.Period = 1
-                        Else
-                            JobSchedule.OrdinalMonth = DateTime.ParseExact(cmbRecurYear_TheMonth.SelectedItem, "MMMM", CultureInfo.CurrentCulture).Month
-                            Select Case cmbRecurYear_TheFirstDay.SelectedItem.ToString
-                                Case "First"
-                                    JobSchedule.Ordinal = 1
-                                Case "Second"
-                                    JobSchedule.Ordinal = 2
-                                Case "Third"
-                                    JobSchedule.Ordinal = 3
-                                Case "Fourth"
-                                    JobSchedule.Ordinal = 4
-                            End Select
-                            Select Case cmbRecurYear_TheSelectDay.SelectedItem
-                                Case "Day"
-                                    JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.Day
-                                Case "Weekday"
-                                    JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.Weekday
-                                Case "Weekend"
-                                    JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.WeekendDay
-                                Case Else
-                                    JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.DayOfWeek
-                                    JobSchedule.OrdinalDayOfWeek = [Enum].Parse(GetType(DayOfWeek), cmbRecurYear_TheSelectDay.SelectedItem)
-                            End Select
-                            JobSchedule.Period = 1
-                        End If
+                                            JobSchedule.TimeUnit = Job2.TimeUnitEnum.Year
+                                            If rdoRecurYear_Every.Checked = True Then
+                                                JobSchedule.OrdinalMonth = DateTime.ParseExact(cmbRecurYear_EveryMonth.SelectedItem, "MMMM", CultureInfo.CurrentCulture).Month
+                                                JobSchedule.Ordinal = nmbRecurYear_Day.Value
+                                                JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.DayOfMonth
+                                                JobSchedule.Period = 1
+                                            Else
+                                                JobSchedule.OrdinalMonth = DateTime.ParseExact(cmbRecurYear_TheMonth.SelectedItem, "MMMM", CultureInfo.CurrentCulture).Month
+                                                Select Case cmbRecurYear_TheFirstDay.SelectedItem.ToString
+                                                    Case "First"
+                                                        JobSchedule.Ordinal = 1
+                                                    Case "Second"
+                                                        JobSchedule.Ordinal = 2
+                                                    Case "Third"
+                                                        JobSchedule.Ordinal = 3
+                                                    Case "Fourth"
+                                                        JobSchedule.Ordinal = 4
+                                                End Select
+                                                Select Case cmbRecurYear_TheSelectDay.SelectedItem
+                                                    Case "Day"
+                                                        JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.Day
+                                                    Case "Weekday"
+                                                        JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.Weekday
+                                                    Case "Weekend"
+                                                        JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.WeekendDay
+                                                    Case Else
+                                                        JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.DayOfWeek
+                                                        JobSchedule.OrdinalDayOfWeek = [Enum].Parse(GetType(DayOfWeek), cmbRecurYear_TheSelectDay.SelectedItem)
+                                                End Select
+                                                JobSchedule.Period = 1
+                                            End If
                                     End Select
                                 Case False '------------No Recurrence Options
                                     JobSchedule.InitialDateTime = dtpScheduleStart.Value
@@ -408,7 +408,6 @@ Public Class Form_JobFromTemplate
                 Else
                     chkitem.Text = item
                 End If
-
                 chkitem.Parent = flowThreatScanArchivesList
             Next
         End If
@@ -453,6 +452,42 @@ Public Class Form_JobFromTemplate
         If txtSearchEndpoint.Text = "" Then
             txtSearchEndpoint.Text = "Search"
         End If
+    End Sub
+
+    Private Sub Form_JobFromTemplate_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+        splitProjects.SplitterDistance = 40
+        splitTargetEndpoints.SplitterDistance = 40
+        Select Case splitThreatFilterAdvanced.Panel2Collapsed
+            Case False
+                splitThreatFilterAdvanced.Panel2Collapsed = False
+                splitThreatFilterAdvanced.Size = New Size(1000, 240)
+                splitThreatFilterAdvanced.SplitterDistance = 40
+                splitThreatFilters.Size = New Size(1000, 469)
+
+                If rdoIOCAll.Checked = True Then
+                    flowThreatScanAllFilter.Visible = True
+                    If chkThreatScanArchives.Checked Then
+                        splitThreatFilters.SplitterDistance = 45 + grpThreatScanAdvanced.Height + flowThreatScanAllFilter.Height + flowThreatScanArchivesList.Height
+                    Else
+                        splitThreatFilters.SplitterDistance = 45 + grpThreatScanAdvanced.Height + flowThreatScanAllFilter.Height
+                    End If
+                Else
+                    flowThreatScanAllFilter.Visible = False
+                    If chkThreatScanArchives.Checked Then
+                        splitThreatFilters.SplitterDistance = 45 + grpThreatScanAdvanced.Height + flowThreatScanArchivesList.Height
+                    Else
+                        splitThreatFilters.SplitterDistance = 45 + grpThreatScanAdvanced.Height
+                    End If
+                End If
+            Case True
+                splitThreatFilterAdvanced.Panel2Collapsed = True
+                splitThreatFilterAdvanced.Size = New Size(1000, 45)
+                splitThreatFilterAdvanced.SplitterDistance = 40
+                splitThreatFilters.Size = New Size(1000, 469)
+                splitThreatFilters.SplitterDistance = 45
+                flowThreatScanAllFilter.Visible = False
+        End Select
+
     End Sub
 
 
@@ -805,7 +840,5 @@ Public Class Form_JobFromTemplate
         End Select
     End Sub
 
-    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbRecurYear_TheFirstDay.SelectedIndexChanged
-
-    End Sub
+    
 End Class
