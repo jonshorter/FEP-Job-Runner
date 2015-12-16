@@ -273,7 +273,7 @@ Public Class Main
 
         If chkUpdates.Checked Then
             Try
-                CheckForUpdates(True)
+                CheckForUpdates(True, chkIncludPreRelease.Checked)
             Catch ex As Exception
             End Try
         End If
@@ -1321,14 +1321,14 @@ Public Class Main
 
     Private Sub btnUpdateCheck(sender As Object, e As EventArgs) Handles btn_CheckForUpdates.Click
         Try
-            CheckForUpdates(False)
+            CheckForUpdates(False, chkIncludPreRelease.Checked)
         Catch ex As Exception
         End Try
     End Sub
 
     Private Sub CheckForUpdate_About_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Try
-            CheckForUpdates(False)
+            CheckForUpdates(False, chkIncludPreRelease.Checked)
         Catch ex As Exception
         End Try
     End Sub

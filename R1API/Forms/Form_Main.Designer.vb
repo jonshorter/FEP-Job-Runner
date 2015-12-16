@@ -281,6 +281,7 @@ Partial Class Main
         Me.ofdBox = New System.Windows.Forms.OpenFileDialog()
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
         Me.tooltip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.chkIncludPreRelease = New System.Windows.Forms.CheckBox()
         Me.GroupBox4.SuspendLayout()
         Me.grpReqSet.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -612,6 +613,7 @@ Partial Class Main
         '
         'GroupBox6
         '
+        Me.GroupBox6.Controls.Add(Me.chkIncludPreRelease)
         Me.GroupBox6.Controls.Add(Me.chkUpdates)
         Me.GroupBox6.Controls.Add(Me.btn_CheckForUpdates)
         Me.GroupBox6.Location = New System.Drawing.Point(536, 66)
@@ -624,7 +626,7 @@ Partial Class Main
         'chkUpdates
         '
         Me.chkUpdates.AutoSize = True
-        Me.chkUpdates.Location = New System.Drawing.Point(19, 29)
+        Me.chkUpdates.Location = New System.Drawing.Point(6, 21)
         Me.chkUpdates.Name = "chkUpdates"
         Me.chkUpdates.Size = New System.Drawing.Size(208, 21)
         Me.chkUpdates.TabIndex = 0
@@ -634,7 +636,7 @@ Partial Class Main
         '
         'btn_CheckForUpdates
         '
-        Me.btn_CheckForUpdates.Location = New System.Drawing.Point(55, 70)
+        Me.btn_CheckForUpdates.Location = New System.Drawing.Point(6, 70)
         Me.btn_CheckForUpdates.Name = "btn_CheckForUpdates"
         Me.btn_CheckForUpdates.Size = New System.Drawing.Size(149, 32)
         Me.btn_CheckForUpdates.TabIndex = 27
@@ -3191,15 +3193,27 @@ Partial Class Main
         Me.sfdBox.Filter = "Box Files|*.json"
         Me.sfdBox.InitialDirectory = "My.Application.Info.DirectoryPath & ""\BoxedJobs"""
         '
+        'chkIncludPreRelease
+        '
+        Me.chkIncludPreRelease.AutoSize = True
+        Me.chkIncludPreRelease.Location = New System.Drawing.Point(6, 43)
+        Me.chkIncludPreRelease.Name = "chkIncludPreRelease"
+        Me.chkIncludPreRelease.Size = New System.Drawing.Size(158, 21)
+        Me.chkIncludPreRelease.TabIndex = 28
+        Me.chkIncludPreRelease.Text = "Include Pre-Release"
+        Me.tooltip.SetToolTip(Me.chkIncludPreRelease, "Check for pre-releases")
+        Me.chkIncludPreRelease.UseVisualStyleBackColor = True
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(840, 732)
         Me.Controls.Add(Me.tabMenu)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.HelpButton = True
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(4)
+        Me.MinimumSize = New System.Drawing.Size(858, 779)
         Me.Name = "Main"
         Me.Text = "R1 Job Runner Version:"
         Me.GroupBox4.ResumeLayout(False)
@@ -3566,5 +3580,6 @@ Partial Class Main
     Friend WithEvents chkRestAPI As System.Windows.Forms.CheckBox
     Friend WithEvents tooltip As System.Windows.Forms.ToolTip
     Friend WithEvents btnLoadDefaultTemplateName As System.Windows.Forms.Button
+    Friend WithEvents chkIncludPreRelease As System.Windows.Forms.CheckBox
 
 End Class

@@ -269,29 +269,29 @@ Module JobRunner_RestFunctions
                 Dim grp As New GroupBox
                 grp.Text = category.name
                 grp.Parent = Main.flowTasks
-                grp.MinimumSize = New Size(250, 100)
-                grp.MaximumSize = New Size(450, 350)
-                grp.AutoSize = False
-                grp.AutoSizeMode = AutoSizeMode.GrowAndShrink
-                grp.Size = New Size(275, 175)
+                grp.MinimumSize = New Size(300, 175)
+                grp.MaximumSize = New Size((Main.flowTasks.Width / 2), 200)
+                grp.AutoSize = True
+                grp.AutoSizeMode = AutoSizeMode.GrowOnly
+                ' grp.Size = New Size((Main.flowTasks.Width / 2) - 10, 175)
                 Dim lsttemplate As New ListView
-             
                 AddHandler lsttemplate.DoubleClick, AddressOf TaskItemDo
                 lsttemplate.MultiSelect = False
                 lsttemplate.HeaderStyle = ColumnHeaderStyle.None
-                lsttemplate.Parent = grp
                 lsttemplate.Dock = DockStyle.Fill
                 lsttemplate.AutoSize = True
-                lsttemplate.Size = New Size(375, 325)
+                ' lsttemplate.Size = New Size(375, 325)
                 lsttemplate.View = View.Details
                 lsttemplate.FullRowSelect = True
                 Dim col1 = lsttemplate.Columns.Add("")
-                col1.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
-                col1.Width = 375
+                ' col1.Width = 375
                 For Each Template In category.templates
                     Dim item = lsttemplate.Items.Add(Template.name)
                     item.Tag = Template.templateId
                 Next
+                col1.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
+                lsttemplate.Parent = grp
+
             Next
 
             Main.flowTasks.Refresh()

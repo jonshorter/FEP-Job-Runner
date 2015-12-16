@@ -117,6 +117,7 @@
     </Compile>
     <Compile Include="Modules\BoxedJobs.vb" />
     <Compile Include="Modules\CertificateCreator.vb" />
+    <Compile Include="Modules\JobRunner_Models.vb" />
     <Compile Include="Modules\JobRunner_RestFunctions.vb" />
     <Compile Include="Sims\FireEye.vb" />
     <Compile Include="Modules\JobRunner_Functions.vb" />

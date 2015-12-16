@@ -4,71 +4,102 @@ Imports Newtonsoft.Json
 Imports System.Text.RegularExpressions
 Imports System.Security.Cryptography.X509Certificates
 Imports R1SimpleRestClient
+Imports RestSharp
 
 Module JobRunner_Functions
 
-    Public Sub CheckForUpdates(Silent As Boolean)
+    Public Sub CheckForUpdates(ByVal Silent As Boolean, ByVal PreRelease As Boolean)
+
         Try
-            Dim updateclient As New WebClient
-            Dim pageHTML As String
-            Dim responseData As Byte()
-            updateclient.Headers.Add("User-Agent", "R1-Job-Runner")
-            responseData = updateclient.DownloadData("https://api.github.com/repos/bmartin5692/R1-Job-Runner/releases/latest")
-            pageHTML = System.Text.Encoding.ASCII.GetString(responseData)
-            Dim releaseInfo = Newtonsoft.Json.JsonConvert.DeserializeObject(pageHTML)
+            Dim rest As New RestSharp.RestClient("https://api.github.com/repos/bmartin5692/R1-Job-Runner/releases")
+            Dim request = New RestSharp.RestRequest("latest", RestSharp.Method.GET)
+            request.RequestFormat = DataFormat.Json
+            request.JsonSerializer = New RestSharpJsonNetSerializer
+            Dim response As RestSharp.RestResponse = rest.Execute(request)
+            Dim latestrelease = JsonConvert.DeserializeObject(Of JobRunner_Models.GitHubRelease)(response.Content)
 
-            Dim version As String = ""
-            Dim description As String = ""
-            Dim link As String = ""
+            request = New RestSharp.RestRequest("", RestSharp.Method.GET)
+            request.RequestFormat = DataFormat.Json
+            request.JsonSerializer = New RestSharpJsonNetSerializer
+            response = rest.Execute(request)
+            Dim allreleases = JsonConvert.DeserializeObject(Of List(Of JobRunner_Models.GitHubRelease))(response.Content)
 
-            For Each item As Linq.JProperty In releaseInfo
-                Select Case item.Name
-                    Case "tag_name"
-                        version = item.Value
-                    Case "body"
-                        description = item.Value
-                        If description.Contains("![image]") Then
-                            Dim pattern As String = "!\[image\]\(.*\)"
-                            Dim replacement As String = ""
-                            Dim rgx As New Regex(pattern)
-                            description = rgx.Replace(description, replacement)
-
-                        End If
-
-                    Case "assets"
-                        For Each subitem As Linq.JObject In item.Value
-                            For Each subsubitem In subitem
-                                Select Case subsubitem.Key
-                                    Case "browser_download_url"
-                                        Dim url As String = subsubitem.Value
-                                        If url.Contains("R1_Job_Runner.exe") Then
-                                            link = url
-                                        End If
-
-                                End Select
-                            Next
-                        Next
-                End Select
+            Dim prereleases As New List(Of JobRunner_Models.GitHubRelease)
+            For Each release In allreleases
+                If release.prerelease = True Then
+                    If release.tag_name > latestrelease.tag_name Then
+                        prereleases.Add(release)
+                    End If
+                End If
             Next
 
-            Dim appver = "v" & My.Application.Info.Version.ToString
-            If appver < version Then
-
-                Dim maintext = "Version " & version & " is now available." & vbCrLf & "---------------" & vbCrLf & _
-                        description & vbCrLf & "---------------" & vbCrLf
-                Dim updatedialog As New Form_UpdateDialog(maintext, "New Version Available", link)
-                Dim result = updatedialog.ShowDialog
+            Dim newrelease As New JobRunner_Models.GitHubRelease
+            Dim newrelease_description As String = ""
+            Dim newrelease_link As String = ""
+            Dim newrelease_IsPre As Boolean = False
+            If PreRelease = True Then
+                Select Case prereleases.Count
+                    Case 0
+                        newrelease = latestrelease
+                        newrelease_IsPre = False
+                    Case 1
+                        newrelease = prereleases(0)
+                        newrelease_IsPre = True
+                    Case Else
+                        Dim prever = prereleases(0).tag_name
+                        For Each release In prereleases
+                            If release.tag_name >= prever Then
+                                newrelease = release
+                                newrelease_IsPre = True
+                            End If
+                        Next
+                End Select
             Else
-                If Not Silent = True Then
-                    MsgBox("No Updates Available. Your version is the latest.", MsgBoxStyle.Information, "No Updates Available")
-                End If
+                newrelease = latestrelease
+                newrelease_IsPre = False
             End If
+            newrelease_description = newrelease.body
+            If newrelease_description.Contains("![image]") Then '--------Remove images
+                Dim pattern As String = "!\[image\]\(.*\)"
+                Dim replacement As String = ""
+                Dim rgx As New Regex(pattern)
+                newrelease_description = rgx.Replace(newrelease_description, replacement)
+            End If
+            For Each asset In newrelease.assets
+                If asset.browser_download_url.Contains("R1_Job_Runner") Then
+                    newrelease_link = asset.browser_download_url
+                End If
+            Next
+
+            If Not String.IsNullOrWhiteSpace(newrelease_link) Then
+                Dim appver = "v" & My.Application.Info.Version.ToString
+                If appver < newrelease.tag_name Then
+                    Dim maintext As String = ""
+                    Select Case newrelease_IsPre
+                        Case True
+                            maintext = "Pre-Release Version " & newrelease.tag_name & " is now available." & vbCrLf & "---------------" & vbCrLf & _
+                                                    newrelease_description & vbCrLf & "---------------" & vbCrLf
+                        Case False
+                            maintext = "Version " & newrelease.tag_name & " is now available." & vbCrLf & "---------------" & vbCrLf & _
+                                                    newrelease_description & vbCrLf & "---------------" & vbCrLf
+                    End Select
+                  Dim updatedialog As New Form_UpdateDialog(maintext, "New Version Available", newrelease_link)
+                    Dim result = updatedialog.ShowDialog
+                Else
+                    If Not Silent = True Then
+                        MsgBox("No Updates Available. Your have the latest version available.", MsgBoxStyle.Information, "No Updates Available")
+                    End If
+                End If
+            Else
+                'There may be releases, but they don't include R1_Job_Runner executable attached.
+            End If
+
         Catch ex As Exception
             Debug.WriteLine(ex.Message)
         End Try
     End Sub
 
-   
+
 
     Public Function CheckRootStoreForSelfSigned() As List(Of String)
         Dim fndhashes As New List(Of String)
