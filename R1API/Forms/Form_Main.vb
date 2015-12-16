@@ -2,13 +2,17 @@
 Imports System.Security
 Imports System.Runtime.InteropServices
 Imports R1SimpleRestClient.Models.Response
+Imports System.Threading
 
 
 Public Class Main
 
     Public auth As New R1SimpleRestClient.Models.Response.AuthToken
-    Public r1timeout As System.Timers.Timer
 
+    Public r1timeout As System.Threading.Timer
+    Public JobRefreshTimer As System.Threading.Timer
+    Public JobEndpointRefreshTimer As System.Threading.Timer
+    Public AlertsRefreshTimer As System.Threading.Timer
 
     Public JobsEndpointStatus
 
@@ -35,7 +39,7 @@ Public Class Main
 
 
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnExecute.Click
+    Private Sub btnExecute_Click(sender As Object, e As EventArgs) Handles btnExecute.Click
         ResetStatusBar()
         'Set label color and text
 
@@ -114,7 +118,7 @@ Public Class Main
 
     End Sub
 
-    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles btnAddComputer.Click
+    Private Sub btnAddComputer_Click(sender As Object, e As EventArgs) Handles btnAddComputer.Click
         'Add hostname to list box
         If txtComputerTarget.Text <> "" Then
             lstComputerTargets.Items.Add(txtComputerTarget.Text)
@@ -122,7 +126,7 @@ Public Class Main
         End If
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnRemoveComputer.Click
+    Private Sub btnRemoveComputer_Click(sender As Object, e As EventArgs) Handles btnRemoveComputer.Click
         'Remove checked items from listbox
         With lstComputerTargets
             If .CheckedItems.Count > 0 Then
@@ -160,19 +164,10 @@ Public Class Main
         'End Try
     End Sub
 
-    Public Sub R1TimeoutUp(ByVal obj As Object, ByVal e As EventArgs)
-        Me.auth.Data.Message = "Timeout"
-    End Sub
-    Public Function R1TimeOutTimer()
-        Dim r1time As New System.Timers.Timer
-        AddHandler r1time.Elapsed, AddressOf R1TimeoutUp
-        r1time.Interval = 1500000
-        r1time.autoreset = True
-        Return r1time
-    End Function
 
 
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
+
+    Private Sub Form_Main_Load(sender As Object, e As EventArgs) Handles Me.Load
         Try
             'Put JSON.Newtonsoft Down
             Dim b As Byte() = My.Resources.Newtonsoft_Json
@@ -180,8 +175,7 @@ Public Class Main
         Catch ex As Exception
         End Try
 
-        'Generate a timer for timeouts from RestUI
-        r1timeout = R1TimeOutTimer()
+
 
         'First Run-Generate default templates
         Me.Text = "R1 Job Runner Version: " & My.Application.Info.Version.ToString
@@ -1188,7 +1182,7 @@ Public Class Main
 
     Private Sub tabMenu_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabMenu.SelectedIndexChanged
 
-     
+
     End Sub
 
 
@@ -1332,7 +1326,7 @@ Public Class Main
         End Try
     End Sub
 
-    Private Sub Button1_Click_2(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub CheckForUpdate_About_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Try
             CheckForUpdates(False)
         Catch ex As Exception
@@ -1346,7 +1340,7 @@ Public Class Main
             Dim authobj = JobRunner_RestFunctions.R1Auth
             If authobj.Data.Message = "Authenticated" Then
                 JobRunner_RestFunctions.GetJobTemplates()
-                r1timeout.Start()
+                r1timeout.Change(10, 1500000)
                 If My.Settings.templatenameselect <> "" Then
                     If txtTemplateName.Items.Contains(My.Settings.templatenameselect) Then
                         txtTemplateName.SelectedItem = My.Settings.templatenameselect
@@ -1361,21 +1355,21 @@ Public Class Main
                 MsgBox(authobj.Data.Message)
                 tabMenu.SelectedTab = tabSettings
             End If
-            Else
-                txtTemplateName.Items.Clear()
-                txtTemplateName.Items.Add("coll-evtx")
-                If My.Settings.templatenameselect <> "" Then
+        Else
+            txtTemplateName.Items.Clear()
+            txtTemplateName.Items.Add("coll-evtx")
+            If My.Settings.templatenameselect <> "" Then
                 If txtTemplateName.Items.Contains(My.Settings.templatenameselect) Then
                     txtTemplateName.SelectedItem = My.Settings.templatenameselect
                 Else
                     txtTemplateName.Items.Add(My.Settings.templatenameselect)
                     txtTemplateName.SelectedItem = My.Settings.templatenameselect
                 End If
-                Else
+            Else
 
-                    txtTemplateName.SelectedIndex = 0
-                End If
+                txtTemplateName.SelectedIndex = 0
             End If
+        End If
 
 
     End Sub
@@ -1428,13 +1422,14 @@ Public Class Main
                         If JobsEndpointStatus <> "" Then
                             JobRunner_RestFunctions.GetEndpointStatusCounts(JobsEndpointStatus)
                             JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus)
+                            JobEndpointRefreshTimer = Create_JobEndpointRefreshTimer()
                             splitEndpointStatus.BringToFront()
                         End If
 
 
                     Case 10 'Result
                         Process.Start("https://" & txtServer.Text & "/r1/#/reviewpage?JobResultID=" & resultid & "&ShowAgentPivot=false&ShowJobPivot=false")
-                   
+
                 End Select
             End If
         Catch ex As Exception
@@ -1448,6 +1443,8 @@ Public Class Main
             Case tabJobsList.Name
                 JobRunner_RestFunctions.GetJobList("")
 
+                JobRefreshTimer = Create_JobRefreshTimer()
+
             Case tabTasks.Name
                 JobRunner_RestFunctions.GetTasks()
 
@@ -1457,6 +1454,7 @@ Public Class Main
             Case tabAlerts.Name
                 JobRunner_RestFunctions.LoadAlerts()
 
+                AlertsRefreshTimer = Create_AlertsRefreshTimer()
         End Select
 
 
@@ -1553,8 +1551,9 @@ Public Class Main
         If tabMenu.SelectedTab.Name = tabRESTUI.Name Then
             Dim authobj = JobRunner_RestFunctions.R1Auth
             If authobj.Data.Message = "Authenticated" Then
-                r1timeout.Start()
+                r1timeout.Change(10, 1500000)
                 JobRunner_RestFunctions.GetJobList("")
+                JobRefreshTimer = Create_JobRefreshTimer()
                 tabControlJobsRest.SelectedTab = tabJobsList
             Else
                 MsgBox(authobj.Data.Message)
@@ -1622,23 +1621,23 @@ Public Class Main
                 Select Case tabMenu.TabPages.Contains(tabRESTUI)
                     Case True
                         tabMenu.TabPages.Remove(tabRESTUI)
+                        If Not JobRefreshTimer Is Nothing Then
+                            JobRefreshTimer.Change(Timeout.Infinite, Timeout.Infinite)
+                        End If
+                        If Not AlertsRefreshTimer Is Nothing Then
+                            AlertsRefreshTimer.Change(Timeout.Infinite, Timeout.Infinite)
+                        End If
                     Case False
-
+                        If Not JobRefreshTimer Is Nothing Then
+                            JobRefreshTimer.Change(Timeout.Infinite, Timeout.Infinite)
+                        End If
+                        If Not AlertsRefreshTimer Is Nothing Then
+                            AlertsRefreshTimer.Change(Timeout.Infinite, Timeout.Infinite)
+                        End If
                 End Select
         End Select
     End Sub
 
-    Private Sub txtDefaultTemplateName_DropDown(sender As Object, e As EventArgs) Handles txtDefaultTemplateName.DropDown
-  
-    End Sub
-
-    Private Sub txtDefaultTemplateName_GotFocus(sender As Object, e As EventArgs) Handles txtDefaultTemplateName.GotFocus
-       
-    End Sub
-
-    Private Sub txtDefaultTemplateName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles txtDefaultTemplateName.SelectedIndexChanged
-     
-    End Sub
 
     Private Sub btnLoadDefaultTemplateName_Click(sender As Object, e As EventArgs) Handles btnLoadDefaultTemplateName.Click
 
@@ -1646,7 +1645,7 @@ Public Class Main
             Dim authobj = JobRunner_RestFunctions.R1Auth
             If authobj.Data.Message = "Authenticated" Then
                 JobRunner_RestFunctions.GetJobTemplates()
-                r1timeout.Start()
+                r1timeout.Change(10, 1500000)
                 txtDefaultTemplateName.Items.Clear()
                 Dim tempitems(txtTemplateName.Items.Count - 1)
                 txtTemplateName.Items.CopyTo(tempitems, 0)
@@ -1678,5 +1677,78 @@ Public Class Main
             End If
 
         End If
+    End Sub
+
+    Private Delegate Sub RefreshJobTimer(ByVal form As Form)
+    Public Sub JobRefreshUp(state As Object)
+        If Me.InvokeRequired Then
+            Me.Invoke(New RefreshJobTimer(AddressOf JobRefreshUp), Me)
+        Else
+            Select Case txtJobsSearch.Text
+                Case ""
+                    JobRunner_RestFunctions.GetJobList("")
+                Case "Search"
+                    JobRunner_RestFunctions.GetJobList("")
+                Case Else
+                    JobRunner_RestFunctions.GetJobList(txtJobsSearch.Text)
+            End Select
+
+        End If
+    End Sub
+    Public Function Create_JobRefreshTimer()
+        Dim JobRefreshCall As New System.Threading.TimerCallback(AddressOf JobRefreshUp)
+        Return New System.Threading.Timer(JobRefreshCall, Nothing, 10, 10000)
+    End Function
+    Private Delegate Sub RefreshJobEndpointTimer(ByVal form As Form)
+    Public Sub JobEndpointRefreshUp(state As Object)
+        If Me.InvokeRequired Then
+            Me.Invoke(New RefreshJobTimer(AddressOf JobEndpointRefreshUp), Me)
+        Else
+            Select Case txtSearchEndpointStatus.Text
+                Case ""
+                    JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus)
+                Case "Search"
+                    JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus)
+                Case Else
+                    JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus, txtSearchEndpointStatus.Text)
+            End Select
+
+        End If
+    End Sub
+    Public Function Create_JobEndpointRefreshTimer()
+        Dim JobEndpointRefreshCall As New System.Threading.TimerCallback(AddressOf JobEndpointRefreshUp)
+        Return New System.Threading.Timer(JobEndpointRefreshCall, Nothing, 10, 10000)
+    End Function
+
+
+
+    Private Delegate Sub RefreshAlertTimer(ByVal form As Form)
+    Public Sub AlertsRefreshUp(state As Object)
+        If Me.InvokeRequired Then
+            Me.Invoke(New RefreshAlertTimer(AddressOf AlertsRefreshUp), Me)
+        Else
+            JobRunner_RestFunctions.LoadAlerts()
+        End If
+    End Sub
+    Public Function Create_AlertsRefreshTimer()
+        Dim AlertRefreshCall As New System.Threading.TimerCallback(AddressOf AlertsRefreshUp)
+        Return New System.Threading.Timer(AlertRefreshCall, Nothing, 10, 10000)
+    End Function
+
+    Private Delegate Sub R1TimeoutTimer(ByVal form As Form)
+    Public Sub R1TimeoutUp(state As Object)
+        If Me.InvokeRequired Then
+            Me.Invoke(New R1TimeoutTimer(AddressOf R1TimeoutUp), Me)
+        Else
+            Me.auth.Data.Message = "Timeout"
+        End If
+    End Sub
+    Public Function Create_R1TimeOutTimer()
+        Dim R1TimeOutCall As New System.Threading.TimerCallback(AddressOf R1TimeoutUp)
+        Return New System.Threading.Timer(R1TimeOutCall, Nothing, 10, 1500000)
+    End Function
+
+    Private Sub txtJobsSearch_TextChanged(sender As Object, e As EventArgs) Handles txtJobsSearch.TextChanged
+
     End Sub
 End Class

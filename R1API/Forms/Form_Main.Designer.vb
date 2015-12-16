@@ -44,6 +44,7 @@ Partial Class Main
         Me.rdor1 = New System.Windows.Forms.RadioButton()
         Me.rdoadgmap = New System.Windows.Forms.RadioButton()
         Me.grpOptDefSet = New System.Windows.Forms.GroupBox()
+        Me.btnLoadDefaultTemplateName = New System.Windows.Forms.Button()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.chkUpdates = New System.Windows.Forms.CheckBox()
         Me.btn_CheckForUpdates = New System.Windows.Forms.Button()
@@ -280,7 +281,6 @@ Partial Class Main
         Me.ofdBox = New System.Windows.Forms.OpenFileDialog()
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
         Me.tooltip = New System.Windows.Forms.ToolTip(Me.components)
-        Me.btnLoadDefaultTemplateName = New System.Windows.Forms.Button()
         Me.GroupBox4.SuspendLayout()
         Me.grpReqSet.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -599,6 +599,15 @@ Partial Class Main
         Me.grpOptDefSet.TabIndex = 28
         Me.grpOptDefSet.TabStop = False
         Me.grpOptDefSet.Text = "Optional Default Settings"
+        '
+        'btnLoadDefaultTemplateName
+        '
+        Me.btnLoadDefaultTemplateName.Location = New System.Drawing.Point(492, 152)
+        Me.btnLoadDefaultTemplateName.Name = "btnLoadDefaultTemplateName"
+        Me.btnLoadDefaultTemplateName.Size = New System.Drawing.Size(38, 23)
+        Me.btnLoadDefaultTemplateName.TabIndex = 29
+        Me.btnLoadDefaultTemplateName.Text = "..."
+        Me.btnLoadDefaultTemplateName.UseVisualStyleBackColor = True
         '
         'GroupBox6
         '
@@ -1762,8 +1771,8 @@ Partial Class Main
         '
         Me.tabControlJobsRest.Controls.Add(Me.tabTasks)
         Me.tabControlJobsRest.Controls.Add(Me.tabProjects)
-        Me.tabControlJobsRest.Controls.Add(Me.tabJobsList)
         Me.tabControlJobsRest.Controls.Add(Me.tabAlerts)
+        Me.tabControlJobsRest.Controls.Add(Me.tabJobsList)
         Me.tabControlJobsRest.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tabControlJobsRest.Location = New System.Drawing.Point(0, 0)
         Me.tabControlJobsRest.Name = "tabControlJobsRest"
@@ -3163,15 +3172,6 @@ Partial Class Main
         Me.sfdBox.DefaultExt = "json"
         Me.sfdBox.Filter = "Box Files|*.json"
         Me.sfdBox.InitialDirectory = "My.Application.Info.DirectoryPath & ""\BoxedJobs"""
-        '
-        'btnLoadDefaultTemplateName
-        '
-        Me.btnLoadDefaultTemplateName.Location = New System.Drawing.Point(492, 152)
-        Me.btnLoadDefaultTemplateName.Name = "btnLoadDefaultTemplateName"
-        Me.btnLoadDefaultTemplateName.Size = New System.Drawing.Size(38, 23)
-        Me.btnLoadDefaultTemplateName.TabIndex = 29
-        Me.btnLoadDefaultTemplateName.Text = "..."
-        Me.btnLoadDefaultTemplateName.UseVisualStyleBackColor = True
         '
         'Main
         '
