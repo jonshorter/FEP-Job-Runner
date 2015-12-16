@@ -3,6 +3,7 @@ Imports System.Security
 Imports System.Runtime.InteropServices
 Imports R1SimpleRestClient.Models.Response
 Imports System.Threading
+Imports System.Reflection
 
 
 Public Class Main
@@ -167,13 +168,40 @@ Public Class Main
 
 
 
+
     Private Sub Form_Main_Load(sender As Object, e As EventArgs) Handles Me.Load
-        Try
-            'Put JSON.Newtonsoft Down
-            Dim b As Byte() = My.Resources.Newtonsoft_Json
-            IO.File.WriteAllBytes("Newtonsoft.Json.dll", b)
-        Catch ex As Exception
-        End Try
+
+        'Dim jsonresource As String = "R1_Job_Runner.Newtonsoft.Json.dll"
+        'Dim r1simplerest As String = "R1_Job_Runner.R1SimpleRestClient.dll"
+        'Dim ressharp As String = "R1_Job_Runner.RestSharp.dll"
+        'EmbeddedAssembly.Load(jsonresource, "Newtonsoft.Json.dll")
+        'EmbeddedAssembly.Load(r1simplerest, "R1SimpleRestClient.dll")
+        'EmbeddedAssembly.Load(ressharp, "RestSharp.dll")
+
+        'AddHandler AppDomain.CurrentDomain.AssemblyResolve, AddressOf CurrentDomain_AssemblyResolve
+
+
+
+        'Try
+        '    'Put JSON.Newtonsoft Down
+        '    Dim b As Byte() = My.Resources.Newtonsoft_Json
+        '    IO.File.WriteAllBytes("Newtonsoft.Json.dll", b)
+        'Catch ex As Exception
+        'End Try
+
+        'Try
+        '    'Put R1SimpleRestClient Down
+        '    Dim b As Byte() = My.Resources.R1SimpleRestClient
+        '    IO.File.WriteAllBytes("R1SimpleRestClient.dll", b)
+        'Catch ex As Exception
+        'End Try
+
+        'Try
+        '    'Put RestSharp Down
+        '    Dim b As Byte() = My.Resources.RestSharp
+        '    IO.File.WriteAllBytes("RestSharp.dll", b)
+        'Catch ex As Exception
+        'End Try
 
 
 

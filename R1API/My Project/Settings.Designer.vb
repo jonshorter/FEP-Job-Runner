@@ -199,15 +199,15 @@ Namespace My
             End Set
         End Property
         
-        <Global.System.Configuration.UserScopedSettingAttribute(), _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.Configuration.DefaultSettingValueAttribute("True")> _
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
         Public Property updatecheck() As Boolean
             Get
-                Return CType(Me("updatecheck"), Boolean)
+                Return CType(Me("updatecheck"),Boolean)
             End Get
-            Set(value As Boolean)
-                Me("updatecheck") = Value
+            Set
+                Me("updatecheck") = value
             End Set
         End Property
     End Class
