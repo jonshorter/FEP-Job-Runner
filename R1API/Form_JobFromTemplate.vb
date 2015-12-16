@@ -89,6 +89,20 @@ Public Class Form_JobFromTemplate
                                             JobSchedule.Period = nmb_RecurDays.Value
                                         Case rdoRecurStart_Weekly.Name '-------------Weekly
                                             JobSchedule.TimeUnit = Job2.TimeUnitEnum.Week
+                                            JobSchedule.Period = nmbRecurWeekly_Weeks.Value
+                                            If chkRecurWeekly_Friday.Checked = False And chkRecurWeekly_Monday.Checked = False And chkRecurWeekly_Saturday.Checked = False And chkRecurWeekly_Sunday.Checked = False And chkRecurWeekly_Thursday.Checked = False And chkRecurWeekly_Tuesday.Checked = False And chkRecurWeekly_Wednesday.Checked = False Then
+                                                MsgBox("At least one day must be selected.", MsgBoxStyle.Exclamation, "Day Selection")
+                                                Return
+                                            Else
+                                                JobSchedule.Weekday = New HashSet(Of DayOfWeek)
+                                                If chkRecurWeekly_Sunday.Checked Then JobSchedule.Weekday.Add([Enum].Parse(GetType(DayOfWeek), chkRecurWeekly_Sunday.Text))
+                                                If chkRecurWeekly_Monday.Checked Then JobSchedule.Weekday.Add([Enum].Parse(GetType(DayOfWeek), chkRecurWeekly_Monday.Text))
+                                                If chkRecurWeekly_Tuesday.Checked Then JobSchedule.Weekday.Add([Enum].Parse(GetType(DayOfWeek), chkRecurWeekly_Tuesday.Text))
+                                                If chkRecurWeekly_Wednesday.Checked Then JobSchedule.Weekday.Add([Enum].Parse(GetType(DayOfWeek), chkRecurWeekly_Wednesday.Text))
+                                                If chkRecurWeekly_Thursday.Checked Then JobSchedule.Weekday.Add([Enum].Parse(GetType(DayOfWeek), chkRecurWeekly_Thursday.Text))
+                                                If chkRecurWeekly_Friday.Checked Then JobSchedule.Weekday.Add([Enum].Parse(GetType(DayOfWeek), chkRecurWeekly_Friday.Text))
+                                                If chkRecurWeekly_Saturday.Checked Then JobSchedule.Weekday.Add([Enum].Parse(GetType(DayOfWeek), chkRecurWeekly_Saturday.Text))
+                                            End If
                                         Case rdoRecurStart_Monthly.Name '-------------Monthly
                                             JobSchedule.TimeUnit = Job2.TimeUnitEnum.Month
                                             If rdoRecurMonth_Day.Checked = True Then

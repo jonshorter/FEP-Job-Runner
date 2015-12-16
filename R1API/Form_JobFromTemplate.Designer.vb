@@ -88,7 +88,7 @@ Partial Class Form_JobFromTemplate
         Me.panel_RecurYearly = New System.Windows.Forms.Panel()
         Me.panel_RecurMonthly = New System.Windows.Forms.Panel()
         Me.panel_RecurWeekly = New System.Windows.Forms.Panel()
-        Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
+        Me.nmbRecurWeekly_Weeks = New System.Windows.Forms.NumericUpDown()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.chkIncrementalCollection = New System.Windows.Forms.CheckBox()
@@ -158,6 +158,13 @@ Partial Class Form_JobFromTemplate
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.nmbRecurMonth_DayMonth = New System.Windows.Forms.NumericUpDown()
+        Me.chkRecurWeekly_Sunday = New System.Windows.Forms.CheckBox()
+        Me.chkRecurWeekly_Monday = New System.Windows.Forms.CheckBox()
+        Me.chkRecurWeekly_Tuesday = New System.Windows.Forms.CheckBox()
+        Me.chkRecurWeekly_Wednesday = New System.Windows.Forms.CheckBox()
+        Me.chkRecurWeekly_Thursday = New System.Windows.Forms.CheckBox()
+        Me.chkRecurWeekly_Friday = New System.Windows.Forms.CheckBox()
+        Me.chkRecurWeekly_Saturday = New System.Windows.Forms.CheckBox()
         CType(Me.splitJobFromTemplate, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.splitJobFromTemplate.Panel1.SuspendLayout()
         Me.splitJobFromTemplate.Panel2.SuspendLayout()
@@ -194,7 +201,7 @@ Partial Class Form_JobFromTemplate
         Me.panel_RecurYearly.SuspendLayout()
         Me.panel_RecurMonthly.SuspendLayout()
         Me.panel_RecurWeekly.SuspendLayout()
-        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nmbRecurWeekly_Weeks, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabThreatFilters.SuspendLayout()
         CType(Me.splitThreatFilters, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.splitThreatFilters.Panel1.SuspendLayout()
@@ -708,12 +715,12 @@ Partial Class Form_JobFromTemplate
         Me.grpRecurrenceStart.Controls.Add(Me.rdoRecurStart_Daily)
         Me.grpRecurrenceStart.Controls.Add(Me.rdoRecurStart_Hourly)
         Me.grpRecurrenceStart.Controls.Add(Me.rdoRecurStart_Minute)
-        Me.grpRecurrenceStart.Controls.Add(Me.panel_RecurMonthly)
         Me.grpRecurrenceStart.Controls.Add(Me.panel_RecurWeekly)
         Me.grpRecurrenceStart.Controls.Add(Me.panel_recurDaily)
         Me.grpRecurrenceStart.Controls.Add(Me.panel_RecurMinute)
         Me.grpRecurrenceStart.Controls.Add(Me.panel_RecurHourly)
         Me.grpRecurrenceStart.Controls.Add(Me.panel_RecurYearly)
+        Me.grpRecurrenceStart.Controls.Add(Me.panel_RecurMonthly)
         Me.grpRecurrenceStart.Location = New System.Drawing.Point(12, 57)
         Me.grpRecurrenceStart.Name = "grpRecurrenceStart"
         Me.grpRecurrenceStart.Size = New System.Drawing.Size(604, 188)
@@ -938,7 +945,14 @@ Partial Class Form_JobFromTemplate
         '
         'panel_RecurWeekly
         '
-        Me.panel_RecurWeekly.Controls.Add(Me.NumericUpDown1)
+        Me.panel_RecurWeekly.Controls.Add(Me.chkRecurWeekly_Saturday)
+        Me.panel_RecurWeekly.Controls.Add(Me.chkRecurWeekly_Friday)
+        Me.panel_RecurWeekly.Controls.Add(Me.chkRecurWeekly_Thursday)
+        Me.panel_RecurWeekly.Controls.Add(Me.chkRecurWeekly_Wednesday)
+        Me.panel_RecurWeekly.Controls.Add(Me.chkRecurWeekly_Tuesday)
+        Me.panel_RecurWeekly.Controls.Add(Me.chkRecurWeekly_Monday)
+        Me.panel_RecurWeekly.Controls.Add(Me.chkRecurWeekly_Sunday)
+        Me.panel_RecurWeekly.Controls.Add(Me.nmbRecurWeekly_Weeks)
         Me.panel_RecurWeekly.Controls.Add(Me.Label12)
         Me.panel_RecurWeekly.Controls.Add(Me.Label13)
         Me.panel_RecurWeekly.Location = New System.Drawing.Point(99, 13)
@@ -947,18 +961,20 @@ Partial Class Form_JobFromTemplate
         Me.panel_RecurWeekly.TabIndex = 11
         Me.panel_RecurWeekly.Visible = False
         '
-        'NumericUpDown1
+        'nmbRecurWeekly_Weeks
         '
-        Me.NumericUpDown1.Location = New System.Drawing.Point(92, 32)
-        Me.NumericUpDown1.Maximum = New Decimal(New Integer() {365, 0, 0, 0})
-        Me.NumericUpDown1.Name = "NumericUpDown1"
-        Me.NumericUpDown1.Size = New System.Drawing.Size(92, 22)
-        Me.NumericUpDown1.TabIndex = 3
+        Me.nmbRecurWeekly_Weeks.Location = New System.Drawing.Point(135, 32)
+        Me.nmbRecurWeekly_Weeks.Maximum = New Decimal(New Integer() {365, 0, 0, 0})
+        Me.nmbRecurWeekly_Weeks.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nmbRecurWeekly_Weeks.Name = "nmbRecurWeekly_Weeks"
+        Me.nmbRecurWeekly_Weeks.Size = New System.Drawing.Size(92, 22)
+        Me.nmbRecurWeekly_Weeks.TabIndex = 3
+        Me.nmbRecurWeekly_Weeks.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(190, 34)
+        Me.Label12.Location = New System.Drawing.Point(243, 34)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(85, 17)
         Me.Label12.TabIndex = 2
@@ -969,9 +985,9 @@ Partial Class Form_JobFromTemplate
         Me.Label13.AutoSize = True
         Me.Label13.Location = New System.Drawing.Point(42, 32)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(44, 17)
+        Me.Label13.Size = New System.Drawing.Size(85, 17)
         Me.Label13.TabIndex = 0
-        Me.Label13.Text = "Every"
+        Me.Label13.Text = "Recur every"
         '
         'chkIncrementalCollection
         '
@@ -1645,6 +1661,76 @@ Partial Class Form_JobFromTemplate
         Me.nmbRecurMonth_DayMonth.TabIndex = 19
         Me.nmbRecurMonth_DayMonth.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
+        'chkRecurWeekly_Sunday
+        '
+        Me.chkRecurWeekly_Sunday.AutoSize = True
+        Me.chkRecurWeekly_Sunday.Location = New System.Drawing.Point(42, 71)
+        Me.chkRecurWeekly_Sunday.Name = "chkRecurWeekly_Sunday"
+        Me.chkRecurWeekly_Sunday.Size = New System.Drawing.Size(78, 21)
+        Me.chkRecurWeekly_Sunday.TabIndex = 4
+        Me.chkRecurWeekly_Sunday.Text = "Sunday"
+        Me.chkRecurWeekly_Sunday.UseVisualStyleBackColor = True
+        '
+        'chkRecurWeekly_Monday
+        '
+        Me.chkRecurWeekly_Monday.AutoSize = True
+        Me.chkRecurWeekly_Monday.Location = New System.Drawing.Point(133, 71)
+        Me.chkRecurWeekly_Monday.Name = "chkRecurWeekly_Monday"
+        Me.chkRecurWeekly_Monday.Size = New System.Drawing.Size(80, 21)
+        Me.chkRecurWeekly_Monday.TabIndex = 5
+        Me.chkRecurWeekly_Monday.Text = "Monday"
+        Me.chkRecurWeekly_Monday.UseVisualStyleBackColor = True
+        '
+        'chkRecurWeekly_Tuesday
+        '
+        Me.chkRecurWeekly_Tuesday.AutoSize = True
+        Me.chkRecurWeekly_Tuesday.Location = New System.Drawing.Point(219, 71)
+        Me.chkRecurWeekly_Tuesday.Name = "chkRecurWeekly_Tuesday"
+        Me.chkRecurWeekly_Tuesday.Size = New System.Drawing.Size(85, 21)
+        Me.chkRecurWeekly_Tuesday.TabIndex = 6
+        Me.chkRecurWeekly_Tuesday.Text = "Tuesday"
+        Me.chkRecurWeekly_Tuesday.UseVisualStyleBackColor = True
+        '
+        'chkRecurWeekly_Wednesday
+        '
+        Me.chkRecurWeekly_Wednesday.AutoSize = True
+        Me.chkRecurWeekly_Wednesday.Location = New System.Drawing.Point(310, 71)
+        Me.chkRecurWeekly_Wednesday.Name = "chkRecurWeekly_Wednesday"
+        Me.chkRecurWeekly_Wednesday.Size = New System.Drawing.Size(105, 21)
+        Me.chkRecurWeekly_Wednesday.TabIndex = 7
+        Me.chkRecurWeekly_Wednesday.Text = "Wednesday"
+        Me.chkRecurWeekly_Wednesday.UseVisualStyleBackColor = True
+        '
+        'chkRecurWeekly_Thursday
+        '
+        Me.chkRecurWeekly_Thursday.AutoSize = True
+        Me.chkRecurWeekly_Thursday.Location = New System.Drawing.Point(94, 101)
+        Me.chkRecurWeekly_Thursday.Name = "chkRecurWeekly_Thursday"
+        Me.chkRecurWeekly_Thursday.Size = New System.Drawing.Size(90, 21)
+        Me.chkRecurWeekly_Thursday.TabIndex = 8
+        Me.chkRecurWeekly_Thursday.Text = "Thursday"
+        Me.chkRecurWeekly_Thursday.UseVisualStyleBackColor = True
+        '
+        'chkRecurWeekly_Friday
+        '
+        Me.chkRecurWeekly_Friday.AutoSize = True
+        Me.chkRecurWeekly_Friday.Location = New System.Drawing.Point(190, 101)
+        Me.chkRecurWeekly_Friday.Name = "chkRecurWeekly_Friday"
+        Me.chkRecurWeekly_Friday.Size = New System.Drawing.Size(69, 21)
+        Me.chkRecurWeekly_Friday.TabIndex = 9
+        Me.chkRecurWeekly_Friday.Text = "Friday"
+        Me.chkRecurWeekly_Friday.UseVisualStyleBackColor = True
+        '
+        'chkRecurWeekly_Saturday
+        '
+        Me.chkRecurWeekly_Saturday.AutoSize = True
+        Me.chkRecurWeekly_Saturday.Location = New System.Drawing.Point(265, 100)
+        Me.chkRecurWeekly_Saturday.Name = "chkRecurWeekly_Saturday"
+        Me.chkRecurWeekly_Saturday.Size = New System.Drawing.Size(87, 21)
+        Me.chkRecurWeekly_Saturday.TabIndex = 10
+        Me.chkRecurWeekly_Saturday.Text = "Saturday"
+        Me.chkRecurWeekly_Saturday.UseVisualStyleBackColor = True
+        '
         'Form_JobFromTemplate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -1704,7 +1790,7 @@ Partial Class Form_JobFromTemplate
         Me.panel_RecurMonthly.PerformLayout()
         Me.panel_RecurWeekly.ResumeLayout(False)
         Me.panel_RecurWeekly.PerformLayout()
-        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nmbRecurWeekly_Weeks, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabThreatFilters.ResumeLayout(False)
         Me.splitThreatFilters.Panel1.ResumeLayout(False)
         Me.splitThreatFilters.Panel2.ResumeLayout(False)
@@ -1845,7 +1931,7 @@ Partial Class Form_JobFromTemplate
     Friend WithEvents panel_RecurMonthly As System.Windows.Forms.Panel
     Friend WithEvents panel_RecurYearly As System.Windows.Forms.Panel
     Friend WithEvents panel_RecurWeekly As System.Windows.Forms.Panel
-    Friend WithEvents NumericUpDown1 As System.Windows.Forms.NumericUpDown
+    Friend WithEvents nmbRecurWeekly_Weeks As System.Windows.Forms.NumericUpDown
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents cmbRecurYear_EveryMonth As System.Windows.Forms.ComboBox
@@ -1867,4 +1953,11 @@ Partial Class Form_JobFromTemplate
     Friend WithEvents Label17 As System.Windows.Forms.Label
     Friend WithEvents Label15 As System.Windows.Forms.Label
     Friend WithEvents nmbRecurMonth_TheMonth As System.Windows.Forms.NumericUpDown
+    Friend WithEvents chkRecurWeekly_Saturday As System.Windows.Forms.CheckBox
+    Friend WithEvents chkRecurWeekly_Friday As System.Windows.Forms.CheckBox
+    Friend WithEvents chkRecurWeekly_Thursday As System.Windows.Forms.CheckBox
+    Friend WithEvents chkRecurWeekly_Wednesday As System.Windows.Forms.CheckBox
+    Friend WithEvents chkRecurWeekly_Tuesday As System.Windows.Forms.CheckBox
+    Friend WithEvents chkRecurWeekly_Monday As System.Windows.Forms.CheckBox
+    Friend WithEvents chkRecurWeekly_Sunday As System.Windows.Forms.CheckBox
 End Class
