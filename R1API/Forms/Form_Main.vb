@@ -1385,8 +1385,9 @@ Public Class Main
                         If JobsEndpointStatus <> "" Then
                             JobRunner_RestFunctions.GetEndpointStatusCounts(JobsEndpointStatus)
                             JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus)
+                            splitEndpointStatus.BringToFront()
                         End If
-                        splitEndpointStatus.BringToFront()
+
 
                     Case 10 'Result
                         Process.Start("https://" & txtServer.Text & "/r1/#/reviewpage?JobResultID=" & resultid & "&ShowAgentPivot=false&ShowJobPivot=false")
@@ -1516,6 +1517,35 @@ Public Class Main
                 MsgBox(authobj.Data.Message)
                 tabMenu.SelectedTab = tabSettings
             End If
+        End If
+    End Sub
+
+    Private Sub btnViewProjectReview_Click(sender As Object, e As EventArgs) Handles btnViewProjectReview.Click
+        Dim projectid = dgvProjectList.CurrentRow.Cells(5).Value
+        Process.Start("https://" & txtServer.Text & "/R1/#/reviewpage?projectid=" & projectid)
+    End Sub
+
+    Private Sub txtSearchEndpointStatus_TextChanged(sender As Object, e As EventArgs) Handles txtSearchEndpointStatus.TextChanged
+
+    End Sub
+    Private Sub txtSearchEndpointStatus_Enter(sender As Object, e As EventArgs) Handles txtSearchEndpointStatus.Enter
+        If txtSearchEndpointStatus.Text = "Search" Then
+            txtSearchEndpointStatus.Text = ""
+        End If
+    End Sub
+
+    Private Sub txtSearchEndpointStatus_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSearchEndpointStatus.KeyDown
+
+        If e.KeyCode = Keys.Enter Then
+            JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus, txtSearchEndpointStatus.Text)
+        End If
+    End Sub
+
+
+
+    Private Sub txtSearchEndpointStatus_Leave(sender As Object, e As EventArgs) Handles txtSearchEndpointStatus.Leave
+        If txtSearchEndpointStatus.Text = "" Then
+            txtSearchEndpointStatus.Text = "Search"
         End If
     End Sub
 End Class

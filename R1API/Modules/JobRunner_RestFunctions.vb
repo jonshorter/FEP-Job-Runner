@@ -55,9 +55,9 @@ Module JobRunner_RestFunctions
             End If
             Dim jobslist As ApiResponse(Of JobData)
             If Not Search = "" Or Search = "Search" Then
-                jobslist = r1rest.Functions.Job.GetAllJobs(Main.auth, Main.txtServer.Text, , , , Search)
+                jobslist = r1rest.Functions.Job.GetAllJobs(Main.auth, Main.txtServer.Text, , 90000, , Search)
             Else
-                jobslist = r1rest.Functions.Job.GetAllJobs(Main.auth, Main.txtServer.Text)
+                jobslist = r1rest.Functions.Job.GetAllJobs(Main.auth, Main.txtServer.Text, , 90000)
             End If
 
             Main.dgvJobsRestJobsList.Rows.Clear()
@@ -145,15 +145,15 @@ Module JobRunner_RestFunctions
     End Sub
 
 
-    Public Sub GetJobTargets(ByVal JobResultID As String)
+    Public Sub GetJobTargets(ByVal JobResultID As String, Optional Search As String = "")
         Try
             Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
             If Main.auth.Data.Message <> "Authenticated" Then
                 Main.auth = r1rest.AuthenticateWithR1(Main.txtServer.Text, Main.txtApiUser.Text, ToInsecureString(Main.apipass))
             End If
-            Dim jobtargets = r1rest.Functions.Job.GetJobTargets(Main.auth, Main.txtServer.Text, JobResultID)
+            Dim jobtargets = r1rest.Functions.Job.GetJobTargets(Main.auth, Main.txtServer.Text, JobResultID, , , , Search)
             Main.dgvEndpointStatusJobTargets.Rows.Clear()
-
+            Main.lblJobName.Text = jobtargets.Data.jobName
             For Each target In jobtargets.Data.targets
                 Dim actionstatus As String = "Cancel"
                 If target.status = "Cancelled" Or target.status = "Cancelling" Or target.status = "Completed" Or target.status = "Failed" Then
