@@ -461,6 +461,8 @@ Partial Class Main
         '
         'GroupBox4
         '
+        Me.GroupBox4.AutoSize = True
+        Me.GroupBox4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.GroupBox4.Controls.Add(Me.grpReqSet)
         Me.GroupBox4.Controls.Add(Me.grpOptDefSet)
         Me.GroupBox4.Controls.Add(Me.txtStatusSettings)
@@ -469,13 +471,15 @@ Partial Class Main
         Me.GroupBox4.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Padding = New System.Windows.Forms.Padding(4)
-        Me.GroupBox4.Size = New System.Drawing.Size(821, 608)
+        Me.GroupBox4.Size = New System.Drawing.Size(821, 462)
         Me.GroupBox4.TabIndex = 19
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Settings"
         '
         'grpReqSet
         '
+        Me.grpReqSet.AutoSize = True
+        Me.grpReqSet.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.grpReqSet.Controls.Add(Me.chkRestAPI)
         Me.grpReqSet.Controls.Add(Me.GroupBox2)
         Me.grpReqSet.Controls.Add(Me.Label7)
@@ -488,7 +492,7 @@ Partial Class Main
         Me.grpReqSet.Margin = New System.Windows.Forms.Padding(4)
         Me.grpReqSet.Name = "grpReqSet"
         Me.grpReqSet.Padding = New System.Windows.Forms.Padding(4)
-        Me.grpReqSet.Size = New System.Drawing.Size(805, 167)
+        Me.grpReqSet.Size = New System.Drawing.Size(805, 182)
         Me.grpReqSet.TabIndex = 29
         Me.grpReqSet.TabStop = False
         Me.grpReqSet.Text = "Required Settings"
@@ -572,6 +576,8 @@ Partial Class Main
         '
         'grpOptDefSet
         '
+        Me.grpOptDefSet.AutoSize = True
+        Me.grpOptDefSet.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.grpOptDefSet.Controls.Add(Me.btnLoadDefaultTemplateName)
         Me.grpOptDefSet.Controls.Add(Me.GroupBox6)
         Me.grpOptDefSet.Controls.Add(Me.Label2)
@@ -589,7 +595,7 @@ Partial Class Main
         Me.grpOptDefSet.Margin = New System.Windows.Forms.Padding(4)
         Me.grpOptDefSet.Name = "grpOptDefSet"
         Me.grpOptDefSet.Padding = New System.Windows.Forms.Padding(4)
-        Me.grpOptDefSet.Size = New System.Drawing.Size(805, 182)
+        Me.grpOptDefSet.Size = New System.Drawing.Size(794, 198)
         Me.grpOptDefSet.TabIndex = 28
         Me.grpOptDefSet.TabStop = False
         Me.grpOptDefSet.Text = "Optional Default Settings"
@@ -702,7 +708,7 @@ Partial Class Main
         Me.txtStatusSettings.BackColor = System.Drawing.SystemColors.Control
         Me.txtStatusSettings.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtStatusSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtStatusSettings.Location = New System.Drawing.Point(8, 399)
+        Me.txtStatusSettings.Location = New System.Drawing.Point(8, 415)
         Me.txtStatusSettings.Margin = New System.Windows.Forms.Padding(4)
         Me.txtStatusSettings.Name = "txtStatusSettings"
         Me.txtStatusSettings.ReadOnly = True
@@ -712,7 +718,7 @@ Partial Class Main
         '
         'btnSaveSettings
         '
-        Me.btnSaveSettings.Location = New System.Drawing.Point(685, 395)
+        Me.btnSaveSettings.Location = New System.Drawing.Point(685, 411)
         Me.btnSaveSettings.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSaveSettings.Name = "btnSaveSettings"
         Me.btnSaveSettings.Size = New System.Drawing.Size(128, 28)
@@ -1871,6 +1877,7 @@ Partial Class Main
         '
         Me.dgvProjectList.AllowUserToAddRows = False
         Me.dgvProjectList.AllowUserToDeleteRows = False
+        Me.dgvProjectList.AllowUserToResizeRows = False
         Me.dgvProjectList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvProjectList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvProjectList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.CreationDate, Me.CreatedBy, Me.LastModDate, Me.ProjectFolderPath, Me.ProjectID})
@@ -1967,6 +1974,7 @@ Partial Class Main
         '
         Me.dgvJobsRestJobsList.AllowUserToAddRows = False
         Me.dgvJobsRestJobsList.AllowUserToDeleteRows = False
+        Me.dgvJobsRestJobsList.AllowUserToResizeRows = False
         Me.dgvJobsRestJobsList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvJobsRestJobsList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvJobsRestJobsList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.jobName, Me.jobStatus, Me.jobRetry, Me.jobCancel, Me.jobType, Me.jobStart, Me.jobEnd, Me.jobID, Me.jobResultID, Me.jobEndpointStatus, Me.Result})
@@ -2296,6 +2304,7 @@ Partial Class Main
         '
         Me.dgvAlerts.AllowUserToAddRows = False
         Me.dgvAlerts.AllowUserToDeleteRows = False
+        Me.dgvAlerts.AllowUserToResizeRows = False
         Me.dgvAlerts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvAlerts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvAlerts.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.artifactName, Me.createDate, Me.severity, Me.target, Me.source, Me.project, Me.confidence, Me.threatScore})
@@ -3223,6 +3232,7 @@ Partial Class Main
         CType(Me.nmbremkillprocid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabMenu.ResumeLayout(False)
         Me.tabSettings.ResumeLayout(False)
+        Me.tabSettings.PerformLayout()
         Me.tabRESTUI.ResumeLayout(False)
         Me.tabControlJobsRest.ResumeLayout(False)
         Me.tabTasks.ResumeLayout(False)

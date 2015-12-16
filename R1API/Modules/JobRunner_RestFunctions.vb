@@ -274,15 +274,17 @@ Module JobRunner_RestFunctions
                 grp.AutoSizeMode = AutoSizeMode.GrowAndShrink
                 grp.Size = New Size(275, 175)
                 Dim lsttemplate As New ListView
+             
                 AddHandler lsttemplate.DoubleClick, AddressOf TaskItemDo
                 lsttemplate.MultiSelect = False
+                lsttemplate.HeaderStyle = ColumnHeaderStyle.None
                 lsttemplate.Parent = grp
                 lsttemplate.Dock = DockStyle.Fill
-                lsttemplate.AutoSize = False
+                lsttemplate.AutoSize = True
                 lsttemplate.Size = New Size(375, 325)
                 lsttemplate.View = View.Details
                 lsttemplate.FullRowSelect = True
-                Dim col1 = lsttemplate.Columns.Add("Template Name")
+                Dim col1 = lsttemplate.Columns.Add("")
                 col1.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
                 col1.Width = 375
                 For Each Template In category.templates
@@ -389,7 +391,7 @@ Module JobRunner_RestFunctions
 
             Form_JobFromTemplate.dgvTargetEndpoints.Rows.Clear()
             For Each endpoint In endpoints.Data.computers
-                Form_JobFromTemplate.dgvTargetEndpoints.Rows.Add(New String() {False, endpoint.computerName, endpoint.ipAddressLastContacted, endpoint.agentOS, endpoint.agentLastContacted, endpoint.computerId})
+                Form_JobFromTemplate.dgvTargetEndpoints.Rows.Add(New String() {True, endpoint.computerName, endpoint.ipAddressLastContacted, endpoint.agentOS, endpoint.agentLastContacted, endpoint.computerId})
             Next
         Catch ex As Exception
         End Try

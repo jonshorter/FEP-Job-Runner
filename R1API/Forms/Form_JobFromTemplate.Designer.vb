@@ -47,12 +47,6 @@ Partial Class Form_JobFromTemplate
         Me.splitTargetEndpoints = New System.Windows.Forms.SplitContainer()
         Me.txtSearchEndpoint = New System.Windows.Forms.TextBox()
         Me.dgvTargetEndpoints = New System.Windows.Forms.DataGridView()
-        Me.CheckEndpoint = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.EndpointName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.IPAddress = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.OperatingSystem = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LastContact = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.targetID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tabSchedule = New System.Windows.Forms.TabPage()
         Me.flowSchedule = New System.Windows.Forms.FlowLayoutPanel()
         Me.grpScheduleOptions = New System.Windows.Forms.GroupBox()
@@ -167,6 +161,12 @@ Partial Class Form_JobFromTemplate
         Me.Group = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Tags = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FilterID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CheckEndpoint = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.EndpointName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IPAddress = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.OperatingSystem = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LastContact = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.targetID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.splitJobFromTemplate, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.splitJobFromTemplate.Panel1.SuspendLayout()
         Me.splitJobFromTemplate.Panel2.SuspendLayout()
@@ -367,6 +367,7 @@ Partial Class Form_JobFromTemplate
         '
         Me.dgvProjectList.AllowUserToAddRows = False
         Me.dgvProjectList.AllowUserToDeleteRows = False
+        Me.dgvProjectList.AllowUserToResizeRows = False
         Me.dgvProjectList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvProjectList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvProjectList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.CreationDate, Me.CreatedBy, Me.LastModDate, Me.ProjectFolderPath, Me.ProjectID})
@@ -491,6 +492,7 @@ Partial Class Form_JobFromTemplate
         '
         Me.dgvTargetEndpoints.AllowUserToAddRows = False
         Me.dgvTargetEndpoints.AllowUserToDeleteRows = False
+        Me.dgvTargetEndpoints.AllowUserToResizeRows = False
         Me.dgvTargetEndpoints.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvTargetEndpoints.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvTargetEndpoints.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CheckEndpoint, Me.EndpointName, Me.IPAddress, Me.OperatingSystem, Me.LastContact, Me.targetID})
@@ -503,50 +505,6 @@ Partial Class Form_JobFromTemplate
         Me.dgvTargetEndpoints.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvTargetEndpoints.Size = New System.Drawing.Size(837, 507)
         Me.dgvTargetEndpoints.TabIndex = 1
-        '
-        'CheckEndpoint
-        '
-        Me.CheckEndpoint.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.CheckEndpoint.FillWeight = 1.0!
-        Me.CheckEndpoint.HeaderText = "Select"
-        Me.CheckEndpoint.Name = "CheckEndpoint"
-        Me.CheckEndpoint.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.CheckEndpoint.Width = 63
-        '
-        'EndpointName
-        '
-        Me.EndpointName.FillWeight = 112.3096!
-        Me.EndpointName.HeaderText = "Endpoint Name"
-        Me.EndpointName.Name = "EndpointName"
-        Me.EndpointName.ReadOnly = True
-        '
-        'IPAddress
-        '
-        Me.IPAddress.FillWeight = 112.3096!
-        Me.IPAddress.HeaderText = "IP Address"
-        Me.IPAddress.Name = "IPAddress"
-        Me.IPAddress.ReadOnly = True
-        '
-        'OperatingSystem
-        '
-        Me.OperatingSystem.FillWeight = 112.3096!
-        Me.OperatingSystem.HeaderText = "Operating System"
-        Me.OperatingSystem.Name = "OperatingSystem"
-        Me.OperatingSystem.ReadOnly = True
-        '
-        'LastContact
-        '
-        Me.LastContact.FillWeight = 112.3096!
-        Me.LastContact.HeaderText = "Last Contact"
-        Me.LastContact.Name = "LastContact"
-        Me.LastContact.ReadOnly = True
-        '
-        'targetID
-        '
-        Me.targetID.HeaderText = "TargetID"
-        Me.targetID.Name = "targetID"
-        Me.targetID.ReadOnly = True
-        Me.targetID.Visible = False
         '
         'tabSchedule
         '
@@ -1747,6 +1705,50 @@ Partial Class Form_JobFromTemplate
         Me.FilterID.Name = "FilterID"
         Me.FilterID.Visible = False
         '
+        'CheckEndpoint
+        '
+        Me.CheckEndpoint.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.CheckEndpoint.FillWeight = 1.0!
+        Me.CheckEndpoint.HeaderText = ""
+        Me.CheckEndpoint.Name = "CheckEndpoint"
+        Me.CheckEndpoint.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.CheckEndpoint.Width = 63
+        '
+        'EndpointName
+        '
+        Me.EndpointName.FillWeight = 112.3096!
+        Me.EndpointName.HeaderText = "Endpoint Name"
+        Me.EndpointName.Name = "EndpointName"
+        Me.EndpointName.ReadOnly = True
+        '
+        'IPAddress
+        '
+        Me.IPAddress.FillWeight = 112.3096!
+        Me.IPAddress.HeaderText = "IP Address"
+        Me.IPAddress.Name = "IPAddress"
+        Me.IPAddress.ReadOnly = True
+        '
+        'OperatingSystem
+        '
+        Me.OperatingSystem.FillWeight = 112.3096!
+        Me.OperatingSystem.HeaderText = "Operating System"
+        Me.OperatingSystem.Name = "OperatingSystem"
+        Me.OperatingSystem.ReadOnly = True
+        '
+        'LastContact
+        '
+        Me.LastContact.FillWeight = 112.3096!
+        Me.LastContact.HeaderText = "Last Contact"
+        Me.LastContact.Name = "LastContact"
+        Me.LastContact.ReadOnly = True
+        '
+        'targetID
+        '
+        Me.targetID.HeaderText = "TargetID"
+        Me.targetID.Name = "targetID"
+        Me.targetID.ReadOnly = True
+        Me.targetID.Visible = False
+        '
         'Form_JobFromTemplate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -1856,12 +1858,6 @@ Partial Class Form_JobFromTemplate
     Friend WithEvents splitTargetEndpoints As System.Windows.Forms.SplitContainer
     Friend WithEvents txtSearchEndpoint As System.Windows.Forms.TextBox
     Friend WithEvents dgvTargetEndpoints As System.Windows.Forms.DataGridView
-    Friend WithEvents CheckEndpoint As System.Windows.Forms.DataGridViewCheckBoxColumn
-    Friend WithEvents EndpointName As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents IPAddress As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents OperatingSystem As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents LastContact As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents targetID As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents flowSchedule As System.Windows.Forms.FlowLayoutPanel
     Friend WithEvents grpScheduleOptions As System.Windows.Forms.GroupBox
     Friend WithEvents rdoSchedule_Schedule As System.Windows.Forms.RadioButton
@@ -1980,4 +1976,10 @@ Partial Class Form_JobFromTemplate
     Friend WithEvents btnJobFromTemplatePrevious As System.Windows.Forms.Button
     Friend WithEvents lblJobFromTemplateMenuText As System.Windows.Forms.Label
     Friend WithEvents btnJobFromTemplateNext As System.Windows.Forms.Button
+    Friend WithEvents CheckEndpoint As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents EndpointName As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents IPAddress As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents OperatingSystem As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents LastContact As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents targetID As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

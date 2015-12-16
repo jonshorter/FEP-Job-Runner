@@ -68,6 +68,8 @@ Module JobRunner_Functions
         End Try
     End Sub
 
+   
+
     Public Function CheckRootStoreForSelfSigned() As List(Of String)
         Dim fndhashes As New List(Of String)
         Dim xstore As New X509Store(StoreName.Root, StoreLocation.LocalMachine)

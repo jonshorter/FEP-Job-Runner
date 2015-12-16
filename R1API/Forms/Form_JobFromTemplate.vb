@@ -321,6 +321,81 @@ Public Class Form_JobFromTemplate
 
     End Sub
 
+    Private _IsSelectAllChecked As Boolean
+
+    Private Sub AddSelectAllCheckBox(ByVal theDataGridView As DataGridView)
+        Dim cbx As New CheckBox
+        cbx.Name = "SelectAll"
+        cbx.Checked = True
+        'The box size
+        cbx.Size = New Size(16, 16)
+        Dim rect As Rectangle
+        rect = theDataGridView.GetCellDisplayRectangle(0, -1, True)
+        'Put CheckBox  in the middle-center of the column header.
+       cbx.Location = New System.Drawing.Point(rect.Location.X + theDataGridView.Columns(0).Width / 2.4, rect.Location.Y + 5)
+        cbx.BackColor = Color.White
+        cbx.ForeColor = Color.Black
+        theDataGridView.Controls.Add(cbx)
+
+        'Handle header CheckBox check/uncheck function
+        AddHandler cbx.Click, AddressOf HeaderCheckBox_Click
+        'When any CheckBox value in the DataGridViewRows changed,
+        'check/uncheck the header CheckBox accordingly.
+        AddHandler theDataGridView.CellValueChanged, AddressOf DataGridView_CellChecked
+        'This event handler is necessary to commit new CheckBox cell value right after
+        'user clicks the CheckBox.
+        'Without it, CellValueChanged event occurs until the CheckBox cell lose focus
+        'which means the header CheckBox won't display corresponding checked state instantly when user
+        'clicks any one of the CheckBoxes.
+        AddHandler theDataGridView.CurrentCellDirtyStateChanged, AddressOf DataGridView_CurrentCellDirtyStateChanged
+    End Sub
+
+    Private Sub HeaderCheckBox_Click(ByVal sender As Object, ByVal e As EventArgs)
+        Me._IsSelectAllChecked = True
+
+        Dim cbx As CheckBox
+        cbx = DirectCast(sender, CheckBox)
+        Dim theDataGridView As DataGridView = cbx.Parent
+
+        For Each row As DataGridViewRow In theDataGridView.Rows
+            row.Cells(0).Value = cbx.Checked
+        Next
+
+        theDataGridView.EndEdit()
+
+        Me._IsSelectAllChecked = False
+    End Sub
+    Private Sub DataGridView_CellChecked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs)
+        Dim dataGridView As DataGridView = DirectCast(sender, DataGridView)
+        If Not Me._IsSelectAllChecked Then
+            If dataGridView.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = False Then
+                'When any single CheckBox is unchecked, uncheck the header CheckBox.
+                DirectCast(dataGridView.Controls.Item("SelectAll"), CheckBox).Checked = False
+            Else
+                'When any single CheckBox is checked, loop through all CheckBoxes to determine
+                'if the header CheckBox needs to be unchecked.
+                Dim isAllChecked As Boolean = True
+                For Each row As DataGridViewRow In dataGridView.Rows
+                    If row.Cells(0).Value = False Then
+                        isAllChecked = False
+                        Exit For
+                    End If
+                Next
+                DirectCast(dataGridView.Controls.Item("SelectAll"), CheckBox).Checked = isAllChecked
+            End If
+        End If
+    End Sub
+    'The CurrentCellDirtyStateChanged event happens after user change the cell value,
+    'before the cell lose focus and CellValueChanged event.
+    Private Sub DataGridView_CurrentCellDirtyStateChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        Dim dataGridView As DataGridView = DirectCast(sender, DataGridView)
+        If TypeOf dataGridView.CurrentCell Is DataGridViewCheckBoxCell Then
+            'When the value changed cell is DataGridViewCheckBoxCell, commit the change
+            'to invoke the CellValueChanged event.
+            dataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit)
+        End If
+    End Sub
+
     Private Sub splitProjects_Panel1_Paint(sender As Object, e As PaintEventArgs) Handles splitProjects.Panel1.Paint, splitTargetEndpoints.Panel1.Paint, splitThreatFilters.Panel1.Paint
 
     End Sub
@@ -368,6 +443,10 @@ Public Class Form_JobFromTemplate
     End Sub
 
     Private Sub JobFromTemplate_Load(sender As Object, e As EventArgs) Handles Me.Load
+        'Add Select Box
+        AddSelectAllCheckBox(dgvTargetEndpoints)
+
+
         tabControlJobFromTemplate.TabPages.Remove(tabThreatFilters)
         TemplateInfo = JobRunner_RestFunctions.GetTemplateInfo(JobTemplateID).Data
         JobRunner_RestFunctions.GetProjectList_JobFromTemplate("")
