@@ -38,172 +38,7 @@ Public Class Main
     Public sim_selfcert As String = ""
 
 
-
-
-    Private Sub btnExecute_Click(sender As Object, e As EventArgs) Handles btnExecute.Click
-        ResetStatusBar()
-        'Set label color and text
-
-
-
-        lblJobStatus.Text = "Submitting Job..."
-        'Get Computers
-        Dim cnames(lstComputerTargets.Items.Count - 1) As String
-        lstComputerTargets.Items.CopyTo(cnames, 0)
-        If lstComputerTargets.Items.Count < 1 Then cnames = Jobs.nullstring
-
-        'Get Shares
-        Dim snames(lstNetShare.Items.Count - 1) As String
-        lstNetShare.Items.CopyTo(snames, 0)
-        If lstNetShare.Items.Count < 1 Then snames = Jobs.nullstring
-
-        'API Limitation, choose agent or shares
-        If snames.Length >= 1 And cnames.Length >= 1 Then
-            Dim result As DialogResult = Form_AgentorShareDialog.ShowDialog()
-
-            'Choose Agent
-            If result = DialogResult.OK Then
-                'Null shares
-                snames = Jobs.nullstring
-
-                'Choose Shares
-            ElseIf result = DialogResult.Cancel Then
-                'Null computers
-                cnames = Jobs.nullstring
-            End If
-        End If
-
-
-        'Generate Inclusion/Exclusion Filters
-        Dim filter As String = Jobs.BuildFilterJSON(StoreInFiltList, StoreExFiltList)
-        'Dim filter As String = Jobs.CreateFilter
-
-        'Set Job Template
-        Dim templatename As String
-        If txtTemplateName.Text <> "" Then
-            templatename = txtTemplateName.Text
-        Else
-            'If it isn't set use the default
-            templatename = "coll-evtx"
-        End If
-
-        'Agent Remediation - Send File
-        Dim remediatesendfile() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile = StoreRemSendList.toarray
-
-
-        'Agent Remediation - Erase File
-        Dim remediateerase() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase = StoreRemDelList.toarray
-
-
-        'Agent Remediation - Execute
-        Dim remediateexecute() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute = StoreRemExecList.toarray
-
-
-        'Agent Remediation - Kill by PID
-        Dim pids() As String = New String() {}
-        Dim pidlist As List(Of String) = StoreRemKillIDList
-        For Each item In pidlist
-            pids.Add(item)
-        Next
-
-
-        'Agent Remediation - Kill by Process Name
-        Dim processnames() As String = New String() {}
-        Dim pnamelist As List(Of String) = StoreRemKillNameList
-        For Each item In pnamelist
-            processnames.Add(item)
-        Next
-
-        'Kick off the job
-        Jobs.RunFromTemplateName(txtServer.Text, templatename, txtJobName.Text, txtProjectName.Text, txtApiUser.Text, ToInsecureString(apipass), cnames, snames, filter, pids, processnames, remediatesendfile, remediateexecute, remediateerase)
-
-    End Sub
-
-    Private Sub btnAddComputer_Click(sender As Object, e As EventArgs) Handles btnAddComputer.Click
-        'Add hostname to list box
-        If txtComputerTarget.Text <> "" Then
-            lstComputerTargets.Items.Add(txtComputerTarget.Text)
-            txtComputerTarget.Text = ""
-        End If
-    End Sub
-
-    Private Sub btnRemoveComputer_Click(sender As Object, e As EventArgs) Handles btnRemoveComputer.Click
-        'Remove checked items from listbox
-        With lstComputerTargets
-            If .CheckedItems.Count > 0 Then
-                For checked As Integer = .CheckedItems.Count - 1 To 0 Step -1
-                    .Items.Remove(.CheckedItems(checked))
-                Next
-            End If
-        End With
-    End Sub
-
-    Private Sub btnAddNetShare_Click(sender As Object, e As EventArgs) Handles btnAddNetShare.Click
-        'Add path to listbox
-        If txtNetSharePath.Text <> "" Then
-            lstNetShare.Items.Add(txtNetSharePath.Text)
-            txtNetSharePath.Text = ""
-        End If
-    End Sub
-
-    Private Sub btnRemoveNetShare_Click(sender As Object, e As EventArgs) Handles btnRemoveNetShare.Click
-        'Remove checked items from listbox
-        With lstNetShare
-            If .CheckedItems.Count > 0 Then
-                For checked As Integer = .CheckedItems.Count - 1 To 0 Step -1
-                    .Items.Remove(.CheckedItems(checked))
-                Next
-            End If
-        End With
-    End Sub
-
-    Private Sub Main_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
-        'Try
-        '    IO.File.Delete("Newtonsoft.Json.dll")
-        'Catch ex As Exception
-        '    Debug.WriteLine(ex.Message)
-        'End Try
-    End Sub
-
-
-
-
-
     Private Sub Form_Main_Load(sender As Object, e As EventArgs) Handles Me.Load
-
-        'Dim jsonresource As String = "R1_Job_Runner.Newtonsoft.Json.dll"
-        'Dim r1simplerest As String = "R1_Job_Runner.R1SimpleRestClient.dll"
-        'Dim ressharp As String = "R1_Job_Runner.RestSharp.dll"
-        'EmbeddedAssembly.Load(jsonresource, "Newtonsoft.Json.dll")
-        'EmbeddedAssembly.Load(r1simplerest, "R1SimpleRestClient.dll")
-        'EmbeddedAssembly.Load(ressharp, "RestSharp.dll")
-
-        'AddHandler AppDomain.CurrentDomain.AssemblyResolve, AddressOf CurrentDomain_AssemblyResolve
-
-
-
-        'Try
-        '    'Put JSON.Newtonsoft Down
-        '    Dim b As Byte() = My.Resources.Newtonsoft_Json
-        '    IO.File.WriteAllBytes("Newtonsoft.Json.dll", b)
-        'Catch ex As Exception
-        'End Try
-
-        'Try
-        '    'Put R1SimpleRestClient Down
-        '    Dim b As Byte() = My.Resources.R1SimpleRestClient
-        '    IO.File.WriteAllBytes("R1SimpleRestClient.dll", b)
-        'Catch ex As Exception
-        'End Try
-
-        'Try
-        '    'Put RestSharp Down
-        '    Dim b As Byte() = My.Resources.RestSharp
-        '    IO.File.WriteAllBytes("RestSharp.dll", b)
-        'Catch ex As Exception
-        'End Try
-
-
 
         'First Run-Generate default templates
         Me.Text = "R1 Job Runner Version: " & My.Application.Info.Version.ToString
@@ -212,13 +47,11 @@ Public Class Main
             My.Settings.templatename.Clear()
             My.Settings.templatename.Add("coll-evtx")
 
-
             'Set Blank Password
             My.Settings.apipassword = EncryptString(ToSecureString(""))
 
             'Updates on
             My.Settings.updatecheck = True
-
 
             'Turn first run off
             My.Settings.firstrun = False
@@ -227,15 +60,12 @@ Public Class Main
 
         'End First Run
 
-
-
         'Set Target to Agent 
         rdoagent.Checked = True
         rdoshare.Checked = False
 
         'Set PID rdo
         rdoPID.Checked = True
-
 
         'Clear status message
         lblJobStatus.Text = ""
@@ -247,6 +77,7 @@ Public Class Main
         txtComputerTarget.Text = txtdefaultcomputer.Text
         txtdefaultshare.Text = My.Settings.defaultshare
         txtNetSharePath.Text = txtdefaultshare.Text
+        'Check password
         If Not String.IsNullOrWhiteSpace(My.Settings.apipassword) Then
             apipass = DecryptString(My.Settings.apipassword)
             txtAPIPass.Text = apipass.ToString
@@ -347,6 +178,7 @@ Public Class Main
                 txtAPIPass.Text = apipass.ToString
             End If
         End If
+
         My.Settings.jobname = txtDefaultJobName.Text
         My.Settings.projectname = txtDefaultProjectName.Text
         If Not My.Settings.webserver = txtServer.Text Then
@@ -380,7 +212,12 @@ Public Class Main
 
     Private Sub tabSettings_Enter(sender As Object, e As EventArgs) Handles tabSettings.Enter
         'Clear the text when the tab is entered
-        txtAPIPass.Text = apipass.ToString
+        If apipass Is Nothing Then
+            txtAPIPass.Text = ""
+        Else
+            txtAPIPass.Text = apipass.ToString
+        End If
+
         txtStatusSettings.Text = ""
     End Sub
 
@@ -1783,4 +1620,122 @@ Public Class Main
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
 
     End Sub
+
+    Private Sub btnExecute_Click(sender As Object, e As EventArgs) Handles btnExecute.Click
+        ResetStatusBar()
+        'Set label color and text
+
+
+
+        lblJobStatus.Text = "Submitting Job..."
+        'Get Computers
+        Dim cnames(lstComputerTargets.Items.Count - 1) As String
+        lstComputerTargets.Items.CopyTo(cnames, 0)
+        If lstComputerTargets.Items.Count < 1 Then cnames = Jobs.nullstring
+
+        'Get Shares
+        Dim snames(lstNetShare.Items.Count - 1) As String
+        lstNetShare.Items.CopyTo(snames, 0)
+        If lstNetShare.Items.Count < 1 Then snames = Jobs.nullstring
+
+        'API Limitation, choose agent or shares
+        If snames.Length >= 1 And cnames.Length >= 1 Then
+            Dim result As DialogResult = Form_AgentorShareDialog.ShowDialog()
+
+            'Choose Agent
+            If result = DialogResult.OK Then
+                'Null shares
+                snames = Jobs.nullstring
+
+                'Choose Shares
+            ElseIf result = DialogResult.Cancel Then
+                'Null computers
+                cnames = Jobs.nullstring
+            End If
+        End If
+
+
+        'Generate Inclusion/Exclusion Filters
+        Dim filter As String = Jobs.BuildFilterJSON(StoreInFiltList, StoreExFiltList)
+        'Dim filter As String = Jobs.CreateFilter
+
+        'Set Job Template
+        Dim templatename As String
+        If txtTemplateName.Text <> "" Then
+            templatename = txtTemplateName.Text
+        Else
+            'If it isn't set use the default
+            templatename = "coll-evtx"
+        End If
+
+        'Agent Remediation - Send File
+        Dim remediatesendfile() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile = StoreRemSendList.toarray
+
+
+        'Agent Remediation - Erase File
+        Dim remediateerase() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase = StoreRemDelList.toarray
+
+
+        'Agent Remediation - Execute
+        Dim remediateexecute() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute = StoreRemExecList.toarray
+
+
+        'Agent Remediation - Kill by PID
+        Dim pids() As String = New String() {}
+        Dim pidlist As List(Of String) = StoreRemKillIDList
+        For Each item In pidlist
+            pids.Add(item)
+        Next
+
+
+        'Agent Remediation - Kill by Process Name
+        Dim processnames() As String = New String() {}
+        Dim pnamelist As List(Of String) = StoreRemKillNameList
+        For Each item In pnamelist
+            processnames.Add(item)
+        Next
+
+        'Kick off the job
+        Jobs.RunFromTemplateName(txtServer.Text, templatename, txtJobName.Text, txtProjectName.Text, txtApiUser.Text, ToInsecureString(apipass), cnames, snames, filter, pids, processnames, remediatesendfile, remediateexecute, remediateerase)
+
+    End Sub
+
+    Private Sub btnAddComputer_Click(sender As Object, e As EventArgs) Handles btnAddComputer.Click
+        'Add hostname to list box
+        If txtComputerTarget.Text <> "" Then
+            lstComputerTargets.Items.Add(txtComputerTarget.Text)
+            txtComputerTarget.Text = ""
+        End If
+    End Sub
+
+    Private Sub btnRemoveComputer_Click(sender As Object, e As EventArgs) Handles btnRemoveComputer.Click
+        'Remove checked items from listbox
+        With lstComputerTargets
+            If .CheckedItems.Count > 0 Then
+                For checked As Integer = .CheckedItems.Count - 1 To 0 Step -1
+                    .Items.Remove(.CheckedItems(checked))
+                Next
+            End If
+        End With
+    End Sub
+
+    Private Sub btnAddNetShare_Click(sender As Object, e As EventArgs) Handles btnAddNetShare.Click
+        'Add path to listbox
+        If txtNetSharePath.Text <> "" Then
+            lstNetShare.Items.Add(txtNetSharePath.Text)
+            txtNetSharePath.Text = ""
+        End If
+    End Sub
+
+    Private Sub btnRemoveNetShare_Click(sender As Object, e As EventArgs) Handles btnRemoveNetShare.Click
+        'Remove checked items from listbox
+        With lstNetShare
+            If .CheckedItems.Count > 0 Then
+                For checked As Integer = .CheckedItems.Count - 1 To 0 Step -1
+                    .Items.Remove(.CheckedItems(checked))
+                Next
+            End If
+        End With
+    End Sub
+
 End Class
