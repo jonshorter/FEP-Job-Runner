@@ -309,7 +309,7 @@ Module JobRunner_RestFunctions
     Public Sub CreateProject(ByVal Name As String, ByVal Description As String, ByVal TBCheck As Boolean, ByVal Server As String, ByVal auth As AuthToken)
         Try
             Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
-            Main.r1timeout.Start()
+
             Dim proj As New SimpleNewProject
             proj.name = Name
             proj.description = Description
@@ -328,7 +328,7 @@ Module JobRunner_RestFunctions
     Public Sub EditProject(ByVal ProjectID As String, ByVal Name As String, ByVal Description As String, ByVal TBCheck As Boolean, ByVal Server As String, ByVal auth As AuthToken)
         Try
             Dim r1rest As New R1SimpleRestClient.R1SimpleRestClient
-            Main.r1timeout.Start()
+
             Dim proj As New ProjectPresenter
             proj.ProjectId = ProjectID
             proj.Name = Name
