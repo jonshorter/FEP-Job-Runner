@@ -1,13 +1,21 @@
 ﻿Imports System.Net
 Imports System.Security
 Imports System.Runtime.InteropServices
-
+Imports R1SimpleRestClient.Models.Response
+Imports System.Threading
+Imports System.Reflection
 
 
 Public Class Main
 
+    Public auth As New R1SimpleRestClient.Models.Response.AuthToken
 
+    Public r1timeout As System.Threading.Timer
+    Public JobRefreshTimer As System.Threading.Timer
+    Public JobEndpointRefreshTimer As System.Threading.Timer
+    Public AlertsRefreshTimer As System.Threading.Timer
 
+    Public JobsEndpointStatus
 
     'Delcare Stores for Job Filters/Options
     Public StoreInFiltList
@@ -30,140 +38,7 @@ Public Class Main
     Public sim_selfcert As String = ""
 
 
-
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnExecute.Click
-        ResetStatusBar()
-        'Set label color and text
-
-        lblJobStatus.Text = "Submitting Job..."
-        'Get Computers
-        Dim cnames(lstComputerTargets.Items.Count - 1) As String
-        lstComputerTargets.Items.CopyTo(cnames, 0)
-        If lstComputerTargets.Items.Count < 1 Then cnames = Jobs.nullstring
-
-        'Get Shares
-        Dim snames(lstNetShare.Items.Count - 1) As String
-        lstNetShare.Items.CopyTo(snames, 0)
-        If lstNetShare.Items.Count < 1 Then snames = Jobs.nullstring
-
-        'API Limitation, choose agent or shares
-        If snames.Length >= 1 And cnames.Length >= 1 Then
-            Dim result As DialogResult = AgentorShareDialog.ShowDialog()
-
-            'Choose Agent
-            If result = DialogResult.OK Then
-                'Null shares
-                snames = Jobs.nullstring
-
-                'Choose Shares
-            ElseIf result = DialogResult.Cancel Then
-                'Null computers
-                cnames = Jobs.nullstring
-            End If
-        End If
-
-
-        'Generate Inclusion/Exclusion Filters
-        Dim filter As String = Jobs.BuildFilterJSON(StoreInFiltList, StoreExFiltList)
-        'Dim filter As String = Jobs.CreateFilter
-
-        'Set Job Template
-        Dim templatename As String
-        If txtTemplateName.Text <> "" Then
-            templatename = txtTemplateName.Text
-        Else
-            'If it isn't set use the default
-            templatename = "coll-evtx"
-        End If
-
-        'Agent Remediation - Send File
-        Dim remediatesendfile() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile = StoreRemSendList.toarray
-
-
-        'Agent Remediation - Erase File
-        Dim remediateerase() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase = StoreRemDelList.toarray
-
-
-        'Agent Remediation - Execute
-        Dim remediateexecute() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute = StoreRemExecList.toarray
-
-
-        'Agent Remediation - Kill by PID
-        Dim pids() As String = New String() {}
-        Dim pidlist As List(Of String) = StoreRemKillIDList
-        For Each item In pidlist
-            pids.Add(item)
-        Next
-
-
-        'Agent Remediation - Kill by Process Name
-        Dim processnames() As String = New String() {}
-        Dim pnamelist As List(Of String) = StoreRemKillNameList
-        For Each item In pnamelist
-            processnames.Add(item)
-        Next
-
-        'Kick off the job
-        Jobs.RunFromTemplateName(txtServer.Text, templatename, txtJobName.Text, txtProjectName.Text, txtApiUser.Text, ToInsecureString(apipass), cnames, snames, filter, pids, processnames, remediatesendfile, remediateexecute, remediateerase)
-
-    End Sub
-
-    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles btnAddComputer.Click
-        'Add hostname to list box
-        If txtComputerTarget.Text <> "" Then
-            lstComputerTargets.Items.Add(txtComputerTarget.Text)
-            txtComputerTarget.Text = ""
-        End If
-    End Sub
-
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnRemoveComputer.Click
-        'Remove checked items from listbox
-        With lstComputerTargets
-            If .CheckedItems.Count > 0 Then
-                For checked As Integer = .CheckedItems.Count - 1 To 0 Step -1
-                    .Items.Remove(.CheckedItems(checked))
-                Next
-            End If
-        End With
-    End Sub
-
-    Private Sub btnAddNetShare_Click(sender As Object, e As EventArgs) Handles btnAddNetShare.Click
-        'Add path to listbox
-        If txtNetSharePath.Text <> "" Then
-            lstNetShare.Items.Add(txtNetSharePath.Text)
-            txtNetSharePath.Text = ""
-        End If
-    End Sub
-
-    Private Sub btnRemoveNetShare_Click(sender As Object, e As EventArgs) Handles btnRemoveNetShare.Click
-        'Remove checked items from listbox
-        With lstNetShare
-            If .CheckedItems.Count > 0 Then
-                For checked As Integer = .CheckedItems.Count - 1 To 0 Step -1
-                    .Items.Remove(.CheckedItems(checked))
-                Next
-            End If
-        End With
-    End Sub
-
-    Private Sub Main_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
-        Try
-            IO.File.Delete("Newtonsoft.Json.dll")
-        Catch ex As Exception
-            Debug.WriteLine(ex.Message)
-        End Try
-    End Sub
-
-
-
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
-        Try
-            'Put JSON.Newtonsoft Down
-            Dim b As Byte() = My.Resources.Newtonsoft_Json
-            IO.File.WriteAllBytes("Newtonsoft.Json.dll", b)
-        Catch ex As Exception
-        End Try
+    Private Sub Form_Main_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         'First Run-Generate default templates
         Me.Text = "R1 Job Runner Version: " & My.Application.Info.Version.ToString
@@ -171,33 +46,12 @@ Public Class Main
             'Set templates
             My.Settings.templatename.Clear()
             My.Settings.templatename.Add("coll-evtx")
-            My.Settings.templatename.Add("Drop Process by PID")
-            My.Settings.templatename.Add("ETM Relative Time Query")
-            My.Settings.templatename.Add("EXE-Metadata-Cerb")
-            My.Settings.templatename.Add("Lockdown NIC")
-            My.Settings.templatename.Add("LockdownEnableNIC")
-            My.Settings.templatename.Add("Memory Acquisition")
-            My.Settings.templatename.Add("Memory Analysis")
-            My.Settings.templatename.Add("Registry-Autostart")
-            My.Settings.templatename.Add("Registry-Full")
-            My.Settings.templatename.Add("Remediate-Name")
-            My.Settings.templatename.Add("Remediate-PID")
-            My.Settings.templatename.Add("Small-exes-Cerb")
-            My.Settings.templatename.Add("Software Inventory")
-            My.Settings.templatename.Add("Vol-Deep")
-            My.Settings.templatename.Add("Vol-Deep-Cerb")
-            My.Settings.templatename.Add("Vol-Hidden-Cerb")
-            My.Settings.templatename.Add("Vol-Hidden-Injected")
-            My.Settings.templatename.Add("Vol-Quick")
-            My.Settings.templatename.Add("Vol-Quick-Cerb")
-            My.Settings.templatename.Add("Vol-Quick-Sched")
 
             'Set Blank Password
             My.Settings.apipassword = EncryptString(ToSecureString(""))
 
             'Updates on
             My.Settings.updatecheck = True
-
 
             'Turn first run off
             My.Settings.firstrun = False
@@ -206,15 +60,12 @@ Public Class Main
 
         'End First Run
 
-
-
         'Set Target to Agent 
         rdoagent.Checked = True
         rdoshare.Checked = False
 
         'Set PID rdo
         rdoPID.Checked = True
-
 
         'Clear status message
         lblJobStatus.Text = ""
@@ -226,6 +77,7 @@ Public Class Main
         txtComputerTarget.Text = txtdefaultcomputer.Text
         txtdefaultshare.Text = My.Settings.defaultshare
         txtNetSharePath.Text = txtdefaultshare.Text
+        'Check password
         If Not String.IsNullOrWhiteSpace(My.Settings.apipassword) Then
             apipass = DecryptString(My.Settings.apipassword)
             txtAPIPass.Text = apipass.ToString
@@ -280,11 +132,11 @@ Public Class Main
 
         If chkUpdates.Checked Then
             Try
-                CheckForUpdates(True)
+                CheckForUpdates(True, chkIncludPreRelease.Checked)
             Catch ex As Exception
             End Try
         End If
-
+        Me.auth = New R1SimpleRestClient.Models.Response.AuthToken
 
     End Sub
 
@@ -304,11 +156,15 @@ Public Class Main
 
     Private Sub btnSaveSettings_Click(sender As Object, e As EventArgs) Handles btnSaveSettings.Click
         ResetStatusBar()
+
         'Save Settings to my.settings
         My.Settings.bypasscert = chkbypasscerts.Checked
         My.Settings.defaultcomputer = txtdefaultcomputer.Text
         My.Settings.defaultshare = txtdefaultshare.Text
-        My.Settings.apiusername = txtApiUser.Text
+        If Not My.Settings.apiusername = txtApiUser.Text Then
+            My.Settings.apiusername = txtApiUser.Text
+            Me.auth = New AuthToken
+        End If
         'My.Settings.apipassword = txtAPIPass.Text
         'My.Settings.apipassword = EncryptString(ToSecureString(txtAPIPass.Text))
         If Not txtAPIPass.Text = apipass.ToString Then
@@ -317,18 +173,28 @@ Public Class Main
                 My.Settings.apipassword = EncryptString(ToSecureString(txtAPIPass.Text))
                 Me.apipass = DecryptString(My.Settings.apipassword)
                 txtAPIPass.Text = apipass.ToString
+                Me.auth = New AuthToken
             Else
                 txtAPIPass.Text = apipass.ToString
             End If
         End If
+
         My.Settings.jobname = txtDefaultJobName.Text
         My.Settings.projectname = txtDefaultProjectName.Text
-        My.Settings.webserver = txtServer.Text
+        If Not My.Settings.webserver = txtServer.Text Then
+            My.Settings.webserver = txtServer.Text
+            Me.auth = New AuthToken
+        End If
         My.Settings.templatename.Clear()
         For Each item In txtDefaultTemplateName.Items
             My.Settings.templatename.Add(item.ToString)
         Next
-        My.Settings.templatenameselect = txtDefaultTemplateName.Text
+        If txtDefaultTemplateName.SelectedItem Is Nothing Then
+            My.Settings.templatenameselect = txtDefaultTemplateName.Text
+        Else
+            My.Settings.templatenameselect = txtDefaultTemplateName.SelectedItem
+        End If
+
         If rdoadgmap.Checked = True Then
             My.Settings.websitepath = "ADG.Map.Web"
         ElseIf rdor1.Checked = True Then
@@ -346,7 +212,12 @@ Public Class Main
 
     Private Sub tabSettings_Enter(sender As Object, e As EventArgs) Handles tabSettings.Enter
         'Clear the text when the tab is entered
-        txtAPIPass.Text = apipass.ToString
+        If apipass Is Nothing Then
+            txtAPIPass.Text = ""
+        Else
+            txtAPIPass.Text = apipass.ToString
+        End If
+
         txtStatusSettings.Text = ""
     End Sub
 
@@ -807,6 +678,8 @@ Public Class Main
         'Job Info Loaded - Set text boxes to default values from settings
         txtComputerTarget.Text = txtdefaultcomputer.Text
         txtNetSharePath.Text = txtdefaultshare.Text
+
+
     End Sub
 
     Private Sub btnAddRemOption_Click(sender As Object, e As EventArgs) Handles btnAddRemOption.Click
@@ -1174,8 +1047,7 @@ Public Class Main
 
     Private Sub tabMenu_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabMenu.SelectedIndexChanged
 
-        btnSaveSettings_Click(e, e)
-        lblJobStatus.Text = ""
+
     End Sub
 
 
@@ -1314,17 +1186,558 @@ Public Class Main
 
     Private Sub btnUpdateCheck(sender As Object, e As EventArgs) Handles btn_CheckForUpdates.Click
         Try
-            CheckForUpdates(False)
+            CheckForUpdates(False, chkIncludPreRelease.Checked)
         Catch ex As Exception
         End Try
     End Sub
 
-    Private Sub Button1_Click_2(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub CheckForUpdate_About_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Try
-            CheckForUpdates(False)
+            CheckForUpdates(False, chkIncludPreRelease.Checked)
         Catch ex As Exception
         End Try
     End Sub
 
-  
+
+
+    Private Sub tabJobExecution_Enter(sender As Object, e As EventArgs) Handles tabJobExecution.Enter
+        If chkRestAPI.Checked Then
+            Dim authobj = JobRunner_RestFunctions.R1Auth
+            If authobj.Data.Message = "Authenticated" Then
+                JobRunner_RestFunctions.GetJobTemplates()
+                r1timeout.Change(10, 1500000)
+                If My.Settings.templatenameselect <> "" Then
+                    If txtTemplateName.Items.Contains(My.Settings.templatenameselect) Then
+                        txtTemplateName.SelectedItem = My.Settings.templatenameselect
+                    Else
+                        txtTemplateName.Items.Add(My.Settings.templatenameselect)
+                        txtTemplateName.SelectedItem = My.Settings.templatenameselect
+                    End If
+                Else
+                    txtTemplateName.SelectedIndex = 0
+                End If
+            Else
+                MsgBox(authobj.Data.Message)
+                tabMenu.SelectedTab = tabSettings
+            End If
+        Else
+            txtTemplateName.Items.Clear()
+            txtTemplateName.Items.Add("coll-evtx")
+            If My.Settings.templatenameselect <> "" Then
+                If txtTemplateName.Items.Contains(My.Settings.templatenameselect) Then
+                    txtTemplateName.SelectedItem = My.Settings.templatenameselect
+                Else
+                    txtTemplateName.Items.Add(My.Settings.templatenameselect)
+                    txtTemplateName.SelectedItem = My.Settings.templatenameselect
+                End If
+            Else
+
+                txtTemplateName.SelectedIndex = 0
+            End If
+        End If
+
+
+    End Sub
+
+
+
+    Private Sub txtJobsSearch_Enter(sender As Object, e As EventArgs) Handles txtJobsSearch.Enter
+        If txtJobsSearch.Text = "Search" Then
+            txtJobsSearch.Text = ""
+        End If
+    End Sub
+
+
+
+
+
+    Private Sub txtJobsSearch_KeyDown(sender As Object, e As KeyEventArgs) Handles txtJobsSearch.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            JobRunner_RestFunctions.GetJobList(txtJobsSearch.Text)
+        End If
+    End Sub
+
+
+    Private Sub txtJobsSearch_Leave(sender As Object, e As EventArgs) Handles txtJobsSearch.Leave
+        If txtJobsSearch.Text = "" Then
+            txtJobsSearch.Text = "Search"
+        End If
+    End Sub
+
+
+
+    Private Sub dgvJobsRestJobsList_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvJobsRestJobsList.CellClick
+        Try
+            If e.RowIndex > -1 Then
+                Dim jobname = dgvJobsRestJobsList.Rows.Item(e.RowIndex).Cells(0).Value.ToString
+                Dim jobid = dgvJobsRestJobsList.Rows.Item(e.RowIndex).Cells(7).Value.ToString
+                Dim resultid = dgvJobsRestJobsList.Rows.Item(e.RowIndex).Cells(8).Value.ToString
+                Select Case e.ColumnIndex
+
+                    Case 2 'Retry
+                        JobRunner_RestFunctions.RetryJob(jobid, jobname & " Retry")
+
+                    Case 3 'Cancel
+                        If dgvJobsRestJobsList.Rows.Item(e.RowIndex).Cells(3).Value.ToString = "Cancel" Then
+                            JobRunner_RestFunctions.CancelJob(resultid, True)
+                        End If
+
+                    Case 9 'EndPoint Status
+                        JobsEndpointStatus = resultid
+                        If JobsEndpointStatus <> "" Then
+                            JobRunner_RestFunctions.GetEndpointStatusCounts(JobsEndpointStatus)
+                            JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus)
+                            JobEndpointRefreshTimer = Create_JobEndpointRefreshTimer()
+                            splitEndpointStatus.BringToFront()
+                        End If
+
+
+                    Case 10 'Result
+                        Process.Start("https://" & txtServer.Text & "/r1/#/reviewpage?JobResultID=" & resultid & "&ShowAgentPivot=false&ShowJobPivot=false")
+
+                End Select
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+
+    Private Sub tabControlJobsRest_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabControlJobsRest.SelectedIndexChanged
+        Select Case tabControlJobsRest.SelectedTab.Name
+            Case tabJobsList.Name
+                JobRunner_RestFunctions.GetJobList("")
+
+                JobRefreshTimer = Create_JobRefreshTimer()
+
+            Case tabTasks.Name
+                JobRunner_RestFunctions.GetTasks()
+
+            Case tabProjects.Name
+                JobRunner_RestFunctions.GetProjectList("")
+
+            Case tabAlerts.Name
+                JobRunner_RestFunctions.LoadAlerts()
+
+                AlertsRefreshTimer = Create_AlertsRefreshTimer()
+        End Select
+
+
+    End Sub
+
+
+    Private Sub btnBackFromEndpointStatus_Click(sender As Object, e As EventArgs) Handles btnBackFromEndpointStatus.Click
+        splitEndpointStatus.SendToBack()
+    End Sub
+
+
+
+    Private Sub txtSearchProject_Enter(sender As Object, e As EventArgs) Handles txtSearchProject.Enter
+        If txtSearchProject.Text = "Search" Then
+            txtSearchProject.Text = ""
+        End If
+    End Sub
+
+    Private Sub txtSearchProject_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSearchProject.KeyDown
+
+        If e.KeyCode = Keys.Enter Then
+            JobRunner_RestFunctions.GetProjectList(txtSearchProject.Text)
+        End If
+    End Sub
+
+
+
+    Private Sub txtSearchProject_Leave(sender As Object, e As EventArgs) Handles txtSearchProject.Leave
+        If txtSearchProject.Text = "" Then
+            txtSearchProject.Text = "Search"
+        End If
+    End Sub
+
+
+
+    Private Sub btnNewProject_Click(sender As Object, e As EventArgs) Handles btnNewProject.Click
+        Dim projectcreate As New Form_CreateEditProject("Create Project", True)
+        projectcreate.ShowDialog()
+        JobRunner_RestFunctions.GetProjectList("")
+    End Sub
+
+
+
+    Private Sub btnEditProject_Click(sender As Object, e As EventArgs) Handles btnEditProject.Click
+        Dim projectedit As New Form_CreateEditProject("Edit Project", False, dgvProjectList.CurrentRow.Cells(5).Value)
+        projectedit.ShowDialog()
+        JobRunner_RestFunctions.GetProjectList("")
+    End Sub
+
+    Private Sub btnDeleteProject_Click(sender As Object, e As EventArgs) Handles btnDeleteProject.Click
+        If MsgBox("Delete Project " & dgvProjectList.CurrentRow.Cells(0).Value & "?", MsgBoxStyle.YesNoCancel, "Delete Project?") = MsgBoxResult.Yes Then
+            JobRunner_RestFunctions.DeleteProject(dgvProjectList.CurrentRow.Cells(5).Value)
+        End If
+    End Sub
+
+
+    Private Sub dgvJobsRestJobsList_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvJobsRestJobsList.CellContentClick
+
+    End Sub
+
+    Private Sub dgvEndpointStatusJobTargets_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvEndpointStatusJobTargets.CellClick
+        Try
+            If e.RowIndex > -1 Then
+                Dim id = dgvEndpointStatusJobTargets.Rows.Item(e.RowIndex).Cells(4).Value.ToString
+                Dim status = dgvEndpointStatusJobTargets.Rows.Item(e.RowIndex).Cells(2).Value.ToString
+                Dim actionbutton = dgvEndpointStatusJobTargets.Rows.Item(e.RowIndex).Cells(5).Value.ToString
+                Select Case e.ColumnIndex
+
+                    Case 5 'Cancel
+                        If actionbutton = "Cancel" Then
+                            Dim cancellist As New List(Of String)
+                            cancellist.Add(id)
+                            JobRunner_RestFunctions.CancelJobTarget(cancellist)
+                            JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus)
+                        End If
+                    Case 6 'Review
+                        Process.Start("https://" & txtServer.Text & "/r1/#/reviewpage?ShowAgentPivot=false&ShowJobPivot=false&JobTargetResultID=" & id)
+
+                End Select
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub dgvEndpointStatusJobTargets_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvEndpointStatusJobTargets.CellContentClick
+
+    End Sub
+
+    Private Sub tabMenu_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles tabMenu.Selecting
+        btnSaveSettings_Click(e, e)
+        lblJobStatus.Text = ""
+
+        If tabMenu.SelectedTab.Name = tabRESTUI.Name Then
+            Dim authobj = JobRunner_RestFunctions.R1Auth
+            If authobj.Data.Message = "Authenticated" Then
+                r1timeout.Change(10, 1500000)
+                JobRunner_RestFunctions.GetJobList("")
+                JobRefreshTimer = Create_JobRefreshTimer()
+                tabControlJobsRest.SelectedTab = tabJobsList
+            Else
+                MsgBox(authobj.Data.Message)
+                tabMenu.SelectedTab = tabSettings
+            End If
+        End If
+    End Sub
+
+    Private Sub btnViewProjectReview_Click(sender As Object, e As EventArgs) Handles btnViewProjectReview.Click
+        Dim projectid = dgvProjectList.CurrentRow.Cells(5).Value
+        Process.Start("https://" & txtServer.Text & "/R1/#/reviewpage?projectid=" & projectid)
+    End Sub
+
+    Private Sub txtSearchEndpointStatus_TextChanged(sender As Object, e As EventArgs) Handles txtSearchEndpointStatus.TextChanged
+
+    End Sub
+    Private Sub txtSearchEndpointStatus_Enter(sender As Object, e As EventArgs) Handles txtSearchEndpointStatus.Enter
+        If txtSearchEndpointStatus.Text = "Search" Then
+            txtSearchEndpointStatus.Text = ""
+        End If
+    End Sub
+
+    Private Sub txtSearchEndpointStatus_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSearchEndpointStatus.KeyDown
+
+        If e.KeyCode = Keys.Enter Then
+            JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus, txtSearchEndpointStatus.Text)
+        End If
+    End Sub
+
+
+
+    Private Sub txtSearchEndpointStatus_Leave(sender As Object, e As EventArgs) Handles txtSearchEndpointStatus.Leave
+        If txtSearchEndpointStatus.Text = "" Then
+            txtSearchEndpointStatus.Text = "Search"
+        End If
+    End Sub
+
+    Private Sub rdoadgmap_CheckedChanged(sender As Object, e As EventArgs) Handles rdoadgmap.CheckedChanged
+        Select Case rdoadgmap.Checked
+            Case True
+                chkRestAPI.Checked = False
+                chkRestAPI.Enabled = False
+            Case False
+                chkRestAPI.Checked = True
+                chkRestAPI.Enabled = True
+        End Select
+    End Sub
+
+    Private Sub rdor1_CheckedChanged(sender As Object, e As EventArgs) Handles rdor1.CheckedChanged
+        Select Case rdor1.Checked
+            Case True
+                chkRestAPI.Enabled = True
+        End Select
+    End Sub
+
+    Private Sub chkRestAPI_CheckedChanged(sender As Object, e As EventArgs) Handles chkRestAPI.CheckedChanged
+        Select Case chkRestAPI.Checked
+            Case True '----Checked SHOW RESTUI
+                Select Case tabMenu.TabPages.Contains(tabRESTUI)
+                    Case True
+                    Case False
+                        tabMenu.TabPages.Insert(1, tabRESTUI)
+                End Select
+            Case False '---Unchecked HIDE RESTUI
+                Select Case tabMenu.TabPages.Contains(tabRESTUI)
+                    Case True
+                        tabMenu.TabPages.Remove(tabRESTUI)
+                        If Not JobRefreshTimer Is Nothing Then
+                            JobRefreshTimer.Change(Timeout.Infinite, Timeout.Infinite)
+                        End If
+                        If Not AlertsRefreshTimer Is Nothing Then
+                            AlertsRefreshTimer.Change(Timeout.Infinite, Timeout.Infinite)
+                        End If
+                    Case False
+                        If Not JobRefreshTimer Is Nothing Then
+                            JobRefreshTimer.Change(Timeout.Infinite, Timeout.Infinite)
+                        End If
+                        If Not AlertsRefreshTimer Is Nothing Then
+                            AlertsRefreshTimer.Change(Timeout.Infinite, Timeout.Infinite)
+                        End If
+                End Select
+        End Select
+    End Sub
+
+
+    Private Sub btnLoadDefaultTemplateName_Click(sender As Object, e As EventArgs) Handles btnLoadDefaultTemplateName.Click
+
+        If chkRestAPI.Checked = True Then
+            Dim authobj = JobRunner_RestFunctions.R1Auth
+            If authobj.Data.Message = "Authenticated" Then
+                JobRunner_RestFunctions.GetJobTemplates()
+                r1timeout.Change(10, 1500000)
+                txtDefaultTemplateName.Items.Clear()
+                Dim tempitems(txtTemplateName.Items.Count - 1)
+                txtTemplateName.Items.CopyTo(tempitems, 0)
+                txtDefaultTemplateName.Items.AddRange(tempitems)
+                If My.Settings.templatenameselect <> "" Then
+                    If txtDefaultTemplateName.Items.Contains(My.Settings.templatenameselect) Then
+                        txtDefaultTemplateName.SelectedItem = My.Settings.templatenameselect
+                    Else
+                        txtDefaultTemplateName.Items.Add(My.Settings.templatenameselect)
+                        txtDefaultTemplateName.SelectedItem = My.Settings.templatenameselect
+                    End If
+                Else
+                    txtDefaultTemplateName.SelectedIndex = 0
+                End If
+            Else
+                MsgBox(authobj.Data.Message)
+                tabMenu.SelectedTab = tabSettings
+            End If
+        Else
+            txtDefaultTemplateName.Items.Clear()
+            txtDefaultTemplateName.Items.Add("coll-evtx")
+            If My.Settings.templatenameselect <> "" Then
+                If txtDefaultTemplateName.Items.Contains(My.Settings.templatenameselect) Then
+                    txtDefaultTemplateName.SelectedItem = My.Settings.templatenameselect
+                Else
+                    txtDefaultTemplateName.Items.Add(My.Settings.templatenameselect)
+                    txtDefaultTemplateName.SelectedItem = My.Settings.templatenameselect
+                End If
+            Else
+                txtDefaultTemplateName.SelectedIndex = 0
+            End If
+
+        End If
+    End Sub
+
+    Private Delegate Sub RefreshJobTimer(ByVal form As Form)
+    Public Sub JobRefreshUp(state As Object)
+        If Me.InvokeRequired Then
+            Me.Invoke(New RefreshJobTimer(AddressOf JobRefreshUp), Me)
+        Else
+            Select Case txtJobsSearch.Text
+                Case ""
+                    JobRunner_RestFunctions.GetJobList("")
+                Case "Search"
+                    JobRunner_RestFunctions.GetJobList("")
+                Case Else
+                    JobRunner_RestFunctions.GetJobList(txtJobsSearch.Text)
+            End Select
+
+        End If
+    End Sub
+    Public Function Create_JobRefreshTimer()
+        Dim JobRefreshCall As New System.Threading.TimerCallback(AddressOf JobRefreshUp)
+        Return New System.Threading.Timer(JobRefreshCall, Nothing, 10, 10000)
+    End Function
+    Private Delegate Sub RefreshJobEndpointTimer(ByVal form As Form)
+    Public Sub JobEndpointRefreshUp(state As Object)
+        If Me.InvokeRequired Then
+            Me.Invoke(New RefreshJobTimer(AddressOf JobEndpointRefreshUp), Me)
+        Else
+            Select Case txtSearchEndpointStatus.Text
+                Case ""
+                    JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus)
+                Case "Search"
+                    JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus)
+                Case Else
+                    JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus, txtSearchEndpointStatus.Text)
+            End Select
+
+        End If
+    End Sub
+    Public Function Create_JobEndpointRefreshTimer()
+        Dim JobEndpointRefreshCall As New System.Threading.TimerCallback(AddressOf JobEndpointRefreshUp)
+        Return New System.Threading.Timer(JobEndpointRefreshCall, Nothing, 10, 10000)
+    End Function
+
+
+
+    Private Delegate Sub RefreshAlertTimer(ByVal form As Form)
+    Public Sub AlertsRefreshUp(state As Object)
+        If Me.InvokeRequired Then
+            Me.Invoke(New RefreshAlertTimer(AddressOf AlertsRefreshUp), Me)
+        Else
+            JobRunner_RestFunctions.LoadAlerts()
+        End If
+    End Sub
+    Public Function Create_AlertsRefreshTimer()
+        Dim AlertRefreshCall As New System.Threading.TimerCallback(AddressOf AlertsRefreshUp)
+        Return New System.Threading.Timer(AlertRefreshCall, Nothing, 10, 10000)
+    End Function
+
+    Private Delegate Sub R1TimeoutTimer(ByVal form As Form)
+    Public Sub R1TimeoutUp(state As Object)
+        If Me.InvokeRequired Then
+            Me.Invoke(New R1TimeoutTimer(AddressOf R1TimeoutUp), Me)
+        Else
+            Me.auth.Data.Message = "Timeout"
+        End If
+    End Sub
+    Public Function Create_R1TimeOutTimer()
+        Dim R1TimeOutCall As New System.Threading.TimerCallback(AddressOf R1TimeoutUp)
+        Return New System.Threading.Timer(R1TimeOutCall, Nothing, 10, 1500000)
+    End Function
+
+    Private Sub txtJobsSearch_TextChanged(sender As Object, e As EventArgs) Handles txtJobsSearch.TextChanged
+
+    End Sub
+
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
+
+    End Sub
+
+    Private Sub btnExecute_Click(sender As Object, e As EventArgs) Handles btnExecute.Click
+        ResetStatusBar()
+        'Set label color and text
+
+
+
+        lblJobStatus.Text = "Submitting Job..."
+        'Get Computers
+        Dim cnames(lstComputerTargets.Items.Count - 1) As String
+        lstComputerTargets.Items.CopyTo(cnames, 0)
+        If lstComputerTargets.Items.Count < 1 Then cnames = Jobs.nullstring
+
+        'Get Shares
+        Dim snames(lstNetShare.Items.Count - 1) As String
+        lstNetShare.Items.CopyTo(snames, 0)
+        If lstNetShare.Items.Count < 1 Then snames = Jobs.nullstring
+
+        'API Limitation, choose agent or shares
+        If snames.Length >= 1 And cnames.Length >= 1 Then
+            Dim result As DialogResult = Form_AgentorShareDialog.ShowDialog()
+
+            'Choose Agent
+            If result = DialogResult.OK Then
+                'Null shares
+                snames = Jobs.nullstring
+
+                'Choose Shares
+            ElseIf result = DialogResult.Cancel Then
+                'Null computers
+                cnames = Jobs.nullstring
+            End If
+        End If
+
+
+        'Generate Inclusion/Exclusion Filters
+        Dim filter As String = Jobs.BuildFilterJSON(StoreInFiltList, StoreExFiltList)
+        'Dim filter As String = Jobs.CreateFilter
+
+        'Set Job Template
+        Dim templatename As String
+        If txtTemplateName.Text <> "" Then
+            templatename = txtTemplateName.Text
+        Else
+            'If it isn't set use the default
+            templatename = "coll-evtx"
+        End If
+
+        'Agent Remediation - Send File
+        Dim remediatesendfile() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile = StoreRemSendList.toarray
+
+
+        'Agent Remediation - Erase File
+        Dim remediateerase() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase = StoreRemDelList.toarray
+
+
+        'Agent Remediation - Execute
+        Dim remediateexecute() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute = StoreRemExecList.toarray
+
+
+        'Agent Remediation - Kill by PID
+        Dim pids() As String = New String() {}
+        Dim pidlist As List(Of String) = StoreRemKillIDList
+        For Each item In pidlist
+            pids.Add(item)
+        Next
+
+
+        'Agent Remediation - Kill by Process Name
+        Dim processnames() As String = New String() {}
+        Dim pnamelist As List(Of String) = StoreRemKillNameList
+        For Each item In pnamelist
+            processnames.Add(item)
+        Next
+
+        'Kick off the job
+        Jobs.RunFromTemplateName(txtServer.Text, templatename, txtJobName.Text, txtProjectName.Text, txtApiUser.Text, ToInsecureString(apipass), cnames, snames, filter, pids, processnames, remediatesendfile, remediateexecute, remediateerase)
+
+    End Sub
+
+    Private Sub btnAddComputer_Click(sender As Object, e As EventArgs) Handles btnAddComputer.Click
+        'Add hostname to list box
+        If txtComputerTarget.Text <> "" Then
+            lstComputerTargets.Items.Add(txtComputerTarget.Text)
+            txtComputerTarget.Text = ""
+        End If
+    End Sub
+
+    Private Sub btnRemoveComputer_Click(sender As Object, e As EventArgs) Handles btnRemoveComputer.Click
+        'Remove checked items from listbox
+        With lstComputerTargets
+            If .CheckedItems.Count > 0 Then
+                For checked As Integer = .CheckedItems.Count - 1 To 0 Step -1
+                    .Items.Remove(.CheckedItems(checked))
+                Next
+            End If
+        End With
+    End Sub
+
+    Private Sub btnAddNetShare_Click(sender As Object, e As EventArgs) Handles btnAddNetShare.Click
+        'Add path to listbox
+        If txtNetSharePath.Text <> "" Then
+            lstNetShare.Items.Add(txtNetSharePath.Text)
+            txtNetSharePath.Text = ""
+        End If
+    End Sub
+
+    Private Sub btnRemoveNetShare_Click(sender As Object, e As EventArgs) Handles btnRemoveNetShare.Click
+        'Remove checked items from listbox
+        With lstNetShare
+            If .CheckedItems.Count > 0 Then
+                For checked As Integer = .CheckedItems.Count - 1 To 0 Step -1
+                    .Items.Remove(.CheckedItems(checked))
+                Next
+            End If
+        End With
+    End Sub
+
 End Class

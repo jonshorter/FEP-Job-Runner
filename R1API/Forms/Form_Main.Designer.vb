@@ -22,6 +22,7 @@ Partial Class Main
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Main))
         Me.btnExecute = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -36,13 +37,16 @@ Partial Class Main
         Me.Label7 = New System.Windows.Forms.Label()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.grpReqSet = New System.Windows.Forms.GroupBox()
+        Me.chkRestAPI = New System.Windows.Forms.CheckBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.txtcustomwebaddress = New System.Windows.Forms.TextBox()
         Me.rdocustom = New System.Windows.Forms.RadioButton()
         Me.rdor1 = New System.Windows.Forms.RadioButton()
         Me.rdoadgmap = New System.Windows.Forms.RadioButton()
         Me.grpOptDefSet = New System.Windows.Forms.GroupBox()
+        Me.btnLoadDefaultTemplateName = New System.Windows.Forms.Button()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.chkIncludPreRelease = New System.Windows.Forms.CheckBox()
         Me.chkUpdates = New System.Windows.Forms.CheckBox()
         Me.btn_CheckForUpdates = New System.Windows.Forms.Button()
         Me.chkbypasscerts = New System.Windows.Forms.CheckBox()
@@ -146,6 +150,74 @@ Partial Class Main
         Me.Label21 = New System.Windows.Forms.Label()
         Me.tabMenu = New System.Windows.Forms.TabControl()
         Me.tabSettings = New System.Windows.Forms.TabPage()
+        Me.tabRESTUI = New System.Windows.Forms.TabPage()
+        Me.tabControlJobsRest = New System.Windows.Forms.TabControl()
+        Me.tabTasks = New System.Windows.Forms.TabPage()
+        Me.flowTasks = New System.Windows.Forms.FlowLayoutPanel()
+        Me.tabProjects = New System.Windows.Forms.TabPage()
+        Me.splitProjects = New System.Windows.Forms.SplitContainer()
+        Me.btnViewProjectReview = New System.Windows.Forms.Button()
+        Me.btnDeleteProject = New System.Windows.Forms.Button()
+        Me.btnEditProject = New System.Windows.Forms.Button()
+        Me.btnNewProject = New System.Windows.Forms.Button()
+        Me.txtSearchProject = New System.Windows.Forms.TextBox()
+        Me.dgvProjectList = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CreationDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CreatedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LastModDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProjectFolderPath = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProjectID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.tabAlerts = New System.Windows.Forms.TabPage()
+        Me.splitAlerts = New System.Windows.Forms.SplitContainer()
+        Me.dgvAlerts = New System.Windows.Forms.DataGridView()
+        Me.artifactName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.createDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.severity = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.target = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.source = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.project = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.confidence = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.threatScore = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.tblAlertBreakdown = New System.Windows.Forms.TableLayoutPanel()
+        Me.flowResponseTime = New System.Windows.Forms.FlowLayoutPanel()
+        Me.lblResponseTime = New System.Windows.Forms.Label()
+        Me.lblTotalNumberofResponses = New System.Windows.Forms.Label()
+        Me.flowTotalResponses = New System.Windows.Forms.FlowLayoutPanel()
+        Me.lblTotalNumberAlerts = New System.Windows.Forms.Label()
+        Me.flowAlertBreakdown = New System.Windows.Forms.FlowLayoutPanel()
+        Me.tabJobsList = New System.Windows.Forms.TabPage()
+        Me.splitJobsRestJobs = New System.Windows.Forms.SplitContainer()
+        Me.txtJobsSearch = New System.Windows.Forms.TextBox()
+        Me.dgvJobsRestJobsList = New System.Windows.Forms.DataGridView()
+        Me.jobName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobRetry = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.jobCancel = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.jobType = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobStart = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobEnd = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobResultID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobEndpointStatus = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.Result = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.splitEndpointStatus = New System.Windows.Forms.SplitContainer()
+        Me.flowEndpointStatus = New System.Windows.Forms.FlowLayoutPanel()
+        Me.btnBackFromEndpointStatus = New System.Windows.Forms.Button()
+        Me.lblJobName = New System.Windows.Forms.Label()
+        Me.txtSearchEndpointStatus = New System.Windows.Forms.TextBox()
+        Me.lblepStatusTotal = New System.Windows.Forms.Label()
+        Me.lblepStatusInProgress = New System.Windows.Forms.Label()
+        Me.lblepstatusFailed = New System.Windows.Forms.Label()
+        Me.lblepstatusSuccessful = New System.Windows.Forms.Label()
+        Me.dgvEndpointStatusJobTargets = New System.Windows.Forms.DataGridView()
+        Me.endpoint = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Start = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Hits = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EndPointID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Action = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.Review = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.tabJobExecution = New System.Windows.Forms.TabPage()
         Me.lblJobStatus = New System.Windows.Forms.Label()
         Me.btnShowJSON = New System.Windows.Forms.Button()
@@ -209,6 +281,7 @@ Partial Class Main
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.ofdBox = New System.Windows.Forms.OpenFileDialog()
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
+        Me.tooltip = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox4.SuspendLayout()
         Me.grpReqSet.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -240,6 +313,34 @@ Partial Class Main
         CType(Me.nmbremkillprocid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabMenu.SuspendLayout()
         Me.tabSettings.SuspendLayout()
+        Me.tabRESTUI.SuspendLayout()
+        Me.tabControlJobsRest.SuspendLayout()
+        Me.tabTasks.SuspendLayout()
+        Me.tabProjects.SuspendLayout()
+        CType(Me.splitProjects, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.splitProjects.Panel1.SuspendLayout()
+        Me.splitProjects.Panel2.SuspendLayout()
+        Me.splitProjects.SuspendLayout()
+        CType(Me.dgvProjectList, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabAlerts.SuspendLayout()
+        CType(Me.splitAlerts, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.splitAlerts.Panel1.SuspendLayout()
+        Me.splitAlerts.Panel2.SuspendLayout()
+        Me.splitAlerts.SuspendLayout()
+        CType(Me.dgvAlerts, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tblAlertBreakdown.SuspendLayout()
+        Me.tabJobsList.SuspendLayout()
+        CType(Me.splitJobsRestJobs, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.splitJobsRestJobs.Panel1.SuspendLayout()
+        Me.splitJobsRestJobs.Panel2.SuspendLayout()
+        Me.splitJobsRestJobs.SuspendLayout()
+        CType(Me.dgvJobsRestJobsList, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.splitEndpointStatus, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.splitEndpointStatus.Panel1.SuspendLayout()
+        Me.splitEndpointStatus.Panel2.SuspendLayout()
+        Me.splitEndpointStatus.SuspendLayout()
+        Me.flowEndpointStatus.SuspendLayout()
+        CType(Me.dgvEndpointStatusJobTargets, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabJobExecution.SuspendLayout()
         Me.tabFireEye.SuspendLayout()
         Me.tabPANW.SuspendLayout()
@@ -261,7 +362,8 @@ Partial Class Main
         Me.btnExecute.Margin = New System.Windows.Forms.Padding(4)
         Me.btnExecute.Name = "btnExecute"
         Me.btnExecute.Size = New System.Drawing.Size(100, 28)
-        Me.btnExecute.TabIndex = 0
+        Me.btnExecute.TabIndex = 1
+        Me.btnExecute.TabStop = False
         Me.btnExecute.Text = "Execute Job"
         Me.btnExecute.UseVisualStyleBackColor = True
         '
@@ -281,7 +383,7 @@ Partial Class Main
         Me.txtDefaultJobName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtDefaultJobName.Name = "txtDefaultJobName"
         Me.txtDefaultJobName.Size = New System.Drawing.Size(312, 22)
-        Me.txtDefaultJobName.TabIndex = 8
+        Me.txtDefaultJobName.TabIndex = 0
         '
         'txtDefaultProjectName
         '
@@ -289,7 +391,7 @@ Partial Class Main
         Me.txtDefaultProjectName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtDefaultProjectName.Name = "txtDefaultProjectName"
         Me.txtDefaultProjectName.Size = New System.Drawing.Size(312, 22)
-        Me.txtDefaultProjectName.TabIndex = 9
+        Me.txtDefaultProjectName.TabIndex = 1
         '
         'Label3
         '
@@ -307,7 +409,7 @@ Partial Class Main
         Me.txtApiUser.Margin = New System.Windows.Forms.Padding(4)
         Me.txtApiUser.Name = "txtApiUser"
         Me.txtApiUser.Size = New System.Drawing.Size(311, 22)
-        Me.txtApiUser.TabIndex = 11
+        Me.txtApiUser.TabIndex = 1
         '
         'Label4
         '
@@ -318,6 +420,7 @@ Partial Class Main
         Me.Label4.Size = New System.Drawing.Size(107, 17)
         Me.Label4.TabIndex = 12
         Me.Label4.Text = "API Username*:"
+        Me.tooltip.SetToolTip(Me.Label4, "The Username to use for interaction with R1.")
         '
         'Label5
         '
@@ -328,6 +431,7 @@ Partial Class Main
         Me.Label5.Size = New System.Drawing.Size(103, 17)
         Me.Label5.TabIndex = 13
         Me.Label5.Text = "API Password*:"
+        Me.tooltip.SetToolTip(Me.Label5, "The password for the user.")
         '
         'txtAPIPass
         '
@@ -336,7 +440,7 @@ Partial Class Main
         Me.txtAPIPass.Name = "txtAPIPass"
         Me.txtAPIPass.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtAPIPass.Size = New System.Drawing.Size(312, 22)
-        Me.txtAPIPass.TabIndex = 14
+        Me.txtAPIPass.TabIndex = 2
         '
         'txtServer
         '
@@ -344,7 +448,7 @@ Partial Class Main
         Me.txtServer.Margin = New System.Windows.Forms.Padding(4)
         Me.txtServer.Name = "txtServer"
         Me.txtServer.Size = New System.Drawing.Size(312, 22)
-        Me.txtServer.TabIndex = 17
+        Me.txtServer.TabIndex = 0
         '
         'Label7
         '
@@ -355,9 +459,12 @@ Partial Class Main
         Me.Label7.Size = New System.Drawing.Size(160, 17)
         Me.Label7.TabIndex = 16
         Me.Label7.Text = "Web Server Hostname*:"
+        Me.tooltip.SetToolTip(Me.Label7, "The webserver hostname where R1 resides.")
         '
         'GroupBox4
         '
+        Me.GroupBox4.AutoSize = True
+        Me.GroupBox4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.GroupBox4.Controls.Add(Me.grpReqSet)
         Me.GroupBox4.Controls.Add(Me.grpOptDefSet)
         Me.GroupBox4.Controls.Add(Me.txtStatusSettings)
@@ -366,13 +473,16 @@ Partial Class Main
         Me.GroupBox4.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Padding = New System.Windows.Forms.Padding(4)
-        Me.GroupBox4.Size = New System.Drawing.Size(821, 608)
-        Me.GroupBox4.TabIndex = 19
+        Me.GroupBox4.Size = New System.Drawing.Size(821, 462)
+        Me.GroupBox4.TabIndex = 0
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Settings"
         '
         'grpReqSet
         '
+        Me.grpReqSet.AutoSize = True
+        Me.grpReqSet.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.grpReqSet.Controls.Add(Me.chkRestAPI)
         Me.grpReqSet.Controls.Add(Me.GroupBox2)
         Me.grpReqSet.Controls.Add(Me.Label7)
         Me.grpReqSet.Controls.Add(Me.Label4)
@@ -384,10 +494,23 @@ Partial Class Main
         Me.grpReqSet.Margin = New System.Windows.Forms.Padding(4)
         Me.grpReqSet.Name = "grpReqSet"
         Me.grpReqSet.Padding = New System.Windows.Forms.Padding(4)
-        Me.grpReqSet.Size = New System.Drawing.Size(805, 123)
-        Me.grpReqSet.TabIndex = 29
+        Me.grpReqSet.Size = New System.Drawing.Size(805, 182)
+        Me.grpReqSet.TabIndex = 0
         Me.grpReqSet.TabStop = False
         Me.grpReqSet.Text = "Required Settings"
+        '
+        'chkRestAPI
+        '
+        Me.chkRestAPI.AutoSize = True
+        Me.chkRestAPI.Checked = True
+        Me.chkRestAPI.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkRestAPI.Location = New System.Drawing.Point(560, 139)
+        Me.chkRestAPI.Name = "chkRestAPI"
+        Me.chkRestAPI.Size = New System.Drawing.Size(182, 21)
+        Me.chkRestAPI.TabIndex = 4
+        Me.chkRestAPI.Text = "Enable RestAPI (5.8.1+)"
+        Me.tooltip.SetToolTip(Me.chkRestAPI, "Enable the Rest API. This is only supported in R1 v5.8.1 and up.")
+        Me.chkRestAPI.UseVisualStyleBackColor = True
         '
         'GroupBox2
         '
@@ -400,9 +523,10 @@ Partial Class Main
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox2.Size = New System.Drawing.Size(237, 111)
-        Me.GroupBox2.TabIndex = 20
+        Me.GroupBox2.TabIndex = 3
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Website Address:"
+        Me.tooltip.SetToolTip(Me.GroupBox2, "Select the trailing website address. 5.8 and up use R1.")
         '
         'txtcustomwebaddress
         '
@@ -423,35 +547,40 @@ Partial Class Main
         Me.rdocustom.Size = New System.Drawing.Size(17, 16)
         Me.rdocustom.TabIndex = 20
         Me.rdocustom.TabStop = True
+        Me.tooltip.SetToolTip(Me.rdocustom, "Specify a custom website path.")
         Me.rdocustom.UseVisualStyleBackColor = True
         '
         'rdor1
         '
         Me.rdor1.AutoSize = True
+        Me.rdor1.Checked = True
         Me.rdor1.Location = New System.Drawing.Point(8, 53)
         Me.rdor1.Margin = New System.Windows.Forms.Padding(4)
         Me.rdor1.Name = "rdor1"
         Me.rdor1.Size = New System.Drawing.Size(47, 21)
-        Me.rdor1.TabIndex = 19
+        Me.rdor1.TabIndex = 0
         Me.rdor1.TabStop = True
         Me.rdor1.Text = "R1"
+        Me.tooltip.SetToolTip(Me.rdor1, "Default for 5.8 and up.")
         Me.rdor1.UseVisualStyleBackColor = True
         '
         'rdoadgmap
         '
         Me.rdoadgmap.AutoSize = True
-        Me.rdoadgmap.Checked = True
         Me.rdoadgmap.Location = New System.Drawing.Point(8, 23)
         Me.rdoadgmap.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoadgmap.Name = "rdoadgmap"
         Me.rdoadgmap.Size = New System.Drawing.Size(123, 21)
         Me.rdoadgmap.TabIndex = 18
-        Me.rdoadgmap.TabStop = True
         Me.rdoadgmap.Text = "ADG.Map.Web"
+        Me.tooltip.SetToolTip(Me.rdoadgmap, "Select for versions below 5.7.")
         Me.rdoadgmap.UseVisualStyleBackColor = True
         '
         'grpOptDefSet
         '
+        Me.grpOptDefSet.AutoSize = True
+        Me.grpOptDefSet.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.grpOptDefSet.Controls.Add(Me.btnLoadDefaultTemplateName)
         Me.grpOptDefSet.Controls.Add(Me.GroupBox6)
         Me.grpOptDefSet.Controls.Add(Me.Label2)
         Me.grpOptDefSet.Controls.Add(Me.Label3)
@@ -464,39 +593,61 @@ Partial Class Main
         Me.grpOptDefSet.Controls.Add(Me.txtdefaultcomputer)
         Me.grpOptDefSet.Controls.Add(Me.txtDefaultTemplateName)
         Me.grpOptDefSet.Controls.Add(Me.Label28)
-        Me.grpOptDefSet.Location = New System.Drawing.Point(8, 154)
+        Me.grpOptDefSet.Location = New System.Drawing.Point(8, 209)
         Me.grpOptDefSet.Margin = New System.Windows.Forms.Padding(4)
         Me.grpOptDefSet.Name = "grpOptDefSet"
         Me.grpOptDefSet.Padding = New System.Windows.Forms.Padding(4)
-        Me.grpOptDefSet.Size = New System.Drawing.Size(805, 185)
-        Me.grpOptDefSet.TabIndex = 28
+        Me.grpOptDefSet.Size = New System.Drawing.Size(794, 198)
+        Me.grpOptDefSet.TabIndex = 1
         Me.grpOptDefSet.TabStop = False
         Me.grpOptDefSet.Text = "Optional Default Settings"
         '
+        'btnLoadDefaultTemplateName
+        '
+        Me.btnLoadDefaultTemplateName.Location = New System.Drawing.Point(492, 152)
+        Me.btnLoadDefaultTemplateName.Name = "btnLoadDefaultTemplateName"
+        Me.btnLoadDefaultTemplateName.Size = New System.Drawing.Size(38, 23)
+        Me.btnLoadDefaultTemplateName.TabIndex = 5
+        Me.btnLoadDefaultTemplateName.Text = "..."
+        Me.btnLoadDefaultTemplateName.UseVisualStyleBackColor = True
+        '
         'GroupBox6
         '
+        Me.GroupBox6.Controls.Add(Me.chkIncludPreRelease)
         Me.GroupBox6.Controls.Add(Me.chkUpdates)
         Me.GroupBox6.Controls.Add(Me.btn_CheckForUpdates)
         Me.GroupBox6.Location = New System.Drawing.Point(536, 66)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.Size = New System.Drawing.Size(251, 108)
-        Me.GroupBox6.TabIndex = 28
+        Me.GroupBox6.TabIndex = 7
         Me.GroupBox6.TabStop = False
         Me.GroupBox6.Text = "Updates"
+        '
+        'chkIncludPreRelease
+        '
+        Me.chkIncludPreRelease.AutoSize = True
+        Me.chkIncludPreRelease.Location = New System.Drawing.Point(6, 43)
+        Me.chkIncludPreRelease.Name = "chkIncludPreRelease"
+        Me.chkIncludPreRelease.Size = New System.Drawing.Size(158, 21)
+        Me.chkIncludPreRelease.TabIndex = 28
+        Me.chkIncludPreRelease.Text = "Include Pre-Release"
+        Me.tooltip.SetToolTip(Me.chkIncludPreRelease, "Check for pre-releases")
+        Me.chkIncludPreRelease.UseVisualStyleBackColor = True
         '
         'chkUpdates
         '
         Me.chkUpdates.AutoSize = True
-        Me.chkUpdates.Location = New System.Drawing.Point(19, 29)
+        Me.chkUpdates.Location = New System.Drawing.Point(6, 21)
         Me.chkUpdates.Name = "chkUpdates"
         Me.chkUpdates.Size = New System.Drawing.Size(208, 21)
-        Me.chkUpdates.TabIndex = 28
+        Me.chkUpdates.TabIndex = 0
         Me.chkUpdates.Text = "Check For Updates On Start"
+        Me.tooltip.SetToolTip(Me.chkUpdates, "Check for updates to Job Runner on start.")
         Me.chkUpdates.UseVisualStyleBackColor = True
         '
         'btn_CheckForUpdates
         '
-        Me.btn_CheckForUpdates.Location = New System.Drawing.Point(55, 70)
+        Me.btn_CheckForUpdates.Location = New System.Drawing.Point(6, 70)
         Me.btn_CheckForUpdates.Name = "btn_CheckForUpdates"
         Me.btn_CheckForUpdates.Size = New System.Drawing.Size(149, 32)
         Me.btn_CheckForUpdates.TabIndex = 27
@@ -510,8 +661,10 @@ Partial Class Main
         Me.chkbypasscerts.Margin = New System.Windows.Forms.Padding(4)
         Me.chkbypasscerts.Name = "chkbypasscerts"
         Me.chkbypasscerts.Size = New System.Drawing.Size(188, 21)
-        Me.chkbypasscerts.TabIndex = 26
+        Me.chkbypasscerts.TabIndex = 6
         Me.chkbypasscerts.Text = "ByPass Invalid Certificate"
+        Me.tooltip.SetToolTip(Me.chkbypasscerts, "Warning! Allows Job Runner to ignore invalid Website certificates, such as self-s" & _
+        "igned certificates.. ")
         Me.chkbypasscerts.UseVisualStyleBackColor = True
         '
         'txtdefaultshare
@@ -520,7 +673,7 @@ Partial Class Main
         Me.txtdefaultshare.Margin = New System.Windows.Forms.Padding(4)
         Me.txtdefaultshare.Name = "txtdefaultshare"
         Me.txtdefaultshare.Size = New System.Drawing.Size(312, 22)
-        Me.txtdefaultshare.TabIndex = 24
+        Me.txtdefaultshare.TabIndex = 3
         '
         'Label29
         '
@@ -548,17 +701,19 @@ Partial Class Main
         Me.txtdefaultcomputer.Margin = New System.Windows.Forms.Padding(4)
         Me.txtdefaultcomputer.Name = "txtdefaultcomputer"
         Me.txtdefaultcomputer.Size = New System.Drawing.Size(312, 22)
-        Me.txtdefaultcomputer.TabIndex = 22
+        Me.txtdefaultcomputer.TabIndex = 2
         '
         'txtDefaultTemplateName
         '
+        Me.txtDefaultTemplateName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.txtDefaultTemplateName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.txtDefaultTemplateName.FormattingEnabled = True
-        Me.txtDefaultTemplateName.Items.AddRange(New Object() {"coll-evtx", "Drop Process by PID", "ETM Relative Time Query", "EXE-Metadata-Cerb", "Lockdown NIC", "LockdownEnableNIC", "Memory Acquisition", "Memory Analysis", "Registry-Autostart", "Registry-Full", "Remediate-Name", "Remediate-PID", "Small-exes-Cerb", "Software Inventory", "Vol-Deep", "Vol-Deep-Cerb", "Vol-Hidden-Cerb", "Vol-Hidden-Injected", "Vol-Quick", "Vol-Quick-Cerb", "Vol-Quick-Sched"})
+        Me.txtDefaultTemplateName.Items.AddRange(New Object() {"coll-evtx"})
         Me.txtDefaultTemplateName.Location = New System.Drawing.Point(173, 151)
         Me.txtDefaultTemplateName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtDefaultTemplateName.Name = "txtDefaultTemplateName"
         Me.txtDefaultTemplateName.Size = New System.Drawing.Size(312, 24)
-        Me.txtDefaultTemplateName.TabIndex = 20
+        Me.txtDefaultTemplateName.TabIndex = 4
         Me.txtDefaultTemplateName.Text = "coll-evtx"
         '
         'Label28
@@ -576,21 +731,22 @@ Partial Class Main
         Me.txtStatusSettings.BackColor = System.Drawing.SystemColors.Control
         Me.txtStatusSettings.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtStatusSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtStatusSettings.Location = New System.Drawing.Point(8, 350)
+        Me.txtStatusSettings.Location = New System.Drawing.Point(8, 415)
         Me.txtStatusSettings.Margin = New System.Windows.Forms.Padding(4)
         Me.txtStatusSettings.Name = "txtStatusSettings"
         Me.txtStatusSettings.ReadOnly = True
         Me.txtStatusSettings.Size = New System.Drawing.Size(643, 19)
-        Me.txtStatusSettings.TabIndex = 27
+        Me.txtStatusSettings.TabIndex = 0
+        Me.txtStatusSettings.TabStop = False
         Me.txtStatusSettings.Text = "Status"
         '
         'btnSaveSettings
         '
-        Me.btnSaveSettings.Location = New System.Drawing.Point(685, 346)
+        Me.btnSaveSettings.Location = New System.Drawing.Point(685, 411)
         Me.btnSaveSettings.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSaveSettings.Name = "btnSaveSettings"
         Me.btnSaveSettings.Size = New System.Drawing.Size(128, 28)
-        Me.btnSaveSettings.TabIndex = 21
+        Me.btnSaveSettings.TabIndex = 2
         Me.btnSaveSettings.Text = "Save Settings"
         Me.btnSaveSettings.UseVisualStyleBackColor = True
         '
@@ -605,7 +761,7 @@ Partial Class Main
         Me.tabSubMenu.Name = "tabSubMenu"
         Me.tabSubMenu.SelectedIndex = 0
         Me.tabSubMenu.Size = New System.Drawing.Size(821, 590)
-        Me.tabSubMenu.TabIndex = 19
+        Me.tabSubMenu.TabIndex = 0
         '
         'tabJobInfo
         '
@@ -635,7 +791,7 @@ Partial Class Main
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox1.Size = New System.Drawing.Size(803, 272)
-        Me.GroupBox1.TabIndex = 27
+        Me.GroupBox1.TabIndex = 3
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Job Targets"
         '
@@ -697,6 +853,7 @@ Partial Class Main
         Me.lstNetShare.Name = "lstNetShare"
         Me.lstNetShare.Size = New System.Drawing.Size(355, 106)
         Me.lstNetShare.TabIndex = 4
+        Me.lstNetShare.TabStop = False
         '
         'txtNetSharePath
         '
@@ -723,6 +880,7 @@ Partial Class Main
         Me.btnRemoveNetShare.Name = "btnRemoveNetShare"
         Me.btnRemoveNetShare.Size = New System.Drawing.Size(100, 28)
         Me.btnRemoveNetShare.TabIndex = 3
+        Me.btnRemoveNetShare.TabStop = False
         Me.btnRemoveNetShare.Text = "Remove"
         Me.btnRemoveNetShare.UseVisualStyleBackColor = True
         '
@@ -738,7 +896,7 @@ Partial Class Main
         Me.grpagent.Name = "grpagent"
         Me.grpagent.Padding = New System.Windows.Forms.Padding(4)
         Me.grpagent.Size = New System.Drawing.Size(292, 198)
-        Me.grpagent.TabIndex = 10
+        Me.grpagent.TabIndex = 0
         Me.grpagent.TabStop = False
         Me.grpagent.Text = "Computer Targets"
         '
@@ -760,6 +918,7 @@ Partial Class Main
         Me.lstComputerTargets.Name = "lstComputerTargets"
         Me.lstComputerTargets.Size = New System.Drawing.Size(159, 106)
         Me.lstComputerTargets.TabIndex = 4
+        Me.lstComputerTargets.TabStop = False
         '
         'txtComputerTarget
         '
@@ -767,7 +926,7 @@ Partial Class Main
         Me.txtComputerTarget.Margin = New System.Windows.Forms.Padding(4)
         Me.txtComputerTarget.Name = "txtComputerTarget"
         Me.txtComputerTarget.Size = New System.Drawing.Size(159, 22)
-        Me.txtComputerTarget.TabIndex = 5
+        Me.txtComputerTarget.TabIndex = 0
         '
         'btnAddComputer
         '
@@ -775,7 +934,7 @@ Partial Class Main
         Me.btnAddComputer.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAddComputer.Name = "btnAddComputer"
         Me.btnAddComputer.Size = New System.Drawing.Size(100, 28)
-        Me.btnAddComputer.TabIndex = 2
+        Me.btnAddComputer.TabIndex = 1
         Me.btnAddComputer.Text = "Add Computer"
         Me.btnAddComputer.UseVisualStyleBackColor = True
         '
@@ -786,18 +945,22 @@ Partial Class Main
         Me.btnRemoveComputer.Name = "btnRemoveComputer"
         Me.btnRemoveComputer.Size = New System.Drawing.Size(100, 28)
         Me.btnRemoveComputer.TabIndex = 3
+        Me.btnRemoveComputer.TabStop = False
         Me.btnRemoveComputer.Text = "Remove"
         Me.btnRemoveComputer.UseVisualStyleBackColor = True
         '
         'txtTemplateName
         '
+        Me.txtTemplateName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.txtTemplateName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.txtTemplateName.FormattingEnabled = True
         Me.txtTemplateName.Items.AddRange(New Object() {"coll-evtx", "Drop Process by PID", "ETM Relative Time Query", "EXE-Metadata-Cerb", "Lockdown NIC", "LockdownEnableNIC", "Memory Acquisition", "Memory Analysis", "Registry-Autostart", "Registry-Full", "Remediate-Name", "Remediate-PID", "Small-exes-Cerb", "Software Inventory", "Vol-Deep", "Vol-Deep-Cerb", "Vol-Hidden-Cerb", "Vol-Hidden-Injected", "Vol-Quick", "Vol-Quick-Cerb", "Vol-Quick-Sched"})
         Me.txtTemplateName.Location = New System.Drawing.Point(161, 76)
         Me.txtTemplateName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtTemplateName.Name = "txtTemplateName"
         Me.txtTemplateName.Size = New System.Drawing.Size(312, 24)
-        Me.txtTemplateName.TabIndex = 26
+        Me.txtTemplateName.Sorted = True
+        Me.txtTemplateName.TabIndex = 2
         '
         'Label25
         '
@@ -815,7 +978,7 @@ Partial Class Main
         Me.txtJobName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtJobName.Name = "txtJobName"
         Me.txtJobName.Size = New System.Drawing.Size(312, 22)
-        Me.txtJobName.TabIndex = 22
+        Me.txtJobName.TabIndex = 0
         '
         'Label26
         '
@@ -833,7 +996,7 @@ Partial Class Main
         Me.txtProjectName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtProjectName.Name = "txtProjectName"
         Me.txtProjectName.Size = New System.Drawing.Size(312, 22)
-        Me.txtProjectName.TabIndex = 23
+        Me.txtProjectName.TabIndex = 1
         '
         'Label27
         '
@@ -916,9 +1079,10 @@ Partial Class Main
         Me.splitInclusion.Panel2.Controls.Add(Me.btnRemoveInclFilterfromList)
         Me.splitInclusion.Panel2.Controls.Add(Me.btnAddInclFilterToList)
         Me.splitInclusion.Size = New System.Drawing.Size(787, 509)
-        Me.splitInclusion.SplitterDistance = 216
+        Me.splitInclusion.SplitterDistance = 272
         Me.splitInclusion.SplitterWidth = 10
-        Me.splitInclusion.TabIndex = 14
+        Me.splitInclusion.TabIndex = 0
+        Me.splitInclusion.TabStop = False
         '
         'txtinclkeywords
         '
@@ -927,7 +1091,7 @@ Partial Class Main
         Me.txtinclkeywords.Multiline = True
         Me.txtinclkeywords.Name = "txtinclkeywords"
         Me.txtinclkeywords.Size = New System.Drawing.Size(443, 128)
-        Me.txtinclkeywords.TabIndex = 2
+        Me.txtinclkeywords.TabIndex = 6
         '
         'rdoinclregexsearch
         '
@@ -947,7 +1111,7 @@ Partial Class Main
         Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(84, 17)
-        Me.Label8.TabIndex = 0
+        Me.Label8.TabIndex = 7
         Me.Label8.Text = "Filter Name:"
         '
         'rdoinclsimplesearch
@@ -958,7 +1122,7 @@ Partial Class Main
         Me.rdoinclsimplesearch.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoinclsimplesearch.Name = "rdoinclsimplesearch"
         Me.rdoinclsimplesearch.Size = New System.Drawing.Size(120, 21)
-        Me.rdoinclsimplesearch.TabIndex = 12
+        Me.rdoinclsimplesearch.TabIndex = 4
         Me.rdoinclsimplesearch.TabStop = True
         Me.rdoinclsimplesearch.Text = "Simple Search"
         Me.rdoinclsimplesearch.UseVisualStyleBackColor = True
@@ -969,7 +1133,7 @@ Partial Class Main
         Me.txtinclfiltername.Margin = New System.Windows.Forms.Padding(4)
         Me.txtinclfiltername.Name = "txtinclfiltername"
         Me.txtinclfiltername.Size = New System.Drawing.Size(245, 22)
-        Me.txtinclfiltername.TabIndex = 1
+        Me.txtinclfiltername.TabIndex = 0
         '
         'chkinclsearchfilename
         '
@@ -978,7 +1142,7 @@ Partial Class Main
         Me.chkinclsearchfilename.Margin = New System.Windows.Forms.Padding(4)
         Me.chkinclsearchfilename.Name = "chkinclsearchfilename"
         Me.chkinclsearchfilename.Size = New System.Drawing.Size(171, 21)
-        Me.chkinclsearchfilename.TabIndex = 10
+        Me.chkinclsearchfilename.TabIndex = 5
         Me.chkinclsearchfilename.Text = "Search FileName Only"
         Me.chkinclsearchfilename.UseVisualStyleBackColor = True
         '
@@ -1009,7 +1173,7 @@ Partial Class Main
         Me.txtinclpathcontains.Multiline = True
         Me.txtinclpathcontains.Name = "txtinclpathcontains"
         Me.txtinclpathcontains.Size = New System.Drawing.Size(641, 24)
-        Me.txtinclpathcontains.TabIndex = 4
+        Me.txtinclpathcontains.TabIndex = 2
         '
         'txtinclmd5hash
         '
@@ -1018,7 +1182,7 @@ Partial Class Main
         Me.txtinclmd5hash.Multiline = True
         Me.txtinclmd5hash.Name = "txtinclmd5hash"
         Me.txtinclmd5hash.Size = New System.Drawing.Size(301, 128)
-        Me.txtinclmd5hash.TabIndex = 8
+        Me.txtinclmd5hash.TabIndex = 3
         '
         'Label10
         '
@@ -1036,7 +1200,7 @@ Partial Class Main
         Me.txtinclextensions.Margin = New System.Windows.Forms.Padding(4)
         Me.txtinclextensions.Name = "txtinclextensions"
         Me.txtinclextensions.Size = New System.Drawing.Size(297, 22)
-        Me.txtinclextensions.TabIndex = 7
+        Me.txtinclextensions.TabIndex = 1
         '
         'Label11
         '
@@ -1045,7 +1209,7 @@ Partial Class Main
         Me.Label11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(80, 17)
-        Me.Label11.TabIndex = 6
+        Me.Label11.TabIndex = 9
         Me.Label11.Text = "Extensions:"
         '
         'btnSaveIncFilterChanges
@@ -1054,7 +1218,8 @@ Partial Class Main
         Me.btnSaveIncFilterChanges.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSaveIncFilterChanges.Name = "btnSaveIncFilterChanges"
         Me.btnSaveIncFilterChanges.Size = New System.Drawing.Size(100, 28)
-        Me.btnSaveIncFilterChanges.TabIndex = 5
+        Me.btnSaveIncFilterChanges.TabIndex = 1
+        Me.btnSaveIncFilterChanges.TabStop = False
         Me.btnSaveIncFilterChanges.Text = "Save"
         Me.btnSaveIncFilterChanges.UseVisualStyleBackColor = True
         '
@@ -1083,7 +1248,8 @@ Partial Class Main
         Me.btnRemoveInclFilterfromList.Margin = New System.Windows.Forms.Padding(4)
         Me.btnRemoveInclFilterfromList.Name = "btnRemoveInclFilterfromList"
         Me.btnRemoveInclFilterfromList.Size = New System.Drawing.Size(100, 28)
-        Me.btnRemoveInclFilterfromList.TabIndex = 1
+        Me.btnRemoveInclFilterfromList.TabIndex = 2
+        Me.btnRemoveInclFilterfromList.TabStop = False
         Me.btnRemoveInclFilterfromList.Text = "Remove"
         Me.btnRemoveInclFilterfromList.UseVisualStyleBackColor = True
         '
@@ -1140,7 +1306,8 @@ Partial Class Main
         Me.SplitExclusion.Size = New System.Drawing.Size(787, 509)
         Me.SplitExclusion.SplitterDistance = 266
         Me.SplitExclusion.SplitterWidth = 10
-        Me.SplitExclusion.TabIndex = 18
+        Me.SplitExclusion.TabIndex = 0
+        Me.SplitExclusion.TabStop = False
         '
         'Label15
         '
@@ -1168,7 +1335,7 @@ Partial Class Main
         Me.txtexclfiltername.Margin = New System.Windows.Forms.Padding(4)
         Me.txtexclfiltername.Name = "txtexclfiltername"
         Me.txtexclfiltername.Size = New System.Drawing.Size(245, 22)
-        Me.txtexclfiltername.TabIndex = 9
+        Me.txtexclfiltername.TabIndex = 0
         '
         'txtexclmd5hash
         '
@@ -1177,7 +1344,7 @@ Partial Class Main
         Me.txtexclmd5hash.Multiline = True
         Me.txtexclmd5hash.Name = "txtexclmd5hash"
         Me.txtexclmd5hash.Size = New System.Drawing.Size(301, 128)
-        Me.txtexclmd5hash.TabIndex = 16
+        Me.txtexclmd5hash.TabIndex = 3
         '
         'txtexclpathcontains
         '
@@ -1186,7 +1353,7 @@ Partial Class Main
         Me.txtexclpathcontains.Multiline = True
         Me.txtexclpathcontains.Name = "txtexclpathcontains"
         Me.txtexclpathcontains.Size = New System.Drawing.Size(641, 24)
-        Me.txtexclpathcontains.TabIndex = 12
+        Me.txtexclpathcontains.TabIndex = 2
         '
         'txtexclextensions
         '
@@ -1194,7 +1361,7 @@ Partial Class Main
         Me.txtexclextensions.Margin = New System.Windows.Forms.Padding(4)
         Me.txtexclextensions.Name = "txtexclextensions"
         Me.txtexclextensions.Size = New System.Drawing.Size(297, 22)
-        Me.txtexclextensions.TabIndex = 15
+        Me.txtexclextensions.TabIndex = 1
         '
         'Label13
         '
@@ -1222,7 +1389,8 @@ Partial Class Main
         Me.btnsaveexclusionfilterchanges.Margin = New System.Windows.Forms.Padding(4)
         Me.btnsaveexclusionfilterchanges.Name = "btnsaveexclusionfilterchanges"
         Me.btnsaveexclusionfilterchanges.Size = New System.Drawing.Size(100, 28)
-        Me.btnsaveexclusionfilterchanges.TabIndex = 10
+        Me.btnsaveexclusionfilterchanges.TabIndex = 1
+        Me.btnsaveexclusionfilterchanges.TabStop = False
         Me.btnsaveexclusionfilterchanges.Text = "Save"
         Me.btnsaveexclusionfilterchanges.UseVisualStyleBackColor = True
         '
@@ -1251,7 +1419,8 @@ Partial Class Main
         Me.btnremoveexclusionfilterfromlist.Margin = New System.Windows.Forms.Padding(4)
         Me.btnremoveexclusionfilterfromlist.Name = "btnremoveexclusionfilterfromlist"
         Me.btnremoveexclusionfilterfromlist.Size = New System.Drawing.Size(100, 28)
-        Me.btnremoveexclusionfilterfromlist.TabIndex = 7
+        Me.btnremoveexclusionfilterfromlist.TabIndex = 2
+        Me.btnremoveexclusionfilterfromlist.TabStop = False
         Me.btnremoveexclusionfilterfromlist.Text = "Remove"
         Me.btnremoveexclusionfilterfromlist.UseVisualStyleBackColor = True
         '
@@ -1261,7 +1430,7 @@ Partial Class Main
         Me.btnaddexclusionfiltertolist.Margin = New System.Windows.Forms.Padding(4)
         Me.btnaddexclusionfiltertolist.Name = "btnaddexclusionfiltertolist"
         Me.btnaddexclusionfiltertolist.Size = New System.Drawing.Size(100, 28)
-        Me.btnaddexclusionfiltertolist.TabIndex = 6
+        Me.btnaddexclusionfiltertolist.TabIndex = 0
         Me.btnaddexclusionfiltertolist.Text = "Add"
         Me.btnaddexclusionfiltertolist.UseVisualStyleBackColor = True
         '
@@ -1306,7 +1475,7 @@ Partial Class Main
         Me.btnAddRemOption.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAddRemOption.Name = "btnAddRemOption"
         Me.btnAddRemOption.Size = New System.Drawing.Size(100, 28)
-        Me.btnAddRemOption.TabIndex = 2
+        Me.btnAddRemOption.TabIndex = 0
         Me.btnAddRemOption.Text = "Add"
         Me.btnAddRemOption.UseVisualStyleBackColor = True
         '
@@ -1373,7 +1542,7 @@ Partial Class Main
         Me.chkremsendexecute.Margin = New System.Windows.Forms.Padding(4)
         Me.chkremsendexecute.Name = "chkremsendexecute"
         Me.chkremsendexecute.Size = New System.Drawing.Size(80, 21)
-        Me.chkremsendexecute.TabIndex = 25
+        Me.chkremsendexecute.TabIndex = 2
         Me.chkremsendexecute.Text = "Execute"
         Me.chkremsendexecute.UseVisualStyleBackColor = True
         Me.chkremsendexecute.Visible = False
@@ -1395,7 +1564,7 @@ Partial Class Main
         Me.txtremsenddest.Margin = New System.Windows.Forms.Padding(4)
         Me.txtremsenddest.Name = "txtremsenddest"
         Me.txtremsenddest.Size = New System.Drawing.Size(312, 22)
-        Me.txtremsenddest.TabIndex = 22
+        Me.txtremsenddest.TabIndex = 1
         '
         'Label17
         '
@@ -1413,7 +1582,7 @@ Partial Class Main
         Me.txtremsendsource.Margin = New System.Windows.Forms.Padding(4)
         Me.txtremsendsource.Name = "txtremsendsource"
         Me.txtremsendsource.Size = New System.Drawing.Size(312, 22)
-        Me.txtremsendsource.TabIndex = 20
+        Me.txtremsendsource.TabIndex = 0
         '
         'Label16
         '
@@ -1446,7 +1615,7 @@ Partial Class Main
         Me.txtremexecargs.Margin = New System.Windows.Forms.Padding(4)
         Me.txtremexecargs.Name = "txtremexecargs"
         Me.txtremexecargs.Size = New System.Drawing.Size(312, 22)
-        Me.txtremexecargs.TabIndex = 24
+        Me.txtremexecargs.TabIndex = 1
         '
         'Label19
         '
@@ -1464,7 +1633,7 @@ Partial Class Main
         Me.txtremexecpath.Margin = New System.Windows.Forms.Padding(4)
         Me.txtremexecpath.Name = "txtremexecpath"
         Me.txtremexecpath.Size = New System.Drawing.Size(312, 22)
-        Me.txtremexecpath.TabIndex = 22
+        Me.txtremexecpath.TabIndex = 0
         '
         'Label18
         '
@@ -1494,7 +1663,7 @@ Partial Class Main
         Me.txtremdelfilepath.Margin = New System.Windows.Forms.Padding(4)
         Me.txtremdelfilepath.Name = "txtremdelfilepath"
         Me.txtremdelfilepath.Size = New System.Drawing.Size(312, 22)
-        Me.txtremdelfilepath.TabIndex = 24
+        Me.txtremdelfilepath.TabIndex = 0
         '
         'Label20
         '
@@ -1541,7 +1710,7 @@ Partial Class Main
         Me.rdoPID.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoPID.Name = "rdoPID"
         Me.rdoPID.Size = New System.Drawing.Size(97, 21)
-        Me.rdoPID.TabIndex = 16
+        Me.rdoPID.TabIndex = 0
         Me.rdoPID.TabStop = True
         Me.rdoPID.Text = "Process ID"
         Me.rdoPID.UseVisualStyleBackColor = True
@@ -1552,7 +1721,7 @@ Partial Class Main
         Me.txtremkillprocname.Margin = New System.Windows.Forms.Padding(4)
         Me.txtremkillprocname.Name = "txtremkillprocname"
         Me.txtremkillprocname.Size = New System.Drawing.Size(312, 22)
-        Me.txtremkillprocname.TabIndex = 14
+        Me.txtremkillprocname.TabIndex = 2
         '
         'Label22
         '
@@ -1571,7 +1740,7 @@ Partial Class Main
         Me.nmbremkillprocid.Maximum = New Decimal(New Integer() {999999999, 0, 0, 0})
         Me.nmbremkillprocid.Name = "nmbremkillprocid"
         Me.nmbremkillprocid.Size = New System.Drawing.Size(101, 22)
-        Me.nmbremkillprocid.TabIndex = 13
+        Me.nmbremkillprocid.TabIndex = 1
         '
         'Label21
         '
@@ -1587,6 +1756,7 @@ Partial Class Main
         '
         Me.tabMenu.Appearance = System.Windows.Forms.TabAppearance.FlatButtons
         Me.tabMenu.Controls.Add(Me.tabSettings)
+        Me.tabMenu.Controls.Add(Me.tabRESTUI)
         Me.tabMenu.Controls.Add(Me.tabJobExecution)
         Me.tabMenu.Controls.Add(Me.tabFireEye)
         Me.tabMenu.Controls.Add(Me.tabPANW)
@@ -1597,8 +1767,8 @@ Partial Class Main
         Me.tabMenu.Margin = New System.Windows.Forms.Padding(4)
         Me.tabMenu.Name = "tabMenu"
         Me.tabMenu.SelectedIndex = 0
-        Me.tabMenu.Size = New System.Drawing.Size(848, 732)
-        Me.tabMenu.TabIndex = 21
+        Me.tabMenu.Size = New System.Drawing.Size(840, 732)
+        Me.tabMenu.TabIndex = 0
         '
         'tabSettings
         '
@@ -1607,10 +1777,714 @@ Partial Class Main
         Me.tabSettings.Margin = New System.Windows.Forms.Padding(4)
         Me.tabSettings.Name = "tabSettings"
         Me.tabSettings.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabSettings.Size = New System.Drawing.Size(840, 700)
+        Me.tabSettings.Size = New System.Drawing.Size(832, 700)
         Me.tabSettings.TabIndex = 1
         Me.tabSettings.Text = "Settings"
         Me.tabSettings.UseVisualStyleBackColor = True
+        '
+        'tabRESTUI
+        '
+        Me.tabRESTUI.Controls.Add(Me.tabControlJobsRest)
+        Me.tabRESTUI.Location = New System.Drawing.Point(4, 28)
+        Me.tabRESTUI.Name = "tabRESTUI"
+        Me.tabRESTUI.Size = New System.Drawing.Size(832, 700)
+        Me.tabRESTUI.TabIndex = 7
+        Me.tabRESTUI.Text = "REST UI"
+        Me.tabRESTUI.UseVisualStyleBackColor = True
+        '
+        'tabControlJobsRest
+        '
+        Me.tabControlJobsRest.Controls.Add(Me.tabTasks)
+        Me.tabControlJobsRest.Controls.Add(Me.tabProjects)
+        Me.tabControlJobsRest.Controls.Add(Me.tabJobsList)
+        Me.tabControlJobsRest.Controls.Add(Me.tabAlerts)
+        Me.tabControlJobsRest.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tabControlJobsRest.Location = New System.Drawing.Point(0, 0)
+        Me.tabControlJobsRest.Name = "tabControlJobsRest"
+        Me.tabControlJobsRest.SelectedIndex = 0
+        Me.tabControlJobsRest.Size = New System.Drawing.Size(832, 700)
+        Me.tabControlJobsRest.TabIndex = 0
+        '
+        'tabTasks
+        '
+        Me.tabTasks.Controls.Add(Me.flowTasks)
+        Me.tabTasks.Location = New System.Drawing.Point(4, 25)
+        Me.tabTasks.Name = "tabTasks"
+        Me.tabTasks.Size = New System.Drawing.Size(824, 671)
+        Me.tabTasks.TabIndex = 2
+        Me.tabTasks.Text = "Tasks"
+        Me.tabTasks.UseVisualStyleBackColor = True
+        '
+        'flowTasks
+        '
+        Me.flowTasks.AutoScroll = True
+        Me.flowTasks.AutoSize = True
+        Me.flowTasks.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.flowTasks.Location = New System.Drawing.Point(0, 0)
+        Me.flowTasks.Name = "flowTasks"
+        Me.flowTasks.Size = New System.Drawing.Size(824, 671)
+        Me.flowTasks.TabIndex = 0
+        '
+        'tabProjects
+        '
+        Me.tabProjects.Controls.Add(Me.splitProjects)
+        Me.tabProjects.Location = New System.Drawing.Point(4, 25)
+        Me.tabProjects.Name = "tabProjects"
+        Me.tabProjects.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabProjects.Size = New System.Drawing.Size(824, 671)
+        Me.tabProjects.TabIndex = 1
+        Me.tabProjects.Text = "Projects"
+        Me.tabProjects.UseVisualStyleBackColor = True
+        '
+        'splitProjects
+        '
+        Me.splitProjects.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.splitProjects.IsSplitterFixed = True
+        Me.splitProjects.Location = New System.Drawing.Point(3, 3)
+        Me.splitProjects.Name = "splitProjects"
+        Me.splitProjects.Orientation = System.Windows.Forms.Orientation.Horizontal
+        '
+        'splitProjects.Panel1
+        '
+        Me.splitProjects.Panel1.Controls.Add(Me.btnViewProjectReview)
+        Me.splitProjects.Panel1.Controls.Add(Me.btnDeleteProject)
+        Me.splitProjects.Panel1.Controls.Add(Me.btnEditProject)
+        Me.splitProjects.Panel1.Controls.Add(Me.btnNewProject)
+        Me.splitProjects.Panel1.Controls.Add(Me.txtSearchProject)
+        '
+        'splitProjects.Panel2
+        '
+        Me.splitProjects.Panel2.Controls.Add(Me.dgvProjectList)
+        Me.splitProjects.Size = New System.Drawing.Size(818, 665)
+        Me.splitProjects.SplitterDistance = 38
+        Me.splitProjects.TabIndex = 0
+        '
+        'btnViewProjectReview
+        '
+        Me.btnViewProjectReview.Location = New System.Drawing.Point(447, 8)
+        Me.btnViewProjectReview.Name = "btnViewProjectReview"
+        Me.btnViewProjectReview.Size = New System.Drawing.Size(135, 27)
+        Me.btnViewProjectReview.TabIndex = 5
+        Me.btnViewProjectReview.Text = "View in Review"
+        Me.btnViewProjectReview.UseVisualStyleBackColor = True
+        '
+        'btnDeleteProject
+        '
+        Me.btnDeleteProject.AutoSize = True
+        Me.btnDeleteProject.Location = New System.Drawing.Point(124, 8)
+        Me.btnDeleteProject.Name = "btnDeleteProject"
+        Me.btnDeleteProject.Size = New System.Drawing.Size(59, 27)
+        Me.btnDeleteProject.TabIndex = 4
+        Me.btnDeleteProject.Text = "Delete"
+        Me.btnDeleteProject.UseVisualStyleBackColor = True
+        '
+        'btnEditProject
+        '
+        Me.btnEditProject.AutoSize = True
+        Me.btnEditProject.Location = New System.Drawing.Point(65, 8)
+        Me.btnEditProject.Name = "btnEditProject"
+        Me.btnEditProject.Size = New System.Drawing.Size(53, 27)
+        Me.btnEditProject.TabIndex = 3
+        Me.btnEditProject.Text = "Edit"
+        Me.btnEditProject.UseVisualStyleBackColor = True
+        '
+        'btnNewProject
+        '
+        Me.btnNewProject.AutoSize = True
+        Me.btnNewProject.Location = New System.Drawing.Point(9, 8)
+        Me.btnNewProject.Name = "btnNewProject"
+        Me.btnNewProject.Size = New System.Drawing.Size(50, 27)
+        Me.btnNewProject.TabIndex = 2
+        Me.btnNewProject.Text = "New"
+        Me.btnNewProject.UseVisualStyleBackColor = True
+        '
+        'txtSearchProject
+        '
+        Me.txtSearchProject.AcceptsReturn = True
+        Me.txtSearchProject.Location = New System.Drawing.Point(216, 10)
+        Me.txtSearchProject.Name = "txtSearchProject"
+        Me.txtSearchProject.Size = New System.Drawing.Size(209, 22)
+        Me.txtSearchProject.TabIndex = 1
+        Me.txtSearchProject.Text = "Search"
+        '
+        'dgvProjectList
+        '
+        Me.dgvProjectList.AllowUserToAddRows = False
+        Me.dgvProjectList.AllowUserToDeleteRows = False
+        Me.dgvProjectList.AllowUserToResizeRows = False
+        Me.dgvProjectList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvProjectList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvProjectList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.CreationDate, Me.CreatedBy, Me.LastModDate, Me.ProjectFolderPath, Me.ProjectID})
+        Me.dgvProjectList.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvProjectList.Location = New System.Drawing.Point(0, 0)
+        Me.dgvProjectList.MultiSelect = False
+        Me.dgvProjectList.Name = "dgvProjectList"
+        Me.dgvProjectList.ReadOnly = True
+        Me.dgvProjectList.RowHeadersVisible = False
+        Me.dgvProjectList.RowTemplate.Height = 24
+        Me.dgvProjectList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvProjectList.Size = New System.Drawing.Size(818, 623)
+        Me.dgvProjectList.TabIndex = 1
+        '
+        'DataGridViewTextBoxColumn1
+        '
+        Me.DataGridViewTextBoxColumn1.HeaderText = "Project Name"
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.DataGridViewTextBoxColumn1.ReadOnly = True
+        '
+        'CreationDate
+        '
+        Me.CreationDate.HeaderText = "Creation Date"
+        Me.CreationDate.Name = "CreationDate"
+        Me.CreationDate.ReadOnly = True
+        '
+        'CreatedBy
+        '
+        Me.CreatedBy.HeaderText = "Created By"
+        Me.CreatedBy.Name = "CreatedBy"
+        Me.CreatedBy.ReadOnly = True
+        '
+        'LastModDate
+        '
+        Me.LastModDate.HeaderText = "Last Modified Date"
+        Me.LastModDate.Name = "LastModDate"
+        Me.LastModDate.ReadOnly = True
+        '
+        'ProjectFolderPath
+        '
+        Me.ProjectFolderPath.HeaderText = "Project Folder Path"
+        Me.ProjectFolderPath.Name = "ProjectFolderPath"
+        Me.ProjectFolderPath.ReadOnly = True
+        '
+        'ProjectID
+        '
+        Me.ProjectID.HeaderText = "Project ID"
+        Me.ProjectID.Name = "ProjectID"
+        Me.ProjectID.ReadOnly = True
+        Me.ProjectID.Visible = False
+        '
+        'tabAlerts
+        '
+        Me.tabAlerts.Controls.Add(Me.splitAlerts)
+        Me.tabAlerts.Location = New System.Drawing.Point(4, 25)
+        Me.tabAlerts.Name = "tabAlerts"
+        Me.tabAlerts.Size = New System.Drawing.Size(824, 671)
+        Me.tabAlerts.TabIndex = 3
+        Me.tabAlerts.Text = "Alerts"
+        Me.tabAlerts.UseVisualStyleBackColor = True
+        '
+        'splitAlerts
+        '
+        Me.splitAlerts.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.splitAlerts.Location = New System.Drawing.Point(0, 0)
+        Me.splitAlerts.Name = "splitAlerts"
+        Me.splitAlerts.Orientation = System.Windows.Forms.Orientation.Horizontal
+        '
+        'splitAlerts.Panel1
+        '
+        Me.splitAlerts.Panel1.Controls.Add(Me.dgvAlerts)
+        '
+        'splitAlerts.Panel2
+        '
+        Me.splitAlerts.Panel2.Controls.Add(Me.tblAlertBreakdown)
+        Me.splitAlerts.Size = New System.Drawing.Size(824, 671)
+        Me.splitAlerts.SplitterDistance = 277
+        Me.splitAlerts.TabIndex = 0
+        '
+        'dgvAlerts
+        '
+        Me.dgvAlerts.AllowUserToAddRows = False
+        Me.dgvAlerts.AllowUserToDeleteRows = False
+        Me.dgvAlerts.AllowUserToResizeRows = False
+        Me.dgvAlerts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvAlerts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvAlerts.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.artifactName, Me.createDate, Me.severity, Me.target, Me.source, Me.project, Me.confidence, Me.threatScore})
+        Me.dgvAlerts.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvAlerts.Location = New System.Drawing.Point(0, 0)
+        Me.dgvAlerts.Name = "dgvAlerts"
+        Me.dgvAlerts.ReadOnly = True
+        Me.dgvAlerts.RowHeadersVisible = False
+        Me.dgvAlerts.RowTemplate.Height = 24
+        Me.dgvAlerts.Size = New System.Drawing.Size(824, 277)
+        Me.dgvAlerts.TabIndex = 0
+        '
+        'artifactName
+        '
+        Me.artifactName.HeaderText = "Name"
+        Me.artifactName.Name = "artifactName"
+        Me.artifactName.ReadOnly = True
+        '
+        'createDate
+        '
+        Me.createDate.HeaderText = "Date"
+        Me.createDate.Name = "createDate"
+        Me.createDate.ReadOnly = True
+        '
+        'severity
+        '
+        Me.severity.HeaderText = "Severity"
+        Me.severity.Name = "severity"
+        Me.severity.ReadOnly = True
+        '
+        'target
+        '
+        Me.target.HeaderText = "Target"
+        Me.target.Name = "target"
+        Me.target.ReadOnly = True
+        '
+        'source
+        '
+        Me.source.HeaderText = "Source"
+        Me.source.Name = "source"
+        Me.source.ReadOnly = True
+        '
+        'project
+        '
+        Me.project.HeaderText = "Project"
+        Me.project.Name = "project"
+        Me.project.ReadOnly = True
+        '
+        'confidence
+        '
+        Me.confidence.HeaderText = "Confidence"
+        Me.confidence.Name = "confidence"
+        Me.confidence.ReadOnly = True
+        '
+        'threatScore
+        '
+        Me.threatScore.HeaderText = "Threat Score"
+        Me.threatScore.Name = "threatScore"
+        Me.threatScore.ReadOnly = True
+        '
+        'tblAlertBreakdown
+        '
+        Me.tblAlertBreakdown.ColumnCount = 2
+        Me.tblAlertBreakdown.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 210.0!))
+        Me.tblAlertBreakdown.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tblAlertBreakdown.Controls.Add(Me.flowResponseTime, 1, 2)
+        Me.tblAlertBreakdown.Controls.Add(Me.lblResponseTime, 0, 2)
+        Me.tblAlertBreakdown.Controls.Add(Me.lblTotalNumberofResponses, 0, 1)
+        Me.tblAlertBreakdown.Controls.Add(Me.flowTotalResponses, 1, 1)
+        Me.tblAlertBreakdown.Controls.Add(Me.lblTotalNumberAlerts, 0, 0)
+        Me.tblAlertBreakdown.Controls.Add(Me.flowAlertBreakdown, 1, 0)
+        Me.tblAlertBreakdown.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblAlertBreakdown.Location = New System.Drawing.Point(0, 0)
+        Me.tblAlertBreakdown.Name = "tblAlertBreakdown"
+        Me.tblAlertBreakdown.RowCount = 3
+        Me.tblAlertBreakdown.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.tblAlertBreakdown.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
+        Me.tblAlertBreakdown.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
+        Me.tblAlertBreakdown.Size = New System.Drawing.Size(824, 390)
+        Me.tblAlertBreakdown.TabIndex = 4
+        '
+        'flowResponseTime
+        '
+        Me.flowResponseTime.AutoSize = True
+        Me.flowResponseTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.flowResponseTime.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.flowResponseTime.Location = New System.Drawing.Point(213, 262)
+        Me.flowResponseTime.Name = "flowResponseTime"
+        Me.flowResponseTime.Size = New System.Drawing.Size(608, 125)
+        Me.flowResponseTime.TabIndex = 10
+        '
+        'lblResponseTime
+        '
+        Me.lblResponseTime.AutoSize = True
+        Me.lblResponseTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblResponseTime.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblResponseTime.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblResponseTime.Location = New System.Drawing.Point(3, 259)
+        Me.lblResponseTime.Name = "lblResponseTime"
+        Me.lblResponseTime.Size = New System.Drawing.Size(204, 131)
+        Me.lblResponseTime.TabIndex = 9
+        Me.lblResponseTime.Text = "Response Time:"
+        '
+        'lblTotalNumberofResponses
+        '
+        Me.lblTotalNumberofResponses.AutoSize = True
+        Me.lblTotalNumberofResponses.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblTotalNumberofResponses.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblTotalNumberofResponses.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTotalNumberofResponses.Location = New System.Drawing.Point(3, 129)
+        Me.lblTotalNumberofResponses.Name = "lblTotalNumberofResponses"
+        Me.lblTotalNumberofResponses.Size = New System.Drawing.Size(204, 130)
+        Me.lblTotalNumberofResponses.TabIndex = 8
+        Me.lblTotalNumberofResponses.Text = "Total Number of Responses:"
+        '
+        'flowTotalResponses
+        '
+        Me.flowTotalResponses.AutoSize = True
+        Me.flowTotalResponses.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.flowTotalResponses.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.flowTotalResponses.Location = New System.Drawing.Point(213, 132)
+        Me.flowTotalResponses.Name = "flowTotalResponses"
+        Me.flowTotalResponses.Size = New System.Drawing.Size(608, 124)
+        Me.flowTotalResponses.TabIndex = 7
+        '
+        'lblTotalNumberAlerts
+        '
+        Me.lblTotalNumberAlerts.AutoSize = True
+        Me.lblTotalNumberAlerts.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblTotalNumberAlerts.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblTotalNumberAlerts.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTotalNumberAlerts.Location = New System.Drawing.Point(3, 0)
+        Me.lblTotalNumberAlerts.Name = "lblTotalNumberAlerts"
+        Me.lblTotalNumberAlerts.Size = New System.Drawing.Size(204, 129)
+        Me.lblTotalNumberAlerts.TabIndex = 5
+        Me.lblTotalNumberAlerts.Text = "Total Number Of Alerts:"
+        '
+        'flowAlertBreakdown
+        '
+        Me.flowAlertBreakdown.AutoSize = True
+        Me.flowAlertBreakdown.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.flowAlertBreakdown.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.flowAlertBreakdown.Location = New System.Drawing.Point(213, 3)
+        Me.flowAlertBreakdown.Name = "flowAlertBreakdown"
+        Me.flowAlertBreakdown.Size = New System.Drawing.Size(608, 123)
+        Me.flowAlertBreakdown.TabIndex = 4
+        '
+        'tabJobsList
+        '
+        Me.tabJobsList.Controls.Add(Me.splitJobsRestJobs)
+        Me.tabJobsList.Controls.Add(Me.splitEndpointStatus)
+        Me.tabJobsList.Location = New System.Drawing.Point(4, 25)
+        Me.tabJobsList.Name = "tabJobsList"
+        Me.tabJobsList.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabJobsList.Size = New System.Drawing.Size(824, 671)
+        Me.tabJobsList.TabIndex = 0
+        Me.tabJobsList.Text = "Job Status"
+        Me.tabJobsList.UseVisualStyleBackColor = True
+        '
+        'splitJobsRestJobs
+        '
+        Me.splitJobsRestJobs.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.splitJobsRestJobs.FixedPanel = System.Windows.Forms.FixedPanel.Panel1
+        Me.splitJobsRestJobs.IsSplitterFixed = True
+        Me.splitJobsRestJobs.Location = New System.Drawing.Point(3, 3)
+        Me.splitJobsRestJobs.Name = "splitJobsRestJobs"
+        Me.splitJobsRestJobs.Orientation = System.Windows.Forms.Orientation.Horizontal
+        '
+        'splitJobsRestJobs.Panel1
+        '
+        Me.splitJobsRestJobs.Panel1.Controls.Add(Me.txtJobsSearch)
+        '
+        'splitJobsRestJobs.Panel2
+        '
+        Me.splitJobsRestJobs.Panel2.Controls.Add(Me.dgvJobsRestJobsList)
+        Me.splitJobsRestJobs.Size = New System.Drawing.Size(818, 665)
+        Me.splitJobsRestJobs.SplitterDistance = 36
+        Me.splitJobsRestJobs.TabIndex = 2
+        '
+        'txtJobsSearch
+        '
+        Me.txtJobsSearch.AcceptsReturn = True
+        Me.txtJobsSearch.Location = New System.Drawing.Point(10, 6)
+        Me.txtJobsSearch.Name = "txtJobsSearch"
+        Me.txtJobsSearch.Size = New System.Drawing.Size(209, 22)
+        Me.txtJobsSearch.TabIndex = 0
+        Me.txtJobsSearch.Text = "Search"
+        '
+        'dgvJobsRestJobsList
+        '
+        Me.dgvJobsRestJobsList.AllowUserToAddRows = False
+        Me.dgvJobsRestJobsList.AllowUserToDeleteRows = False
+        Me.dgvJobsRestJobsList.AllowUserToResizeRows = False
+        Me.dgvJobsRestJobsList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvJobsRestJobsList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvJobsRestJobsList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.jobName, Me.jobStatus, Me.jobRetry, Me.jobCancel, Me.jobType, Me.jobStart, Me.jobEnd, Me.jobID, Me.jobResultID, Me.jobEndpointStatus, Me.Result})
+        Me.dgvJobsRestJobsList.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvJobsRestJobsList.Location = New System.Drawing.Point(0, 0)
+        Me.dgvJobsRestJobsList.Name = "dgvJobsRestJobsList"
+        Me.dgvJobsRestJobsList.ReadOnly = True
+        Me.dgvJobsRestJobsList.RowHeadersVisible = False
+        Me.dgvJobsRestJobsList.RowTemplate.Height = 24
+        Me.dgvJobsRestJobsList.Size = New System.Drawing.Size(818, 625)
+        Me.dgvJobsRestJobsList.TabIndex = 0
+        '
+        'jobName
+        '
+        Me.jobName.FillWeight = 21.22523!
+        Me.jobName.HeaderText = "Name"
+        Me.jobName.Name = "jobName"
+        Me.jobName.ReadOnly = True
+        '
+        'jobStatus
+        '
+        Me.jobStatus.DividerWidth = 5
+        Me.jobStatus.FillWeight = 21.22523!
+        Me.jobStatus.HeaderText = "Status"
+        Me.jobStatus.Name = "jobStatus"
+        Me.jobStatus.ReadOnly = True
+        '
+        'jobRetry
+        '
+        Me.jobRetry.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.jobRetry.DividerWidth = 5
+        Me.jobRetry.FillWeight = 1.198895!
+        Me.jobRetry.HeaderText = "Retry Job"
+        Me.jobRetry.MinimumWidth = 80
+        Me.jobRetry.Name = "jobRetry"
+        Me.jobRetry.ReadOnly = True
+        Me.jobRetry.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.jobRetry.Width = 80
+        '
+        'jobCancel
+        '
+        Me.jobCancel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.jobCancel.DividerWidth = 5
+        Me.jobCancel.FillWeight = 2.0!
+        Me.jobCancel.HeaderText = "Cancel Job"
+        Me.jobCancel.MinimumWidth = 80
+        Me.jobCancel.Name = "jobCancel"
+        Me.jobCancel.ReadOnly = True
+        Me.jobCancel.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.jobCancel.Width = 80
+        '
+        'jobType
+        '
+        Me.jobType.FillWeight = 21.22523!
+        Me.jobType.HeaderText = "Type"
+        Me.jobType.Name = "jobType"
+        Me.jobType.ReadOnly = True
+        '
+        'jobStart
+        '
+        Me.jobStart.FillWeight = 21.22523!
+        Me.jobStart.HeaderText = "Start"
+        Me.jobStart.Name = "jobStart"
+        Me.jobStart.ReadOnly = True
+        '
+        'jobEnd
+        '
+        Me.jobEnd.DividerWidth = 5
+        Me.jobEnd.FillWeight = 21.22523!
+        Me.jobEnd.HeaderText = "End"
+        Me.jobEnd.Name = "jobEnd"
+        Me.jobEnd.ReadOnly = True
+        '
+        'jobID
+        '
+        Me.jobID.HeaderText = "jobID"
+        Me.jobID.Name = "jobID"
+        Me.jobID.ReadOnly = True
+        Me.jobID.Visible = False
+        '
+        'jobResultID
+        '
+        Me.jobResultID.HeaderText = "ResultID"
+        Me.jobResultID.Name = "jobResultID"
+        Me.jobResultID.ReadOnly = True
+        Me.jobResultID.Visible = False
+        '
+        'jobEndpointStatus
+        '
+        Me.jobEndpointStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.jobEndpointStatus.FillWeight = 2.0!
+        Me.jobEndpointStatus.HeaderText = "Endpoint Status"
+        Me.jobEndpointStatus.MinimumWidth = 80
+        Me.jobEndpointStatus.Name = "jobEndpointStatus"
+        Me.jobEndpointStatus.ReadOnly = True
+        Me.jobEndpointStatus.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.jobEndpointStatus.Width = 80
+        '
+        'Result
+        '
+        Me.Result.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.Result.FillWeight = 2.0!
+        Me.Result.HeaderText = "Result"
+        Me.Result.MinimumWidth = 75
+        Me.Result.Name = "Result"
+        Me.Result.ReadOnly = True
+        Me.Result.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.Result.Width = 75
+        '
+        'splitEndpointStatus
+        '
+        Me.splitEndpointStatus.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.splitEndpointStatus.IsSplitterFixed = True
+        Me.splitEndpointStatus.Location = New System.Drawing.Point(3, 3)
+        Me.splitEndpointStatus.Name = "splitEndpointStatus"
+        Me.splitEndpointStatus.Orientation = System.Windows.Forms.Orientation.Horizontal
+        '
+        'splitEndpointStatus.Panel1
+        '
+        Me.splitEndpointStatus.Panel1.Controls.Add(Me.flowEndpointStatus)
+        Me.splitEndpointStatus.Panel1MinSize = 90
+        '
+        'splitEndpointStatus.Panel2
+        '
+        Me.splitEndpointStatus.Panel2.Controls.Add(Me.dgvEndpointStatusJobTargets)
+        Me.splitEndpointStatus.Size = New System.Drawing.Size(818, 665)
+        Me.splitEndpointStatus.SplitterDistance = 90
+        Me.splitEndpointStatus.TabIndex = 3
+        '
+        'flowEndpointStatus
+        '
+        Me.flowEndpointStatus.AutoSize = True
+        Me.flowEndpointStatus.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.flowEndpointStatus.Controls.Add(Me.btnBackFromEndpointStatus)
+        Me.flowEndpointStatus.Controls.Add(Me.lblJobName)
+        Me.flowEndpointStatus.Controls.Add(Me.txtSearchEndpointStatus)
+        Me.flowEndpointStatus.Controls.Add(Me.lblepStatusTotal)
+        Me.flowEndpointStatus.Controls.Add(Me.lblepStatusInProgress)
+        Me.flowEndpointStatus.Controls.Add(Me.lblepstatusFailed)
+        Me.flowEndpointStatus.Controls.Add(Me.lblepstatusSuccessful)
+        Me.flowEndpointStatus.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.flowEndpointStatus.Location = New System.Drawing.Point(0, 0)
+        Me.flowEndpointStatus.Name = "flowEndpointStatus"
+        Me.flowEndpointStatus.Size = New System.Drawing.Size(818, 90)
+        Me.flowEndpointStatus.TabIndex = 0
+        '
+        'btnBackFromEndpointStatus
+        '
+        Me.btnBackFromEndpointStatus.Location = New System.Drawing.Point(3, 3)
+        Me.btnBackFromEndpointStatus.Name = "btnBackFromEndpointStatus"
+        Me.btnBackFromEndpointStatus.Size = New System.Drawing.Size(115, 29)
+        Me.btnBackFromEndpointStatus.TabIndex = 20
+        Me.btnBackFromEndpointStatus.Text = "Back To Jobs"
+        Me.btnBackFromEndpointStatus.UseVisualStyleBackColor = True
+        '
+        'lblJobName
+        '
+        Me.lblJobName.AutoSize = True
+        Me.flowEndpointStatus.SetFlowBreak(Me.lblJobName, True)
+        Me.lblJobName.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblJobName.Location = New System.Drawing.Point(124, 0)
+        Me.lblJobName.Name = "lblJobName"
+        Me.lblJobName.Size = New System.Drawing.Size(102, 25)
+        Me.lblJobName.TabIndex = 21
+        Me.lblJobName.Text = "Job Name"
+        '
+        'txtSearchEndpointStatus
+        '
+        Me.txtSearchEndpointStatus.AcceptsReturn = True
+        Me.txtSearchEndpointStatus.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.flowEndpointStatus.SetFlowBreak(Me.txtSearchEndpointStatus, True)
+        Me.txtSearchEndpointStatus.Location = New System.Drawing.Point(3, 38)
+        Me.txtSearchEndpointStatus.Name = "txtSearchEndpointStatus"
+        Me.txtSearchEndpointStatus.Size = New System.Drawing.Size(209, 22)
+        Me.txtSearchEndpointStatus.TabIndex = 22
+        Me.txtSearchEndpointStatus.Text = "Search"
+        '
+        'lblepStatusTotal
+        '
+        Me.lblepStatusTotal.AutoSize = True
+        Me.lblepStatusTotal.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lblepStatusTotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblepStatusTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblepStatusTotal.Location = New System.Drawing.Point(3, 63)
+        Me.lblepStatusTotal.Name = "lblepStatusTotal"
+        Me.lblepStatusTotal.Size = New System.Drawing.Size(58, 22)
+        Me.lblepStatusTotal.TabIndex = 16
+        Me.lblepStatusTotal.Text = "Total: "
+        '
+        'lblepStatusInProgress
+        '
+        Me.lblepStatusInProgress.AutoSize = True
+        Me.lblepStatusInProgress.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lblepStatusInProgress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblepStatusInProgress.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblepStatusInProgress.Location = New System.Drawing.Point(67, 63)
+        Me.lblepStatusInProgress.Name = "lblepStatusInProgress"
+        Me.lblepStatusInProgress.Size = New System.Drawing.Size(107, 22)
+        Me.lblepStatusInProgress.TabIndex = 17
+        Me.lblepStatusInProgress.Text = "In Progress: "
+        '
+        'lblepstatusFailed
+        '
+        Me.lblepstatusFailed.AutoSize = True
+        Me.lblepstatusFailed.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lblepstatusFailed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblepstatusFailed.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblepstatusFailed.Location = New System.Drawing.Point(180, 63)
+        Me.lblepstatusFailed.Name = "lblepstatusFailed"
+        Me.lblepstatusFailed.Size = New System.Drawing.Size(66, 22)
+        Me.lblepstatusFailed.TabIndex = 18
+        Me.lblepstatusFailed.Text = "Failed: "
+        '
+        'lblepstatusSuccessful
+        '
+        Me.lblepstatusSuccessful.AutoSize = True
+        Me.lblepstatusSuccessful.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lblepstatusSuccessful.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblepstatusSuccessful.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblepstatusSuccessful.Location = New System.Drawing.Point(252, 63)
+        Me.lblepstatusSuccessful.Name = "lblepstatusSuccessful"
+        Me.lblepstatusSuccessful.Size = New System.Drawing.Size(104, 22)
+        Me.lblepstatusSuccessful.TabIndex = 19
+        Me.lblepstatusSuccessful.Text = "Successful: "
+        '
+        'dgvEndpointStatusJobTargets
+        '
+        Me.dgvEndpointStatusJobTargets.AllowUserToAddRows = False
+        Me.dgvEndpointStatusJobTargets.AllowUserToDeleteRows = False
+        Me.dgvEndpointStatusJobTargets.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvEndpointStatusJobTargets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvEndpointStatusJobTargets.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.endpoint, Me.Start, Me.Status, Me.Hits, Me.EndPointID, Me.Action, Me.Review})
+        Me.dgvEndpointStatusJobTargets.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvEndpointStatusJobTargets.Location = New System.Drawing.Point(0, 0)
+        Me.dgvEndpointStatusJobTargets.Name = "dgvEndpointStatusJobTargets"
+        Me.dgvEndpointStatusJobTargets.ReadOnly = True
+        Me.dgvEndpointStatusJobTargets.RowHeadersVisible = False
+        Me.dgvEndpointStatusJobTargets.RowTemplate.Height = 24
+        Me.dgvEndpointStatusJobTargets.Size = New System.Drawing.Size(818, 571)
+        Me.dgvEndpointStatusJobTargets.TabIndex = 9
+        '
+        'endpoint
+        '
+        Me.endpoint.FillWeight = 59.53934!
+        Me.endpoint.HeaderText = "Endpoint"
+        Me.endpoint.Name = "endpoint"
+        Me.endpoint.ReadOnly = True
+        '
+        'Start
+        '
+        Me.Start.FillWeight = 59.53934!
+        Me.Start.HeaderText = "Start"
+        Me.Start.Name = "Start"
+        Me.Start.ReadOnly = True
+        '
+        'Status
+        '
+        Me.Status.FillWeight = 59.53934!
+        Me.Status.HeaderText = "Status"
+        Me.Status.Name = "Status"
+        Me.Status.ReadOnly = True
+        '
+        'Hits
+        '
+        Me.Hits.FillWeight = 59.53934!
+        Me.Hits.HeaderText = "Hits"
+        Me.Hits.Name = "Hits"
+        Me.Hits.ReadOnly = True
+        '
+        'EndPointID
+        '
+        Me.EndPointID.HeaderText = "EndPointID"
+        Me.EndPointID.Name = "EndPointID"
+        Me.EndPointID.ReadOnly = True
+        Me.EndPointID.Visible = False
+        '
+        'Action
+        '
+        Me.Action.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.Action.FillWeight = 1.0!
+        Me.Action.HeaderText = "Action"
+        Me.Action.MinimumWidth = 80
+        Me.Action.Name = "Action"
+        Me.Action.ReadOnly = True
+        Me.Action.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.Action.Width = 80
+        '
+        'Review
+        '
+        Me.Review.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.Review.FillWeight = 1.0!
+        Me.Review.HeaderText = "Review"
+        Me.Review.MinimumWidth = 80
+        Me.Review.Name = "Review"
+        Me.Review.ReadOnly = True
+        Me.Review.Width = 80
         '
         'tabJobExecution
         '
@@ -1624,9 +2498,9 @@ Partial Class Main
         Me.tabJobExecution.Margin = New System.Windows.Forms.Padding(4)
         Me.tabJobExecution.Name = "tabJobExecution"
         Me.tabJobExecution.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabJobExecution.Size = New System.Drawing.Size(840, 700)
+        Me.tabJobExecution.Size = New System.Drawing.Size(832, 700)
         Me.tabJobExecution.TabIndex = 0
-        Me.tabJobExecution.Text = "Job Execution"
+        Me.tabJobExecution.Text = "JobsAPI Execution"
         Me.tabJobExecution.UseVisualStyleBackColor = True
         '
         'lblJobStatus
@@ -1650,6 +2524,7 @@ Partial Class Main
         Me.btnShowJSON.Name = "btnShowJSON"
         Me.btnShowJSON.Size = New System.Drawing.Size(100, 28)
         Me.btnShowJSON.TabIndex = 23
+        Me.btnShowJSON.TabStop = False
         Me.btnShowJSON.Text = "Show JSON"
         Me.btnShowJSON.UseVisualStyleBackColor = True
         '
@@ -1660,6 +2535,7 @@ Partial Class Main
         Me.btnLoadFromBox.Name = "btnLoadFromBox"
         Me.btnLoadFromBox.Size = New System.Drawing.Size(120, 28)
         Me.btnLoadFromBox.TabIndex = 22
+        Me.btnLoadFromBox.TabStop = False
         Me.btnLoadFromBox.Text = "Load From Box"
         Me.btnLoadFromBox.UseVisualStyleBackColor = True
         '
@@ -1670,6 +2546,7 @@ Partial Class Main
         Me.btnSaveAsBox.Name = "btnSaveAsBox"
         Me.btnSaveAsBox.Size = New System.Drawing.Size(100, 28)
         Me.btnSaveAsBox.TabIndex = 21
+        Me.btnSaveAsBox.TabStop = False
         Me.btnSaveAsBox.Text = "Save as Box"
         Me.btnSaveAsBox.UseVisualStyleBackColor = True
         '
@@ -1689,7 +2566,7 @@ Partial Class Main
         Me.tabFireEye.Margin = New System.Windows.Forms.Padding(4)
         Me.tabFireEye.Name = "tabFireEye"
         Me.tabFireEye.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabFireEye.Size = New System.Drawing.Size(840, 700)
+        Me.tabFireEye.Size = New System.Drawing.Size(832, 700)
         Me.tabFireEye.TabIndex = 4
         Me.tabFireEye.Text = "FireEye"
         Me.tabFireEye.UseVisualStyleBackColor = True
@@ -1700,7 +2577,7 @@ Partial Class Main
         Me.txtFireEyeMalwareMD5.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFireEyeMalwareMD5.Name = "txtFireEyeMalwareMD5"
         Me.txtFireEyeMalwareMD5.Size = New System.Drawing.Size(233, 22)
-        Me.txtFireEyeMalwareMD5.TabIndex = 34
+        Me.txtFireEyeMalwareMD5.TabIndex = 2
         Me.txtFireEyeMalwareMD5.Text = "47f9fdc617f8c98a6732be534d8dbe9a"
         '
         'Label47
@@ -1768,7 +2645,7 @@ Partial Class Main
         Me.cmbFEAlertType.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbFEAlertType.Name = "cmbFEAlertType"
         Me.cmbFEAlertType.Size = New System.Drawing.Size(233, 24)
-        Me.cmbFEAlertType.TabIndex = 4
+        Me.cmbFEAlertType.TabIndex = 1
         '
         'txtFETarget
         '
@@ -1776,7 +2653,7 @@ Partial Class Main
         Me.txtFETarget.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFETarget.Name = "txtFETarget"
         Me.txtFETarget.Size = New System.Drawing.Size(233, 22)
-        Me.txtFETarget.TabIndex = 3
+        Me.txtFETarget.TabIndex = 0
         '
         'Label33
         '
@@ -1794,7 +2671,7 @@ Partial Class Main
         Me.btn_FEEvent.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_FEEvent.Name = "btn_FEEvent"
         Me.btn_FEEvent.Size = New System.Drawing.Size(156, 28)
-        Me.btn_FEEvent.TabIndex = 0
+        Me.btn_FEEvent.TabIndex = 3
         Me.btn_FEEvent.Text = "Send FireEye Event"
         Me.btn_FEEvent.UseVisualStyleBackColor = True
         '
@@ -1818,7 +2695,7 @@ Partial Class Main
         Me.tabPANW.Location = New System.Drawing.Point(4, 28)
         Me.tabPANW.Margin = New System.Windows.Forms.Padding(4)
         Me.tabPANW.Name = "tabPANW"
-        Me.tabPANW.Size = New System.Drawing.Size(840, 700)
+        Me.tabPANW.Size = New System.Drawing.Size(832, 700)
         Me.tabPANW.TabIndex = 5
         Me.tabPANW.Text = "PANW"
         Me.tabPANW.UseVisualStyleBackColor = True
@@ -1829,7 +2706,7 @@ Partial Class Main
         Me.txtPANWMalwareMD5.Margin = New System.Windows.Forms.Padding(4)
         Me.txtPANWMalwareMD5.Name = "txtPANWMalwareMD5"
         Me.txtPANWMalwareMD5.Size = New System.Drawing.Size(233, 22)
-        Me.txtPANWMalwareMD5.TabIndex = 38
+        Me.txtPANWMalwareMD5.TabIndex = 3
         Me.txtPANWMalwareMD5.Text = "47f9fdc617f8c98a6732be534d8dbe9a"
         '
         'Label48
@@ -1863,6 +2740,7 @@ Partial Class Main
         Me.txtPANWSim.ReadOnly = True
         Me.txtPANWSim.Size = New System.Drawing.Size(272, 230)
         Me.txtPANWSim.TabIndex = 34
+        Me.txtPANWSim.TabStop = False
         Me.txtPANWSim.Text = resources.GetString("txtPANWSim.Text")
         '
         'TextBox4
@@ -1924,7 +2802,7 @@ Partial Class Main
         Me.panw_sim_port.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.panw_sim_port.Name = "panw_sim_port"
         Me.panw_sim_port.Size = New System.Drawing.Size(128, 22)
-        Me.panw_sim_port.TabIndex = 24
+        Me.panw_sim_port.TabIndex = 0
         Me.panw_sim_port.Value = New Decimal(New Integer() {8449, 0, 0, 0})
         '
         'Label44
@@ -1953,7 +2831,7 @@ Partial Class Main
         Me.btn_WildfireStart.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_WildfireStart.Name = "btn_WildfireStart"
         Me.btn_WildfireStart.Size = New System.Drawing.Size(175, 28)
-        Me.btn_WildfireStart.TabIndex = 21
+        Me.btn_WildfireStart.TabIndex = 1
         Me.btn_WildfireStart.Text = "Start Wildfire Sim"
         Me.btn_WildfireStart.UseVisualStyleBackColor = True
         '
@@ -1964,7 +2842,7 @@ Partial Class Main
         Me.panwPort.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
         Me.panwPort.Name = "panwPort"
         Me.panwPort.Size = New System.Drawing.Size(160, 22)
-        Me.panwPort.TabIndex = 11
+        Me.panwPort.TabIndex = 0
         Me.panwPort.Value = New Decimal(New Integer() {514, 0, 0, 0})
         '
         'Label30
@@ -1996,7 +2874,7 @@ Partial Class Main
         Me.cmbPANWAlert.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbPANWAlert.Name = "cmbPANWAlert"
         Me.cmbPANWAlert.Size = New System.Drawing.Size(233, 24)
-        Me.cmbPANWAlert.TabIndex = 8
+        Me.cmbPANWAlert.TabIndex = 2
         '
         'txtPANWTarget
         '
@@ -2004,7 +2882,7 @@ Partial Class Main
         Me.txtPANWTarget.Margin = New System.Windows.Forms.Padding(4)
         Me.txtPANWTarget.Name = "txtPANWTarget"
         Me.txtPANWTarget.Size = New System.Drawing.Size(233, 22)
-        Me.txtPANWTarget.TabIndex = 7
+        Me.txtPANWTarget.TabIndex = 1
         '
         'Label36
         '
@@ -2022,7 +2900,7 @@ Partial Class Main
         Me.btnPANWSend.Margin = New System.Windows.Forms.Padding(4)
         Me.btnPANWSend.Name = "btnPANWSend"
         Me.btnPANWSend.Size = New System.Drawing.Size(185, 28)
-        Me.btnPANWSend.TabIndex = 0
+        Me.btnPANWSend.TabIndex = 4
         Me.btnPANWSend.Text = "Send PANW SysLog Alert"
         Me.btnPANWSend.UseVisualStyleBackColor = True
         '
@@ -2049,7 +2927,7 @@ Partial Class Main
         Me.tabXPS.Margin = New System.Windows.Forms.Padding(4)
         Me.tabXPS.Name = "tabXPS"
         Me.tabXPS.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabXPS.Size = New System.Drawing.Size(840, 700)
+        Me.tabXPS.Size = New System.Drawing.Size(832, 700)
         Me.tabXPS.TabIndex = 6
         Me.tabXPS.Text = "XPS"
         Me.tabXPS.UseVisualStyleBackColor = True
@@ -2060,7 +2938,7 @@ Partial Class Main
         Me.txtXPSMalwareMD5.Margin = New System.Windows.Forms.Padding(4)
         Me.txtXPSMalwareMD5.Name = "txtXPSMalwareMD5"
         Me.txtXPSMalwareMD5.Size = New System.Drawing.Size(233, 22)
-        Me.txtXPSMalwareMD5.TabIndex = 32
+        Me.txtXPSMalwareMD5.TabIndex = 4
         Me.txtXPSMalwareMD5.Text = "47f9fdc617f8c98a6732be534d8dbe9a"
         '
         'Label46
@@ -2090,7 +2968,7 @@ Partial Class Main
         Me.txtXPSMalware.Margin = New System.Windows.Forms.Padding(4)
         Me.txtXPSMalware.Name = "txtXPSMalware"
         Me.txtXPSMalware.Size = New System.Drawing.Size(233, 22)
-        Me.txtXPSMalware.TabIndex = 29
+        Me.txtXPSMalware.TabIndex = 3
         Me.txtXPSMalware.Text = "Super.Evil.Malware"
         '
         'Label42
@@ -2124,6 +3002,7 @@ Partial Class Main
         Me.txtXPSSIM.ReadOnly = True
         Me.txtXPSSIM.Size = New System.Drawing.Size(272, 230)
         Me.txtXPSSIM.TabIndex = 26
+        Me.txtXPSSIM.TabStop = False
         Me.txtXPSSIM.Text = resources.GetString("txtXPSSIM.Text")
         '
         'txtFELink2
@@ -2174,7 +3053,7 @@ Partial Class Main
         Me.xps_sim_Port.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.xps_sim_Port.Name = "xps_sim_Port"
         Me.xps_sim_Port.Size = New System.Drawing.Size(128, 22)
-        Me.xps_sim_Port.TabIndex = 24
+        Me.xps_sim_Port.TabIndex = 0
         Me.xps_sim_Port.Value = New Decimal(New Integer() {8448, 0, 0, 0})
         '
         'Label43
@@ -2203,7 +3082,7 @@ Partial Class Main
         Me.btnStartXPSListener.Margin = New System.Windows.Forms.Padding(4)
         Me.btnStartXPSListener.Name = "btnStartXPSListener"
         Me.btnStartXPSListener.Size = New System.Drawing.Size(175, 28)
-        Me.btnStartXPSListener.TabIndex = 21
+        Me.btnStartXPSListener.TabIndex = 1
         Me.btnStartXPSListener.Text = "Start XPS CP Sim"
         Me.btnStartXPSListener.UseVisualStyleBackColor = True
         '
@@ -2226,7 +3105,7 @@ Partial Class Main
         Me.cmbXPSSeverity.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbXPSSeverity.Name = "cmbXPSSeverity"
         Me.cmbXPSSeverity.Size = New System.Drawing.Size(233, 24)
-        Me.cmbXPSSeverity.TabIndex = 19
+        Me.cmbXPSSeverity.TabIndex = 2
         '
         'xpsPort
         '
@@ -2235,7 +3114,7 @@ Partial Class Main
         Me.xpsPort.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
         Me.xpsPort.Name = "xpsPort"
         Me.xpsPort.Size = New System.Drawing.Size(160, 22)
-        Me.xpsPort.TabIndex = 18
+        Me.xpsPort.TabIndex = 0
         Me.xpsPort.Value = New Decimal(New Integer() {514, 0, 0, 0})
         '
         'Label38
@@ -2254,7 +3133,7 @@ Partial Class Main
         Me.txtXPSTarget.Margin = New System.Windows.Forms.Padding(4)
         Me.txtXPSTarget.Name = "txtXPSTarget"
         Me.txtXPSTarget.Size = New System.Drawing.Size(233, 22)
-        Me.txtXPSTarget.TabIndex = 14
+        Me.txtXPSTarget.TabIndex = 1
         '
         'Label40
         '
@@ -2272,7 +3151,7 @@ Partial Class Main
         Me.btnXPSSend.Margin = New System.Windows.Forms.Padding(4)
         Me.btnXPSSend.Name = "btnXPSSend"
         Me.btnXPSSend.Size = New System.Drawing.Size(185, 28)
-        Me.btnXPSSend.TabIndex = 12
+        Me.btnXPSSend.TabIndex = 5
         Me.btnXPSSend.Text = "Send XPS SysLog Alert"
         Me.btnXPSSend.UseVisualStyleBackColor = True
         '
@@ -2283,7 +3162,7 @@ Partial Class Main
         Me.tabAbout.Location = New System.Drawing.Point(4, 28)
         Me.tabAbout.Margin = New System.Windows.Forms.Padding(4)
         Me.tabAbout.Name = "tabAbout"
-        Me.tabAbout.Size = New System.Drawing.Size(840, 700)
+        Me.tabAbout.Size = New System.Drawing.Size(832, 700)
         Me.tabAbout.TabIndex = 3
         Me.tabAbout.Text = "About"
         Me.tabAbout.UseVisualStyleBackColor = True
@@ -2293,7 +3172,7 @@ Partial Class Main
         Me.Button1.Location = New System.Drawing.Point(343, 173)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(149, 32)
-        Me.Button1.TabIndex = 28
+        Me.Button1.TabIndex = 0
         Me.Button1.Text = "Check for Updates"
         Me.Button1.UseVisualStyleBackColor = True
         '
@@ -2308,8 +3187,9 @@ Partial Class Main
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(840, 700)
+        Me.TextBox1.Size = New System.Drawing.Size(832, 700)
         Me.TextBox1.TabIndex = 0
+        Me.TextBox1.TabStop = False
         Me.TextBox1.Text = resources.GetString("TextBox1.Text")
         '
         'ofdBox
@@ -2328,12 +3208,12 @@ Partial Class Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(848, 732)
+        Me.ClientSize = New System.Drawing.Size(840, 732)
         Me.Controls.Add(Me.tabMenu)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.HelpButton = True
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(4)
-        Me.MaximizeBox = False
+        Me.MinimumSize = New System.Drawing.Size(858, 779)
         Me.Name = "Main"
         Me.Text = "R1 Job Runner Version:"
         Me.GroupBox4.ResumeLayout(False)
@@ -2384,6 +3264,41 @@ Partial Class Main
         CType(Me.nmbremkillprocid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabMenu.ResumeLayout(False)
         Me.tabSettings.ResumeLayout(False)
+        Me.tabSettings.PerformLayout()
+        Me.tabRESTUI.ResumeLayout(False)
+        Me.tabControlJobsRest.ResumeLayout(False)
+        Me.tabTasks.ResumeLayout(False)
+        Me.tabTasks.PerformLayout()
+        Me.tabProjects.ResumeLayout(False)
+        Me.splitProjects.Panel1.ResumeLayout(False)
+        Me.splitProjects.Panel1.PerformLayout()
+        Me.splitProjects.Panel2.ResumeLayout(False)
+        CType(Me.splitProjects, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.splitProjects.ResumeLayout(False)
+        CType(Me.dgvProjectList, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabAlerts.ResumeLayout(False)
+        Me.splitAlerts.Panel1.ResumeLayout(False)
+        Me.splitAlerts.Panel2.ResumeLayout(False)
+        CType(Me.splitAlerts, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.splitAlerts.ResumeLayout(False)
+        CType(Me.dgvAlerts, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tblAlertBreakdown.ResumeLayout(False)
+        Me.tblAlertBreakdown.PerformLayout()
+        Me.tabJobsList.ResumeLayout(False)
+        Me.splitJobsRestJobs.Panel1.ResumeLayout(False)
+        Me.splitJobsRestJobs.Panel1.PerformLayout()
+        Me.splitJobsRestJobs.Panel2.ResumeLayout(False)
+        CType(Me.splitJobsRestJobs, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.splitJobsRestJobs.ResumeLayout(False)
+        CType(Me.dgvJobsRestJobsList, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.splitEndpointStatus.Panel1.ResumeLayout(False)
+        Me.splitEndpointStatus.Panel1.PerformLayout()
+        Me.splitEndpointStatus.Panel2.ResumeLayout(False)
+        CType(Me.splitEndpointStatus, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.splitEndpointStatus.ResumeLayout(False)
+        Me.flowEndpointStatus.ResumeLayout(False)
+        Me.flowEndpointStatus.PerformLayout()
+        CType(Me.dgvEndpointStatusJobTargets, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabJobExecution.ResumeLayout(False)
         Me.tabJobExecution.PerformLayout()
         Me.tabFireEye.ResumeLayout(False)
@@ -2594,5 +3509,77 @@ Partial Class Main
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
     Friend WithEvents chkUpdates As System.Windows.Forms.CheckBox
+    Friend WithEvents tabRESTUI As System.Windows.Forms.TabPage
+    Friend WithEvents tabControlJobsRest As System.Windows.Forms.TabControl
+    Friend WithEvents tabJobsList As System.Windows.Forms.TabPage
+    Friend WithEvents txtJobsSearch As System.Windows.Forms.TextBox
+    Friend WithEvents splitJobsRestJobs As System.Windows.Forms.SplitContainer
+    Friend WithEvents dgvJobsRestJobsList As System.Windows.Forms.DataGridView
+    Friend WithEvents splitEndpointStatus As System.Windows.Forms.SplitContainer
+    Friend WithEvents dgvEndpointStatusJobTargets As System.Windows.Forms.DataGridView
+    Friend WithEvents tabTasks As System.Windows.Forms.TabPage
+    Friend WithEvents tabProjects As System.Windows.Forms.TabPage
+    Friend WithEvents splitProjects As System.Windows.Forms.SplitContainer
+    Friend WithEvents btnNewProject As System.Windows.Forms.Button
+    Friend WithEvents txtSearchProject As System.Windows.Forms.TextBox
+    Friend WithEvents dgvProjectList As System.Windows.Forms.DataGridView
+    Friend WithEvents tabAlerts As System.Windows.Forms.TabPage
+    Friend WithEvents flowTasks As System.Windows.Forms.FlowLayoutPanel
+    Friend WithEvents btnEditProject As System.Windows.Forms.Button
+    Friend WithEvents btnDeleteProject As System.Windows.Forms.Button
+    Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents CreationDate As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents CreatedBy As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents LastModDate As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ProjectFolderPath As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ProjectID As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents splitAlerts As System.Windows.Forms.SplitContainer
+    Friend WithEvents dgvAlerts As System.Windows.Forms.DataGridView
+    Friend WithEvents artifactName As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents createDate As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents severity As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents target As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents source As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents project As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents confidence As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents threatScore As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents tblAlertBreakdown As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents lblTotalNumberofResponses As System.Windows.Forms.Label
+    Friend WithEvents flowTotalResponses As System.Windows.Forms.FlowLayoutPanel
+    Friend WithEvents lblTotalNumberAlerts As System.Windows.Forms.Label
+    Friend WithEvents flowAlertBreakdown As System.Windows.Forms.FlowLayoutPanel
+    Friend WithEvents flowResponseTime As System.Windows.Forms.FlowLayoutPanel
+    Friend WithEvents lblResponseTime As System.Windows.Forms.Label
+    Friend WithEvents endpoint As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Start As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Status As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Hits As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents EndPointID As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Action As System.Windows.Forms.DataGridViewButtonColumn
+    Friend WithEvents Review As System.Windows.Forms.DataGridViewButtonColumn
+    Friend WithEvents jobName As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents jobStatus As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents jobRetry As System.Windows.Forms.DataGridViewButtonColumn
+    Friend WithEvents jobCancel As System.Windows.Forms.DataGridViewButtonColumn
+    Friend WithEvents jobType As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents jobStart As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents jobEnd As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents jobID As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents jobResultID As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents jobEndpointStatus As System.Windows.Forms.DataGridViewButtonColumn
+    Friend WithEvents Result As System.Windows.Forms.DataGridViewButtonColumn
+    Friend WithEvents btnViewProjectReview As System.Windows.Forms.Button
+    Friend WithEvents flowEndpointStatus As System.Windows.Forms.FlowLayoutPanel
+    Friend WithEvents btnBackFromEndpointStatus As System.Windows.Forms.Button
+    Friend WithEvents lblJobName As System.Windows.Forms.Label
+    Friend WithEvents txtSearchEndpointStatus As System.Windows.Forms.TextBox
+    Friend WithEvents lblepStatusTotal As System.Windows.Forms.Label
+    Friend WithEvents lblepStatusInProgress As System.Windows.Forms.Label
+    Friend WithEvents lblepstatusFailed As System.Windows.Forms.Label
+    Friend WithEvents lblepstatusSuccessful As System.Windows.Forms.Label
+    Friend WithEvents chkRestAPI As System.Windows.Forms.CheckBox
+    Friend WithEvents tooltip As System.Windows.Forms.ToolTip
+    Friend WithEvents btnLoadDefaultTemplateName As System.Windows.Forms.Button
+    Friend WithEvents chkIncludPreRelease As System.Windows.Forms.CheckBox
 
 End Class
