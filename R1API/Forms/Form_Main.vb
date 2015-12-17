@@ -1522,6 +1522,8 @@ Public Class Main
                         txtDefaultTemplateName.Items.Add(My.Settings.templatenameselect)
                         txtDefaultTemplateName.SelectedItem = My.Settings.templatenameselect
                     End If
+                Else
+                    txtDefaultTemplateName.SelectedIndex = 0
                 End If
             Else
                 MsgBox(authobj.Data.Message)
