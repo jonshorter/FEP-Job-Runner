@@ -1207,7 +1207,7 @@ Public Class Main
         End Try
     End Sub
 
-    Private Sub CheckForUpdate_About_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub CheckForUpdate_About_Click(sender As Object, e As EventArgs) Handles btn_AboutCheckforUpdates.Click
         Try
             CheckForUpdates(False, chkIncludPreRelease.Checked)
         Catch ex As Exception

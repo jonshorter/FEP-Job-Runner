@@ -281,13 +281,15 @@ Partial Class Main
         Me.Label40 = New System.Windows.Forms.Label()
         Me.btnXPSSend = New System.Windows.Forms.Button()
         Me.tabAbout = New System.Windows.Forms.TabPage()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btn_AboutCheckforUpdates = New System.Windows.Forms.Button()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.ofdBox = New System.Windows.Forms.OpenFileDialog()
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
         Me.tooltip = New System.Windows.Forms.ToolTip(Me.components)
         Me.lblWildFireURL = New System.Windows.Forms.Label()
         Me.lblXPSHostname = New System.Windows.Forms.Label()
+        Me.tableFireEye = New System.Windows.Forms.TableLayoutPanel()
+        Me.flowFireEye = New System.Windows.Forms.FlowLayoutPanel()
         Me.GroupBox4.SuspendLayout()
         Me.grpReqSet.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -360,6 +362,8 @@ Partial Class Main
         CType(Me.xps_sim_Port, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.xpsPort, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabAbout.SuspendLayout()
+        Me.tableFireEye.SuspendLayout()
+        Me.flowFireEye.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnExecute
@@ -2557,18 +2561,7 @@ Partial Class Main
         '
         'tabFireEye
         '
-        Me.tabFireEye.Controls.Add(Me.txtFireEyeMalwareName)
-        Me.tabFireEye.Controls.Add(Me.Label50)
-        Me.tabFireEye.Controls.Add(Me.txtFireEyeMalwareMD5)
-        Me.tabFireEye.Controls.Add(Me.Label47)
-        Me.tabFireEye.Controls.Add(Me.lblFEStatus)
-        Me.tabFireEye.Controls.Add(Me.txtFELink)
-        Me.tabFireEye.Controls.Add(Me.Label37)
-        Me.tabFireEye.Controls.Add(Me.Label34)
-        Me.tabFireEye.Controls.Add(Me.cmbFEAlertType)
-        Me.tabFireEye.Controls.Add(Me.txtFETarget)
-        Me.tabFireEye.Controls.Add(Me.Label33)
-        Me.tabFireEye.Controls.Add(Me.btn_FEEvent)
+        Me.tabFireEye.Controls.Add(Me.flowFireEye)
         Me.tabFireEye.Location = New System.Drawing.Point(4, 28)
         Me.tabFireEye.Margin = New System.Windows.Forms.Padding(4)
         Me.tabFireEye.Name = "tabFireEye"
@@ -2580,17 +2573,17 @@ Partial Class Main
         '
         'txtFireEyeMalwareName
         '
-        Me.txtFireEyeMalwareName.Location = New System.Drawing.Point(141, 82)
+        Me.txtFireEyeMalwareName.Location = New System.Drawing.Point(134, 66)
         Me.txtFireEyeMalwareName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFireEyeMalwareName.Name = "txtFireEyeMalwareName"
-        Me.txtFireEyeMalwareName.Size = New System.Drawing.Size(233, 22)
+        Me.txtFireEyeMalwareName.Size = New System.Drawing.Size(264, 22)
         Me.txtFireEyeMalwareName.TabIndex = 40
         Me.txtFireEyeMalwareName.Text = "Super.Evil.Malware"
         '
         'Label50
         '
         Me.Label50.AutoSize = True
-        Me.Label50.Location = New System.Drawing.Point(12, 86)
+        Me.Label50.Location = New System.Drawing.Point(4, 62)
         Me.Label50.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label50.Name = "Label50"
         Me.Label50.Size = New System.Drawing.Size(105, 17)
@@ -2599,17 +2592,17 @@ Partial Class Main
         '
         'txtFireEyeMalwareMD5
         '
-        Me.txtFireEyeMalwareMD5.Location = New System.Drawing.Point(141, 111)
+        Me.txtFireEyeMalwareMD5.Location = New System.Drawing.Point(134, 96)
         Me.txtFireEyeMalwareMD5.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFireEyeMalwareMD5.Name = "txtFireEyeMalwareMD5"
-        Me.txtFireEyeMalwareMD5.Size = New System.Drawing.Size(233, 22)
+        Me.txtFireEyeMalwareMD5.Size = New System.Drawing.Size(264, 22)
         Me.txtFireEyeMalwareMD5.TabIndex = 2
         Me.txtFireEyeMalwareMD5.Text = "47f9fdc617f8c98a6732be534d8dbe9a"
         '
         'Label47
         '
         Me.Label47.AutoSize = True
-        Me.Label47.Location = New System.Drawing.Point(36, 114)
+        Me.Label47.Location = New System.Drawing.Point(4, 92)
         Me.Label47.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label47.Name = "Label47"
         Me.Label47.Size = New System.Drawing.Size(97, 17)
@@ -2619,8 +2612,9 @@ Partial Class Main
         'lblFEStatus
         '
         Me.lblFEStatus.AutoSize = True
+        Me.flowFireEye.SetFlowBreak(Me.lblFEStatus, True)
         Me.lblFEStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFEStatus.Location = New System.Drawing.Point(56, 191)
+        Me.lblFEStatus.Location = New System.Drawing.Point(4, 164)
         Me.lblFEStatus.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFEStatus.Name = "lblFEStatus"
         Me.lblFEStatus.Size = New System.Drawing.Size(95, 20)
@@ -2632,7 +2626,7 @@ Partial Class Main
         Me.txtFELink.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtFELink.Cursor = System.Windows.Forms.Cursors.Hand
         Me.txtFELink.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFELink.Location = New System.Drawing.Point(14, 319)
+        Me.txtFELink.Location = New System.Drawing.Point(4, 224)
         Me.txtFELink.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFELink.Name = "txtFELink"
         Me.txtFELink.ReadOnly = True
@@ -2643,11 +2637,13 @@ Partial Class Main
         '
         'Label37
         '
+        Me.Label37.AutoSize = True
+        Me.flowFireEye.SetFlowBreak(Me.Label37, True)
         Me.Label37.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label37.Location = New System.Drawing.Point(8, 240)
+        Me.Label37.Location = New System.Drawing.Point(4, 184)
         Me.Label37.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label37.Name = "Label37"
-        Me.Label37.Size = New System.Drawing.Size(450, 64)
+        Me.Label37.Size = New System.Drawing.Size(788, 36)
         Me.Label37.TabIndex = 6
         Me.Label37.Text = "To generate a verified hit from a test FireEye ThreatScan download the following " & _
     "EXE to your target, or enter a Custom MD5 Hash above." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
@@ -2655,7 +2651,7 @@ Partial Class Main
         'Label34
         '
         Me.Label34.AutoSize = True
-        Me.Label34.Location = New System.Drawing.Point(56, 54)
+        Me.Label34.Location = New System.Drawing.Point(4, 30)
         Me.Label34.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label34.Name = "Label34"
         Me.Label34.Size = New System.Drawing.Size(77, 17)
@@ -2667,24 +2663,24 @@ Partial Class Main
         Me.cmbFEAlertType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbFEAlertType.FormattingEnabled = True
         Me.cmbFEAlertType.Items.AddRange(New Object() {"malware-object", "malware-callback", "web-infection", "domain-match", "infection-match"})
-        Me.cmbFEAlertType.Location = New System.Drawing.Point(141, 50)
+        Me.cmbFEAlertType.Location = New System.Drawing.Point(134, 34)
         Me.cmbFEAlertType.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbFEAlertType.Name = "cmbFEAlertType"
-        Me.cmbFEAlertType.Size = New System.Drawing.Size(233, 24)
+        Me.cmbFEAlertType.Size = New System.Drawing.Size(264, 24)
         Me.cmbFEAlertType.TabIndex = 1
         '
         'txtFETarget
         '
-        Me.txtFETarget.Location = New System.Drawing.Point(141, 18)
+        Me.txtFETarget.Location = New System.Drawing.Point(134, 4)
         Me.txtFETarget.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFETarget.Name = "txtFETarget"
-        Me.txtFETarget.Size = New System.Drawing.Size(233, 22)
+        Me.txtFETarget.Size = New System.Drawing.Size(264, 22)
         Me.txtFETarget.TabIndex = 0
         '
         'Label33
         '
         Me.Label33.AutoSize = True
-        Me.Label33.Location = New System.Drawing.Point(11, 22)
+        Me.Label33.Location = New System.Drawing.Point(4, 0)
         Me.Label33.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label33.Name = "Label33"
         Me.Label33.Size = New System.Drawing.Size(122, 17)
@@ -2693,7 +2689,7 @@ Partial Class Main
         '
         'btn_FEEvent
         '
-        Me.btn_FEEvent.Location = New System.Drawing.Point(141, 147)
+        Me.btn_FEEvent.Location = New System.Drawing.Point(134, 126)
         Me.btn_FEEvent.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_FEEvent.Name = "btn_FEEvent"
         Me.btn_FEEvent.Size = New System.Drawing.Size(156, 28)
@@ -3208,7 +3204,7 @@ Partial Class Main
         '
         'tabAbout
         '
-        Me.tabAbout.Controls.Add(Me.Button1)
+        Me.tabAbout.Controls.Add(Me.btn_AboutCheckforUpdates)
         Me.tabAbout.Controls.Add(Me.TextBox1)
         Me.tabAbout.Location = New System.Drawing.Point(4, 28)
         Me.tabAbout.Margin = New System.Windows.Forms.Padding(4)
@@ -3218,14 +3214,14 @@ Partial Class Main
         Me.tabAbout.Text = "About"
         Me.tabAbout.UseVisualStyleBackColor = True
         '
-        'Button1
+        'btn_AboutCheckforUpdates
         '
-        Me.Button1.Location = New System.Drawing.Point(343, 173)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(149, 32)
-        Me.Button1.TabIndex = 0
-        Me.Button1.Text = "Check for Updates"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btn_AboutCheckforUpdates.Location = New System.Drawing.Point(343, 173)
+        Me.btn_AboutCheckforUpdates.Name = "btn_AboutCheckforUpdates"
+        Me.btn_AboutCheckforUpdates.Size = New System.Drawing.Size(149, 32)
+        Me.btn_AboutCheckforUpdates.TabIndex = 0
+        Me.btn_AboutCheckforUpdates.Text = "Check for Updates"
+        Me.btn_AboutCheckforUpdates.UseVisualStyleBackColor = True
         '
         'TextBox1
         '
@@ -3276,6 +3272,49 @@ Partial Class Main
         Me.lblXPSHostname.Size = New System.Drawing.Size(367, 17)
         Me.lblXPSHostname.TabIndex = 41
         Me.lblXPSHostname.Text = "xps:8448"
+        '
+        'tableFireEye
+        '
+        Me.tableFireEye.AutoSize = True
+        Me.tableFireEye.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.tableFireEye.ColumnCount = 2
+        Me.tableFireEye.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableFireEye.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tableFireEye.Controls.Add(Me.Label33, 0, 0)
+        Me.tableFireEye.Controls.Add(Me.txtFireEyeMalwareMD5, 1, 3)
+        Me.tableFireEye.Controls.Add(Me.Label47, 0, 3)
+        Me.tableFireEye.Controls.Add(Me.txtFETarget, 1, 0)
+        Me.tableFireEye.Controls.Add(Me.btn_FEEvent, 1, 4)
+        Me.tableFireEye.Controls.Add(Me.Label50, 0, 2)
+        Me.tableFireEye.Controls.Add(Me.Label34, 0, 1)
+        Me.tableFireEye.Controls.Add(Me.cmbFEAlertType, 1, 1)
+        Me.tableFireEye.Controls.Add(Me.txtFireEyeMalwareName, 1, 2)
+        Me.tableFireEye.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.flowFireEye.SetFlowBreak(Me.tableFireEye, True)
+        Me.tableFireEye.Location = New System.Drawing.Point(3, 3)
+        Me.tableFireEye.Name = "tableFireEye"
+        Me.tableFireEye.RowCount = 5
+        Me.tableFireEye.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableFireEye.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableFireEye.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableFireEye.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableFireEye.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableFireEye.Size = New System.Drawing.Size(402, 158)
+        Me.tableFireEye.TabIndex = 42
+        '
+        'flowFireEye
+        '
+        Me.flowFireEye.AutoSize = True
+        Me.flowFireEye.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.flowFireEye.Controls.Add(Me.tableFireEye)
+        Me.flowFireEye.Controls.Add(Me.lblFEStatus)
+        Me.flowFireEye.Controls.Add(Me.Label37)
+        Me.flowFireEye.Controls.Add(Me.txtFELink)
+        Me.flowFireEye.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.flowFireEye.Location = New System.Drawing.Point(4, 4)
+        Me.flowFireEye.Name = "flowFireEye"
+        Me.flowFireEye.Size = New System.Drawing.Size(824, 692)
+        Me.flowFireEye.TabIndex = 43
         '
         'Main
         '
@@ -3392,6 +3431,10 @@ Partial Class Main
         CType(Me.xpsPort, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabAbout.ResumeLayout(False)
         Me.tabAbout.PerformLayout()
+        Me.tableFireEye.ResumeLayout(False)
+        Me.tableFireEye.PerformLayout()
+        Me.flowFireEye.ResumeLayout(False)
+        Me.flowFireEye.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -3579,7 +3622,7 @@ Partial Class Main
     Friend WithEvents txtPANWMalwareMD5 As System.Windows.Forms.TextBox
     Friend WithEvents Label48 As System.Windows.Forms.Label
     Friend WithEvents btn_CheckForUpdates As System.Windows.Forms.Button
-    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents btn_AboutCheckforUpdates As System.Windows.Forms.Button
     Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
     Friend WithEvents chkUpdates As System.Windows.Forms.CheckBox
     Friend WithEvents tabRESTUI As System.Windows.Forms.TabPage
@@ -3660,5 +3703,7 @@ Partial Class Main
     Friend WithEvents Label50 As System.Windows.Forms.Label
     Friend WithEvents lblWildFireURL As System.Windows.Forms.Label
     Friend WithEvents lblXPSHostname As System.Windows.Forms.Label
+    Friend WithEvents flowFireEye As System.Windows.Forms.FlowLayoutPanel
+    Friend WithEvents tableFireEye As System.Windows.Forms.TableLayoutPanel
 
 End Class
