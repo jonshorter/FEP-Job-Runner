@@ -1799,4 +1799,25 @@ Public Class Main
         lblXPSHostname.Text = My.Computer.Name & ":" & xps_sim_Port.Value
     End Sub
 
+    Private Sub Main_RegionChanged(sender As Object, e As EventArgs) Handles Me.RegionChanged
+
+    End Sub
+
+    Private Sub Main_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+        tabSubMenu.Width = Me.Width - 20
+        Select Case tabSubMenu.SelectedTab.Name
+            Case tabJobInfo.Name
+                tabSubMenu.Height = flowJobInfo.Height + 10
+            Case tabFilters.Name
+
+            Case tabAgentRemediation.Name
+                tabSubMenu.MinimumSize = New Size(0, 375)
+                tabSubMenu.Height = tableAgentRemediation.Height + 10
+        End Select
+
+    End Sub
+
+    Private Sub flowJobsAPI_Paint(sender As Object, e As PaintEventArgs) Handles flowJobsAPI.Paint
+
+    End Sub
 End Class

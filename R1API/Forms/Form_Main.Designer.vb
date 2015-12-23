@@ -60,6 +60,14 @@ Partial Class Main
         Me.btnSaveSettings = New System.Windows.Forms.Button()
         Me.tabSubMenu = New System.Windows.Forms.TabControl()
         Me.tabJobInfo = New System.Windows.Forms.TabPage()
+        Me.flowJobInfo = New System.Windows.Forms.FlowLayoutPanel()
+        Me.tableJobInfo = New System.Windows.Forms.TableLayoutPanel()
+        Me.Label26 = New System.Windows.Forms.Label()
+        Me.Label27 = New System.Windows.Forms.Label()
+        Me.txtTemplateName = New System.Windows.Forms.ComboBox()
+        Me.Label25 = New System.Windows.Forms.Label()
+        Me.txtProjectName = New System.Windows.Forms.TextBox()
+        Me.txtJobName = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.rdoagent = New System.Windows.Forms.RadioButton()
         Me.rdoshare = New System.Windows.Forms.RadioButton()
@@ -75,12 +83,6 @@ Partial Class Main
         Me.txtComputerTarget = New System.Windows.Forms.TextBox()
         Me.btnAddComputer = New System.Windows.Forms.Button()
         Me.btnRemoveComputer = New System.Windows.Forms.Button()
-        Me.txtTemplateName = New System.Windows.Forms.ComboBox()
-        Me.Label25 = New System.Windows.Forms.Label()
-        Me.txtJobName = New System.Windows.Forms.TextBox()
-        Me.Label26 = New System.Windows.Forms.Label()
-        Me.txtProjectName = New System.Windows.Forms.TextBox()
-        Me.Label27 = New System.Windows.Forms.Label()
         Me.tabFilters = New System.Windows.Forms.TabPage()
         Me.tabFiltersSubMenu = New System.Windows.Forms.TabControl()
         Me.tabInclusionFilter = New System.Windows.Forms.TabPage()
@@ -119,35 +121,41 @@ Partial Class Main
         Me.btnremoveexclusionfilterfromlist = New System.Windows.Forms.Button()
         Me.btnaddexclusionfiltertolist = New System.Windows.Forms.Button()
         Me.tabAgentRemediation = New System.Windows.Forms.TabPage()
-        Me.btnSaveRemOptionChange = New System.Windows.Forms.Button()
-        Me.btnRemoveRemOption = New System.Windows.Forms.Button()
-        Me.btnAddRemOption = New System.Windows.Forms.Button()
+        Me.tableAgentRemediation = New System.Windows.Forms.TableLayoutPanel()
         Me.lvRemOptions = New System.Windows.Forms.ListView()
         Me.colRemType = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.colitem = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.tabAgentRemediationSubMenu = New System.Windows.Forms.TabControl()
         Me.tabAgentSendFile = New System.Windows.Forms.TabPage()
-        Me.chkremsendexecute = New System.Windows.Forms.CheckBox()
-        Me.chkremsenddelete = New System.Windows.Forms.CheckBox()
-        Me.txtremsenddest = New System.Windows.Forms.TextBox()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.txtremsendsource = New System.Windows.Forms.TextBox()
+        Me.tableARSendFile = New System.Windows.Forms.TableLayoutPanel()
         Me.Label16 = New System.Windows.Forms.Label()
+        Me.chkremsendexecute = New System.Windows.Forms.CheckBox()
+        Me.txtremsendsource = New System.Windows.Forms.TextBox()
+        Me.chkremsenddelete = New System.Windows.Forms.CheckBox()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.txtremsenddest = New System.Windows.Forms.TextBox()
         Me.tabAgentExecute = New System.Windows.Forms.TabPage()
+        Me.tableARExecute = New System.Windows.Forms.TableLayoutPanel()
+        Me.Label18 = New System.Windows.Forms.Label()
         Me.txtremexecargs = New System.Windows.Forms.TextBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.txtremexecpath = New System.Windows.Forms.TextBox()
-        Me.Label18 = New System.Windows.Forms.Label()
         Me.tabAgentDelete = New System.Windows.Forms.TabPage()
-        Me.txtremdelfilepath = New System.Windows.Forms.TextBox()
+        Me.tableARDelete = New System.Windows.Forms.TableLayoutPanel()
         Me.Label20 = New System.Windows.Forms.Label()
+        Me.txtremdelfilepath = New System.Windows.Forms.TextBox()
         Me.TabAgentKill = New System.Windows.Forms.TabPage()
+        Me.tableARKill = New System.Windows.Forms.TableLayoutPanel()
+        Me.grpARKill = New System.Windows.Forms.GroupBox()
         Me.rdoPName = New System.Windows.Forms.RadioButton()
         Me.rdoPID = New System.Windows.Forms.RadioButton()
         Me.txtremkillprocname = New System.Windows.Forms.TextBox()
+        Me.Label21 = New System.Windows.Forms.Label()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.nmbremkillprocid = New System.Windows.Forms.NumericUpDown()
-        Me.Label21 = New System.Windows.Forms.Label()
+        Me.btnRemoveRemOption = New System.Windows.Forms.Button()
+        Me.btnSaveRemOptionChange = New System.Windows.Forms.Button()
+        Me.btnAddRemOption = New System.Windows.Forms.Button()
         Me.tabMenu = New System.Windows.Forms.TabControl()
         Me.tabSettings = New System.Windows.Forms.TabPage()
         Me.tabRESTUI = New System.Windows.Forms.TabPage()
@@ -219,8 +227,10 @@ Partial Class Main
         Me.lblTotalNumberAlerts = New System.Windows.Forms.Label()
         Me.flowAlertBreakdown = New System.Windows.Forms.FlowLayoutPanel()
         Me.tabJobExecution = New System.Windows.Forms.TabPage()
-        Me.lblJobStatus = New System.Windows.Forms.Label()
+        Me.flowJobsAPI = New System.Windows.Forms.FlowLayoutPanel()
+        Me.tableJobExecute = New System.Windows.Forms.TableLayoutPanel()
         Me.btnShowJSON = New System.Windows.Forms.Button()
+        Me.lblJobStatus = New System.Windows.Forms.Label()
         Me.btnLoadFromBox = New System.Windows.Forms.Button()
         Me.btnSaveAsBox = New System.Windows.Forms.Button()
         Me.tabFireEye = New System.Windows.Forms.TabPage()
@@ -240,12 +250,6 @@ Partial Class Main
         Me.txtFELink = New System.Windows.Forms.TextBox()
         Me.tabPANW = New System.Windows.Forms.TabPage()
         Me.flowPANW = New System.Windows.Forms.FlowLayoutPanel()
-        Me.lblPANWHitInstruction = New System.Windows.Forms.Label()
-        Me.grpWildFireSim = New System.Windows.Forms.GroupBox()
-        Me.panw_sim_port = New System.Windows.Forms.NumericUpDown()
-        Me.Label44 = New System.Windows.Forms.Label()
-        Me.lblwildfirestatus = New System.Windows.Forms.Label()
-        Me.btn_WildfireStart = New System.Windows.Forms.Button()
         Me.tablePANWSendAlert = New System.Windows.Forms.TableLayoutPanel()
         Me.Label30 = New System.Windows.Forms.Label()
         Me.Label36 = New System.Windows.Forms.Label()
@@ -259,32 +263,45 @@ Partial Class Main
         Me.btnPANWSend = New System.Windows.Forms.Button()
         Me.txtPANWTarget = New System.Windows.Forms.TextBox()
         Me.cmbPANWAlert = New System.Windows.Forms.ComboBox()
-        Me.txtFireEyeDownload1 = New System.Windows.Forms.TextBox()
+        Me.grpWildFireSim = New System.Windows.Forms.GroupBox()
+        Me.panw_sim_port = New System.Windows.Forms.NumericUpDown()
+        Me.Label44 = New System.Windows.Forms.Label()
+        Me.lblwildfirestatus = New System.Windows.Forms.Label()
+        Me.btn_WildfireStart = New System.Windows.Forms.Button()
+        Me.tablePANWBottom = New System.Windows.Forms.TableLayoutPanel()
         Me.grpWildFirePicture = New System.Windows.Forms.GroupBox()
         Me.lblWildFireURL = New System.Windows.Forms.Label()
         Me.panwPicture = New System.Windows.Forms.PictureBox()
+        Me.txtFireEyeDownload1 = New System.Windows.Forms.TextBox()
+        Me.lblPANWHitInstruction = New System.Windows.Forms.Label()
+        Me.txtPANWSim = New System.Windows.Forms.Label()
         Me.tabXPS = New System.Windows.Forms.TabPage()
-        Me.lblXPSHostname = New System.Windows.Forms.Label()
+        Me.flowXPS = New System.Windows.Forms.FlowLayoutPanel()
+        Me.tableXPSGrid = New System.Windows.Forms.TableLayoutPanel()
+        Me.Label38 = New System.Windows.Forms.Label()
+        Me.xpsPort = New System.Windows.Forms.NumericUpDown()
         Me.txtXPSMalwareMD5 = New System.Windows.Forms.TextBox()
+        Me.Label40 = New System.Windows.Forms.Label()
+        Me.btnXPSSend = New System.Windows.Forms.Button()
         Me.Label46 = New System.Windows.Forms.Label()
-        Me.lblXPSStatus = New System.Windows.Forms.Label()
+        Me.txtXPSTarget = New System.Windows.Forms.TextBox()
+        Me.Label41 = New System.Windows.Forms.Label()
         Me.txtXPSMalware = New System.Windows.Forms.TextBox()
+        Me.cmbXPSSeverity = New System.Windows.Forms.ComboBox()
         Me.Label42 = New System.Windows.Forms.Label()
-        Me.xpsPicture = New System.Windows.Forms.PictureBox()
-        Me.txtFELink2 = New System.Windows.Forms.TextBox()
-        Me.Label39 = New System.Windows.Forms.Label()
+        Me.lblXPSStatus = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.xps_sim_Port = New System.Windows.Forms.NumericUpDown()
         Me.Label43 = New System.Windows.Forms.Label()
         Me.lbldemoxpsstatus = New System.Windows.Forms.Label()
         Me.btnStartXPSListener = New System.Windows.Forms.Button()
-        Me.Label41 = New System.Windows.Forms.Label()
-        Me.cmbXPSSeverity = New System.Windows.Forms.ComboBox()
-        Me.xpsPort = New System.Windows.Forms.NumericUpDown()
-        Me.Label38 = New System.Windows.Forms.Label()
-        Me.txtXPSTarget = New System.Windows.Forms.TextBox()
-        Me.Label40 = New System.Windows.Forms.Label()
-        Me.btnXPSSend = New System.Windows.Forms.Button()
+        Me.tableXPSTextPic = New System.Windows.Forms.TableLayoutPanel()
+        Me.txtXPSSim = New System.Windows.Forms.Label()
+        Me.grpXPSPicture = New System.Windows.Forms.GroupBox()
+        Me.lblXPSHostname = New System.Windows.Forms.Label()
+        Me.xpsPicture = New System.Windows.Forms.PictureBox()
+        Me.Label39 = New System.Windows.Forms.Label()
+        Me.txtFELink2 = New System.Windows.Forms.TextBox()
         Me.tabAbout = New System.Windows.Forms.TabPage()
         Me.flowAbout = New System.Windows.Forms.FlowLayoutPanel()
         Me.lbltxtAbout = New System.Windows.Forms.Label()
@@ -292,13 +309,6 @@ Partial Class Main
         Me.ofdBox = New System.Windows.Forms.OpenFileDialog()
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
         Me.tooltip = New System.Windows.Forms.ToolTip(Me.components)
-        Me.txtPANWSim = New System.Windows.Forms.Label()
-        Me.tablePANWBottom = New System.Windows.Forms.TableLayoutPanel()
-        Me.grpXPSPicture = New System.Windows.Forms.GroupBox()
-        Me.tableXPSTextPic = New System.Windows.Forms.TableLayoutPanel()
-        Me.txtXPSSim = New System.Windows.Forms.Label()
-        Me.tableXPSGrid = New System.Windows.Forms.TableLayoutPanel()
-        Me.flowXPS = New System.Windows.Forms.FlowLayoutPanel()
         Me.GroupBox4.SuspendLayout()
         Me.grpReqSet.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -306,6 +316,8 @@ Partial Class Main
         Me.GroupBox6.SuspendLayout()
         Me.tabSubMenu.SuspendLayout()
         Me.tabJobInfo.SuspendLayout()
+        Me.flowJobInfo.SuspendLayout()
+        Me.tableJobInfo.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.grpshare.SuspendLayout()
         Me.grpagent.SuspendLayout()
@@ -322,11 +334,17 @@ Partial Class Main
         Me.SplitExclusion.Panel2.SuspendLayout()
         Me.SplitExclusion.SuspendLayout()
         Me.tabAgentRemediation.SuspendLayout()
+        Me.tableAgentRemediation.SuspendLayout()
         Me.tabAgentRemediationSubMenu.SuspendLayout()
         Me.tabAgentSendFile.SuspendLayout()
+        Me.tableARSendFile.SuspendLayout()
         Me.tabAgentExecute.SuspendLayout()
+        Me.tableARExecute.SuspendLayout()
         Me.tabAgentDelete.SuspendLayout()
+        Me.tableARDelete.SuspendLayout()
         Me.TabAgentKill.SuspendLayout()
+        Me.tableARKill.SuspendLayout()
+        Me.grpARKill.SuspendLayout()
         CType(Me.nmbremkillprocid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabMenu.SuspendLayout()
         Me.tabSettings.SuspendLayout()
@@ -359,34 +377,36 @@ Partial Class Main
         CType(Me.dgvAlerts, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tblAlertBreakdown.SuspendLayout()
         Me.tabJobExecution.SuspendLayout()
+        Me.flowJobsAPI.SuspendLayout()
+        Me.tableJobExecute.SuspendLayout()
         Me.tabFireEye.SuspendLayout()
         Me.flowFireEye.SuspendLayout()
         Me.tableFireEye.SuspendLayout()
         Me.tabPANW.SuspendLayout()
         Me.flowPANW.SuspendLayout()
-        Me.grpWildFireSim.SuspendLayout()
-        CType(Me.panw_sim_port, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tablePANWSendAlert.SuspendLayout()
         CType(Me.panwPort, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grpWildFireSim.SuspendLayout()
+        CType(Me.panw_sim_port, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tablePANWBottom.SuspendLayout()
         Me.grpWildFirePicture.SuspendLayout()
         CType(Me.panwPicture, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabXPS.SuspendLayout()
-        CType(Me.xpsPicture, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.flowXPS.SuspendLayout()
+        Me.tableXPSGrid.SuspendLayout()
+        CType(Me.xpsPort, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox3.SuspendLayout()
         CType(Me.xps_sim_Port, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.xpsPort, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tableXPSTextPic.SuspendLayout()
+        Me.grpXPSPicture.SuspendLayout()
+        CType(Me.xpsPicture, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabAbout.SuspendLayout()
         Me.flowAbout.SuspendLayout()
-        Me.tablePANWBottom.SuspendLayout()
-        Me.grpXPSPicture.SuspendLayout()
-        Me.tableXPSTextPic.SuspendLayout()
-        Me.tableXPSGrid.SuspendLayout()
-        Me.flowXPS.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnExecute
         '
-        Me.btnExecute.Location = New System.Drawing.Point(724, 604)
+        Me.btnExecute.Location = New System.Drawing.Point(352, 8)
         Me.btnExecute.Margin = New System.Windows.Forms.Padding(4)
         Me.btnExecute.Name = "btnExecute"
         Me.btnExecute.Size = New System.Drawing.Size(100, 28)
@@ -783,29 +803,119 @@ Partial Class Main
         Me.tabSubMenu.Controls.Add(Me.tabJobInfo)
         Me.tabSubMenu.Controls.Add(Me.tabFilters)
         Me.tabSubMenu.Controls.Add(Me.tabAgentRemediation)
-        Me.tabSubMenu.Location = New System.Drawing.Point(8, 7)
+        Me.tabSubMenu.Dock = System.Windows.Forms.DockStyle.Top
+        Me.flowJobsAPI.SetFlowBreak(Me.tabSubMenu, True)
+        Me.tabSubMenu.Location = New System.Drawing.Point(4, 4)
         Me.tabSubMenu.Margin = New System.Windows.Forms.Padding(4)
         Me.tabSubMenu.Name = "tabSubMenu"
         Me.tabSubMenu.SelectedIndex = 0
-        Me.tabSubMenu.Size = New System.Drawing.Size(821, 590)
+        Me.tabSubMenu.Size = New System.Drawing.Size(947, 718)
         Me.tabSubMenu.TabIndex = 0
         '
         'tabJobInfo
         '
-        Me.tabJobInfo.Controls.Add(Me.GroupBox1)
-        Me.tabJobInfo.Controls.Add(Me.txtTemplateName)
-        Me.tabJobInfo.Controls.Add(Me.Label25)
-        Me.tabJobInfo.Controls.Add(Me.txtJobName)
-        Me.tabJobInfo.Controls.Add(Me.Label26)
-        Me.tabJobInfo.Controls.Add(Me.txtProjectName)
-        Me.tabJobInfo.Controls.Add(Me.Label27)
+        Me.tabJobInfo.Controls.Add(Me.flowJobInfo)
         Me.tabJobInfo.Location = New System.Drawing.Point(4, 28)
         Me.tabJobInfo.Margin = New System.Windows.Forms.Padding(4)
         Me.tabJobInfo.Name = "tabJobInfo"
-        Me.tabJobInfo.Size = New System.Drawing.Size(813, 558)
+        Me.tabJobInfo.Size = New System.Drawing.Size(939, 686)
         Me.tabJobInfo.TabIndex = 3
         Me.tabJobInfo.Text = "Job Information"
         Me.tabJobInfo.UseVisualStyleBackColor = True
+        '
+        'flowJobInfo
+        '
+        Me.flowJobInfo.AutoSize = True
+        Me.flowJobInfo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.flowJobInfo.Controls.Add(Me.tableJobInfo)
+        Me.flowJobInfo.Controls.Add(Me.GroupBox1)
+        Me.flowJobInfo.Dock = System.Windows.Forms.DockStyle.Top
+        Me.flowJobInfo.Location = New System.Drawing.Point(0, 0)
+        Me.flowJobInfo.Name = "flowJobInfo"
+        Me.flowJobInfo.Size = New System.Drawing.Size(939, 378)
+        Me.flowJobInfo.TabIndex = 27
+        '
+        'tableJobInfo
+        '
+        Me.tableJobInfo.AutoSize = True
+        Me.tableJobInfo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.tableJobInfo.ColumnCount = 2
+        Me.tableJobInfo.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableJobInfo.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableJobInfo.Controls.Add(Me.Label26, 0, 0)
+        Me.tableJobInfo.Controls.Add(Me.Label27, 0, 1)
+        Me.tableJobInfo.Controls.Add(Me.txtTemplateName, 1, 2)
+        Me.tableJobInfo.Controls.Add(Me.Label25, 0, 2)
+        Me.tableJobInfo.Controls.Add(Me.txtProjectName, 1, 1)
+        Me.tableJobInfo.Controls.Add(Me.txtJobName, 1, 0)
+        Me.flowJobInfo.SetFlowBreak(Me.tableJobInfo, True)
+        Me.tableJobInfo.Location = New System.Drawing.Point(3, 3)
+        Me.tableJobInfo.Name = "tableJobInfo"
+        Me.tableJobInfo.RowCount = 3
+        Me.tableJobInfo.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableJobInfo.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableJobInfo.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableJobInfo.Size = New System.Drawing.Size(440, 92)
+        Me.tableJobInfo.TabIndex = 26
+        '
+        'Label26
+        '
+        Me.Label26.AutoSize = True
+        Me.Label26.Location = New System.Drawing.Point(4, 0)
+        Me.Label26.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label26.Name = "Label26"
+        Me.Label26.Size = New System.Drawing.Size(81, 17)
+        Me.Label26.TabIndex = 21
+        Me.Label26.Text = "Job Name*:"
+        '
+        'Label27
+        '
+        Me.Label27.AutoSize = True
+        Me.Label27.Location = New System.Drawing.Point(4, 30)
+        Me.Label27.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label27.Name = "Label27"
+        Me.Label27.Size = New System.Drawing.Size(97, 17)
+        Me.Label27.TabIndex = 24
+        Me.Label27.Text = "Project Name:"
+        '
+        'txtTemplateName
+        '
+        Me.txtTemplateName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.txtTemplateName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.txtTemplateName.FormattingEnabled = True
+        Me.txtTemplateName.Items.AddRange(New Object() {"coll-evtx", "Drop Process by PID", "ETM Relative Time Query", "EXE-Metadata-Cerb", "Lockdown NIC", "LockdownEnableNIC", "Memory Acquisition", "Memory Analysis", "Registry-Autostart", "Registry-Full", "Remediate-Name", "Remediate-PID", "Small-exes-Cerb", "Software Inventory", "Vol-Deep", "Vol-Deep-Cerb", "Vol-Hidden-Cerb", "Vol-Hidden-Injected", "Vol-Quick", "Vol-Quick-Cerb", "Vol-Quick-Sched"})
+        Me.txtTemplateName.Location = New System.Drawing.Point(124, 64)
+        Me.txtTemplateName.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtTemplateName.Name = "txtTemplateName"
+        Me.txtTemplateName.Size = New System.Drawing.Size(312, 24)
+        Me.txtTemplateName.Sorted = True
+        Me.txtTemplateName.TabIndex = 2
+        '
+        'Label25
+        '
+        Me.Label25.AutoSize = True
+        Me.Label25.Location = New System.Drawing.Point(4, 60)
+        Me.Label25.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label25.Name = "Label25"
+        Me.Label25.Size = New System.Drawing.Size(112, 17)
+        Me.Label25.TabIndex = 25
+        Me.Label25.Text = "Template Name:"
+        '
+        'txtProjectName
+        '
+        Me.txtProjectName.Location = New System.Drawing.Point(124, 34)
+        Me.txtProjectName.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtProjectName.Name = "txtProjectName"
+        Me.txtProjectName.Size = New System.Drawing.Size(312, 22)
+        Me.txtProjectName.TabIndex = 1
+        '
+        'txtJobName
+        '
+        Me.txtJobName.Location = New System.Drawing.Point(124, 4)
+        Me.txtJobName.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtJobName.Name = "txtJobName"
+        Me.txtJobName.Size = New System.Drawing.Size(312, 22)
+        Me.txtJobName.TabIndex = 0
         '
         'GroupBox1
         '
@@ -813,7 +923,7 @@ Partial Class Main
         Me.GroupBox1.Controls.Add(Me.rdoshare)
         Me.GroupBox1.Controls.Add(Me.grpshare)
         Me.GroupBox1.Controls.Add(Me.grpagent)
-        Me.GroupBox1.Location = New System.Drawing.Point(4, 110)
+        Me.GroupBox1.Location = New System.Drawing.Point(4, 102)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4)
@@ -976,65 +1086,6 @@ Partial Class Main
         Me.btnRemoveComputer.Text = "Remove"
         Me.btnRemoveComputer.UseVisualStyleBackColor = True
         '
-        'txtTemplateName
-        '
-        Me.txtTemplateName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.txtTemplateName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.txtTemplateName.FormattingEnabled = True
-        Me.txtTemplateName.Items.AddRange(New Object() {"coll-evtx", "Drop Process by PID", "ETM Relative Time Query", "EXE-Metadata-Cerb", "Lockdown NIC", "LockdownEnableNIC", "Memory Acquisition", "Memory Analysis", "Registry-Autostart", "Registry-Full", "Remediate-Name", "Remediate-PID", "Small-exes-Cerb", "Software Inventory", "Vol-Deep", "Vol-Deep-Cerb", "Vol-Hidden-Cerb", "Vol-Hidden-Injected", "Vol-Quick", "Vol-Quick-Cerb", "Vol-Quick-Sched"})
-        Me.txtTemplateName.Location = New System.Drawing.Point(161, 76)
-        Me.txtTemplateName.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtTemplateName.Name = "txtTemplateName"
-        Me.txtTemplateName.Size = New System.Drawing.Size(312, 24)
-        Me.txtTemplateName.Sorted = True
-        Me.txtTemplateName.TabIndex = 2
-        '
-        'Label25
-        '
-        Me.Label25.AutoSize = True
-        Me.Label25.Location = New System.Drawing.Point(17, 80)
-        Me.Label25.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(112, 17)
-        Me.Label25.TabIndex = 25
-        Me.Label25.Text = "Template Name:"
-        '
-        'txtJobName
-        '
-        Me.txtJobName.Location = New System.Drawing.Point(161, 11)
-        Me.txtJobName.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtJobName.Name = "txtJobName"
-        Me.txtJobName.Size = New System.Drawing.Size(312, 22)
-        Me.txtJobName.TabIndex = 0
-        '
-        'Label26
-        '
-        Me.Label26.AutoSize = True
-        Me.Label26.Location = New System.Drawing.Point(17, 15)
-        Me.Label26.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(81, 17)
-        Me.Label26.TabIndex = 21
-        Me.Label26.Text = "Job Name*:"
-        '
-        'txtProjectName
-        '
-        Me.txtProjectName.Location = New System.Drawing.Point(161, 43)
-        Me.txtProjectName.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtProjectName.Name = "txtProjectName"
-        Me.txtProjectName.Size = New System.Drawing.Size(312, 22)
-        Me.txtProjectName.TabIndex = 1
-        '
-        'Label27
-        '
-        Me.Label27.AutoSize = True
-        Me.Label27.Location = New System.Drawing.Point(17, 47)
-        Me.Label27.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(97, 17)
-        Me.Label27.TabIndex = 24
-        Me.Label27.Text = "Project Name:"
-        '
         'tabFilters
         '
         Me.tabFilters.Controls.Add(Me.tabFiltersSubMenu)
@@ -1042,7 +1093,7 @@ Partial Class Main
         Me.tabFilters.Margin = New System.Windows.Forms.Padding(4)
         Me.tabFilters.Name = "tabFilters"
         Me.tabFilters.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabFilters.Size = New System.Drawing.Size(813, 558)
+        Me.tabFilters.Size = New System.Drawing.Size(939, 686)
         Me.tabFilters.TabIndex = 1
         Me.tabFilters.Text = "Filters"
         Me.tabFilters.UseVisualStyleBackColor = True
@@ -1055,7 +1106,7 @@ Partial Class Main
         Me.tabFiltersSubMenu.Margin = New System.Windows.Forms.Padding(4)
         Me.tabFiltersSubMenu.Name = "tabFiltersSubMenu"
         Me.tabFiltersSubMenu.SelectedIndex = 0
-        Me.tabFiltersSubMenu.Size = New System.Drawing.Size(803, 546)
+        Me.tabFiltersSubMenu.Size = New System.Drawing.Size(874, 546)
         Me.tabFiltersSubMenu.TabIndex = 0
         '
         'tabInclusionFilter
@@ -1065,7 +1116,7 @@ Partial Class Main
         Me.tabInclusionFilter.Margin = New System.Windows.Forms.Padding(4)
         Me.tabInclusionFilter.Name = "tabInclusionFilter"
         Me.tabInclusionFilter.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabInclusionFilter.Size = New System.Drawing.Size(795, 517)
+        Me.tabInclusionFilter.Size = New System.Drawing.Size(866, 517)
         Me.tabInclusionFilter.TabIndex = 0
         Me.tabInclusionFilter.Text = "Inclusion"
         Me.tabInclusionFilter.UseVisualStyleBackColor = True
@@ -1105,7 +1156,7 @@ Partial Class Main
         Me.splitInclusion.Panel2.Controls.Add(Me.Label31)
         Me.splitInclusion.Panel2.Controls.Add(Me.btnRemoveInclFilterfromList)
         Me.splitInclusion.Panel2.Controls.Add(Me.btnAddInclFilterToList)
-        Me.splitInclusion.Size = New System.Drawing.Size(787, 509)
+        Me.splitInclusion.Size = New System.Drawing.Size(858, 509)
         Me.splitInclusion.SplitterDistance = 272
         Me.splitInclusion.SplitterWidth = 10
         Me.splitInclusion.TabIndex = 0
@@ -1297,7 +1348,7 @@ Partial Class Main
         Me.tabExclusionFilter.Margin = New System.Windows.Forms.Padding(4)
         Me.tabExclusionFilter.Name = "tabExclusionFilter"
         Me.tabExclusionFilter.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabExclusionFilter.Size = New System.Drawing.Size(795, 517)
+        Me.tabExclusionFilter.Size = New System.Drawing.Size(866, 517)
         Me.tabExclusionFilter.TabIndex = 1
         Me.tabExclusionFilter.Text = "Exclusion"
         Me.tabExclusionFilter.UseVisualStyleBackColor = True
@@ -1330,7 +1381,7 @@ Partial Class Main
         Me.SplitExclusion.Panel2.Controls.Add(Me.Label32)
         Me.SplitExclusion.Panel2.Controls.Add(Me.btnremoveexclusionfilterfromlist)
         Me.SplitExclusion.Panel2.Controls.Add(Me.btnaddexclusionfiltertolist)
-        Me.SplitExclusion.Size = New System.Drawing.Size(787, 509)
+        Me.SplitExclusion.Size = New System.Drawing.Size(858, 509)
         Me.SplitExclusion.SplitterDistance = 266
         Me.SplitExclusion.SplitterWidth = 10
         Me.SplitExclusion.TabIndex = 0
@@ -1463,61 +1514,54 @@ Partial Class Main
         '
         'tabAgentRemediation
         '
-        Me.tabAgentRemediation.Controls.Add(Me.btnSaveRemOptionChange)
-        Me.tabAgentRemediation.Controls.Add(Me.btnRemoveRemOption)
-        Me.tabAgentRemediation.Controls.Add(Me.btnAddRemOption)
-        Me.tabAgentRemediation.Controls.Add(Me.lvRemOptions)
-        Me.tabAgentRemediation.Controls.Add(Me.tabAgentRemediationSubMenu)
+        Me.tabAgentRemediation.Controls.Add(Me.tableAgentRemediation)
         Me.tabAgentRemediation.Location = New System.Drawing.Point(4, 28)
         Me.tabAgentRemediation.Margin = New System.Windows.Forms.Padding(4)
         Me.tabAgentRemediation.Name = "tabAgentRemediation"
-        Me.tabAgentRemediation.Size = New System.Drawing.Size(813, 558)
+        Me.tabAgentRemediation.Size = New System.Drawing.Size(939, 686)
         Me.tabAgentRemediation.TabIndex = 2
         Me.tabAgentRemediation.Text = "Agent Remediation"
         Me.tabAgentRemediation.UseVisualStyleBackColor = True
         '
-        'btnSaveRemOptionChange
+        'tableAgentRemediation
         '
-        Me.btnSaveRemOptionChange.Location = New System.Drawing.Point(359, 357)
-        Me.btnSaveRemOptionChange.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnSaveRemOptionChange.Name = "btnSaveRemOptionChange"
-        Me.btnSaveRemOptionChange.Size = New System.Drawing.Size(100, 28)
-        Me.btnSaveRemOptionChange.TabIndex = 4
-        Me.btnSaveRemOptionChange.Text = "Save"
-        Me.btnSaveRemOptionChange.UseVisualStyleBackColor = True
-        '
-        'btnRemoveRemOption
-        '
-        Me.btnRemoveRemOption.Location = New System.Drawing.Point(705, 357)
-        Me.btnRemoveRemOption.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnRemoveRemOption.Name = "btnRemoveRemOption"
-        Me.btnRemoveRemOption.Size = New System.Drawing.Size(100, 28)
-        Me.btnRemoveRemOption.TabIndex = 3
-        Me.btnRemoveRemOption.Text = "Remove"
-        Me.btnRemoveRemOption.UseVisualStyleBackColor = True
-        '
-        'btnAddRemOption
-        '
-        Me.btnAddRemOption.Location = New System.Drawing.Point(5, 357)
-        Me.btnAddRemOption.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnAddRemOption.Name = "btnAddRemOption"
-        Me.btnAddRemOption.Size = New System.Drawing.Size(100, 28)
-        Me.btnAddRemOption.TabIndex = 0
-        Me.btnAddRemOption.Text = "Add"
-        Me.btnAddRemOption.UseVisualStyleBackColor = True
+        Me.tableAgentRemediation.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tableAgentRemediation.AutoSize = True
+        Me.tableAgentRemediation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.tableAgentRemediation.ColumnCount = 3
+        Me.tableAgentRemediation.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableAgentRemediation.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableAgentRemediation.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableAgentRemediation.Controls.Add(Me.tabAgentRemediationSubMenu, 0, 0)
+        Me.tableAgentRemediation.Controls.Add(Me.lvRemOptions, 0, 2)
+        Me.tableAgentRemediation.Controls.Add(Me.btnRemoveRemOption, 2, 1)
+        Me.tableAgentRemediation.Controls.Add(Me.btnSaveRemOptionChange, 1, 1)
+        Me.tableAgentRemediation.Controls.Add(Me.btnAddRemOption, 0, 1)
+        Me.tableAgentRemediation.Location = New System.Drawing.Point(7, 3)
+        Me.tableAgentRemediation.MinimumSize = New System.Drawing.Size(0, 375)
+        Me.tableAgentRemediation.Name = "tableAgentRemediation"
+        Me.tableAgentRemediation.RowCount = 3
+        Me.tableAgentRemediation.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.tableAgentRemediation.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45.0!))
+        Me.tableAgentRemediation.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.tableAgentRemediation.Size = New System.Drawing.Size(669, 375)
+        Me.tableAgentRemediation.TabIndex = 5
         '
         'lvRemOptions
         '
         Me.lvRemOptions.CheckBoxes = True
         Me.lvRemOptions.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.colRemType, Me.colitem})
+        Me.tableAgentRemediation.SetColumnSpan(Me.lvRemOptions, 3)
         Me.lvRemOptions.FullRowSelect = True
         Me.lvRemOptions.GridLines = True
         Me.lvRemOptions.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
-        Me.lvRemOptions.Location = New System.Drawing.Point(5, 393)
+        Me.lvRemOptions.Location = New System.Drawing.Point(4, 214)
         Me.lvRemOptions.Margin = New System.Windows.Forms.Padding(4)
         Me.lvRemOptions.MultiSelect = False
         Me.lvRemOptions.Name = "lvRemOptions"
-        Me.lvRemOptions.Size = New System.Drawing.Size(799, 157)
+        Me.lvRemOptions.Size = New System.Drawing.Size(653, 157)
         Me.lvRemOptions.TabIndex = 1
         Me.lvRemOptions.UseCompatibleStateImageBehavior = False
         Me.lvRemOptions.View = System.Windows.Forms.View.Details
@@ -1534,38 +1578,69 @@ Partial Class Main
         '
         'tabAgentRemediationSubMenu
         '
+        Me.tabAgentRemediationSubMenu.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tableAgentRemediation.SetColumnSpan(Me.tabAgentRemediationSubMenu, 3)
         Me.tabAgentRemediationSubMenu.Controls.Add(Me.tabAgentSendFile)
         Me.tabAgentRemediationSubMenu.Controls.Add(Me.tabAgentExecute)
         Me.tabAgentRemediationSubMenu.Controls.Add(Me.tabAgentDelete)
         Me.tabAgentRemediationSubMenu.Controls.Add(Me.TabAgentKill)
-        Me.tabAgentRemediationSubMenu.Location = New System.Drawing.Point(0, 0)
+        Me.tabAgentRemediationSubMenu.Location = New System.Drawing.Point(4, 4)
         Me.tabAgentRemediationSubMenu.Margin = New System.Windows.Forms.Padding(4)
         Me.tabAgentRemediationSubMenu.Name = "tabAgentRemediationSubMenu"
         Me.tabAgentRemediationSubMenu.SelectedIndex = 0
-        Me.tabAgentRemediationSubMenu.Size = New System.Drawing.Size(811, 343)
+        Me.tabAgentRemediationSubMenu.Size = New System.Drawing.Size(661, 157)
         Me.tabAgentRemediationSubMenu.TabIndex = 0
         '
         'tabAgentSendFile
         '
-        Me.tabAgentSendFile.Controls.Add(Me.chkremsendexecute)
-        Me.tabAgentSendFile.Controls.Add(Me.chkremsenddelete)
-        Me.tabAgentSendFile.Controls.Add(Me.txtremsenddest)
-        Me.tabAgentSendFile.Controls.Add(Me.Label17)
-        Me.tabAgentSendFile.Controls.Add(Me.txtremsendsource)
-        Me.tabAgentSendFile.Controls.Add(Me.Label16)
+        Me.tabAgentSendFile.Controls.Add(Me.tableARSendFile)
         Me.tabAgentSendFile.Location = New System.Drawing.Point(4, 25)
         Me.tabAgentSendFile.Margin = New System.Windows.Forms.Padding(4)
         Me.tabAgentSendFile.Name = "tabAgentSendFile"
         Me.tabAgentSendFile.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabAgentSendFile.Size = New System.Drawing.Size(803, 314)
+        Me.tabAgentSendFile.Size = New System.Drawing.Size(903, 128)
         Me.tabAgentSendFile.TabIndex = 0
         Me.tabAgentSendFile.Text = "Send File"
         Me.tabAgentSendFile.UseVisualStyleBackColor = True
         '
+        'tableARSendFile
+        '
+        Me.tableARSendFile.AutoSize = True
+        Me.tableARSendFile.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.tableARSendFile.ColumnCount = 2
+        Me.tableARSendFile.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableARSendFile.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableARSendFile.Controls.Add(Me.Label16, 0, 0)
+        Me.tableARSendFile.Controls.Add(Me.chkremsendexecute, 1, 2)
+        Me.tableARSendFile.Controls.Add(Me.txtremsendsource, 1, 0)
+        Me.tableARSendFile.Controls.Add(Me.chkremsenddelete, 0, 2)
+        Me.tableARSendFile.Controls.Add(Me.Label17, 0, 1)
+        Me.tableARSendFile.Controls.Add(Me.txtremsenddest, 1, 1)
+        Me.tableARSendFile.Dock = System.Windows.Forms.DockStyle.Left
+        Me.tableARSendFile.Location = New System.Drawing.Point(4, 4)
+        Me.tableARSendFile.Name = "tableARSendFile"
+        Me.tableARSendFile.RowCount = 3
+        Me.tableARSendFile.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableARSendFile.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableARSendFile.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableARSendFile.Size = New System.Drawing.Size(470, 120)
+        Me.tableARSendFile.TabIndex = 25
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(4, 0)
+        Me.Label16.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(120, 17)
+        Me.Label16.TabIndex = 21
+        Me.Label16.Text = "Source File Path: "
+        '
         'chkremsendexecute
         '
         Me.chkremsendexecute.AutoSize = True
-        Me.chkremsendexecute.Location = New System.Drawing.Point(153, 84)
+        Me.chkremsendexecute.Location = New System.Drawing.Point(154, 64)
         Me.chkremsendexecute.Margin = New System.Windows.Forms.Padding(4)
         Me.chkremsendexecute.Name = "chkremsendexecute"
         Me.chkremsendexecute.Size = New System.Drawing.Size(80, 21)
@@ -1574,10 +1649,18 @@ Partial Class Main
         Me.chkremsendexecute.UseVisualStyleBackColor = True
         Me.chkremsendexecute.Visible = False
         '
+        'txtremsendsource
+        '
+        Me.txtremsendsource.Location = New System.Drawing.Point(154, 4)
+        Me.txtremsendsource.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtremsendsource.Name = "txtremsendsource"
+        Me.txtremsendsource.Size = New System.Drawing.Size(312, 22)
+        Me.txtremsendsource.TabIndex = 0
+        '
         'chkremsenddelete
         '
         Me.chkremsenddelete.AutoSize = True
-        Me.chkremsenddelete.Location = New System.Drawing.Point(12, 84)
+        Me.chkremsenddelete.Location = New System.Drawing.Point(4, 64)
         Me.chkremsenddelete.Margin = New System.Windows.Forms.Padding(4)
         Me.chkremsenddelete.Name = "chkremsenddelete"
         Me.chkremsenddelete.Size = New System.Drawing.Size(97, 21)
@@ -1585,60 +1668,69 @@ Partial Class Main
         Me.chkremsenddelete.Text = "Delete File"
         Me.chkremsenddelete.UseVisualStyleBackColor = True
         '
-        'txtremsenddest
-        '
-        Me.txtremsenddest.Location = New System.Drawing.Point(153, 43)
-        Me.txtremsenddest.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtremsenddest.Name = "txtremsenddest"
-        Me.txtremsenddest.Size = New System.Drawing.Size(312, 22)
-        Me.txtremsenddest.TabIndex = 1
-        '
         'Label17
         '
         Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(8, 47)
+        Me.Label17.Location = New System.Drawing.Point(4, 30)
         Me.Label17.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(142, 17)
         Me.Label17.TabIndex = 23
         Me.Label17.Text = "Destination File Path:"
         '
-        'txtremsendsource
+        'txtremsenddest
         '
-        Me.txtremsendsource.Location = New System.Drawing.Point(153, 11)
-        Me.txtremsendsource.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtremsendsource.Name = "txtremsendsource"
-        Me.txtremsendsource.Size = New System.Drawing.Size(312, 22)
-        Me.txtremsendsource.TabIndex = 0
-        '
-        'Label16
-        '
-        Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(8, 15)
-        Me.Label16.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(120, 17)
-        Me.Label16.TabIndex = 21
-        Me.Label16.Text = "Source File Path: "
+        Me.txtremsenddest.Location = New System.Drawing.Point(154, 34)
+        Me.txtremsenddest.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtremsenddest.Name = "txtremsenddest"
+        Me.txtremsenddest.Size = New System.Drawing.Size(312, 22)
+        Me.txtremsenddest.TabIndex = 1
         '
         'tabAgentExecute
         '
-        Me.tabAgentExecute.Controls.Add(Me.txtremexecargs)
-        Me.tabAgentExecute.Controls.Add(Me.Label19)
-        Me.tabAgentExecute.Controls.Add(Me.txtremexecpath)
-        Me.tabAgentExecute.Controls.Add(Me.Label18)
+        Me.tabAgentExecute.Controls.Add(Me.tableARExecute)
         Me.tabAgentExecute.Location = New System.Drawing.Point(4, 25)
         Me.tabAgentExecute.Margin = New System.Windows.Forms.Padding(4)
         Me.tabAgentExecute.Name = "tabAgentExecute"
         Me.tabAgentExecute.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabAgentExecute.Size = New System.Drawing.Size(803, 314)
+        Me.tabAgentExecute.Size = New System.Drawing.Size(903, 128)
         Me.tabAgentExecute.TabIndex = 1
         Me.tabAgentExecute.Text = "Execute"
         Me.tabAgentExecute.UseVisualStyleBackColor = True
         '
+        'tableARExecute
+        '
+        Me.tableARExecute.AutoSize = True
+        Me.tableARExecute.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.tableARExecute.ColumnCount = 2
+        Me.tableARExecute.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableARExecute.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableARExecute.Controls.Add(Me.Label18, 0, 0)
+        Me.tableARExecute.Controls.Add(Me.txtremexecargs, 1, 1)
+        Me.tableARExecute.Controls.Add(Me.Label19, 0, 1)
+        Me.tableARExecute.Controls.Add(Me.txtremexecpath, 1, 0)
+        Me.tableARExecute.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tableARExecute.Location = New System.Drawing.Point(4, 4)
+        Me.tableARExecute.Name = "tableARExecute"
+        Me.tableARExecute.RowCount = 2
+        Me.tableARExecute.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableARExecute.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableARExecute.Size = New System.Drawing.Size(895, 120)
+        Me.tableARExecute.TabIndex = 26
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(4, 0)
+        Me.Label18.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(113, 17)
+        Me.Label18.TabIndex = 23
+        Me.Label18.Text = "Target File Path:"
+        '
         'txtremexecargs
         '
-        Me.txtremexecargs.Location = New System.Drawing.Point(157, 53)
+        Me.txtremexecargs.Location = New System.Drawing.Point(125, 34)
         Me.txtremexecargs.Margin = New System.Windows.Forms.Padding(4)
         Me.txtremexecargs.Name = "txtremexecargs"
         Me.txtremexecargs.Size = New System.Drawing.Size(312, 22)
@@ -1647,7 +1739,7 @@ Partial Class Main
         'Label19
         '
         Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(12, 57)
+        Me.Label19.Location = New System.Drawing.Point(4, 30)
         Me.Label19.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(80, 17)
@@ -1656,72 +1748,106 @@ Partial Class Main
         '
         'txtremexecpath
         '
-        Me.txtremexecpath.Location = New System.Drawing.Point(157, 16)
+        Me.txtremexecpath.Location = New System.Drawing.Point(125, 4)
         Me.txtremexecpath.Margin = New System.Windows.Forms.Padding(4)
         Me.txtremexecpath.Name = "txtremexecpath"
         Me.txtremexecpath.Size = New System.Drawing.Size(312, 22)
         Me.txtremexecpath.TabIndex = 0
         '
-        'Label18
-        '
-        Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(12, 20)
-        Me.Label18.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(113, 17)
-        Me.Label18.TabIndex = 23
-        Me.Label18.Text = "Target File Path:"
-        '
         'tabAgentDelete
         '
-        Me.tabAgentDelete.Controls.Add(Me.txtremdelfilepath)
-        Me.tabAgentDelete.Controls.Add(Me.Label20)
+        Me.tabAgentDelete.Controls.Add(Me.tableARDelete)
         Me.tabAgentDelete.Location = New System.Drawing.Point(4, 25)
         Me.tabAgentDelete.Margin = New System.Windows.Forms.Padding(4)
         Me.tabAgentDelete.Name = "tabAgentDelete"
-        Me.tabAgentDelete.Size = New System.Drawing.Size(803, 314)
+        Me.tabAgentDelete.Size = New System.Drawing.Size(653, 128)
         Me.tabAgentDelete.TabIndex = 2
         Me.tabAgentDelete.Text = "Delete File"
         Me.tabAgentDelete.UseVisualStyleBackColor = True
         '
-        'txtremdelfilepath
+        'tableARDelete
         '
-        Me.txtremdelfilepath.Location = New System.Drawing.Point(157, 17)
-        Me.txtremdelfilepath.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtremdelfilepath.Name = "txtremdelfilepath"
-        Me.txtremdelfilepath.Size = New System.Drawing.Size(312, 22)
-        Me.txtremdelfilepath.TabIndex = 0
+        Me.tableARDelete.AutoSize = True
+        Me.tableARDelete.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.tableARDelete.ColumnCount = 2
+        Me.tableARDelete.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableARDelete.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableARDelete.Controls.Add(Me.Label20, 0, 0)
+        Me.tableARDelete.Controls.Add(Me.txtremdelfilepath, 1, 0)
+        Me.tableARDelete.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tableARDelete.Location = New System.Drawing.Point(0, 0)
+        Me.tableARDelete.Name = "tableARDelete"
+        Me.tableARDelete.RowCount = 1
+        Me.tableARDelete.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableARDelete.Size = New System.Drawing.Size(653, 128)
+        Me.tableARDelete.TabIndex = 26
         '
         'Label20
         '
         Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(12, 21)
+        Me.Label20.Location = New System.Drawing.Point(4, 0)
         Me.Label20.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(113, 17)
         Me.Label20.TabIndex = 25
         Me.Label20.Text = "Target File Path:"
         '
+        'txtremdelfilepath
+        '
+        Me.txtremdelfilepath.Location = New System.Drawing.Point(125, 4)
+        Me.txtremdelfilepath.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtremdelfilepath.Name = "txtremdelfilepath"
+        Me.txtremdelfilepath.Size = New System.Drawing.Size(312, 22)
+        Me.txtremdelfilepath.TabIndex = 0
+        '
         'TabAgentKill
         '
-        Me.TabAgentKill.Controls.Add(Me.rdoPName)
-        Me.TabAgentKill.Controls.Add(Me.rdoPID)
-        Me.TabAgentKill.Controls.Add(Me.txtremkillprocname)
-        Me.TabAgentKill.Controls.Add(Me.Label22)
-        Me.TabAgentKill.Controls.Add(Me.nmbremkillprocid)
-        Me.TabAgentKill.Controls.Add(Me.Label21)
+        Me.TabAgentKill.Controls.Add(Me.tableARKill)
         Me.TabAgentKill.Location = New System.Drawing.Point(4, 25)
         Me.TabAgentKill.Margin = New System.Windows.Forms.Padding(4)
         Me.TabAgentKill.Name = "TabAgentKill"
-        Me.TabAgentKill.Size = New System.Drawing.Size(803, 314)
+        Me.TabAgentKill.Size = New System.Drawing.Size(653, 128)
         Me.TabAgentKill.TabIndex = 3
         Me.TabAgentKill.Text = "Kill Process"
         Me.TabAgentKill.UseVisualStyleBackColor = True
         '
+        'tableARKill
+        '
+        Me.tableARKill.AutoSize = True
+        Me.tableARKill.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.tableARKill.ColumnCount = 2
+        Me.tableARKill.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableARKill.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableARKill.Controls.Add(Me.grpARKill, 0, 0)
+        Me.tableARKill.Controls.Add(Me.txtremkillprocname, 1, 2)
+        Me.tableARKill.Controls.Add(Me.Label21, 0, 1)
+        Me.tableARKill.Controls.Add(Me.Label22, 0, 2)
+        Me.tableARKill.Controls.Add(Me.nmbremkillprocid, 1, 1)
+        Me.tableARKill.Location = New System.Drawing.Point(0, 0)
+        Me.tableARKill.Name = "tableARKill"
+        Me.tableARKill.RowCount = 3
+        Me.tableARKill.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableARKill.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableARKill.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableARKill.Size = New System.Drawing.Size(432, 126)
+        Me.tableARKill.TabIndex = 20
+        '
+        'grpARKill
+        '
+        Me.tableARKill.SetColumnSpan(Me.grpARKill, 2)
+        Me.grpARKill.Controls.Add(Me.rdoPName)
+        Me.grpARKill.Controls.Add(Me.rdoPID)
+        Me.grpARKill.Location = New System.Drawing.Point(3, 3)
+        Me.grpARKill.Name = "grpARKill"
+        Me.grpARKill.Size = New System.Drawing.Size(267, 60)
+        Me.grpARKill.TabIndex = 19
+        Me.grpARKill.TabStop = False
+        Me.grpARKill.Text = "Target"
+        '
         'rdoPName
         '
         Me.rdoPName.AutoSize = True
-        Me.rdoPName.Location = New System.Drawing.Point(213, 18)
+        Me.rdoPName.Location = New System.Drawing.Point(139, 28)
         Me.rdoPName.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoPName.Name = "rdoPName"
         Me.rdoPName.Size = New System.Drawing.Size(121, 21)
@@ -1733,7 +1859,7 @@ Partial Class Main
         'rdoPID
         '
         Me.rdoPID.AutoSize = True
-        Me.rdoPID.Location = New System.Drawing.Point(19, 18)
+        Me.rdoPID.Location = New System.Drawing.Point(7, 28)
         Me.rdoPID.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoPID.Name = "rdoPID"
         Me.rdoPID.Size = New System.Drawing.Size(97, 21)
@@ -1744,16 +1870,26 @@ Partial Class Main
         '
         'txtremkillprocname
         '
-        Me.txtremkillprocname.Location = New System.Drawing.Point(125, 97)
+        Me.txtremkillprocname.Location = New System.Drawing.Point(116, 100)
         Me.txtremkillprocname.Margin = New System.Windows.Forms.Padding(4)
         Me.txtremkillprocname.Name = "txtremkillprocname"
         Me.txtremkillprocname.Size = New System.Drawing.Size(312, 22)
         Me.txtremkillprocname.TabIndex = 2
         '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Location = New System.Drawing.Point(4, 66)
+        Me.Label21.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(100, 17)
+        Me.Label21.TabIndex = 12
+        Me.Label21.Text = "By Process ID:"
+        '
         'Label22
         '
         Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(15, 101)
+        Me.Label22.Location = New System.Drawing.Point(4, 96)
         Me.Label22.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(104, 17)
@@ -1762,22 +1898,42 @@ Partial Class Main
         '
         'nmbremkillprocid
         '
-        Me.nmbremkillprocid.Location = New System.Drawing.Point(125, 65)
+        Me.nmbremkillprocid.Location = New System.Drawing.Point(116, 70)
         Me.nmbremkillprocid.Margin = New System.Windows.Forms.Padding(4)
         Me.nmbremkillprocid.Maximum = New Decimal(New Integer() {999999999, 0, 0, 0})
         Me.nmbremkillprocid.Name = "nmbremkillprocid"
         Me.nmbremkillprocid.Size = New System.Drawing.Size(101, 22)
         Me.nmbremkillprocid.TabIndex = 1
         '
-        'Label21
+        'btnRemoveRemOption
         '
-        Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(15, 68)
-        Me.Label21.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(100, 17)
-        Me.Label21.TabIndex = 12
-        Me.Label21.Text = "By Process ID:"
+        Me.btnRemoveRemOption.Location = New System.Drawing.Point(220, 169)
+        Me.btnRemoveRemOption.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnRemoveRemOption.Name = "btnRemoveRemOption"
+        Me.btnRemoveRemOption.Size = New System.Drawing.Size(100, 28)
+        Me.btnRemoveRemOption.TabIndex = 3
+        Me.btnRemoveRemOption.Text = "Remove"
+        Me.btnRemoveRemOption.UseVisualStyleBackColor = True
+        '
+        'btnSaveRemOptionChange
+        '
+        Me.btnSaveRemOptionChange.Location = New System.Drawing.Point(112, 169)
+        Me.btnSaveRemOptionChange.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnSaveRemOptionChange.Name = "btnSaveRemOptionChange"
+        Me.btnSaveRemOptionChange.Size = New System.Drawing.Size(100, 28)
+        Me.btnSaveRemOptionChange.TabIndex = 4
+        Me.btnSaveRemOptionChange.Text = "Save"
+        Me.btnSaveRemOptionChange.UseVisualStyleBackColor = True
+        '
+        'btnAddRemOption
+        '
+        Me.btnAddRemOption.Location = New System.Drawing.Point(4, 169)
+        Me.btnAddRemOption.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnAddRemOption.Name = "btnAddRemOption"
+        Me.btnAddRemOption.Size = New System.Drawing.Size(100, 28)
+        Me.btnAddRemOption.TabIndex = 0
+        Me.btnAddRemOption.Text = "Add"
+        Me.btnAddRemOption.UseVisualStyleBackColor = True
         '
         'tabMenu
         '
@@ -1858,7 +2014,7 @@ Partial Class Main
         Me.tabProjects.Location = New System.Drawing.Point(4, 25)
         Me.tabProjects.Name = "tabProjects"
         Me.tabProjects.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabProjects.Size = New System.Drawing.Size(824, 671)
+        Me.tabProjects.Size = New System.Drawing.Size(1486, 869)
         Me.tabProjects.TabIndex = 1
         Me.tabProjects.Text = "Projects"
         Me.tabProjects.UseVisualStyleBackColor = True
@@ -1882,8 +2038,8 @@ Partial Class Main
         'splitProjects.Panel2
         '
         Me.splitProjects.Panel2.Controls.Add(Me.dgvProjectList)
-        Me.splitProjects.Size = New System.Drawing.Size(818, 665)
-        Me.splitProjects.SplitterDistance = 38
+        Me.splitProjects.Size = New System.Drawing.Size(1480, 863)
+        Me.splitProjects.SplitterDistance = 49
         Me.splitProjects.TabIndex = 0
         '
         'btnViewProjectReview
@@ -1950,7 +2106,7 @@ Partial Class Main
         Me.dgvProjectList.RowHeadersVisible = False
         Me.dgvProjectList.RowTemplate.Height = 24
         Me.dgvProjectList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvProjectList.Size = New System.Drawing.Size(818, 623)
+        Me.dgvProjectList.Size = New System.Drawing.Size(1480, 810)
         Me.dgvProjectList.TabIndex = 1
         '
         'DataGridViewTextBoxColumn1
@@ -1997,7 +2153,7 @@ Partial Class Main
         Me.tabJobsList.Location = New System.Drawing.Point(4, 25)
         Me.tabJobsList.Name = "tabJobsList"
         Me.tabJobsList.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabJobsList.Size = New System.Drawing.Size(824, 671)
+        Me.tabJobsList.Size = New System.Drawing.Size(1486, 869)
         Me.tabJobsList.TabIndex = 0
         Me.tabJobsList.Text = "Job Status"
         Me.tabJobsList.UseVisualStyleBackColor = True
@@ -2018,7 +2174,7 @@ Partial Class Main
         'splitJobsRestJobs.Panel2
         '
         Me.splitJobsRestJobs.Panel2.Controls.Add(Me.dgvJobsRestJobsList)
-        Me.splitJobsRestJobs.Size = New System.Drawing.Size(818, 665)
+        Me.splitJobsRestJobs.Size = New System.Drawing.Size(1480, 863)
         Me.splitJobsRestJobs.SplitterDistance = 36
         Me.splitJobsRestJobs.TabIndex = 2
         '
@@ -2045,7 +2201,7 @@ Partial Class Main
         Me.dgvJobsRestJobsList.ReadOnly = True
         Me.dgvJobsRestJobsList.RowHeadersVisible = False
         Me.dgvJobsRestJobsList.RowTemplate.Height = 24
-        Me.dgvJobsRestJobsList.Size = New System.Drawing.Size(818, 625)
+        Me.dgvJobsRestJobsList.Size = New System.Drawing.Size(1480, 823)
         Me.dgvJobsRestJobsList.TabIndex = 0
         '
         'jobName
@@ -2161,8 +2317,8 @@ Partial Class Main
         'splitEndpointStatus.Panel2
         '
         Me.splitEndpointStatus.Panel2.Controls.Add(Me.dgvEndpointStatusJobTargets)
-        Me.splitEndpointStatus.Size = New System.Drawing.Size(818, 665)
-        Me.splitEndpointStatus.SplitterDistance = 90
+        Me.splitEndpointStatus.Size = New System.Drawing.Size(1480, 863)
+        Me.splitEndpointStatus.SplitterDistance = 116
         Me.splitEndpointStatus.TabIndex = 3
         '
         'flowEndpointStatus
@@ -2179,7 +2335,7 @@ Partial Class Main
         Me.flowEndpointStatus.Dock = System.Windows.Forms.DockStyle.Fill
         Me.flowEndpointStatus.Location = New System.Drawing.Point(0, 0)
         Me.flowEndpointStatus.Name = "flowEndpointStatus"
-        Me.flowEndpointStatus.Size = New System.Drawing.Size(818, 90)
+        Me.flowEndpointStatus.Size = New System.Drawing.Size(1480, 116)
         Me.flowEndpointStatus.TabIndex = 0
         '
         'btnBackFromEndpointStatus
@@ -2274,7 +2430,7 @@ Partial Class Main
         Me.dgvEndpointStatusJobTargets.ReadOnly = True
         Me.dgvEndpointStatusJobTargets.RowHeadersVisible = False
         Me.dgvEndpointStatusJobTargets.RowTemplate.Height = 24
-        Me.dgvEndpointStatusJobTargets.Size = New System.Drawing.Size(818, 571)
+        Me.dgvEndpointStatusJobTargets.Size = New System.Drawing.Size(1480, 743)
         Me.dgvEndpointStatusJobTargets.TabIndex = 9
         '
         'endpoint
@@ -2338,7 +2494,7 @@ Partial Class Main
         Me.tabAlerts.Controls.Add(Me.splitAlerts)
         Me.tabAlerts.Location = New System.Drawing.Point(4, 25)
         Me.tabAlerts.Name = "tabAlerts"
-        Me.tabAlerts.Size = New System.Drawing.Size(824, 671)
+        Me.tabAlerts.Size = New System.Drawing.Size(1486, 869)
         Me.tabAlerts.TabIndex = 3
         Me.tabAlerts.Text = "Alerts"
         Me.tabAlerts.UseVisualStyleBackColor = True
@@ -2357,8 +2513,8 @@ Partial Class Main
         'splitAlerts.Panel2
         '
         Me.splitAlerts.Panel2.Controls.Add(Me.tblAlertBreakdown)
-        Me.splitAlerts.Size = New System.Drawing.Size(824, 671)
-        Me.splitAlerts.SplitterDistance = 277
+        Me.splitAlerts.Size = New System.Drawing.Size(1486, 869)
+        Me.splitAlerts.SplitterDistance = 358
         Me.splitAlerts.TabIndex = 0
         '
         'dgvAlerts
@@ -2375,7 +2531,7 @@ Partial Class Main
         Me.dgvAlerts.ReadOnly = True
         Me.dgvAlerts.RowHeadersVisible = False
         Me.dgvAlerts.RowTemplate.Height = 24
-        Me.dgvAlerts.Size = New System.Drawing.Size(824, 277)
+        Me.dgvAlerts.Size = New System.Drawing.Size(1486, 358)
         Me.dgvAlerts.TabIndex = 0
         '
         'artifactName
@@ -2444,7 +2600,7 @@ Partial Class Main
         Me.tblAlertBreakdown.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
         Me.tblAlertBreakdown.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
         Me.tblAlertBreakdown.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
-        Me.tblAlertBreakdown.Size = New System.Drawing.Size(824, 390)
+        Me.tblAlertBreakdown.Size = New System.Drawing.Size(1486, 507)
         Me.tblAlertBreakdown.TabIndex = 4
         '
         'flowResponseTime
@@ -2452,9 +2608,9 @@ Partial Class Main
         Me.flowResponseTime.AutoSize = True
         Me.flowResponseTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.flowResponseTime.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.flowResponseTime.Location = New System.Drawing.Point(213, 262)
+        Me.flowResponseTime.Location = New System.Drawing.Point(213, 340)
         Me.flowResponseTime.Name = "flowResponseTime"
-        Me.flowResponseTime.Size = New System.Drawing.Size(608, 125)
+        Me.flowResponseTime.Size = New System.Drawing.Size(1270, 164)
         Me.flowResponseTime.TabIndex = 10
         '
         'lblResponseTime
@@ -2463,9 +2619,9 @@ Partial Class Main
         Me.lblResponseTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblResponseTime.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblResponseTime.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblResponseTime.Location = New System.Drawing.Point(3, 259)
+        Me.lblResponseTime.Location = New System.Drawing.Point(3, 337)
         Me.lblResponseTime.Name = "lblResponseTime"
-        Me.lblResponseTime.Size = New System.Drawing.Size(204, 131)
+        Me.lblResponseTime.Size = New System.Drawing.Size(204, 170)
         Me.lblResponseTime.TabIndex = 9
         Me.lblResponseTime.Text = "Response Time:"
         '
@@ -2475,9 +2631,9 @@ Partial Class Main
         Me.lblTotalNumberofResponses.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblTotalNumberofResponses.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblTotalNumberofResponses.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTotalNumberofResponses.Location = New System.Drawing.Point(3, 129)
+        Me.lblTotalNumberofResponses.Location = New System.Drawing.Point(3, 168)
         Me.lblTotalNumberofResponses.Name = "lblTotalNumberofResponses"
-        Me.lblTotalNumberofResponses.Size = New System.Drawing.Size(204, 130)
+        Me.lblTotalNumberofResponses.Size = New System.Drawing.Size(204, 169)
         Me.lblTotalNumberofResponses.TabIndex = 8
         Me.lblTotalNumberofResponses.Text = "Total Number of Responses:"
         '
@@ -2486,9 +2642,9 @@ Partial Class Main
         Me.flowTotalResponses.AutoSize = True
         Me.flowTotalResponses.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.flowTotalResponses.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.flowTotalResponses.Location = New System.Drawing.Point(213, 132)
+        Me.flowTotalResponses.Location = New System.Drawing.Point(213, 171)
         Me.flowTotalResponses.Name = "flowTotalResponses"
-        Me.flowTotalResponses.Size = New System.Drawing.Size(608, 124)
+        Me.flowTotalResponses.Size = New System.Drawing.Size(1270, 163)
         Me.flowTotalResponses.TabIndex = 7
         '
         'lblTotalNumberAlerts
@@ -2499,7 +2655,7 @@ Partial Class Main
         Me.lblTotalNumberAlerts.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTotalNumberAlerts.Location = New System.Drawing.Point(3, 0)
         Me.lblTotalNumberAlerts.Name = "lblTotalNumberAlerts"
-        Me.lblTotalNumberAlerts.Size = New System.Drawing.Size(204, 129)
+        Me.lblTotalNumberAlerts.Size = New System.Drawing.Size(204, 168)
         Me.lblTotalNumberAlerts.TabIndex = 5
         Me.lblTotalNumberAlerts.Text = "Total Number Of Alerts:"
         '
@@ -2510,17 +2666,12 @@ Partial Class Main
         Me.flowAlertBreakdown.Dock = System.Windows.Forms.DockStyle.Fill
         Me.flowAlertBreakdown.Location = New System.Drawing.Point(213, 3)
         Me.flowAlertBreakdown.Name = "flowAlertBreakdown"
-        Me.flowAlertBreakdown.Size = New System.Drawing.Size(608, 123)
+        Me.flowAlertBreakdown.Size = New System.Drawing.Size(1270, 162)
         Me.flowAlertBreakdown.TabIndex = 4
         '
         'tabJobExecution
         '
-        Me.tabJobExecution.Controls.Add(Me.lblJobStatus)
-        Me.tabJobExecution.Controls.Add(Me.btnShowJSON)
-        Me.tabJobExecution.Controls.Add(Me.btnLoadFromBox)
-        Me.tabJobExecution.Controls.Add(Me.btnSaveAsBox)
-        Me.tabJobExecution.Controls.Add(Me.btnExecute)
-        Me.tabJobExecution.Controls.Add(Me.tabSubMenu)
+        Me.tabJobExecution.Controls.Add(Me.flowJobsAPI)
         Me.tabJobExecution.Location = New System.Drawing.Point(4, 28)
         Me.tabJobExecution.Margin = New System.Windows.Forms.Padding(4)
         Me.tabJobExecution.Name = "tabJobExecution"
@@ -2530,23 +2681,46 @@ Partial Class Main
         Me.tabJobExecution.Text = "JobsAPI Execution"
         Me.tabJobExecution.UseVisualStyleBackColor = True
         '
-        'lblJobStatus
+        'flowJobsAPI
         '
-        Me.lblJobStatus.AutoSize = True
-        Me.lblJobStatus.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.lblJobStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblJobStatus.Location = New System.Drawing.Point(4, 874)
-        Me.lblJobStatus.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblJobStatus.MaximumSize = New System.Drawing.Size(667, 0)
-        Me.lblJobStatus.MinimumSize = New System.Drawing.Size(667, 0)
-        Me.lblJobStatus.Name = "lblJobStatus"
-        Me.lblJobStatus.Size = New System.Drawing.Size(667, 20)
-        Me.lblJobStatus.TabIndex = 33
-        Me.lblJobStatus.Text = "lblJobStatus"
+        Me.flowJobsAPI.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.flowJobsAPI.AutoSize = True
+        Me.flowJobsAPI.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.flowJobsAPI.Controls.Add(Me.tabSubMenu)
+        Me.flowJobsAPI.Controls.Add(Me.tableJobExecute)
+        Me.flowJobsAPI.Location = New System.Drawing.Point(4, 4)
+        Me.flowJobsAPI.Name = "flowJobsAPI"
+        Me.flowJobsAPI.Size = New System.Drawing.Size(1421, 796)
+        Me.flowJobsAPI.TabIndex = 35
+        '
+        'tableJobExecute
+        '
+        Me.tableJobExecute.AutoSize = True
+        Me.tableJobExecute.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.tableJobExecute.ColumnCount = 4
+        Me.tableJobExecute.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableJobExecute.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableJobExecute.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableJobExecute.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableJobExecute.Controls.Add(Me.btnShowJSON, 0, 0)
+        Me.tableJobExecute.Controls.Add(Me.lblJobStatus, 0, 1)
+        Me.tableJobExecute.Controls.Add(Me.btnLoadFromBox, 1, 0)
+        Me.tableJobExecute.Controls.Add(Me.btnExecute, 3, 0)
+        Me.tableJobExecute.Controls.Add(Me.btnSaveAsBox, 2, 0)
+        Me.tableJobExecute.Location = New System.Drawing.Point(3, 729)
+        Me.tableJobExecute.Name = "tableJobExecute"
+        Me.tableJobExecute.Padding = New System.Windows.Forms.Padding(4)
+        Me.tableJobExecute.RowCount = 2
+        Me.tableJobExecute.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableJobExecute.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.tableJobExecute.Size = New System.Drawing.Size(460, 64)
+        Me.tableJobExecute.TabIndex = 34
         '
         'btnShowJSON
         '
-        Me.btnShowJSON.Location = New System.Drawing.Point(280, 604)
+        Me.btnShowJSON.Location = New System.Drawing.Point(8, 8)
         Me.btnShowJSON.Margin = New System.Windows.Forms.Padding(4)
         Me.btnShowJSON.Name = "btnShowJSON"
         Me.btnShowJSON.Size = New System.Drawing.Size(100, 28)
@@ -2555,9 +2729,23 @@ Partial Class Main
         Me.btnShowJSON.Text = "Show JSON"
         Me.btnShowJSON.UseVisualStyleBackColor = True
         '
+        'lblJobStatus
+        '
+        Me.lblJobStatus.AutoSize = True
+        Me.tableJobExecute.SetColumnSpan(Me.lblJobStatus, 4)
+        Me.lblJobStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblJobStatus.Location = New System.Drawing.Point(8, 40)
+        Me.lblJobStatus.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblJobStatus.MaximumSize = New System.Drawing.Size(667, 0)
+        Me.lblJobStatus.MinimumSize = New System.Drawing.Size(400, 0)
+        Me.lblJobStatus.Name = "lblJobStatus"
+        Me.lblJobStatus.Size = New System.Drawing.Size(400, 20)
+        Me.lblJobStatus.TabIndex = 33
+        Me.lblJobStatus.Text = "lblJobStatus"
+        '
         'btnLoadFromBox
         '
-        Me.btnLoadFromBox.Location = New System.Drawing.Point(425, 604)
+        Me.btnLoadFromBox.Location = New System.Drawing.Point(116, 8)
         Me.btnLoadFromBox.Margin = New System.Windows.Forms.Padding(4)
         Me.btnLoadFromBox.Name = "btnLoadFromBox"
         Me.btnLoadFromBox.Size = New System.Drawing.Size(120, 28)
@@ -2568,7 +2756,7 @@ Partial Class Main
         '
         'btnSaveAsBox
         '
-        Me.btnSaveAsBox.Location = New System.Drawing.Point(581, 604)
+        Me.btnSaveAsBox.Location = New System.Drawing.Point(244, 8)
         Me.btnSaveAsBox.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSaveAsBox.Name = "btnSaveAsBox"
         Me.btnSaveAsBox.Size = New System.Drawing.Size(100, 28)
@@ -2782,79 +2970,6 @@ Partial Class Main
         Me.flowPANW.Size = New System.Drawing.Size(1494, 898)
         Me.flowPANW.TabIndex = 41
         '
-        'lblPANWHitInstruction
-        '
-        Me.lblPANWHitInstruction.AutoSize = True
-        Me.lblPANWHitInstruction.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblPANWHitInstruction.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPANWHitInstruction.Location = New System.Drawing.Point(4, 75)
-        Me.lblPANWHitInstruction.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblPANWHitInstruction.MaximumSize = New System.Drawing.Size(700, 0)
-        Me.lblPANWHitInstruction.Name = "lblPANWHitInstruction"
-        Me.lblPANWHitInstruction.Size = New System.Drawing.Size(699, 36)
-        Me.lblPANWHitInstruction.TabIndex = 32
-        Me.lblPANWHitInstruction.Text = "To generate a verified hit from a test PANW ThreatScan download the following EXE" & _
-    " to your target, or enter a custom MD5 Hash above."
-        '
-        'grpWildFireSim
-        '
-        Me.grpWildFireSim.AutoSize = True
-        Me.grpWildFireSim.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.grpWildFireSim.Controls.Add(Me.panw_sim_port)
-        Me.grpWildFireSim.Controls.Add(Me.Label44)
-        Me.grpWildFireSim.Controls.Add(Me.lblwildfirestatus)
-        Me.grpWildFireSim.Controls.Add(Me.btn_WildfireStart)
-        Me.flowPANW.SetFlowBreak(Me.grpWildFireSim, True)
-        Me.grpWildFireSim.Location = New System.Drawing.Point(419, 4)
-        Me.grpWildFireSim.Margin = New System.Windows.Forms.Padding(4)
-        Me.grpWildFireSim.Name = "grpWildFireSim"
-        Me.grpWildFireSim.Padding = New System.Windows.Forms.Padding(4)
-        Me.grpWildFireSim.Size = New System.Drawing.Size(272, 137)
-        Me.grpWildFireSim.TabIndex = 24
-        Me.grpWildFireSim.TabStop = False
-        Me.grpWildFireSim.Text = "PANW Wildfire Sim"
-        '
-        'panw_sim_port
-        '
-        Me.panw_sim_port.Location = New System.Drawing.Point(136, 28)
-        Me.panw_sim_port.Margin = New System.Windows.Forms.Padding(4)
-        Me.panw_sim_port.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
-        Me.panw_sim_port.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.panw_sim_port.Name = "panw_sim_port"
-        Me.panw_sim_port.Size = New System.Drawing.Size(128, 22)
-        Me.panw_sim_port.TabIndex = 0
-        Me.panw_sim_port.Value = New Decimal(New Integer() {8449, 0, 0, 0})
-        '
-        'Label44
-        '
-        Me.Label44.AutoSize = True
-        Me.Label44.Location = New System.Drawing.Point(8, 31)
-        Me.Label44.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label44.Name = "Label44"
-        Me.Label44.Size = New System.Drawing.Size(116, 17)
-        Me.Label44.TabIndex = 23
-        Me.Label44.Text = "Wildfire Sim Port:"
-        '
-        'lblwildfirestatus
-        '
-        Me.lblwildfirestatus.AutoSize = True
-        Me.lblwildfirestatus.Location = New System.Drawing.Point(24, 101)
-        Me.lblwildfirestatus.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblwildfirestatus.Name = "lblwildfirestatus"
-        Me.lblwildfirestatus.Size = New System.Drawing.Size(206, 17)
-        Me.lblwildfirestatus.TabIndex = 22
-        Me.lblwildfirestatus.Text = "Wildfire Sim Status: Not Started"
-        '
-        'btn_WildfireStart
-        '
-        Me.btn_WildfireStart.Location = New System.Drawing.Point(43, 63)
-        Me.btn_WildfireStart.Margin = New System.Windows.Forms.Padding(4)
-        Me.btn_WildfireStart.Name = "btn_WildfireStart"
-        Me.btn_WildfireStart.Size = New System.Drawing.Size(175, 28)
-        Me.btn_WildfireStart.TabIndex = 1
-        Me.btn_WildfireStart.Text = "Start Wildfire Sim"
-        Me.btn_WildfireStart.UseVisualStyleBackColor = True
-        '
         'tablePANWSendAlert
         '
         Me.tablePANWSendAlert.AutoSize = True
@@ -3009,20 +3124,84 @@ Partial Class Main
         Me.cmbPANWAlert.Size = New System.Drawing.Size(233, 24)
         Me.cmbPANWAlert.TabIndex = 2
         '
-        'txtFireEyeDownload1
+        'grpWildFireSim
         '
-        Me.txtFireEyeDownload1.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtFireEyeDownload1.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.txtFireEyeDownload1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtFireEyeDownload1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFireEyeDownload1.Location = New System.Drawing.Point(4, 115)
-        Me.txtFireEyeDownload1.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtFireEyeDownload1.Name = "txtFireEyeDownload1"
-        Me.txtFireEyeDownload1.ReadOnly = True
-        Me.txtFireEyeDownload1.Size = New System.Drawing.Size(699, 17)
-        Me.txtFireEyeDownload1.TabIndex = 33
-        Me.txtFireEyeDownload1.TabStop = False
-        Me.txtFireEyeDownload1.Text = "http://fedeploycheck.fireeye.com/appliance-test/test-infection.exe"
+        Me.grpWildFireSim.AutoSize = True
+        Me.grpWildFireSim.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.grpWildFireSim.Controls.Add(Me.panw_sim_port)
+        Me.grpWildFireSim.Controls.Add(Me.Label44)
+        Me.grpWildFireSim.Controls.Add(Me.lblwildfirestatus)
+        Me.grpWildFireSim.Controls.Add(Me.btn_WildfireStart)
+        Me.flowPANW.SetFlowBreak(Me.grpWildFireSim, True)
+        Me.grpWildFireSim.Location = New System.Drawing.Point(419, 4)
+        Me.grpWildFireSim.Margin = New System.Windows.Forms.Padding(4)
+        Me.grpWildFireSim.Name = "grpWildFireSim"
+        Me.grpWildFireSim.Padding = New System.Windows.Forms.Padding(4)
+        Me.grpWildFireSim.Size = New System.Drawing.Size(272, 137)
+        Me.grpWildFireSim.TabIndex = 24
+        Me.grpWildFireSim.TabStop = False
+        Me.grpWildFireSim.Text = "PANW Wildfire Sim"
+        '
+        'panw_sim_port
+        '
+        Me.panw_sim_port.Location = New System.Drawing.Point(136, 28)
+        Me.panw_sim_port.Margin = New System.Windows.Forms.Padding(4)
+        Me.panw_sim_port.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
+        Me.panw_sim_port.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.panw_sim_port.Name = "panw_sim_port"
+        Me.panw_sim_port.Size = New System.Drawing.Size(128, 22)
+        Me.panw_sim_port.TabIndex = 0
+        Me.panw_sim_port.Value = New Decimal(New Integer() {8449, 0, 0, 0})
+        '
+        'Label44
+        '
+        Me.Label44.AutoSize = True
+        Me.Label44.Location = New System.Drawing.Point(8, 31)
+        Me.Label44.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label44.Name = "Label44"
+        Me.Label44.Size = New System.Drawing.Size(116, 17)
+        Me.Label44.TabIndex = 23
+        Me.Label44.Text = "Wildfire Sim Port:"
+        '
+        'lblwildfirestatus
+        '
+        Me.lblwildfirestatus.AutoSize = True
+        Me.lblwildfirestatus.Location = New System.Drawing.Point(24, 101)
+        Me.lblwildfirestatus.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblwildfirestatus.Name = "lblwildfirestatus"
+        Me.lblwildfirestatus.Size = New System.Drawing.Size(206, 17)
+        Me.lblwildfirestatus.TabIndex = 22
+        Me.lblwildfirestatus.Text = "Wildfire Sim Status: Not Started"
+        '
+        'btn_WildfireStart
+        '
+        Me.btn_WildfireStart.Location = New System.Drawing.Point(43, 63)
+        Me.btn_WildfireStart.Margin = New System.Windows.Forms.Padding(4)
+        Me.btn_WildfireStart.Name = "btn_WildfireStart"
+        Me.btn_WildfireStart.Size = New System.Drawing.Size(175, 28)
+        Me.btn_WildfireStart.TabIndex = 1
+        Me.btn_WildfireStart.Text = "Start Wildfire Sim"
+        Me.btn_WildfireStart.UseVisualStyleBackColor = True
+        '
+        'tablePANWBottom
+        '
+        Me.tablePANWBottom.AutoSize = True
+        Me.tablePANWBottom.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.tablePANWBottom.ColumnCount = 1
+        Me.tablePANWBottom.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tablePANWBottom.Controls.Add(Me.grpWildFirePicture, 0, 3)
+        Me.tablePANWBottom.Controls.Add(Me.txtFireEyeDownload1, 0, 2)
+        Me.tablePANWBottom.Controls.Add(Me.lblPANWHitInstruction, 0, 1)
+        Me.tablePANWBottom.Controls.Add(Me.txtPANWSim, 0, 0)
+        Me.tablePANWBottom.Location = New System.Drawing.Point(3, 216)
+        Me.tablePANWBottom.Name = "tablePANWBottom"
+        Me.tablePANWBottom.RowCount = 4
+        Me.tablePANWBottom.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tablePANWBottom.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tablePANWBottom.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tablePANWBottom.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tablePANWBottom.Size = New System.Drawing.Size(707, 329)
+        Me.tablePANWBottom.TabIndex = 43
         '
         'grpWildFirePicture
         '
@@ -3054,10 +3233,52 @@ Partial Class Main
         Me.panwPicture.Location = New System.Drawing.Point(3, 18)
         Me.panwPicture.Margin = New System.Windows.Forms.Padding(4)
         Me.panwPicture.Name = "panwPicture"
-        Me.panwPicture.Size = New System.Drawing.Size(691, 147)
+        Me.panwPicture.Size = New System.Drawing.Size(516, 147)
         Me.panwPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
         Me.panwPicture.TabIndex = 35
         Me.panwPicture.TabStop = False
+        '
+        'txtFireEyeDownload1
+        '
+        Me.txtFireEyeDownload1.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtFireEyeDownload1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.txtFireEyeDownload1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtFireEyeDownload1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFireEyeDownload1.Location = New System.Drawing.Point(4, 115)
+        Me.txtFireEyeDownload1.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtFireEyeDownload1.Name = "txtFireEyeDownload1"
+        Me.txtFireEyeDownload1.ReadOnly = True
+        Me.txtFireEyeDownload1.Size = New System.Drawing.Size(699, 17)
+        Me.txtFireEyeDownload1.TabIndex = 33
+        Me.txtFireEyeDownload1.TabStop = False
+        Me.txtFireEyeDownload1.Text = "http://fedeploycheck.fireeye.com/appliance-test/test-infection.exe"
+        '
+        'lblPANWHitInstruction
+        '
+        Me.lblPANWHitInstruction.AutoSize = True
+        Me.lblPANWHitInstruction.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblPANWHitInstruction.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPANWHitInstruction.Location = New System.Drawing.Point(4, 75)
+        Me.lblPANWHitInstruction.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblPANWHitInstruction.MaximumSize = New System.Drawing.Size(700, 0)
+        Me.lblPANWHitInstruction.Name = "lblPANWHitInstruction"
+        Me.lblPANWHitInstruction.Size = New System.Drawing.Size(699, 36)
+        Me.lblPANWHitInstruction.TabIndex = 32
+        Me.lblPANWHitInstruction.Text = "To generate a verified hit from a test PANW ThreatScan download the following EXE" & _
+    " to your target, or enter a custom MD5 Hash above."
+        '
+        'txtPANWSim
+        '
+        Me.txtPANWSim.AutoSize = True
+        Me.txtPANWSim.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtPANWSim.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPANWSim.Location = New System.Drawing.Point(3, 0)
+        Me.txtPANWSim.Margin = New System.Windows.Forms.Padding(3, 0, 3, 3)
+        Me.txtPANWSim.MaximumSize = New System.Drawing.Size(700, 0)
+        Me.txtPANWSim.Name = "txtPANWSim"
+        Me.txtPANWSim.Size = New System.Drawing.Size(700, 72)
+        Me.txtPANWSim.TabIndex = 24
+        Me.txtPANWSim.Text = resources.GetString("txtPANWSim.Text")
         '
         'tabXPS
         '
@@ -3071,16 +3292,70 @@ Partial Class Main
         Me.tabXPS.Text = "XPS"
         Me.tabXPS.UseVisualStyleBackColor = True
         '
-        'lblXPSHostname
+        'flowXPS
         '
-        Me.lblXPSHostname.AutoSize = True
-        Me.lblXPSHostname.BackColor = System.Drawing.Color.White
-        Me.lblXPSHostname.Location = New System.Drawing.Point(97, 102)
-        Me.lblXPSHostname.MinimumSize = New System.Drawing.Size(367, 0)
-        Me.lblXPSHostname.Name = "lblXPSHostname"
-        Me.lblXPSHostname.Size = New System.Drawing.Size(367, 17)
-        Me.lblXPSHostname.TabIndex = 41
-        Me.lblXPSHostname.Text = "xps:8448"
+        Me.flowXPS.AutoSize = True
+        Me.flowXPS.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.flowXPS.Controls.Add(Me.tableXPSGrid)
+        Me.flowXPS.Controls.Add(Me.GroupBox3)
+        Me.flowXPS.Controls.Add(Me.tableXPSTextPic)
+        Me.flowXPS.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.flowXPS.Location = New System.Drawing.Point(4, 4)
+        Me.flowXPS.Name = "flowXPS"
+        Me.flowXPS.Size = New System.Drawing.Size(1486, 890)
+        Me.flowXPS.TabIndex = 45
+        '
+        'tableXPSGrid
+        '
+        Me.tableXPSGrid.AutoSize = True
+        Me.tableXPSGrid.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.tableXPSGrid.ColumnCount = 2
+        Me.tableXPSGrid.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableXPSGrid.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tableXPSGrid.Controls.Add(Me.Label38, 0, 0)
+        Me.tableXPSGrid.Controls.Add(Me.xpsPort, 1, 0)
+        Me.tableXPSGrid.Controls.Add(Me.txtXPSMalwareMD5, 1, 4)
+        Me.tableXPSGrid.Controls.Add(Me.Label40, 0, 1)
+        Me.tableXPSGrid.Controls.Add(Me.btnXPSSend, 1, 5)
+        Me.tableXPSGrid.Controls.Add(Me.Label46, 0, 4)
+        Me.tableXPSGrid.Controls.Add(Me.txtXPSTarget, 1, 1)
+        Me.tableXPSGrid.Controls.Add(Me.Label41, 0, 2)
+        Me.tableXPSGrid.Controls.Add(Me.txtXPSMalware, 1, 3)
+        Me.tableXPSGrid.Controls.Add(Me.cmbXPSSeverity, 1, 2)
+        Me.tableXPSGrid.Controls.Add(Me.Label42, 0, 3)
+        Me.tableXPSGrid.Controls.Add(Me.lblXPSStatus, 0, 6)
+        Me.tableXPSGrid.Location = New System.Drawing.Point(3, 3)
+        Me.tableXPSGrid.Name = "tableXPSGrid"
+        Me.tableXPSGrid.RowCount = 7
+        Me.tableXPSGrid.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableXPSGrid.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableXPSGrid.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableXPSGrid.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableXPSGrid.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableXPSGrid.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableXPSGrid.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableXPSGrid.Size = New System.Drawing.Size(395, 208)
+        Me.tableXPSGrid.TabIndex = 44
+        '
+        'Label38
+        '
+        Me.Label38.AutoSize = True
+        Me.Label38.Location = New System.Drawing.Point(4, 0)
+        Me.Label38.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label38.Name = "Label38"
+        Me.Label38.Size = New System.Drawing.Size(146, 17)
+        Me.Label38.TabIndex = 17
+        Me.Label38.Text = "R1 XPS Listener Port:"
+        '
+        'xpsPort
+        '
+        Me.xpsPort.Location = New System.Drawing.Point(158, 4)
+        Me.xpsPort.Margin = New System.Windows.Forms.Padding(4)
+        Me.xpsPort.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
+        Me.xpsPort.Name = "xpsPort"
+        Me.xpsPort.Size = New System.Drawing.Size(160, 22)
+        Me.xpsPort.TabIndex = 0
+        Me.xpsPort.Value = New Decimal(New Integer() {514, 0, 0, 0})
         '
         'txtXPSMalwareMD5
         '
@@ -3090,6 +3365,26 @@ Partial Class Main
         Me.txtXPSMalwareMD5.Size = New System.Drawing.Size(233, 22)
         Me.txtXPSMalwareMD5.TabIndex = 4
         Me.txtXPSMalwareMD5.Text = "47f9fdc617f8c98a6732be534d8dbe9a"
+        '
+        'Label40
+        '
+        Me.Label40.AutoSize = True
+        Me.Label40.Location = New System.Drawing.Point(4, 30)
+        Me.Label40.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label40.Name = "Label40"
+        Me.Label40.Size = New System.Drawing.Size(122, 17)
+        Me.Label40.TabIndex = 13
+        Me.Label40.Text = "Target Hostname:"
+        '
+        'btnXPSSend
+        '
+        Me.btnXPSSend.Location = New System.Drawing.Point(158, 156)
+        Me.btnXPSSend.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnXPSSend.Name = "btnXPSSend"
+        Me.btnXPSSend.Size = New System.Drawing.Size(185, 28)
+        Me.btnXPSSend.TabIndex = 5
+        Me.btnXPSSend.Text = "Send XPS SysLog Alert"
+        Me.btnXPSSend.UseVisualStyleBackColor = True
         '
         'Label46
         '
@@ -3101,16 +3396,23 @@ Partial Class Main
         Me.Label46.TabIndex = 31
         Me.Label46.Text = "Malware MD5:"
         '
-        'lblXPSStatus
+        'txtXPSTarget
         '
-        Me.lblXPSStatus.AutoSize = True
-        Me.lblXPSStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblXPSStatus.Location = New System.Drawing.Point(4, 188)
-        Me.lblXPSStatus.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblXPSStatus.Name = "lblXPSStatus"
-        Me.lblXPSStatus.Size = New System.Drawing.Size(107, 20)
-        Me.lblXPSStatus.TabIndex = 30
-        Me.lblXPSStatus.Text = "lblXPSStatus"
+        Me.txtXPSTarget.Location = New System.Drawing.Point(158, 34)
+        Me.txtXPSTarget.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtXPSTarget.Name = "txtXPSTarget"
+        Me.txtXPSTarget.Size = New System.Drawing.Size(233, 22)
+        Me.txtXPSTarget.TabIndex = 1
+        '
+        'Label41
+        '
+        Me.Label41.AutoSize = True
+        Me.Label41.Location = New System.Drawing.Point(4, 60)
+        Me.Label41.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label41.Name = "Label41"
+        Me.Label41.Size = New System.Drawing.Size(63, 17)
+        Me.Label41.TabIndex = 20
+        Me.Label41.Text = "Severity:"
         '
         'txtXPSMalware
         '
@@ -3120,6 +3422,17 @@ Partial Class Main
         Me.txtXPSMalware.Size = New System.Drawing.Size(233, 22)
         Me.txtXPSMalware.TabIndex = 3
         Me.txtXPSMalware.Text = "Super.Evil.Malware"
+        '
+        'cmbXPSSeverity
+        '
+        Me.cmbXPSSeverity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbXPSSeverity.FormattingEnabled = True
+        Me.cmbXPSSeverity.Items.AddRange(New Object() {"Low", "Medium", "High", "Critical"})
+        Me.cmbXPSSeverity.Location = New System.Drawing.Point(158, 64)
+        Me.cmbXPSSeverity.Margin = New System.Windows.Forms.Padding(4)
+        Me.cmbXPSSeverity.Name = "cmbXPSSeverity"
+        Me.cmbXPSSeverity.Size = New System.Drawing.Size(233, 24)
+        Me.cmbXPSSeverity.TabIndex = 2
         '
         'Label42
         '
@@ -3131,44 +3444,16 @@ Partial Class Main
         Me.Label42.TabIndex = 28
         Me.Label42.Text = "Malware Name:"
         '
-        'xpsPicture
+        'lblXPSStatus
         '
-        Me.xpsPicture.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.xpsPicture.Image = CType(resources.GetObject("xpsPicture.Image"), System.Drawing.Image)
-        Me.xpsPicture.Location = New System.Drawing.Point(3, 18)
-        Me.xpsPicture.Margin = New System.Windows.Forms.Padding(4)
-        Me.xpsPicture.Name = "xpsPicture"
-        Me.xpsPicture.Size = New System.Drawing.Size(502, 168)
-        Me.xpsPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
-        Me.xpsPicture.TabIndex = 27
-        Me.xpsPicture.TabStop = False
-        '
-        'txtFELink2
-        '
-        Me.txtFELink2.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtFELink2.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.txtFELink2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFELink2.Location = New System.Drawing.Point(4, 136)
-        Me.txtFELink2.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtFELink2.Name = "txtFELink2"
-        Me.txtFELink2.ReadOnly = True
-        Me.txtFELink2.Size = New System.Drawing.Size(427, 17)
-        Me.txtFELink2.TabIndex = 25
-        Me.txtFELink2.TabStop = False
-        Me.txtFELink2.Text = "http://fedeploycheck.fireeye.com/appliance-test/test-infection.exe"
-        '
-        'Label39
-        '
-        Me.Label39.AutoSize = True
-        Me.Label39.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label39.Location = New System.Drawing.Point(4, 78)
-        Me.Label39.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label39.MaximumSize = New System.Drawing.Size(700, 0)
-        Me.Label39.Name = "Label39"
-        Me.Label39.Size = New System.Drawing.Size(699, 54)
-        Me.Label39.TabIndex = 24
-        Me.Label39.Text = "To generate a verified hit from a test XPS ThreatScan download the following EXE " & _
-    "to your target, or enter a custom MD5 hash above." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.lblXPSStatus.AutoSize = True
+        Me.lblXPSStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblXPSStatus.Location = New System.Drawing.Point(4, 188)
+        Me.lblXPSStatus.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblXPSStatus.Name = "lblXPSStatus"
+        Me.lblXPSStatus.Size = New System.Drawing.Size(107, 20)
+        Me.lblXPSStatus.TabIndex = 30
+        Me.lblXPSStatus.Text = "lblXPSStatus"
         '
         'GroupBox3
         '
@@ -3227,74 +3512,100 @@ Partial Class Main
         Me.btnStartXPSListener.Text = "Start XPS CP Sim"
         Me.btnStartXPSListener.UseVisualStyleBackColor = True
         '
-        'Label41
+        'tableXPSTextPic
         '
-        Me.Label41.AutoSize = True
-        Me.Label41.Location = New System.Drawing.Point(4, 60)
-        Me.Label41.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label41.Name = "Label41"
-        Me.Label41.Size = New System.Drawing.Size(63, 17)
-        Me.Label41.TabIndex = 20
-        Me.Label41.Text = "Severity:"
+        Me.tableXPSTextPic.AutoSize = True
+        Me.tableXPSTextPic.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.tableXPSTextPic.ColumnCount = 1
+        Me.tableXPSTextPic.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableXPSTextPic.Controls.Add(Me.txtXPSSim, 0, 0)
+        Me.tableXPSTextPic.Controls.Add(Me.grpXPSPicture, 0, 3)
+        Me.tableXPSTextPic.Controls.Add(Me.Label39, 0, 1)
+        Me.tableXPSTextPic.Controls.Add(Me.txtFELink2, 0, 2)
+        Me.tableXPSTextPic.Location = New System.Drawing.Point(3, 217)
+        Me.tableXPSTextPic.Name = "tableXPSTextPic"
+        Me.tableXPSTextPic.RowCount = 4
+        Me.tableXPSTextPic.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableXPSTextPic.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableXPSTextPic.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableXPSTextPic.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableXPSTextPic.Size = New System.Drawing.Size(707, 331)
+        Me.tableXPSTextPic.TabIndex = 43
         '
-        'cmbXPSSeverity
+        'txtXPSSim
         '
-        Me.cmbXPSSeverity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbXPSSeverity.FormattingEnabled = True
-        Me.cmbXPSSeverity.Items.AddRange(New Object() {"Low", "Medium", "High", "Critical"})
-        Me.cmbXPSSeverity.Location = New System.Drawing.Point(158, 64)
-        Me.cmbXPSSeverity.Margin = New System.Windows.Forms.Padding(4)
-        Me.cmbXPSSeverity.Name = "cmbXPSSeverity"
-        Me.cmbXPSSeverity.Size = New System.Drawing.Size(233, 24)
-        Me.cmbXPSSeverity.TabIndex = 2
+        Me.txtXPSSim.AutoSize = True
+        Me.txtXPSSim.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtXPSSim.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtXPSSim.Location = New System.Drawing.Point(3, 0)
+        Me.txtXPSSim.Margin = New System.Windows.Forms.Padding(3, 0, 3, 3)
+        Me.txtXPSSim.MaximumSize = New System.Drawing.Size(700, 0)
+        Me.txtXPSSim.Name = "txtXPSSim"
+        Me.txtXPSSim.Size = New System.Drawing.Size(700, 72)
+        Me.txtXPSSim.TabIndex = 43
+        Me.txtXPSSim.Text = resources.GetString("txtXPSSim.Text")
         '
-        'xpsPort
+        'grpXPSPicture
         '
-        Me.xpsPort.Location = New System.Drawing.Point(158, 4)
-        Me.xpsPort.Margin = New System.Windows.Forms.Padding(4)
-        Me.xpsPort.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
-        Me.xpsPort.Name = "xpsPort"
-        Me.xpsPort.Size = New System.Drawing.Size(160, 22)
-        Me.xpsPort.TabIndex = 0
-        Me.xpsPort.Value = New Decimal(New Integer() {514, 0, 0, 0})
+        Me.grpXPSPicture.AutoSize = True
+        Me.grpXPSPicture.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.grpXPSPicture.Controls.Add(Me.lblXPSHostname)
+        Me.grpXPSPicture.Controls.Add(Me.xpsPicture)
+        Me.grpXPSPicture.Location = New System.Drawing.Point(3, 139)
+        Me.grpXPSPicture.Name = "grpXPSPicture"
+        Me.grpXPSPicture.Size = New System.Drawing.Size(508, 189)
+        Me.grpXPSPicture.TabIndex = 42
+        Me.grpXPSPicture.TabStop = False
         '
-        'Label38
+        'lblXPSHostname
         '
-        Me.Label38.AutoSize = True
-        Me.Label38.Location = New System.Drawing.Point(4, 0)
-        Me.Label38.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label38.Name = "Label38"
-        Me.Label38.Size = New System.Drawing.Size(146, 17)
-        Me.Label38.TabIndex = 17
-        Me.Label38.Text = "R1 XPS Listener Port:"
+        Me.lblXPSHostname.AutoSize = True
+        Me.lblXPSHostname.BackColor = System.Drawing.Color.White
+        Me.lblXPSHostname.Location = New System.Drawing.Point(97, 102)
+        Me.lblXPSHostname.MinimumSize = New System.Drawing.Size(367, 0)
+        Me.lblXPSHostname.Name = "lblXPSHostname"
+        Me.lblXPSHostname.Size = New System.Drawing.Size(367, 17)
+        Me.lblXPSHostname.TabIndex = 41
+        Me.lblXPSHostname.Text = "xps:8448"
         '
-        'txtXPSTarget
+        'xpsPicture
         '
-        Me.txtXPSTarget.Location = New System.Drawing.Point(158, 34)
-        Me.txtXPSTarget.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtXPSTarget.Name = "txtXPSTarget"
-        Me.txtXPSTarget.Size = New System.Drawing.Size(233, 22)
-        Me.txtXPSTarget.TabIndex = 1
+        Me.xpsPicture.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.xpsPicture.Image = CType(resources.GetObject("xpsPicture.Image"), System.Drawing.Image)
+        Me.xpsPicture.Location = New System.Drawing.Point(3, 18)
+        Me.xpsPicture.Margin = New System.Windows.Forms.Padding(4)
+        Me.xpsPicture.Name = "xpsPicture"
+        Me.xpsPicture.Size = New System.Drawing.Size(502, 168)
+        Me.xpsPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        Me.xpsPicture.TabIndex = 27
+        Me.xpsPicture.TabStop = False
         '
-        'Label40
+        'Label39
         '
-        Me.Label40.AutoSize = True
-        Me.Label40.Location = New System.Drawing.Point(4, 30)
-        Me.Label40.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label40.Name = "Label40"
-        Me.Label40.Size = New System.Drawing.Size(122, 17)
-        Me.Label40.TabIndex = 13
-        Me.Label40.Text = "Target Hostname:"
+        Me.Label39.AutoSize = True
+        Me.Label39.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label39.Location = New System.Drawing.Point(4, 75)
+        Me.Label39.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label39.MaximumSize = New System.Drawing.Size(700, 0)
+        Me.Label39.Name = "Label39"
+        Me.Label39.Size = New System.Drawing.Size(699, 36)
+        Me.Label39.TabIndex = 24
+        Me.Label39.Text = "To generate a verified hit from a test XPS ThreatScan download the following EXE " & _
+    "to your target, or enter a custom MD5 hash above."
         '
-        'btnXPSSend
+        'txtFELink2
         '
-        Me.btnXPSSend.Location = New System.Drawing.Point(158, 156)
-        Me.btnXPSSend.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnXPSSend.Name = "btnXPSSend"
-        Me.btnXPSSend.Size = New System.Drawing.Size(185, 28)
-        Me.btnXPSSend.TabIndex = 5
-        Me.btnXPSSend.Text = "Send XPS SysLog Alert"
-        Me.btnXPSSend.UseVisualStyleBackColor = True
+        Me.txtFELink2.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtFELink2.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.txtFELink2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFELink2.Location = New System.Drawing.Point(4, 115)
+        Me.txtFELink2.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtFELink2.Name = "txtFELink2"
+        Me.txtFELink2.ReadOnly = True
+        Me.txtFELink2.Size = New System.Drawing.Size(427, 17)
+        Me.txtFELink2.TabIndex = 25
+        Me.txtFELink2.TabStop = False
+        Me.txtFELink2.Text = "http://fedeploycheck.fireeye.com/appliance-test/test-infection.exe"
         '
         'tabAbout
         '
@@ -3350,130 +3661,6 @@ Partial Class Main
         Me.sfdBox.Filter = "Box Files|*.json"
         Me.sfdBox.InitialDirectory = "My.Application.Info.DirectoryPath & ""\BoxedJobs"""
         '
-        'txtPANWSim
-        '
-        Me.txtPANWSim.AutoSize = True
-        Me.txtPANWSim.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtPANWSim.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPANWSim.Location = New System.Drawing.Point(3, 0)
-        Me.txtPANWSim.Margin = New System.Windows.Forms.Padding(3, 0, 3, 3)
-        Me.txtPANWSim.MaximumSize = New System.Drawing.Size(700, 0)
-        Me.txtPANWSim.Name = "txtPANWSim"
-        Me.txtPANWSim.Size = New System.Drawing.Size(700, 72)
-        Me.txtPANWSim.TabIndex = 24
-        Me.txtPANWSim.Text = resources.GetString("txtPANWSim.Text")
-        '
-        'tablePANWBottom
-        '
-        Me.tablePANWBottom.AutoSize = True
-        Me.tablePANWBottom.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.tablePANWBottom.ColumnCount = 1
-        Me.tablePANWBottom.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.tablePANWBottom.Controls.Add(Me.grpWildFirePicture, 0, 3)
-        Me.tablePANWBottom.Controls.Add(Me.txtFireEyeDownload1, 0, 2)
-        Me.tablePANWBottom.Controls.Add(Me.lblPANWHitInstruction, 0, 1)
-        Me.tablePANWBottom.Controls.Add(Me.txtPANWSim, 0, 0)
-        Me.tablePANWBottom.Location = New System.Drawing.Point(3, 216)
-        Me.tablePANWBottom.Name = "tablePANWBottom"
-        Me.tablePANWBottom.RowCount = 4
-        Me.tablePANWBottom.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tablePANWBottom.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tablePANWBottom.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tablePANWBottom.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tablePANWBottom.Size = New System.Drawing.Size(707, 329)
-        Me.tablePANWBottom.TabIndex = 43
-        '
-        'grpXPSPicture
-        '
-        Me.grpXPSPicture.AutoSize = True
-        Me.grpXPSPicture.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.grpXPSPicture.Controls.Add(Me.lblXPSHostname)
-        Me.grpXPSPicture.Controls.Add(Me.xpsPicture)
-        Me.grpXPSPicture.Location = New System.Drawing.Point(3, 160)
-        Me.grpXPSPicture.Name = "grpXPSPicture"
-        Me.grpXPSPicture.Size = New System.Drawing.Size(508, 189)
-        Me.grpXPSPicture.TabIndex = 42
-        Me.grpXPSPicture.TabStop = False
-        '
-        'tableXPSTextPic
-        '
-        Me.tableXPSTextPic.AutoSize = True
-        Me.tableXPSTextPic.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.tableXPSTextPic.ColumnCount = 1
-        Me.tableXPSTextPic.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.tableXPSTextPic.Controls.Add(Me.txtXPSSim, 0, 0)
-        Me.tableXPSTextPic.Controls.Add(Me.grpXPSPicture, 0, 3)
-        Me.tableXPSTextPic.Controls.Add(Me.Label39, 0, 1)
-        Me.tableXPSTextPic.Controls.Add(Me.txtFELink2, 0, 2)
-        Me.tableXPSTextPic.Location = New System.Drawing.Point(3, 217)
-        Me.tableXPSTextPic.Name = "tableXPSTextPic"
-        Me.tableXPSTextPic.RowCount = 4
-        Me.tableXPSTextPic.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tableXPSTextPic.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tableXPSTextPic.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tableXPSTextPic.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tableXPSTextPic.Size = New System.Drawing.Size(707, 352)
-        Me.tableXPSTextPic.TabIndex = 43
-        '
-        'txtXPSSim
-        '
-        Me.txtXPSSim.AutoSize = True
-        Me.txtXPSSim.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtXPSSim.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtXPSSim.Location = New System.Drawing.Point(3, 0)
-        Me.txtXPSSim.Margin = New System.Windows.Forms.Padding(3, 0, 3, 3)
-        Me.txtXPSSim.MaximumSize = New System.Drawing.Size(700, 0)
-        Me.txtXPSSim.Name = "txtXPSSim"
-        Me.txtXPSSim.Padding = New System.Windows.Forms.Padding(0, 0, 0, 3)
-        Me.txtXPSSim.Size = New System.Drawing.Size(700, 75)
-        Me.txtXPSSim.TabIndex = 43
-        Me.txtXPSSim.Text = resources.GetString("txtXPSSim.Text")
-        '
-        'tableXPSGrid
-        '
-        Me.tableXPSGrid.AutoSize = True
-        Me.tableXPSGrid.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.tableXPSGrid.ColumnCount = 2
-        Me.tableXPSGrid.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.tableXPSGrid.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.tableXPSGrid.Controls.Add(Me.Label38, 0, 0)
-        Me.tableXPSGrid.Controls.Add(Me.xpsPort, 1, 0)
-        Me.tableXPSGrid.Controls.Add(Me.txtXPSMalwareMD5, 1, 4)
-        Me.tableXPSGrid.Controls.Add(Me.Label40, 0, 1)
-        Me.tableXPSGrid.Controls.Add(Me.btnXPSSend, 1, 5)
-        Me.tableXPSGrid.Controls.Add(Me.Label46, 0, 4)
-        Me.tableXPSGrid.Controls.Add(Me.txtXPSTarget, 1, 1)
-        Me.tableXPSGrid.Controls.Add(Me.Label41, 0, 2)
-        Me.tableXPSGrid.Controls.Add(Me.txtXPSMalware, 1, 3)
-        Me.tableXPSGrid.Controls.Add(Me.cmbXPSSeverity, 1, 2)
-        Me.tableXPSGrid.Controls.Add(Me.Label42, 0, 3)
-        Me.tableXPSGrid.Controls.Add(Me.lblXPSStatus, 0, 6)
-        Me.tableXPSGrid.Location = New System.Drawing.Point(3, 3)
-        Me.tableXPSGrid.Name = "tableXPSGrid"
-        Me.tableXPSGrid.RowCount = 7
-        Me.tableXPSGrid.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tableXPSGrid.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tableXPSGrid.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tableXPSGrid.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tableXPSGrid.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tableXPSGrid.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tableXPSGrid.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tableXPSGrid.Size = New System.Drawing.Size(395, 208)
-        Me.tableXPSGrid.TabIndex = 44
-        '
-        'flowXPS
-        '
-        Me.flowXPS.AutoSize = True
-        Me.flowXPS.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.flowXPS.Controls.Add(Me.tableXPSGrid)
-        Me.flowXPS.Controls.Add(Me.GroupBox3)
-        Me.flowXPS.Controls.Add(Me.tableXPSTextPic)
-        Me.flowXPS.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.flowXPS.Location = New System.Drawing.Point(4, 4)
-        Me.flowXPS.Name = "flowXPS"
-        Me.flowXPS.Size = New System.Drawing.Size(1486, 890)
-        Me.flowXPS.TabIndex = 45
-        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -3499,6 +3686,10 @@ Partial Class Main
         Me.tabSubMenu.ResumeLayout(False)
         Me.tabJobInfo.ResumeLayout(False)
         Me.tabJobInfo.PerformLayout()
+        Me.flowJobInfo.ResumeLayout(False)
+        Me.flowJobInfo.PerformLayout()
+        Me.tableJobInfo.ResumeLayout(False)
+        Me.tableJobInfo.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.grpshare.ResumeLayout(False)
@@ -3522,15 +3713,27 @@ Partial Class Main
         CType(Me.SplitExclusion, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitExclusion.ResumeLayout(False)
         Me.tabAgentRemediation.ResumeLayout(False)
+        Me.tabAgentRemediation.PerformLayout()
+        Me.tableAgentRemediation.ResumeLayout(False)
         Me.tabAgentRemediationSubMenu.ResumeLayout(False)
         Me.tabAgentSendFile.ResumeLayout(False)
         Me.tabAgentSendFile.PerformLayout()
+        Me.tableARSendFile.ResumeLayout(False)
+        Me.tableARSendFile.PerformLayout()
         Me.tabAgentExecute.ResumeLayout(False)
         Me.tabAgentExecute.PerformLayout()
+        Me.tableARExecute.ResumeLayout(False)
+        Me.tableARExecute.PerformLayout()
         Me.tabAgentDelete.ResumeLayout(False)
         Me.tabAgentDelete.PerformLayout()
+        Me.tableARDelete.ResumeLayout(False)
+        Me.tableARDelete.PerformLayout()
         Me.TabAgentKill.ResumeLayout(False)
         Me.TabAgentKill.PerformLayout()
+        Me.tableARKill.ResumeLayout(False)
+        Me.tableARKill.PerformLayout()
+        Me.grpARKill.ResumeLayout(False)
+        Me.grpARKill.PerformLayout()
         CType(Me.nmbremkillprocid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabMenu.ResumeLayout(False)
         Me.tabSettings.ResumeLayout(False)
@@ -3571,6 +3774,10 @@ Partial Class Main
         Me.tblAlertBreakdown.PerformLayout()
         Me.tabJobExecution.ResumeLayout(False)
         Me.tabJobExecution.PerformLayout()
+        Me.flowJobsAPI.ResumeLayout(False)
+        Me.flowJobsAPI.PerformLayout()
+        Me.tableJobExecute.ResumeLayout(False)
+        Me.tableJobExecute.PerformLayout()
         Me.tabFireEye.ResumeLayout(False)
         Me.tabFireEye.PerformLayout()
         Me.flowFireEye.ResumeLayout(False)
@@ -3581,36 +3788,36 @@ Partial Class Main
         Me.tabPANW.PerformLayout()
         Me.flowPANW.ResumeLayout(False)
         Me.flowPANW.PerformLayout()
-        Me.grpWildFireSim.ResumeLayout(False)
-        Me.grpWildFireSim.PerformLayout()
-        CType(Me.panw_sim_port, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tablePANWSendAlert.ResumeLayout(False)
         Me.tablePANWSendAlert.PerformLayout()
         CType(Me.panwPort, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.grpWildFireSim.ResumeLayout(False)
+        Me.grpWildFireSim.PerformLayout()
+        CType(Me.panw_sim_port, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tablePANWBottom.ResumeLayout(False)
+        Me.tablePANWBottom.PerformLayout()
         Me.grpWildFirePicture.ResumeLayout(False)
         Me.grpWildFirePicture.PerformLayout()
         CType(Me.panwPicture, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabXPS.ResumeLayout(False)
         Me.tabXPS.PerformLayout()
-        CType(Me.xpsPicture, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.flowXPS.ResumeLayout(False)
+        Me.flowXPS.PerformLayout()
+        Me.tableXPSGrid.ResumeLayout(False)
+        Me.tableXPSGrid.PerformLayout()
+        CType(Me.xpsPort, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
         CType(Me.xps_sim_Port, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.xpsPort, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tableXPSTextPic.ResumeLayout(False)
+        Me.tableXPSTextPic.PerformLayout()
+        Me.grpXPSPicture.ResumeLayout(False)
+        Me.grpXPSPicture.PerformLayout()
+        CType(Me.xpsPicture, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabAbout.ResumeLayout(False)
         Me.tabAbout.PerformLayout()
         Me.flowAbout.ResumeLayout(False)
         Me.flowAbout.PerformLayout()
-        Me.tablePANWBottom.ResumeLayout(False)
-        Me.tablePANWBottom.PerformLayout()
-        Me.grpXPSPicture.ResumeLayout(False)
-        Me.grpXPSPicture.PerformLayout()
-        Me.tableXPSTextPic.ResumeLayout(False)
-        Me.tableXPSTextPic.PerformLayout()
-        Me.tableXPSGrid.ResumeLayout(False)
-        Me.tableXPSGrid.PerformLayout()
-        Me.flowXPS.ResumeLayout(False)
-        Me.flowXPS.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -3890,5 +4097,15 @@ Partial Class Main
     Friend WithEvents grpXPSPicture As System.Windows.Forms.GroupBox
     Friend WithEvents tableXPSGrid As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents flowXPS As System.Windows.Forms.FlowLayoutPanel
+    Friend WithEvents tableJobInfo As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents tableJobExecute As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents flowJobsAPI As System.Windows.Forms.FlowLayoutPanel
+    Friend WithEvents flowJobInfo As System.Windows.Forms.FlowLayoutPanel
+    Friend WithEvents tableAgentRemediation As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents tableARSendFile As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents tableARExecute As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents tableARDelete As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents tableARKill As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents grpARKill As System.Windows.Forms.GroupBox
 
 End Class
