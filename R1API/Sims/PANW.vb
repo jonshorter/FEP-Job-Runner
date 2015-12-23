@@ -127,7 +127,7 @@ Public Module PANW
         Public Property md5 As String = "47f9fdc617f8c98a6732be534d8dbe9a"
         Public Property filetype As String = "PE"
         Public Property size As Integer = 28672
-        Public Property malware As String = "yes"
+        Public Property malware As String = "no"
     End Class
     Public Class wildfire_taskinfo
         Public Property report As New wildfire_taskinfo_report
@@ -138,7 +138,7 @@ Public Module PANW
         Public Property task As String = "71286573"
         Public Property sha256 As String = ""
         Public Property md5 As String = "47f9fdc617f8c98a6732be534d8dbe9a"
-        Public Property malware As String = "yes"
+        Public Property malware As String = "no"
         Public Property summary As New wildfire_taskinfo_report_summary
         Public Property process As New wildfire_taskinfo_report_process
         Public Property file

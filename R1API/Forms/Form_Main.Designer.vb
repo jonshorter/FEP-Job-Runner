@@ -282,6 +282,10 @@ Partial Class Main
         Me.ofdBox = New System.Windows.Forms.OpenFileDialog()
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
         Me.tooltip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.txtPANWMalwareName = New System.Windows.Forms.TextBox()
+        Me.Label49 = New System.Windows.Forms.Label()
+        Me.txtFireEyeMalwareName = New System.Windows.Forms.TextBox()
+        Me.Label50 = New System.Windows.Forms.Label()
         Me.GroupBox4.SuspendLayout()
         Me.grpReqSet.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -2551,6 +2555,8 @@ Partial Class Main
         '
         'tabFireEye
         '
+        Me.tabFireEye.Controls.Add(Me.txtFireEyeMalwareName)
+        Me.tabFireEye.Controls.Add(Me.Label50)
         Me.tabFireEye.Controls.Add(Me.txtFireEyeMalwareMD5)
         Me.tabFireEye.Controls.Add(Me.Label47)
         Me.tabFireEye.Controls.Add(Me.lblFEStatus)
@@ -2572,7 +2578,7 @@ Partial Class Main
         '
         'txtFireEyeMalwareMD5
         '
-        Me.txtFireEyeMalwareMD5.Location = New System.Drawing.Point(141, 82)
+        Me.txtFireEyeMalwareMD5.Location = New System.Drawing.Point(141, 111)
         Me.txtFireEyeMalwareMD5.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFireEyeMalwareMD5.Name = "txtFireEyeMalwareMD5"
         Me.txtFireEyeMalwareMD5.Size = New System.Drawing.Size(233, 22)
@@ -2582,7 +2588,7 @@ Partial Class Main
         'Label47
         '
         Me.Label47.AutoSize = True
-        Me.Label47.Location = New System.Drawing.Point(36, 85)
+        Me.Label47.Location = New System.Drawing.Point(36, 114)
         Me.Label47.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label47.Name = "Label47"
         Me.Label47.Size = New System.Drawing.Size(97, 17)
@@ -2593,7 +2599,7 @@ Partial Class Main
         '
         Me.lblFEStatus.AutoSize = True
         Me.lblFEStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFEStatus.Location = New System.Drawing.Point(56, 162)
+        Me.lblFEStatus.Location = New System.Drawing.Point(56, 191)
         Me.lblFEStatus.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFEStatus.Name = "lblFEStatus"
         Me.lblFEStatus.Size = New System.Drawing.Size(95, 20)
@@ -2605,7 +2611,7 @@ Partial Class Main
         Me.txtFELink.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtFELink.Cursor = System.Windows.Forms.Cursors.Hand
         Me.txtFELink.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFELink.Location = New System.Drawing.Point(14, 290)
+        Me.txtFELink.Location = New System.Drawing.Point(14, 319)
         Me.txtFELink.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFELink.Name = "txtFELink"
         Me.txtFELink.ReadOnly = True
@@ -2617,7 +2623,7 @@ Partial Class Main
         'Label37
         '
         Me.Label37.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label37.Location = New System.Drawing.Point(8, 211)
+        Me.Label37.Location = New System.Drawing.Point(8, 240)
         Me.Label37.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label37.Name = "Label37"
         Me.Label37.Size = New System.Drawing.Size(450, 64)
@@ -2666,7 +2672,7 @@ Partial Class Main
         '
         'btn_FEEvent
         '
-        Me.btn_FEEvent.Location = New System.Drawing.Point(141, 118)
+        Me.btn_FEEvent.Location = New System.Drawing.Point(141, 147)
         Me.btn_FEEvent.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_FEEvent.Name = "btn_FEEvent"
         Me.btn_FEEvent.Size = New System.Drawing.Size(156, 28)
@@ -2676,6 +2682,8 @@ Partial Class Main
         '
         'tabPANW
         '
+        Me.tabPANW.Controls.Add(Me.txtPANWMalwareName)
+        Me.tabPANW.Controls.Add(Me.Label49)
         Me.tabPANW.Controls.Add(Me.txtPANWMalwareMD5)
         Me.tabPANW.Controls.Add(Me.Label48)
         Me.tabPANW.Controls.Add(Me.PictureBox2)
@@ -2701,7 +2709,7 @@ Partial Class Main
         '
         'txtPANWMalwareMD5
         '
-        Me.txtPANWMalwareMD5.Location = New System.Drawing.Point(173, 118)
+        Me.txtPANWMalwareMD5.Location = New System.Drawing.Point(173, 150)
         Me.txtPANWMalwareMD5.Margin = New System.Windows.Forms.Padding(4)
         Me.txtPANWMalwareMD5.Name = "txtPANWMalwareMD5"
         Me.txtPANWMalwareMD5.Size = New System.Drawing.Size(233, 22)
@@ -2711,7 +2719,7 @@ Partial Class Main
         'Label48
         '
         Me.Label48.AutoSize = True
-        Me.Label48.Location = New System.Drawing.Point(44, 122)
+        Me.Label48.Location = New System.Drawing.Point(44, 154)
         Me.Label48.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label48.Name = "Label48"
         Me.Label48.Size = New System.Drawing.Size(97, 17)
@@ -2721,7 +2729,7 @@ Partial Class Main
         'PictureBox2
         '
         Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
-        Me.PictureBox2.Location = New System.Drawing.Point(59, 383)
+        Me.PictureBox2.Location = New System.Drawing.Point(59, 405)
         Me.PictureBox2.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(516, 147)
@@ -2747,7 +2755,7 @@ Partial Class Main
         Me.TextBox4.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBox4.Cursor = System.Windows.Forms.Cursors.Hand
         Me.TextBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox4.Location = New System.Drawing.Point(37, 336)
+        Me.TextBox4.Location = New System.Drawing.Point(37, 358)
         Me.TextBox4.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox4.Name = "TextBox4"
         Me.TextBox4.ReadOnly = True
@@ -2759,7 +2767,7 @@ Partial Class Main
         'Label45
         '
         Me.Label45.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label45.Location = New System.Drawing.Point(43, 269)
+        Me.Label45.Location = New System.Drawing.Point(43, 291)
         Me.Label45.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label45.Name = "Label45"
         Me.Label45.Size = New System.Drawing.Size(400, 63)
@@ -2771,7 +2779,7 @@ Partial Class Main
         '
         Me.lblPANWStatus.AutoSize = True
         Me.lblPANWStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPANWStatus.Location = New System.Drawing.Point(56, 215)
+        Me.lblPANWStatus.Location = New System.Drawing.Point(56, 237)
         Me.lblPANWStatus.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblPANWStatus.Name = "lblPANWStatus"
         Me.lblPANWStatus.Size = New System.Drawing.Size(124, 20)
@@ -2866,6 +2874,8 @@ Partial Class Main
         '
         'cmbPANWAlert
         '
+        Me.cmbPANWAlert.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.cmbPANWAlert.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbPANWAlert.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbPANWAlert.FormattingEnabled = True
         Me.cmbPANWAlert.Items.AddRange(New Object() {"WILDFIRE", "VIRUS", "FILE", "FLOOD", "URL"})
@@ -2895,7 +2905,7 @@ Partial Class Main
         '
         'btnPANWSend
         '
-        Me.btnPANWSend.Location = New System.Drawing.Point(173, 150)
+        Me.btnPANWSend.Location = New System.Drawing.Point(173, 182)
         Me.btnPANWSend.Margin = New System.Windows.Forms.Padding(4)
         Me.btnPANWSend.Name = "btnPANWSend"
         Me.btnPANWSend.Size = New System.Drawing.Size(185, 28)
@@ -3202,6 +3212,44 @@ Partial Class Main
         Me.sfdBox.DefaultExt = "json"
         Me.sfdBox.Filter = "Box Files|*.json"
         Me.sfdBox.InitialDirectory = "My.Application.Info.DirectoryPath & ""\BoxedJobs"""
+        '
+        'txtPANWMalwareName
+        '
+        Me.txtPANWMalwareName.Location = New System.Drawing.Point(173, 120)
+        Me.txtPANWMalwareName.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtPANWMalwareName.Name = "txtPANWMalwareName"
+        Me.txtPANWMalwareName.Size = New System.Drawing.Size(233, 22)
+        Me.txtPANWMalwareName.TabIndex = 38
+        Me.txtPANWMalwareName.Text = "Super.Evil.Malware"
+        '
+        'Label49
+        '
+        Me.Label49.AutoSize = True
+        Me.Label49.Location = New System.Drawing.Point(44, 124)
+        Me.Label49.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label49.Name = "Label49"
+        Me.Label49.Size = New System.Drawing.Size(105, 17)
+        Me.Label49.TabIndex = 39
+        Me.Label49.Text = "Malware Name:"
+        '
+        'txtFireEyeMalwareName
+        '
+        Me.txtFireEyeMalwareName.Location = New System.Drawing.Point(141, 82)
+        Me.txtFireEyeMalwareName.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtFireEyeMalwareName.Name = "txtFireEyeMalwareName"
+        Me.txtFireEyeMalwareName.Size = New System.Drawing.Size(233, 22)
+        Me.txtFireEyeMalwareName.TabIndex = 40
+        Me.txtFireEyeMalwareName.Text = "Super.Evil.Malware"
+        '
+        'Label50
+        '
+        Me.Label50.AutoSize = True
+        Me.Label50.Location = New System.Drawing.Point(12, 86)
+        Me.Label50.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label50.Name = "Label50"
+        Me.Label50.Size = New System.Drawing.Size(105, 17)
+        Me.Label50.TabIndex = 41
+        Me.Label50.Text = "Malware Name:"
         '
         'Main
         '
@@ -3580,5 +3628,9 @@ Partial Class Main
     Friend WithEvents tooltip As System.Windows.Forms.ToolTip
     Friend WithEvents btnLoadDefaultTemplateName As System.Windows.Forms.Button
     Friend WithEvents chkIncludPreRelease As System.Windows.Forms.CheckBox
+    Friend WithEvents txtPANWMalwareName As System.Windows.Forms.TextBox
+    Friend WithEvents Label49 As System.Windows.Forms.Label
+    Friend WithEvents txtFireEyeMalwareName As System.Windows.Forms.TextBox
+    Friend WithEvents Label50 As System.Windows.Forms.Label
 
 End Class

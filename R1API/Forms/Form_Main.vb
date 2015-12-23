@@ -1023,6 +1023,11 @@ Public Class Main
             If Not String.IsNullOrWhiteSpace(txtFireEyeMalwareMD5.Text) Then
                 fevent.alert.explanation.malwaredetected.malware.md5sum = Me.txtFireEyeMalwareMD5.Text
             End If
+            If String.IsNullOrWhiteSpace(txtFireEyeMalwareName.Text) Then
+                fevent.alert.explanation.malwaredetected.malware.name = "Super.Evil.Malware"
+            Else
+                fevent.alert.explanation.malwaredetected.malware.name = txtFireEyeMalwareName.Text
+            End If
             FireEye.SendEvent(FireEye.FEventtoJson(fevent))
         Catch ex As Exception
             Debug.WriteLine(ex.Message)
@@ -1037,6 +1042,11 @@ Public Class Main
             panwthreat.P4Subtype = cmbPANWAlert.Text.ToLower
             If Not String.IsNullOrWhiteSpace(txtPANWMalwareMD5.Text) Then
                 panwthreat.P43Filedigest = txtPANWMalwareMD5.Text
+            End If
+            If String.IsNullOrWhiteSpace(txtPANWMalwareName.Text) Then
+                panwthreat.P31Miscellaneous = "Super.Evil.Malware.exe"
+            Else
+                panwthreat.P31Miscellaneous = txtPANWMalwareName.Text & ".exe"
             End If
             Dim panwtstr As String = PANW.ThreatTOCSV(panwthreat)
             PANW.SendEvent(panwtstr)
