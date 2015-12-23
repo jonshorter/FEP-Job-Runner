@@ -1020,6 +1020,9 @@
   <data name="txtPANWSim.Text" xml:space="preserve">
     <value>The Wildfire Sim simulates R1 queries to Wildfire to get malware reports and kick off validated threatscans. The Wildfire Sim defaults to port 8449, and requires elevated privileges to place an SSL certificate in the keystore for https communication. After starting the Wildfire Sim, configure the R1 PANW connector to point to https://" &amp; My.Computer.Name &amp; ":8449. The Wildfire Sim will accept any API Key."</value>
   </data>
+  <data name="txtXPSSim.Text" xml:space="preserve">
+    <value>The XPS CP Sim defaults to port 8448, and requires elevated privileges to place an SSL certificate in the keystore for https communication. After starting the XPS CP Sim, configure the R1 XPS connector to point to this HOSTNAME:8448. The XPS CP Sim will accept any username/password combination as long as they are not the same.</value>
+  </data>
   <data name="xpsPicture.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAfYAAACoCAYAAAASGMyPAAAABGdBTUEAALGPC/xhBQAArIFJREFUeF7s
@@ -1761,9 +1764,6 @@
         kPPXm3ztXgtU3RwrGa9rhX/cc3HzSJutGo0mh/rGFo1mWtDUchCrfrsaK1aswMDARF8mBvwf5QR2rjHU
         6fIAAAAASUVORK5CYII=
 </value>
-  </data>
-  <data name="txtXPSSIM.Text" xml:space="preserve">
-    <value>The XPS CP Sim defaults to port 8448, and requires elevated privileges to place an SSL certificate in the keystore for https communication. After starting the XPS CP Sim, configure the R1 XPS connector to point to this HOSTNAME:8448. The XPS CP Sim will accept any username/password combination as long as they are not the same.</value>
   </data>
   <data name="lbltxtAbout.Text" xml:space="preserve">
     <value>

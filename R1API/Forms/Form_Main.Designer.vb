@@ -271,7 +271,6 @@ Partial Class Main
         Me.txtXPSMalware = New System.Windows.Forms.TextBox()
         Me.Label42 = New System.Windows.Forms.Label()
         Me.xpsPicture = New System.Windows.Forms.PictureBox()
-        Me.txtXPSSIM = New System.Windows.Forms.TextBox()
         Me.txtFELink2 = New System.Windows.Forms.TextBox()
         Me.Label39 = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
@@ -295,6 +294,11 @@ Partial Class Main
         Me.tooltip = New System.Windows.Forms.ToolTip(Me.components)
         Me.txtPANWSim = New System.Windows.Forms.Label()
         Me.tablePANWBottom = New System.Windows.Forms.TableLayoutPanel()
+        Me.grpXPSPicture = New System.Windows.Forms.GroupBox()
+        Me.tableXPSTextPic = New System.Windows.Forms.TableLayoutPanel()
+        Me.txtXPSSim = New System.Windows.Forms.Label()
+        Me.tableXPSGrid = New System.Windows.Forms.TableLayoutPanel()
+        Me.flowXPS = New System.Windows.Forms.FlowLayoutPanel()
         Me.GroupBox4.SuspendLayout()
         Me.grpReqSet.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -374,6 +378,10 @@ Partial Class Main
         Me.tabAbout.SuspendLayout()
         Me.flowAbout.SuspendLayout()
         Me.tablePANWBottom.SuspendLayout()
+        Me.grpXPSPicture.SuspendLayout()
+        Me.tableXPSTextPic.SuspendLayout()
+        Me.tableXPSGrid.SuspendLayout()
+        Me.flowXPS.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnExecute
@@ -3053,24 +3061,7 @@ Partial Class Main
         '
         'tabXPS
         '
-        Me.tabXPS.Controls.Add(Me.lblXPSHostname)
-        Me.tabXPS.Controls.Add(Me.txtXPSMalwareMD5)
-        Me.tabXPS.Controls.Add(Me.Label46)
-        Me.tabXPS.Controls.Add(Me.lblXPSStatus)
-        Me.tabXPS.Controls.Add(Me.txtXPSMalware)
-        Me.tabXPS.Controls.Add(Me.Label42)
-        Me.tabXPS.Controls.Add(Me.xpsPicture)
-        Me.tabXPS.Controls.Add(Me.txtXPSSIM)
-        Me.tabXPS.Controls.Add(Me.txtFELink2)
-        Me.tabXPS.Controls.Add(Me.Label39)
-        Me.tabXPS.Controls.Add(Me.GroupBox3)
-        Me.tabXPS.Controls.Add(Me.Label41)
-        Me.tabXPS.Controls.Add(Me.cmbXPSSeverity)
-        Me.tabXPS.Controls.Add(Me.xpsPort)
-        Me.tabXPS.Controls.Add(Me.Label38)
-        Me.tabXPS.Controls.Add(Me.txtXPSTarget)
-        Me.tabXPS.Controls.Add(Me.Label40)
-        Me.tabXPS.Controls.Add(Me.btnXPSSend)
+        Me.tabXPS.Controls.Add(Me.flowXPS)
         Me.tabXPS.Location = New System.Drawing.Point(4, 28)
         Me.tabXPS.Margin = New System.Windows.Forms.Padding(4)
         Me.tabXPS.Name = "tabXPS"
@@ -3084,7 +3075,7 @@ Partial Class Main
         '
         Me.lblXPSHostname.AutoSize = True
         Me.lblXPSHostname.BackColor = System.Drawing.Color.White
-        Me.lblXPSHostname.Location = New System.Drawing.Point(170, 472)
+        Me.lblXPSHostname.Location = New System.Drawing.Point(97, 102)
         Me.lblXPSHostname.MinimumSize = New System.Drawing.Size(367, 0)
         Me.lblXPSHostname.Name = "lblXPSHostname"
         Me.lblXPSHostname.Size = New System.Drawing.Size(367, 17)
@@ -3093,7 +3084,7 @@ Partial Class Main
         '
         'txtXPSMalwareMD5
         '
-        Me.txtXPSMalwareMD5.Location = New System.Drawing.Point(173, 150)
+        Me.txtXPSMalwareMD5.Location = New System.Drawing.Point(158, 126)
         Me.txtXPSMalwareMD5.Margin = New System.Windows.Forms.Padding(4)
         Me.txtXPSMalwareMD5.Name = "txtXPSMalwareMD5"
         Me.txtXPSMalwareMD5.Size = New System.Drawing.Size(233, 22)
@@ -3103,7 +3094,7 @@ Partial Class Main
         'Label46
         '
         Me.Label46.AutoSize = True
-        Me.Label46.Location = New System.Drawing.Point(44, 154)
+        Me.Label46.Location = New System.Drawing.Point(4, 122)
         Me.Label46.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label46.Name = "Label46"
         Me.Label46.Size = New System.Drawing.Size(97, 17)
@@ -3114,7 +3105,7 @@ Partial Class Main
         '
         Me.lblXPSStatus.AutoSize = True
         Me.lblXPSStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblXPSStatus.Location = New System.Drawing.Point(44, 228)
+        Me.lblXPSStatus.Location = New System.Drawing.Point(4, 188)
         Me.lblXPSStatus.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblXPSStatus.Name = "lblXPSStatus"
         Me.lblXPSStatus.Size = New System.Drawing.Size(107, 20)
@@ -3123,7 +3114,7 @@ Partial Class Main
         '
         'txtXPSMalware
         '
-        Me.txtXPSMalware.Location = New System.Drawing.Point(173, 118)
+        Me.txtXPSMalware.Location = New System.Drawing.Point(158, 96)
         Me.txtXPSMalware.Margin = New System.Windows.Forms.Padding(4)
         Me.txtXPSMalware.Name = "txtXPSMalware"
         Me.txtXPSMalware.Size = New System.Drawing.Size(233, 22)
@@ -3133,7 +3124,7 @@ Partial Class Main
         'Label42
         '
         Me.Label42.AutoSize = True
-        Me.Label42.Location = New System.Drawing.Point(44, 122)
+        Me.Label42.Location = New System.Drawing.Point(4, 92)
         Me.Label42.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label42.Name = "Label42"
         Me.Label42.Size = New System.Drawing.Size(105, 17)
@@ -3142,8 +3133,9 @@ Partial Class Main
         '
         'xpsPicture
         '
+        Me.xpsPicture.Dock = System.Windows.Forms.DockStyle.Fill
         Me.xpsPicture.Image = CType(resources.GetObject("xpsPicture.Image"), System.Drawing.Image)
-        Me.xpsPicture.Location = New System.Drawing.Point(76, 388)
+        Me.xpsPicture.Location = New System.Drawing.Point(3, 18)
         Me.xpsPicture.Margin = New System.Windows.Forms.Padding(4)
         Me.xpsPicture.Name = "xpsPicture"
         Me.xpsPicture.Size = New System.Drawing.Size(502, 168)
@@ -3151,40 +3143,29 @@ Partial Class Main
         Me.xpsPicture.TabIndex = 27
         Me.xpsPicture.TabStop = False
         '
-        'txtXPSSIM
-        '
-        Me.txtXPSSIM.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtXPSSIM.Location = New System.Drawing.Point(473, 150)
-        Me.txtXPSSIM.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtXPSSIM.Multiline = True
-        Me.txtXPSSIM.Name = "txtXPSSIM"
-        Me.txtXPSSIM.ReadOnly = True
-        Me.txtXPSSIM.Size = New System.Drawing.Size(272, 230)
-        Me.txtXPSSIM.TabIndex = 26
-        Me.txtXPSSIM.TabStop = False
-        Me.txtXPSSIM.Text = resources.GetString("txtXPSSIM.Text")
-        '
         'txtFELink2
         '
         Me.txtFELink2.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtFELink2.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.txtFELink2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFELink2.Location = New System.Drawing.Point(38, 337)
+        Me.txtFELink2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFELink2.Location = New System.Drawing.Point(4, 136)
         Me.txtFELink2.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFELink2.Name = "txtFELink2"
         Me.txtFELink2.ReadOnly = True
-        Me.txtFELink2.Size = New System.Drawing.Size(427, 16)
+        Me.txtFELink2.Size = New System.Drawing.Size(427, 17)
         Me.txtFELink2.TabIndex = 25
         Me.txtFELink2.TabStop = False
         Me.txtFELink2.Text = "http://fedeploycheck.fireeye.com/appliance-test/test-infection.exe"
         '
         'Label39
         '
+        Me.Label39.AutoSize = True
         Me.Label39.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label39.Location = New System.Drawing.Point(44, 262)
+        Me.Label39.Location = New System.Drawing.Point(4, 78)
         Me.Label39.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label39.MaximumSize = New System.Drawing.Size(700, 0)
         Me.Label39.Name = "Label39"
-        Me.Label39.Size = New System.Drawing.Size(400, 71)
+        Me.Label39.Size = New System.Drawing.Size(699, 54)
         Me.Label39.TabIndex = 24
         Me.Label39.Text = "To generate a verified hit from a test XPS ThreatScan download the following EXE " & _
     "to your target, or enter a custom MD5 hash above." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
@@ -3195,7 +3176,8 @@ Partial Class Main
         Me.GroupBox3.Controls.Add(Me.Label43)
         Me.GroupBox3.Controls.Add(Me.lbldemoxpsstatus)
         Me.GroupBox3.Controls.Add(Me.btnStartXPSListener)
-        Me.GroupBox3.Location = New System.Drawing.Point(473, 17)
+        Me.flowXPS.SetFlowBreak(Me.GroupBox3, True)
+        Me.GroupBox3.Location = New System.Drawing.Point(405, 4)
         Me.GroupBox3.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Padding = New System.Windows.Forms.Padding(4)
@@ -3248,7 +3230,7 @@ Partial Class Main
         'Label41
         '
         Me.Label41.AutoSize = True
-        Me.Label41.Location = New System.Drawing.Point(93, 86)
+        Me.Label41.Location = New System.Drawing.Point(4, 60)
         Me.Label41.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label41.Name = "Label41"
         Me.Label41.Size = New System.Drawing.Size(63, 17)
@@ -3260,7 +3242,7 @@ Partial Class Main
         Me.cmbXPSSeverity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbXPSSeverity.FormattingEnabled = True
         Me.cmbXPSSeverity.Items.AddRange(New Object() {"Low", "Medium", "High", "Critical"})
-        Me.cmbXPSSeverity.Location = New System.Drawing.Point(173, 82)
+        Me.cmbXPSSeverity.Location = New System.Drawing.Point(158, 64)
         Me.cmbXPSSeverity.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbXPSSeverity.Name = "cmbXPSSeverity"
         Me.cmbXPSSeverity.Size = New System.Drawing.Size(233, 24)
@@ -3268,7 +3250,7 @@ Partial Class Main
         '
         'xpsPort
         '
-        Me.xpsPort.Location = New System.Drawing.Point(173, 20)
+        Me.xpsPort.Location = New System.Drawing.Point(158, 4)
         Me.xpsPort.Margin = New System.Windows.Forms.Padding(4)
         Me.xpsPort.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
         Me.xpsPort.Name = "xpsPort"
@@ -3279,7 +3261,7 @@ Partial Class Main
         'Label38
         '
         Me.Label38.AutoSize = True
-        Me.Label38.Location = New System.Drawing.Point(11, 22)
+        Me.Label38.Location = New System.Drawing.Point(4, 0)
         Me.Label38.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label38.Name = "Label38"
         Me.Label38.Size = New System.Drawing.Size(146, 17)
@@ -3288,7 +3270,7 @@ Partial Class Main
         '
         'txtXPSTarget
         '
-        Me.txtXPSTarget.Location = New System.Drawing.Point(173, 50)
+        Me.txtXPSTarget.Location = New System.Drawing.Point(158, 34)
         Me.txtXPSTarget.Margin = New System.Windows.Forms.Padding(4)
         Me.txtXPSTarget.Name = "txtXPSTarget"
         Me.txtXPSTarget.Size = New System.Drawing.Size(233, 22)
@@ -3297,7 +3279,7 @@ Partial Class Main
         'Label40
         '
         Me.Label40.AutoSize = True
-        Me.Label40.Location = New System.Drawing.Point(35, 54)
+        Me.Label40.Location = New System.Drawing.Point(4, 30)
         Me.Label40.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label40.Name = "Label40"
         Me.Label40.Size = New System.Drawing.Size(122, 17)
@@ -3306,7 +3288,7 @@ Partial Class Main
         '
         'btnXPSSend
         '
-        Me.btnXPSSend.Location = New System.Drawing.Point(173, 188)
+        Me.btnXPSSend.Location = New System.Drawing.Point(158, 156)
         Me.btnXPSSend.Margin = New System.Windows.Forms.Padding(4)
         Me.btnXPSSend.Name = "btnXPSSend"
         Me.btnXPSSend.Size = New System.Drawing.Size(185, 28)
@@ -3400,6 +3382,97 @@ Partial Class Main
         Me.tablePANWBottom.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tablePANWBottom.Size = New System.Drawing.Size(707, 329)
         Me.tablePANWBottom.TabIndex = 43
+        '
+        'grpXPSPicture
+        '
+        Me.grpXPSPicture.AutoSize = True
+        Me.grpXPSPicture.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.grpXPSPicture.Controls.Add(Me.lblXPSHostname)
+        Me.grpXPSPicture.Controls.Add(Me.xpsPicture)
+        Me.grpXPSPicture.Location = New System.Drawing.Point(3, 160)
+        Me.grpXPSPicture.Name = "grpXPSPicture"
+        Me.grpXPSPicture.Size = New System.Drawing.Size(508, 189)
+        Me.grpXPSPicture.TabIndex = 42
+        Me.grpXPSPicture.TabStop = False
+        '
+        'tableXPSTextPic
+        '
+        Me.tableXPSTextPic.AutoSize = True
+        Me.tableXPSTextPic.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.tableXPSTextPic.ColumnCount = 1
+        Me.tableXPSTextPic.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableXPSTextPic.Controls.Add(Me.txtXPSSim, 0, 0)
+        Me.tableXPSTextPic.Controls.Add(Me.grpXPSPicture, 0, 3)
+        Me.tableXPSTextPic.Controls.Add(Me.Label39, 0, 1)
+        Me.tableXPSTextPic.Controls.Add(Me.txtFELink2, 0, 2)
+        Me.tableXPSTextPic.Location = New System.Drawing.Point(3, 217)
+        Me.tableXPSTextPic.Name = "tableXPSTextPic"
+        Me.tableXPSTextPic.RowCount = 4
+        Me.tableXPSTextPic.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableXPSTextPic.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableXPSTextPic.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableXPSTextPic.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableXPSTextPic.Size = New System.Drawing.Size(707, 352)
+        Me.tableXPSTextPic.TabIndex = 43
+        '
+        'txtXPSSim
+        '
+        Me.txtXPSSim.AutoSize = True
+        Me.txtXPSSim.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtXPSSim.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtXPSSim.Location = New System.Drawing.Point(3, 0)
+        Me.txtXPSSim.Margin = New System.Windows.Forms.Padding(3, 0, 3, 3)
+        Me.txtXPSSim.MaximumSize = New System.Drawing.Size(700, 0)
+        Me.txtXPSSim.Name = "txtXPSSim"
+        Me.txtXPSSim.Padding = New System.Windows.Forms.Padding(0, 0, 0, 3)
+        Me.txtXPSSim.Size = New System.Drawing.Size(700, 75)
+        Me.txtXPSSim.TabIndex = 43
+        Me.txtXPSSim.Text = resources.GetString("txtXPSSim.Text")
+        '
+        'tableXPSGrid
+        '
+        Me.tableXPSGrid.AutoSize = True
+        Me.tableXPSGrid.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.tableXPSGrid.ColumnCount = 2
+        Me.tableXPSGrid.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableXPSGrid.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tableXPSGrid.Controls.Add(Me.Label38, 0, 0)
+        Me.tableXPSGrid.Controls.Add(Me.xpsPort, 1, 0)
+        Me.tableXPSGrid.Controls.Add(Me.txtXPSMalwareMD5, 1, 4)
+        Me.tableXPSGrid.Controls.Add(Me.Label40, 0, 1)
+        Me.tableXPSGrid.Controls.Add(Me.btnXPSSend, 1, 5)
+        Me.tableXPSGrid.Controls.Add(Me.Label46, 0, 4)
+        Me.tableXPSGrid.Controls.Add(Me.txtXPSTarget, 1, 1)
+        Me.tableXPSGrid.Controls.Add(Me.Label41, 0, 2)
+        Me.tableXPSGrid.Controls.Add(Me.txtXPSMalware, 1, 3)
+        Me.tableXPSGrid.Controls.Add(Me.cmbXPSSeverity, 1, 2)
+        Me.tableXPSGrid.Controls.Add(Me.Label42, 0, 3)
+        Me.tableXPSGrid.Controls.Add(Me.lblXPSStatus, 0, 6)
+        Me.tableXPSGrid.Location = New System.Drawing.Point(3, 3)
+        Me.tableXPSGrid.Name = "tableXPSGrid"
+        Me.tableXPSGrid.RowCount = 7
+        Me.tableXPSGrid.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableXPSGrid.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableXPSGrid.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableXPSGrid.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableXPSGrid.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableXPSGrid.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableXPSGrid.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableXPSGrid.Size = New System.Drawing.Size(395, 208)
+        Me.tableXPSGrid.TabIndex = 44
+        '
+        'flowXPS
+        '
+        Me.flowXPS.AutoSize = True
+        Me.flowXPS.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.flowXPS.Controls.Add(Me.tableXPSGrid)
+        Me.flowXPS.Controls.Add(Me.GroupBox3)
+        Me.flowXPS.Controls.Add(Me.tableXPSTextPic)
+        Me.flowXPS.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.flowXPS.Location = New System.Drawing.Point(4, 4)
+        Me.flowXPS.Name = "flowXPS"
+        Me.flowXPS.Size = New System.Drawing.Size(1486, 890)
+        Me.flowXPS.TabIndex = 45
         '
         'Main
         '
@@ -3530,6 +3603,14 @@ Partial Class Main
         Me.flowAbout.PerformLayout()
         Me.tablePANWBottom.ResumeLayout(False)
         Me.tablePANWBottom.PerformLayout()
+        Me.grpXPSPicture.ResumeLayout(False)
+        Me.grpXPSPicture.PerformLayout()
+        Me.tableXPSTextPic.ResumeLayout(False)
+        Me.tableXPSTextPic.PerformLayout()
+        Me.tableXPSGrid.ResumeLayout(False)
+        Me.tableXPSGrid.PerformLayout()
+        Me.flowXPS.ResumeLayout(False)
+        Me.flowXPS.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -3690,7 +3771,6 @@ Partial Class Main
     Friend WithEvents lbldemoxpsstatus As System.Windows.Forms.Label
     Friend WithEvents txtFELink2 As System.Windows.Forms.TextBox
     Friend WithEvents Label39 As System.Windows.Forms.Label
-    Friend WithEvents txtXPSSIM As System.Windows.Forms.TextBox
     Friend WithEvents xpsPicture As System.Windows.Forms.PictureBox
     Friend WithEvents txtXPSMalware As System.Windows.Forms.TextBox
     Friend WithEvents Label42 As System.Windows.Forms.Label
@@ -3805,5 +3885,10 @@ Partial Class Main
     Friend WithEvents grpWildFirePicture As System.Windows.Forms.GroupBox
     Friend WithEvents txtPANWSim As System.Windows.Forms.Label
     Friend WithEvents tablePANWBottom As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents tableXPSTextPic As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents txtXPSSim As System.Windows.Forms.Label
+    Friend WithEvents grpXPSPicture As System.Windows.Forms.GroupBox
+    Friend WithEvents tableXPSGrid As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents flowXPS As System.Windows.Forms.FlowLayoutPanel
 
 End Class

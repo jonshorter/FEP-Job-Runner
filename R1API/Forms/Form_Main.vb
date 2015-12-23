@@ -1117,7 +1117,10 @@ Public Class Main
             xpsThreat.Rule = "Malware Detection Engine"
             xpsThreat.Severity = Me.cmbXPSSeverity.SelectedItem.ToString
             Dim xpststr As String = XPS.XPSThreatTOCSV(xpsThreat)
-            xps_sim_var.MalwareMD5 = txtXPSMalwareMD5.Text
+            If Not xps_sim_var Is Nothing Then
+                xps_sim_var.MalwareMD5 = txtXPSMalwareMD5.Text
+            End If
+
             XPS.SendEvent(xpststr)
 
         Catch Ex As Exception
