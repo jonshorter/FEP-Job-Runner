@@ -336,6 +336,8 @@ Public Module XPS
         Public prefix As String = "https://*:" & Main.xps_sim_Port.Value & "/"
         Public listener As HttpListener = New HttpListener
         Public certhash As String = ""
+        Public Property MalwareMD5 As String
+
 
         Public Sub Start()
             CertLoad()
@@ -404,9 +406,9 @@ Public Module XPS
                         Else
                             'Response for report query
                             response = context.Response
-                            If Not String.IsNullOrWhiteSpace(Main.txtFireEyeMalwareMD5.Text) Then
+                            If Not String.IsNullOrWhiteSpace(Me.MalwareMD5) Then
                                 'Use Specified MD5
-                                buffer = System.Text.Encoding.UTF8.GetBytes(XPS.XPS_MDE_Response_ToJSON(XPS.GenerateXPS_MDE_Response(Main.txtXPSMalwareMD5.Text)))
+                                buffer = System.Text.Encoding.UTF8.GetBytes(XPS.XPS_MDE_Response_ToJSON(XPS.GenerateXPS_MDE_Response(Me.MalwareMD5)))
                                 Debug.WriteLine("XPS Response with Custom MD5")
                             Else
                                 'Else use FETest MD5

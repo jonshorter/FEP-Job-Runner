@@ -1105,7 +1105,7 @@ Public Class Main
             xpsThreat.Rule = "Malware Detection Engine"
             xpsThreat.Severity = Me.cmbXPSSeverity.SelectedItem.ToString
             Dim xpststr As String = XPS.XPSThreatTOCSV(xpsThreat)
-
+            xps_sim_var.MalwareMD5 = txtXPSMalwareMD5.Text
             XPS.SendEvent(xpststr)
 
         Catch Ex As Exception
@@ -1741,6 +1741,36 @@ Public Class Main
     End Sub
 
     Private Sub tabPANW_Click(sender As Object, e As EventArgs) Handles tabPANW.Click
+
+    End Sub
+
+    Private Sub txtXPSMalwareMD5_Leave(sender As Object, e As EventArgs) Handles txtXPSMalwareMD5.Leave
+        If String.IsNullOrWhiteSpace(txtXPSMalwareMD5.Text) Then
+            txtXPSMalwareMD5.Text = "47f9fdc617f8c98a6732be534d8dbe9a"
+        End If
+    End Sub
+
+    Private Sub txtXPSMalwareMD5_TextChanged(sender As Object, e As EventArgs) Handles txtXPSMalwareMD5.TextChanged
+
+    End Sub
+
+    Private Sub txtPANWMalwareMD5_Leave(sender As Object, e As EventArgs) Handles txtPANWMalwareMD5.Leave
+        If String.IsNullOrWhiteSpace(txtPANWMalwareMD5.Text) Then
+            txtPANWMalwareMD5.Text = "47f9fdc617f8c98a6732be534d8dbe9a"
+        End If
+    End Sub
+
+    Private Sub txtPANWMalwareMD5_TextChanged(sender As Object, e As EventArgs) Handles txtPANWMalwareMD5.TextChanged
+
+    End Sub
+
+    Private Sub txtFireEyeMalwareMD5_Leave(sender As Object, e As EventArgs) Handles txtFireEyeMalwareMD5.Leave
+        If String.IsNullOrWhiteSpace(txtFireEyeMalwareMD5.Text) Then
+            txtFireEyeMalwareMD5.Text = "47f9fdc617f8c98a6732be534d8dbe9a"
+        End If
+    End Sub
+
+    Private Sub txtFireEyeMalwareMD5_TextChanged(sender As Object, e As EventArgs) Handles txtFireEyeMalwareMD5.TextChanged
 
     End Sub
 End Class
