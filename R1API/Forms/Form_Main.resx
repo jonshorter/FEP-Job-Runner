@@ -120,6 +120,20 @@
   <metadata name="tooltip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>205, 17</value>
   </metadata>
+  <data name="lbltxtAbout.Text" xml:space="preserve">
+    <value>
+R1 Job Runner is a tool for testing various APIs and Integrations of Resolution1. It's homepage is located at: https://github.com/bmartin5692/R1-Job-Runner
+
+This program utilizes the following third-party libraries:
+-Newtonsoft Json.Net for all JSON creation. More info can be found at http://www.newtonsoft.com/json
+
+-RestSharp for all RestAPI calls. More info can be found at http://restsharp.org
+
+-R1SimpleRestClient for interacting with the Resolution1 Rest API. More info can be found at https://github.com/bmartin5692/R1-RestAPI-Net
+
+
+</value>
+  </data>
   <metadata name="DataGridViewTextBoxColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1862,14 +1876,6 @@
   </data>
   <data name="txtXPSSIM.Text" xml:space="preserve">
     <value>The XPS CP Sim defaults to port 8448, and requires elevated privileges to place an SSL certificate in the keystore for https communication. After starting the XPS CP Sim, configure the R1 XPS connector to point to this HOSTNAME:8448. The XPS CP Sim will accept any username/password combination as long as they are not the same.</value>
-  </data>
-  <data name="TextBox1.Text" xml:space="preserve">
-    <value>
-
-This program makes use of the JobServices API referenced at https://server/adg.map.web/services/api/JobsService.asmx.
-
-This program utilizes Newtonsoft Json.Net for all JSON creation. You can find it at: http://www.newtonsoft.com/json
-</value>
   </data>
   <metadata name="ofdBox.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>

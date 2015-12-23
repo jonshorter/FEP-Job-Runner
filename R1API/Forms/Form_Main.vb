@@ -1631,13 +1631,7 @@ Public Class Main
         Return New System.Threading.Timer(R1TimeOutCall, Nothing, 10, 1500000)
     End Function
 
-    Private Sub txtJobsSearch_TextChanged(sender As Object, e As EventArgs) Handles txtJobsSearch.TextChanged
-
-    End Sub
-
-    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
-
-    End Sub
+   
 
     Private Sub btnExecute_Click(sender As Object, e As EventArgs) Handles btnExecute.Click
         ResetStatusBar()
