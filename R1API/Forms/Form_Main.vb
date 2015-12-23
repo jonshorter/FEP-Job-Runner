@@ -1057,7 +1057,7 @@ Public Class Main
 
     Private Sub tabPANW_Enter(sender As Object, e As EventArgs) Handles tabPANW.Enter
         cmbPANWAlert.SelectedIndex = 0
-        Dim panwsimtxt As String = "The Wildfire Sim simulates R1 queries to Wildfire to get malware reports and kick off validated threatscans. The Wildfire Sim defaults to port 8449, and requires elevated privileges to place an SSL certificate in the keystore for https communication. After starting the Wildfire Sim, configure the R1 XPS connector to point to https://" & My.Computer.Name & ":8449. The Wildfire Sim will accept any API Key."
+        Dim panwsimtxt As String = "The Wildfire Sim simulates R1 queries to Wildfire to get malware reports and kick off validated threatscans. The Wildfire Sim defaults to port 8449, and requires elevated privileges to place an SSL certificate in the keystore for https communication. After starting the Wildfire Sim, configure the R1 PANW connector to point to https://" & My.Computer.Name & ":8449. The Wildfire Sim will accept any API Key."
         txtPANWSim.Text = panwsimtxt
     End Sub
 
@@ -1740,4 +1740,7 @@ Public Class Main
         End With
     End Sub
 
+    Private Sub tabPANW_Click(sender As Object, e As EventArgs) Handles tabPANW.Click
+
+    End Sub
 End Class
