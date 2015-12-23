@@ -1195,7 +1195,7 @@ Public Class Main
     End Sub
 
 
-    Private Sub TextBox4_Click(sender As Object, e As EventArgs) Handles TextBox4.Click
+    Private Sub TextBox4_Click(sender As Object, e As EventArgs) Handles txtFireEyeDownload1.Click
         Dim sinfo As New ProcessStartInfo(txtFELink.Text)
         Process.Start(sinfo)
     End Sub
@@ -1795,4 +1795,5 @@ Public Class Main
     Private Sub xps_sim_Port_ValueChanged(sender As Object, e As EventArgs) Handles xps_sim_Port.ValueChanged
         lblXPSHostname.Text = My.Computer.Name & ":" & xps_sim_Port.Value
     End Sub
+
 End Class

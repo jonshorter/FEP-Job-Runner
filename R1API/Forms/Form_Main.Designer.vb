@@ -225,8 +225,6 @@ Partial Class Main
         Me.btnSaveAsBox = New System.Windows.Forms.Button()
         Me.tabFireEye = New System.Windows.Forms.TabPage()
         Me.flowFireEye = New System.Windows.Forms.FlowLayoutPanel()
-        Me.lblFEStatus = New System.Windows.Forms.Label()
-        Me.Label37 = New System.Windows.Forms.Label()
         Me.tableFireEye = New System.Windows.Forms.TableLayoutPanel()
         Me.Label33 = New System.Windows.Forms.Label()
         Me.txtFireEyeMalwareMD5 = New System.Windows.Forms.TextBox()
@@ -237,30 +235,34 @@ Partial Class Main
         Me.Label34 = New System.Windows.Forms.Label()
         Me.cmbFEAlertType = New System.Windows.Forms.ComboBox()
         Me.txtFireEyeMalwareName = New System.Windows.Forms.TextBox()
+        Me.lblFEStatus = New System.Windows.Forms.Label()
+        Me.Label37 = New System.Windows.Forms.Label()
         Me.txtFELink = New System.Windows.Forms.TextBox()
         Me.tabPANW = New System.Windows.Forms.TabPage()
-        Me.lblWildFireURL = New System.Windows.Forms.Label()
-        Me.txtPANWMalwareName = New System.Windows.Forms.TextBox()
-        Me.Label49 = New System.Windows.Forms.Label()
-        Me.txtPANWMalwareMD5 = New System.Windows.Forms.TextBox()
-        Me.Label48 = New System.Windows.Forms.Label()
-        Me.panwPicture = New System.Windows.Forms.PictureBox()
-        Me.txtPANWSim = New System.Windows.Forms.TextBox()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.Label45 = New System.Windows.Forms.Label()
-        Me.lblPANWStatus = New System.Windows.Forms.Label()
-        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.flowPANW = New System.Windows.Forms.FlowLayoutPanel()
+        Me.lblPANWHitInstruction = New System.Windows.Forms.Label()
+        Me.grpWildFireSim = New System.Windows.Forms.GroupBox()
         Me.panw_sim_port = New System.Windows.Forms.NumericUpDown()
         Me.Label44 = New System.Windows.Forms.Label()
         Me.lblwildfirestatus = New System.Windows.Forms.Label()
         Me.btn_WildfireStart = New System.Windows.Forms.Button()
-        Me.panwPort = New System.Windows.Forms.NumericUpDown()
+        Me.tablePANWSendAlert = New System.Windows.Forms.TableLayoutPanel()
         Me.Label30 = New System.Windows.Forms.Label()
-        Me.Label35 = New System.Windows.Forms.Label()
-        Me.cmbPANWAlert = New System.Windows.Forms.ComboBox()
-        Me.txtPANWTarget = New System.Windows.Forms.TextBox()
         Me.Label36 = New System.Windows.Forms.Label()
+        Me.txtPANWMalwareMD5 = New System.Windows.Forms.TextBox()
+        Me.txtPANWMalwareName = New System.Windows.Forms.TextBox()
+        Me.Label35 = New System.Windows.Forms.Label()
+        Me.Label49 = New System.Windows.Forms.Label()
+        Me.lblPANWStatus = New System.Windows.Forms.Label()
+        Me.Label48 = New System.Windows.Forms.Label()
+        Me.panwPort = New System.Windows.Forms.NumericUpDown()
         Me.btnPANWSend = New System.Windows.Forms.Button()
+        Me.txtPANWTarget = New System.Windows.Forms.TextBox()
+        Me.cmbPANWAlert = New System.Windows.Forms.ComboBox()
+        Me.txtFireEyeDownload1 = New System.Windows.Forms.TextBox()
+        Me.grpWildFirePicture = New System.Windows.Forms.GroupBox()
+        Me.lblWildFireURL = New System.Windows.Forms.Label()
+        Me.panwPicture = New System.Windows.Forms.PictureBox()
         Me.tabXPS = New System.Windows.Forms.TabPage()
         Me.lblXPSHostname = New System.Windows.Forms.Label()
         Me.txtXPSMalwareMD5 = New System.Windows.Forms.TextBox()
@@ -291,6 +293,8 @@ Partial Class Main
         Me.ofdBox = New System.Windows.Forms.OpenFileDialog()
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
         Me.tooltip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.txtPANWSim = New System.Windows.Forms.Label()
+        Me.tablePANWBottom = New System.Windows.Forms.TableLayoutPanel()
         Me.GroupBox4.SuspendLayout()
         Me.grpReqSet.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -355,10 +359,13 @@ Partial Class Main
         Me.flowFireEye.SuspendLayout()
         Me.tableFireEye.SuspendLayout()
         Me.tabPANW.SuspendLayout()
-        CType(Me.panwPicture, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox5.SuspendLayout()
+        Me.flowPANW.SuspendLayout()
+        Me.grpWildFireSim.SuspendLayout()
         CType(Me.panw_sim_port, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tablePANWSendAlert.SuspendLayout()
         CType(Me.panwPort, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grpWildFirePicture.SuspendLayout()
+        CType(Me.panwPicture, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabXPS.SuspendLayout()
         CType(Me.xpsPicture, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox3.SuspendLayout()
@@ -366,6 +373,7 @@ Partial Class Main
         CType(Me.xpsPort, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabAbout.SuspendLayout()
         Me.flowAbout.SuspendLayout()
+        Me.tablePANWBottom.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnExecute
@@ -1778,7 +1786,7 @@ Partial Class Main
         Me.tabMenu.Margin = New System.Windows.Forms.Padding(4)
         Me.tabMenu.Name = "tabMenu"
         Me.tabMenu.SelectedIndex = 0
-        Me.tabMenu.Size = New System.Drawing.Size(840, 732)
+        Me.tabMenu.Size = New System.Drawing.Size(1502, 930)
         Me.tabMenu.TabIndex = 0
         '
         'tabSettings
@@ -1788,7 +1796,7 @@ Partial Class Main
         Me.tabSettings.Margin = New System.Windows.Forms.Padding(4)
         Me.tabSettings.Name = "tabSettings"
         Me.tabSettings.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabSettings.Size = New System.Drawing.Size(832, 700)
+        Me.tabSettings.Size = New System.Drawing.Size(1494, 898)
         Me.tabSettings.TabIndex = 1
         Me.tabSettings.Text = "Settings"
         Me.tabSettings.UseVisualStyleBackColor = True
@@ -1798,7 +1806,7 @@ Partial Class Main
         Me.tabRESTUI.Controls.Add(Me.tabControlJobsRest)
         Me.tabRESTUI.Location = New System.Drawing.Point(4, 28)
         Me.tabRESTUI.Name = "tabRESTUI"
-        Me.tabRESTUI.Size = New System.Drawing.Size(832, 700)
+        Me.tabRESTUI.Size = New System.Drawing.Size(1494, 898)
         Me.tabRESTUI.TabIndex = 7
         Me.tabRESTUI.Text = "REST UI"
         Me.tabRESTUI.UseVisualStyleBackColor = True
@@ -1813,7 +1821,7 @@ Partial Class Main
         Me.tabControlJobsRest.Location = New System.Drawing.Point(0, 0)
         Me.tabControlJobsRest.Name = "tabControlJobsRest"
         Me.tabControlJobsRest.SelectedIndex = 0
-        Me.tabControlJobsRest.Size = New System.Drawing.Size(832, 700)
+        Me.tabControlJobsRest.Size = New System.Drawing.Size(1494, 898)
         Me.tabControlJobsRest.TabIndex = 0
         '
         'tabTasks
@@ -1821,7 +1829,7 @@ Partial Class Main
         Me.tabTasks.Controls.Add(Me.flowTasks)
         Me.tabTasks.Location = New System.Drawing.Point(4, 25)
         Me.tabTasks.Name = "tabTasks"
-        Me.tabTasks.Size = New System.Drawing.Size(824, 671)
+        Me.tabTasks.Size = New System.Drawing.Size(1486, 869)
         Me.tabTasks.TabIndex = 2
         Me.tabTasks.Text = "Tasks"
         Me.tabTasks.UseVisualStyleBackColor = True
@@ -1833,7 +1841,7 @@ Partial Class Main
         Me.flowTasks.Dock = System.Windows.Forms.DockStyle.Fill
         Me.flowTasks.Location = New System.Drawing.Point(0, 0)
         Me.flowTasks.Name = "flowTasks"
-        Me.flowTasks.Size = New System.Drawing.Size(824, 671)
+        Me.flowTasks.Size = New System.Drawing.Size(1486, 869)
         Me.flowTasks.TabIndex = 0
         '
         'tabProjects
@@ -2509,7 +2517,7 @@ Partial Class Main
         Me.tabJobExecution.Margin = New System.Windows.Forms.Padding(4)
         Me.tabJobExecution.Name = "tabJobExecution"
         Me.tabJobExecution.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabJobExecution.Size = New System.Drawing.Size(832, 700)
+        Me.tabJobExecution.Size = New System.Drawing.Size(1494, 898)
         Me.tabJobExecution.TabIndex = 0
         Me.tabJobExecution.Text = "JobsAPI Execution"
         Me.tabJobExecution.UseVisualStyleBackColor = True
@@ -2519,7 +2527,7 @@ Partial Class Main
         Me.lblJobStatus.AutoSize = True
         Me.lblJobStatus.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.lblJobStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblJobStatus.Location = New System.Drawing.Point(4, 676)
+        Me.lblJobStatus.Location = New System.Drawing.Point(4, 874)
         Me.lblJobStatus.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblJobStatus.MaximumSize = New System.Drawing.Size(667, 0)
         Me.lblJobStatus.MinimumSize = New System.Drawing.Size(667, 0)
@@ -2568,7 +2576,7 @@ Partial Class Main
         Me.tabFireEye.Margin = New System.Windows.Forms.Padding(4)
         Me.tabFireEye.Name = "tabFireEye"
         Me.tabFireEye.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabFireEye.Size = New System.Drawing.Size(832, 700)
+        Me.tabFireEye.Size = New System.Drawing.Size(1494, 898)
         Me.tabFireEye.TabIndex = 4
         Me.tabFireEye.Text = "FireEye"
         Me.tabFireEye.UseVisualStyleBackColor = True
@@ -2584,33 +2592,8 @@ Partial Class Main
         Me.flowFireEye.Dock = System.Windows.Forms.DockStyle.Fill
         Me.flowFireEye.Location = New System.Drawing.Point(4, 4)
         Me.flowFireEye.Name = "flowFireEye"
-        Me.flowFireEye.Size = New System.Drawing.Size(824, 692)
+        Me.flowFireEye.Size = New System.Drawing.Size(1486, 890)
         Me.flowFireEye.TabIndex = 43
-        '
-        'lblFEStatus
-        '
-        Me.lblFEStatus.AutoSize = True
-        Me.flowFireEye.SetFlowBreak(Me.lblFEStatus, True)
-        Me.lblFEStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFEStatus.Location = New System.Drawing.Point(4, 164)
-        Me.lblFEStatus.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblFEStatus.Name = "lblFEStatus"
-        Me.lblFEStatus.Size = New System.Drawing.Size(95, 20)
-        Me.lblFEStatus.TabIndex = 32
-        Me.lblFEStatus.Text = "lblFEStatus"
-        '
-        'Label37
-        '
-        Me.Label37.AutoSize = True
-        Me.flowFireEye.SetFlowBreak(Me.Label37, True)
-        Me.Label37.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label37.Location = New System.Drawing.Point(4, 184)
-        Me.Label37.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label37.Name = "Label37"
-        Me.Label37.Size = New System.Drawing.Size(788, 36)
-        Me.Label37.TabIndex = 6
-        Me.Label37.Text = "To generate a verified hit from a test FireEye ThreatScan download the following " & _
-    "EXE to your target, or enter a Custom MD5 Hash above." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         '
         'tableFireEye
         '
@@ -2728,12 +2711,37 @@ Partial Class Main
         Me.txtFireEyeMalwareName.TabIndex = 40
         Me.txtFireEyeMalwareName.Text = "Super.Evil.Malware"
         '
+        'lblFEStatus
+        '
+        Me.lblFEStatus.AutoSize = True
+        Me.flowFireEye.SetFlowBreak(Me.lblFEStatus, True)
+        Me.lblFEStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblFEStatus.Location = New System.Drawing.Point(4, 164)
+        Me.lblFEStatus.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblFEStatus.Name = "lblFEStatus"
+        Me.lblFEStatus.Size = New System.Drawing.Size(95, 20)
+        Me.lblFEStatus.TabIndex = 32
+        Me.lblFEStatus.Text = "lblFEStatus"
+        '
+        'Label37
+        '
+        Me.Label37.AutoSize = True
+        Me.flowFireEye.SetFlowBreak(Me.Label37, True)
+        Me.Label37.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label37.Location = New System.Drawing.Point(4, 184)
+        Me.Label37.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label37.Name = "Label37"
+        Me.Label37.Size = New System.Drawing.Size(907, 18)
+        Me.Label37.TabIndex = 6
+        Me.Label37.Text = "To generate a verified hit from a test FireEye ThreatScan download the following " & _
+    "EXE to your target, or enter a Custom MD5 Hash above." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        '
         'txtFELink
         '
         Me.txtFELink.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtFELink.Cursor = System.Windows.Forms.Cursors.Hand
         Me.txtFELink.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFELink.Location = New System.Drawing.Point(4, 224)
+        Me.txtFELink.Location = New System.Drawing.Point(4, 206)
         Me.txtFELink.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFELink.Name = "txtFELink"
         Me.txtFELink.ReadOnly = True
@@ -2744,155 +2752,59 @@ Partial Class Main
         '
         'tabPANW
         '
-        Me.tabPANW.Controls.Add(Me.lblWildFireURL)
-        Me.tabPANW.Controls.Add(Me.txtPANWMalwareName)
-        Me.tabPANW.Controls.Add(Me.Label49)
-        Me.tabPANW.Controls.Add(Me.txtPANWMalwareMD5)
-        Me.tabPANW.Controls.Add(Me.Label48)
-        Me.tabPANW.Controls.Add(Me.panwPicture)
-        Me.tabPANW.Controls.Add(Me.txtPANWSim)
-        Me.tabPANW.Controls.Add(Me.TextBox4)
-        Me.tabPANW.Controls.Add(Me.Label45)
-        Me.tabPANW.Controls.Add(Me.lblPANWStatus)
-        Me.tabPANW.Controls.Add(Me.GroupBox5)
-        Me.tabPANW.Controls.Add(Me.panwPort)
-        Me.tabPANW.Controls.Add(Me.Label30)
-        Me.tabPANW.Controls.Add(Me.Label35)
-        Me.tabPANW.Controls.Add(Me.cmbPANWAlert)
-        Me.tabPANW.Controls.Add(Me.txtPANWTarget)
-        Me.tabPANW.Controls.Add(Me.Label36)
-        Me.tabPANW.Controls.Add(Me.btnPANWSend)
+        Me.tabPANW.Controls.Add(Me.flowPANW)
         Me.tabPANW.Location = New System.Drawing.Point(4, 28)
         Me.tabPANW.Margin = New System.Windows.Forms.Padding(4)
         Me.tabPANW.Name = "tabPANW"
-        Me.tabPANW.Size = New System.Drawing.Size(832, 700)
+        Me.tabPANW.Size = New System.Drawing.Size(1494, 898)
         Me.tabPANW.TabIndex = 5
         Me.tabPANW.Text = "PANW"
         Me.tabPANW.UseVisualStyleBackColor = True
         '
-        'lblWildFireURL
+        'flowPANW
         '
-        Me.lblWildFireURL.AutoSize = True
-        Me.lblWildFireURL.BackColor = System.Drawing.Color.White
-        Me.lblWildFireURL.Location = New System.Drawing.Point(170, 490)
-        Me.lblWildFireURL.MinimumSize = New System.Drawing.Size(367, 0)
-        Me.lblWildFireURL.Name = "lblWildFireURL"
-        Me.lblWildFireURL.Size = New System.Drawing.Size(367, 17)
-        Me.lblWildFireURL.TabIndex = 40
-        Me.lblWildFireURL.Text = "https://wildfire:8449"
+        Me.flowPANW.AutoSize = True
+        Me.flowPANW.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.flowPANW.Controls.Add(Me.tablePANWSendAlert)
+        Me.flowPANW.Controls.Add(Me.grpWildFireSim)
+        Me.flowPANW.Controls.Add(Me.tablePANWBottom)
+        Me.flowPANW.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.flowPANW.Location = New System.Drawing.Point(0, 0)
+        Me.flowPANW.Name = "flowPANW"
+        Me.flowPANW.Size = New System.Drawing.Size(1494, 898)
+        Me.flowPANW.TabIndex = 41
         '
-        'txtPANWMalwareName
+        'lblPANWHitInstruction
         '
-        Me.txtPANWMalwareName.Location = New System.Drawing.Point(173, 120)
-        Me.txtPANWMalwareName.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtPANWMalwareName.Name = "txtPANWMalwareName"
-        Me.txtPANWMalwareName.Size = New System.Drawing.Size(233, 22)
-        Me.txtPANWMalwareName.TabIndex = 38
-        Me.txtPANWMalwareName.Text = "Super.Evil.Malware"
+        Me.lblPANWHitInstruction.AutoSize = True
+        Me.lblPANWHitInstruction.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblPANWHitInstruction.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPANWHitInstruction.Location = New System.Drawing.Point(4, 75)
+        Me.lblPANWHitInstruction.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblPANWHitInstruction.MaximumSize = New System.Drawing.Size(700, 0)
+        Me.lblPANWHitInstruction.Name = "lblPANWHitInstruction"
+        Me.lblPANWHitInstruction.Size = New System.Drawing.Size(699, 36)
+        Me.lblPANWHitInstruction.TabIndex = 32
+        Me.lblPANWHitInstruction.Text = "To generate a verified hit from a test PANW ThreatScan download the following EXE" & _
+    " to your target, or enter a custom MD5 Hash above."
         '
-        'Label49
+        'grpWildFireSim
         '
-        Me.Label49.AutoSize = True
-        Me.Label49.Location = New System.Drawing.Point(44, 124)
-        Me.Label49.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label49.Name = "Label49"
-        Me.Label49.Size = New System.Drawing.Size(105, 17)
-        Me.Label49.TabIndex = 39
-        Me.Label49.Text = "Malware Name:"
-        '
-        'txtPANWMalwareMD5
-        '
-        Me.txtPANWMalwareMD5.Location = New System.Drawing.Point(173, 150)
-        Me.txtPANWMalwareMD5.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtPANWMalwareMD5.Name = "txtPANWMalwareMD5"
-        Me.txtPANWMalwareMD5.Size = New System.Drawing.Size(233, 22)
-        Me.txtPANWMalwareMD5.TabIndex = 3
-        Me.txtPANWMalwareMD5.Text = "47f9fdc617f8c98a6732be534d8dbe9a"
-        '
-        'Label48
-        '
-        Me.Label48.AutoSize = True
-        Me.Label48.Location = New System.Drawing.Point(44, 154)
-        Me.Label48.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label48.Name = "Label48"
-        Me.Label48.Size = New System.Drawing.Size(97, 17)
-        Me.Label48.TabIndex = 37
-        Me.Label48.Text = "Malware MD5:"
-        '
-        'panwPicture
-        '
-        Me.panwPicture.Image = CType(resources.GetObject("panwPicture.Image"), System.Drawing.Image)
-        Me.panwPicture.Location = New System.Drawing.Point(59, 405)
-        Me.panwPicture.Margin = New System.Windows.Forms.Padding(4)
-        Me.panwPicture.Name = "panwPicture"
-        Me.panwPicture.Size = New System.Drawing.Size(516, 147)
-        Me.panwPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
-        Me.panwPicture.TabIndex = 35
-        Me.panwPicture.TabStop = False
-        '
-        'txtPANWSim
-        '
-        Me.txtPANWSim.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtPANWSim.Location = New System.Drawing.Point(472, 150)
-        Me.txtPANWSim.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtPANWSim.Multiline = True
-        Me.txtPANWSim.Name = "txtPANWSim"
-        Me.txtPANWSim.ReadOnly = True
-        Me.txtPANWSim.Size = New System.Drawing.Size(272, 230)
-        Me.txtPANWSim.TabIndex = 34
-        Me.txtPANWSim.TabStop = False
-        Me.txtPANWSim.Text = resources.GetString("txtPANWSim.Text")
-        '
-        'TextBox4
-        '
-        Me.TextBox4.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox4.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.TextBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox4.Location = New System.Drawing.Point(37, 358)
-        Me.TextBox4.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.ReadOnly = True
-        Me.TextBox4.Size = New System.Drawing.Size(427, 16)
-        Me.TextBox4.TabIndex = 33
-        Me.TextBox4.TabStop = False
-        Me.TextBox4.Text = "http://fedeploycheck.fireeye.com/appliance-test/test-infection.exe"
-        '
-        'Label45
-        '
-        Me.Label45.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label45.Location = New System.Drawing.Point(43, 291)
-        Me.Label45.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label45.Name = "Label45"
-        Me.Label45.Size = New System.Drawing.Size(400, 63)
-        Me.Label45.TabIndex = 32
-        Me.Label45.Text = "To generate a verified hit from a test PANW" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " ThreatScan download the following E" & _
-    "XE to your target, or enter a custom MD5 Hash above." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
-        '
-        'lblPANWStatus
-        '
-        Me.lblPANWStatus.AutoSize = True
-        Me.lblPANWStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPANWStatus.Location = New System.Drawing.Point(56, 237)
-        Me.lblPANWStatus.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblPANWStatus.Name = "lblPANWStatus"
-        Me.lblPANWStatus.Size = New System.Drawing.Size(124, 20)
-        Me.lblPANWStatus.TabIndex = 31
-        Me.lblPANWStatus.Text = "lblPANWStatus"
-        '
-        'GroupBox5
-        '
-        Me.GroupBox5.Controls.Add(Me.panw_sim_port)
-        Me.GroupBox5.Controls.Add(Me.Label44)
-        Me.GroupBox5.Controls.Add(Me.lblwildfirestatus)
-        Me.GroupBox5.Controls.Add(Me.btn_WildfireStart)
-        Me.GroupBox5.Location = New System.Drawing.Point(475, 17)
-        Me.GroupBox5.Margin = New System.Windows.Forms.Padding(4)
-        Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Padding = New System.Windows.Forms.Padding(4)
-        Me.GroupBox5.Size = New System.Drawing.Size(272, 126)
-        Me.GroupBox5.TabIndex = 24
-        Me.GroupBox5.TabStop = False
-        Me.GroupBox5.Text = "PANW Wildfire Sim"
+        Me.grpWildFireSim.AutoSize = True
+        Me.grpWildFireSim.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.grpWildFireSim.Controls.Add(Me.panw_sim_port)
+        Me.grpWildFireSim.Controls.Add(Me.Label44)
+        Me.grpWildFireSim.Controls.Add(Me.lblwildfirestatus)
+        Me.grpWildFireSim.Controls.Add(Me.btn_WildfireStart)
+        Me.flowPANW.SetFlowBreak(Me.grpWildFireSim, True)
+        Me.grpWildFireSim.Location = New System.Drawing.Point(419, 4)
+        Me.grpWildFireSim.Margin = New System.Windows.Forms.Padding(4)
+        Me.grpWildFireSim.Name = "grpWildFireSim"
+        Me.grpWildFireSim.Padding = New System.Windows.Forms.Padding(4)
+        Me.grpWildFireSim.Size = New System.Drawing.Size(272, 137)
+        Me.grpWildFireSim.TabIndex = 24
+        Me.grpWildFireSim.TabStop = False
+        Me.grpWildFireSim.Text = "PANW Wildfire Sim"
         '
         'panw_sim_port
         '
@@ -2935,9 +2847,120 @@ Partial Class Main
         Me.btn_WildfireStart.Text = "Start Wildfire Sim"
         Me.btn_WildfireStart.UseVisualStyleBackColor = True
         '
+        'tablePANWSendAlert
+        '
+        Me.tablePANWSendAlert.AutoSize = True
+        Me.tablePANWSendAlert.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.tablePANWSendAlert.ColumnCount = 2
+        Me.tablePANWSendAlert.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tablePANWSendAlert.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tablePANWSendAlert.Controls.Add(Me.Label30, 0, 0)
+        Me.tablePANWSendAlert.Controls.Add(Me.Label36, 0, 1)
+        Me.tablePANWSendAlert.Controls.Add(Me.txtPANWMalwareMD5, 1, 4)
+        Me.tablePANWSendAlert.Controls.Add(Me.txtPANWMalwareName, 1, 3)
+        Me.tablePANWSendAlert.Controls.Add(Me.Label35, 0, 2)
+        Me.tablePANWSendAlert.Controls.Add(Me.Label49, 0, 3)
+        Me.tablePANWSendAlert.Controls.Add(Me.lblPANWStatus, 0, 6)
+        Me.tablePANWSendAlert.Controls.Add(Me.Label48, 0, 4)
+        Me.tablePANWSendAlert.Controls.Add(Me.panwPort, 1, 0)
+        Me.tablePANWSendAlert.Controls.Add(Me.btnPANWSend, 1, 5)
+        Me.tablePANWSendAlert.Controls.Add(Me.txtPANWTarget, 1, 1)
+        Me.tablePANWSendAlert.Controls.Add(Me.cmbPANWAlert, 1, 2)
+        Me.tablePANWSendAlert.Location = New System.Drawing.Point(3, 3)
+        Me.tablePANWSendAlert.Name = "tablePANWSendAlert"
+        Me.tablePANWSendAlert.RowCount = 7
+        Me.tablePANWSendAlert.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tablePANWSendAlert.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tablePANWSendAlert.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tablePANWSendAlert.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tablePANWSendAlert.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tablePANWSendAlert.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tablePANWSendAlert.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tablePANWSendAlert.Size = New System.Drawing.Size(409, 207)
+        Me.tablePANWSendAlert.TabIndex = 0
+        '
+        'Label30
+        '
+        Me.Label30.AutoSize = True
+        Me.Label30.Location = New System.Drawing.Point(4, 0)
+        Me.Label30.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(160, 17)
+        Me.Label30.TabIndex = 10
+        Me.Label30.Text = "R1 PANW Listener Port:"
+        '
+        'Label36
+        '
+        Me.Label36.AutoSize = True
+        Me.Label36.Location = New System.Drawing.Point(4, 30)
+        Me.Label36.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label36.Name = "Label36"
+        Me.Label36.Size = New System.Drawing.Size(122, 17)
+        Me.Label36.TabIndex = 6
+        Me.Label36.Text = "Target Hostname:"
+        '
+        'txtPANWMalwareMD5
+        '
+        Me.txtPANWMalwareMD5.Location = New System.Drawing.Point(172, 126)
+        Me.txtPANWMalwareMD5.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtPANWMalwareMD5.Name = "txtPANWMalwareMD5"
+        Me.txtPANWMalwareMD5.Size = New System.Drawing.Size(233, 22)
+        Me.txtPANWMalwareMD5.TabIndex = 3
+        Me.txtPANWMalwareMD5.Text = "47f9fdc617f8c98a6732be534d8dbe9a"
+        '
+        'txtPANWMalwareName
+        '
+        Me.txtPANWMalwareName.Location = New System.Drawing.Point(172, 96)
+        Me.txtPANWMalwareName.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtPANWMalwareName.Name = "txtPANWMalwareName"
+        Me.txtPANWMalwareName.Size = New System.Drawing.Size(233, 22)
+        Me.txtPANWMalwareName.TabIndex = 38
+        Me.txtPANWMalwareName.Text = "Super.Evil.Malware"
+        '
+        'Label35
+        '
+        Me.Label35.AutoSize = True
+        Me.Label35.Location = New System.Drawing.Point(4, 60)
+        Me.Label35.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label35.Name = "Label35"
+        Me.Label35.Size = New System.Drawing.Size(77, 17)
+        Me.Label35.TabIndex = 9
+        Me.Label35.Text = "Alert Type:"
+        '
+        'Label49
+        '
+        Me.Label49.AutoSize = True
+        Me.Label49.Location = New System.Drawing.Point(4, 92)
+        Me.Label49.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label49.Name = "Label49"
+        Me.Label49.Size = New System.Drawing.Size(105, 17)
+        Me.Label49.TabIndex = 39
+        Me.Label49.Text = "Malware Name:"
+        '
+        'lblPANWStatus
+        '
+        Me.lblPANWStatus.AutoSize = True
+        Me.lblPANWStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPANWStatus.Location = New System.Drawing.Point(4, 187)
+        Me.lblPANWStatus.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblPANWStatus.Name = "lblPANWStatus"
+        Me.lblPANWStatus.Size = New System.Drawing.Size(124, 20)
+        Me.lblPANWStatus.TabIndex = 31
+        Me.lblPANWStatus.Text = "lblPANWStatus"
+        '
+        'Label48
+        '
+        Me.Label48.AutoSize = True
+        Me.Label48.Location = New System.Drawing.Point(4, 122)
+        Me.Label48.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label48.Name = "Label48"
+        Me.Label48.Size = New System.Drawing.Size(97, 17)
+        Me.Label48.TabIndex = 37
+        Me.Label48.Text = "Malware MD5:"
+        '
         'panwPort
         '
-        Me.panwPort.Location = New System.Drawing.Point(173, 20)
+        Me.panwPort.Location = New System.Drawing.Point(172, 4)
         Me.panwPort.Margin = New System.Windows.Forms.Padding(4)
         Me.panwPort.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
         Me.panwPort.Name = "panwPort"
@@ -2945,25 +2968,25 @@ Partial Class Main
         Me.panwPort.TabIndex = 0
         Me.panwPort.Value = New Decimal(New Integer() {514, 0, 0, 0})
         '
-        'Label30
+        'btnPANWSend
         '
-        Me.Label30.AutoSize = True
-        Me.Label30.Location = New System.Drawing.Point(11, 22)
-        Me.Label30.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(160, 17)
-        Me.Label30.TabIndex = 10
-        Me.Label30.Text = "R1 PANW Listener Port:"
+        Me.btnPANWSend.AutoSize = True
+        Me.btnPANWSend.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnPANWSend.Location = New System.Drawing.Point(172, 156)
+        Me.btnPANWSend.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnPANWSend.Name = "btnPANWSend"
+        Me.btnPANWSend.Size = New System.Drawing.Size(180, 27)
+        Me.btnPANWSend.TabIndex = 4
+        Me.btnPANWSend.Text = "Send PANW SysLog Alert"
+        Me.btnPANWSend.UseVisualStyleBackColor = True
         '
-        'Label35
+        'txtPANWTarget
         '
-        Me.Label35.AutoSize = True
-        Me.Label35.Location = New System.Drawing.Point(56, 86)
-        Me.Label35.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label35.Name = "Label35"
-        Me.Label35.Size = New System.Drawing.Size(77, 17)
-        Me.Label35.TabIndex = 9
-        Me.Label35.Text = "Alert Type:"
+        Me.txtPANWTarget.Location = New System.Drawing.Point(172, 34)
+        Me.txtPANWTarget.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtPANWTarget.Name = "txtPANWTarget"
+        Me.txtPANWTarget.Size = New System.Drawing.Size(233, 22)
+        Me.txtPANWTarget.TabIndex = 1
         '
         'cmbPANWAlert
         '
@@ -2972,39 +2995,61 @@ Partial Class Main
         Me.cmbPANWAlert.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbPANWAlert.FormattingEnabled = True
         Me.cmbPANWAlert.Items.AddRange(New Object() {"WILDFIRE", "VIRUS", "FILE", "FLOOD", "URL"})
-        Me.cmbPANWAlert.Location = New System.Drawing.Point(173, 82)
+        Me.cmbPANWAlert.Location = New System.Drawing.Point(172, 64)
         Me.cmbPANWAlert.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbPANWAlert.Name = "cmbPANWAlert"
         Me.cmbPANWAlert.Size = New System.Drawing.Size(233, 24)
         Me.cmbPANWAlert.TabIndex = 2
         '
-        'txtPANWTarget
+        'txtFireEyeDownload1
         '
-        Me.txtPANWTarget.Location = New System.Drawing.Point(173, 50)
-        Me.txtPANWTarget.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtPANWTarget.Name = "txtPANWTarget"
-        Me.txtPANWTarget.Size = New System.Drawing.Size(233, 22)
-        Me.txtPANWTarget.TabIndex = 1
+        Me.txtFireEyeDownload1.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtFireEyeDownload1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.txtFireEyeDownload1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtFireEyeDownload1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFireEyeDownload1.Location = New System.Drawing.Point(4, 115)
+        Me.txtFireEyeDownload1.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtFireEyeDownload1.Name = "txtFireEyeDownload1"
+        Me.txtFireEyeDownload1.ReadOnly = True
+        Me.txtFireEyeDownload1.Size = New System.Drawing.Size(699, 17)
+        Me.txtFireEyeDownload1.TabIndex = 33
+        Me.txtFireEyeDownload1.TabStop = False
+        Me.txtFireEyeDownload1.Text = "http://fedeploycheck.fireeye.com/appliance-test/test-infection.exe"
         '
-        'Label36
+        'grpWildFirePicture
         '
-        Me.Label36.AutoSize = True
-        Me.Label36.Location = New System.Drawing.Point(11, 54)
-        Me.Label36.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label36.Name = "Label36"
-        Me.Label36.Size = New System.Drawing.Size(122, 17)
-        Me.Label36.TabIndex = 6
-        Me.Label36.Text = "Target Hostname:"
+        Me.grpWildFirePicture.AutoSize = True
+        Me.grpWildFirePicture.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.grpWildFirePicture.Controls.Add(Me.lblWildFireURL)
+        Me.grpWildFirePicture.Controls.Add(Me.panwPicture)
+        Me.grpWildFirePicture.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.grpWildFirePicture.Location = New System.Drawing.Point(3, 139)
+        Me.grpWildFirePicture.Name = "grpWildFirePicture"
+        Me.grpWildFirePicture.Size = New System.Drawing.Size(701, 187)
+        Me.grpWildFirePicture.TabIndex = 41
+        Me.grpWildFirePicture.TabStop = False
         '
-        'btnPANWSend
+        'lblWildFireURL
         '
-        Me.btnPANWSend.Location = New System.Drawing.Point(173, 182)
-        Me.btnPANWSend.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnPANWSend.Name = "btnPANWSend"
-        Me.btnPANWSend.Size = New System.Drawing.Size(185, 28)
-        Me.btnPANWSend.TabIndex = 4
-        Me.btnPANWSend.Text = "Send PANW SysLog Alert"
-        Me.btnPANWSend.UseVisualStyleBackColor = True
+        Me.lblWildFireURL.AutoSize = True
+        Me.lblWildFireURL.BackColor = System.Drawing.Color.White
+        Me.lblWildFireURL.Location = New System.Drawing.Point(113, 103)
+        Me.lblWildFireURL.MinimumSize = New System.Drawing.Size(367, 0)
+        Me.lblWildFireURL.Name = "lblWildFireURL"
+        Me.lblWildFireURL.Size = New System.Drawing.Size(367, 17)
+        Me.lblWildFireURL.TabIndex = 40
+        Me.lblWildFireURL.Text = "https://wildfire:8449"
+        '
+        'panwPicture
+        '
+        Me.panwPicture.Image = CType(resources.GetObject("panwPicture.Image"), System.Drawing.Image)
+        Me.panwPicture.Location = New System.Drawing.Point(3, 18)
+        Me.panwPicture.Margin = New System.Windows.Forms.Padding(4)
+        Me.panwPicture.Name = "panwPicture"
+        Me.panwPicture.Size = New System.Drawing.Size(691, 147)
+        Me.panwPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        Me.panwPicture.TabIndex = 35
+        Me.panwPicture.TabStop = False
         '
         'tabXPS
         '
@@ -3030,7 +3075,7 @@ Partial Class Main
         Me.tabXPS.Margin = New System.Windows.Forms.Padding(4)
         Me.tabXPS.Name = "tabXPS"
         Me.tabXPS.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabXPS.Size = New System.Drawing.Size(832, 700)
+        Me.tabXPS.Size = New System.Drawing.Size(1494, 898)
         Me.tabXPS.TabIndex = 6
         Me.tabXPS.Text = "XPS"
         Me.tabXPS.UseVisualStyleBackColor = True
@@ -3275,7 +3320,7 @@ Partial Class Main
         Me.tabAbout.Location = New System.Drawing.Point(4, 28)
         Me.tabAbout.Margin = New System.Windows.Forms.Padding(4)
         Me.tabAbout.Name = "tabAbout"
-        Me.tabAbout.Size = New System.Drawing.Size(832, 700)
+        Me.tabAbout.Size = New System.Drawing.Size(1494, 898)
         Me.tabAbout.TabIndex = 3
         Me.tabAbout.Text = "About"
         Me.tabAbout.UseVisualStyleBackColor = True
@@ -3288,7 +3333,7 @@ Partial Class Main
         Me.flowAbout.Dock = System.Windows.Forms.DockStyle.Fill
         Me.flowAbout.Location = New System.Drawing.Point(0, 0)
         Me.flowAbout.Name = "flowAbout"
-        Me.flowAbout.Size = New System.Drawing.Size(832, 700)
+        Me.flowAbout.Size = New System.Drawing.Size(1494, 898)
         Me.flowAbout.TabIndex = 1
         '
         'lbltxtAbout
@@ -3298,13 +3343,13 @@ Partial Class Main
         Me.lbltxtAbout.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbltxtAbout.Location = New System.Drawing.Point(3, 0)
         Me.lbltxtAbout.Name = "lbltxtAbout"
-        Me.lbltxtAbout.Size = New System.Drawing.Size(718, 234)
+        Me.lbltxtAbout.Size = New System.Drawing.Size(1026, 198)
         Me.lbltxtAbout.TabIndex = 1
         Me.lbltxtAbout.Text = resources.GetString("lbltxtAbout.Text")
         '
         'btn_AboutCheckforUpdates
         '
-        Me.btn_AboutCheckforUpdates.Location = New System.Drawing.Point(3, 237)
+        Me.btn_AboutCheckforUpdates.Location = New System.Drawing.Point(3, 201)
         Me.btn_AboutCheckforUpdates.Name = "btn_AboutCheckforUpdates"
         Me.btn_AboutCheckforUpdates.Size = New System.Drawing.Size(149, 32)
         Me.btn_AboutCheckforUpdates.TabIndex = 0
@@ -3323,11 +3368,44 @@ Partial Class Main
         Me.sfdBox.Filter = "Box Files|*.json"
         Me.sfdBox.InitialDirectory = "My.Application.Info.DirectoryPath & ""\BoxedJobs"""
         '
+        'txtPANWSim
+        '
+        Me.txtPANWSim.AutoSize = True
+        Me.txtPANWSim.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtPANWSim.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPANWSim.Location = New System.Drawing.Point(3, 0)
+        Me.txtPANWSim.Margin = New System.Windows.Forms.Padding(3, 0, 3, 3)
+        Me.txtPANWSim.MaximumSize = New System.Drawing.Size(700, 0)
+        Me.txtPANWSim.Name = "txtPANWSim"
+        Me.txtPANWSim.Size = New System.Drawing.Size(700, 72)
+        Me.txtPANWSim.TabIndex = 24
+        Me.txtPANWSim.Text = resources.GetString("txtPANWSim.Text")
+        '
+        'tablePANWBottom
+        '
+        Me.tablePANWBottom.AutoSize = True
+        Me.tablePANWBottom.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.tablePANWBottom.ColumnCount = 1
+        Me.tablePANWBottom.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tablePANWBottom.Controls.Add(Me.grpWildFirePicture, 0, 3)
+        Me.tablePANWBottom.Controls.Add(Me.txtFireEyeDownload1, 0, 2)
+        Me.tablePANWBottom.Controls.Add(Me.lblPANWHitInstruction, 0, 1)
+        Me.tablePANWBottom.Controls.Add(Me.txtPANWSim, 0, 0)
+        Me.tablePANWBottom.Location = New System.Drawing.Point(3, 216)
+        Me.tablePANWBottom.Name = "tablePANWBottom"
+        Me.tablePANWBottom.RowCount = 4
+        Me.tablePANWBottom.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tablePANWBottom.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tablePANWBottom.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tablePANWBottom.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tablePANWBottom.Size = New System.Drawing.Size(707, 329)
+        Me.tablePANWBottom.TabIndex = 43
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(840, 732)
+        Me.ClientSize = New System.Drawing.Size(1502, 930)
         Me.Controls.Add(Me.tabMenu)
         Me.HelpButton = True
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -3428,11 +3506,17 @@ Partial Class Main
         Me.tableFireEye.PerformLayout()
         Me.tabPANW.ResumeLayout(False)
         Me.tabPANW.PerformLayout()
-        CType(Me.panwPicture, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox5.ResumeLayout(False)
-        Me.GroupBox5.PerformLayout()
+        Me.flowPANW.ResumeLayout(False)
+        Me.flowPANW.PerformLayout()
+        Me.grpWildFireSim.ResumeLayout(False)
+        Me.grpWildFireSim.PerformLayout()
         CType(Me.panw_sim_port, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tablePANWSendAlert.ResumeLayout(False)
+        Me.tablePANWSendAlert.PerformLayout()
         CType(Me.panwPort, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.grpWildFirePicture.ResumeLayout(False)
+        Me.grpWildFirePicture.PerformLayout()
+        CType(Me.panwPicture, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabXPS.ResumeLayout(False)
         Me.tabXPS.PerformLayout()
         CType(Me.xpsPicture, System.ComponentModel.ISupportInitialize).EndInit()
@@ -3444,6 +3528,8 @@ Partial Class Main
         Me.tabAbout.PerformLayout()
         Me.flowAbout.ResumeLayout(False)
         Me.flowAbout.PerformLayout()
+        Me.tablePANWBottom.ResumeLayout(False)
+        Me.tablePANWBottom.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -3610,7 +3696,7 @@ Partial Class Main
     Friend WithEvents Label42 As System.Windows.Forms.Label
     Friend WithEvents xps_sim_Port As System.Windows.Forms.NumericUpDown
     Friend WithEvents Label43 As System.Windows.Forms.Label
-    Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
+    Friend WithEvents grpWildFireSim As System.Windows.Forms.GroupBox
     Friend WithEvents panw_sim_port As System.Windows.Forms.NumericUpDown
     Friend WithEvents Label44 As System.Windows.Forms.Label
     Friend WithEvents lblwildfirestatus As System.Windows.Forms.Label
@@ -3620,9 +3706,8 @@ Partial Class Main
     Friend WithEvents lblFEStatus As System.Windows.Forms.Label
     Friend WithEvents lblJobStatus As System.Windows.Forms.Label
     Friend WithEvents panwPicture As System.Windows.Forms.PictureBox
-    Friend WithEvents txtPANWSim As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
-    Friend WithEvents Label45 As System.Windows.Forms.Label
+    Friend WithEvents txtFireEyeDownload1 As System.Windows.Forms.TextBox
+    Friend WithEvents lblPANWHitInstruction As System.Windows.Forms.Label
     Friend WithEvents txtXPSMalwareMD5 As System.Windows.Forms.TextBox
     Friend WithEvents Label46 As System.Windows.Forms.Label
     Friend WithEvents txtFireEyeMalwareMD5 As System.Windows.Forms.TextBox
@@ -3715,5 +3800,10 @@ Partial Class Main
     Friend WithEvents tableFireEye As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents flowAbout As System.Windows.Forms.FlowLayoutPanel
     Friend WithEvents lbltxtAbout As System.Windows.Forms.Label
+    Friend WithEvents flowPANW As System.Windows.Forms.FlowLayoutPanel
+    Friend WithEvents tablePANWSendAlert As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents grpWildFirePicture As System.Windows.Forms.GroupBox
+    Friend WithEvents txtPANWSim As System.Windows.Forms.Label
+    Friend WithEvents tablePANWBottom As System.Windows.Forms.TableLayoutPanel
 
 End Class
