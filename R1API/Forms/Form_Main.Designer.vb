@@ -803,7 +803,7 @@ Partial Class Main
         Me.tabSubMenu.Margin = New System.Windows.Forms.Padding(4)
         Me.tabSubMenu.Name = "tabSubMenu"
         Me.tabSubMenu.SelectedIndex = 0
-        Me.tabSubMenu.Size = New System.Drawing.Size(1573, 718)
+        Me.tabSubMenu.Size = New System.Drawing.Size(820, 628)
         Me.tabSubMenu.TabIndex = 0
         '
         'tabJobInfo
@@ -812,7 +812,7 @@ Partial Class Main
         Me.tabJobInfo.Location = New System.Drawing.Point(4, 28)
         Me.tabJobInfo.Margin = New System.Windows.Forms.Padding(4)
         Me.tabJobInfo.Name = "tabJobInfo"
-        Me.tabJobInfo.Size = New System.Drawing.Size(1565, 686)
+        Me.tabJobInfo.Size = New System.Drawing.Size(812, 596)
         Me.tabJobInfo.TabIndex = 3
         Me.tabJobInfo.Text = "Job Information"
         Me.tabJobInfo.UseVisualStyleBackColor = True
@@ -823,7 +823,7 @@ Partial Class Main
         Me.flowJobInfo.Controls.Add(Me.GroupBox1)
         Me.flowJobInfo.Location = New System.Drawing.Point(0, 0)
         Me.flowJobInfo.Name = "flowJobInfo"
-        Me.flowJobInfo.Size = New System.Drawing.Size(812, 378)
+        Me.flowJobInfo.Size = New System.Drawing.Size(695, 356)
         Me.flowJobInfo.TabIndex = 27
         '
         'tableJobInfo
@@ -918,7 +918,7 @@ Partial Class Main
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4)
-        Me.GroupBox1.Size = New System.Drawing.Size(803, 272)
+        Me.GroupBox1.Size = New System.Drawing.Size(684, 246)
         Me.GroupBox1.TabIndex = 3
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Job Targets"
@@ -958,7 +958,7 @@ Partial Class Main
         Me.grpshare.Margin = New System.Windows.Forms.Padding(4)
         Me.grpshare.Name = "grpshare"
         Me.grpshare.Padding = New System.Windows.Forms.Padding(4)
-        Me.grpshare.Size = New System.Drawing.Size(480, 198)
+        Me.grpshare.Size = New System.Drawing.Size(365, 188)
         Me.grpshare.TabIndex = 11
         Me.grpshare.TabStop = False
         Me.grpshare.Text = "Network Shares"
@@ -979,7 +979,7 @@ Partial Class Main
         Me.lstNetShare.Location = New System.Drawing.Point(8, 70)
         Me.lstNetShare.Margin = New System.Windows.Forms.Padding(4)
         Me.lstNetShare.Name = "lstNetShare"
-        Me.lstNetShare.Size = New System.Drawing.Size(355, 106)
+        Me.lstNetShare.Size = New System.Drawing.Size(239, 106)
         Me.lstNetShare.TabIndex = 4
         Me.lstNetShare.TabStop = False
         '
@@ -988,12 +988,12 @@ Partial Class Main
         Me.txtNetSharePath.Location = New System.Drawing.Point(8, 38)
         Me.txtNetSharePath.Margin = New System.Windows.Forms.Padding(4)
         Me.txtNetSharePath.Name = "txtNetSharePath"
-        Me.txtNetSharePath.Size = New System.Drawing.Size(355, 22)
+        Me.txtNetSharePath.Size = New System.Drawing.Size(239, 22)
         Me.txtNetSharePath.TabIndex = 5
         '
         'btnAddNetShare
         '
-        Me.btnAddNetShare.Location = New System.Drawing.Point(372, 34)
+        Me.btnAddNetShare.Location = New System.Drawing.Point(255, 36)
         Me.btnAddNetShare.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAddNetShare.Name = "btnAddNetShare"
         Me.btnAddNetShare.Size = New System.Drawing.Size(100, 28)
@@ -1003,7 +1003,7 @@ Partial Class Main
         '
         'btnRemoveNetShare
         '
-        Me.btnRemoveNetShare.Location = New System.Drawing.Point(372, 158)
+        Me.btnRemoveNetShare.Location = New System.Drawing.Point(255, 148)
         Me.btnRemoveNetShare.Margin = New System.Windows.Forms.Padding(4)
         Me.btnRemoveNetShare.Name = "btnRemoveNetShare"
         Me.btnRemoveNetShare.Size = New System.Drawing.Size(100, 28)
@@ -1023,7 +1023,7 @@ Partial Class Main
         Me.grpagent.Margin = New System.Windows.Forms.Padding(4)
         Me.grpagent.Name = "grpagent"
         Me.grpagent.Padding = New System.Windows.Forms.Padding(4)
-        Me.grpagent.Size = New System.Drawing.Size(292, 198)
+        Me.grpagent.Size = New System.Drawing.Size(292, 188)
         Me.grpagent.TabIndex = 0
         Me.grpagent.TabStop = False
         Me.grpagent.Text = "Computer Targets"
@@ -1068,7 +1068,7 @@ Partial Class Main
         '
         'btnRemoveComputer
         '
-        Me.btnRemoveComputer.Location = New System.Drawing.Point(176, 158)
+        Me.btnRemoveComputer.Location = New System.Drawing.Point(175, 148)
         Me.btnRemoveComputer.Margin = New System.Windows.Forms.Padding(4)
         Me.btnRemoveComputer.Name = "btnRemoveComputer"
         Me.btnRemoveComputer.Size = New System.Drawing.Size(100, 28)
@@ -1084,14 +1084,13 @@ Partial Class Main
         Me.tabFilters.Margin = New System.Windows.Forms.Padding(4)
         Me.tabFilters.Name = "tabFilters"
         Me.tabFilters.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabFilters.Size = New System.Drawing.Size(1565, 686)
+        Me.tabFilters.Size = New System.Drawing.Size(812, 596)
         Me.tabFilters.TabIndex = 1
         Me.tabFilters.Text = "Filters"
         Me.tabFilters.UseVisualStyleBackColor = True
         '
         'tableFilters
         '
-        Me.tableFilters.AutoSize = True
         Me.tableFilters.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.tableFilters.ColumnCount = 3
         Me.tableFilters.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
@@ -1108,7 +1107,7 @@ Partial Class Main
         Me.tableFilters.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tableFilters.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tableFilters.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tableFilters.Size = New System.Drawing.Size(737, 771)
+        Me.tableFilters.Size = New System.Drawing.Size(721, 570)
         Me.tableFilters.TabIndex = 1
         '
         'tabFiltersSubMenu
@@ -1121,7 +1120,7 @@ Partial Class Main
         Me.tabFiltersSubMenu.Margin = New System.Windows.Forms.Padding(4)
         Me.tabFiltersSubMenu.Name = "tabFiltersSubMenu"
         Me.tabFiltersSubMenu.SelectedIndex = 0
-        Me.tabFiltersSubMenu.Size = New System.Drawing.Size(729, 340)
+        Me.tabFiltersSubMenu.Size = New System.Drawing.Size(717, 340)
         Me.tabFiltersSubMenu.TabIndex = 0
         '
         'tabInclusionFilter
@@ -1131,7 +1130,7 @@ Partial Class Main
         Me.tabInclusionFilter.Margin = New System.Windows.Forms.Padding(4)
         Me.tabInclusionFilter.Name = "tabInclusionFilter"
         Me.tabInclusionFilter.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabInclusionFilter.Size = New System.Drawing.Size(721, 311)
+        Me.tabInclusionFilter.Size = New System.Drawing.Size(709, 311)
         Me.tabInclusionFilter.TabIndex = 0
         Me.tabInclusionFilter.Text = "Inclusion"
         Me.tabInclusionFilter.UseVisualStyleBackColor = True
@@ -1167,7 +1166,7 @@ Partial Class Main
         Me.tableInclusionFilters.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tableInclusionFilters.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tableInclusionFilters.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tableInclusionFilters.Size = New System.Drawing.Size(713, 303)
+        Me.tableInclusionFilters.Size = New System.Drawing.Size(701, 303)
         Me.tableInclusionFilters.TabIndex = 14
         '
         'Label8
@@ -1183,12 +1182,11 @@ Partial Class Main
         'txtinclkeywords
         '
         Me.tableInclusionFilters.SetColumnSpan(Me.txtinclkeywords, 2)
-        Me.txtinclkeywords.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtinclkeywords.Location = New System.Drawing.Point(365, 124)
         Me.txtinclkeywords.Margin = New System.Windows.Forms.Padding(4)
         Me.txtinclkeywords.Multiline = True
         Me.txtinclkeywords.Name = "txtinclkeywords"
-        Me.txtinclkeywords.Size = New System.Drawing.Size(344, 175)
+        Me.txtinclkeywords.Size = New System.Drawing.Size(316, 175)
         Me.txtinclkeywords.TabIndex = 6
         '
         'txtinclfiltername
@@ -1242,11 +1240,10 @@ Partial Class Main
         '
         'txtinclextensions
         '
-        Me.txtinclextensions.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtinclextensions.Location = New System.Drawing.Point(493, 4)
         Me.txtinclextensions.Margin = New System.Windows.Forms.Padding(4)
         Me.txtinclextensions.Name = "txtinclextensions"
-        Me.txtinclextensions.Size = New System.Drawing.Size(216, 22)
+        Me.txtinclextensions.Size = New System.Drawing.Size(188, 22)
         Me.txtinclextensions.TabIndex = 1
         '
         'Label10
@@ -1262,12 +1259,11 @@ Partial Class Main
         'txtinclpathcontains
         '
         Me.tableInclusionFilters.SetColumnSpan(Me.txtinclpathcontains, 3)
-        Me.txtinclpathcontains.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtinclpathcontains.Location = New System.Drawing.Point(112, 34)
         Me.txtinclpathcontains.Margin = New System.Windows.Forms.Padding(4)
         Me.txtinclpathcontains.Multiline = True
         Me.txtinclpathcontains.Name = "txtinclpathcontains"
-        Me.txtinclpathcontains.Size = New System.Drawing.Size(597, 24)
+        Me.txtinclpathcontains.Size = New System.Drawing.Size(569, 24)
         Me.txtinclpathcontains.TabIndex = 2
         '
         'chkinclsearchfilename
@@ -1312,7 +1308,7 @@ Partial Class Main
         Me.tabExclusionFilter.Margin = New System.Windows.Forms.Padding(4)
         Me.tabExclusionFilter.Name = "tabExclusionFilter"
         Me.tabExclusionFilter.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabExclusionFilter.Size = New System.Drawing.Size(721, 311)
+        Me.tabExclusionFilter.Size = New System.Drawing.Size(709, 311)
         Me.tabExclusionFilter.TabIndex = 1
         Me.tabExclusionFilter.Text = "Exclusion"
         Me.tabExclusionFilter.UseVisualStyleBackColor = True
@@ -1342,7 +1338,7 @@ Partial Class Main
         Me.tableExclusionFilters.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tableExclusionFilters.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tableExclusionFilters.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tableExclusionFilters.Size = New System.Drawing.Size(713, 303)
+        Me.tableExclusionFilters.Size = New System.Drawing.Size(701, 303)
         Me.tableExclusionFilters.TabIndex = 18
         '
         'Label15
@@ -1397,21 +1393,19 @@ Partial Class Main
         'txtexclpathcontains
         '
         Me.tableExclusionFilters.SetColumnSpan(Me.txtexclpathcontains, 3)
-        Me.txtexclpathcontains.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtexclpathcontains.Location = New System.Drawing.Point(112, 34)
         Me.txtexclpathcontains.Margin = New System.Windows.Forms.Padding(4)
         Me.txtexclpathcontains.Multiline = True
         Me.txtexclpathcontains.Name = "txtexclpathcontains"
-        Me.txtexclpathcontains.Size = New System.Drawing.Size(597, 24)
+        Me.txtexclpathcontains.Size = New System.Drawing.Size(585, 24)
         Me.txtexclpathcontains.TabIndex = 2
         '
         'txtexclextensions
         '
-        Me.txtexclextensions.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtexclextensions.Location = New System.Drawing.Point(453, 4)
         Me.txtexclextensions.Margin = New System.Windows.Forms.Padding(4)
         Me.txtexclextensions.Name = "txtexclextensions"
-        Me.txtexclextensions.Size = New System.Drawing.Size(256, 22)
+        Me.txtexclextensions.Size = New System.Drawing.Size(244, 22)
         Me.txtexclextensions.TabIndex = 1
         '
         'Label13
@@ -1465,14 +1459,13 @@ Partial Class Main
         Me.dgvFilters.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvFilters.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colFilterCheck, Me.col_FilterType, Me.colFilterName})
         Me.tableFilters.SetColumnSpan(Me.dgvFilters, 3)
-        Me.dgvFilters.Dock = System.Windows.Forms.DockStyle.Left
         Me.dgvFilters.Location = New System.Drawing.Point(3, 387)
         Me.dgvFilters.MultiSelect = False
         Me.dgvFilters.Name = "dgvFilters"
         Me.dgvFilters.RowHeadersVisible = False
         Me.dgvFilters.RowTemplate.Height = 24
         Me.dgvFilters.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvFilters.Size = New System.Drawing.Size(726, 381)
+        Me.dgvFilters.Size = New System.Drawing.Size(714, 174)
         Me.dgvFilters.TabIndex = 6
         '
         'colFilterCheck
@@ -1503,7 +1496,7 @@ Partial Class Main
         Me.tabAgentRemediation.Location = New System.Drawing.Point(4, 28)
         Me.tabAgentRemediation.Margin = New System.Windows.Forms.Padding(4)
         Me.tabAgentRemediation.Name = "tabAgentRemediation"
-        Me.tabAgentRemediation.Size = New System.Drawing.Size(1565, 686)
+        Me.tabAgentRemediation.Size = New System.Drawing.Size(812, 596)
         Me.tabAgentRemediation.TabIndex = 2
         Me.tabAgentRemediation.Text = "Agent Remediation"
         Me.tabAgentRemediation.UseVisualStyleBackColor = True
@@ -1528,9 +1521,9 @@ Partial Class Main
         Me.tableAgentRemediation.MinimumSize = New System.Drawing.Size(0, 375)
         Me.tableAgentRemediation.Name = "tableAgentRemediation"
         Me.tableAgentRemediation.RowCount = 3
-        Me.tableAgentRemediation.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.tableAgentRemediation.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45.0!))
-        Me.tableAgentRemediation.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.tableAgentRemediation.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableAgentRemediation.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableAgentRemediation.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tableAgentRemediation.Size = New System.Drawing.Size(669, 375)
         Me.tableAgentRemediation.TabIndex = 5
         '
@@ -1871,7 +1864,7 @@ Partial Class Main
         Me.lvRemOptions.FullRowSelect = True
         Me.lvRemOptions.GridLines = True
         Me.lvRemOptions.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
-        Me.lvRemOptions.Location = New System.Drawing.Point(4, 214)
+        Me.lvRemOptions.Location = New System.Drawing.Point(4, 205)
         Me.lvRemOptions.Margin = New System.Windows.Forms.Padding(4)
         Me.lvRemOptions.MultiSelect = False
         Me.lvRemOptions.Name = "lvRemOptions"
@@ -1935,7 +1928,7 @@ Partial Class Main
         Me.tabMenu.Margin = New System.Windows.Forms.Padding(4)
         Me.tabMenu.Name = "tabMenu"
         Me.tabMenu.SelectedIndex = 0
-        Me.tabMenu.Size = New System.Drawing.Size(1502, 930)
+        Me.tabMenu.Size = New System.Drawing.Size(844, 859)
         Me.tabMenu.TabIndex = 0
         '
         'tabSettings
@@ -2661,23 +2654,20 @@ Partial Class Main
         Me.tabJobExecution.Margin = New System.Windows.Forms.Padding(4)
         Me.tabJobExecution.Name = "tabJobExecution"
         Me.tabJobExecution.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabJobExecution.Size = New System.Drawing.Size(1494, 898)
+        Me.tabJobExecution.Size = New System.Drawing.Size(836, 827)
         Me.tabJobExecution.TabIndex = 0
         Me.tabJobExecution.Text = "JobsAPI Execution"
         Me.tabJobExecution.UseVisualStyleBackColor = True
         '
         'flowJobsAPI
         '
-        Me.flowJobsAPI.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.flowJobsAPI.AutoSize = True
         Me.flowJobsAPI.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.flowJobsAPI.Controls.Add(Me.tabSubMenu)
         Me.flowJobsAPI.Controls.Add(Me.tableJobExecute)
+        Me.flowJobsAPI.Dock = System.Windows.Forms.DockStyle.Fill
         Me.flowJobsAPI.Location = New System.Drawing.Point(4, 4)
         Me.flowJobsAPI.Name = "flowJobsAPI"
-        Me.flowJobsAPI.Size = New System.Drawing.Size(1581, 796)
+        Me.flowJobsAPI.Size = New System.Drawing.Size(828, 819)
         Me.flowJobsAPI.TabIndex = 35
         '
         'tableJobExecute
@@ -2694,7 +2684,7 @@ Partial Class Main
         Me.tableJobExecute.Controls.Add(Me.btnLoadFromBox, 1, 0)
         Me.tableJobExecute.Controls.Add(Me.btnExecute, 3, 0)
         Me.tableJobExecute.Controls.Add(Me.btnSaveAsBox, 2, 0)
-        Me.tableJobExecute.Location = New System.Drawing.Point(3, 729)
+        Me.tableJobExecute.Location = New System.Drawing.Point(3, 639)
         Me.tableJobExecute.Name = "tableJobExecute"
         Me.tableJobExecute.Padding = New System.Windows.Forms.Padding(4)
         Me.tableJobExecute.RowCount = 2
@@ -3650,7 +3640,7 @@ Partial Class Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1502, 930)
+        Me.ClientSize = New System.Drawing.Size(844, 859)
         Me.Controls.Add(Me.tabMenu)
         Me.HelpButton = True
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -3681,7 +3671,6 @@ Partial Class Main
         Me.grpagent.ResumeLayout(False)
         Me.grpagent.PerformLayout()
         Me.tabFilters.ResumeLayout(False)
-        Me.tabFilters.PerformLayout()
         Me.tableFilters.ResumeLayout(False)
         Me.tabFiltersSubMenu.ResumeLayout(False)
         Me.tabInclusionFilter.ResumeLayout(False)
@@ -3754,7 +3743,6 @@ Partial Class Main
         Me.tblAlertBreakdown.ResumeLayout(False)
         Me.tblAlertBreakdown.PerformLayout()
         Me.tabJobExecution.ResumeLayout(False)
-        Me.tabJobExecution.PerformLayout()
         Me.flowJobsAPI.ResumeLayout(False)
         Me.flowJobsAPI.PerformLayout()
         Me.tableJobExecute.ResumeLayout(False)

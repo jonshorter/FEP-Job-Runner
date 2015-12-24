@@ -137,7 +137,7 @@ Public Class Main
             End Try
         End If
         Me.auth = New R1SimpleRestClient.Models.Response.AuthToken
-
+        tabSubMenu.Height = flowJobInfo.Height + 20
     End Sub
 
     Private Sub rdoagent_CheckedChanged(sender As Object, e As EventArgs) Handles rdoagent.CheckedChanged
@@ -1567,11 +1567,13 @@ Public Class Main
     Private Sub Main_Resize(sender As Object, e As EventArgs) Handles Me.Resize
        Select Case tabSubMenu.SelectedTab.Name
             Case tabAgentRemediation.Name
-                tabSubMenu.Size = tableAgentRemediation.Size
+                tabSubMenu.Width = tableAgentRemediation.Width + 10
+                tabSubMenu.Height = tableAgentRemediation.Height + 20
             Case tabFilters.Name
-                tabSubMenu.Size = tableFilters.Size
+                tabSubMenu.Height = tableFilters.Height + 20
+                tabSubMenu.Width = tableFilters.Width + 10
             Case tabJobInfo.Name
-                tabSubMenu.Size = flowJobInfo.Size
+                tabSubMenu.Height = flowJobInfo.Height + 20
         End Select
 
     End Sub
@@ -1587,25 +1589,26 @@ Public Class Main
     Private Sub tabSubMenu_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabSubMenu.SelectedIndexChanged
         Select Case tabSubMenu.SelectedTab.Name
             Case tabAgentRemediation.Name
-                tabSubMenu.Size = tableAgentRemediation.Size
+                tabSubMenu.Width = tableAgentRemediation.Width + 10
+                tabSubMenu.Height = tableAgentRemediation.Height + 20
             Case tabFilters.Name
-                tabSubMenu.Size = tableFilters.Size
+                tabSubMenu.Height = tableFilters.Height + 20
+                tabSubMenu.Width = tableFilters.Width + 10
             Case tabJobInfo.Name
-                tabSubMenu.Size = flowJobInfo.Size
+                tabSubMenu.Height = flowJobInfo.Height + 20
         End Select
     End Sub
 
     Private Sub tabSubMenu_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles tabSubMenu.Selecting
         Select Case tabSubMenu.SelectedTab.Name
             Case tabAgentRemediation.Name
-                tabSubMenu.Size = tableAgentRemediation.Size
+                tabSubMenu.Width = tableAgentRemediation.Width + 10
+                tabSubMenu.Height = tableAgentRemediation.Height + 20
             Case tabFilters.Name
-                tabSubMenu.Size = tableFilters.Size
-
+                tabSubMenu.Height = tableFilters.Height + 20
+                tabSubMenu.Width = tableFilters.Width + 10
             Case tabJobInfo.Name
-                tabSubMenu.Size = flowJobInfo.Size
-
-
+                tabSubMenu.Height = flowJobInfo.Height + 20
         End Select
     End Sub
 
