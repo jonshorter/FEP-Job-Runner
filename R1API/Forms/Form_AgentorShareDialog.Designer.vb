@@ -97,7 +97,7 @@ Partial Class Form_AgentorShareDialog
         Me.MinimizeBox = False
         Me.Name = "Form_AgentorShareDialog"
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Target Agent or Share?"
         Me.TopMost = True
         Me.TableLayoutPanel1.ResumeLayout(False)

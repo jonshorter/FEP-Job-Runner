@@ -1479,8 +1479,10 @@ Public Class Main
     Private Sub btnAddComputer_Click(sender As Object, e As EventArgs) Handles btnAddComputer.Click
         'Add hostname to list box
         If txtComputerTarget.Text <> "" Then
-            lstComputerTargets.Items.Add(txtComputerTarget.Text)
-            txtComputerTarget.Text = ""
+            If Not lstComputerTargets.Items.Contains(txtComputerTarget.Text) Then
+                lstComputerTargets.Items.Add(txtComputerTarget.Text)
+                txtComputerTarget.Text = ""
+            End If
         End If
     End Sub
 
@@ -1498,8 +1500,10 @@ Public Class Main
     Private Sub btnAddNetShare_Click(sender As Object, e As EventArgs) Handles btnAddNetShare.Click
         'Add path to listbox
         If txtNetSharePath.Text <> "" Then
-            lstNetShare.Items.Add(txtNetSharePath.Text)
-            txtNetSharePath.Text = ""
+            If Not lstNetShare.Items.Contains(txtNetSharePath.Text) Then
+                lstNetShare.Items.Add(txtNetSharePath.Text)
+                txtNetSharePath.Text = ""
+            End If
         End If
     End Sub
 

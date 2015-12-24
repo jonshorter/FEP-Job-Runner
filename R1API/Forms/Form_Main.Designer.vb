@@ -35,8 +35,7 @@ Partial Class Main
         Me.txtAPIPass = New System.Windows.Forms.TextBox()
         Me.txtServer = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.grpReqSet = New System.Windows.Forms.GroupBox()
+        Me.grpSettings = New System.Windows.Forms.GroupBox()
         Me.chkRestAPI = New System.Windows.Forms.CheckBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.txtcustomwebaddress = New System.Windows.Forms.TextBox()
@@ -44,12 +43,6 @@ Partial Class Main
         Me.rdor1 = New System.Windows.Forms.RadioButton()
         Me.rdoadgmap = New System.Windows.Forms.RadioButton()
         Me.grpOptDefSet = New System.Windows.Forms.GroupBox()
-        Me.btnLoadDefaultTemplateName = New System.Windows.Forms.Button()
-        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
-        Me.chkIncludPreRelease = New System.Windows.Forms.CheckBox()
-        Me.chkUpdates = New System.Windows.Forms.CheckBox()
-        Me.btn_CheckForUpdates = New System.Windows.Forms.Button()
-        Me.chkbypasscerts = New System.Windows.Forms.CheckBox()
         Me.txtdefaultshare = New System.Windows.Forms.TextBox()
         Me.Label29 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -68,7 +61,7 @@ Partial Class Main
         Me.Label25 = New System.Windows.Forms.Label()
         Me.txtProjectName = New System.Windows.Forms.TextBox()
         Me.txtJobName = New System.Windows.Forms.TextBox()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.grpJobTargetSelect = New System.Windows.Forms.GroupBox()
         Me.rdoagent = New System.Windows.Forms.RadioButton()
         Me.rdoshare = New System.Windows.Forms.RadioButton()
         Me.grpshare = New System.Windows.Forms.GroupBox()
@@ -307,16 +300,28 @@ Partial Class Main
         Me.ofdBox = New System.Windows.Forms.OpenFileDialog()
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
         Me.tooltip = New System.Windows.Forms.ToolTip(Me.components)
-        Me.GroupBox4.SuspendLayout()
-        Me.grpReqSet.SuspendLayout()
+        Me.tableSettingRequired = New System.Windows.Forms.TableLayoutPanel()
+        Me.grpReqSettings = New System.Windows.Forms.GroupBox()
+        Me.tableSettingOptional = New System.Windows.Forms.TableLayoutPanel()
+        Me.flowSettings = New System.Windows.Forms.FlowLayoutPanel()
+        Me.btnLoadDefaultTemplateName = New System.Windows.Forms.Button()
+        Me.chkbypasscerts = New System.Windows.Forms.CheckBox()
+        Me.btn_CheckForUpdates = New System.Windows.Forms.Button()
+        Me.chkUpdates = New System.Windows.Forms.CheckBox()
+        Me.chkIncludPreRelease = New System.Windows.Forms.CheckBox()
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.tableSettingSave = New System.Windows.Forms.TableLayoutPanel()
+        Me.tableComputerTargets = New System.Windows.Forms.TableLayoutPanel()
+        Me.tableNetworkShares = New System.Windows.Forms.TableLayoutPanel()
+        Me.tableJobInfoTarget = New System.Windows.Forms.TableLayoutPanel()
+        Me.grpSettings.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.grpOptDefSet.SuspendLayout()
-        Me.GroupBox6.SuspendLayout()
         Me.tabSubMenu.SuspendLayout()
         Me.tabJobInfo.SuspendLayout()
         Me.flowJobInfo.SuspendLayout()
         Me.tableJobInfo.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
+        Me.grpJobTargetSelect.SuspendLayout()
         Me.grpshare.SuspendLayout()
         Me.grpagent.SuspendLayout()
         Me.tabFilters.SuspendLayout()
@@ -396,6 +401,15 @@ Partial Class Main
         CType(Me.xpsPicture, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabAbout.SuspendLayout()
         Me.flowAbout.SuspendLayout()
+        Me.tableSettingRequired.SuspendLayout()
+        Me.grpReqSettings.SuspendLayout()
+        Me.tableSettingOptional.SuspendLayout()
+        Me.flowSettings.SuspendLayout()
+        Me.GroupBox6.SuspendLayout()
+        Me.tableSettingSave.SuspendLayout()
+        Me.tableComputerTargets.SuspendLayout()
+        Me.tableNetworkShares.SuspendLayout()
+        Me.tableJobInfoTarget.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnExecute
@@ -412,7 +426,7 @@ Partial Class Main
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(8, 31)
+        Me.Label2.Location = New System.Drawing.Point(4, 0)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(125, 17)
@@ -421,24 +435,26 @@ Partial Class Main
         '
         'txtDefaultJobName
         '
-        Me.txtDefaultJobName.Location = New System.Drawing.Point(173, 23)
+        Me.txtDefaultJobName.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtDefaultJobName.Location = New System.Drawing.Point(175, 4)
         Me.txtDefaultJobName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtDefaultJobName.Name = "txtDefaultJobName"
-        Me.txtDefaultJobName.Size = New System.Drawing.Size(312, 22)
+        Me.txtDefaultJobName.Size = New System.Drawing.Size(219, 22)
         Me.txtDefaultJobName.TabIndex = 0
         '
         'txtDefaultProjectName
         '
-        Me.txtDefaultProjectName.Location = New System.Drawing.Point(173, 55)
+        Me.txtDefaultProjectName.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtDefaultProjectName.Location = New System.Drawing.Point(175, 34)
         Me.txtDefaultProjectName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtDefaultProjectName.Name = "txtDefaultProjectName"
-        Me.txtDefaultProjectName.Size = New System.Drawing.Size(312, 22)
+        Me.txtDefaultProjectName.Size = New System.Drawing.Size(219, 22)
         Me.txtDefaultProjectName.TabIndex = 1
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(8, 59)
+        Me.Label3.Location = New System.Drawing.Point(4, 30)
         Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(146, 17)
@@ -447,16 +463,17 @@ Partial Class Main
         '
         'txtApiUser
         '
-        Me.txtApiUser.Location = New System.Drawing.Point(175, 57)
+        Me.txtApiUser.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtApiUser.Location = New System.Drawing.Point(172, 34)
         Me.txtApiUser.Margin = New System.Windows.Forms.Padding(4)
         Me.txtApiUser.Name = "txtApiUser"
-        Me.txtApiUser.Size = New System.Drawing.Size(311, 22)
+        Me.txtApiUser.Size = New System.Drawing.Size(219, 22)
         Me.txtApiUser.TabIndex = 1
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(9, 60)
+        Me.Label4.Location = New System.Drawing.Point(4, 30)
         Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(107, 17)
@@ -467,7 +484,7 @@ Partial Class Main
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(9, 92)
+        Me.Label5.Location = New System.Drawing.Point(4, 60)
         Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(103, 17)
@@ -477,25 +494,27 @@ Partial Class Main
         '
         'txtAPIPass
         '
-        Me.txtAPIPass.Location = New System.Drawing.Point(175, 89)
+        Me.txtAPIPass.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtAPIPass.Location = New System.Drawing.Point(172, 64)
         Me.txtAPIPass.Margin = New System.Windows.Forms.Padding(4)
         Me.txtAPIPass.Name = "txtAPIPass"
         Me.txtAPIPass.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-        Me.txtAPIPass.Size = New System.Drawing.Size(312, 22)
+        Me.txtAPIPass.Size = New System.Drawing.Size(219, 22)
         Me.txtAPIPass.TabIndex = 2
         '
         'txtServer
         '
-        Me.txtServer.Location = New System.Drawing.Point(175, 25)
+        Me.txtServer.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtServer.Location = New System.Drawing.Point(172, 4)
         Me.txtServer.Margin = New System.Windows.Forms.Padding(4)
         Me.txtServer.Name = "txtServer"
-        Me.txtServer.Size = New System.Drawing.Size(312, 22)
+        Me.txtServer.Size = New System.Drawing.Size(219, 22)
         Me.txtServer.TabIndex = 0
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(9, 28)
+        Me.Label7.Location = New System.Drawing.Point(4, 0)
         Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(160, 17)
@@ -503,50 +522,27 @@ Partial Class Main
         Me.Label7.Text = "Web Server Hostname*:"
         Me.tooltip.SetToolTip(Me.Label7, "The webserver hostname where R1 resides.")
         '
-        'GroupBox4
+        'grpSettings
         '
-        Me.GroupBox4.AutoSize = True
-        Me.GroupBox4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.GroupBox4.Controls.Add(Me.grpReqSet)
-        Me.GroupBox4.Controls.Add(Me.grpOptDefSet)
-        Me.GroupBox4.Controls.Add(Me.txtStatusSettings)
-        Me.GroupBox4.Controls.Add(Me.btnSaveSettings)
-        Me.GroupBox4.Location = New System.Drawing.Point(8, 9)
-        Me.GroupBox4.Margin = New System.Windows.Forms.Padding(4)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Padding = New System.Windows.Forms.Padding(4)
-        Me.GroupBox4.Size = New System.Drawing.Size(821, 462)
-        Me.GroupBox4.TabIndex = 0
-        Me.GroupBox4.TabStop = False
-        Me.GroupBox4.Text = "Settings"
-        '
-        'grpReqSet
-        '
-        Me.grpReqSet.AutoSize = True
-        Me.grpReqSet.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.grpReqSet.Controls.Add(Me.chkRestAPI)
-        Me.grpReqSet.Controls.Add(Me.GroupBox2)
-        Me.grpReqSet.Controls.Add(Me.Label7)
-        Me.grpReqSet.Controls.Add(Me.Label4)
-        Me.grpReqSet.Controls.Add(Me.Label5)
-        Me.grpReqSet.Controls.Add(Me.txtApiUser)
-        Me.grpReqSet.Controls.Add(Me.txtServer)
-        Me.grpReqSet.Controls.Add(Me.txtAPIPass)
-        Me.grpReqSet.Location = New System.Drawing.Point(8, 23)
-        Me.grpReqSet.Margin = New System.Windows.Forms.Padding(4)
-        Me.grpReqSet.Name = "grpReqSet"
-        Me.grpReqSet.Padding = New System.Windows.Forms.Padding(4)
-        Me.grpReqSet.Size = New System.Drawing.Size(805, 182)
-        Me.grpReqSet.TabIndex = 0
-        Me.grpReqSet.TabStop = False
-        Me.grpReqSet.Text = "Required Settings"
+        Me.grpSettings.AutoSize = True
+        Me.grpSettings.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.grpSettings.Controls.Add(Me.flowSettings)
+        Me.grpSettings.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.grpSettings.Location = New System.Drawing.Point(4, 4)
+        Me.grpSettings.Margin = New System.Windows.Forms.Padding(4)
+        Me.grpSettings.Name = "grpSettings"
+        Me.grpSettings.Padding = New System.Windows.Forms.Padding(4)
+        Me.grpSettings.Size = New System.Drawing.Size(742, 688)
+        Me.grpSettings.TabIndex = 0
+        Me.grpSettings.TabStop = False
+        Me.grpSettings.Text = "Settings"
         '
         'chkRestAPI
         '
         Me.chkRestAPI.AutoSize = True
         Me.chkRestAPI.Checked = True
         Me.chkRestAPI.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkRestAPI.Location = New System.Drawing.Point(560, 139)
+        Me.chkRestAPI.Location = New System.Drawing.Point(398, 122)
         Me.chkRestAPI.Name = "chkRestAPI"
         Me.chkRestAPI.Size = New System.Drawing.Size(182, 21)
         Me.chkRestAPI.TabIndex = 4
@@ -560,10 +556,11 @@ Partial Class Main
         Me.GroupBox2.Controls.Add(Me.rdocustom)
         Me.GroupBox2.Controls.Add(Me.rdor1)
         Me.GroupBox2.Controls.Add(Me.rdoadgmap)
-        Me.GroupBox2.Location = New System.Drawing.Point(560, 12)
+        Me.GroupBox2.Location = New System.Drawing.Point(399, 4)
         Me.GroupBox2.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Padding = New System.Windows.Forms.Padding(4)
+        Me.tableSettingRequired.SetRowSpan(Me.GroupBox2, 3)
         Me.GroupBox2.Size = New System.Drawing.Size(237, 111)
         Me.GroupBox2.TabIndex = 3
         Me.GroupBox2.TabStop = False
@@ -622,105 +619,30 @@ Partial Class Main
         '
         Me.grpOptDefSet.AutoSize = True
         Me.grpOptDefSet.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.grpOptDefSet.Controls.Add(Me.btnLoadDefaultTemplateName)
-        Me.grpOptDefSet.Controls.Add(Me.GroupBox6)
-        Me.grpOptDefSet.Controls.Add(Me.Label2)
-        Me.grpOptDefSet.Controls.Add(Me.Label3)
-        Me.grpOptDefSet.Controls.Add(Me.chkbypasscerts)
-        Me.grpOptDefSet.Controls.Add(Me.txtDefaultProjectName)
-        Me.grpOptDefSet.Controls.Add(Me.txtdefaultshare)
-        Me.grpOptDefSet.Controls.Add(Me.txtDefaultJobName)
-        Me.grpOptDefSet.Controls.Add(Me.Label29)
-        Me.grpOptDefSet.Controls.Add(Me.Label14)
-        Me.grpOptDefSet.Controls.Add(Me.txtdefaultcomputer)
-        Me.grpOptDefSet.Controls.Add(Me.txtDefaultTemplateName)
-        Me.grpOptDefSet.Controls.Add(Me.Label28)
-        Me.grpOptDefSet.Location = New System.Drawing.Point(8, 209)
+        Me.grpOptDefSet.Controls.Add(Me.tableSettingOptional)
+        Me.flowSettings.SetFlowBreak(Me.grpOptDefSet, True)
+        Me.grpOptDefSet.Location = New System.Drawing.Point(4, 177)
         Me.grpOptDefSet.Margin = New System.Windows.Forms.Padding(4)
         Me.grpOptDefSet.Name = "grpOptDefSet"
         Me.grpOptDefSet.Padding = New System.Windows.Forms.Padding(4)
-        Me.grpOptDefSet.Size = New System.Drawing.Size(794, 198)
+        Me.grpOptDefSet.Size = New System.Drawing.Size(676, 214)
         Me.grpOptDefSet.TabIndex = 1
         Me.grpOptDefSet.TabStop = False
         Me.grpOptDefSet.Text = "Optional Default Settings"
         '
-        'btnLoadDefaultTemplateName
-        '
-        Me.btnLoadDefaultTemplateName.Location = New System.Drawing.Point(492, 152)
-        Me.btnLoadDefaultTemplateName.Name = "btnLoadDefaultTemplateName"
-        Me.btnLoadDefaultTemplateName.Size = New System.Drawing.Size(38, 23)
-        Me.btnLoadDefaultTemplateName.TabIndex = 5
-        Me.btnLoadDefaultTemplateName.Text = "..."
-        Me.btnLoadDefaultTemplateName.UseVisualStyleBackColor = True
-        '
-        'GroupBox6
-        '
-        Me.GroupBox6.Controls.Add(Me.chkIncludPreRelease)
-        Me.GroupBox6.Controls.Add(Me.chkUpdates)
-        Me.GroupBox6.Controls.Add(Me.btn_CheckForUpdates)
-        Me.GroupBox6.Location = New System.Drawing.Point(536, 66)
-        Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Size = New System.Drawing.Size(251, 108)
-        Me.GroupBox6.TabIndex = 7
-        Me.GroupBox6.TabStop = False
-        Me.GroupBox6.Text = "Updates"
-        '
-        'chkIncludPreRelease
-        '
-        Me.chkIncludPreRelease.AutoSize = True
-        Me.chkIncludPreRelease.Location = New System.Drawing.Point(6, 43)
-        Me.chkIncludPreRelease.Name = "chkIncludPreRelease"
-        Me.chkIncludPreRelease.Size = New System.Drawing.Size(158, 21)
-        Me.chkIncludPreRelease.TabIndex = 28
-        Me.chkIncludPreRelease.Text = "Include Pre-Release"
-        Me.tooltip.SetToolTip(Me.chkIncludPreRelease, "Check for pre-releases")
-        Me.chkIncludPreRelease.UseVisualStyleBackColor = True
-        '
-        'chkUpdates
-        '
-        Me.chkUpdates.AutoSize = True
-        Me.chkUpdates.Location = New System.Drawing.Point(6, 21)
-        Me.chkUpdates.Name = "chkUpdates"
-        Me.chkUpdates.Size = New System.Drawing.Size(208, 21)
-        Me.chkUpdates.TabIndex = 0
-        Me.chkUpdates.Text = "Check For Updates On Start"
-        Me.tooltip.SetToolTip(Me.chkUpdates, "Check for updates to Job Runner on start.")
-        Me.chkUpdates.UseVisualStyleBackColor = True
-        '
-        'btn_CheckForUpdates
-        '
-        Me.btn_CheckForUpdates.Location = New System.Drawing.Point(6, 70)
-        Me.btn_CheckForUpdates.Name = "btn_CheckForUpdates"
-        Me.btn_CheckForUpdates.Size = New System.Drawing.Size(149, 32)
-        Me.btn_CheckForUpdates.TabIndex = 27
-        Me.btn_CheckForUpdates.Text = "Check for Updates"
-        Me.btn_CheckForUpdates.UseVisualStyleBackColor = True
-        '
-        'chkbypasscerts
-        '
-        Me.chkbypasscerts.AutoSize = True
-        Me.chkbypasscerts.Location = New System.Drawing.Point(560, 23)
-        Me.chkbypasscerts.Margin = New System.Windows.Forms.Padding(4)
-        Me.chkbypasscerts.Name = "chkbypasscerts"
-        Me.chkbypasscerts.Size = New System.Drawing.Size(188, 21)
-        Me.chkbypasscerts.TabIndex = 6
-        Me.chkbypasscerts.Text = "ByPass Invalid Certificate"
-        Me.tooltip.SetToolTip(Me.chkbypasscerts, "Warning! Allows Job Runner to ignore invalid Website certificates, such as self-s" & _
-        "igned certificates.. ")
-        Me.chkbypasscerts.UseVisualStyleBackColor = True
-        '
         'txtdefaultshare
         '
-        Me.txtdefaultshare.Location = New System.Drawing.Point(173, 119)
+        Me.txtdefaultshare.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtdefaultshare.Location = New System.Drawing.Point(175, 94)
         Me.txtdefaultshare.Margin = New System.Windows.Forms.Padding(4)
         Me.txtdefaultshare.Name = "txtdefaultshare"
-        Me.txtdefaultshare.Size = New System.Drawing.Size(312, 22)
+        Me.txtdefaultshare.Size = New System.Drawing.Size(219, 22)
         Me.txtdefaultshare.TabIndex = 3
         '
         'Label29
         '
         Me.Label29.AutoSize = True
-        Me.Label29.Location = New System.Drawing.Point(8, 123)
+        Me.Label29.Location = New System.Drawing.Point(4, 90)
         Me.Label29.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label29.Name = "Label29"
         Me.Label29.Size = New System.Drawing.Size(140, 17)
@@ -730,7 +652,7 @@ Partial Class Main
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(9, 155)
+        Me.Label14.Location = New System.Drawing.Point(4, 159)
         Me.Label14.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(161, 17)
@@ -739,28 +661,31 @@ Partial Class Main
         '
         'txtdefaultcomputer
         '
-        Me.txtdefaultcomputer.Location = New System.Drawing.Point(173, 87)
+        Me.txtdefaultcomputer.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtdefaultcomputer.Location = New System.Drawing.Point(175, 64)
         Me.txtdefaultcomputer.Margin = New System.Windows.Forms.Padding(4)
         Me.txtdefaultcomputer.Name = "txtdefaultcomputer"
-        Me.txtdefaultcomputer.Size = New System.Drawing.Size(312, 22)
+        Me.txtdefaultcomputer.Size = New System.Drawing.Size(219, 22)
         Me.txtdefaultcomputer.TabIndex = 2
         '
         'txtDefaultTemplateName
         '
         Me.txtDefaultTemplateName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txtDefaultTemplateName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.txtDefaultTemplateName.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtDefaultTemplateName.DropDownWidth = 375
         Me.txtDefaultTemplateName.Items.AddRange(New Object() {"coll-evtx"})
-        Me.txtDefaultTemplateName.Location = New System.Drawing.Point(173, 151)
+        Me.txtDefaultTemplateName.Location = New System.Drawing.Point(175, 163)
         Me.txtDefaultTemplateName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtDefaultTemplateName.Name = "txtDefaultTemplateName"
-        Me.txtDefaultTemplateName.Size = New System.Drawing.Size(312, 24)
+        Me.txtDefaultTemplateName.Size = New System.Drawing.Size(219, 24)
         Me.txtDefaultTemplateName.TabIndex = 4
         Me.txtDefaultTemplateName.Text = "coll-evtx"
         '
         'Label28
         '
         Me.Label28.AutoSize = True
-        Me.Label28.Location = New System.Drawing.Point(8, 91)
+        Me.Label28.Location = New System.Drawing.Point(4, 60)
         Me.Label28.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label28.Name = "Label28"
         Me.Label28.Size = New System.Drawing.Size(163, 17)
@@ -772,18 +697,18 @@ Partial Class Main
         Me.txtStatusSettings.BackColor = System.Drawing.SystemColors.Control
         Me.txtStatusSettings.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtStatusSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtStatusSettings.Location = New System.Drawing.Point(8, 415)
+        Me.txtStatusSettings.Location = New System.Drawing.Point(4, 4)
         Me.txtStatusSettings.Margin = New System.Windows.Forms.Padding(4)
         Me.txtStatusSettings.Name = "txtStatusSettings"
         Me.txtStatusSettings.ReadOnly = True
-        Me.txtStatusSettings.Size = New System.Drawing.Size(643, 19)
+        Me.txtStatusSettings.Size = New System.Drawing.Size(549, 19)
         Me.txtStatusSettings.TabIndex = 0
         Me.txtStatusSettings.TabStop = False
         Me.txtStatusSettings.Text = "Status"
         '
         'btnSaveSettings
         '
-        Me.btnSaveSettings.Location = New System.Drawing.Point(685, 411)
+        Me.btnSaveSettings.Location = New System.Drawing.Point(561, 4)
         Me.btnSaveSettings.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSaveSettings.Name = "btnSaveSettings"
         Me.btnSaveSettings.Size = New System.Drawing.Size(128, 28)
@@ -803,7 +728,7 @@ Partial Class Main
         Me.tabSubMenu.Margin = New System.Windows.Forms.Padding(4)
         Me.tabSubMenu.Name = "tabSubMenu"
         Me.tabSubMenu.SelectedIndex = 0
-        Me.tabSubMenu.Size = New System.Drawing.Size(820, 628)
+        Me.tabSubMenu.Size = New System.Drawing.Size(738, 610)
         Me.tabSubMenu.TabIndex = 0
         '
         'tabJobInfo
@@ -812,18 +737,21 @@ Partial Class Main
         Me.tabJobInfo.Location = New System.Drawing.Point(4, 28)
         Me.tabJobInfo.Margin = New System.Windows.Forms.Padding(4)
         Me.tabJobInfo.Name = "tabJobInfo"
-        Me.tabJobInfo.Size = New System.Drawing.Size(812, 596)
+        Me.tabJobInfo.Size = New System.Drawing.Size(730, 578)
         Me.tabJobInfo.TabIndex = 3
         Me.tabJobInfo.Text = "Job Information"
         Me.tabJobInfo.UseVisualStyleBackColor = True
         '
         'flowJobInfo
         '
+        Me.flowJobInfo.AutoSize = True
+        Me.flowJobInfo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.flowJobInfo.Controls.Add(Me.tableJobInfo)
-        Me.flowJobInfo.Controls.Add(Me.GroupBox1)
+        Me.flowJobInfo.Controls.Add(Me.tableJobInfoTarget)
+        Me.flowJobInfo.Dock = System.Windows.Forms.DockStyle.Top
         Me.flowJobInfo.Location = New System.Drawing.Point(0, 0)
         Me.flowJobInfo.Name = "flowJobInfo"
-        Me.flowJobInfo.Size = New System.Drawing.Size(695, 356)
+        Me.flowJobInfo.Size = New System.Drawing.Size(730, 375)
         Me.flowJobInfo.TabIndex = 27
         '
         'tableJobInfo
@@ -846,7 +774,7 @@ Partial Class Main
         Me.tableJobInfo.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tableJobInfo.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tableJobInfo.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tableJobInfo.Size = New System.Drawing.Size(440, 92)
+        Me.tableJobInfo.Size = New System.Drawing.Size(348, 92)
         Me.tableJobInfo.TabIndex = 26
         '
         'Label26
@@ -873,12 +801,13 @@ Partial Class Main
         '
         Me.txtTemplateName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txtTemplateName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.txtTemplateName.DropDownWidth = 375
         Me.txtTemplateName.FormattingEnabled = True
         Me.txtTemplateName.Items.AddRange(New Object() {"coll-evtx", "Drop Process by PID", "ETM Relative Time Query", "EXE-Metadata-Cerb", "Lockdown NIC", "LockdownEnableNIC", "Memory Acquisition", "Memory Analysis", "Registry-Autostart", "Registry-Full", "Remediate-Name", "Remediate-PID", "Small-exes-Cerb", "Software Inventory", "Vol-Deep", "Vol-Deep-Cerb", "Vol-Hidden-Cerb", "Vol-Hidden-Injected", "Vol-Quick", "Vol-Quick-Cerb", "Vol-Quick-Sched"})
         Me.txtTemplateName.Location = New System.Drawing.Point(124, 64)
         Me.txtTemplateName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtTemplateName.Name = "txtTemplateName"
-        Me.txtTemplateName.Size = New System.Drawing.Size(312, 24)
+        Me.txtTemplateName.Size = New System.Drawing.Size(220, 24)
         Me.txtTemplateName.Sorted = True
         Me.txtTemplateName.TabIndex = 2
         '
@@ -897,7 +826,7 @@ Partial Class Main
         Me.txtProjectName.Location = New System.Drawing.Point(124, 34)
         Me.txtProjectName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtProjectName.Name = "txtProjectName"
-        Me.txtProjectName.Size = New System.Drawing.Size(312, 22)
+        Me.txtProjectName.Size = New System.Drawing.Size(220, 22)
         Me.txtProjectName.TabIndex = 1
         '
         'txtJobName
@@ -905,23 +834,25 @@ Partial Class Main
         Me.txtJobName.Location = New System.Drawing.Point(124, 4)
         Me.txtJobName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtJobName.Name = "txtJobName"
-        Me.txtJobName.Size = New System.Drawing.Size(312, 22)
+        Me.txtJobName.Size = New System.Drawing.Size(220, 22)
         Me.txtJobName.TabIndex = 0
         '
-        'GroupBox1
+        'grpJobTargetSelect
         '
-        Me.GroupBox1.Controls.Add(Me.rdoagent)
-        Me.GroupBox1.Controls.Add(Me.rdoshare)
-        Me.GroupBox1.Controls.Add(Me.grpshare)
-        Me.GroupBox1.Controls.Add(Me.grpagent)
-        Me.GroupBox1.Location = New System.Drawing.Point(4, 102)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4)
-        Me.GroupBox1.Size = New System.Drawing.Size(684, 246)
-        Me.GroupBox1.TabIndex = 3
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Job Targets"
+        Me.grpJobTargetSelect.AutoSize = True
+        Me.grpJobTargetSelect.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.tableJobInfoTarget.SetColumnSpan(Me.grpJobTargetSelect, 2)
+        Me.grpJobTargetSelect.Controls.Add(Me.rdoagent)
+        Me.grpJobTargetSelect.Controls.Add(Me.rdoshare)
+        Me.grpJobTargetSelect.Dock = System.Windows.Forms.DockStyle.Top
+        Me.grpJobTargetSelect.Location = New System.Drawing.Point(4, 4)
+        Me.grpJobTargetSelect.Margin = New System.Windows.Forms.Padding(4)
+        Me.grpJobTargetSelect.Name = "grpJobTargetSelect"
+        Me.grpJobTargetSelect.Padding = New System.Windows.Forms.Padding(4)
+        Me.grpJobTargetSelect.Size = New System.Drawing.Size(665, 67)
+        Me.grpJobTargetSelect.TabIndex = 3
+        Me.grpJobTargetSelect.TabStop = False
+        Me.grpJobTargetSelect.Text = "Job Targets"
         '
         'rdoagent
         '
@@ -939,7 +870,7 @@ Partial Class Main
         'rdoshare
         '
         Me.rdoshare.AutoSize = True
-        Me.rdoshare.Location = New System.Drawing.Point(321, 23)
+        Me.rdoshare.Location = New System.Drawing.Point(300, 23)
         Me.rdoshare.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoshare.Name = "rdoshare"
         Me.rdoshare.Size = New System.Drawing.Size(122, 21)
@@ -949,12 +880,8 @@ Partial Class Main
         '
         'grpshare
         '
-        Me.grpshare.Controls.Add(Me.Label6)
-        Me.grpshare.Controls.Add(Me.lstNetShare)
-        Me.grpshare.Controls.Add(Me.txtNetSharePath)
-        Me.grpshare.Controls.Add(Me.btnAddNetShare)
-        Me.grpshare.Controls.Add(Me.btnRemoveNetShare)
-        Me.grpshare.Location = New System.Drawing.Point(312, 49)
+        Me.grpshare.Controls.Add(Me.tableNetworkShares)
+        Me.grpshare.Location = New System.Drawing.Point(304, 79)
         Me.grpshare.Margin = New System.Windows.Forms.Padding(4)
         Me.grpshare.Name = "grpshare"
         Me.grpshare.Padding = New System.Windows.Forms.Padding(4)
@@ -966,7 +893,7 @@ Partial Class Main
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(8, 18)
+        Me.Label6.Location = New System.Drawing.Point(4, 0)
         Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(41, 17)
@@ -976,24 +903,24 @@ Partial Class Main
         'lstNetShare
         '
         Me.lstNetShare.FormattingEnabled = True
-        Me.lstNetShare.Location = New System.Drawing.Point(8, 70)
+        Me.lstNetShare.Location = New System.Drawing.Point(4, 57)
         Me.lstNetShare.Margin = New System.Windows.Forms.Padding(4)
         Me.lstNetShare.Name = "lstNetShare"
-        Me.lstNetShare.Size = New System.Drawing.Size(239, 106)
+        Me.lstNetShare.Size = New System.Drawing.Size(196, 106)
         Me.lstNetShare.TabIndex = 4
         Me.lstNetShare.TabStop = False
         '
         'txtNetSharePath
         '
-        Me.txtNetSharePath.Location = New System.Drawing.Point(8, 38)
+        Me.txtNetSharePath.Location = New System.Drawing.Point(4, 21)
         Me.txtNetSharePath.Margin = New System.Windows.Forms.Padding(4)
         Me.txtNetSharePath.Name = "txtNetSharePath"
-        Me.txtNetSharePath.Size = New System.Drawing.Size(239, 22)
+        Me.txtNetSharePath.Size = New System.Drawing.Size(196, 22)
         Me.txtNetSharePath.TabIndex = 5
         '
         'btnAddNetShare
         '
-        Me.btnAddNetShare.Location = New System.Drawing.Point(255, 36)
+        Me.btnAddNetShare.Location = New System.Drawing.Point(208, 21)
         Me.btnAddNetShare.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAddNetShare.Name = "btnAddNetShare"
         Me.btnAddNetShare.Size = New System.Drawing.Size(100, 28)
@@ -1003,7 +930,7 @@ Partial Class Main
         '
         'btnRemoveNetShare
         '
-        Me.btnRemoveNetShare.Location = New System.Drawing.Point(255, 148)
+        Me.btnRemoveNetShare.Location = New System.Drawing.Point(208, 57)
         Me.btnRemoveNetShare.Margin = New System.Windows.Forms.Padding(4)
         Me.btnRemoveNetShare.Name = "btnRemoveNetShare"
         Me.btnRemoveNetShare.Size = New System.Drawing.Size(100, 28)
@@ -1014,12 +941,8 @@ Partial Class Main
         '
         'grpagent
         '
-        Me.grpagent.Controls.Add(Me.Label1)
-        Me.grpagent.Controls.Add(Me.lstComputerTargets)
-        Me.grpagent.Controls.Add(Me.txtComputerTarget)
-        Me.grpagent.Controls.Add(Me.btnAddComputer)
-        Me.grpagent.Controls.Add(Me.btnRemoveComputer)
-        Me.grpagent.Location = New System.Drawing.Point(7, 49)
+        Me.grpagent.Controls.Add(Me.tableComputerTargets)
+        Me.grpagent.Location = New System.Drawing.Point(4, 79)
         Me.grpagent.Margin = New System.Windows.Forms.Padding(4)
         Me.grpagent.Name = "grpagent"
         Me.grpagent.Padding = New System.Windows.Forms.Padding(4)
@@ -1031,7 +954,7 @@ Partial Class Main
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(8, 18)
+        Me.Label1.Location = New System.Drawing.Point(4, 0)
         Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(76, 17)
@@ -1041,7 +964,7 @@ Partial Class Main
         'lstComputerTargets
         '
         Me.lstComputerTargets.FormattingEnabled = True
-        Me.lstComputerTargets.Location = New System.Drawing.Point(8, 70)
+        Me.lstComputerTargets.Location = New System.Drawing.Point(4, 57)
         Me.lstComputerTargets.Margin = New System.Windows.Forms.Padding(4)
         Me.lstComputerTargets.Name = "lstComputerTargets"
         Me.lstComputerTargets.Size = New System.Drawing.Size(159, 106)
@@ -1050,7 +973,7 @@ Partial Class Main
         '
         'txtComputerTarget
         '
-        Me.txtComputerTarget.Location = New System.Drawing.Point(8, 38)
+        Me.txtComputerTarget.Location = New System.Drawing.Point(4, 21)
         Me.txtComputerTarget.Margin = New System.Windows.Forms.Padding(4)
         Me.txtComputerTarget.Name = "txtComputerTarget"
         Me.txtComputerTarget.Size = New System.Drawing.Size(159, 22)
@@ -1058,7 +981,7 @@ Partial Class Main
         '
         'btnAddComputer
         '
-        Me.btnAddComputer.Location = New System.Drawing.Point(176, 36)
+        Me.btnAddComputer.Location = New System.Drawing.Point(171, 21)
         Me.btnAddComputer.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAddComputer.Name = "btnAddComputer"
         Me.btnAddComputer.Size = New System.Drawing.Size(100, 28)
@@ -1068,7 +991,7 @@ Partial Class Main
         '
         'btnRemoveComputer
         '
-        Me.btnRemoveComputer.Location = New System.Drawing.Point(175, 148)
+        Me.btnRemoveComputer.Location = New System.Drawing.Point(171, 57)
         Me.btnRemoveComputer.Margin = New System.Windows.Forms.Padding(4)
         Me.btnRemoveComputer.Name = "btnRemoveComputer"
         Me.btnRemoveComputer.Size = New System.Drawing.Size(100, 28)
@@ -1084,7 +1007,7 @@ Partial Class Main
         Me.tabFilters.Margin = New System.Windows.Forms.Padding(4)
         Me.tabFilters.Name = "tabFilters"
         Me.tabFilters.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabFilters.Size = New System.Drawing.Size(812, 596)
+        Me.tabFilters.Size = New System.Drawing.Size(730, 578)
         Me.tabFilters.TabIndex = 1
         Me.tabFilters.Text = "Filters"
         Me.tabFilters.UseVisualStyleBackColor = True
@@ -1496,7 +1419,7 @@ Partial Class Main
         Me.tabAgentRemediation.Location = New System.Drawing.Point(4, 28)
         Me.tabAgentRemediation.Margin = New System.Windows.Forms.Padding(4)
         Me.tabAgentRemediation.Name = "tabAgentRemediation"
-        Me.tabAgentRemediation.Size = New System.Drawing.Size(812, 596)
+        Me.tabAgentRemediation.Size = New System.Drawing.Size(730, 578)
         Me.tabAgentRemediation.TabIndex = 2
         Me.tabAgentRemediation.Text = "Agent Remediation"
         Me.tabAgentRemediation.UseVisualStyleBackColor = True
@@ -1512,11 +1435,11 @@ Partial Class Main
         Me.tableAgentRemediation.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.tableAgentRemediation.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.tableAgentRemediation.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.tableAgentRemediation.Controls.Add(Me.tabAgentRemediationSubMenu, 0, 0)
         Me.tableAgentRemediation.Controls.Add(Me.lvRemOptions, 0, 2)
         Me.tableAgentRemediation.Controls.Add(Me.btnRemoveRemOption, 2, 1)
         Me.tableAgentRemediation.Controls.Add(Me.btnSaveRemOptionChange, 1, 1)
         Me.tableAgentRemediation.Controls.Add(Me.btnAddRemOption, 0, 1)
+        Me.tableAgentRemediation.Controls.Add(Me.tabAgentRemediationSubMenu, 0, 0)
         Me.tableAgentRemediation.Location = New System.Drawing.Point(7, 3)
         Me.tableAgentRemediation.MinimumSize = New System.Drawing.Size(0, 375)
         Me.tableAgentRemediation.Name = "tableAgentRemediation"
@@ -1728,7 +1651,8 @@ Partial Class Main
         Me.tableARDelete.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tableARDelete.Location = New System.Drawing.Point(0, 0)
         Me.tableARDelete.Name = "tableARDelete"
-        Me.tableARDelete.RowCount = 1
+        Me.tableARDelete.RowCount = 2
+        Me.tableARDelete.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tableARDelete.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tableARDelete.Size = New System.Drawing.Size(653, 128)
         Me.tableARDelete.TabIndex = 26
@@ -1739,13 +1663,16 @@ Partial Class Main
         Me.Label20.Location = New System.Drawing.Point(4, 0)
         Me.Label20.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(113, 17)
+        Me.Label20.Padding = New System.Windows.Forms.Padding(4, 4, 0, 0)
+        Me.Label20.Size = New System.Drawing.Size(117, 21)
         Me.Label20.TabIndex = 25
         Me.Label20.Text = "Target File Path:"
         '
         'txtremdelfilepath
         '
-        Me.txtremdelfilepath.Location = New System.Drawing.Point(125, 4)
+        Me.txtremdelfilepath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtremdelfilepath.Location = New System.Drawing.Point(129, 4)
         Me.txtremdelfilepath.Margin = New System.Windows.Forms.Padding(4)
         Me.txtremdelfilepath.Name = "txtremdelfilepath"
         Me.txtremdelfilepath.Size = New System.Drawing.Size(312, 22)
@@ -1928,17 +1855,17 @@ Partial Class Main
         Me.tabMenu.Margin = New System.Windows.Forms.Padding(4)
         Me.tabMenu.Name = "tabMenu"
         Me.tabMenu.SelectedIndex = 0
-        Me.tabMenu.Size = New System.Drawing.Size(844, 859)
+        Me.tabMenu.Size = New System.Drawing.Size(758, 728)
         Me.tabMenu.TabIndex = 0
         '
         'tabSettings
         '
-        Me.tabSettings.Controls.Add(Me.GroupBox4)
+        Me.tabSettings.Controls.Add(Me.grpSettings)
         Me.tabSettings.Location = New System.Drawing.Point(4, 28)
         Me.tabSettings.Margin = New System.Windows.Forms.Padding(4)
         Me.tabSettings.Name = "tabSettings"
         Me.tabSettings.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabSettings.Size = New System.Drawing.Size(1494, 898)
+        Me.tabSettings.Size = New System.Drawing.Size(750, 696)
         Me.tabSettings.TabIndex = 1
         Me.tabSettings.Text = "Settings"
         Me.tabSettings.UseVisualStyleBackColor = True
@@ -1948,7 +1875,7 @@ Partial Class Main
         Me.tabRESTUI.Controls.Add(Me.tabControlJobsRest)
         Me.tabRESTUI.Location = New System.Drawing.Point(4, 28)
         Me.tabRESTUI.Name = "tabRESTUI"
-        Me.tabRESTUI.Size = New System.Drawing.Size(1494, 898)
+        Me.tabRESTUI.Size = New System.Drawing.Size(750, 696)
         Me.tabRESTUI.TabIndex = 7
         Me.tabRESTUI.Text = "REST UI"
         Me.tabRESTUI.UseVisualStyleBackColor = True
@@ -1963,7 +1890,7 @@ Partial Class Main
         Me.tabControlJobsRest.Location = New System.Drawing.Point(0, 0)
         Me.tabControlJobsRest.Name = "tabControlJobsRest"
         Me.tabControlJobsRest.SelectedIndex = 0
-        Me.tabControlJobsRest.Size = New System.Drawing.Size(1494, 898)
+        Me.tabControlJobsRest.Size = New System.Drawing.Size(750, 696)
         Me.tabControlJobsRest.TabIndex = 0
         '
         'tabTasks
@@ -1971,7 +1898,7 @@ Partial Class Main
         Me.tabTasks.Controls.Add(Me.flowTasks)
         Me.tabTasks.Location = New System.Drawing.Point(4, 25)
         Me.tabTasks.Name = "tabTasks"
-        Me.tabTasks.Size = New System.Drawing.Size(1486, 869)
+        Me.tabTasks.Size = New System.Drawing.Size(742, 667)
         Me.tabTasks.TabIndex = 2
         Me.tabTasks.Text = "Tasks"
         Me.tabTasks.UseVisualStyleBackColor = True
@@ -1983,7 +1910,7 @@ Partial Class Main
         Me.flowTasks.Dock = System.Windows.Forms.DockStyle.Fill
         Me.flowTasks.Location = New System.Drawing.Point(0, 0)
         Me.flowTasks.Name = "flowTasks"
-        Me.flowTasks.Size = New System.Drawing.Size(1486, 869)
+        Me.flowTasks.Size = New System.Drawing.Size(742, 667)
         Me.flowTasks.TabIndex = 0
         '
         'tabProjects
@@ -2131,7 +2058,7 @@ Partial Class Main
         Me.tabJobsList.Location = New System.Drawing.Point(4, 25)
         Me.tabJobsList.Name = "tabJobsList"
         Me.tabJobsList.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabJobsList.Size = New System.Drawing.Size(1486, 869)
+        Me.tabJobsList.Size = New System.Drawing.Size(742, 667)
         Me.tabJobsList.TabIndex = 0
         Me.tabJobsList.Text = "Job Status"
         Me.tabJobsList.UseVisualStyleBackColor = True
@@ -2152,7 +2079,7 @@ Partial Class Main
         'splitJobsRestJobs.Panel2
         '
         Me.splitJobsRestJobs.Panel2.Controls.Add(Me.dgvJobsRestJobsList)
-        Me.splitJobsRestJobs.Size = New System.Drawing.Size(1480, 863)
+        Me.splitJobsRestJobs.Size = New System.Drawing.Size(736, 661)
         Me.splitJobsRestJobs.SplitterDistance = 36
         Me.splitJobsRestJobs.TabIndex = 2
         '
@@ -2179,7 +2106,7 @@ Partial Class Main
         Me.dgvJobsRestJobsList.ReadOnly = True
         Me.dgvJobsRestJobsList.RowHeadersVisible = False
         Me.dgvJobsRestJobsList.RowTemplate.Height = 24
-        Me.dgvJobsRestJobsList.Size = New System.Drawing.Size(1480, 823)
+        Me.dgvJobsRestJobsList.Size = New System.Drawing.Size(736, 621)
         Me.dgvJobsRestJobsList.TabIndex = 0
         '
         'jobName
@@ -2295,8 +2222,8 @@ Partial Class Main
         'splitEndpointStatus.Panel2
         '
         Me.splitEndpointStatus.Panel2.Controls.Add(Me.dgvEndpointStatusJobTargets)
-        Me.splitEndpointStatus.Size = New System.Drawing.Size(1480, 863)
-        Me.splitEndpointStatus.SplitterDistance = 116
+        Me.splitEndpointStatus.Size = New System.Drawing.Size(736, 661)
+        Me.splitEndpointStatus.SplitterDistance = 90
         Me.splitEndpointStatus.TabIndex = 3
         '
         'flowEndpointStatus
@@ -2313,7 +2240,7 @@ Partial Class Main
         Me.flowEndpointStatus.Dock = System.Windows.Forms.DockStyle.Fill
         Me.flowEndpointStatus.Location = New System.Drawing.Point(0, 0)
         Me.flowEndpointStatus.Name = "flowEndpointStatus"
-        Me.flowEndpointStatus.Size = New System.Drawing.Size(1480, 116)
+        Me.flowEndpointStatus.Size = New System.Drawing.Size(736, 90)
         Me.flowEndpointStatus.TabIndex = 0
         '
         'btnBackFromEndpointStatus
@@ -2408,7 +2335,7 @@ Partial Class Main
         Me.dgvEndpointStatusJobTargets.ReadOnly = True
         Me.dgvEndpointStatusJobTargets.RowHeadersVisible = False
         Me.dgvEndpointStatusJobTargets.RowTemplate.Height = 24
-        Me.dgvEndpointStatusJobTargets.Size = New System.Drawing.Size(1480, 743)
+        Me.dgvEndpointStatusJobTargets.Size = New System.Drawing.Size(736, 567)
         Me.dgvEndpointStatusJobTargets.TabIndex = 9
         '
         'endpoint
@@ -2654,7 +2581,7 @@ Partial Class Main
         Me.tabJobExecution.Margin = New System.Windows.Forms.Padding(4)
         Me.tabJobExecution.Name = "tabJobExecution"
         Me.tabJobExecution.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabJobExecution.Size = New System.Drawing.Size(836, 827)
+        Me.tabJobExecution.Size = New System.Drawing.Size(750, 696)
         Me.tabJobExecution.TabIndex = 0
         Me.tabJobExecution.Text = "JobsAPI Execution"
         Me.tabJobExecution.UseVisualStyleBackColor = True
@@ -2667,7 +2594,7 @@ Partial Class Main
         Me.flowJobsAPI.Dock = System.Windows.Forms.DockStyle.Fill
         Me.flowJobsAPI.Location = New System.Drawing.Point(4, 4)
         Me.flowJobsAPI.Name = "flowJobsAPI"
-        Me.flowJobsAPI.Size = New System.Drawing.Size(828, 819)
+        Me.flowJobsAPI.Size = New System.Drawing.Size(742, 688)
         Me.flowJobsAPI.TabIndex = 35
         '
         'tableJobExecute
@@ -2684,7 +2611,7 @@ Partial Class Main
         Me.tableJobExecute.Controls.Add(Me.btnLoadFromBox, 1, 0)
         Me.tableJobExecute.Controls.Add(Me.btnExecute, 3, 0)
         Me.tableJobExecute.Controls.Add(Me.btnSaveAsBox, 2, 0)
-        Me.tableJobExecute.Location = New System.Drawing.Point(3, 639)
+        Me.tableJobExecute.Location = New System.Drawing.Point(3, 621)
         Me.tableJobExecute.Name = "tableJobExecute"
         Me.tableJobExecute.Padding = New System.Windows.Forms.Padding(4)
         Me.tableJobExecute.RowCount = 2
@@ -2747,7 +2674,7 @@ Partial Class Main
         Me.tabFireEye.Margin = New System.Windows.Forms.Padding(4)
         Me.tabFireEye.Name = "tabFireEye"
         Me.tabFireEye.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabFireEye.Size = New System.Drawing.Size(1494, 898)
+        Me.tabFireEye.Size = New System.Drawing.Size(750, 696)
         Me.tabFireEye.TabIndex = 4
         Me.tabFireEye.Text = "FireEye"
         Me.tabFireEye.UseVisualStyleBackColor = True
@@ -2763,7 +2690,7 @@ Partial Class Main
         Me.flowFireEye.Dock = System.Windows.Forms.DockStyle.Fill
         Me.flowFireEye.Location = New System.Drawing.Point(4, 4)
         Me.flowFireEye.Name = "flowFireEye"
-        Me.flowFireEye.Size = New System.Drawing.Size(1486, 890)
+        Me.flowFireEye.Size = New System.Drawing.Size(742, 688)
         Me.flowFireEye.TabIndex = 43
         '
         'tableFireEye
@@ -2902,7 +2829,7 @@ Partial Class Main
         Me.Label37.Location = New System.Drawing.Point(4, 184)
         Me.Label37.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label37.Name = "Label37"
-        Me.Label37.Size = New System.Drawing.Size(907, 18)
+        Me.Label37.Size = New System.Drawing.Size(731, 36)
         Me.Label37.TabIndex = 6
         Me.Label37.Text = "To generate a verified hit from a test FireEye ThreatScan download the following " & _
     "EXE to your target, or enter a Custom MD5 Hash above." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
@@ -2912,7 +2839,7 @@ Partial Class Main
         Me.txtFELink.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtFELink.Cursor = System.Windows.Forms.Cursors.Hand
         Me.txtFELink.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFELink.Location = New System.Drawing.Point(4, 206)
+        Me.txtFELink.Location = New System.Drawing.Point(4, 224)
         Me.txtFELink.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFELink.Name = "txtFELink"
         Me.txtFELink.ReadOnly = True
@@ -2927,7 +2854,7 @@ Partial Class Main
         Me.tabPANW.Location = New System.Drawing.Point(4, 28)
         Me.tabPANW.Margin = New System.Windows.Forms.Padding(4)
         Me.tabPANW.Name = "tabPANW"
-        Me.tabPANW.Size = New System.Drawing.Size(1494, 898)
+        Me.tabPANW.Size = New System.Drawing.Size(750, 696)
         Me.tabPANW.TabIndex = 5
         Me.tabPANW.Text = "PANW"
         Me.tabPANW.UseVisualStyleBackColor = True
@@ -2942,7 +2869,7 @@ Partial Class Main
         Me.flowPANW.Dock = System.Windows.Forms.DockStyle.Fill
         Me.flowPANW.Location = New System.Drawing.Point(0, 0)
         Me.flowPANW.Name = "flowPANW"
-        Me.flowPANW.Size = New System.Drawing.Size(1494, 898)
+        Me.flowPANW.Size = New System.Drawing.Size(750, 696)
         Me.flowPANW.TabIndex = 41
         '
         'tablePANWSendAlert
@@ -3262,7 +3189,7 @@ Partial Class Main
         Me.tabXPS.Margin = New System.Windows.Forms.Padding(4)
         Me.tabXPS.Name = "tabXPS"
         Me.tabXPS.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabXPS.Size = New System.Drawing.Size(1494, 898)
+        Me.tabXPS.Size = New System.Drawing.Size(750, 696)
         Me.tabXPS.TabIndex = 6
         Me.tabXPS.Text = "XPS"
         Me.tabXPS.UseVisualStyleBackColor = True
@@ -3277,7 +3204,7 @@ Partial Class Main
         Me.flowXPS.Dock = System.Windows.Forms.DockStyle.Fill
         Me.flowXPS.Location = New System.Drawing.Point(4, 4)
         Me.flowXPS.Name = "flowXPS"
-        Me.flowXPS.Size = New System.Drawing.Size(1486, 890)
+        Me.flowXPS.Size = New System.Drawing.Size(742, 688)
         Me.flowXPS.TabIndex = 45
         '
         'tableXPSGrid
@@ -3588,7 +3515,7 @@ Partial Class Main
         Me.tabAbout.Location = New System.Drawing.Point(4, 28)
         Me.tabAbout.Margin = New System.Windows.Forms.Padding(4)
         Me.tabAbout.Name = "tabAbout"
-        Me.tabAbout.Size = New System.Drawing.Size(1494, 898)
+        Me.tabAbout.Size = New System.Drawing.Size(750, 696)
         Me.tabAbout.TabIndex = 3
         Me.tabAbout.Text = "About"
         Me.tabAbout.UseVisualStyleBackColor = True
@@ -3601,7 +3528,7 @@ Partial Class Main
         Me.flowAbout.Dock = System.Windows.Forms.DockStyle.Fill
         Me.flowAbout.Location = New System.Drawing.Point(0, 0)
         Me.flowAbout.Name = "flowAbout"
-        Me.flowAbout.Size = New System.Drawing.Size(1494, 898)
+        Me.flowAbout.Size = New System.Drawing.Size(750, 696)
         Me.flowAbout.TabIndex = 1
         '
         'lbltxtAbout
@@ -3611,13 +3538,13 @@ Partial Class Main
         Me.lbltxtAbout.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbltxtAbout.Location = New System.Drawing.Point(3, 0)
         Me.lbltxtAbout.Name = "lbltxtAbout"
-        Me.lbltxtAbout.Size = New System.Drawing.Size(1026, 198)
+        Me.lbltxtAbout.Size = New System.Drawing.Size(718, 234)
         Me.lbltxtAbout.TabIndex = 1
         Me.lbltxtAbout.Text = resources.GetString("lbltxtAbout.Text")
         '
         'btn_AboutCheckforUpdates
         '
-        Me.btn_AboutCheckforUpdates.Location = New System.Drawing.Point(3, 201)
+        Me.btn_AboutCheckforUpdates.Location = New System.Drawing.Point(3, 237)
         Me.btn_AboutCheckforUpdates.Name = "btn_AboutCheckforUpdates"
         Me.btn_AboutCheckforUpdates.Size = New System.Drawing.Size(149, 32)
         Me.btn_AboutCheckforUpdates.TabIndex = 0
@@ -3636,36 +3563,268 @@ Partial Class Main
         Me.sfdBox.Filter = "Box Files|*.json"
         Me.sfdBox.InitialDirectory = "My.Application.Info.DirectoryPath & ""\BoxedJobs"""
         '
+        'tableSettingRequired
+        '
+        Me.tableSettingRequired.AutoSize = True
+        Me.tableSettingRequired.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.tableSettingRequired.ColumnCount = 3
+        Me.tableSettingRequired.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableSettingRequired.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableSettingRequired.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableSettingRequired.Controls.Add(Me.chkRestAPI, 2, 3)
+        Me.tableSettingRequired.Controls.Add(Me.Label7, 0, 0)
+        Me.tableSettingRequired.Controls.Add(Me.GroupBox2, 2, 0)
+        Me.tableSettingRequired.Controls.Add(Me.txtServer, 1, 0)
+        Me.tableSettingRequired.Controls.Add(Me.txtAPIPass, 1, 2)
+        Me.tableSettingRequired.Controls.Add(Me.Label5, 0, 2)
+        Me.tableSettingRequired.Controls.Add(Me.Label4, 0, 1)
+        Me.tableSettingRequired.Controls.Add(Me.txtApiUser, 1, 1)
+        Me.tableSettingRequired.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tableSettingRequired.Location = New System.Drawing.Point(3, 18)
+        Me.tableSettingRequired.Name = "tableSettingRequired"
+        Me.tableSettingRequired.RowCount = 4
+        Me.tableSettingRequired.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableSettingRequired.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableSettingRequired.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableSettingRequired.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableSettingRequired.Size = New System.Drawing.Size(640, 146)
+        Me.tableSettingRequired.TabIndex = 1
+        '
+        'grpReqSettings
+        '
+        Me.grpReqSettings.AutoSize = True
+        Me.grpReqSettings.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.grpReqSettings.Controls.Add(Me.tableSettingRequired)
+        Me.flowSettings.SetFlowBreak(Me.grpReqSettings, True)
+        Me.grpReqSettings.Location = New System.Drawing.Point(3, 3)
+        Me.grpReqSettings.Name = "grpReqSettings"
+        Me.grpReqSettings.Size = New System.Drawing.Size(646, 167)
+        Me.grpReqSettings.TabIndex = 2
+        Me.grpReqSettings.TabStop = False
+        Me.grpReqSettings.Text = "Required Settings"
+        '
+        'tableSettingOptional
+        '
+        Me.tableSettingOptional.AutoSize = True
+        Me.tableSettingOptional.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.tableSettingOptional.ColumnCount = 4
+        Me.tableSettingOptional.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableSettingOptional.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableSettingOptional.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableSettingOptional.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableSettingOptional.Controls.Add(Me.Label2, 0, 0)
+        Me.tableSettingOptional.Controls.Add(Me.Label14, 0, 4)
+        Me.tableSettingOptional.Controls.Add(Me.txtdefaultshare, 1, 3)
+        Me.tableSettingOptional.Controls.Add(Me.GroupBox6, 3, 1)
+        Me.tableSettingOptional.Controls.Add(Me.Label29, 0, 3)
+        Me.tableSettingOptional.Controls.Add(Me.txtDefaultJobName, 1, 0)
+        Me.tableSettingOptional.Controls.Add(Me.txtDefaultProjectName, 1, 1)
+        Me.tableSettingOptional.Controls.Add(Me.txtdefaultcomputer, 1, 2)
+        Me.tableSettingOptional.Controls.Add(Me.Label3, 0, 1)
+        Me.tableSettingOptional.Controls.Add(Me.chkbypasscerts, 3, 0)
+        Me.tableSettingOptional.Controls.Add(Me.Label28, 0, 2)
+        Me.tableSettingOptional.Controls.Add(Me.btnLoadDefaultTemplateName, 2, 4)
+        Me.tableSettingOptional.Controls.Add(Me.txtDefaultTemplateName, 1, 4)
+        Me.tableSettingOptional.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tableSettingOptional.Location = New System.Drawing.Point(4, 19)
+        Me.tableSettingOptional.Name = "tableSettingOptional"
+        Me.tableSettingOptional.RowCount = 5
+        Me.tableSettingOptional.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableSettingOptional.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableSettingOptional.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableSettingOptional.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableSettingOptional.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableSettingOptional.Size = New System.Drawing.Size(668, 191)
+        Me.tableSettingOptional.TabIndex = 3
+        '
+        'flowSettings
+        '
+        Me.flowSettings.AutoSize = True
+        Me.flowSettings.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.flowSettings.Controls.Add(Me.grpReqSettings)
+        Me.flowSettings.Controls.Add(Me.grpOptDefSet)
+        Me.flowSettings.Controls.Add(Me.tableSettingSave)
+        Me.flowSettings.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.flowSettings.Location = New System.Drawing.Point(4, 19)
+        Me.flowSettings.Name = "flowSettings"
+        Me.flowSettings.Size = New System.Drawing.Size(734, 665)
+        Me.flowSettings.TabIndex = 3
+        '
+        'btnLoadDefaultTemplateName
+        '
+        Me.btnLoadDefaultTemplateName.Location = New System.Drawing.Point(401, 162)
+        Me.btnLoadDefaultTemplateName.Name = "btnLoadDefaultTemplateName"
+        Me.btnLoadDefaultTemplateName.Size = New System.Drawing.Size(38, 23)
+        Me.btnLoadDefaultTemplateName.TabIndex = 5
+        Me.btnLoadDefaultTemplateName.Text = "..."
+        Me.btnLoadDefaultTemplateName.UseVisualStyleBackColor = True
+        '
+        'chkbypasscerts
+        '
+        Me.chkbypasscerts.AutoSize = True
+        Me.chkbypasscerts.Location = New System.Drawing.Point(446, 4)
+        Me.chkbypasscerts.Margin = New System.Windows.Forms.Padding(4)
+        Me.chkbypasscerts.Name = "chkbypasscerts"
+        Me.chkbypasscerts.Size = New System.Drawing.Size(188, 21)
+        Me.chkbypasscerts.TabIndex = 6
+        Me.chkbypasscerts.Text = "ByPass Invalid Certificate"
+        Me.tooltip.SetToolTip(Me.chkbypasscerts, "Warning! Allows Job Runner to ignore invalid Website certificates, such as self-s" & _
+        "igned certificates.. ")
+        Me.chkbypasscerts.UseVisualStyleBackColor = True
+        '
+        'btn_CheckForUpdates
+        '
+        Me.btn_CheckForUpdates.Location = New System.Drawing.Point(6, 70)
+        Me.btn_CheckForUpdates.Name = "btn_CheckForUpdates"
+        Me.btn_CheckForUpdates.Size = New System.Drawing.Size(149, 32)
+        Me.btn_CheckForUpdates.TabIndex = 27
+        Me.btn_CheckForUpdates.Text = "Check for Updates"
+        Me.btn_CheckForUpdates.UseVisualStyleBackColor = True
+        '
+        'chkUpdates
+        '
+        Me.chkUpdates.AutoSize = True
+        Me.chkUpdates.Location = New System.Drawing.Point(6, 21)
+        Me.chkUpdates.Name = "chkUpdates"
+        Me.chkUpdates.Size = New System.Drawing.Size(208, 21)
+        Me.chkUpdates.TabIndex = 0
+        Me.chkUpdates.Text = "Check For Updates On Start"
+        Me.tooltip.SetToolTip(Me.chkUpdates, "Check for updates to Job Runner on start.")
+        Me.chkUpdates.UseVisualStyleBackColor = True
+        '
+        'chkIncludPreRelease
+        '
+        Me.chkIncludPreRelease.AutoSize = True
+        Me.chkIncludPreRelease.Location = New System.Drawing.Point(6, 43)
+        Me.chkIncludPreRelease.Name = "chkIncludPreRelease"
+        Me.chkIncludPreRelease.Size = New System.Drawing.Size(158, 21)
+        Me.chkIncludPreRelease.TabIndex = 28
+        Me.chkIncludPreRelease.Text = "Include Pre-Release"
+        Me.tooltip.SetToolTip(Me.chkIncludPreRelease, "Check for pre-releases")
+        Me.chkIncludPreRelease.UseVisualStyleBackColor = True
+        '
+        'GroupBox6
+        '
+        Me.GroupBox6.AutoSize = True
+        Me.GroupBox6.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.GroupBox6.Controls.Add(Me.chkIncludPreRelease)
+        Me.GroupBox6.Controls.Add(Me.chkUpdates)
+        Me.GroupBox6.Controls.Add(Me.btn_CheckForUpdates)
+        Me.GroupBox6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox6.Location = New System.Drawing.Point(445, 33)
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.tableSettingOptional.SetRowSpan(Me.GroupBox6, 3)
+        Me.GroupBox6.Size = New System.Drawing.Size(220, 123)
+        Me.GroupBox6.TabIndex = 7
+        Me.GroupBox6.TabStop = False
+        Me.GroupBox6.Text = "Updates"
+        '
+        'tableSettingSave
+        '
+        Me.tableSettingSave.AutoSize = True
+        Me.tableSettingSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.tableSettingSave.ColumnCount = 2
+        Me.tableSettingSave.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableSettingSave.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableSettingSave.Controls.Add(Me.btnSaveSettings, 1, 0)
+        Me.tableSettingSave.Controls.Add(Me.txtStatusSettings, 0, 0)
+        Me.tableSettingSave.Location = New System.Drawing.Point(3, 398)
+        Me.tableSettingSave.Name = "tableSettingSave"
+        Me.tableSettingSave.RowCount = 1
+        Me.tableSettingSave.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableSettingSave.Size = New System.Drawing.Size(693, 36)
+        Me.tableSettingSave.TabIndex = 3
+        '
+        'tableComputerTargets
+        '
+        Me.tableComputerTargets.AutoSize = True
+        Me.tableComputerTargets.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.tableComputerTargets.ColumnCount = 2
+        Me.tableComputerTargets.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableComputerTargets.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableComputerTargets.Controls.Add(Me.btnRemoveComputer, 1, 2)
+        Me.tableComputerTargets.Controls.Add(Me.lstComputerTargets, 0, 2)
+        Me.tableComputerTargets.Controls.Add(Me.Label1, 0, 0)
+        Me.tableComputerTargets.Controls.Add(Me.btnAddComputer, 1, 1)
+        Me.tableComputerTargets.Controls.Add(Me.txtComputerTarget, 0, 1)
+        Me.tableComputerTargets.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tableComputerTargets.Location = New System.Drawing.Point(4, 19)
+        Me.tableComputerTargets.Name = "tableComputerTargets"
+        Me.tableComputerTargets.RowCount = 3
+        Me.tableComputerTargets.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableComputerTargets.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableComputerTargets.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableComputerTargets.Size = New System.Drawing.Size(284, 165)
+        Me.tableComputerTargets.TabIndex = 28
+        '
+        'tableNetworkShares
+        '
+        Me.tableNetworkShares.AutoSize = True
+        Me.tableNetworkShares.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.tableNetworkShares.ColumnCount = 2
+        Me.tableNetworkShares.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableNetworkShares.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableNetworkShares.Controls.Add(Me.btnRemoveNetShare, 1, 2)
+        Me.tableNetworkShares.Controls.Add(Me.lstNetShare, 0, 2)
+        Me.tableNetworkShares.Controls.Add(Me.Label6, 0, 0)
+        Me.tableNetworkShares.Controls.Add(Me.btnAddNetShare, 1, 1)
+        Me.tableNetworkShares.Controls.Add(Me.txtNetSharePath, 0, 1)
+        Me.tableNetworkShares.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tableNetworkShares.Location = New System.Drawing.Point(4, 19)
+        Me.tableNetworkShares.Name = "tableNetworkShares"
+        Me.tableNetworkShares.RowCount = 3
+        Me.tableNetworkShares.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableNetworkShares.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableNetworkShares.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableNetworkShares.Size = New System.Drawing.Size(357, 165)
+        Me.tableNetworkShares.TabIndex = 28
+        '
+        'tableJobInfoTarget
+        '
+        Me.tableJobInfoTarget.AutoSize = True
+        Me.tableJobInfoTarget.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.tableJobInfoTarget.ColumnCount = 2
+        Me.tableJobInfoTarget.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableJobInfoTarget.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableJobInfoTarget.Controls.Add(Me.grpJobTargetSelect, 0, 0)
+        Me.tableJobInfoTarget.Controls.Add(Me.grpshare, 1, 1)
+        Me.tableJobInfoTarget.Controls.Add(Me.grpagent, 0, 1)
+        Me.tableJobInfoTarget.Location = New System.Drawing.Point(3, 101)
+        Me.tableJobInfoTarget.Name = "tableJobInfoTarget"
+        Me.tableJobInfoTarget.RowCount = 2
+        Me.tableJobInfoTarget.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableJobInfoTarget.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableJobInfoTarget.Size = New System.Drawing.Size(673, 271)
+        Me.tableJobInfoTarget.TabIndex = 14
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(844, 859)
+        Me.ClientSize = New System.Drawing.Size(758, 728)
         Me.Controls.Add(Me.tabMenu)
         Me.HelpButton = True
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(4)
-        Me.MinimumSize = New System.Drawing.Size(858, 779)
+        Me.MinimumSize = New System.Drawing.Size(776, 775)
         Me.Name = "Main"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "R1 Job Runner Version:"
-        Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox4.PerformLayout()
-        Me.grpReqSet.ResumeLayout(False)
-        Me.grpReqSet.PerformLayout()
+        Me.grpSettings.ResumeLayout(False)
+        Me.grpSettings.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.grpOptDefSet.ResumeLayout(False)
         Me.grpOptDefSet.PerformLayout()
-        Me.GroupBox6.ResumeLayout(False)
-        Me.GroupBox6.PerformLayout()
         Me.tabSubMenu.ResumeLayout(False)
         Me.tabJobInfo.ResumeLayout(False)
+        Me.tabJobInfo.PerformLayout()
         Me.flowJobInfo.ResumeLayout(False)
         Me.flowJobInfo.PerformLayout()
         Me.tableJobInfo.ResumeLayout(False)
         Me.tableJobInfo.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.grpJobTargetSelect.ResumeLayout(False)
+        Me.grpJobTargetSelect.PerformLayout()
         Me.grpshare.ResumeLayout(False)
         Me.grpshare.PerformLayout()
         Me.grpagent.ResumeLayout(False)
@@ -3787,6 +3946,24 @@ Partial Class Main
         Me.tabAbout.PerformLayout()
         Me.flowAbout.ResumeLayout(False)
         Me.flowAbout.PerformLayout()
+        Me.tableSettingRequired.ResumeLayout(False)
+        Me.tableSettingRequired.PerformLayout()
+        Me.grpReqSettings.ResumeLayout(False)
+        Me.grpReqSettings.PerformLayout()
+        Me.tableSettingOptional.ResumeLayout(False)
+        Me.tableSettingOptional.PerformLayout()
+        Me.flowSettings.ResumeLayout(False)
+        Me.flowSettings.PerformLayout()
+        Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBox6.PerformLayout()
+        Me.tableSettingSave.ResumeLayout(False)
+        Me.tableSettingSave.PerformLayout()
+        Me.tableComputerTargets.ResumeLayout(False)
+        Me.tableComputerTargets.PerformLayout()
+        Me.tableNetworkShares.ResumeLayout(False)
+        Me.tableNetworkShares.PerformLayout()
+        Me.tableJobInfoTarget.ResumeLayout(False)
+        Me.tableJobInfoTarget.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -3801,7 +3978,7 @@ Partial Class Main
     Friend WithEvents txtAPIPass As System.Windows.Forms.TextBox
     Friend WithEvents txtServer As System.Windows.Forms.TextBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
+    Friend WithEvents grpSettings As System.Windows.Forms.GroupBox
     Friend WithEvents tabSubMenu As System.Windows.Forms.TabControl
     Friend WithEvents tabFilters As System.Windows.Forms.TabPage
     Friend WithEvents tabFiltersSubMenu As System.Windows.Forms.TabControl
@@ -3868,13 +4045,12 @@ Partial Class Main
     Friend WithEvents Label29 As System.Windows.Forms.Label
     Friend WithEvents txtdefaultcomputer As System.Windows.Forms.TextBox
     Friend WithEvents Label28 As System.Windows.Forms.Label
-    Friend WithEvents chkbypasscerts As System.Windows.Forms.CheckBox
     Friend WithEvents txtStatusSettings As System.Windows.Forms.TextBox
     Friend WithEvents btnSaveAsBox As System.Windows.Forms.Button
     Friend WithEvents btnLoadFromBox As System.Windows.Forms.Button
     Friend WithEvents ofdBox As System.Windows.Forms.OpenFileDialog
     Friend WithEvents sfdBox As System.Windows.Forms.SaveFileDialog
-    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents grpJobTargetSelect As System.Windows.Forms.GroupBox
     Friend WithEvents rdoagent As System.Windows.Forms.RadioButton
     Friend WithEvents rdoshare As System.Windows.Forms.RadioButton
     Friend WithEvents grpshare As System.Windows.Forms.GroupBox
@@ -3912,7 +4088,6 @@ Partial Class Main
     Friend WithEvents Label36 As System.Windows.Forms.Label
     Friend WithEvents Label37 As System.Windows.Forms.Label
     Friend WithEvents txtFELink As System.Windows.Forms.TextBox
-    Friend WithEvents grpReqSet As System.Windows.Forms.GroupBox
     Friend WithEvents grpOptDefSet As System.Windows.Forms.GroupBox
     Friend WithEvents btnShowJSON As System.Windows.Forms.Button
     Friend WithEvents rdor1 As System.Windows.Forms.RadioButton
@@ -3958,10 +4133,7 @@ Partial Class Main
     Friend WithEvents Label47 As System.Windows.Forms.Label
     Friend WithEvents txtPANWMalwareMD5 As System.Windows.Forms.TextBox
     Friend WithEvents Label48 As System.Windows.Forms.Label
-    Friend WithEvents btn_CheckForUpdates As System.Windows.Forms.Button
     Friend WithEvents btn_AboutCheckforUpdates As System.Windows.Forms.Button
-    Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
-    Friend WithEvents chkUpdates As System.Windows.Forms.CheckBox
     Friend WithEvents tabRESTUI As System.Windows.Forms.TabPage
     Friend WithEvents tabControlJobsRest As System.Windows.Forms.TabControl
     Friend WithEvents tabJobsList As System.Windows.Forms.TabPage
@@ -4032,8 +4204,6 @@ Partial Class Main
     Friend WithEvents lblepstatusSuccessful As System.Windows.Forms.Label
     Friend WithEvents chkRestAPI As System.Windows.Forms.CheckBox
     Friend WithEvents tooltip As System.Windows.Forms.ToolTip
-    Friend WithEvents btnLoadDefaultTemplateName As System.Windows.Forms.Button
-    Friend WithEvents chkIncludPreRelease As System.Windows.Forms.CheckBox
     Friend WithEvents txtPANWMalwareName As System.Windows.Forms.TextBox
     Friend WithEvents Label49 As System.Windows.Forms.Label
     Friend WithEvents txtFireEyeMalwareName As System.Windows.Forms.TextBox
@@ -4074,5 +4244,19 @@ Partial Class Main
     Friend WithEvents colFilterCheck As System.Windows.Forms.DataGridViewCheckBoxColumn
     Friend WithEvents col_FilterType As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colFilterName As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents flowSettings As System.Windows.Forms.FlowLayoutPanel
+    Friend WithEvents grpReqSettings As System.Windows.Forms.GroupBox
+    Friend WithEvents tableSettingRequired As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents tableSettingOptional As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
+    Friend WithEvents chkIncludPreRelease As System.Windows.Forms.CheckBox
+    Friend WithEvents chkUpdates As System.Windows.Forms.CheckBox
+    Friend WithEvents btn_CheckForUpdates As System.Windows.Forms.Button
+    Friend WithEvents chkbypasscerts As System.Windows.Forms.CheckBox
+    Friend WithEvents btnLoadDefaultTemplateName As System.Windows.Forms.Button
+    Friend WithEvents tableSettingSave As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents tableComputerTargets As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents tableNetworkShares As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents tableJobInfoTarget As System.Windows.Forms.TableLayoutPanel
 
 End Class

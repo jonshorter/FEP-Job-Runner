@@ -93,6 +93,7 @@ Partial Class Form_UpdateDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "Form_UpdateDialog"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "UpdateDialog"
         Me.FlowLayoutPanel1.ResumeLayout(False)
         Me.FlowLayoutPanel1.PerformLayout()
