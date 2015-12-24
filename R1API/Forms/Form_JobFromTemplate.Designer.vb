@@ -35,18 +35,18 @@ Partial Class Form_JobFromTemplate
         Me.btnNewProject = New System.Windows.Forms.Button()
         Me.txtSearchProject = New System.Windows.Forms.TextBox()
         Me.dgvProjectList = New System.Windows.Forms.DataGridView()
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CreationDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CreatedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LastModDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ProjectFolderPath = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ProjectID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tabTargets = New System.Windows.Forms.TabPage()
         Me.splitTargetsSelect = New System.Windows.Forms.SplitContainer()
         Me.treeGroups = New System.Windows.Forms.TreeView()
         Me.splitTargetEndpoints = New System.Windows.Forms.SplitContainer()
         Me.txtSearchEndpoint = New System.Windows.Forms.TextBox()
         Me.dgvTargetEndpoints = New System.Windows.Forms.DataGridView()
+        Me.CheckEndpoint = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.EndpointName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IPAddress = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.OperatingSystem = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LastContact = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.targetID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tabSchedule = New System.Windows.Forms.TabPage()
         Me.flowSchedule = New System.Windows.Forms.FlowLayoutPanel()
         Me.grpScheduleOptions = New System.Windows.Forms.GroupBox()
@@ -149,6 +149,12 @@ Partial Class Form_JobFromTemplate
         Me.dtpDate = New System.Windows.Forms.DateTimePicker()
         Me.dtpTime = New System.Windows.Forms.DateTimePicker()
         Me.dgvThreatFilters = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CreationDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CreatedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LastModDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProjectFolderPath = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProjectID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Selected = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.FilterName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.View = New System.Windows.Forms.DataGridViewButtonColumn()
@@ -161,12 +167,6 @@ Partial Class Form_JobFromTemplate
         Me.Group = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Tags = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FilterID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CheckEndpoint = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.EndpointName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.IPAddress = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.OperatingSystem = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LastContact = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.targetID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.splitJobFromTemplate, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.splitJobFromTemplate.Panel1.SuspendLayout()
         Me.splitJobFromTemplate.Panel2.SuspendLayout()
@@ -382,43 +382,6 @@ Partial Class Form_JobFromTemplate
         Me.dgvProjectList.Size = New System.Drawing.Size(1016, 507)
         Me.dgvProjectList.TabIndex = 0
         '
-        'DataGridViewTextBoxColumn1
-        '
-        Me.DataGridViewTextBoxColumn1.HeaderText = "Project Name"
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        Me.DataGridViewTextBoxColumn1.ReadOnly = True
-        '
-        'CreationDate
-        '
-        Me.CreationDate.HeaderText = "Creation Date"
-        Me.CreationDate.Name = "CreationDate"
-        Me.CreationDate.ReadOnly = True
-        '
-        'CreatedBy
-        '
-        Me.CreatedBy.HeaderText = "Created By"
-        Me.CreatedBy.Name = "CreatedBy"
-        Me.CreatedBy.ReadOnly = True
-        '
-        'LastModDate
-        '
-        Me.LastModDate.HeaderText = "Last Modified Date"
-        Me.LastModDate.Name = "LastModDate"
-        Me.LastModDate.ReadOnly = True
-        '
-        'ProjectFolderPath
-        '
-        Me.ProjectFolderPath.HeaderText = "Project Folder Path"
-        Me.ProjectFolderPath.Name = "ProjectFolderPath"
-        Me.ProjectFolderPath.ReadOnly = True
-        '
-        'ProjectID
-        '
-        Me.ProjectID.HeaderText = "Project ID"
-        Me.ProjectID.Name = "ProjectID"
-        Me.ProjectID.ReadOnly = True
-        Me.ProjectID.Visible = False
-        '
         'tabTargets
         '
         Me.tabTargets.Controls.Add(Me.splitTargetsSelect)
@@ -505,6 +468,50 @@ Partial Class Form_JobFromTemplate
         Me.dgvTargetEndpoints.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvTargetEndpoints.Size = New System.Drawing.Size(837, 507)
         Me.dgvTargetEndpoints.TabIndex = 0
+        '
+        'CheckEndpoint
+        '
+        Me.CheckEndpoint.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.CheckEndpoint.FillWeight = 1.0!
+        Me.CheckEndpoint.HeaderText = ""
+        Me.CheckEndpoint.Name = "CheckEndpoint"
+        Me.CheckEndpoint.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.CheckEndpoint.Width = 63
+        '
+        'EndpointName
+        '
+        Me.EndpointName.FillWeight = 112.3096!
+        Me.EndpointName.HeaderText = "Endpoint Name"
+        Me.EndpointName.Name = "EndpointName"
+        Me.EndpointName.ReadOnly = True
+        '
+        'IPAddress
+        '
+        Me.IPAddress.FillWeight = 112.3096!
+        Me.IPAddress.HeaderText = "IP Address"
+        Me.IPAddress.Name = "IPAddress"
+        Me.IPAddress.ReadOnly = True
+        '
+        'OperatingSystem
+        '
+        Me.OperatingSystem.FillWeight = 112.3096!
+        Me.OperatingSystem.HeaderText = "Operating System"
+        Me.OperatingSystem.Name = "OperatingSystem"
+        Me.OperatingSystem.ReadOnly = True
+        '
+        'LastContact
+        '
+        Me.LastContact.FillWeight = 112.3096!
+        Me.LastContact.HeaderText = "Last Contact"
+        Me.LastContact.Name = "LastContact"
+        Me.LastContact.ReadOnly = True
+        '
+        'targetID
+        '
+        Me.targetID.HeaderText = "TargetID"
+        Me.targetID.Name = "targetID"
+        Me.targetID.ReadOnly = True
+        Me.targetID.Visible = False
         '
         'tabSchedule
         '
@@ -1622,22 +1629,69 @@ Partial Class Form_JobFromTemplate
         Me.dgvThreatFilters.Size = New System.Drawing.Size(1016, 100)
         Me.dgvThreatFilters.TabIndex = 0
         '
+        'DataGridViewTextBoxColumn1
+        '
+        Me.DataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.DataGridViewTextBoxColumn1.FillWeight = 20.0!
+        Me.DataGridViewTextBoxColumn1.HeaderText = "Project Name"
+        Me.DataGridViewTextBoxColumn1.MinimumWidth = 203
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.DataGridViewTextBoxColumn1.ReadOnly = True
+        Me.DataGridViewTextBoxColumn1.Width = 203
+        '
+        'CreationDate
+        '
+        Me.CreationDate.FillWeight = 15.0!
+        Me.CreationDate.HeaderText = "Creation Date"
+        Me.CreationDate.Name = "CreationDate"
+        Me.CreationDate.ReadOnly = True
+        '
+        'CreatedBy
+        '
+        Me.CreatedBy.FillWeight = 15.0!
+        Me.CreatedBy.HeaderText = "Created By"
+        Me.CreatedBy.Name = "CreatedBy"
+        Me.CreatedBy.ReadOnly = True
+        '
+        'LastModDate
+        '
+        Me.LastModDate.FillWeight = 15.0!
+        Me.LastModDate.HeaderText = "Last Modified Date"
+        Me.LastModDate.Name = "LastModDate"
+        Me.LastModDate.ReadOnly = True
+        '
+        'ProjectFolderPath
+        '
+        Me.ProjectFolderPath.FillWeight = 15.0!
+        Me.ProjectFolderPath.HeaderText = "Project Folder Path"
+        Me.ProjectFolderPath.Name = "ProjectFolderPath"
+        Me.ProjectFolderPath.ReadOnly = True
+        '
+        'ProjectID
+        '
+        Me.ProjectID.FillWeight = 5.0!
+        Me.ProjectID.HeaderText = "Project ID"
+        Me.ProjectID.Name = "ProjectID"
+        Me.ProjectID.ReadOnly = True
+        Me.ProjectID.Visible = False
+        '
         'Selected
         '
-        Me.Selected.FillWeight = 71.43088!
+        Me.Selected.FillWeight = 1.0!
         Me.Selected.HeaderText = "Select"
+        Me.Selected.MinimumWidth = 32
         Me.Selected.Name = "Selected"
         '
         'FilterName
         '
-        Me.FilterName.FillWeight = 71.43088!
+        Me.FilterName.FillWeight = 23.35574!
         Me.FilterName.HeaderText = "Name"
         Me.FilterName.Name = "FilterName"
         Me.FilterName.ReadOnly = True
         '
         'View
         '
-        Me.View.FillWeight = 1.0!
+        Me.View.FillWeight = 0.7785247!
         Me.View.HeaderText = "View"
         Me.View.MinimumWidth = 45
         Me.View.Name = "View"
@@ -1645,109 +1699,66 @@ Partial Class Form_JobFromTemplate
         '
         'Description
         '
-        Me.Description.FillWeight = 71.43088!
+        Me.Description.FillWeight = 7.785247!
         Me.Description.HeaderText = "Description"
         Me.Description.Name = "Description"
         Me.Description.ReadOnly = True
         '
         'Source
         '
-        Me.Source.FillWeight = 71.43088!
+        Me.Source.FillWeight = 7.785247!
         Me.Source.HeaderText = "Source"
         Me.Source.Name = "Source"
         Me.Source.ReadOnly = True
         '
         'AuthoredDate
         '
-        Me.AuthoredDate.FillWeight = 71.43088!
+        Me.AuthoredDate.FillWeight = 7.785247!
         Me.AuthoredDate.HeaderText = "Authored Date"
         Me.AuthoredDate.Name = "AuthoredDate"
         Me.AuthoredDate.ReadOnly = True
         '
         'Author
         '
-        Me.Author.FillWeight = 71.43088!
+        Me.Author.FillWeight = 7.785247!
         Me.Author.HeaderText = "Authored By"
         Me.Author.Name = "Author"
         Me.Author.ReadOnly = True
         '
         'Type
         '
-        Me.Type.FillWeight = 71.43088!
+        Me.Type.FillWeight = 7.785247!
         Me.Type.HeaderText = "Type"
         Me.Type.Name = "Type"
         Me.Type.ReadOnly = True
         '
         'Category
         '
-        Me.Category.FillWeight = 71.43088!
+        Me.Category.FillWeight = 7.785247!
         Me.Category.HeaderText = "Category"
         Me.Category.Name = "Category"
         Me.Category.ReadOnly = True
         '
         'Group
         '
-        Me.Group.FillWeight = 71.43088!
+        Me.Group.FillWeight = 7.785247!
         Me.Group.HeaderText = "Group"
         Me.Group.Name = "Group"
         Me.Group.ReadOnly = True
         '
         'Tags
         '
-        Me.Tags.FillWeight = 71.43088!
+        Me.Tags.FillWeight = 7.785247!
         Me.Tags.HeaderText = "Tags"
         Me.Tags.Name = "Tags"
         Me.Tags.ReadOnly = True
         '
         'FilterID
         '
+        Me.FilterID.FillWeight = 10.0!
         Me.FilterID.HeaderText = "Filter ID"
         Me.FilterID.Name = "FilterID"
         Me.FilterID.Visible = False
-        '
-        'CheckEndpoint
-        '
-        Me.CheckEndpoint.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.CheckEndpoint.FillWeight = 1.0!
-        Me.CheckEndpoint.HeaderText = ""
-        Me.CheckEndpoint.Name = "CheckEndpoint"
-        Me.CheckEndpoint.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.CheckEndpoint.Width = 63
-        '
-        'EndpointName
-        '
-        Me.EndpointName.FillWeight = 112.3096!
-        Me.EndpointName.HeaderText = "Endpoint Name"
-        Me.EndpointName.Name = "EndpointName"
-        Me.EndpointName.ReadOnly = True
-        '
-        'IPAddress
-        '
-        Me.IPAddress.FillWeight = 112.3096!
-        Me.IPAddress.HeaderText = "IP Address"
-        Me.IPAddress.Name = "IPAddress"
-        Me.IPAddress.ReadOnly = True
-        '
-        'OperatingSystem
-        '
-        Me.OperatingSystem.FillWeight = 112.3096!
-        Me.OperatingSystem.HeaderText = "Operating System"
-        Me.OperatingSystem.Name = "OperatingSystem"
-        Me.OperatingSystem.ReadOnly = True
-        '
-        'LastContact
-        '
-        Me.LastContact.FillWeight = 112.3096!
-        Me.LastContact.HeaderText = "Last Contact"
-        Me.LastContact.Name = "LastContact"
-        Me.LastContact.ReadOnly = True
-        '
-        'targetID
-        '
-        Me.targetID.HeaderText = "TargetID"
-        Me.targetID.Name = "targetID"
-        Me.targetID.ReadOnly = True
-        Me.targetID.Visible = False
         '
         'Form_JobFromTemplate
         '
@@ -1847,12 +1858,6 @@ Partial Class Form_JobFromTemplate
     Friend WithEvents btnNewProject As System.Windows.Forms.Button
     Friend WithEvents txtSearchProject As System.Windows.Forms.TextBox
     Friend WithEvents dgvProjectList As System.Windows.Forms.DataGridView
-    Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents CreationDate As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents CreatedBy As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents LastModDate As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ProjectFolderPath As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ProjectID As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents splitTargetsSelect As System.Windows.Forms.SplitContainer
     Friend WithEvents treeGroups As System.Windows.Forms.TreeView
     Friend WithEvents splitTargetEndpoints As System.Windows.Forms.SplitContainer
@@ -1865,18 +1870,6 @@ Partial Class Form_JobFromTemplate
     Friend WithEvents tabThreatFilters As System.Windows.Forms.TabPage
     Friend WithEvents splitThreatFilters As System.Windows.Forms.SplitContainer
     Friend WithEvents dgvThreatFilters As System.Windows.Forms.DataGridView
-    Friend WithEvents Selected As System.Windows.Forms.DataGridViewCheckBoxColumn
-    Friend WithEvents FilterName As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents View As System.Windows.Forms.DataGridViewButtonColumn
-    Friend WithEvents Description As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Source As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents AuthoredDate As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Author As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Type As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Category As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Group As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Tags As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents FilterID As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents grpSchedule_StartDate As System.Windows.Forms.GroupBox
     Friend WithEvents dtpScheduleStart As System.Windows.Forms.DateTimePicker
     Friend WithEvents splitThreatFilterAdvanced As System.Windows.Forms.SplitContainer
@@ -1982,4 +1975,22 @@ Partial Class Form_JobFromTemplate
     Friend WithEvents OperatingSystem As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents LastContact As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents targetID As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents CreationDate As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents CreatedBy As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents LastModDate As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ProjectFolderPath As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ProjectID As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Selected As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents FilterName As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents View As System.Windows.Forms.DataGridViewButtonColumn
+    Friend WithEvents Description As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Source As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents AuthoredDate As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Author As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Type As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Category As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Group As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Tags As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FilterID As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class
