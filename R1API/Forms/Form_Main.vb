@@ -446,53 +446,64 @@ Public Class Main
         'Select case of the currently active tab
         Select Case tabAgentRemediationSubMenu.SelectedTab.Name
             Case tabAgentSendFile.Name
-                'Send File Tab
-                'remsenlst = store
-                Dim remsendlst As List(Of JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile) = StoreRemSendList
-                'Add new item to UI
-                Dim nrem = lvRemOptions.Items.Add("Send File")
-                nrem.SubItems.Add(remsendlst.Count + 1)
-                'New send option variable
-                Dim nremsend As New JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile
-                'Set properties from UI
-                nremsend.FileToSend = txtremsendsource.Text
-                nremsend.RemotePath = txtremsenddest.Text
-                nremsend.OverwriteIfExists = chkremsenddelete.Checked
-                'Add to store
-                remsendlst.Add(nremsend)
-
+                If Not String.IsNullOrWhiteSpace(txtremsendsource.Text) And Not String.IsNullOrWhiteSpace(txtremsenddest.Text) Then
+                    'Send File Tab
+                    'remsenlst = store
+                    Dim remsendlst As List(Of JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile) = StoreRemSendList
+                    'Add new item to UI
+                    Dim nrem = lvRemOptions.Items.Add("Send File")
+                    nrem.SubItems.Add(remsendlst.Count + 1)
+                    'New send option variable
+                    Dim nremsend As New JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile
+                    'Set properties from UI
+                    nremsend.FileToSend = txtremsendsource.Text
+                    nremsend.RemotePath = txtremsenddest.Text
+                    nremsend.OverwriteIfExists = chkremsenddelete.Checked
+                    'Add to store
+                    remsendlst.Add(nremsend)
+                Else
+                    MsgBox("Please specify source and destination paths.")
+                End If
             Case tabAgentExecute.Name
-                'Execute Tab
-                'remexeclist = store
-                Dim remexeclist As List(Of JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute) = StoreRemExecList
-                'Add new item to UI
-                Dim nrem = lvRemOptions.Items.Add("Execute")
-                nrem.SubItems.Add(remexeclist.Count + 1)
-                'New exec opt variable
-                Dim nremexec As New JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute
-                'Set properties from UI
-                nremexec.Executable = txtremexecpath.Text
-                nremexec.Arguments = txtremexecargs.Text
-                'Add to store
-                remexeclist.Add(nremexec)
+                If Not String.IsNullOrWhiteSpace(txtremexecpath.Text) Then
+                    'Execute Tab
+                    'remexeclist = store
+                    Dim remexeclist As List(Of JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute) = StoreRemExecList
+                    'Add new item to UI
+                    Dim nrem = lvRemOptions.Items.Add("Execute")
+                    nrem.SubItems.Add(remexeclist.Count + 1)
+                    'New exec opt variable
+                    Dim nremexec As New JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute
+                    'Set properties from UI
+                    nremexec.Executable = txtremexecpath.Text
+                    nremexec.Arguments = txtremexecargs.Text
+                    'Add to store
+                    remexeclist.Add(nremexec)
+                Else
+                    MsgBox("Please specify the path of an executable.")
+                End If
 
             Case tabAgentDelete.Name
-                'Delete File Tab
-                'remdellist = Store
-                Dim remdellist As List(Of JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase) = StoreRemDelList
-                'Add to UI
-                Dim nrem = lvRemOptions.Items.Add("Delete File")
-                nrem.SubItems.Add(remdellist.Count + 1)
-                'New delete opt variable
-                Dim nremdel As New JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase
-                'Set properties from UI
-                nremdel.RemotePath = txtremdelfilepath.Text
-                'Add to store
-                remdellist.Add(nremdel)
+                If Not String.IsNullOrWhiteSpace(txtremdelfilepath.Text) Then
+                    'Delete File Tab
+                    'remdellist = Store
+                    Dim remdellist As List(Of JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase) = StoreRemDelList
+                    'Add to UI
+                    Dim nrem = lvRemOptions.Items.Add("Delete File")
+                    nrem.SubItems.Add(remdellist.Count + 1)
+                    'New delete opt variable
+                    Dim nremdel As New JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase
+                    'Set properties from UI
+                    nremdel.RemotePath = txtremdelfilepath.Text
+                    'Add to store
+                    remdellist.Add(nremdel)
+                Else
+                    MsgBox("Please specify the path of a file to delete.")
+                End If
 
             Case TabAgentKill.Name
                 'Kill process tab. We split the name and ids so we check which was set here. (We only allow one per add-radio buttons)
-                If txtremkillprocname.Text <> "" Then
+                If Not String.IsNullOrWhiteSpace(txtremkillprocname.Text) Then
                     'Process name is not blank - add
                     'remprocnamelsit = store
                     Dim remprocnamelist As List(Of String) = StoreRemKillNameList
@@ -1479,7 +1490,7 @@ Public Class Main
 
     Private Sub btnAddComputer_Click(sender As Object, e As EventArgs) Handles btnAddComputer.Click
         'Add hostname to list box
-        If txtComputerTarget.Text <> "" Then
+        If Not String.IsNullOrWhiteSpace(txtComputerTarget.Text) Then
             If Not lstComputerTargets.Items.Contains(txtComputerTarget.Text) Then
                 lstComputerTargets.Items.Add(txtComputerTarget.Text)
                 txtComputerTarget.Text = ""
@@ -1500,7 +1511,7 @@ Public Class Main
 
     Private Sub btnAddNetShare_Click(sender As Object, e As EventArgs) Handles btnAddNetShare.Click
         'Add path to listbox
-        If txtNetSharePath.Text <> "" Then
+        If Not String.IsNullOrWhiteSpace(txtNetSharePath.Text) Then
             If Not lstNetShare.Items.Contains(txtNetSharePath.Text) Then
                 lstNetShare.Items.Add(txtNetSharePath.Text)
                 txtNetSharePath.Text = ""
@@ -1622,64 +1633,67 @@ Public Class Main
         'Select case of the currently active tab
         Select Case tabFiltersSubMenu.SelectedTab.Name
             Case tabInclusionFilter.Name
-                'Inclusion Filter tab
-                Dim inclist As List(Of InclusionFilter) = StoreInFiltList
-                'Check for filtername
-                Dim isthere = JobRunner_Functions.CheckInclusionFilterList(txtinclfiltername.Text)
-                If isthere = -1 Then
-                    'add new
-                    'Add to UI
-                    Dim nfilter = dgvFilters.Rows.Add()
-                    dgvFilters.Rows(nfilter).Cells(0).Value = False
-                    dgvFilters.Rows(nfilter).Cells(1).Value = "Inclusion"
-                    dgvFilters.Rows(nfilter).Cells(2).Value = txtinclfiltername.Text
-          
-                    'New inclusion filter
-                    Dim nfilt As New InclusionFilter
-                    'Set properties
-                    nfilt.FilterName = txtinclfiltername.Text
-                    nfilt.Extensions = txtinclextensions.Text
-                    nfilt.IsKeyWordSearch = rdoinclsimplesearch.Checked
-                    nfilt.IsRegexSearch = rdoinclregexsearch.Checked
-                    nfilt.IsSearchFilenameOnly = chkinclsearchfilename.Checked
-                    nfilt.Keywords = txtinclkeywords.Text
-                    nfilt.MD5HashsEntryText = txtinclmd5hash.Text
-                    nfilt.PathURLContains = txtinclpathcontains.Text
-                    'Add item to store
-                    inclist.Add(nfilt)
-                    'Add item to UI
-                    dgvFilters.Rows(nfilter).Selected = True
-                Else
-                    'already exists
-                    MsgBox("Filter Name Already Exists.")
+                If Not String.IsNullOrWhiteSpace(txtinclfiltername.Text) Then
+                    'Inclusion Filter tab
+                    Dim inclist As List(Of InclusionFilter) = StoreInFiltList
+                    'Check for filtername
+                    Dim isthere = JobRunner_Functions.CheckInclusionFilterList(txtinclfiltername.Text)
+                    If isthere = -1 Then
+                        'add new
+                        'Add to UI
+                        Dim nfilter = dgvFilters.Rows.Add()
+                        dgvFilters.Rows(nfilter).Cells(0).Value = False
+                        dgvFilters.Rows(nfilter).Cells(1).Value = "Inclusion"
+                        dgvFilters.Rows(nfilter).Cells(2).Value = txtinclfiltername.Text
+
+                        'New inclusion filter
+                        Dim nfilt As New InclusionFilter
+                        'Set properties
+                        nfilt.FilterName = txtinclfiltername.Text
+                        nfilt.Extensions = txtinclextensions.Text
+                        nfilt.IsKeyWordSearch = rdoinclsimplesearch.Checked
+                        nfilt.IsRegexSearch = rdoinclregexsearch.Checked
+                        nfilt.IsSearchFilenameOnly = chkinclsearchfilename.Checked
+                        nfilt.Keywords = txtinclkeywords.Text
+                        nfilt.MD5HashsEntryText = txtinclmd5hash.Text
+                        nfilt.PathURLContains = txtinclpathcontains.Text
+                        'Add item to store
+                        inclist.Add(nfilt)
+                        'Add item to UI
+                        dgvFilters.Rows(nfilter).Selected = True
+                    Else
+                        'already exists
+                        MsgBox("Filter Name Already Exists.")
+                    End If
                 End If
-          
             Case tabExclusionFilter.Name
-                'Exclusion Filter tab
-                Dim exclist As List(Of ExclusionFilter) = StoreExFiltList
-                'Check for filtername
-                Dim isthere = JobRunner_Functions.CheckExclusionFilterList(txtexclfiltername.Text)
-                If isthere = -1 Then
-                    'add new
-                    'Add to UI
-                    Dim exfilter = dgvFilters.Rows.Add()
-                    dgvFilters.Rows(exfilter).Cells(0).Value = False
-                    dgvFilters.Rows(exfilter).Cells(1).Value = "Exclusion"
-                    dgvFilters.Rows(exfilter).Cells(2).Value = txtexclfiltername.Text
-                    'New inclusion filter
-                    Dim nfilt As New ExclusionFilter
-                    'Set properties
-                    nfilt.FilterName = txtexclfiltername.Text
-                    nfilt.Extensions = txtexclextensions.Text
-                    nfilt.MD5HashsEntryText = txtexclmd5hash.Text
-                    nfilt.PathURLContains = txtexclpathcontains.Text
-                    'Add item to store
-                    exclist.Add(nfilt)
-                    'Add item to UI
-                    dgvFilters.Rows(exfilter).Selected = True
-                Else
-                    'already exists
-                    MsgBox("Filter Name Already Exists.")
+                If Not String.IsNullOrWhiteSpace(txtexclfiltername.Text) Then
+                    'Exclusion Filter tab
+                    Dim exclist As List(Of ExclusionFilter) = StoreExFiltList
+                    'Check for filtername
+                    Dim isthere = JobRunner_Functions.CheckExclusionFilterList(txtexclfiltername.Text)
+                    If isthere = -1 Then
+                        'add new
+                        'Add to UI
+                        Dim exfilter = dgvFilters.Rows.Add()
+                        dgvFilters.Rows(exfilter).Cells(0).Value = False
+                        dgvFilters.Rows(exfilter).Cells(1).Value = "Exclusion"
+                        dgvFilters.Rows(exfilter).Cells(2).Value = txtexclfiltername.Text
+                        'New inclusion filter
+                        Dim nfilt As New ExclusionFilter
+                        'Set properties
+                        nfilt.FilterName = txtexclfiltername.Text
+                        nfilt.Extensions = txtexclextensions.Text
+                        nfilt.MD5HashsEntryText = txtexclmd5hash.Text
+                        nfilt.PathURLContains = txtexclpathcontains.Text
+                        'Add item to store
+                        exclist.Add(nfilt)
+                        'Add item to UI
+                        dgvFilters.Rows(exfilter).Selected = True
+                    Else
+                        'already exists
+                        MsgBox("Filter Name Already Exists.")
+                    End If
                 End If
         End Select
     End Sub

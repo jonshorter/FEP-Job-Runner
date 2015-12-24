@@ -1498,7 +1498,7 @@ Partial Class Main
         Me.tableARSendFile.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tableARSendFile.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tableARSendFile.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tableARSendFile.Size = New System.Drawing.Size(470, 120)
+        Me.tableARSendFile.Size = New System.Drawing.Size(475, 120)
         Me.tableARSendFile.TabIndex = 25
         '
         'Label16
@@ -1507,14 +1507,14 @@ Partial Class Main
         Me.Label16.Location = New System.Drawing.Point(4, 0)
         Me.Label16.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(120, 17)
+        Me.Label16.Size = New System.Drawing.Size(125, 17)
         Me.Label16.TabIndex = 21
-        Me.Label16.Text = "Source File Path: "
+        Me.Label16.Text = "Source File Path*: "
         '
         'chkremsendexecute
         '
         Me.chkremsendexecute.AutoSize = True
-        Me.chkremsendexecute.Location = New System.Drawing.Point(154, 64)
+        Me.chkremsendexecute.Location = New System.Drawing.Point(159, 64)
         Me.chkremsendexecute.Margin = New System.Windows.Forms.Padding(4)
         Me.chkremsendexecute.Name = "chkremsendexecute"
         Me.chkremsendexecute.Size = New System.Drawing.Size(80, 21)
@@ -1525,7 +1525,7 @@ Partial Class Main
         '
         'txtremsendsource
         '
-        Me.txtremsendsource.Location = New System.Drawing.Point(154, 4)
+        Me.txtremsendsource.Location = New System.Drawing.Point(159, 4)
         Me.txtremsendsource.Margin = New System.Windows.Forms.Padding(4)
         Me.txtremsendsource.Name = "txtremsendsource"
         Me.txtremsendsource.Size = New System.Drawing.Size(312, 22)
@@ -1548,13 +1548,13 @@ Partial Class Main
         Me.Label17.Location = New System.Drawing.Point(4, 30)
         Me.Label17.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(142, 17)
+        Me.Label17.Size = New System.Drawing.Size(147, 17)
         Me.Label17.TabIndex = 23
-        Me.Label17.Text = "Destination File Path:"
+        Me.Label17.Text = "Destination File Path*:"
         '
         'txtremsenddest
         '
-        Me.txtremsenddest.Location = New System.Drawing.Point(154, 34)
+        Me.txtremsenddest.Location = New System.Drawing.Point(159, 34)
         Me.txtremsenddest.Margin = New System.Windows.Forms.Padding(4)
         Me.txtremsenddest.Name = "txtremsenddest"
         Me.txtremsenddest.Size = New System.Drawing.Size(312, 22)
@@ -1598,13 +1598,13 @@ Partial Class Main
         Me.Label18.Location = New System.Drawing.Point(4, 0)
         Me.Label18.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(113, 17)
+        Me.Label18.Size = New System.Drawing.Size(118, 17)
         Me.Label18.TabIndex = 23
-        Me.Label18.Text = "Target File Path:"
+        Me.Label18.Text = "Target File Path*:"
         '
         'txtremexecargs
         '
-        Me.txtremexecargs.Location = New System.Drawing.Point(125, 34)
+        Me.txtremexecargs.Location = New System.Drawing.Point(130, 34)
         Me.txtremexecargs.Margin = New System.Windows.Forms.Padding(4)
         Me.txtremexecargs.Name = "txtremexecargs"
         Me.txtremexecargs.Size = New System.Drawing.Size(312, 22)
@@ -1622,7 +1622,7 @@ Partial Class Main
         '
         'txtremexecpath
         '
-        Me.txtremexecpath.Location = New System.Drawing.Point(125, 4)
+        Me.txtremexecpath.Location = New System.Drawing.Point(130, 4)
         Me.txtremexecpath.Margin = New System.Windows.Forms.Padding(4)
         Me.txtremexecpath.Name = "txtremexecpath"
         Me.txtremexecpath.Size = New System.Drawing.Size(312, 22)
@@ -1664,15 +1664,15 @@ Partial Class Main
         Me.Label20.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label20.Name = "Label20"
         Me.Label20.Padding = New System.Windows.Forms.Padding(4, 4, 0, 0)
-        Me.Label20.Size = New System.Drawing.Size(117, 21)
+        Me.Label20.Size = New System.Drawing.Size(122, 21)
         Me.Label20.TabIndex = 25
-        Me.Label20.Text = "Target File Path:"
+        Me.Label20.Text = "Target File Path*:"
         '
         'txtremdelfilepath
         '
         Me.txtremdelfilepath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.txtremdelfilepath.Location = New System.Drawing.Point(129, 4)
+        Me.txtremdelfilepath.Location = New System.Drawing.Point(134, 4)
         Me.txtremdelfilepath.Margin = New System.Windows.Forms.Padding(4)
         Me.txtremdelfilepath.Name = "txtremdelfilepath"
         Me.txtremdelfilepath.Size = New System.Drawing.Size(312, 22)
@@ -1788,6 +1788,7 @@ Partial Class Main
         Me.lvRemOptions.CheckBoxes = True
         Me.lvRemOptions.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.colRemType, Me.colitem})
         Me.tableAgentRemediation.SetColumnSpan(Me.lvRemOptions, 3)
+        Me.lvRemOptions.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lvRemOptions.FullRowSelect = True
         Me.lvRemOptions.GridLines = True
         Me.lvRemOptions.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
@@ -1795,7 +1796,8 @@ Partial Class Main
         Me.lvRemOptions.Margin = New System.Windows.Forms.Padding(4)
         Me.lvRemOptions.MultiSelect = False
         Me.lvRemOptions.Name = "lvRemOptions"
-        Me.lvRemOptions.Size = New System.Drawing.Size(653, 157)
+        Me.lvRemOptions.ShowGroups = False
+        Me.lvRemOptions.Size = New System.Drawing.Size(661, 166)
         Me.lvRemOptions.TabIndex = 1
         Me.lvRemOptions.UseCompatibleStateImageBehavior = False
         Me.lvRemOptions.View = System.Windows.Forms.View.Details
@@ -1808,7 +1810,7 @@ Partial Class Main
         'colitem
         '
         Me.colitem.Text = "Item"
-        Me.colitem.Width = 200
+        Me.colitem.Width = 50
         '
         'btnRemoveRemOption
         '
