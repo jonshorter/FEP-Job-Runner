@@ -4,6 +4,7 @@ Imports System.Runtime.InteropServices
 Imports R1SimpleRestClient.Models.Response
 Imports System.Threading
 Imports System.Reflection
+Imports System.IO
 
 
 Public Class Main
@@ -36,9 +37,34 @@ Public Class Main
     Public panw_sim_var As PANW.PANW_Sim
     'Self-Signed Cert
     Public sim_selfcert As String = ""
+    Public debug_on As Boolean = False
+    Public debug_trace As TextWriterTraceListener
+    Public debug_fs As FileStream
 
+    Private Sub Main_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        If debug_on = True Then
+            DebugWriteLine("App Closing")
+            Debug.Close()
+            Trace.Close()
+        End If
+    End Sub
 
     Private Sub Form_Main_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If IO.File.Exists("debuglogs.txt") Then
+            'New trace
+            Dim trace As New TextWriterTraceListener
+            'FS Object
+            Dim fs As FileStream = New FileStream(My.Application.Info.ProductName & ".log", FileMode.Append, FileAccess.Write)
+            'Set writer
+            trace.Writer = New StreamWriter(fs)
+            'Add listner
+
+            Debug.Listeners.Add(trace)
+            Debug.AutoFlush = True
+            debug_on = True
+            DebugWriteLine("Debugging Enabled")
+        End If
+
 
         'First Run-Generate default templates
         Me.Text = "R1 Job Runner Version: " & My.Application.Info.Version.ToString
@@ -801,7 +827,7 @@ Public Class Main
                 FireEye.SendEvent(FireEye.FEventtoJson(fevent))
             End If
         Catch ex As Exception
-            Debug.WriteLine(ex.Message)
+            DebugWriteLine(ex.Message)
         End Try
     End Sub
 
@@ -824,7 +850,7 @@ Public Class Main
                 PANW.SendEvent(panwtstr)
             End If
         Catch ex As Exception
-            Debug.WriteLine(ex.Message)
+            DebugWriteLine(ex.Message)
         End Try
     End Sub
 
@@ -842,7 +868,7 @@ Public Class Main
         lblWildFireURL.Location = New Point(panwPicture.Location.X + 111, panwPicture.Location.Y + 85)
         lblWildFireURL.Text = "https://" & My.Computer.Name & ":" & panw_sim_port.Value
         cmbPANWAlert.SelectedIndex = 0
-       txtPANWSim.Text = "The Wildfire Sim simulates Resolution1 queries to Wildfire to get malware reports and kick off validated threatscans. After starting the Wildfire Sim, configure the Resolution1 PANW connector as shown below. If Job Runner isn't running on the R1 server, browse to https://" & My.Computer.Name & ":" & panw_sim_port.Value & " on the server and import the certificate to the Local Machine - Trusted Root Certification Authorities Store."
+        txtPANWSim.Text = "The Wildfire Sim simulates Resolution1 queries to Wildfire to get malware reports and kick off validated threatscans. After starting the Wildfire Sim, configure the Resolution1 PANW connector as shown below. If Job Runner isn't running on the R1 server, browse to https://" & My.Computer.Name & ":" & panw_sim_port.Value & " on the server and import the certificate to the Local Machine - Trusted Root Certification Authorities Store."
     End Sub
 
     Private Sub txtFELink_DoubleClick(sender As Object, e As EventArgs) Handles txtFELink.DoubleClick, txtFELink.Click
@@ -895,7 +921,7 @@ Public Class Main
                 XPS.SendEvent(xpststr)
             End If
         Catch Ex As Exception
-            Debug.WriteLine(Ex.Message)
+            DebugWriteLine(Ex.Message)
         End Try
     End Sub
 
@@ -918,7 +944,7 @@ Public Class Main
                     xps_sim_var = New XPS.XPS_Sim
                     xps_sim_var.Start()
                 Catch ex As Exception
-                    Debug.WriteLine(ex.Message)
+                    DebugWriteLine(ex.Message)
                 End Try
             Case "Stop XPS CP Sim"
                 Try
@@ -927,7 +953,7 @@ Public Class Main
                     lbldemoxpsstatus.Text = "XPS CP Sim Status: Not Started"
                     xps_sim_Port.Enabled = True
                 Catch ex As Exception
-                    Debug.WriteLine(ex.Message)
+                    DebugWriteLine(ex.Message)
                 End Try
         End Select
 
@@ -949,7 +975,7 @@ Public Class Main
                     panw_sim_var = New PANW.PANW_Sim
                     panw_sim_var.Start()
                 Catch ex As Exception
-                    Debug.WriteLine(ex.Message)
+                    DebugWriteLine(ex.Message)
                 End Try
             Case "Stop Wildfire Sim"
                 Try
@@ -959,7 +985,7 @@ Public Class Main
                     panw_sim_port.Enabled = True
 
                 Catch ex As Exception
-                    Debug.WriteLine(ex.Message)
+                    DebugWriteLine(ex.Message)
                 End Try
         End Select
 
@@ -1406,7 +1432,7 @@ Public Class Main
         Return New System.Threading.Timer(R1TimeOutCall, Nothing, 10, 1500000)
     End Function
 
-   
+
 
     Private Sub btnExecute_Click(sender As Object, e As EventArgs) Handles btnExecute.Click
         ResetStatusBar()
@@ -1586,7 +1612,7 @@ Public Class Main
     End Sub
 
     Private Sub Main_Resize(sender As Object, e As EventArgs) Handles Me.Resize
-       Select Case tabSubMenu.SelectedTab.Name
+        Select Case tabSubMenu.SelectedTab.Name
             Case tabAgentRemediation.Name
                 tabSubMenu.Width = tableAgentRemediation.Width + 10
                 tabSubMenu.Height = tableAgentRemediation.Height + 20
@@ -1604,7 +1630,7 @@ Public Class Main
     End Sub
 
     Private Sub Main_ResizeEnd(sender As Object, e As EventArgs) Handles Me.ResizeEnd
-     
+
     End Sub
 
     Private Sub tabSubMenu_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabSubMenu.SelectedIndexChanged

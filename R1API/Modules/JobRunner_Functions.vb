@@ -98,9 +98,13 @@ Module JobRunner_Functions
             End If
 
         Catch ex As Exception
-            Debug.WriteLine(ex.Message)
+            DebugWriteLine(ex.Message)
         End Try
     End Sub
+    Public Sub DebugWriteLine(ByVal Text As String)
+        Debug.WriteLine(DateTime.UtcNow & " - " & Text)
+    End Sub
+
 
     Public Function CheckInclusionFilterList(ByVal FilterName As String) As Integer
 
@@ -113,7 +117,7 @@ Module JobRunner_Functions
             If nfilt.FilterName = FilterName Then
                 retvalue = cnt
             End If
-                cnt += 1
+            cnt += 1
         Next
         Return retvalue
     End Function
@@ -150,7 +154,7 @@ Module JobRunner_Functions
         xstore.Open(OpenFlags.ReadWrite)
         For Each cert As X509Certificate2 In xstore.Certificates
             If cert.Subject = "CN=" & My.Computer.Name Then
-                Debug.WriteLine("Found Self-Signed In Root Store")
+                DebugWriteLine("Found Self-Signed In Root Store")
                 fndhashes.Add(cert.GetCertHashString)
             End If
         Next
@@ -163,7 +167,7 @@ Module JobRunner_Functions
         xstore.Open(OpenFlags.ReadWrite)
         For Each cert As X509Certificate2 In xstore.Certificates
             If cert.Subject = "CN=" & My.Computer.Name Then
-                Debug.WriteLine("Found Self-Signed In My Store")
+                DebugWriteLine("Found Self-Signed In My Store")
                 fndhashes.Add(cert.GetCertHashString)
             End If
         Next
@@ -176,7 +180,7 @@ Module JobRunner_Functions
         mystore.Open(OpenFlags.ReadWrite)
         For Each cert As X509Certificate2 In mystore.Certificates
             If cert.GetCertHashString = certhash Then
-                Debug.WriteLine("Found Self-Signed In My Store and Moving to Root")
+                DebugWriteLine("Found Self-Signed In My Store and Moving to Root")
                 Dim rootstore As New X509Store(StoreName.Root, StoreLocation.LocalMachine)
                 rootstore.Open(OpenFlags.ReadWrite)
                 rootstore.Add(cert)
@@ -199,7 +203,7 @@ Module JobRunner_Functions
         xstore.Open(OpenFlags.ReadWrite)
         For Each cert As X509Certificate2 In xstore.Certificates
             If cert.GetCertHashString = certhash Then
-                Debug.WriteLine("Found Self-Signed In My Store and Removing")
+                DebugWriteLine("Found Self-Signed In My Store and Removing")
                 xstore.Remove(cert)
             End If
         Next
@@ -210,7 +214,7 @@ Module JobRunner_Functions
         xstore.Open(OpenFlags.ReadWrite)
         For Each cert As X509Certificate2 In xstore.Certificates
             If cert.GetCertHashString = certhash Then
-                Debug.WriteLine("Found Self-Signed In Root Store and Removing")
+                DebugWriteLine("Found Self-Signed In Root Store and Removing")
                 xstore.Remove(cert)
             End If
         Next
