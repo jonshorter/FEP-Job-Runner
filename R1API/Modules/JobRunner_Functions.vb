@@ -102,7 +102,47 @@ Module JobRunner_Functions
         End Try
     End Sub
 
+    Public Function CheckInclusionFilterList(ByVal FilterName As String) As Integer
 
+        Dim inclist As List(Of InclusionFilter) = Main.StoreInFiltList
+        Dim retvalue As Integer = -1
+        Dim cnt As Integer = 0
+        'Iterate store
+        For Each nfilt In inclist
+            'If the filtername = selected item
+            If nfilt.FilterName = FilterName Then
+                retvalue = cnt
+            End If
+                cnt += 1
+        Next
+        Return retvalue
+    End Function
+
+    Public Function CheckExclusionFilterList(ByVal FilterName As String) As Integer
+
+        Dim exclist As List(Of ExclusionFilter) = Main.StoreExFiltList
+        Dim retvalue As Integer = -1
+        Dim cnt As Integer = 0
+        'Iterate store
+        For Each efilt In exclist
+            'If the filtername = selected item
+            If efilt.FilterName = FilterName Then
+                retvalue = cnt
+            End If
+            cnt += 1
+        Next
+        Return retvalue
+    End Function
+
+    Public Function GetCheckedFilters()
+        Dim checkedlist As New List(Of Integer)
+        For Each item As DataGridViewRow In Main.dgvFilters.Rows
+            If item.Cells(0).Value = True Then
+                checkedlist.Add(item.Index)
+            End If
+        Next
+        Return checkedlist
+    End Function
 
     Public Function CheckRootStoreForSelfSigned() As List(Of String)
         Dim fndhashes As New List(Of String)

@@ -290,10 +290,6 @@ Public Class Main
             ClearAllJobOptioons(Me.tabAgentExecute.Controls)
             ClearAllJobOptioons(Me.TabAgentKill.Controls)
             ClearAllJobOptioons(Me.tabAgentSendFile.Controls)
-            ClearAllJobOptioons(Me.splitInclusion.Panel1.Controls)
-            ClearAllJobOptioons(Me.splitInclusion.Panel2.Controls)
-            ClearAllJobOptioons(Me.SplitExclusion.Panel1.Controls)
-            ClearAllJobOptioons(Me.SplitExclusion.Panel2.Controls)
             StoreInFiltList.clear()
             StoreExFiltList.clear()
             StoreRemDelList.clear()
@@ -329,7 +325,8 @@ Public Class Main
 
                 'Add all filters to UI
                 For Each item As InclusionFilter In maininlist
-                    lstboxinclusionfilters.Items.Add(item.FilterName)
+                    dgvFilters.Rows.Add(False, "Inclusion", item.FilterName)
+
                 Next
             End If
 
@@ -344,7 +341,7 @@ Public Class Main
 
                 'Add all filters to UI
                 For Each item As ExclusionFilter In mainexlist
-                    lstboxexclusionfilters.Items.Add(item.FilterName)
+                    dgvFilters.Rows.Add(False, "Exclusion", item.FilterName)
                 Next
             End If
 
@@ -437,249 +434,10 @@ Public Class Main
         End If
 
     End Sub
-
-    Private Sub btnAddInclFilterToList_Click(sender As Object, e As EventArgs) Handles btnAddInclFilterToList.Click
-        'Add inclusion filter to list
-        'If name already exists
-        If lstboxinclusionfilters.Items.Contains(txtinclfiltername.Text) Then
-            MsgBox("Filter Name Already Exists.")
-        Else
-            'Name doesn't exists
-            'Inclist = Store
-            Dim inclist As List(Of InclusionFilter) = StoreInFiltList
-            'New inclusion filter
-            Dim nfilt As New InclusionFilter
-            'Set properties
-            nfilt.FilterName = txtinclfiltername.Text
-            nfilt.Extensions = txtinclextensions.Text
-            nfilt.IsKeyWordSearch = rdoinclsimplesearch.Checked
-            nfilt.IsRegexSearch = rdoinclregexsearch.Checked
-            nfilt.IsSearchFilenameOnly = chkinclsearchfilename.Checked
-            nfilt.Keywords = txtinclkeywords.Text
-            nfilt.MD5HashsEntryText = txtinclmd5hash.Text
-            nfilt.PathURLContains = txtinclpathcontains.Text
-            'Add item to store
-            inclist.Add(nfilt)
-            'Add item to UI
-            lstboxinclusionfilters.Items.Add(nfilt.FilterName)
-        End If
-    End Sub
-
-    Private Sub btnRemoveInclFilterfromList_Click(sender As Object, e As EventArgs) Handles btnRemoveInclFilterfromList.Click
-        'Remove checked inclusion filter items from listbox
-        With lstboxinclusionfilters
-            '> 0 items checked
-            If .CheckedItems.Count > 0 Then
-                'inlst = Store
-                Dim inlst As List(Of InclusionFilter) = StoreInFiltList
-                'Iterate backwards max to min
-                For checked As Integer = .CheckedItems.Count - 1 To 0 Step -1
-                    'Remove from Store
-                    Jobs.RemoveItemFromInclusionStore(.CheckedItems(checked))
-                    'Remove from UI
-                    .Items.Remove(.CheckedItems(checked))
-                Next
-            End If
-        End With
-    End Sub
-
-    Private Sub lstboxinclusionfilters_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstboxinclusionfilters.SelectedIndexChanged
-        'Load the selected filter to the UI
-
-        'inclist = Store
-        Dim inclist As List(Of InclusionFilter) = StoreInFiltList
-        'Iterate store
-        For Each item In inclist
-            'Match the name - this should be unique
-            If item.FilterName = lstboxinclusionfilters.SelectedItem Then
-                'Matched! - Set the controls to the filter
-                txtinclfiltername.Text = item.FilterName
-                txtinclextensions.Text = item.Extensions
-                rdoinclsimplesearch.Checked = item.IsKeyWordSearch
-                rdoinclregexsearch.Checked = item.IsRegexSearch
-                chkinclsearchfilename.Checked = item.IsSearchFilenameOnly
-                txtinclkeywords.Text = item.Keywords
-                txtinclmd5hash.Text = item.MD5HashsEntryText
-                txtinclpathcontains.Text = item.PathURLContains
-            End If
-        Next
-    End Sub
-
-    Private Sub btnSaveIncFilterChanges_Click(sender As Object, e As EventArgs) Handles btnSaveIncFilterChanges.Click
-        'Save Inclusion Filter Changes
-
-        'Select case of Filter Name
-        Select Case txtinclfiltername.Text
-            'Matches the lstbox still
-            Case lstboxinclusionfilters.SelectedItem
-                'Inclist = store
-                Dim inclist As List(Of InclusionFilter) = StoreInFiltList
-                'Iterate store
-                For Each nfilt In inclist
-                    'If the filtername = selected item
-                    If nfilt.FilterName = lstboxinclusionfilters.SelectedItem Then
-                        'Update properties
-                        nfilt.FilterName = txtinclfiltername.Text
-                        nfilt.Extensions = txtinclextensions.Text
-                        nfilt.IsKeyWordSearch = rdoinclsimplesearch.Checked
-                        nfilt.IsRegexSearch = rdoinclregexsearch.Checked
-                        nfilt.IsSearchFilenameOnly = chkinclsearchfilename.Checked
-                        nfilt.Keywords = txtinclkeywords.Text
-                        nfilt.MD5HashsEntryText = txtinclmd5hash.Text
-                        nfilt.PathURLContains = txtinclpathcontains.Text
-                    End If
-                Next
-
-            Case Is <> lstboxinclusionfilters.SelectedItem
-                'The filter name was changed
-                'If the list already contains this name - Don't do anything, show a message
-                If lstboxinclusionfilters.Items.Contains(txtinclfiltername.Text) Then
-                    MsgBox("Filter Name Already Exists. No Changes Made.")
-                Else
-                    'The list doesn't contain this item.
-                    'Inclist = Store
-                    Dim inclist As List(Of InclusionFilter) = StoreInFiltList
-                    'Iterate store
-                    For Each nfilt In inclist
-                        'Find current item record
-                        If nfilt.FilterName = lstboxinclusionfilters.SelectedItem Then
-                            'Update properties
-                            nfilt.FilterName = txtinclfiltername.Text
-                            nfilt.Extensions = txtinclextensions.Text
-                            nfilt.IsKeyWordSearch = rdoinclsimplesearch.Checked
-                            nfilt.IsRegexSearch = rdoinclregexsearch.Checked
-                            nfilt.IsSearchFilenameOnly = chkinclsearchfilename.Checked
-                            nfilt.Keywords = txtinclkeywords.Text
-                            nfilt.MD5HashsEntryText = txtinclmd5hash.Text
-                            nfilt.PathURLContains = txtinclpathcontains.Text
-                            'Update name in list
-                            lstboxinclusionfilters.SelectedItem = nfilt.FilterName
-                            'Remove old item from UI
-                            lstboxinclusionfilters.Items.Remove(lstboxinclusionfilters.SelectedItem)
-                            'Add new item to UI
-                            lstboxinclusionfilters.Items.Add(nfilt.FilterName)
-                        End If
-                    Next
-                End If
-        End Select
-
-    End Sub
-
-    Private Sub btnaddexclusionfiltertolist_Click(sender As Object, e As EventArgs) Handles btnaddexclusionfiltertolist.Click
-        'Add exclusion filter to listbox
-        'Check if the name is already in the list
-        If lstboxexclusionfilters.Items.Contains(txtexclfiltername.Text) Then
-            'Already exists. Display message stop.
-            MsgBox("Filter Name Already Exists.")
-        Else
-            'Doesn't exist
-            'exclist = Store
-            Dim exclist As List(Of ExclusionFilter) = StoreExFiltList
-            'New Exclusion Filter
-            Dim nfilt As New ExclusionFilter
-            'Set Properties
-            nfilt.FilterName = txtexclfiltername.Text
-            nfilt.Extensions = txtexclextensions.Text
-            nfilt.MD5HashsEntryText = txtexclmd5hash.Text
-            nfilt.PathURLContains = txtexclpathcontains.Text
-            'Add to Store
-            exclist.Add(nfilt)
-            'Add to UI
-            lstboxexclusionfilters.Items.Add(nfilt.FilterName)
-        End If
-    End Sub
-
-    Private Sub btnsaveexclusionfilterchanges_Click(sender As Object, e As EventArgs) Handles btnsaveexclusionfilterchanges.Click
-        'Save exclusion filter changes
-
-        'Select case of filter name
-        Select Case txtinclfiltername.Text
-            Case lstboxinclusionfilters.SelectedItem
-                'No change to the filter name
-                'exclist = store
-                Dim exclist As List(Of ExclusionFilter) = StoreExFiltList
-                'iterate store
-                For Each nfilt In exclist
-                    'Find item that matches filter name
-                    If nfilt.FilterName = lstboxexclusionfilters.SelectedItem Then
-                        'Update properties
-                        nfilt.FilterName = txtexclfiltername.Text
-                        nfilt.Extensions = txtexclextensions.Text
-                        nfilt.MD5HashsEntryText = txtexclmd5hash.Text
-                        nfilt.PathURLContains = txtexclpathcontains.Text
-                    End If
-                Next
-            Case Is <> lstboxinclusionfilters.SelectedItem
-                'The filter name was updated
-                'Check if the filter name already exists
-                If lstboxinclusionfilters.Items.Contains(txtinclfiltername.Text) Then
-                    'It does...Display message.
-                    MsgBox("Filter Name Already Exists. No Changes Made.")
-                Else
-                    'It doesn't exist
-                    'exclist = store
-                    Dim exclist As List(Of ExclusionFilter) = StoreExFiltList
-                    'Iterate store
-                    For Each nfilt In exclist
-                        'Find item that matches old filter name
-                        If nfilt.FilterName = lstboxexclusionfilters.SelectedItem Then
-                            'Update properties
-                            nfilt.FilterName = txtexclfiltername.Text
-                            nfilt.Extensions = txtexclextensions.Text
-                            nfilt.MD5HashsEntryText = txtexclmd5hash.Text
-                            nfilt.PathURLContains = txtexclpathcontains.Text
-                            'Update name in list
-                            lstboxexclusionfilters.SelectedItem = nfilt.FilterName
-                            'Remove old filter
-                            lstboxexclusionfilters.Items.Remove(lstboxexclusionfilters.SelectedItem)
-                            'Add updated filter
-                            lstboxexclusionfilters.Items.Add(nfilt.FilterName)
-                        End If
-                    Next
-                End If
-        End Select
-    End Sub
-
-    Private Sub btnremoveexclusionfilterfromlist_Click(sender As Object, e As EventArgs) Handles btnremoveexclusionfilterfromlist.Click
-        'Remove checked items from listbox
-        With lstboxexclusionfilters
-            '> 0 items checked
-            If .CheckedItems.Count > 0 Then
-                'Iterate backwards from max to min
-                For checked As Integer = .CheckedItems.Count - 1 To 0 Step -1
-                    'Remove item from store
-                    Jobs.RemoveItemFromExclusionStore(.CheckedItems(checked))
-                    'Remove item from UI
-                    .Items.Remove(.CheckedItems(checked))
-                Next
-            End If
-        End With
-    End Sub
-
-    Private Sub lstboxexclusionfilters_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstboxexclusionfilters.SelectedIndexChanged
-        'Load the selected exclusion filter to the UI
-        'exclist = Store
-        Dim exclist As List(Of ExclusionFilter) = StoreExFiltList
-        'Iterate store
-        For Each item In exclist
-            'Filtername matches
-            If item.FilterName = lstboxexclusionfilters.SelectedItem Then
-                'Load properties to UI
-                txtexclfiltername.Text = item.FilterName
-                txtexclextensions.Text = item.Extensions
-                txtexclmd5hash.Text = item.MD5HashsEntryText
-                txtexclpathcontains.Text = item.PathURLContains
-            End If
-        Next
-    End Sub
-
-
     Private Sub tabJobInfo_Click(sender As Object, e As EventArgs) Handles tabJobInfo.Click
         'Job Info Loaded - Set text boxes to default values from settings
         txtComputerTarget.Text = txtdefaultcomputer.Text
         txtNetSharePath.Text = txtdefaultshare.Text
-
-
     End Sub
 
     Private Sub btnAddRemOption_Click(sender As Object, e As EventArgs) Handles btnAddRemOption.Click
@@ -1444,6 +1202,9 @@ Public Class Main
                 tabMenu.SelectedTab = tabSettings
             End If
         End If
+        If tabMenu.SelectedTab.Name = tabJobExecution.Name Then
+            tabSubMenu.SelectedTab = tabJobInfo
+        End If
     End Sub
 
     Private Sub btnViewProjectReview_Click(sender As Object, e As EventArgs) Handles btnViewProjectReview.Click
@@ -1804,20 +1565,304 @@ Public Class Main
     End Sub
 
     Private Sub Main_Resize(sender As Object, e As EventArgs) Handles Me.Resize
-        tabSubMenu.Width = Me.Width - 20
-        Select Case tabSubMenu.SelectedTab.Name
-            Case tabJobInfo.Name
-                tabSubMenu.Height = flowJobInfo.Height + 10
-            Case tabFilters.Name
-
+       Select Case tabSubMenu.SelectedTab.Name
             Case tabAgentRemediation.Name
-                tabSubMenu.MinimumSize = New Size(0, 375)
-                tabSubMenu.Height = tableAgentRemediation.Height + 10
+                tabSubMenu.Size = tableAgentRemediation.Size
+            Case tabFilters.Name
+                tabSubMenu.Size = tableFilters.Size
+            Case tabJobInfo.Name
+                tabSubMenu.Size = flowJobInfo.Size
         End Select
 
     End Sub
 
     Private Sub flowJobsAPI_Paint(sender As Object, e As PaintEventArgs) Handles flowJobsAPI.Paint
+
+    End Sub
+
+    Private Sub Main_ResizeEnd(sender As Object, e As EventArgs) Handles Me.ResizeEnd
+     
+    End Sub
+
+    Private Sub tabSubMenu_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabSubMenu.SelectedIndexChanged
+        Select Case tabSubMenu.SelectedTab.Name
+            Case tabAgentRemediation.Name
+                tabSubMenu.Size = tableAgentRemediation.Size
+            Case tabFilters.Name
+                tabSubMenu.Size = tableFilters.Size
+            Case tabJobInfo.Name
+                tabSubMenu.Size = flowJobInfo.Size
+        End Select
+    End Sub
+
+    Private Sub tabSubMenu_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles tabSubMenu.Selecting
+        Select Case tabSubMenu.SelectedTab.Name
+            Case tabAgentRemediation.Name
+                tabSubMenu.Size = tableAgentRemediation.Size
+            Case tabFilters.Name
+                tabSubMenu.Size = tableFilters.Size
+
+            Case tabJobInfo.Name
+                tabSubMenu.Size = flowJobInfo.Size
+
+
+        End Select
+    End Sub
+
+    Private Sub btnFilters_AddClick(sender As Object, e As EventArgs) Handles btnFilters_Add.Click
+
+        'Select case of the currently active tab
+        Select Case tabFiltersSubMenu.SelectedTab.Name
+            Case tabInclusionFilter.Name
+                'Inclusion Filter tab
+                Dim inclist As List(Of InclusionFilter) = StoreInFiltList
+                'Check for filtername
+                Dim isthere = JobRunner_Functions.CheckInclusionFilterList(txtinclfiltername.Text)
+                If isthere = -1 Then
+                    'add new
+                    'Add to UI
+                    Dim nfilter = dgvFilters.Rows.Add()
+                    dgvFilters.Rows(nfilter).Cells(0).Value = False
+                    dgvFilters.Rows(nfilter).Cells(1).Value = "Inclusion"
+                    dgvFilters.Rows(nfilter).Cells(2).Value = txtinclfiltername.Text
+          
+                    'New inclusion filter
+                    Dim nfilt As New InclusionFilter
+                    'Set properties
+                    nfilt.FilterName = txtinclfiltername.Text
+                    nfilt.Extensions = txtinclextensions.Text
+                    nfilt.IsKeyWordSearch = rdoinclsimplesearch.Checked
+                    nfilt.IsRegexSearch = rdoinclregexsearch.Checked
+                    nfilt.IsSearchFilenameOnly = chkinclsearchfilename.Checked
+                    nfilt.Keywords = txtinclkeywords.Text
+                    nfilt.MD5HashsEntryText = txtinclmd5hash.Text
+                    nfilt.PathURLContains = txtinclpathcontains.Text
+                    'Add item to store
+                    inclist.Add(nfilt)
+                    'Add item to UI
+                    dgvFilters.Rows(nfilter).Selected = True
+                Else
+                    'already exists
+                    MsgBox("Filter Name Already Exists.")
+                End If
+          
+            Case tabExclusionFilter.Name
+                'Exclusion Filter tab
+                Dim exclist As List(Of ExclusionFilter) = StoreExFiltList
+                'Check for filtername
+                Dim isthere = JobRunner_Functions.CheckExclusionFilterList(txtexclfiltername.Text)
+                If isthere = -1 Then
+                    'add new
+                    'Add to UI
+                    Dim exfilter = dgvFilters.Rows.Add()
+                    dgvFilters.Rows(exfilter).Cells(0).Value = False
+                    dgvFilters.Rows(exfilter).Cells(1).Value = "Exclusion"
+                    dgvFilters.Rows(exfilter).Cells(2).Value = txtexclfiltername.Text
+                    'New inclusion filter
+                    Dim nfilt As New ExclusionFilter
+                    'Set properties
+                    nfilt.FilterName = txtexclfiltername.Text
+                    nfilt.Extensions = txtexclextensions.Text
+                    nfilt.MD5HashsEntryText = txtexclmd5hash.Text
+                    nfilt.PathURLContains = txtexclpathcontains.Text
+                    'Add item to store
+                    exclist.Add(nfilt)
+                    'Add item to UI
+                    dgvFilters.Rows(exfilter).Selected = True
+                Else
+                    'already exists
+                    MsgBox("Filter Name Already Exists.")
+                End If
+        End Select
+    End Sub
+
+    Private Sub btnFilters_Remove_Click(sender As Object, e As EventArgs) Handles btnFilters_Remove.Click
+        'Remove checked filters
+        For Each filtrow As DataGridViewRow In Me.dgvFilters.Rows
+            If filtrow.Cells(0).Value = True Then
+                Select Case filtrow.Cells(1).Value
+                    Case "Inclusion"
+                        Jobs.RemoveItemFromInclusionStore(filtrow.Cells(2).Value)
+                    Case "Exclusion"
+                        Jobs.RemoveItemFromExclusionStore(filtrow.Cells(2).Value)
+                End Select
+                dgvFilters.Rows.Remove(filtrow)
+            End If
+        Next
+
+    End Sub
+
+    Private Sub btnFilters_Save_Click(sender As Object, e As EventArgs) Handles btnFilters_Save.Click
+        'Save filter change
+        '> 0 selected items
+        If dgvFilters.SelectedRows.Count > 0 Then
+            Select Case dgvFilters.SelectedRows(0).Cells(1).Value
+                Case "Inclusion"
+                    'Save Inclusion Filter Changes
+                    'Select case of Filter Name
+                    Select Case txtinclfiltername.Text
+                        'Matches the lstbox still
+                        Case dgvFilters.SelectedRows(0).Cells(2).Value
+                            'Inclist = store
+                            Dim inclist As List(Of InclusionFilter) = StoreInFiltList
+                            'Iterate store
+                            For Each nfilt In inclist
+                                'If the filtername = selected item
+                                If nfilt.FilterName = dgvFilters.SelectedRows(0).Cells(2).Value Then
+                                    'Update properties
+                                    nfilt.FilterName = txtinclfiltername.Text
+                                    nfilt.Extensions = txtinclextensions.Text
+                                    nfilt.IsKeyWordSearch = rdoinclsimplesearch.Checked
+                                    nfilt.IsRegexSearch = rdoinclregexsearch.Checked
+                                    nfilt.IsSearchFilenameOnly = chkinclsearchfilename.Checked
+                                    nfilt.Keywords = txtinclkeywords.Text
+                                    nfilt.MD5HashsEntryText = txtinclmd5hash.Text
+                                    nfilt.PathURLContains = txtinclpathcontains.Text
+                                End If
+                            Next
+
+                        Case Is <> dgvFilters.SelectedRows(0).Cells(2).Value
+                            'The filter name was changed
+                            'If the list already contains this name - Don't do anything, show a message
+                            Dim isthere = JobRunner_Functions.CheckInclusionFilterList(txtinclfiltername.Text)
+                            If isthere > -1 Then
+                                MsgBox("Filter Name Already Exists. No Changes Made.")
+                            Else
+                                'The list doesn't contain this item.
+                                'Inclist = Store
+                                Dim inclist As List(Of InclusionFilter) = StoreInFiltList
+                                Dim cnt = 0
+                                'Iterate store
+                                For Each nfilt In inclist
+                                    'Find current item record
+                                    If nfilt.FilterName = dgvFilters.SelectedRows(0).Cells(2).Value Then
+                                        'Update properties
+                                        nfilt.FilterName = txtinclfiltername.Text
+                                        nfilt.Extensions = txtinclextensions.Text
+                                        nfilt.IsKeyWordSearch = rdoinclsimplesearch.Checked
+                                        nfilt.IsRegexSearch = rdoinclregexsearch.Checked
+                                        nfilt.IsSearchFilenameOnly = chkinclsearchfilename.Checked
+                                        nfilt.Keywords = txtinclkeywords.Text
+                                        nfilt.MD5HashsEntryText = txtinclmd5hash.Text
+                                        nfilt.PathURLContains = txtinclpathcontains.Text
+                                        'Update name in list
+                                        dgvFilters.SelectedRows(0).Cells(2).Value = nfilt.FilterName
+                                        'Remove old item from UI
+                                        dgvFilters.Rows.Remove(dgvFilters.SelectedRows(0))
+
+                                        'Add new item to UI
+                                        Dim x = dgvFilters.Rows.Add(False, "Inclusion", nfilt.FilterName)
+                                        dgvFilters.Rows(x).Selected = True
+
+                                    End If
+                                    cnt += 1
+                                Next
+                            End If
+                    End Select
+
+                Case "Exclusion"
+                    'Save Exclusion Filter Changes
+                    'Select case of Filter Name
+                    Select Case txtexclfiltername.Text
+                        'Matches the lstbox still
+                        Case dgvFilters.SelectedRows(0).Cells(2).Value
+                            'exclist = store
+                            Dim exclist As List(Of ExclusionFilter) = StoreExFiltList
+                            'Iterate store
+                            For Each nfilt In exclist
+                                'If the filtername = selected item
+                                If nfilt.FilterName = dgvFilters.SelectedRows(0).Cells(2).Value Then
+                                    'Update properties
+                                    nfilt.FilterName = txtexclfiltername.Text
+                                    nfilt.Extensions = txtexclextensions.Text
+                                    nfilt.MD5HashsEntryText = txtexclmd5hash.Text
+                                    nfilt.PathURLContains = txtexclpathcontains.Text
+                                End If
+                            Next
+
+                        Case Is <> dgvFilters.SelectedRows(0).Cells(2).Value
+                            'The filter name was changed
+                            'If the list already contains this name - Don't do anything, show a message
+                            Dim isthere = JobRunner_Functions.CheckExclusionFilterList(txtexclfiltername.Text)
+                            If isthere > -1 Then
+                                MsgBox("Filter Name Already Exists. No Changes Made.")
+                            Else
+                                'The list doesn't contain this item.
+                                'Exclist = Store
+                                Dim exclist As List(Of ExclusionFilter) = StoreExFiltList
+                                Dim cnt = 0
+                                'Iterate store
+                                For Each nfilt In exclist
+                                    'Find current item record
+                                    If nfilt.FilterName = dgvFilters.SelectedRows(0).Cells(2).Value Then
+                                        'Update properties
+                                        nfilt.FilterName = txtexclfiltername.Text
+                                        nfilt.Extensions = txtexclextensions.Text
+                                        nfilt.MD5HashsEntryText = txtexclmd5hash.Text
+                                        nfilt.PathURLContains = txtexclpathcontains.Text
+                                        'Update name in list
+                                        dgvFilters.SelectedRows(0).Cells(2).Value = nfilt.FilterName
+                                        'Remove old item from UI
+                                        dgvFilters.Rows.Remove(dgvFilters.SelectedRows(0))
+
+                                        'Add new item to UI
+                                        Dim x = dgvFilters.Rows.Add(False, "Exclusion", nfilt.FilterName)
+                                        dgvFilters.Rows(x).Selected = True
+
+                                    End If
+                                    cnt += 1
+                                Next
+                            End If
+                    End Select
+            End Select
+        End If
+
+
+    End Sub
+
+    Private Sub dgvFilters_SelectionChanged(sender As Object, e As EventArgs) Handles dgvFilters.SelectionChanged
+        'Selected filter changed - switch to the relevant tab and load the filter from the store
+        'Check if selected items > 0
+        If dgvFilters.SelectedRows.Count > 0 Then
+            'Select case of filter type
+            Select Case dgvFilters.SelectedRows(0).Cells(1).Value
+                Case "Inclusion"
+                    tabFiltersSubMenu.SelectedTab = tabInclusionFilter
+                    Dim filtitem = JobRunner_Functions.CheckInclusionFilterList(dgvFilters.SelectedRows(0).Cells(2).Value)
+                    Dim incllist As List(Of InclusionFilter) = StoreInFiltList
+                    Dim getfiltitem = incllist(filtitem)
+                    txtinclfiltername.Text = getfiltitem.FilterName
+                    txtinclextensions.Text = getfiltitem.Extensions
+                    rdoinclsimplesearch.Checked = getfiltitem.IsKeyWordSearch
+                    rdoinclregexsearch.Checked = getfiltitem.IsRegexSearch
+                    chkinclsearchfilename.Checked = getfiltitem.IsSearchFilenameOnly
+                    txtinclkeywords.Text = getfiltitem.Keywords
+                    txtinclmd5hash.Text = getfiltitem.MD5HashsEntryText
+                    txtinclpathcontains.Text = getfiltitem.PathURLContains
+                    dgvFilters.Focus()
+                Case "Exclusion"
+                    tabFiltersSubMenu.SelectedTab = tabExclusionFilter
+                    Dim filtitem = JobRunner_Functions.CheckExclusionFilterList(dgvFilters.SelectedRows(0).Cells(2).Value)
+                    Dim excllist As List(Of ExclusionFilter) = StoreExFiltList
+                    Dim getfiltitem = excllist(filtitem)
+                    txtexclfiltername.Text = getfiltitem.FilterName
+                    txtexclextensions.Text = getfiltitem.Extensions
+                    txtexclmd5hash.Text = getfiltitem.MD5HashsEntryText
+                    txtexclpathcontains.Text = getfiltitem.PathURLContains
+                    dgvFilters.Focus()
+            End Select
+        End If
+    End Sub
+
+    Private Sub tabInclusionFilter_Enter(sender As Object, e As EventArgs) Handles tabInclusionFilter.Enter
+        tabFiltersSubMenu.Width = tableFilters.Width
+    End Sub
+
+    Private Sub tabExclusionFilter_Enter(sender As Object, e As EventArgs) Handles tabExclusionFilter.Enter
+        tabFiltersSubMenu.Width = tableFilters.Width
+    End Sub
+
+    Private Sub tabExclusionFilter_Resize(sender As Object, e As EventArgs) Handles tabExclusionFilter.Resize
 
     End Sub
 End Class

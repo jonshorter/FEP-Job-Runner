@@ -84,47 +84,42 @@ Partial Class Main
         Me.btnAddComputer = New System.Windows.Forms.Button()
         Me.btnRemoveComputer = New System.Windows.Forms.Button()
         Me.tabFilters = New System.Windows.Forms.TabPage()
+        Me.tableFilters = New System.Windows.Forms.TableLayoutPanel()
         Me.tabFiltersSubMenu = New System.Windows.Forms.TabControl()
         Me.tabInclusionFilter = New System.Windows.Forms.TabPage()
-        Me.splitInclusion = New System.Windows.Forms.SplitContainer()
-        Me.txtinclkeywords = New System.Windows.Forms.TextBox()
-        Me.rdoinclregexsearch = New System.Windows.Forms.RadioButton()
+        Me.tableInclusionFilters = New System.Windows.Forms.TableLayoutPanel()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.rdoinclsimplesearch = New System.Windows.Forms.RadioButton()
+        Me.txtinclkeywords = New System.Windows.Forms.TextBox()
         Me.txtinclfiltername = New System.Windows.Forms.TextBox()
-        Me.chkinclsearchfilename = New System.Windows.Forms.CheckBox()
+        Me.txtinclmd5hash = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label23 = New System.Windows.Forms.Label()
-        Me.txtinclpathcontains = New System.Windows.Forms.TextBox()
-        Me.txtinclmd5hash = New System.Windows.Forms.TextBox()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.txtinclextensions = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.btnSaveIncFilterChanges = New System.Windows.Forms.Button()
-        Me.lstboxinclusionfilters = New System.Windows.Forms.CheckedListBox()
-        Me.Label31 = New System.Windows.Forms.Label()
-        Me.btnRemoveInclFilterfromList = New System.Windows.Forms.Button()
-        Me.btnAddInclFilterToList = New System.Windows.Forms.Button()
+        Me.txtinclextensions = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.txtinclpathcontains = New System.Windows.Forms.TextBox()
+        Me.chkinclsearchfilename = New System.Windows.Forms.CheckBox()
+        Me.rdoinclregexsearch = New System.Windows.Forms.RadioButton()
+        Me.rdoinclsimplesearch = New System.Windows.Forms.RadioButton()
         Me.tabExclusionFilter = New System.Windows.Forms.TabPage()
-        Me.SplitExclusion = New System.Windows.Forms.SplitContainer()
+        Me.tableExclusionFilters = New System.Windows.Forms.TableLayoutPanel()
         Me.Label15 = New System.Windows.Forms.Label()
+        Me.txtexclmd5hash = New System.Windows.Forms.TextBox()
         Me.Label24 = New System.Windows.Forms.Label()
         Me.txtexclfiltername = New System.Windows.Forms.TextBox()
-        Me.txtexclmd5hash = New System.Windows.Forms.TextBox()
+        Me.Label12 = New System.Windows.Forms.Label()
         Me.txtexclpathcontains = New System.Windows.Forms.TextBox()
         Me.txtexclextensions = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.btnsaveexclusionfilterchanges = New System.Windows.Forms.Button()
-        Me.lstboxexclusionfilters = New System.Windows.Forms.CheckedListBox()
-        Me.Label32 = New System.Windows.Forms.Label()
-        Me.btnremoveexclusionfilterfromlist = New System.Windows.Forms.Button()
-        Me.btnaddexclusionfiltertolist = New System.Windows.Forms.Button()
+        Me.btnFilters_Remove = New System.Windows.Forms.Button()
+        Me.btnFilters_Save = New System.Windows.Forms.Button()
+        Me.btnFilters_Add = New System.Windows.Forms.Button()
+        Me.dgvFilters = New System.Windows.Forms.DataGridView()
+        Me.colFilterCheck = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.col_FilterType = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colFilterName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tabAgentRemediation = New System.Windows.Forms.TabPage()
         Me.tableAgentRemediation = New System.Windows.Forms.TableLayoutPanel()
-        Me.lvRemOptions = New System.Windows.Forms.ListView()
-        Me.colRemType = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.colitem = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.tabAgentRemediationSubMenu = New System.Windows.Forms.TabControl()
         Me.tabAgentSendFile = New System.Windows.Forms.TabPage()
         Me.tableARSendFile = New System.Windows.Forms.TableLayoutPanel()
@@ -153,6 +148,9 @@ Partial Class Main
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.nmbremkillprocid = New System.Windows.Forms.NumericUpDown()
+        Me.lvRemOptions = New System.Windows.Forms.ListView()
+        Me.colRemType = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.colitem = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnRemoveRemOption = New System.Windows.Forms.Button()
         Me.btnSaveRemOptionChange = New System.Windows.Forms.Button()
         Me.btnAddRemOption = New System.Windows.Forms.Button()
@@ -322,17 +320,13 @@ Partial Class Main
         Me.grpshare.SuspendLayout()
         Me.grpagent.SuspendLayout()
         Me.tabFilters.SuspendLayout()
+        Me.tableFilters.SuspendLayout()
         Me.tabFiltersSubMenu.SuspendLayout()
         Me.tabInclusionFilter.SuspendLayout()
-        CType(Me.splitInclusion, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.splitInclusion.Panel1.SuspendLayout()
-        Me.splitInclusion.Panel2.SuspendLayout()
-        Me.splitInclusion.SuspendLayout()
+        Me.tableInclusionFilters.SuspendLayout()
         Me.tabExclusionFilter.SuspendLayout()
-        CType(Me.SplitExclusion, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SplitExclusion.Panel1.SuspendLayout()
-        Me.SplitExclusion.Panel2.SuspendLayout()
-        Me.SplitExclusion.SuspendLayout()
+        Me.tableExclusionFilters.SuspendLayout()
+        CType(Me.dgvFilters, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabAgentRemediation.SuspendLayout()
         Me.tableAgentRemediation.SuspendLayout()
         Me.tabAgentRemediationSubMenu.SuspendLayout()
@@ -799,17 +793,17 @@ Partial Class Main
         '
         'tabSubMenu
         '
+        Me.tabSubMenu.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.tabSubMenu.Appearance = System.Windows.Forms.TabAppearance.FlatButtons
         Me.tabSubMenu.Controls.Add(Me.tabJobInfo)
         Me.tabSubMenu.Controls.Add(Me.tabFilters)
         Me.tabSubMenu.Controls.Add(Me.tabAgentRemediation)
-        Me.tabSubMenu.Dock = System.Windows.Forms.DockStyle.Top
         Me.flowJobsAPI.SetFlowBreak(Me.tabSubMenu, True)
         Me.tabSubMenu.Location = New System.Drawing.Point(4, 4)
         Me.tabSubMenu.Margin = New System.Windows.Forms.Padding(4)
         Me.tabSubMenu.Name = "tabSubMenu"
         Me.tabSubMenu.SelectedIndex = 0
-        Me.tabSubMenu.Size = New System.Drawing.Size(947, 718)
+        Me.tabSubMenu.Size = New System.Drawing.Size(1573, 718)
         Me.tabSubMenu.TabIndex = 0
         '
         'tabJobInfo
@@ -818,21 +812,18 @@ Partial Class Main
         Me.tabJobInfo.Location = New System.Drawing.Point(4, 28)
         Me.tabJobInfo.Margin = New System.Windows.Forms.Padding(4)
         Me.tabJobInfo.Name = "tabJobInfo"
-        Me.tabJobInfo.Size = New System.Drawing.Size(939, 686)
+        Me.tabJobInfo.Size = New System.Drawing.Size(1565, 686)
         Me.tabJobInfo.TabIndex = 3
         Me.tabJobInfo.Text = "Job Information"
         Me.tabJobInfo.UseVisualStyleBackColor = True
         '
         'flowJobInfo
         '
-        Me.flowJobInfo.AutoSize = True
-        Me.flowJobInfo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.flowJobInfo.Controls.Add(Me.tableJobInfo)
         Me.flowJobInfo.Controls.Add(Me.GroupBox1)
-        Me.flowJobInfo.Dock = System.Windows.Forms.DockStyle.Top
         Me.flowJobInfo.Location = New System.Drawing.Point(0, 0)
         Me.flowJobInfo.Name = "flowJobInfo"
-        Me.flowJobInfo.Size = New System.Drawing.Size(939, 378)
+        Me.flowJobInfo.Size = New System.Drawing.Size(812, 378)
         Me.flowJobInfo.TabIndex = 27
         '
         'tableJobInfo
@@ -1088,146 +1079,141 @@ Partial Class Main
         '
         'tabFilters
         '
-        Me.tabFilters.Controls.Add(Me.tabFiltersSubMenu)
+        Me.tabFilters.Controls.Add(Me.tableFilters)
         Me.tabFilters.Location = New System.Drawing.Point(4, 28)
         Me.tabFilters.Margin = New System.Windows.Forms.Padding(4)
         Me.tabFilters.Name = "tabFilters"
         Me.tabFilters.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabFilters.Size = New System.Drawing.Size(939, 686)
+        Me.tabFilters.Size = New System.Drawing.Size(1565, 686)
         Me.tabFilters.TabIndex = 1
         Me.tabFilters.Text = "Filters"
         Me.tabFilters.UseVisualStyleBackColor = True
         '
+        'tableFilters
+        '
+        Me.tableFilters.AutoSize = True
+        Me.tableFilters.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.tableFilters.ColumnCount = 3
+        Me.tableFilters.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableFilters.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableFilters.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableFilters.Controls.Add(Me.tabFiltersSubMenu, 0, 0)
+        Me.tableFilters.Controls.Add(Me.btnFilters_Remove, 2, 1)
+        Me.tableFilters.Controls.Add(Me.btnFilters_Save, 1, 1)
+        Me.tableFilters.Controls.Add(Me.btnFilters_Add, 0, 1)
+        Me.tableFilters.Controls.Add(Me.dgvFilters, 0, 2)
+        Me.tableFilters.Location = New System.Drawing.Point(3, 3)
+        Me.tableFilters.Name = "tableFilters"
+        Me.tableFilters.RowCount = 3
+        Me.tableFilters.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableFilters.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableFilters.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableFilters.Size = New System.Drawing.Size(737, 771)
+        Me.tableFilters.TabIndex = 1
+        '
         'tabFiltersSubMenu
         '
+        Me.tableFilters.SetColumnSpan(Me.tabFiltersSubMenu, 3)
         Me.tabFiltersSubMenu.Controls.Add(Me.tabInclusionFilter)
         Me.tabFiltersSubMenu.Controls.Add(Me.tabExclusionFilter)
+        Me.tabFiltersSubMenu.Dock = System.Windows.Forms.DockStyle.Left
         Me.tabFiltersSubMenu.Location = New System.Drawing.Point(4, 4)
         Me.tabFiltersSubMenu.Margin = New System.Windows.Forms.Padding(4)
         Me.tabFiltersSubMenu.Name = "tabFiltersSubMenu"
         Me.tabFiltersSubMenu.SelectedIndex = 0
-        Me.tabFiltersSubMenu.Size = New System.Drawing.Size(874, 546)
+        Me.tabFiltersSubMenu.Size = New System.Drawing.Size(729, 340)
         Me.tabFiltersSubMenu.TabIndex = 0
         '
         'tabInclusionFilter
         '
-        Me.tabInclusionFilter.Controls.Add(Me.splitInclusion)
+        Me.tabInclusionFilter.Controls.Add(Me.tableInclusionFilters)
         Me.tabInclusionFilter.Location = New System.Drawing.Point(4, 25)
         Me.tabInclusionFilter.Margin = New System.Windows.Forms.Padding(4)
         Me.tabInclusionFilter.Name = "tabInclusionFilter"
         Me.tabInclusionFilter.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabInclusionFilter.Size = New System.Drawing.Size(866, 517)
+        Me.tabInclusionFilter.Size = New System.Drawing.Size(721, 311)
         Me.tabInclusionFilter.TabIndex = 0
         Me.tabInclusionFilter.Text = "Inclusion"
         Me.tabInclusionFilter.UseVisualStyleBackColor = True
         '
-        'splitInclusion
+        'tableInclusionFilters
         '
-        Me.splitInclusion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.splitInclusion.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.splitInclusion.FixedPanel = System.Windows.Forms.FixedPanel.Panel1
-        Me.splitInclusion.IsSplitterFixed = True
-        Me.splitInclusion.Location = New System.Drawing.Point(4, 4)
-        Me.splitInclusion.Margin = New System.Windows.Forms.Padding(4)
-        Me.splitInclusion.Name = "splitInclusion"
-        Me.splitInclusion.Orientation = System.Windows.Forms.Orientation.Horizontal
-        '
-        'splitInclusion.Panel1
-        '
-        Me.splitInclusion.Panel1.Controls.Add(Me.txtinclkeywords)
-        Me.splitInclusion.Panel1.Controls.Add(Me.rdoinclregexsearch)
-        Me.splitInclusion.Panel1.Controls.Add(Me.Label8)
-        Me.splitInclusion.Panel1.Controls.Add(Me.rdoinclsimplesearch)
-        Me.splitInclusion.Panel1.Controls.Add(Me.txtinclfiltername)
-        Me.splitInclusion.Panel1.Controls.Add(Me.chkinclsearchfilename)
-        Me.splitInclusion.Panel1.Controls.Add(Me.Label9)
-        Me.splitInclusion.Panel1.Controls.Add(Me.Label23)
-        Me.splitInclusion.Panel1.Controls.Add(Me.txtinclpathcontains)
-        Me.splitInclusion.Panel1.Controls.Add(Me.txtinclmd5hash)
-        Me.splitInclusion.Panel1.Controls.Add(Me.Label10)
-        Me.splitInclusion.Panel1.Controls.Add(Me.txtinclextensions)
-        Me.splitInclusion.Panel1.Controls.Add(Me.Label11)
-        Me.splitInclusion.Panel1MinSize = 216
-        '
-        'splitInclusion.Panel2
-        '
-        Me.splitInclusion.Panel2.Controls.Add(Me.btnSaveIncFilterChanges)
-        Me.splitInclusion.Panel2.Controls.Add(Me.lstboxinclusionfilters)
-        Me.splitInclusion.Panel2.Controls.Add(Me.Label31)
-        Me.splitInclusion.Panel2.Controls.Add(Me.btnRemoveInclFilterfromList)
-        Me.splitInclusion.Panel2.Controls.Add(Me.btnAddInclFilterToList)
-        Me.splitInclusion.Size = New System.Drawing.Size(858, 509)
-        Me.splitInclusion.SplitterDistance = 272
-        Me.splitInclusion.SplitterWidth = 10
-        Me.splitInclusion.TabIndex = 0
-        Me.splitInclusion.TabStop = False
-        '
-        'txtinclkeywords
-        '
-        Me.txtinclkeywords.Location = New System.Drawing.Point(321, 119)
-        Me.txtinclkeywords.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtinclkeywords.Multiline = True
-        Me.txtinclkeywords.Name = "txtinclkeywords"
-        Me.txtinclkeywords.Size = New System.Drawing.Size(443, 128)
-        Me.txtinclkeywords.TabIndex = 6
-        '
-        'rdoinclregexsearch
-        '
-        Me.rdoinclregexsearch.AutoSize = True
-        Me.rdoinclregexsearch.Location = New System.Drawing.Point(469, 75)
-        Me.rdoinclregexsearch.Margin = New System.Windows.Forms.Padding(4)
-        Me.rdoinclregexsearch.Name = "rdoinclregexsearch"
-        Me.rdoinclregexsearch.Size = New System.Drawing.Size(119, 21)
-        Me.rdoinclregexsearch.TabIndex = 13
-        Me.rdoinclregexsearch.Text = "RegEx Search"
-        Me.rdoinclregexsearch.UseVisualStyleBackColor = True
+        Me.tableInclusionFilters.AutoSize = True
+        Me.tableInclusionFilters.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.tableInclusionFilters.ColumnCount = 4
+        Me.tableInclusionFilters.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableInclusionFilters.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableInclusionFilters.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableInclusionFilters.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableInclusionFilters.Controls.Add(Me.Label8, 0, 0)
+        Me.tableInclusionFilters.Controls.Add(Me.txtinclkeywords, 2, 4)
+        Me.tableInclusionFilters.Controls.Add(Me.txtinclfiltername, 1, 0)
+        Me.tableInclusionFilters.Controls.Add(Me.txtinclmd5hash, 0, 4)
+        Me.tableInclusionFilters.Controls.Add(Me.Label9, 2, 3)
+        Me.tableInclusionFilters.Controls.Add(Me.Label23, 1, 3)
+        Me.tableInclusionFilters.Controls.Add(Me.Label11, 2, 0)
+        Me.tableInclusionFilters.Controls.Add(Me.txtinclextensions, 3, 0)
+        Me.tableInclusionFilters.Controls.Add(Me.Label10, 0, 1)
+        Me.tableInclusionFilters.Controls.Add(Me.txtinclpathcontains, 1, 1)
+        Me.tableInclusionFilters.Controls.Add(Me.chkinclsearchfilename, 3, 3)
+        Me.tableInclusionFilters.Controls.Add(Me.rdoinclregexsearch, 3, 2)
+        Me.tableInclusionFilters.Controls.Add(Me.rdoinclsimplesearch, 2, 2)
+        Me.tableInclusionFilters.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tableInclusionFilters.Location = New System.Drawing.Point(4, 4)
+        Me.tableInclusionFilters.Name = "tableInclusionFilters"
+        Me.tableInclusionFilters.RowCount = 5
+        Me.tableInclusionFilters.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableInclusionFilters.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableInclusionFilters.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableInclusionFilters.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableInclusionFilters.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableInclusionFilters.Size = New System.Drawing.Size(713, 303)
+        Me.tableInclusionFilters.TabIndex = 14
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(13, 11)
+        Me.Label8.Location = New System.Drawing.Point(4, 0)
         Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(84, 17)
         Me.Label8.TabIndex = 7
         Me.Label8.Text = "Filter Name:"
         '
-        'rdoinclsimplesearch
+        'txtinclkeywords
         '
-        Me.rdoinclsimplesearch.AutoSize = True
-        Me.rdoinclsimplesearch.Checked = True
-        Me.rdoinclsimplesearch.Location = New System.Drawing.Point(323, 75)
-        Me.rdoinclsimplesearch.Margin = New System.Windows.Forms.Padding(4)
-        Me.rdoinclsimplesearch.Name = "rdoinclsimplesearch"
-        Me.rdoinclsimplesearch.Size = New System.Drawing.Size(120, 21)
-        Me.rdoinclsimplesearch.TabIndex = 4
-        Me.rdoinclsimplesearch.TabStop = True
-        Me.rdoinclsimplesearch.Text = "Simple Search"
-        Me.rdoinclsimplesearch.UseVisualStyleBackColor = True
+        Me.tableInclusionFilters.SetColumnSpan(Me.txtinclkeywords, 2)
+        Me.txtinclkeywords.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtinclkeywords.Location = New System.Drawing.Point(365, 124)
+        Me.txtinclkeywords.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtinclkeywords.Multiline = True
+        Me.txtinclkeywords.Name = "txtinclkeywords"
+        Me.txtinclkeywords.Size = New System.Drawing.Size(344, 175)
+        Me.txtinclkeywords.TabIndex = 6
         '
         'txtinclfiltername
         '
-        Me.txtinclfiltername.Location = New System.Drawing.Point(123, 7)
+        Me.txtinclfiltername.Location = New System.Drawing.Point(112, 4)
         Me.txtinclfiltername.Margin = New System.Windows.Forms.Padding(4)
         Me.txtinclfiltername.Name = "txtinclfiltername"
         Me.txtinclfiltername.Size = New System.Drawing.Size(245, 22)
         Me.txtinclfiltername.TabIndex = 0
         '
-        'chkinclsearchfilename
+        'txtinclmd5hash
         '
-        Me.chkinclsearchfilename.AutoSize = True
-        Me.chkinclsearchfilename.Location = New System.Drawing.Point(609, 76)
-        Me.chkinclsearchfilename.Margin = New System.Windows.Forms.Padding(4)
-        Me.chkinclsearchfilename.Name = "chkinclsearchfilename"
-        Me.chkinclsearchfilename.Size = New System.Drawing.Size(171, 21)
-        Me.chkinclsearchfilename.TabIndex = 5
-        Me.chkinclsearchfilename.Text = "Search FileName Only"
-        Me.chkinclsearchfilename.UseVisualStyleBackColor = True
+        Me.tableInclusionFilters.SetColumnSpan(Me.txtinclmd5hash, 2)
+        Me.txtinclmd5hash.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtinclmd5hash.Location = New System.Drawing.Point(4, 124)
+        Me.txtinclmd5hash.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtinclmd5hash.Multiline = True
+        Me.txtinclmd5hash.Name = "txtinclmd5hash"
+        Me.txtinclmd5hash.Size = New System.Drawing.Size(353, 175)
+        Me.txtinclmd5hash.TabIndex = 3
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(319, 100)
+        Me.Label9.Location = New System.Drawing.Point(365, 91)
         Me.Label9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(73, 17)
@@ -1237,170 +1223,153 @@ Partial Class Main
         'Label23
         '
         Me.Label23.AutoSize = True
-        Me.Label23.Location = New System.Drawing.Point(13, 100)
+        Me.Label23.Location = New System.Drawing.Point(112, 91)
         Me.Label23.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label23.Name = "Label23"
         Me.Label23.Size = New System.Drawing.Size(78, 17)
         Me.Label23.TabIndex = 9
         Me.Label23.Text = "MD5 Hash:"
         '
-        'txtinclpathcontains
-        '
-        Me.txtinclpathcontains.Location = New System.Drawing.Point(123, 44)
-        Me.txtinclpathcontains.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtinclpathcontains.Multiline = True
-        Me.txtinclpathcontains.Name = "txtinclpathcontains"
-        Me.txtinclpathcontains.Size = New System.Drawing.Size(641, 24)
-        Me.txtinclpathcontains.TabIndex = 2
-        '
-        'txtinclmd5hash
-        '
-        Me.txtinclmd5hash.Location = New System.Drawing.Point(11, 119)
-        Me.txtinclmd5hash.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtinclmd5hash.Multiline = True
-        Me.txtinclmd5hash.Name = "txtinclmd5hash"
-        Me.txtinclmd5hash.Size = New System.Drawing.Size(301, 128)
-        Me.txtinclmd5hash.TabIndex = 3
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(13, 48)
-        Me.Label10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(100, 17)
-        Me.Label10.TabIndex = 5
-        Me.Label10.Text = "Path Contains:"
-        '
-        'txtinclextensions
-        '
-        Me.txtinclextensions.Location = New System.Drawing.Point(467, 7)
-        Me.txtinclextensions.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtinclextensions.Name = "txtinclextensions"
-        Me.txtinclextensions.Size = New System.Drawing.Size(297, 22)
-        Me.txtinclextensions.TabIndex = 1
-        '
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(377, 11)
+        Me.Label11.Location = New System.Drawing.Point(365, 0)
         Me.Label11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(80, 17)
         Me.Label11.TabIndex = 9
         Me.Label11.Text = "Extensions:"
         '
-        'btnSaveIncFilterChanges
+        'txtinclextensions
         '
-        Me.btnSaveIncFilterChanges.Location = New System.Drawing.Point(347, 4)
-        Me.btnSaveIncFilterChanges.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnSaveIncFilterChanges.Name = "btnSaveIncFilterChanges"
-        Me.btnSaveIncFilterChanges.Size = New System.Drawing.Size(100, 28)
-        Me.btnSaveIncFilterChanges.TabIndex = 1
-        Me.btnSaveIncFilterChanges.TabStop = False
-        Me.btnSaveIncFilterChanges.Text = "Save"
-        Me.btnSaveIncFilterChanges.UseVisualStyleBackColor = True
+        Me.txtinclextensions.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtinclextensions.Location = New System.Drawing.Point(493, 4)
+        Me.txtinclextensions.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtinclextensions.Name = "txtinclextensions"
+        Me.txtinclextensions.Size = New System.Drawing.Size(216, 22)
+        Me.txtinclextensions.TabIndex = 1
         '
-        'lstboxinclusionfilters
+        'Label10
         '
-        Me.lstboxinclusionfilters.FormattingEnabled = True
-        Me.lstboxinclusionfilters.Location = New System.Drawing.Point(4, 73)
-        Me.lstboxinclusionfilters.Margin = New System.Windows.Forms.Padding(4)
-        Me.lstboxinclusionfilters.Name = "lstboxinclusionfilters"
-        Me.lstboxinclusionfilters.Size = New System.Drawing.Size(773, 140)
-        Me.lstboxinclusionfilters.TabIndex = 4
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(4, 30)
+        Me.Label10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(100, 17)
+        Me.Label10.TabIndex = 5
+        Me.Label10.Text = "Path Contains:"
         '
-        'Label31
+        'txtinclpathcontains
         '
-        Me.Label31.AutoSize = True
-        Me.Label31.Location = New System.Drawing.Point(7, 53)
-        Me.Label31.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label31.Name = "Label31"
-        Me.Label31.Size = New System.Drawing.Size(50, 17)
-        Me.Label31.TabIndex = 3
-        Me.Label31.Text = "Filters:"
+        Me.tableInclusionFilters.SetColumnSpan(Me.txtinclpathcontains, 3)
+        Me.txtinclpathcontains.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtinclpathcontains.Location = New System.Drawing.Point(112, 34)
+        Me.txtinclpathcontains.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtinclpathcontains.Multiline = True
+        Me.txtinclpathcontains.Name = "txtinclpathcontains"
+        Me.txtinclpathcontains.Size = New System.Drawing.Size(597, 24)
+        Me.txtinclpathcontains.TabIndex = 2
         '
-        'btnRemoveInclFilterfromList
+        'chkinclsearchfilename
         '
-        Me.btnRemoveInclFilterfromList.Location = New System.Drawing.Point(683, 4)
-        Me.btnRemoveInclFilterfromList.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnRemoveInclFilterfromList.Name = "btnRemoveInclFilterfromList"
-        Me.btnRemoveInclFilterfromList.Size = New System.Drawing.Size(100, 28)
-        Me.btnRemoveInclFilterfromList.TabIndex = 2
-        Me.btnRemoveInclFilterfromList.TabStop = False
-        Me.btnRemoveInclFilterfromList.Text = "Remove"
-        Me.btnRemoveInclFilterfromList.UseVisualStyleBackColor = True
+        Me.chkinclsearchfilename.AutoSize = True
+        Me.chkinclsearchfilename.Location = New System.Drawing.Point(493, 95)
+        Me.chkinclsearchfilename.Margin = New System.Windows.Forms.Padding(4)
+        Me.chkinclsearchfilename.Name = "chkinclsearchfilename"
+        Me.chkinclsearchfilename.Size = New System.Drawing.Size(171, 21)
+        Me.chkinclsearchfilename.TabIndex = 5
+        Me.chkinclsearchfilename.Text = "Search FileName Only"
+        Me.chkinclsearchfilename.UseVisualStyleBackColor = True
         '
-        'btnAddInclFilterToList
+        'rdoinclregexsearch
         '
-        Me.btnAddInclFilterToList.Location = New System.Drawing.Point(4, 4)
-        Me.btnAddInclFilterToList.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnAddInclFilterToList.Name = "btnAddInclFilterToList"
-        Me.btnAddInclFilterToList.Size = New System.Drawing.Size(100, 28)
-        Me.btnAddInclFilterToList.TabIndex = 0
-        Me.btnAddInclFilterToList.Text = "Add"
-        Me.btnAddInclFilterToList.UseVisualStyleBackColor = True
+        Me.rdoinclregexsearch.AutoSize = True
+        Me.rdoinclregexsearch.Location = New System.Drawing.Point(493, 66)
+        Me.rdoinclregexsearch.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoinclregexsearch.Name = "rdoinclregexsearch"
+        Me.rdoinclregexsearch.Size = New System.Drawing.Size(119, 21)
+        Me.rdoinclregexsearch.TabIndex = 13
+        Me.rdoinclregexsearch.Text = "RegEx Search"
+        Me.rdoinclregexsearch.UseVisualStyleBackColor = True
+        '
+        'rdoinclsimplesearch
+        '
+        Me.rdoinclsimplesearch.AutoSize = True
+        Me.rdoinclsimplesearch.Checked = True
+        Me.rdoinclsimplesearch.Location = New System.Drawing.Point(365, 66)
+        Me.rdoinclsimplesearch.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoinclsimplesearch.Name = "rdoinclsimplesearch"
+        Me.rdoinclsimplesearch.Size = New System.Drawing.Size(120, 21)
+        Me.rdoinclsimplesearch.TabIndex = 4
+        Me.rdoinclsimplesearch.TabStop = True
+        Me.rdoinclsimplesearch.Text = "Simple Search"
+        Me.rdoinclsimplesearch.UseVisualStyleBackColor = True
         '
         'tabExclusionFilter
         '
-        Me.tabExclusionFilter.Controls.Add(Me.SplitExclusion)
+        Me.tabExclusionFilter.Controls.Add(Me.tableExclusionFilters)
         Me.tabExclusionFilter.Location = New System.Drawing.Point(4, 25)
         Me.tabExclusionFilter.Margin = New System.Windows.Forms.Padding(4)
         Me.tabExclusionFilter.Name = "tabExclusionFilter"
         Me.tabExclusionFilter.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabExclusionFilter.Size = New System.Drawing.Size(866, 517)
+        Me.tabExclusionFilter.Size = New System.Drawing.Size(721, 311)
         Me.tabExclusionFilter.TabIndex = 1
         Me.tabExclusionFilter.Text = "Exclusion"
         Me.tabExclusionFilter.UseVisualStyleBackColor = True
         '
-        'SplitExclusion
+        'tableExclusionFilters
         '
-        Me.SplitExclusion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.SplitExclusion.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SplitExclusion.IsSplitterFixed = True
-        Me.SplitExclusion.Location = New System.Drawing.Point(4, 4)
-        Me.SplitExclusion.Margin = New System.Windows.Forms.Padding(4)
-        Me.SplitExclusion.Name = "SplitExclusion"
-        Me.SplitExclusion.Orientation = System.Windows.Forms.Orientation.Horizontal
-        '
-        'SplitExclusion.Panel1
-        '
-        Me.SplitExclusion.Panel1.Controls.Add(Me.Label15)
-        Me.SplitExclusion.Panel1.Controls.Add(Me.Label24)
-        Me.SplitExclusion.Panel1.Controls.Add(Me.txtexclfiltername)
-        Me.SplitExclusion.Panel1.Controls.Add(Me.txtexclmd5hash)
-        Me.SplitExclusion.Panel1.Controls.Add(Me.txtexclpathcontains)
-        Me.SplitExclusion.Panel1.Controls.Add(Me.txtexclextensions)
-        Me.SplitExclusion.Panel1.Controls.Add(Me.Label13)
-        Me.SplitExclusion.Panel1.Controls.Add(Me.Label12)
-        '
-        'SplitExclusion.Panel2
-        '
-        Me.SplitExclusion.Panel2.Controls.Add(Me.btnsaveexclusionfilterchanges)
-        Me.SplitExclusion.Panel2.Controls.Add(Me.lstboxexclusionfilters)
-        Me.SplitExclusion.Panel2.Controls.Add(Me.Label32)
-        Me.SplitExclusion.Panel2.Controls.Add(Me.btnremoveexclusionfilterfromlist)
-        Me.SplitExclusion.Panel2.Controls.Add(Me.btnaddexclusionfiltertolist)
-        Me.SplitExclusion.Size = New System.Drawing.Size(858, 509)
-        Me.SplitExclusion.SplitterDistance = 266
-        Me.SplitExclusion.SplitterWidth = 10
-        Me.SplitExclusion.TabIndex = 0
-        Me.SplitExclusion.TabStop = False
+        Me.tableExclusionFilters.AutoSize = True
+        Me.tableExclusionFilters.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.tableExclusionFilters.ColumnCount = 4
+        Me.tableExclusionFilters.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableExclusionFilters.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableExclusionFilters.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableExclusionFilters.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tableExclusionFilters.Controls.Add(Me.Label15, 0, 0)
+        Me.tableExclusionFilters.Controls.Add(Me.txtexclmd5hash, 0, 3)
+        Me.tableExclusionFilters.Controls.Add(Me.Label24, 1, 2)
+        Me.tableExclusionFilters.Controls.Add(Me.txtexclfiltername, 1, 0)
+        Me.tableExclusionFilters.Controls.Add(Me.Label12, 2, 0)
+        Me.tableExclusionFilters.Controls.Add(Me.txtexclpathcontains, 1, 1)
+        Me.tableExclusionFilters.Controls.Add(Me.txtexclextensions, 3, 0)
+        Me.tableExclusionFilters.Controls.Add(Me.Label13, 0, 1)
+        Me.tableExclusionFilters.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tableExclusionFilters.Location = New System.Drawing.Point(4, 4)
+        Me.tableExclusionFilters.Name = "tableExclusionFilters"
+        Me.tableExclusionFilters.RowCount = 4
+        Me.tableExclusionFilters.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableExclusionFilters.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableExclusionFilters.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableExclusionFilters.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tableExclusionFilters.Size = New System.Drawing.Size(713, 303)
+        Me.tableExclusionFilters.TabIndex = 18
         '
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(13, 11)
+        Me.Label15.Location = New System.Drawing.Point(4, 0)
         Me.Label15.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(84, 17)
         Me.Label15.TabIndex = 8
         Me.Label15.Text = "Filter Name:"
         '
+        'txtexclmd5hash
+        '
+        Me.tableExclusionFilters.SetColumnSpan(Me.txtexclmd5hash, 2)
+        Me.txtexclmd5hash.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtexclmd5hash.Location = New System.Drawing.Point(4, 83)
+        Me.txtexclmd5hash.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtexclmd5hash.Multiline = True
+        Me.txtexclmd5hash.Name = "txtexclmd5hash"
+        Me.txtexclmd5hash.Size = New System.Drawing.Size(353, 216)
+        Me.txtexclmd5hash.TabIndex = 3
+        '
         'Label24
         '
         Me.Label24.AutoSize = True
-        Me.Label24.Location = New System.Drawing.Point(13, 100)
+        Me.Label24.Location = New System.Drawing.Point(112, 62)
         Me.Label24.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(78, 17)
@@ -1409,108 +1378,124 @@ Partial Class Main
         '
         'txtexclfiltername
         '
-        Me.txtexclfiltername.Location = New System.Drawing.Point(123, 7)
+        Me.txtexclfiltername.Location = New System.Drawing.Point(112, 4)
         Me.txtexclfiltername.Margin = New System.Windows.Forms.Padding(4)
         Me.txtexclfiltername.Name = "txtexclfiltername"
         Me.txtexclfiltername.Size = New System.Drawing.Size(245, 22)
         Me.txtexclfiltername.TabIndex = 0
         '
-        'txtexclmd5hash
-        '
-        Me.txtexclmd5hash.Location = New System.Drawing.Point(11, 119)
-        Me.txtexclmd5hash.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtexclmd5hash.Multiline = True
-        Me.txtexclmd5hash.Name = "txtexclmd5hash"
-        Me.txtexclmd5hash.Size = New System.Drawing.Size(301, 128)
-        Me.txtexclmd5hash.TabIndex = 3
-        '
-        'txtexclpathcontains
-        '
-        Me.txtexclpathcontains.Location = New System.Drawing.Point(123, 44)
-        Me.txtexclpathcontains.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtexclpathcontains.Multiline = True
-        Me.txtexclpathcontains.Name = "txtexclpathcontains"
-        Me.txtexclpathcontains.Size = New System.Drawing.Size(641, 24)
-        Me.txtexclpathcontains.TabIndex = 2
-        '
-        'txtexclextensions
-        '
-        Me.txtexclextensions.Location = New System.Drawing.Point(467, 7)
-        Me.txtexclextensions.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtexclextensions.Name = "txtexclextensions"
-        Me.txtexclextensions.Size = New System.Drawing.Size(297, 22)
-        Me.txtexclextensions.TabIndex = 1
-        '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(13, 48)
-        Me.Label13.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(100, 17)
-        Me.Label13.TabIndex = 13
-        Me.Label13.Text = "Path Contains:"
-        '
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(377, 11)
+        Me.Label12.Location = New System.Drawing.Point(365, 0)
         Me.Label12.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(80, 17)
         Me.Label12.TabIndex = 14
         Me.Label12.Text = "Extensions:"
         '
-        'btnsaveexclusionfilterchanges
+        'txtexclpathcontains
         '
-        Me.btnsaveexclusionfilterchanges.Location = New System.Drawing.Point(347, 4)
-        Me.btnsaveexclusionfilterchanges.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnsaveexclusionfilterchanges.Name = "btnsaveexclusionfilterchanges"
-        Me.btnsaveexclusionfilterchanges.Size = New System.Drawing.Size(100, 28)
-        Me.btnsaveexclusionfilterchanges.TabIndex = 1
-        Me.btnsaveexclusionfilterchanges.TabStop = False
-        Me.btnsaveexclusionfilterchanges.Text = "Save"
-        Me.btnsaveexclusionfilterchanges.UseVisualStyleBackColor = True
+        Me.tableExclusionFilters.SetColumnSpan(Me.txtexclpathcontains, 3)
+        Me.txtexclpathcontains.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtexclpathcontains.Location = New System.Drawing.Point(112, 34)
+        Me.txtexclpathcontains.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtexclpathcontains.Multiline = True
+        Me.txtexclpathcontains.Name = "txtexclpathcontains"
+        Me.txtexclpathcontains.Size = New System.Drawing.Size(597, 24)
+        Me.txtexclpathcontains.TabIndex = 2
         '
-        'lstboxexclusionfilters
+        'txtexclextensions
         '
-        Me.lstboxexclusionfilters.FormattingEnabled = True
-        Me.lstboxexclusionfilters.Location = New System.Drawing.Point(4, 73)
-        Me.lstboxexclusionfilters.Margin = New System.Windows.Forms.Padding(4)
-        Me.lstboxexclusionfilters.Name = "lstboxexclusionfilters"
-        Me.lstboxexclusionfilters.Size = New System.Drawing.Size(773, 140)
-        Me.lstboxexclusionfilters.TabIndex = 9
+        Me.txtexclextensions.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtexclextensions.Location = New System.Drawing.Point(453, 4)
+        Me.txtexclextensions.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtexclextensions.Name = "txtexclextensions"
+        Me.txtexclextensions.Size = New System.Drawing.Size(256, 22)
+        Me.txtexclextensions.TabIndex = 1
         '
-        'Label32
+        'Label13
         '
-        Me.Label32.AutoSize = True
-        Me.Label32.Location = New System.Drawing.Point(7, 53)
-        Me.Label32.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label32.Name = "Label32"
-        Me.Label32.Size = New System.Drawing.Size(50, 17)
-        Me.Label32.TabIndex = 8
-        Me.Label32.Text = "Filters:"
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(4, 30)
+        Me.Label13.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(100, 17)
+        Me.Label13.TabIndex = 13
+        Me.Label13.Text = "Path Contains:"
         '
-        'btnremoveexclusionfilterfromlist
+        'btnFilters_Remove
         '
-        Me.btnremoveexclusionfilterfromlist.Location = New System.Drawing.Point(683, 4)
-        Me.btnremoveexclusionfilterfromlist.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnremoveexclusionfilterfromlist.Name = "btnremoveexclusionfilterfromlist"
-        Me.btnremoveexclusionfilterfromlist.Size = New System.Drawing.Size(100, 28)
-        Me.btnremoveexclusionfilterfromlist.TabIndex = 2
-        Me.btnremoveexclusionfilterfromlist.TabStop = False
-        Me.btnremoveexclusionfilterfromlist.Text = "Remove"
-        Me.btnremoveexclusionfilterfromlist.UseVisualStyleBackColor = True
+        Me.btnFilters_Remove.Location = New System.Drawing.Point(220, 352)
+        Me.btnFilters_Remove.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnFilters_Remove.Name = "btnFilters_Remove"
+        Me.btnFilters_Remove.Size = New System.Drawing.Size(100, 28)
+        Me.btnFilters_Remove.TabIndex = 5
+        Me.btnFilters_Remove.TabStop = False
+        Me.btnFilters_Remove.Text = "Remove"
+        Me.btnFilters_Remove.UseVisualStyleBackColor = True
         '
-        'btnaddexclusionfiltertolist
+        'btnFilters_Save
         '
-        Me.btnaddexclusionfiltertolist.Location = New System.Drawing.Point(4, 4)
-        Me.btnaddexclusionfiltertolist.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnaddexclusionfiltertolist.Name = "btnaddexclusionfiltertolist"
-        Me.btnaddexclusionfiltertolist.Size = New System.Drawing.Size(100, 28)
-        Me.btnaddexclusionfiltertolist.TabIndex = 0
-        Me.btnaddexclusionfiltertolist.Text = "Add"
-        Me.btnaddexclusionfiltertolist.UseVisualStyleBackColor = True
+        Me.btnFilters_Save.Location = New System.Drawing.Point(112, 352)
+        Me.btnFilters_Save.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnFilters_Save.Name = "btnFilters_Save"
+        Me.btnFilters_Save.Size = New System.Drawing.Size(100, 28)
+        Me.btnFilters_Save.TabIndex = 5
+        Me.btnFilters_Save.TabStop = False
+        Me.btnFilters_Save.Text = "Save"
+        Me.btnFilters_Save.UseVisualStyleBackColor = True
+        '
+        'btnFilters_Add
+        '
+        Me.btnFilters_Add.Location = New System.Drawing.Point(4, 352)
+        Me.btnFilters_Add.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnFilters_Add.Name = "btnFilters_Add"
+        Me.btnFilters_Add.Size = New System.Drawing.Size(100, 28)
+        Me.btnFilters_Add.TabIndex = 1
+        Me.btnFilters_Add.Text = "Add"
+        Me.btnFilters_Add.UseVisualStyleBackColor = True
+        '
+        'dgvFilters
+        '
+        Me.dgvFilters.AllowUserToAddRows = False
+        Me.dgvFilters.AllowUserToDeleteRows = False
+        Me.dgvFilters.AllowUserToResizeRows = False
+        Me.dgvFilters.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvFilters.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvFilters.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colFilterCheck, Me.col_FilterType, Me.colFilterName})
+        Me.tableFilters.SetColumnSpan(Me.dgvFilters, 3)
+        Me.dgvFilters.Dock = System.Windows.Forms.DockStyle.Left
+        Me.dgvFilters.Location = New System.Drawing.Point(3, 387)
+        Me.dgvFilters.MultiSelect = False
+        Me.dgvFilters.Name = "dgvFilters"
+        Me.dgvFilters.RowHeadersVisible = False
+        Me.dgvFilters.RowTemplate.Height = 24
+        Me.dgvFilters.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvFilters.Size = New System.Drawing.Size(726, 381)
+        Me.dgvFilters.TabIndex = 6
+        '
+        'colFilterCheck
+        '
+        Me.colFilterCheck.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
+        Me.colFilterCheck.HeaderText = "Select"
+        Me.colFilterCheck.Name = "colFilterCheck"
+        Me.colFilterCheck.Width = 53
+        '
+        'col_FilterType
+        '
+        Me.col_FilterType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.col_FilterType.HeaderText = "Type"
+        Me.col_FilterType.Name = "col_FilterType"
+        Me.col_FilterType.ReadOnly = True
+        Me.col_FilterType.Width = 65
+        '
+        'colFilterName
+        '
+        Me.colFilterName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.colFilterName.HeaderText = "Filter Name"
+        Me.colFilterName.Name = "colFilterName"
+        Me.colFilterName.ReadOnly = True
         '
         'tabAgentRemediation
         '
@@ -1518,7 +1503,7 @@ Partial Class Main
         Me.tabAgentRemediation.Location = New System.Drawing.Point(4, 28)
         Me.tabAgentRemediation.Margin = New System.Windows.Forms.Padding(4)
         Me.tabAgentRemediation.Name = "tabAgentRemediation"
-        Me.tabAgentRemediation.Size = New System.Drawing.Size(939, 686)
+        Me.tabAgentRemediation.Size = New System.Drawing.Size(1565, 686)
         Me.tabAgentRemediation.TabIndex = 2
         Me.tabAgentRemediation.Text = "Agent Remediation"
         Me.tabAgentRemediation.UseVisualStyleBackColor = True
@@ -1549,33 +1534,6 @@ Partial Class Main
         Me.tableAgentRemediation.Size = New System.Drawing.Size(669, 375)
         Me.tableAgentRemediation.TabIndex = 5
         '
-        'lvRemOptions
-        '
-        Me.lvRemOptions.CheckBoxes = True
-        Me.lvRemOptions.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.colRemType, Me.colitem})
-        Me.tableAgentRemediation.SetColumnSpan(Me.lvRemOptions, 3)
-        Me.lvRemOptions.FullRowSelect = True
-        Me.lvRemOptions.GridLines = True
-        Me.lvRemOptions.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
-        Me.lvRemOptions.Location = New System.Drawing.Point(4, 214)
-        Me.lvRemOptions.Margin = New System.Windows.Forms.Padding(4)
-        Me.lvRemOptions.MultiSelect = False
-        Me.lvRemOptions.Name = "lvRemOptions"
-        Me.lvRemOptions.Size = New System.Drawing.Size(653, 157)
-        Me.lvRemOptions.TabIndex = 1
-        Me.lvRemOptions.UseCompatibleStateImageBehavior = False
-        Me.lvRemOptions.View = System.Windows.Forms.View.Details
-        '
-        'colRemType
-        '
-        Me.colRemType.Text = "Remediation Type"
-        Me.colRemType.Width = 200
-        '
-        'colitem
-        '
-        Me.colitem.Text = "Item"
-        Me.colitem.Width = 200
-        '
         'tabAgentRemediationSubMenu
         '
         Me.tabAgentRemediationSubMenu.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -1599,7 +1557,7 @@ Partial Class Main
         Me.tabAgentSendFile.Margin = New System.Windows.Forms.Padding(4)
         Me.tabAgentSendFile.Name = "tabAgentSendFile"
         Me.tabAgentSendFile.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabAgentSendFile.Size = New System.Drawing.Size(903, 128)
+        Me.tabAgentSendFile.Size = New System.Drawing.Size(653, 128)
         Me.tabAgentSendFile.TabIndex = 0
         Me.tabAgentSendFile.Text = "Send File"
         Me.tabAgentSendFile.UseVisualStyleBackColor = True
@@ -1693,7 +1651,7 @@ Partial Class Main
         Me.tabAgentExecute.Margin = New System.Windows.Forms.Padding(4)
         Me.tabAgentExecute.Name = "tabAgentExecute"
         Me.tabAgentExecute.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabAgentExecute.Size = New System.Drawing.Size(903, 128)
+        Me.tabAgentExecute.Size = New System.Drawing.Size(653, 128)
         Me.tabAgentExecute.TabIndex = 1
         Me.tabAgentExecute.Text = "Execute"
         Me.tabAgentExecute.UseVisualStyleBackColor = True
@@ -1715,7 +1673,7 @@ Partial Class Main
         Me.tableARExecute.RowCount = 2
         Me.tableARExecute.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tableARExecute.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tableARExecute.Size = New System.Drawing.Size(895, 120)
+        Me.tableARExecute.Size = New System.Drawing.Size(645, 120)
         Me.tableARExecute.TabIndex = 26
         '
         'Label18
@@ -1829,7 +1787,7 @@ Partial Class Main
         Me.tableARKill.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tableARKill.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tableARKill.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tableARKill.Size = New System.Drawing.Size(432, 126)
+        Me.tableARKill.Size = New System.Drawing.Size(432, 116)
         Me.tableARKill.TabIndex = 20
         '
         'grpARKill
@@ -1839,7 +1797,7 @@ Partial Class Main
         Me.grpARKill.Controls.Add(Me.rdoPID)
         Me.grpARKill.Location = New System.Drawing.Point(3, 3)
         Me.grpARKill.Name = "grpARKill"
-        Me.grpARKill.Size = New System.Drawing.Size(267, 60)
+        Me.grpARKill.Size = New System.Drawing.Size(267, 50)
         Me.grpARKill.TabIndex = 19
         Me.grpARKill.TabStop = False
         Me.grpARKill.Text = "Target"
@@ -1847,7 +1805,7 @@ Partial Class Main
         'rdoPName
         '
         Me.rdoPName.AutoSize = True
-        Me.rdoPName.Location = New System.Drawing.Point(139, 28)
+        Me.rdoPName.Location = New System.Drawing.Point(139, 22)
         Me.rdoPName.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoPName.Name = "rdoPName"
         Me.rdoPName.Size = New System.Drawing.Size(121, 21)
@@ -1859,7 +1817,7 @@ Partial Class Main
         'rdoPID
         '
         Me.rdoPID.AutoSize = True
-        Me.rdoPID.Location = New System.Drawing.Point(7, 28)
+        Me.rdoPID.Location = New System.Drawing.Point(7, 22)
         Me.rdoPID.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoPID.Name = "rdoPID"
         Me.rdoPID.Size = New System.Drawing.Size(97, 21)
@@ -1870,7 +1828,7 @@ Partial Class Main
         '
         'txtremkillprocname
         '
-        Me.txtremkillprocname.Location = New System.Drawing.Point(116, 100)
+        Me.txtremkillprocname.Location = New System.Drawing.Point(116, 90)
         Me.txtremkillprocname.Margin = New System.Windows.Forms.Padding(4)
         Me.txtremkillprocname.Name = "txtremkillprocname"
         Me.txtremkillprocname.Size = New System.Drawing.Size(312, 22)
@@ -1879,7 +1837,7 @@ Partial Class Main
         'Label21
         '
         Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(4, 66)
+        Me.Label21.Location = New System.Drawing.Point(4, 56)
         Me.Label21.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label21.Name = "Label21"
         Me.Label21.Size = New System.Drawing.Size(100, 17)
@@ -1889,7 +1847,7 @@ Partial Class Main
         'Label22
         '
         Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(4, 96)
+        Me.Label22.Location = New System.Drawing.Point(4, 86)
         Me.Label22.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(104, 17)
@@ -1898,12 +1856,39 @@ Partial Class Main
         '
         'nmbremkillprocid
         '
-        Me.nmbremkillprocid.Location = New System.Drawing.Point(116, 70)
+        Me.nmbremkillprocid.Location = New System.Drawing.Point(116, 60)
         Me.nmbremkillprocid.Margin = New System.Windows.Forms.Padding(4)
         Me.nmbremkillprocid.Maximum = New Decimal(New Integer() {999999999, 0, 0, 0})
         Me.nmbremkillprocid.Name = "nmbremkillprocid"
         Me.nmbremkillprocid.Size = New System.Drawing.Size(101, 22)
         Me.nmbremkillprocid.TabIndex = 1
+        '
+        'lvRemOptions
+        '
+        Me.lvRemOptions.CheckBoxes = True
+        Me.lvRemOptions.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.colRemType, Me.colitem})
+        Me.tableAgentRemediation.SetColumnSpan(Me.lvRemOptions, 3)
+        Me.lvRemOptions.FullRowSelect = True
+        Me.lvRemOptions.GridLines = True
+        Me.lvRemOptions.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
+        Me.lvRemOptions.Location = New System.Drawing.Point(4, 214)
+        Me.lvRemOptions.Margin = New System.Windows.Forms.Padding(4)
+        Me.lvRemOptions.MultiSelect = False
+        Me.lvRemOptions.Name = "lvRemOptions"
+        Me.lvRemOptions.Size = New System.Drawing.Size(653, 157)
+        Me.lvRemOptions.TabIndex = 1
+        Me.lvRemOptions.UseCompatibleStateImageBehavior = False
+        Me.lvRemOptions.View = System.Windows.Forms.View.Details
+        '
+        'colRemType
+        '
+        Me.colRemType.Text = "Remediation Type"
+        Me.colRemType.Width = 200
+        '
+        'colitem
+        '
+        Me.colitem.Text = "Item"
+        Me.colitem.Width = 200
         '
         'btnRemoveRemOption
         '
@@ -2692,7 +2677,7 @@ Partial Class Main
         Me.flowJobsAPI.Controls.Add(Me.tableJobExecute)
         Me.flowJobsAPI.Location = New System.Drawing.Point(4, 4)
         Me.flowJobsAPI.Name = "flowJobsAPI"
-        Me.flowJobsAPI.Size = New System.Drawing.Size(1421, 796)
+        Me.flowJobsAPI.Size = New System.Drawing.Size(1581, 796)
         Me.flowJobsAPI.TabIndex = 35
         '
         'tableJobExecute
@@ -3685,7 +3670,6 @@ Partial Class Main
         Me.GroupBox6.PerformLayout()
         Me.tabSubMenu.ResumeLayout(False)
         Me.tabJobInfo.ResumeLayout(False)
-        Me.tabJobInfo.PerformLayout()
         Me.flowJobInfo.ResumeLayout(False)
         Me.flowJobInfo.PerformLayout()
         Me.tableJobInfo.ResumeLayout(False)
@@ -3697,21 +3681,18 @@ Partial Class Main
         Me.grpagent.ResumeLayout(False)
         Me.grpagent.PerformLayout()
         Me.tabFilters.ResumeLayout(False)
+        Me.tabFilters.PerformLayout()
+        Me.tableFilters.ResumeLayout(False)
         Me.tabFiltersSubMenu.ResumeLayout(False)
         Me.tabInclusionFilter.ResumeLayout(False)
-        Me.splitInclusion.Panel1.ResumeLayout(False)
-        Me.splitInclusion.Panel1.PerformLayout()
-        Me.splitInclusion.Panel2.ResumeLayout(False)
-        Me.splitInclusion.Panel2.PerformLayout()
-        CType(Me.splitInclusion, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.splitInclusion.ResumeLayout(False)
+        Me.tabInclusionFilter.PerformLayout()
+        Me.tableInclusionFilters.ResumeLayout(False)
+        Me.tableInclusionFilters.PerformLayout()
         Me.tabExclusionFilter.ResumeLayout(False)
-        Me.SplitExclusion.Panel1.ResumeLayout(False)
-        Me.SplitExclusion.Panel1.PerformLayout()
-        Me.SplitExclusion.Panel2.ResumeLayout(False)
-        Me.SplitExclusion.Panel2.PerformLayout()
-        CType(Me.SplitExclusion, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.SplitExclusion.ResumeLayout(False)
+        Me.tabExclusionFilter.PerformLayout()
+        Me.tableExclusionFilters.ResumeLayout(False)
+        Me.tableExclusionFilters.PerformLayout()
+        CType(Me.dgvFilters, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabAgentRemediation.ResumeLayout(False)
         Me.tabAgentRemediation.PerformLayout()
         Me.tableAgentRemediation.ResumeLayout(False)
@@ -3905,18 +3886,6 @@ Partial Class Main
     Friend WithEvents btnLoadFromBox As System.Windows.Forms.Button
     Friend WithEvents ofdBox As System.Windows.Forms.OpenFileDialog
     Friend WithEvents sfdBox As System.Windows.Forms.SaveFileDialog
-    Friend WithEvents splitInclusion As System.Windows.Forms.SplitContainer
-    Friend WithEvents btnRemoveInclFilterfromList As System.Windows.Forms.Button
-    Friend WithEvents btnAddInclFilterToList As System.Windows.Forms.Button
-    Friend WithEvents Label31 As System.Windows.Forms.Label
-    Friend WithEvents lstboxinclusionfilters As System.Windows.Forms.CheckedListBox
-    Friend WithEvents btnSaveIncFilterChanges As System.Windows.Forms.Button
-    Friend WithEvents SplitExclusion As System.Windows.Forms.SplitContainer
-    Friend WithEvents btnsaveexclusionfilterchanges As System.Windows.Forms.Button
-    Friend WithEvents lstboxexclusionfilters As System.Windows.Forms.CheckedListBox
-    Friend WithEvents Label32 As System.Windows.Forms.Label
-    Friend WithEvents btnremoveexclusionfilterfromlist As System.Windows.Forms.Button
-    Friend WithEvents btnaddexclusionfiltertolist As System.Windows.Forms.Button
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents rdoagent As System.Windows.Forms.RadioButton
     Friend WithEvents rdoshare As System.Windows.Forms.RadioButton
@@ -4107,5 +4076,15 @@ Partial Class Main
     Friend WithEvents tableARDelete As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents tableARKill As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents grpARKill As System.Windows.Forms.GroupBox
+    Friend WithEvents tableInclusionFilters As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents tableExclusionFilters As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents tableFilters As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents btnFilters_Remove As System.Windows.Forms.Button
+    Friend WithEvents btnFilters_Save As System.Windows.Forms.Button
+    Friend WithEvents btnFilters_Add As System.Windows.Forms.Button
+    Friend WithEvents dgvFilters As System.Windows.Forms.DataGridView
+    Friend WithEvents colFilterCheck As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents col_FilterType As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colFilterName As System.Windows.Forms.DataGridViewTextBoxColumn
 
 End Class
