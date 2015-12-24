@@ -161,27 +161,10 @@ Partial Class Main
         Me.btnNewProject = New System.Windows.Forms.Button()
         Me.txtSearchProject = New System.Windows.Forms.TextBox()
         Me.dgvProjectList = New System.Windows.Forms.DataGridView()
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CreationDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CreatedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LastModDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ProjectFolderPath = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ProjectID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tabJobsList = New System.Windows.Forms.TabPage()
         Me.splitJobsRestJobs = New System.Windows.Forms.SplitContainer()
         Me.txtJobsSearch = New System.Windows.Forms.TextBox()
         Me.dgvJobsRestJobsList = New System.Windows.Forms.DataGridView()
-        Me.jobName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.jobStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.jobRetry = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.jobCancel = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.jobType = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.jobStart = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.jobEnd = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.jobID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.jobResultID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.jobEndpointStatus = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.Result = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.splitEndpointStatus = New System.Windows.Forms.SplitContainer()
         Me.flowEndpointStatus = New System.Windows.Forms.FlowLayoutPanel()
         Me.btnBackFromEndpointStatus = New System.Windows.Forms.Button()
@@ -202,14 +185,6 @@ Partial Class Main
         Me.tabAlerts = New System.Windows.Forms.TabPage()
         Me.splitAlerts = New System.Windows.Forms.SplitContainer()
         Me.dgvAlerts = New System.Windows.Forms.DataGridView()
-        Me.artifactName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.createDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.severity = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.target = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.source = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.project = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.confidence = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.threatScore = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tblAlertBreakdown = New System.Windows.Forms.TableLayoutPanel()
         Me.flowResponseTime = New System.Windows.Forms.FlowLayoutPanel()
         Me.lblResponseTime = New System.Windows.Forms.Label()
@@ -314,6 +289,31 @@ Partial Class Main
         Me.tableComputerTargets = New System.Windows.Forms.TableLayoutPanel()
         Me.tableNetworkShares = New System.Windows.Forms.TableLayoutPanel()
         Me.tableJobInfoTarget = New System.Windows.Forms.TableLayoutPanel()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CreationDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CreatedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LastModDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProjectFolderPath = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProjectID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobRetry = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.jobCancel = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.jobType = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobStart = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobEnd = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobResultID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobEndpointStatus = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.Result = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.artifactName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.createDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.severity = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.target = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.source = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.project = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.confidence = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.threatScore = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.grpSettings.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.grpOptDefSet.SuspendLayout()
@@ -1919,7 +1919,7 @@ Partial Class Main
         Me.tabProjects.Location = New System.Drawing.Point(4, 25)
         Me.tabProjects.Name = "tabProjects"
         Me.tabProjects.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabProjects.Size = New System.Drawing.Size(1486, 869)
+        Me.tabProjects.Size = New System.Drawing.Size(742, 667)
         Me.tabProjects.TabIndex = 1
         Me.tabProjects.Text = "Projects"
         Me.tabProjects.UseVisualStyleBackColor = True
@@ -1943,8 +1943,8 @@ Partial Class Main
         'splitProjects.Panel2
         '
         Me.splitProjects.Panel2.Controls.Add(Me.dgvProjectList)
-        Me.splitProjects.Size = New System.Drawing.Size(1480, 863)
-        Me.splitProjects.SplitterDistance = 49
+        Me.splitProjects.Size = New System.Drawing.Size(736, 661)
+        Me.splitProjects.SplitterDistance = 37
         Me.splitProjects.TabIndex = 0
         '
         'btnViewProjectReview
@@ -2011,45 +2011,8 @@ Partial Class Main
         Me.dgvProjectList.RowHeadersVisible = False
         Me.dgvProjectList.RowTemplate.Height = 24
         Me.dgvProjectList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvProjectList.Size = New System.Drawing.Size(1480, 810)
+        Me.dgvProjectList.Size = New System.Drawing.Size(736, 620)
         Me.dgvProjectList.TabIndex = 1
-        '
-        'DataGridViewTextBoxColumn1
-        '
-        Me.DataGridViewTextBoxColumn1.HeaderText = "Project Name"
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        Me.DataGridViewTextBoxColumn1.ReadOnly = True
-        '
-        'CreationDate
-        '
-        Me.CreationDate.HeaderText = "Creation Date"
-        Me.CreationDate.Name = "CreationDate"
-        Me.CreationDate.ReadOnly = True
-        '
-        'CreatedBy
-        '
-        Me.CreatedBy.HeaderText = "Created By"
-        Me.CreatedBy.Name = "CreatedBy"
-        Me.CreatedBy.ReadOnly = True
-        '
-        'LastModDate
-        '
-        Me.LastModDate.HeaderText = "Last Modified Date"
-        Me.LastModDate.Name = "LastModDate"
-        Me.LastModDate.ReadOnly = True
-        '
-        'ProjectFolderPath
-        '
-        Me.ProjectFolderPath.HeaderText = "Project Folder Path"
-        Me.ProjectFolderPath.Name = "ProjectFolderPath"
-        Me.ProjectFolderPath.ReadOnly = True
-        '
-        'ProjectID
-        '
-        Me.ProjectID.HeaderText = "Project ID"
-        Me.ProjectID.Name = "ProjectID"
-        Me.ProjectID.ReadOnly = True
-        Me.ProjectID.Visible = False
         '
         'tabJobsList
         '
@@ -2108,103 +2071,6 @@ Partial Class Main
         Me.dgvJobsRestJobsList.RowTemplate.Height = 24
         Me.dgvJobsRestJobsList.Size = New System.Drawing.Size(736, 621)
         Me.dgvJobsRestJobsList.TabIndex = 0
-        '
-        'jobName
-        '
-        Me.jobName.FillWeight = 21.22523!
-        Me.jobName.HeaderText = "Name"
-        Me.jobName.Name = "jobName"
-        Me.jobName.ReadOnly = True
-        '
-        'jobStatus
-        '
-        Me.jobStatus.DividerWidth = 5
-        Me.jobStatus.FillWeight = 21.22523!
-        Me.jobStatus.HeaderText = "Status"
-        Me.jobStatus.Name = "jobStatus"
-        Me.jobStatus.ReadOnly = True
-        '
-        'jobRetry
-        '
-        Me.jobRetry.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.jobRetry.DividerWidth = 5
-        Me.jobRetry.FillWeight = 1.198895!
-        Me.jobRetry.HeaderText = "Retry Job"
-        Me.jobRetry.MinimumWidth = 80
-        Me.jobRetry.Name = "jobRetry"
-        Me.jobRetry.ReadOnly = True
-        Me.jobRetry.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.jobRetry.Width = 80
-        '
-        'jobCancel
-        '
-        Me.jobCancel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.jobCancel.DividerWidth = 5
-        Me.jobCancel.FillWeight = 2.0!
-        Me.jobCancel.HeaderText = "Cancel Job"
-        Me.jobCancel.MinimumWidth = 80
-        Me.jobCancel.Name = "jobCancel"
-        Me.jobCancel.ReadOnly = True
-        Me.jobCancel.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.jobCancel.Width = 80
-        '
-        'jobType
-        '
-        Me.jobType.FillWeight = 21.22523!
-        Me.jobType.HeaderText = "Type"
-        Me.jobType.Name = "jobType"
-        Me.jobType.ReadOnly = True
-        '
-        'jobStart
-        '
-        Me.jobStart.FillWeight = 21.22523!
-        Me.jobStart.HeaderText = "Start"
-        Me.jobStart.Name = "jobStart"
-        Me.jobStart.ReadOnly = True
-        '
-        'jobEnd
-        '
-        Me.jobEnd.DividerWidth = 5
-        Me.jobEnd.FillWeight = 21.22523!
-        Me.jobEnd.HeaderText = "End"
-        Me.jobEnd.Name = "jobEnd"
-        Me.jobEnd.ReadOnly = True
-        '
-        'jobID
-        '
-        Me.jobID.HeaderText = "jobID"
-        Me.jobID.Name = "jobID"
-        Me.jobID.ReadOnly = True
-        Me.jobID.Visible = False
-        '
-        'jobResultID
-        '
-        Me.jobResultID.HeaderText = "ResultID"
-        Me.jobResultID.Name = "jobResultID"
-        Me.jobResultID.ReadOnly = True
-        Me.jobResultID.Visible = False
-        '
-        'jobEndpointStatus
-        '
-        Me.jobEndpointStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.jobEndpointStatus.FillWeight = 2.0!
-        Me.jobEndpointStatus.HeaderText = "Endpoint Status"
-        Me.jobEndpointStatus.MinimumWidth = 80
-        Me.jobEndpointStatus.Name = "jobEndpointStatus"
-        Me.jobEndpointStatus.ReadOnly = True
-        Me.jobEndpointStatus.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.jobEndpointStatus.Width = 80
-        '
-        'Result
-        '
-        Me.Result.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.Result.FillWeight = 2.0!
-        Me.Result.HeaderText = "Result"
-        Me.Result.MinimumWidth = 75
-        Me.Result.Name = "Result"
-        Me.Result.ReadOnly = True
-        Me.Result.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.Result.Width = 75
         '
         'splitEndpointStatus
         '
@@ -2399,7 +2265,7 @@ Partial Class Main
         Me.tabAlerts.Controls.Add(Me.splitAlerts)
         Me.tabAlerts.Location = New System.Drawing.Point(4, 25)
         Me.tabAlerts.Name = "tabAlerts"
-        Me.tabAlerts.Size = New System.Drawing.Size(1486, 869)
+        Me.tabAlerts.Size = New System.Drawing.Size(742, 667)
         Me.tabAlerts.TabIndex = 3
         Me.tabAlerts.Text = "Alerts"
         Me.tabAlerts.UseVisualStyleBackColor = True
@@ -2418,8 +2284,8 @@ Partial Class Main
         'splitAlerts.Panel2
         '
         Me.splitAlerts.Panel2.Controls.Add(Me.tblAlertBreakdown)
-        Me.splitAlerts.Size = New System.Drawing.Size(1486, 869)
-        Me.splitAlerts.SplitterDistance = 358
+        Me.splitAlerts.Size = New System.Drawing.Size(742, 667)
+        Me.splitAlerts.SplitterDistance = 274
         Me.splitAlerts.TabIndex = 0
         '
         'dgvAlerts
@@ -2436,56 +2302,8 @@ Partial Class Main
         Me.dgvAlerts.ReadOnly = True
         Me.dgvAlerts.RowHeadersVisible = False
         Me.dgvAlerts.RowTemplate.Height = 24
-        Me.dgvAlerts.Size = New System.Drawing.Size(1486, 358)
+        Me.dgvAlerts.Size = New System.Drawing.Size(742, 274)
         Me.dgvAlerts.TabIndex = 0
-        '
-        'artifactName
-        '
-        Me.artifactName.HeaderText = "Name"
-        Me.artifactName.Name = "artifactName"
-        Me.artifactName.ReadOnly = True
-        '
-        'createDate
-        '
-        Me.createDate.HeaderText = "Date"
-        Me.createDate.Name = "createDate"
-        Me.createDate.ReadOnly = True
-        '
-        'severity
-        '
-        Me.severity.HeaderText = "Severity"
-        Me.severity.Name = "severity"
-        Me.severity.ReadOnly = True
-        '
-        'target
-        '
-        Me.target.HeaderText = "Target"
-        Me.target.Name = "target"
-        Me.target.ReadOnly = True
-        '
-        'source
-        '
-        Me.source.HeaderText = "Source"
-        Me.source.Name = "source"
-        Me.source.ReadOnly = True
-        '
-        'project
-        '
-        Me.project.HeaderText = "Project"
-        Me.project.Name = "project"
-        Me.project.ReadOnly = True
-        '
-        'confidence
-        '
-        Me.confidence.HeaderText = "Confidence"
-        Me.confidence.Name = "confidence"
-        Me.confidence.ReadOnly = True
-        '
-        'threatScore
-        '
-        Me.threatScore.HeaderText = "Threat Score"
-        Me.threatScore.Name = "threatScore"
-        Me.threatScore.ReadOnly = True
         '
         'tblAlertBreakdown
         '
@@ -2505,7 +2323,7 @@ Partial Class Main
         Me.tblAlertBreakdown.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
         Me.tblAlertBreakdown.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
         Me.tblAlertBreakdown.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
-        Me.tblAlertBreakdown.Size = New System.Drawing.Size(1486, 507)
+        Me.tblAlertBreakdown.Size = New System.Drawing.Size(742, 389)
         Me.tblAlertBreakdown.TabIndex = 4
         '
         'flowResponseTime
@@ -2513,9 +2331,9 @@ Partial Class Main
         Me.flowResponseTime.AutoSize = True
         Me.flowResponseTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.flowResponseTime.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.flowResponseTime.Location = New System.Drawing.Point(213, 340)
+        Me.flowResponseTime.Location = New System.Drawing.Point(213, 261)
         Me.flowResponseTime.Name = "flowResponseTime"
-        Me.flowResponseTime.Size = New System.Drawing.Size(1270, 164)
+        Me.flowResponseTime.Size = New System.Drawing.Size(526, 125)
         Me.flowResponseTime.TabIndex = 10
         '
         'lblResponseTime
@@ -2524,9 +2342,9 @@ Partial Class Main
         Me.lblResponseTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblResponseTime.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblResponseTime.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblResponseTime.Location = New System.Drawing.Point(3, 337)
+        Me.lblResponseTime.Location = New System.Drawing.Point(3, 258)
         Me.lblResponseTime.Name = "lblResponseTime"
-        Me.lblResponseTime.Size = New System.Drawing.Size(204, 170)
+        Me.lblResponseTime.Size = New System.Drawing.Size(204, 131)
         Me.lblResponseTime.TabIndex = 9
         Me.lblResponseTime.Text = "Response Time:"
         '
@@ -2536,9 +2354,9 @@ Partial Class Main
         Me.lblTotalNumberofResponses.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblTotalNumberofResponses.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblTotalNumberofResponses.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTotalNumberofResponses.Location = New System.Drawing.Point(3, 168)
+        Me.lblTotalNumberofResponses.Location = New System.Drawing.Point(3, 129)
         Me.lblTotalNumberofResponses.Name = "lblTotalNumberofResponses"
-        Me.lblTotalNumberofResponses.Size = New System.Drawing.Size(204, 169)
+        Me.lblTotalNumberofResponses.Size = New System.Drawing.Size(204, 129)
         Me.lblTotalNumberofResponses.TabIndex = 8
         Me.lblTotalNumberofResponses.Text = "Total Number of Responses:"
         '
@@ -2547,9 +2365,9 @@ Partial Class Main
         Me.flowTotalResponses.AutoSize = True
         Me.flowTotalResponses.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.flowTotalResponses.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.flowTotalResponses.Location = New System.Drawing.Point(213, 171)
+        Me.flowTotalResponses.Location = New System.Drawing.Point(213, 132)
         Me.flowTotalResponses.Name = "flowTotalResponses"
-        Me.flowTotalResponses.Size = New System.Drawing.Size(1270, 163)
+        Me.flowTotalResponses.Size = New System.Drawing.Size(526, 123)
         Me.flowTotalResponses.TabIndex = 7
         '
         'lblTotalNumberAlerts
@@ -2560,7 +2378,7 @@ Partial Class Main
         Me.lblTotalNumberAlerts.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTotalNumberAlerts.Location = New System.Drawing.Point(3, 0)
         Me.lblTotalNumberAlerts.Name = "lblTotalNumberAlerts"
-        Me.lblTotalNumberAlerts.Size = New System.Drawing.Size(204, 168)
+        Me.lblTotalNumberAlerts.Size = New System.Drawing.Size(204, 129)
         Me.lblTotalNumberAlerts.TabIndex = 5
         Me.lblTotalNumberAlerts.Text = "Total Number Of Alerts:"
         '
@@ -2571,7 +2389,7 @@ Partial Class Main
         Me.flowAlertBreakdown.Dock = System.Windows.Forms.DockStyle.Fill
         Me.flowAlertBreakdown.Location = New System.Drawing.Point(213, 3)
         Me.flowAlertBreakdown.Name = "flowAlertBreakdown"
-        Me.flowAlertBreakdown.Size = New System.Drawing.Size(1270, 162)
+        Me.flowAlertBreakdown.Size = New System.Drawing.Size(526, 123)
         Me.flowAlertBreakdown.TabIndex = 4
         '
         'tabJobExecution
@@ -3797,6 +3615,220 @@ Partial Class Main
         Me.tableJobInfoTarget.Size = New System.Drawing.Size(673, 271)
         Me.tableJobInfoTarget.TabIndex = 14
         '
+        'DataGridViewTextBoxColumn1
+        '
+        Me.DataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.DataGridViewTextBoxColumn1.FillWeight = 99.0!
+        Me.DataGridViewTextBoxColumn1.HeaderText = "Project Name"
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.DataGridViewTextBoxColumn1.ReadOnly = True
+        Me.DataGridViewTextBoxColumn1.Width = 108
+        '
+        'CreationDate
+        '
+        Me.CreationDate.FillWeight = 10.0!
+        Me.CreationDate.HeaderText = "Creation Date"
+        Me.CreationDate.Name = "CreationDate"
+        Me.CreationDate.ReadOnly = True
+        '
+        'CreatedBy
+        '
+        Me.CreatedBy.FillWeight = 10.0!
+        Me.CreatedBy.HeaderText = "Created By"
+        Me.CreatedBy.Name = "CreatedBy"
+        Me.CreatedBy.ReadOnly = True
+        '
+        'LastModDate
+        '
+        Me.LastModDate.FillWeight = 10.0!
+        Me.LastModDate.HeaderText = "Last Modified Date"
+        Me.LastModDate.Name = "LastModDate"
+        Me.LastModDate.ReadOnly = True
+        '
+        'ProjectFolderPath
+        '
+        Me.ProjectFolderPath.FillWeight = 10.0!
+        Me.ProjectFolderPath.HeaderText = "Project Folder Path"
+        Me.ProjectFolderPath.Name = "ProjectFolderPath"
+        Me.ProjectFolderPath.ReadOnly = True
+        '
+        'ProjectID
+        '
+        Me.ProjectID.FillWeight = 1.0!
+        Me.ProjectID.HeaderText = "Project ID"
+        Me.ProjectID.Name = "ProjectID"
+        Me.ProjectID.ReadOnly = True
+        Me.ProjectID.Visible = False
+        '
+        'jobName
+        '
+        Me.jobName.FillWeight = 40.0!
+        Me.jobName.HeaderText = "Name"
+        Me.jobName.MinimumWidth = 117
+        Me.jobName.Name = "jobName"
+        Me.jobName.ReadOnly = True
+        '
+        'jobStatus
+        '
+        Me.jobStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.jobStatus.DividerWidth = 5
+        Me.jobStatus.FillWeight = 5.0!
+        Me.jobStatus.HeaderText = "Status"
+        Me.jobStatus.Name = "jobStatus"
+        Me.jobStatus.ReadOnly = True
+        Me.jobStatus.Width = 78
+        '
+        'jobRetry
+        '
+        Me.jobRetry.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.jobRetry.DividerWidth = 5
+        Me.jobRetry.FillWeight = 5.0!
+        Me.jobRetry.HeaderText = "Retry Job"
+        Me.jobRetry.MinimumWidth = 80
+        Me.jobRetry.Name = "jobRetry"
+        Me.jobRetry.ReadOnly = True
+        Me.jobRetry.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.jobRetry.Width = 80
+        '
+        'jobCancel
+        '
+        Me.jobCancel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.jobCancel.DividerWidth = 5
+        Me.jobCancel.FillWeight = 5.0!
+        Me.jobCancel.HeaderText = "Cancel Job"
+        Me.jobCancel.MinimumWidth = 80
+        Me.jobCancel.Name = "jobCancel"
+        Me.jobCancel.ReadOnly = True
+        Me.jobCancel.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.jobCancel.Width = 89
+        '
+        'jobType
+        '
+        Me.jobType.FillWeight = 5.0!
+        Me.jobType.HeaderText = "Type"
+        Me.jobType.MinimumWidth = 40
+        Me.jobType.Name = "jobType"
+        Me.jobType.ReadOnly = True
+        '
+        'jobStart
+        '
+        Me.jobStart.FillWeight = 5.0!
+        Me.jobStart.HeaderText = "Start"
+        Me.jobStart.MinimumWidth = 40
+        Me.jobStart.Name = "jobStart"
+        Me.jobStart.ReadOnly = True
+        '
+        'jobEnd
+        '
+        Me.jobEnd.DividerWidth = 5
+        Me.jobEnd.FillWeight = 5.0!
+        Me.jobEnd.HeaderText = "End"
+        Me.jobEnd.MinimumWidth = 40
+        Me.jobEnd.Name = "jobEnd"
+        Me.jobEnd.ReadOnly = True
+        '
+        'jobID
+        '
+        Me.jobID.FillWeight = 5.0!
+        Me.jobID.HeaderText = "jobID"
+        Me.jobID.Name = "jobID"
+        Me.jobID.ReadOnly = True
+        Me.jobID.Visible = False
+        '
+        'jobResultID
+        '
+        Me.jobResultID.FillWeight = 5.0!
+        Me.jobResultID.HeaderText = "ResultID"
+        Me.jobResultID.Name = "jobResultID"
+        Me.jobResultID.ReadOnly = True
+        Me.jobResultID.Visible = False
+        '
+        'jobEndpointStatus
+        '
+        Me.jobEndpointStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.jobEndpointStatus.FillWeight = 5.0!
+        Me.jobEndpointStatus.HeaderText = "Endpoint Status"
+        Me.jobEndpointStatus.MinimumWidth = 80
+        Me.jobEndpointStatus.Name = "jobEndpointStatus"
+        Me.jobEndpointStatus.ReadOnly = True
+        Me.jobEndpointStatus.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.jobEndpointStatus.Width = 114
+        '
+        'Result
+        '
+        Me.Result.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Result.FillWeight = 5.0!
+        Me.Result.HeaderText = "Result"
+        Me.Result.MinimumWidth = 75
+        Me.Result.Name = "Result"
+        Me.Result.ReadOnly = True
+        Me.Result.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.Result.Width = 75
+        '
+        'artifactName
+        '
+        Me.artifactName.FillWeight = 35.0!
+        Me.artifactName.HeaderText = "Name"
+        Me.artifactName.MinimumWidth = 175
+        Me.artifactName.Name = "artifactName"
+        Me.artifactName.ReadOnly = True
+        '
+        'createDate
+        '
+        Me.createDate.FillWeight = 5.0!
+        Me.createDate.HeaderText = "Date"
+        Me.createDate.MinimumWidth = 50
+        Me.createDate.Name = "createDate"
+        Me.createDate.ReadOnly = True
+        '
+        'severity
+        '
+        Me.severity.FillWeight = 5.0!
+        Me.severity.HeaderText = "Severity"
+        Me.severity.MinimumWidth = 50
+        Me.severity.Name = "severity"
+        Me.severity.ReadOnly = True
+        '
+        'target
+        '
+        Me.target.FillWeight = 20.0!
+        Me.target.HeaderText = "Target"
+        Me.target.MinimumWidth = 70
+        Me.target.Name = "target"
+        Me.target.ReadOnly = True
+        '
+        'source
+        '
+        Me.source.FillWeight = 15.0!
+        Me.source.HeaderText = "Source"
+        Me.source.MinimumWidth = 70
+        Me.source.Name = "source"
+        Me.source.ReadOnly = True
+        '
+        'project
+        '
+        Me.project.FillWeight = 15.0!
+        Me.project.HeaderText = "Project"
+        Me.project.MinimumWidth = 50
+        Me.project.Name = "project"
+        Me.project.ReadOnly = True
+        '
+        'confidence
+        '
+        Me.confidence.FillWeight = 10.0!
+        Me.confidence.HeaderText = "Confidence"
+        Me.confidence.MinimumWidth = 40
+        Me.confidence.Name = "confidence"
+        Me.confidence.ReadOnly = True
+        '
+        'threatScore
+        '
+        Me.threatScore.FillWeight = 10.0!
+        Me.threatScore.HeaderText = "Threat Score"
+        Me.threatScore.MinimumWidth = 40
+        Me.threatScore.Name = "threatScore"
+        Me.threatScore.ReadOnly = True
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -4152,22 +4184,8 @@ Partial Class Main
     Friend WithEvents flowTasks As System.Windows.Forms.FlowLayoutPanel
     Friend WithEvents btnEditProject As System.Windows.Forms.Button
     Friend WithEvents btnDeleteProject As System.Windows.Forms.Button
-    Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents CreationDate As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents CreatedBy As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents LastModDate As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ProjectFolderPath As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ProjectID As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents splitAlerts As System.Windows.Forms.SplitContainer
     Friend WithEvents dgvAlerts As System.Windows.Forms.DataGridView
-    Friend WithEvents artifactName As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents createDate As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents severity As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents target As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents source As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents project As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents confidence As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents threatScore As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents tblAlertBreakdown As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents lblTotalNumberofResponses As System.Windows.Forms.Label
     Friend WithEvents flowTotalResponses As System.Windows.Forms.FlowLayoutPanel
@@ -4182,17 +4200,6 @@ Partial Class Main
     Friend WithEvents EndPointID As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Action As System.Windows.Forms.DataGridViewButtonColumn
     Friend WithEvents Review As System.Windows.Forms.DataGridViewButtonColumn
-    Friend WithEvents jobName As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents jobStatus As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents jobRetry As System.Windows.Forms.DataGridViewButtonColumn
-    Friend WithEvents jobCancel As System.Windows.Forms.DataGridViewButtonColumn
-    Friend WithEvents jobType As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents jobStart As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents jobEnd As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents jobID As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents jobResultID As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents jobEndpointStatus As System.Windows.Forms.DataGridViewButtonColumn
-    Friend WithEvents Result As System.Windows.Forms.DataGridViewButtonColumn
     Friend WithEvents btnViewProjectReview As System.Windows.Forms.Button
     Friend WithEvents flowEndpointStatus As System.Windows.Forms.FlowLayoutPanel
     Friend WithEvents btnBackFromEndpointStatus As System.Windows.Forms.Button
@@ -4258,5 +4265,30 @@ Partial Class Main
     Friend WithEvents tableComputerTargets As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents tableNetworkShares As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents tableJobInfoTarget As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents CreationDate As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents CreatedBy As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents LastModDate As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ProjectFolderPath As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ProjectID As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents jobName As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents jobStatus As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents jobRetry As System.Windows.Forms.DataGridViewButtonColumn
+    Friend WithEvents jobCancel As System.Windows.Forms.DataGridViewButtonColumn
+    Friend WithEvents jobType As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents jobStart As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents jobEnd As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents jobID As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents jobResultID As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents jobEndpointStatus As System.Windows.Forms.DataGridViewButtonColumn
+    Friend WithEvents Result As System.Windows.Forms.DataGridViewButtonColumn
+    Friend WithEvents artifactName As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents createDate As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents severity As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents target As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents source As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents project As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents confidence As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents threatScore As System.Windows.Forms.DataGridViewTextBoxColumn
 
 End Class

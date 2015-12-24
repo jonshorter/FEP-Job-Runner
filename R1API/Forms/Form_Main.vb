@@ -1084,18 +1084,18 @@ Public Class Main
         Select Case tabControlJobsRest.SelectedTab.Name
             Case tabJobsList.Name
                 JobRunner_RestFunctions.GetJobList("")
-
+                Me.Width = 830
                 JobRefreshTimer = Create_JobRefreshTimer()
 
             Case tabTasks.Name
                 JobRunner_RestFunctions.GetTasks()
-
+                Me.Width = 830
             Case tabProjects.Name
                 JobRunner_RestFunctions.GetProjectList("")
-
+                Me.Width = 830
             Case tabAlerts.Name
                 JobRunner_RestFunctions.LoadAlerts()
-
+                Me.Width = 830
                 AlertsRefreshTimer = Create_AlertsRefreshTimer()
         End Select
 
@@ -1197,6 +1197,7 @@ Public Class Main
                 JobRunner_RestFunctions.GetJobList("")
                 JobRefreshTimer = Create_JobRefreshTimer()
                 tabControlJobsRest.SelectedTab = tabJobsList
+                Me.Width = 830
             Else
                 MsgBox(authobj.Data.Message)
                 tabMenu.SelectedTab = tabSettings
