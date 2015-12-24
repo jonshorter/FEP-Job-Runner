@@ -787,17 +787,19 @@ Public Class Main
     Private Sub btn_FEEvent_Click(sender As Object, e As EventArgs) Handles btn_FEEvent.Click
         Try
             ResetStatusBar()
-            Dim fevent As FireEye.FireEye_Event = FireEye.GenerateFEEvent(cmbFEAlertType.Text)
-            'If the MD5 provided isnt blank, use it. Otherwise it defaults to the FETest MD5.
-            If Not String.IsNullOrWhiteSpace(txtFireEyeMalwareMD5.Text) Then
-                fevent.alert.explanation.malwaredetected.malware.md5sum = Me.txtFireEyeMalwareMD5.Text
+            If Not String.IsNullOrWhiteSpace(txtFETarget.Text) Then
+                Dim fevent As FireEye.FireEye_Event = FireEye.GenerateFEEvent(cmbFEAlertType.Text)
+                'If the MD5 provided isnt blank, use it. Otherwise it defaults to the FETest MD5.
+                If Not String.IsNullOrWhiteSpace(txtFireEyeMalwareMD5.Text) Then
+                    fevent.alert.explanation.malwaredetected.malware.md5sum = Me.txtFireEyeMalwareMD5.Text
+                End If
+                If String.IsNullOrWhiteSpace(txtFireEyeMalwareName.Text) Then
+                    fevent.alert.explanation.malwaredetected.malware.name = "Super.Evil.Malware"
+                Else
+                    fevent.alert.explanation.malwaredetected.malware.name = txtFireEyeMalwareName.Text
+                End If
+                FireEye.SendEvent(FireEye.FEventtoJson(fevent))
             End If
-            If String.IsNullOrWhiteSpace(txtFireEyeMalwareName.Text) Then
-                fevent.alert.explanation.malwaredetected.malware.name = "Super.Evil.Malware"
-            Else
-                fevent.alert.explanation.malwaredetected.malware.name = txtFireEyeMalwareName.Text
-            End If
-            FireEye.SendEvent(FireEye.FEventtoJson(fevent))
         Catch ex As Exception
             Debug.WriteLine(ex.Message)
         End Try
@@ -806,19 +808,21 @@ Public Class Main
     Private Sub btnPANWSend_Click(sender As Object, e As EventArgs) Handles btnPANWSend.Click
         Try
             ResetStatusBar()
-            Dim panwthreat As New PANW.PANWThreat
-            panwthreat.P8Destination_IP = txtPANWTarget.Text
-            panwthreat.P4Subtype = cmbPANWAlert.Text.ToLower
-            If Not String.IsNullOrWhiteSpace(txtPANWMalwareMD5.Text) Then
-                panwthreat.P43Filedigest = txtPANWMalwareMD5.Text
+            If Not String.IsNullOrWhiteSpace(txtPANWTarget.Text) Then
+                Dim panwthreat As New PANW.PANWThreat
+                panwthreat.P8Destination_IP = txtPANWTarget.Text
+                panwthreat.P4Subtype = cmbPANWAlert.Text.ToLower
+                If Not String.IsNullOrWhiteSpace(txtPANWMalwareMD5.Text) Then
+                    panwthreat.P43Filedigest = txtPANWMalwareMD5.Text
+                End If
+                If String.IsNullOrWhiteSpace(txtPANWMalwareName.Text) Then
+                    panwthreat.P31Miscellaneous = "Super.Evil.Malware.exe"
+                Else
+                    panwthreat.P31Miscellaneous = txtPANWMalwareName.Text & ".exe"
+                End If
+                Dim panwtstr As String = PANW.ThreatTOCSV(panwthreat)
+                PANW.SendEvent(panwtstr)
             End If
-            If String.IsNullOrWhiteSpace(txtPANWMalwareName.Text) Then
-                panwthreat.P31Miscellaneous = "Super.Evil.Malware.exe"
-            Else
-                panwthreat.P31Miscellaneous = txtPANWMalwareName.Text & ".exe"
-            End If
-            Dim panwtstr As String = PANW.ThreatTOCSV(panwthreat)
-            PANW.SendEvent(panwtstr)
         Catch ex As Exception
             Debug.WriteLine(ex.Message)
         End Try
@@ -871,26 +875,25 @@ Public Class Main
     Private Sub btnXPSSend_Click(sender As Object, e As EventArgs) Handles btnXPSSend.Click
         Try
             Jobs.ResetStatusBar()
-            Dim xpsThreat As New XPS.XPSThreat
-
-            xpsThreat.Dstaddr = Me.txtXPSTarget.Text
-            xpsThreat.HostIp = Me.txtXPSTarget.Text
-            xpsThreat.Action = "alert"
-            If String.IsNullOrWhiteSpace(txtXPSMalware.Text) Then
-                xpsThreat.MalwareName = "Super.Evil.Malware"
-            Else
-                xpsThreat.MalwareName = txtXPSMalware.Text
+            If Not String.IsNullOrWhiteSpace(txtXPSTarget.Text) Then
+                Dim xpsThreat As New XPS.XPSThreat
+                xpsThreat.Dstaddr = Me.txtXPSTarget.Text
+                xpsThreat.HostIp = Me.txtXPSTarget.Text
+                xpsThreat.Action = "alert"
+                If String.IsNullOrWhiteSpace(txtXPSMalware.Text) Then
+                    xpsThreat.MalwareName = "Super.Evil.Malware"
+                Else
+                    xpsThreat.MalwareName = txtXPSMalware.Text
+                End If
+                xpsThreat.MalwareType = "Malware"
+                xpsThreat.Rule = "Malware Detection Engine"
+                xpsThreat.Severity = Me.cmbXPSSeverity.SelectedItem.ToString
+                Dim xpststr As String = XPS.XPSThreatTOCSV(xpsThreat)
+                If Not xps_sim_var Is Nothing Then
+                    xps_sim_var.MalwareMD5 = txtXPSMalwareMD5.Text
+                End If
+                XPS.SendEvent(xpststr)
             End If
-            xpsThreat.MalwareType = "Malware"
-            xpsThreat.Rule = "Malware Detection Engine"
-            xpsThreat.Severity = Me.cmbXPSSeverity.SelectedItem.ToString
-            Dim xpststr As String = XPS.XPSThreatTOCSV(xpsThreat)
-            If Not xps_sim_var Is Nothing Then
-                xps_sim_var.MalwareMD5 = txtXPSMalwareMD5.Text
-            End If
-
-            XPS.SendEvent(xpststr)
-
         Catch Ex As Exception
             Debug.WriteLine(Ex.Message)
         End Try
@@ -1407,81 +1410,85 @@ Public Class Main
 
     Private Sub btnExecute_Click(sender As Object, e As EventArgs) Handles btnExecute.Click
         ResetStatusBar()
-        'Set label color and text
+        If Not String.IsNullOrWhiteSpace(txtJobName.Text) Then
+            If lstComputerTargets.Items.Count > 0 Or lstNetShare.Items.Count > 0 Then
+                'Set label color and text
+                lblJobStatus.Text = "Submitting Job..."
+                'Get Computers
+                Dim cnames(lstComputerTargets.Items.Count - 1) As String
+                lstComputerTargets.Items.CopyTo(cnames, 0)
+                If lstComputerTargets.Items.Count < 1 Then cnames = Jobs.nullstring
+
+                'Get Shares
+                Dim snames(lstNetShare.Items.Count - 1) As String
+                lstNetShare.Items.CopyTo(snames, 0)
+                If lstNetShare.Items.Count < 1 Then snames = Jobs.nullstring
+
+                'API Limitation, choose agent or shares
+                If snames.Length >= 1 And cnames.Length >= 1 Then
+                    Dim result As DialogResult = Form_AgentorShareDialog.ShowDialog()
+
+                    'Choose Agent
+                    If result = DialogResult.OK Then
+                        'Null shares
+                        snames = Jobs.nullstring
+
+                        'Choose Shares
+                    ElseIf result = DialogResult.Cancel Then
+                        'Null computers
+                        cnames = Jobs.nullstring
+                    End If
+                End If
 
 
+                'Generate Inclusion/Exclusion Filters
+                Dim filter As String = Jobs.BuildFilterJSON(StoreInFiltList, StoreExFiltList)
+                'Dim filter As String = Jobs.CreateFilter
 
-        lblJobStatus.Text = "Submitting Job..."
-        'Get Computers
-        Dim cnames(lstComputerTargets.Items.Count - 1) As String
-        lstComputerTargets.Items.CopyTo(cnames, 0)
-        If lstComputerTargets.Items.Count < 1 Then cnames = Jobs.nullstring
+                'Set Job Template
+                Dim templatename As String
+                If txtTemplateName.Text <> "" Then
+                    templatename = txtTemplateName.Text
+                Else
+                    'If it isn't set use the default
+                    templatename = "coll-evtx"
+                End If
 
-        'Get Shares
-        Dim snames(lstNetShare.Items.Count - 1) As String
-        lstNetShare.Items.CopyTo(snames, 0)
-        If lstNetShare.Items.Count < 1 Then snames = Jobs.nullstring
+                'Agent Remediation - Send File
+                Dim remediatesendfile() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile = StoreRemSendList.toarray
 
-        'API Limitation, choose agent or shares
-        If snames.Length >= 1 And cnames.Length >= 1 Then
-            Dim result As DialogResult = Form_AgentorShareDialog.ShowDialog()
 
-            'Choose Agent
-            If result = DialogResult.OK Then
-                'Null shares
-                snames = Jobs.nullstring
+                'Agent Remediation - Erase File
+                Dim remediateerase() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase = StoreRemDelList.toarray
 
-                'Choose Shares
-            ElseIf result = DialogResult.Cancel Then
-                'Null computers
-                cnames = Jobs.nullstring
+
+                'Agent Remediation - Execute
+                Dim remediateexecute() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute = StoreRemExecList.toarray
+
+
+                'Agent Remediation - Kill by PID
+                Dim pids() As String = New String() {}
+                Dim pidlist As List(Of String) = StoreRemKillIDList
+                For Each item In pidlist
+                    pids.Add(item)
+                Next
+
+
+                'Agent Remediation - Kill by Process Name
+                Dim processnames() As String = New String() {}
+                Dim pnamelist As List(Of String) = StoreRemKillNameList
+                For Each item In pnamelist
+                    processnames.Add(item)
+                Next
+
+                'Kick off the job
+                Jobs.RunFromTemplateName(txtServer.Text, templatename, txtJobName.Text, txtProjectName.Text, txtApiUser.Text, ToInsecureString(apipass), cnames, snames, filter, pids, processnames, remediatesendfile, remediateexecute, remediateerase)
+            Else
+                MsgBox("At least one computer or share target must be added.")
             End If
-        End If
-
-
-        'Generate Inclusion/Exclusion Filters
-        Dim filter As String = Jobs.BuildFilterJSON(StoreInFiltList, StoreExFiltList)
-        'Dim filter As String = Jobs.CreateFilter
-
-        'Set Job Template
-        Dim templatename As String
-        If txtTemplateName.Text <> "" Then
-            templatename = txtTemplateName.Text
         Else
-            'If it isn't set use the default
-            templatename = "coll-evtx"
+            MsgBox("Job name required.")
         End If
-
-        'Agent Remediation - Send File
-        Dim remediatesendfile() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile = StoreRemSendList.toarray
-
-
-        'Agent Remediation - Erase File
-        Dim remediateerase() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase = StoreRemDelList.toarray
-
-
-        'Agent Remediation - Execute
-        Dim remediateexecute() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute = StoreRemExecList.toarray
-
-
-        'Agent Remediation - Kill by PID
-        Dim pids() As String = New String() {}
-        Dim pidlist As List(Of String) = StoreRemKillIDList
-        For Each item In pidlist
-            pids.Add(item)
-        Next
-
-
-        'Agent Remediation - Kill by Process Name
-        Dim processnames() As String = New String() {}
-        Dim pnamelist As List(Of String) = StoreRemKillNameList
-        For Each item In pnamelist
-            processnames.Add(item)
-        Next
-
-        'Kick off the job
-        Jobs.RunFromTemplateName(txtServer.Text, templatename, txtJobName.Text, txtProjectName.Text, txtApiUser.Text, ToInsecureString(apipass), cnames, snames, filter, pids, processnames, remediatesendfile, remediateexecute, remediateerase)
-
     End Sub
 
     Private Sub btnAddComputer_Click(sender As Object, e As EventArgs) Handles btnAddComputer.Click
