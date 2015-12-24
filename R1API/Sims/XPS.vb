@@ -65,7 +65,7 @@ Public Module XPS
             bytCommand = Encoding.ASCII.GetBytes(XPSEvent)
             Dim pRet = udpClient.Send(bytCommand, bytCommand.Length)
             ' Console.WriteLine("No of bytes sent " & pRet)
-            Debug.WriteLine("XPS SysLog Event Sent")
+            DebugWriteLine("XPS SysLog Event Sent")
             Main.lblXPSStatus.Text = "XPS Syslog Malware Event Sent"
 
         Catch ex As Exception
@@ -345,7 +345,7 @@ Public Module XPS
             listener.Prefixes.Add(prefix)
             listener.Start()
             listener.BeginGetContext(AddressOf Sim_Respond, listener)
-            Debug.WriteLine("XPS Sim Listening " & prefix)
+            DebugWriteLine("XPS Sim Listening " & prefix)
 
         End Sub
         Public Sub [Stop]()
@@ -375,11 +375,11 @@ Public Module XPS
                             response.ContentLength64 = buffer.Length
                             output = response.OutputStream
                             output.Write(buffer, 0, buffer.Length)
-                            Debug.WriteLine("XPS General Website")
+                            DebugWriteLine("XPS General Website")
                         Else
                             'Check for stop command and END
                             If context.Request.QueryString.Item(context.Request.QueryString.Count - 1) = "STOP" Then
-                                Debug.WriteLine("XPS STOP")
+                                DebugWriteLine("XPS STOP")
                                 response = context.Response
                                 response.StatusCode = 200
                                 response.StatusDescription = "STOP"
@@ -402,18 +402,18 @@ Public Module XPS
                             response.ContentLength64 = buffer.Length
                             output = response.OutputStream
                             output.Write(buffer, 0, buffer.Length)
-                            Debug.WriteLine("XPS Auth Request")
+                            DebugWriteLine("XPS Auth Request")
                         Else
                             'Response for report query
                             response = context.Response
                             If Not String.IsNullOrWhiteSpace(Me.MalwareMD5) Then
                                 'Use Specified MD5
                                 buffer = System.Text.Encoding.UTF8.GetBytes(XPS.XPS_MDE_Response_ToJSON(XPS.GenerateXPS_MDE_Response(Me.MalwareMD5)))
-                                Debug.WriteLine("XPS Response with Custom MD5")
+                                DebugWriteLine("XPS Response with Custom MD5")
                             Else
                                 'Else use FETest MD5
                                 buffer = System.Text.Encoding.UTF8.GetBytes(XPS.XPS_MDE_Response_ToJSON(XPS.GenerateXPS_MDE_Response("47f9fdc617f8c98a6732be534d8dbe9a")))
-                                Debug.WriteLine("XPS Response with FE MD5")
+                                DebugWriteLine("XPS Response with FE MD5")
                             End If
                             response.ContentLength64 = buffer.Length
                             output = response.OutputStream
@@ -437,27 +437,27 @@ Public Module XPS
                     Case 0
                         JobRunner_Functions.MoveSelfFromMyToRoot(selfcertmy(0))
                         Main.sim_selfcert = selfcertmy(0)
-                        Debug.WriteLine("My Exists, Moving to Root")
+                        DebugWriteLine("My Exists, Moving to Root")
                     Case 1
                         If selfcertmy(0) = selfcertroot(0) Then
                             Main.sim_selfcert = selfcertroot(0)
-                            Debug.WriteLine("My = Root, Using")
+                            DebugWriteLine("My = Root, Using")
                         Else
                             JobRunner_Functions.DeleteRootSelfSigned(selfcertroot(0))
                             JobRunner_Functions.MoveSelfFromMyToRoot(selfcertmy(0))
                             Main.sim_selfcert = selfcertmy(0)
-                            Debug.WriteLine("My <> Root. Deleting and Moving")
+                            DebugWriteLine("My <> Root. Deleting and Moving")
                         End If
                     Case Else
                         'Just use 0 in root
                         Main.sim_selfcert = selfcertroot(0)
-                        Debug.WriteLine("Using Root 0")
+                        DebugWriteLine("Using Root 0")
                 End Select
             Else
                 Dim selfcert = JobRunner_Functions.CreateSelfInMy()
                 JobRunner_Functions.MoveSelfFromMyToRoot(selfcert.GetCertHashString)
                 Main.sim_selfcert = selfcert.GetCertHashString
-                Debug.WriteLine("No Certs. Creating and Using New")
+                DebugWriteLine("No Certs. Creating and Using New")
             End If
         End Sub
 
@@ -465,7 +465,7 @@ Public Module XPS
             Try
                 Dim appguid As String = New Guid(CType(Main.GetType.Assembly.GetCustomAttributes(GetType(Runtime.InteropServices.GuidAttribute), False)(0), Runtime.InteropServices.GuidAttribute).Value).ToString
                 Dim netshproc As New Process
-                Debug.WriteLine("netsh http add sslcert ipport=0.0.0.0:" & Main.xps_sim_Port.Value & " certhash=" & certhash & " appid={" & appguid & "}")
+                DebugWriteLine("netsh http add sslcert ipport=0.0.0.0:" & Main.xps_sim_Port.Value & " certhash=" & certhash & " appid={" & appguid & "}")
                 Dim netshprocStartInfo As New ProcessStartInfo("cmd.exe", "/c netsh http add sslcert ipport=0.0.0.0:" & Main.xps_sim_Port.Value & " certhash=" & certhash & " appid={" & appguid & "}")
                 netshprocStartInfo.WindowStyle = ProcessWindowStyle.Hidden
                 netshprocStartInfo.CreateNoWindow = True
@@ -473,12 +473,12 @@ Public Module XPS
                 netshprocStartInfo.RedirectStandardError = True
                 netshprocStartInfo.RedirectStandardOutput = True
                 netshproc.StartInfo = netshprocStartInfo
-                Debug.WriteLine("Running commands")
+                DebugWriteLine("Running commands")
                 netshproc.Start()
                 Dim netshreader As IO.StreamReader = netshproc.StandardOutput
-                Debug.WriteLine(netshreader.ReadToEnd)
+                DebugWriteLine(netshreader.ReadToEnd)
             Catch ex As Exception
-                Debug.WriteLine(ex.Message)
+                DebugWriteLine(ex.Message)
             End Try
         End Sub
 
@@ -486,7 +486,7 @@ Public Module XPS
             Try
                 Dim appguid As String = New Guid(CType(Main.GetType.Assembly.GetCustomAttributes(GetType(Runtime.InteropServices.GuidAttribute), False)(0), Runtime.InteropServices.GuidAttribute).Value).ToString
                 Dim netshproc As New Process
-                Debug.WriteLine("netsh http delete sslcert ipport=0.0.0.0:" & Main.xps_sim_Port.Value)
+                DebugWriteLine("netsh http delete sslcert ipport=0.0.0.0:" & Main.xps_sim_Port.Value)
                 Dim netshprocStartInfo As New ProcessStartInfo("cmd.exe", "/c netsh http delete sslcert ipport=0.0.0.0:" & Main.xps_sim_Port.Value)
                 netshprocStartInfo.WindowStyle = ProcessWindowStyle.Hidden
                 netshprocStartInfo.UseShellExecute = False
@@ -494,12 +494,12 @@ Public Module XPS
                 netshprocStartInfo.RedirectStandardError = True
                 netshprocStartInfo.RedirectStandardOutput = True
                 netshproc.StartInfo = netshprocStartInfo
-                Debug.WriteLine("Running commands")
+                DebugWriteLine("Running commands")
                 netshproc.Start()
                 Dim netshreader As IO.StreamReader = netshproc.StandardOutput
-                Debug.WriteLine(netshreader.ReadToEnd)
+                DebugWriteLine(netshreader.ReadToEnd)
             Catch ex As Exception
-                Debug.WriteLine(ex.Message)
+                DebugWriteLine(ex.Message)
             End Try
         End Sub
     End Class

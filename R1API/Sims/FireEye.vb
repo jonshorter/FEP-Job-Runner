@@ -143,7 +143,7 @@ Module FireEye
                 Dim rstring As String = sr.ReadToEnd
                 If rstring = "" Then
                     Main.lblFEStatus.Text = "FireEye Event Submitted"
-                    Debug.WriteLine("FireEye Event Submitted")
+                    DebugWriteLine("FireEye Event Submitted")
                 Else
                     Main.lblFEStatus.Text = "Error Submitting FireEye Event"
                 End If
