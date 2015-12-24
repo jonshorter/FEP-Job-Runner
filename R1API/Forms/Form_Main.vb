@@ -838,8 +838,7 @@ Public Class Main
         lblWildFireURL.Location = New Point(panwPicture.Location.X + 111, panwPicture.Location.Y + 85)
         lblWildFireURL.Text = "https://" & My.Computer.Name & ":" & panw_sim_port.Value
         cmbPANWAlert.SelectedIndex = 0
-        Dim panwsimtxt As String = "The Wildfire Sim simulates R1 queries to Wildfire to get malware reports and kick off validated threatscans. The Wildfire Sim defaults to port 8449, and requires elevated privileges to place an SSL certificate in the keystore for https communication. After starting the Wildfire Sim, configure the R1 PANW connector to point to https://" & My.Computer.Name & ":8449. The Wildfire Sim will accept any API Key."
-        txtPANWSim.Text = panwsimtxt
+       txtPANWSim.Text = "The Wildfire Sim simulates Resolution1 queries to Wildfire to get malware reports and kick off validated threatscans. After starting the Wildfire Sim, configure the Resolution1 PANW connector as shown below. If Job Runner isn't running on the R1 server, browse to https://" & My.Computer.Name & ":" & panw_sim_port.Value & " on the server and import the certificate to the Local Machine - Trusted Root Certification Authorities Store."
     End Sub
 
     Private Sub txtFELink_DoubleClick(sender As Object, e As EventArgs) Handles txtFELink.DoubleClick, txtFELink.Click
@@ -902,11 +901,8 @@ Public Class Main
     Private Sub tabXPS_Enter(sender As Object, e As EventArgs) Handles tabXPS.Enter
         lblXPSHostname.Location = New Point(xpsPicture.Location.X + 94, xpsPicture.Location.Y + 86)
         lblXPSHostname.Text = My.Computer.Name & ":" & xps_sim_Port.Value
-
-
         cmbXPSSeverity.SelectedItem = "Critical"
-        Dim xpsimtxt As String = "The XPS CP Sim simulates R1 queries to XPS to get malware reports and kick off validated threatscans. The XPS CP Sim defaults to port 8448, and requires elevated privileges to place an SSL certificate in the keystore for https communication. After starting the XPS CP Sim, configure the R1 XPS connector to point to " & My.Computer.Name & ":8448. The XPS CP Sim will accept any username/password combination as long as they are not the same."
-        txtXPSSIM.Text = xpsimtxt
+        txtXPSSim.Text = "The XPS CP Sim simulates Resolution1 queries to XPS to get malware reports and kick off validated threatscans. After starting the XPS CP Sim, configure the Resolution1 XPS connector as shown below. If Job Runner isn't running on the R1 server, browse to https://" & My.Computer.Name & ":" & xps_sim_Port.Value & " on the server and import the certificate to the Local Machine - Trusted Root Certification Authorities Store."
     End Sub
 
     Private Sub btnStartXPSListener_Click(sender As Object, e As EventArgs) Handles btnStartXPSListener.Click
@@ -1566,6 +1562,7 @@ Public Class Main
 
     Private Sub panw_sim_port_ValueChanged(sender As Object, e As EventArgs) Handles panw_sim_port.ValueChanged
         lblWildFireURL.Text = "https://" & My.Computer.Name & ":" & panw_sim_port.Value
+        txtPANWSim.Text = "The Wildfire Sim simulates Resolution1 queries to Wildfire to get malware reports and kick off validated threatscans. After starting the Wildfire Sim, configure the Resolution1 PANW connector as shown below. If Job Runner isn't running on the R1 server, browse to https://" & My.Computer.Name & ":" & panw_sim_port.Value & " on the server and import the certificate to the Local Machine - Trusted Root Certification Authorities Store."
     End Sub
 
     Private Sub tabXPS_Click(sender As Object, e As EventArgs) Handles tabXPS.Click
@@ -1574,6 +1571,7 @@ Public Class Main
 
     Private Sub xps_sim_Port_ValueChanged(sender As Object, e As EventArgs) Handles xps_sim_Port.ValueChanged
         lblXPSHostname.Text = My.Computer.Name & ":" & xps_sim_Port.Value
+        txtXPSSim.Text = "The XPS CP Sim simulates Resolution1 queries to XPS to get malware reports and kick off validated threatscans. After starting the XPS CP Sim, configure the Resolution1 XPS connector as shown below. If Job Runner isn't running on the R1 server, browse to https://" & My.Computer.Name & ":" & xps_sim_Port.Value & " on the server and import the certificate to the Local Machine - Trusted Root Certification Authorities Store."
     End Sub
 
     Private Sub Main_RegionChanged(sender As Object, e As EventArgs) Handles Me.RegionChanged
@@ -1885,6 +1883,10 @@ Public Class Main
     End Sub
 
     Private Sub tabExclusionFilter_Resize(sender As Object, e As EventArgs) Handles tabExclusionFilter.Resize
+
+    End Sub
+
+    Private Sub flowPANW_Paint(sender As Object, e As PaintEventArgs) Handles flowPANW.Paint
 
     End Sub
 End Class

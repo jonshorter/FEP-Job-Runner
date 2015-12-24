@@ -2911,9 +2911,9 @@ Partial Class Main
         Me.tablePANWBottom.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.tablePANWBottom.ColumnCount = 1
         Me.tablePANWBottom.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.tablePANWBottom.Controls.Add(Me.grpWildFirePicture, 0, 3)
-        Me.tablePANWBottom.Controls.Add(Me.txtFireEyeDownload1, 0, 2)
-        Me.tablePANWBottom.Controls.Add(Me.lblPANWHitInstruction, 0, 1)
+        Me.tablePANWBottom.Controls.Add(Me.grpWildFirePicture, 0, 1)
+        Me.tablePANWBottom.Controls.Add(Me.txtFireEyeDownload1, 0, 3)
+        Me.tablePANWBottom.Controls.Add(Me.lblPANWHitInstruction, 0, 2)
         Me.tablePANWBottom.Controls.Add(Me.txtPANWSim, 0, 0)
         Me.tablePANWBottom.Location = New System.Drawing.Point(3, 216)
         Me.tablePANWBottom.Name = "tablePANWBottom"
@@ -2922,7 +2922,7 @@ Partial Class Main
         Me.tablePANWBottom.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tablePANWBottom.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tablePANWBottom.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tablePANWBottom.Size = New System.Drawing.Size(707, 329)
+        Me.tablePANWBottom.Size = New System.Drawing.Size(707, 275)
         Me.tablePANWBottom.TabIndex = 43
         '
         'grpWildFirePicture
@@ -2932,7 +2932,7 @@ Partial Class Main
         Me.grpWildFirePicture.Controls.Add(Me.lblWildFireURL)
         Me.grpWildFirePicture.Controls.Add(Me.panwPicture)
         Me.grpWildFirePicture.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.grpWildFirePicture.Location = New System.Drawing.Point(3, 139)
+        Me.grpWildFirePicture.Location = New System.Drawing.Point(3, 24)
         Me.grpWildFirePicture.Name = "grpWildFirePicture"
         Me.grpWildFirePicture.Size = New System.Drawing.Size(701, 187)
         Me.grpWildFirePicture.TabIndex = 41
@@ -2966,7 +2966,7 @@ Partial Class Main
         Me.txtFireEyeDownload1.Cursor = System.Windows.Forms.Cursors.Hand
         Me.txtFireEyeDownload1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtFireEyeDownload1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFireEyeDownload1.Location = New System.Drawing.Point(4, 115)
+        Me.txtFireEyeDownload1.Location = New System.Drawing.Point(4, 254)
         Me.txtFireEyeDownload1.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFireEyeDownload1.Name = "txtFireEyeDownload1"
         Me.txtFireEyeDownload1.ReadOnly = True
@@ -2980,7 +2980,7 @@ Partial Class Main
         Me.lblPANWHitInstruction.AutoSize = True
         Me.lblPANWHitInstruction.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblPANWHitInstruction.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPANWHitInstruction.Location = New System.Drawing.Point(4, 75)
+        Me.lblPANWHitInstruction.Location = New System.Drawing.Point(4, 214)
         Me.lblPANWHitInstruction.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblPANWHitInstruction.MaximumSize = New System.Drawing.Size(700, 0)
         Me.lblPANWHitInstruction.Name = "lblPANWHitInstruction"
@@ -2998,9 +2998,9 @@ Partial Class Main
         Me.txtPANWSim.Margin = New System.Windows.Forms.Padding(3, 0, 3, 3)
         Me.txtPANWSim.MaximumSize = New System.Drawing.Size(700, 0)
         Me.txtPANWSim.Name = "txtPANWSim"
-        Me.txtPANWSim.Size = New System.Drawing.Size(700, 72)
+        Me.txtPANWSim.Size = New System.Drawing.Size(700, 18)
         Me.txtPANWSim.TabIndex = 24
-        Me.txtPANWSim.Text = resources.GetString("txtPANWSim.Text")
+        Me.txtPANWSim.Text = "PANW Text. Set at runtime"
         '
         'tabXPS
         '
@@ -3241,9 +3241,9 @@ Partial Class Main
         Me.tableXPSTextPic.ColumnCount = 1
         Me.tableXPSTextPic.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.tableXPSTextPic.Controls.Add(Me.txtXPSSim, 0, 0)
-        Me.tableXPSTextPic.Controls.Add(Me.grpXPSPicture, 0, 3)
-        Me.tableXPSTextPic.Controls.Add(Me.Label39, 0, 1)
-        Me.tableXPSTextPic.Controls.Add(Me.txtFELink2, 0, 2)
+        Me.tableXPSTextPic.Controls.Add(Me.grpXPSPicture, 0, 1)
+        Me.tableXPSTextPic.Controls.Add(Me.Label39, 0, 2)
+        Me.tableXPSTextPic.Controls.Add(Me.txtFELink2, 0, 3)
         Me.tableXPSTextPic.Location = New System.Drawing.Point(3, 217)
         Me.tableXPSTextPic.Name = "tableXPSTextPic"
         Me.tableXPSTextPic.RowCount = 4
@@ -3251,7 +3251,7 @@ Partial Class Main
         Me.tableXPSTextPic.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tableXPSTextPic.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tableXPSTextPic.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tableXPSTextPic.Size = New System.Drawing.Size(707, 331)
+        Me.tableXPSTextPic.Size = New System.Drawing.Size(707, 277)
         Me.tableXPSTextPic.TabIndex = 43
         '
         'txtXPSSim
@@ -3263,9 +3263,9 @@ Partial Class Main
         Me.txtXPSSim.Margin = New System.Windows.Forms.Padding(3, 0, 3, 3)
         Me.txtXPSSim.MaximumSize = New System.Drawing.Size(700, 0)
         Me.txtXPSSim.Name = "txtXPSSim"
-        Me.txtXPSSim.Size = New System.Drawing.Size(700, 72)
+        Me.txtXPSSim.Size = New System.Drawing.Size(700, 18)
         Me.txtXPSSim.TabIndex = 43
-        Me.txtXPSSim.Text = resources.GetString("txtXPSSim.Text")
+        Me.txtXPSSim.Text = "XPS Text. Set at runtime."
         '
         'grpXPSPicture
         '
@@ -3273,7 +3273,7 @@ Partial Class Main
         Me.grpXPSPicture.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.grpXPSPicture.Controls.Add(Me.lblXPSHostname)
         Me.grpXPSPicture.Controls.Add(Me.xpsPicture)
-        Me.grpXPSPicture.Location = New System.Drawing.Point(3, 139)
+        Me.grpXPSPicture.Location = New System.Drawing.Point(3, 24)
         Me.grpXPSPicture.Name = "grpXPSPicture"
         Me.grpXPSPicture.Size = New System.Drawing.Size(508, 189)
         Me.grpXPSPicture.TabIndex = 42
@@ -3306,7 +3306,7 @@ Partial Class Main
         '
         Me.Label39.AutoSize = True
         Me.Label39.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label39.Location = New System.Drawing.Point(4, 75)
+        Me.Label39.Location = New System.Drawing.Point(4, 216)
         Me.Label39.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label39.MaximumSize = New System.Drawing.Size(700, 0)
         Me.Label39.Name = "Label39"
@@ -3319,12 +3319,13 @@ Partial Class Main
         '
         Me.txtFELink2.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtFELink2.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.txtFELink2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtFELink2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFELink2.Location = New System.Drawing.Point(4, 115)
+        Me.txtFELink2.Location = New System.Drawing.Point(4, 256)
         Me.txtFELink2.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFELink2.Name = "txtFELink2"
         Me.txtFELink2.ReadOnly = True
-        Me.txtFELink2.Size = New System.Drawing.Size(427, 17)
+        Me.txtFELink2.Size = New System.Drawing.Size(699, 17)
         Me.txtFELink2.TabIndex = 25
         Me.txtFELink2.TabStop = False
         Me.txtFELink2.Text = "http://fedeploycheck.fireeye.com/appliance-test/test-infection.exe"
