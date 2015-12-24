@@ -920,4 +920,7 @@ Public Class Form_JobFromTemplate
     End Sub
 
     
+    Private Sub dgvTargetEndpoints_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvTargetEndpoints.CellContentClick
+
+    End Sub
 End Class
