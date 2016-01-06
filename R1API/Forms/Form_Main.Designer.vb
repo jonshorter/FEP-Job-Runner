@@ -238,6 +238,7 @@ Partial Class Main
         Me.lblJobStatus = New System.Windows.Forms.Label()
         Me.btnLoadFromBox = New System.Windows.Forms.Button()
         Me.btnSaveAsBox = New System.Windows.Forms.Button()
+        Me.btnSavePowershell = New System.Windows.Forms.Button()
         Me.tabFireEye = New System.Windows.Forms.TabPage()
         Me.flowFireEye = New System.Windows.Forms.FlowLayoutPanel()
         Me.tableFireEye = New System.Windows.Forms.TableLayoutPanel()
@@ -414,7 +415,7 @@ Partial Class Main
         '
         'btnExecute
         '
-        Me.btnExecute.Location = New System.Drawing.Point(352, 8)
+        Me.btnExecute.Location = New System.Drawing.Point(564, 8)
         Me.btnExecute.Margin = New System.Windows.Forms.Padding(4)
         Me.btnExecute.Name = "btnExecute"
         Me.btnExecute.Size = New System.Drawing.Size(100, 28)
@@ -2869,7 +2870,8 @@ Partial Class Main
         '
         Me.tableJobExecute.AutoSize = True
         Me.tableJobExecute.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.tableJobExecute.ColumnCount = 4
+        Me.tableJobExecute.ColumnCount = 5
+        Me.tableJobExecute.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.tableJobExecute.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.tableJobExecute.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.tableJobExecute.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
@@ -2877,15 +2879,16 @@ Partial Class Main
         Me.tableJobExecute.Controls.Add(Me.btnShowJSON, 0, 0)
         Me.tableJobExecute.Controls.Add(Me.lblJobStatus, 0, 1)
         Me.tableJobExecute.Controls.Add(Me.btnLoadFromBox, 1, 0)
-        Me.tableJobExecute.Controls.Add(Me.btnExecute, 3, 0)
+        Me.tableJobExecute.Controls.Add(Me.btnExecute, 4, 0)
         Me.tableJobExecute.Controls.Add(Me.btnSaveAsBox, 2, 0)
+        Me.tableJobExecute.Controls.Add(Me.btnSavePowershell, 3, 0)
         Me.tableJobExecute.Location = New System.Drawing.Point(3, 621)
         Me.tableJobExecute.Name = "tableJobExecute"
         Me.tableJobExecute.Padding = New System.Windows.Forms.Padding(4)
         Me.tableJobExecute.RowCount = 2
         Me.tableJobExecute.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tableJobExecute.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.tableJobExecute.Size = New System.Drawing.Size(460, 64)
+        Me.tableJobExecute.Size = New System.Drawing.Size(672, 64)
         Me.tableJobExecute.TabIndex = 34
         '
         'btnShowJSON
@@ -2893,10 +2896,10 @@ Partial Class Main
         Me.btnShowJSON.Location = New System.Drawing.Point(8, 8)
         Me.btnShowJSON.Margin = New System.Windows.Forms.Padding(4)
         Me.btnShowJSON.Name = "btnShowJSON"
-        Me.btnShowJSON.Size = New System.Drawing.Size(100, 28)
+        Me.btnShowJSON.Size = New System.Drawing.Size(154, 28)
         Me.btnShowJSON.TabIndex = 23
         Me.btnShowJSON.TabStop = False
-        Me.btnShowJSON.Text = "Show JSON"
+        Me.btnShowJSON.Text = "Show Filter JSON"
         Me.btnShowJSON.UseVisualStyleBackColor = True
         '
         'lblJobStatus
@@ -2915,7 +2918,7 @@ Partial Class Main
         '
         'btnLoadFromBox
         '
-        Me.btnLoadFromBox.Location = New System.Drawing.Point(116, 8)
+        Me.btnLoadFromBox.Location = New System.Drawing.Point(170, 8)
         Me.btnLoadFromBox.Margin = New System.Windows.Forms.Padding(4)
         Me.btnLoadFromBox.Name = "btnLoadFromBox"
         Me.btnLoadFromBox.Size = New System.Drawing.Size(120, 28)
@@ -2926,7 +2929,7 @@ Partial Class Main
         '
         'btnSaveAsBox
         '
-        Me.btnSaveAsBox.Location = New System.Drawing.Point(244, 8)
+        Me.btnSaveAsBox.Location = New System.Drawing.Point(298, 8)
         Me.btnSaveAsBox.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSaveAsBox.Name = "btnSaveAsBox"
         Me.btnSaveAsBox.Size = New System.Drawing.Size(100, 28)
@@ -2934,6 +2937,15 @@ Partial Class Main
         Me.btnSaveAsBox.TabStop = False
         Me.btnSaveAsBox.Text = "Save as Box"
         Me.btnSaveAsBox.UseVisualStyleBackColor = True
+        '
+        'btnSavePowershell
+        '
+        Me.btnSavePowershell.Location = New System.Drawing.Point(405, 7)
+        Me.btnSavePowershell.Name = "btnSavePowershell"
+        Me.btnSavePowershell.Size = New System.Drawing.Size(152, 28)
+        Me.btnSavePowershell.TabIndex = 35
+        Me.btnSavePowershell.Text = "Save Powershell"
+        Me.btnSavePowershell.UseVisualStyleBackColor = True
         '
         'tabFireEye
         '
@@ -4293,5 +4305,6 @@ Partial Class Main
     Friend WithEvents project As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents confidence As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents threatScore As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents btnSavePowershell As System.Windows.Forms.Button
 
 End Class
