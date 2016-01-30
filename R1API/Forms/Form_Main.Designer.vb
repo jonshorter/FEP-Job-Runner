@@ -315,6 +315,7 @@ Partial Class Main
         Me.ofdBox = New System.Windows.Forms.OpenFileDialog()
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
         Me.tooltip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.sfdPowerShell = New System.Windows.Forms.SaveFileDialog()
         Me.grpSettings.SuspendLayout()
         Me.flowSettings.SuspendLayout()
         Me.grpReqSettings.SuspendLayout()
@@ -3844,6 +3845,12 @@ Partial Class Main
         Me.sfdBox.Filter = "Box Files|*.json"
         Me.sfdBox.InitialDirectory = "My.Application.Info.DirectoryPath & ""\BoxedJobs"""
         '
+        'sfdPowerShell
+        '
+        Me.sfdPowerShell.DefaultExt = "ps1"
+        Me.sfdPowerShell.Filter = "Powershell Files|*.ps1"
+        Me.sfdPowerShell.InitialDirectory = "My.Application.Info.DirectoryPath & ""\Powershell"""
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -4306,5 +4313,6 @@ Partial Class Main
     Friend WithEvents confidence As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents threatScore As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents btnSavePowershell As System.Windows.Forms.Button
+    Friend WithEvents sfdPowerShell As System.Windows.Forms.SaveFileDialog
 
 End Class

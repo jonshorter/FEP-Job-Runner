@@ -254,6 +254,8 @@ Public Class Main
         ResetStatusBar()
         'Save Boxed Job
         'Show the Save File Dialog
+        If Not IO.Directory.Exists(My.Application.Info.DirectoryPath & "\BoxedJobs") Then IO.Directory.CreateDirectory(My.Application.Info.DirectoryPath & "\BoxedJobs")
+
         sfdBox.InitialDirectory = My.Application.Info.DirectoryPath & "\BoxedJobs"
         If sfdBox.ShowDialog() = 1 Then
             'New Box
@@ -1928,205 +1930,231 @@ Public Class Main
         'Copying the execute code to be used for this to speed dev time
 
         ResetStatusBar()
-        If Not String.IsNullOrWhiteSpace(txtJobName.Text) Then
-            If lstComputerTargets.Items.Count > 0 Or lstNetShare.Items.Count > 0 Then
-                'Set label color and text
-                ' lblJobStatus.Text = "Submitting Job..."
-                'Get Computers
-                Dim cnames(lstComputerTargets.Items.Count - 1) As String
-                lstComputerTargets.Items.CopyTo(cnames, 0)
-                If lstComputerTargets.Items.Count < 1 Then cnames = Jobs.nullstring
+        If Not IO.Directory.Exists(My.Application.Info.DirectoryPath & "\PowerShell") Then IO.Directory.CreateDirectory(My.Application.Info.DirectoryPath & "\PowerShell")
 
-                'Get Shares
-                Dim snames(lstNetShare.Items.Count - 1) As String
-                lstNetShare.Items.CopyTo(snames, 0)
-                If lstNetShare.Items.Count < 1 Then snames = Jobs.nullstring
+        sfdPowerShell.InitialDirectory = My.Application.Info.DirectoryPath & "\PowerShell"
+        If sfdPowerShell.ShowDialog() = 1 Then
+           
 
-                'API Limitation, choose agent or shares
-                If snames.Length >= 1 And cnames.Length >= 1 Then
-                    Dim result As DialogResult = Form_AgentorShareDialog.ShowDialog()
 
-                    'Choose Agent
-                    If result = DialogResult.OK Then
-                        'Null shares
-                        snames = Jobs.nullstring
 
-                        'Choose Shares
-                    ElseIf result = DialogResult.Cancel Then
-                        'Null computers
-                        cnames = Jobs.nullstring
+            If Not String.IsNullOrWhiteSpace(txtJobName.Text) Then
+                If lstComputerTargets.Items.Count > 0 Or lstNetShare.Items.Count > 0 Then
+                    'Set label color and text
+                    ' lblJobStatus.Text = "Submitting Job..."
+                    'Get Computers
+                    Dim cnames(lstComputerTargets.Items.Count - 1) As String
+                    lstComputerTargets.Items.CopyTo(cnames, 0)
+                    If lstComputerTargets.Items.Count < 1 Then cnames = Jobs.nullstring
+
+                    'Get Shares
+                    Dim snames(lstNetShare.Items.Count - 1) As String
+                    lstNetShare.Items.CopyTo(snames, 0)
+                    If lstNetShare.Items.Count < 1 Then snames = Jobs.nullstring
+
+                    'API Limitation, choose agent or shares
+                    If snames.Length >= 1 And cnames.Length >= 1 Then
+                        Dim result As DialogResult = Form_AgentorShareDialog.ShowDialog()
+
+                        'Choose Agent
+                        If result = DialogResult.OK Then
+                            'Null shares
+                            snames = Jobs.nullstring
+
+                            'Choose Shares
+                        ElseIf result = DialogResult.Cancel Then
+                            'Null computers
+                            cnames = Jobs.nullstring
+                        End If
                     End If
-                End If
 
 
-                'Generate Inclusion/Exclusion Filters
-                Dim filter As String = Jobs.BuildFilterJSON(StoreInFiltList, StoreExFiltList)
-                'Dim filter As String = Jobs.CreateFilter
+                    'Generate Inclusion/Exclusion Filters
+                    Dim filter As String = Jobs.BuildFilterJSON(StoreInFiltList, StoreExFiltList)
+                    'Dim filter As String = Jobs.CreateFilter
 
-                'Set Job Template
-                Dim templatename As String
-                If txtTemplateName.Text <> "" Then
-                    templatename = txtTemplateName.Text
-                Else
-                    'If it isn't set use the default
-                    templatename = "coll-evtx"
-                End If
-
-                'Agent Remediation - Send File
-                Dim remediatesendfile() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile = StoreRemSendList.toarray
-
-
-                'Agent Remediation - Erase File
-                Dim remediateerase() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase = StoreRemDelList.toarray
-
-
-                'Agent Remediation - Execute
-                Dim remediateexecute() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute = StoreRemExecList.toarray
-
-
-                'Agent Remediation - Kill by PID
-                Dim pids() As String = New String() {}
-                Dim pidlist As List(Of String) = StoreRemKillIDList
-                For Each item In pidlist
-                    pids.Add(item)
-                Next
-
-
-                'Agent Remediation - Kill by Process Name
-                Dim processnames() As String = New String() {}
-                Dim pnamelist As List(Of String) = StoreRemKillNameList
-                For Each item In pnamelist
-                    processnames.Add(item)
-                Next
-
-                'Write the PS1 File
-                Dim psfile As System.IO.StreamWriter
-                psfile = My.Computer.FileSystem.OpenTextFileWriter(txtJobName.Text & ".ps1", False)
-                If chkbypasscerts.Checked = True Then
-                    psfile.WriteLine("[System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}")
-                End If
-
-                psfile.WriteLine("$JobService = New-WebServiceProxy -uri https://" & txtServer.Text & "/" & My.Settings.websitepath & "/services/api/JobsService.asmx?wsdl")
-                psfile.Write("$JobService.RunJobFromTemplateName(")
-                psfile.Write("[string]""" & txtServer.Text & """,")
-                psfile.Write("[string]""" & templatename & """,")
-                psfile.Write("[string]""" & txtJobName.Text & """,")
-
-                If Not String.IsNullOrWhiteSpace(txtProjectName.Text) Then
-                    psfile.Write("[string]""" & txtProjectName.Text & """,")
-                Else
-                    psfile.Write("$null,")
-                End If
-
-                psfile.Write("[string]""" & txtApiUser.Text & """,")
-                psfile.Write("[string]""" & ToInsecureString(apipass) & """,")
-
-                If cnames.Count > 0 Then
-                    psfile.Write("[string[]](""")
-                    psfile.Write(String.Join(""",""", cnames))
-                    psfile.Write("""),")
-                Else
-                    psfile.Write("$null,")
-                End If
-
-                If snames.Count > 0 Then
-                    psfile.Write("[string[]](""")
-                    psfile.Write(String.Join(""",""", snames))
-                    psfile.Write("""),")
-                Else
-                    psfile.Write("$null,")
-                End If
-
-            
-                    If pids.Count > 0 Then
-                        psfile.Write("[string[]](""")
-                        psfile.Write(String.Join(""",""", pids))
-                        psfile.Write("""),")
+                    'Set Job Template
+                    Dim templatename As String
+                    If txtTemplateName.Text <> "" Then
+                        templatename = txtTemplateName.Text
                     Else
-                        psfile.Write("$null,")
+                        'If it isn't set use the default
+                        templatename = "coll-evtx"
                     End If
 
-                    If processnames.Count > 0 Then
-                        psfile.Write("[string[]](""")
-                        psfile.Write(String.Join(""",""", processnames))
-                        psfile.Write("""),")
-                    Else
-                        psfile.Write("$null,")
-                    End If
-
-                If remediatesendfile.Count > 0 Then
-                    psfile.Write("[JobOptionsOperationsAgentRemediationSendFile[]](")
+                    'Agent Remediation - Send File
+                    Dim remediatesendfile() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile = StoreRemSendList.toarray
                     For Each item In remediatesendfile
-                        psfile.Write("(""")
-                        psfile.Write(item.FileToSend & """,""")
-                        psfile.Write(item.RemotePath & """,""")
-                        psfile.Write(item.IsRelative & """,""")
-                        psfile.Write(item.OverwriteIfExists & """),")
+                        Debug.WriteLine(item)
                     Next
-                    psfile.Write("),")
-                Else
-                    psfile.Write("$null,")
-                End If
 
-                If remediateexecute.Count > 0 Then
-                    psfile.Write("[JobOptionsOperationsAgentRemediationExecute[]](")
-                    For Each item In remediateexecute
-                        psfile.Write("(""")
-                        psfile.Write(item.Executable & """,""")
-                        psfile.Write(item.Arguments & """),")
+                    'Agent Remediation - Erase File
+                    Dim remediateerase() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase = StoreRemDelList.toarray
+
+
+                    'Agent Remediation - Execute
+                    Dim remediateexecute() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute = StoreRemExecList.toarray
+
+
+                    'Agent Remediation - Kill by PID
+                    Dim pids() As String = New String() {}
+                    Dim pidlist As List(Of String) = StoreRemKillIDList
+                    For Each item In pidlist
+                        pids.Add(item)
                     Next
-                    psfile.Write("),")
-                Else
-                    psfile.Write("$null,")
-                End If
 
-                If remediateerase.Count > 0 Then
-                    psfile.Write("[JobOptionsOperationsAgentRemediationErase[]](")
-                    For Each item In remediateerase
-                        psfile.Write("(""")
-                        psfile.Write(item.RemotePath & """,""")
-                        psfile.Write(item.IsRelative & """,""")
-                        psfile.Write(item.Wipe & """),")
+
+                    'Agent Remediation - Kill by Process Name
+                    Dim processnames() As String = New String() {}
+                    Dim pnamelist As List(Of String) = StoreRemKillNameList
+                    For Each item In pnamelist
+                        processnames.Add(item)
                     Next
-                    psfile.Write("),")
-                Else
-                    psfile.Write("$null,")
-                End If
-                
 
-                If cnames.Count > 0 Then
-                    If filter.Count > 0 Then
-                        psfile.Write("[string]""" & filter & """,")
-                    Else
-                        psfile.Write("$null,")
+                    'Write the PS1 File
+                    Dim psfile As System.IO.StreamWriter
+                    psfile = My.Computer.FileSystem.OpenTextFileWriter(sfdPowerShell.FileName, False)
+                    If chkbypasscerts.Checked = True Then
+                        psfile.WriteLine("#Ignore Bad Certs")
+                        psfile.WriteLine("[System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}")
                     End If
-                Else
-                    psfile.Write("$null,")
-                End If
-
-                If snames.Count > 0 Then
-                    If filter.Count > 0 Then
-                        psfile.Write("[string]""" & filter & """,")
+                    psfile.WriteLine("#Service URI")
+                    psfile.WriteLine("$Service = New-WebServiceProxy -uri https://" & txtServer.Text & "/" & My.Settings.websitepath & "/services/api/JobsService.asmx?wsdl")
+                    psfile.WriteLine("$type = $Service.GetType().Namespace")
+                    psfile.WriteLine()
+                    psfile.WriteLine("#Main Config")
+                    psfile.WriteLine("#----------------------------------------------")
+                    psfile.WriteLine("$TemplateName = """ & templatename & """")
+                    psfile.WriteLine("$JobName = """ & txtJobName.Text & """")
+                    If Not String.IsNullOrWhiteSpace(txtProjectName.Text) Then
+                        psfile.WriteLine("$ProjectName = """ & txtProjectName.Text & """")
                     Else
-                        psfile.Write("$null,")
+                        psfile.WriteLine("$ProjectName = $null")
                     End If
+                    psfile.WriteLine("$APIUsername = """ & txtApiUser.Text & """")
+                    psfile.WriteLine("$APIPassword = """ & ToInsecureString(apipass) & """")
+                    If cnames.Count > 0 Then
+                        psfile.Write("$Computers = """)
+                        psfile.Write(String.Join(""",""", cnames))
+                        psfile.Write("""")
+                        psfile.WriteLine()
+                    Else
+                        psfile.Write("$Computers = $null")
+                    End If
+                    If snames.Count > 0 Then
+                        psfile.Write("$Shares = """)
+                        psfile.Write(String.Join(""",""", snames))
+                        psfile.Write("""")
+                        psfile.WriteLine()
+                    Else
+                        psfile.WriteLine("$Shares = $null")
+                    End If
+                    If pids.Count > 0 Then
+                        psfile.Write("$PIDs = """)
+                        psfile.Write(String.Join(""",""", pids))
+                        psfile.Write("""")
+                        psfile.WriteLine()
+                    Else
+                        psfile.WriteLine("$PIDs = $null")
+                    End If
+                    If processnames.Count > 0 Then
+                        psfile.Write("$ProcessNames = """)
+                        psfile.Write(String.Join(""",""", processnames))
+                        psfile.Write("""")
+                        psfile.WriteLine()
+                    Else
+                        psfile.WriteLine("$ProcessNames = $null")
+                    End If
+                    psfile.WriteLine("$moduleID = ""ISModuleArcSight""")
+                    psfile.WriteLine("$thirdPartyJobId = ""00000000-0000-0000-0000-000000000000""")
+                    psfile.WriteLine("$integrationInfo = ""Job Runner""")
+                    psfile.WriteLine("#----------------------------------------------")
+                    psfile.WriteLine("#End Main Config")
+                    psfile.WriteLine()
+
+                    If remediatesendfile.Count > 0 Then
+                        psfile.WriteLine("#SendFileOptions")
+                        psfile.WriteLine("$OptionsSendFile = ($type + '.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile')")
+                        psfile.WriteLine("$SendFileOptions = @()")
+                        For i = 0 To remediatesendfile.Count - 1
+                            psfile.WriteLine("#Start - SendFileOption - " & i)
+                            psfile.WriteLine("#----------------------------------------------")
+                            psfile.WriteLine("$send" & i & " = New-Object ($OptionsSendFile)")
+                            psfile.WriteLine("$send" & i & ".FileToSend = """ & remediatesendfile(i).FileToSend & """")
+                            psfile.WriteLine("$send" & i & ".RemotePath = """ & remediatesendfile(i).RemotePath & """")
+                            psfile.WriteLine("$send" & i & ".IsRelative = """ & remediatesendfile(i).IsRelative & """")
+                            psfile.WriteLine("$send" & i & ".OverwriteIfExists = """ & remediatesendfile(i).OverwriteIfExists & """")
+                            psfile.WriteLine("$SendFileOptions += $send" & i)
+                            psfile.WriteLine("#----------------------------------------------")
+                            psfile.WriteLine("#End - SendFileOption - " & i)
+                            psfile.WriteLine()
+                        Next
+                    Else
+                        psfile.WriteLine("$SendFileOptions = $null")
+                    End If
+                    psfile.WriteLine()
+                    If remediateexecute.Count > 0 Then
+                        psfile.WriteLine("#ExecuteFileOptions")
+                        psfile.WriteLine("$OptionsExecute = ($type + '.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute')")
+                        psfile.WriteLine("$ExecuteOptions = @()")
+                        For i = 0 To remediateexecute.Count - 1
+                            psfile.WriteLine("#Start - ExecuteOption - " & i)
+                            psfile.WriteLine("#----------------------------------------------")
+                            psfile.WriteLine("$exec" & i & " = New-Object ($OptionsExecute)")
+                            psfile.WriteLine("$exec" & i & ".Executable = """ & remediateexecute(i).Executable & """")
+                            psfile.WriteLine("$exec" & i & ".Arguments = """ & remediateexecute(i).Arguments & """")
+                            psfile.WriteLine("$ExecuteOptions += $exec" & i)
+                            psfile.WriteLine("#----------------------------------------------")
+                            psfile.WriteLine("#End - ExecuteOption - " & i)
+                            psfile.WriteLine()
+                        Next
+                    Else
+                        psfile.WriteLine("$ExecuteOptions = $null")
+                    End If
+                    psfile.WriteLine()
+                    If remediateerase.Count > 0 Then
+                        psfile.WriteLine("#EraseFileOptions")
+                        psfile.WriteLine("$OptionsErase = ($type + '.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase')")
+                        psfile.WriteLine("$EraseOptions = @()")
+                        For i = 0 To remediateerase.Count - 1
+                            psfile.WriteLine("#Start - EraseOption - " & i)
+                            psfile.WriteLine("#----------------------------------------------")
+                            psfile.WriteLine("$erase" & i & " = New-Object ($OptionsErase)")
+                            psfile.WriteLine("$erase" & i & ".RemotePath = """ & remediateerase(i).RemotePath & """")
+                            psfile.WriteLine("$erase" & i & ".IsRelative = """ & remediateerase(i).IsRelative & """")
+                            psfile.WriteLine("$erase" & i & ".Wipe = """ & remediateerase(i).Wipe & """")
+                            psfile.WriteLine("$EraseOptions += $erase" & i)
+                            psfile.WriteLine("#----------------------------------------------")
+                            psfile.WriteLine("#End - EraseOption - " & i)
+                            psfile.WriteLine()
+                        Next
+                    Else
+                        psfile.WriteLine("$EraseOptions = $null")
+                    End If
+                    psfile.WriteLine()
+                    psfile.WriteLine("#Execute Job")
+                    psfile.WriteLine("$Service.RunJobFromTemplateName($TemplateName, $JobName, $ProjectName, $APIUsername, $APIPassword,")
+                    psfile.WriteLine("$Computers, $Shares, $PIDs, $ProcessNames, $SendFileOptions, $ExecuteOptions, $EraseOptions,")
+
+                    If cnames.Count > 0 Then
+                        psfile.WriteLine("""" & filter.Replace("""", "'") & """, $null,")
+                    ElseIf snames.Count > 0 Then
+                        psfile.WriteLine("$null,""" & filter.Replace("""", "'") & """,")
+                    Else
+                        psfile.WriteLine("$null, $null,")
+                    End If
+
+                    psfile.WriteLine("$moduleID, $thirdPartyJobId, $integrationInfo)")
+
+                    psfile.Close()
+
+                    MsgBox("Powershell file written to " & sfdPowerShell.FileName)
                 Else
-                    psfile.Write("$null,")
+                    MsgBox("At least one computer or share target must be added.")
                 End If
-
-                psfile.Write("[string]""ISModuleArcSight"",")
-                psfile.Write("[string]""00000000-0000-0000-0000-000000000000"",")
-                psfile.Write("[string]""ThirdParty Integration Info passed to module""")
-                psfile.Write(")")
-                psfile.Close()
-
-                MsgBox("Powershell file written. ")
-            Else
-                MsgBox("At least one computer or share target must be added.")
-            End If
             Else
                 MsgBox("Job name required.")
             End If
-
+        End If
     End Sub
 End Class
