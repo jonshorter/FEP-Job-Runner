@@ -161,6 +161,7 @@ Public Class Main
             Try
                 CheckForUpdates(True, chkIncludPreRelease.Checked)
             Catch ex As Exception
+                DebugWriteLine(ex.Message)
             End Try
         End If
         Me.auth = New R1SimpleRestClient.Models.Response.AuthToken
@@ -183,7 +184,7 @@ Public Class Main
 
     Private Sub btnSaveSettings_Click(sender As Object, e As EventArgs) Handles btnSaveSettings.Click
         ResetStatusBar()
-
+        DebugWriteLine("Saving Settings")
         'Save Settings to my.settings
         My.Settings.bypasscert = chkbypasscerts.Checked
         My.Settings.defaultcomputer = txtdefaultcomputer.Text
@@ -258,48 +259,53 @@ Public Class Main
 
         sfdBox.InitialDirectory = My.Application.Info.DirectoryPath & "\BoxedJobs"
         If sfdBox.ShowDialog() = 1 Then
-            'New Box
-            Dim sbox As New BoxedJob
+            Try
+                'New Box
+                Dim sbox As New BoxedJob
 
-            'Set Box Variables
-            sbox.BoxJobName = sfdBox.FileName
-            sbox.R1JobName = txtJobName.Text
-            sbox.R1Template = txtTemplateName.Text
-            sbox.R1Project = txtProjectName.Text
+                'Set Box Variables
+                sbox.BoxJobName = sfdBox.FileName
+                sbox.R1JobName = txtJobName.Text
+                sbox.R1Template = txtTemplateName.Text
+                sbox.R1Project = txtProjectName.Text
 
-            'Process IDs
-            Dim pids() As String = New String() {}
-            Dim pidlist As List(Of String) = StoreRemKillIDList
-            For Each item In pidlist
-                pids.Add(item)
-            Next
-            sbox.R1_AR_PIDS = pids
+                'Process IDs
+                Dim pids() As String = New String() {}
+                Dim pidlist As List(Of String) = StoreRemKillIDList
+                For Each item In pidlist
+                    pids.Add(item)
+                Next
+                sbox.R1_AR_PIDS = pids
 
-            'Process Names
-            Dim processnames() As String = New String() {}
-            Dim pnamelist As List(Of String) = StoreRemKillNameList
-            For Each item In pnamelist
-                processnames.Add(item)
-            Next
-            sbox.R1_AR_ProcessNames = processnames
+                'Process Names
+                Dim processnames() As String = New String() {}
+                Dim pnamelist As List(Of String) = StoreRemKillNameList
+                For Each item In pnamelist
+                    processnames.Add(item)
+                Next
+                sbox.R1_AR_ProcessNames = processnames
 
-            'Send Options
-            Dim ar_send() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile = StoreRemSendList.toarray
-            sbox.R1_AR_Send = ar_send
+                'Send Options
+                Dim ar_send() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile = StoreRemSendList.toarray
+                sbox.R1_AR_Send = ar_send
 
-            'Execute Options
-            Dim ar_exec() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute = StoreRemExecList.toarray
-            sbox.R1_AR_Execute = ar_exec
+                'Execute Options
+                Dim ar_exec() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute = StoreRemExecList.toarray
+                sbox.R1_AR_Execute = ar_exec
 
-            'Erase Options
-            Dim ar_erase() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase = StoreRemDelList.toarray
-            sbox.R1_AR_Erase = ar_erase
+                'Erase Options
+                Dim ar_erase() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase = StoreRemDelList.toarray
+                sbox.R1_AR_Erase = ar_erase
 
-            'Filters
-            sbox.R1Filter = Jobs.BuildFilterJSON(StoreInFiltList, StoreExFiltList)
+                'Filters
+                sbox.R1Filter = Jobs.BuildFilterJSON(StoreInFiltList, StoreExFiltList)
 
-            'Save Job
-            BoxedJobs.SaveBoxedJob(sfdBox.FileName, sbox)
+                'Save Job
+                DebugWriteLine("Saving Box Job")
+                BoxedJobs.SaveBoxedJob(sfdBox.FileName, sbox)
+            Catch ex As Exception
+                DebugWriteLine(ex.Message)
+            End Try
         End If
     End Sub
 
@@ -310,154 +316,158 @@ Public Class Main
 
         'If File Exists
         If IO.File.Exists(fname) Then
-            'Clear the controls on every tab, form.
-            ClearAllJobOptioons(Me.tabJobInfo.Controls)
-            ClearAllJobOptioons(Me.tabFilters.Controls)
-            ClearAllJobOptioons(Me.tabInclusionFilter.Controls)
-            ClearAllJobOptioons(Me.tabExclusionFilter.Controls)
-            ClearAllJobOptioons(Me.tabAgentDelete.Controls)
-            ClearAllJobOptioons(Me.tabAgentExecute.Controls)
-            ClearAllJobOptioons(Me.TabAgentKill.Controls)
-            ClearAllJobOptioons(Me.tabAgentSendFile.Controls)
-            StoreInFiltList.clear()
-            StoreExFiltList.clear()
-            StoreRemDelList.clear()
-            StoreRemExecList.clear()
-            StoreRemSendList.clear()
-            StoreRemKillIDList.clear()
-            StoreRemKillNameList.clear()
+            Try
+                'Clear the controls on every tab, form.
+                ClearAllJobOptioons(Me.tabJobInfo.Controls)
+                ClearAllJobOptioons(Me.tabFilters.Controls)
+                ClearAllJobOptioons(Me.tabInclusionFilter.Controls)
+                ClearAllJobOptioons(Me.tabExclusionFilter.Controls)
+                ClearAllJobOptioons(Me.tabAgentDelete.Controls)
+                ClearAllJobOptioons(Me.tabAgentExecute.Controls)
+                ClearAllJobOptioons(Me.TabAgentKill.Controls)
+                ClearAllJobOptioons(Me.tabAgentSendFile.Controls)
+                StoreInFiltList.clear()
+                StoreExFiltList.clear()
+                StoreRemDelList.clear()
+                StoreRemExecList.clear()
+                StoreRemSendList.clear()
+                StoreRemKillIDList.clear()
+                StoreRemKillNameList.clear()
 
-            'New Box = the file
-            Dim box As BoxedJob = BoxedJobs.ParseBoxedJobFromFile(fname)
-            txtJobName.Text = box.R1JobName
-            txtProjectName.Text = box.R1Project
-            txtTemplateName.Text = box.R1Template
-            'Get Filters Out
+                'New Box = the file
+                Dim box As BoxedJob = BoxedJobs.ParseBoxedJobFromFile(fname)
+                txtJobName.Text = box.R1JobName
+                txtProjectName.Text = box.R1Project
+                txtTemplateName.Text = box.R1Template
+                'Get Filters Out
 
-            'New Filter List
-            Dim flist As List(Of Object) = Jobs.ParseFilterJSON(box.R1Filter)
-            'New Inclusion List
-            Dim inlist As New List(Of InclusionFilter)
-            'New Exclusion list
-            Dim exlist As New List(Of ExclusionFilter)
+                'New Filter List
+                Dim flist As List(Of Object) = Jobs.ParseFilterJSON(box.R1Filter)
+                'New Inclusion List
+                Dim inlist As New List(Of InclusionFilter)
+                'New Exclusion list
+                Dim exlist As New List(Of ExclusionFilter)
 
-            inlist = flist(0)
-            exlist = flist(1)
-            '> 0 filters in list
-            If inlist.Count > 0 Then
-                'Inclusion Filter List = Store
-                Dim maininlist As List(Of InclusionFilter) = StoreInFiltList
-                'Add all filters to Store
-                For Each item As InclusionFilter In inlist
-                    maininlist.Add(item)
-                Next
+                inlist = flist(0)
+                exlist = flist(1)
+                '> 0 filters in list
+                If inlist.Count > 0 Then
+                    'Inclusion Filter List = Store
+                    Dim maininlist As List(Of InclusionFilter) = StoreInFiltList
+                    'Add all filters to Store
+                    For Each item As InclusionFilter In inlist
+                        maininlist.Add(item)
+                    Next
 
-                'Add all filters to UI
-                For Each item As InclusionFilter In maininlist
-                    dgvFilters.Rows.Add(False, "Inclusion", item.FilterName)
+                    'Add all filters to UI
+                    For Each item As InclusionFilter In maininlist
+                        dgvFilters.Rows.Add(False, "Inclusion", item.FilterName)
 
-                Next
-            End If
+                    Next
+                End If
 
-            '> 0 filters in list
-            If exlist.Count > 0 Then
-                'Exclusion Filter List = Store
-                Dim mainexlist As List(Of ExclusionFilter) = StoreExFiltList
-                'Add all filters to Store
-                For Each item As ExclusionFilter In exlist
-                    mainexlist.Add(item)
-                Next
+                '> 0 filters in list
+                If exlist.Count > 0 Then
+                    'Exclusion Filter List = Store
+                    Dim mainexlist As List(Of ExclusionFilter) = StoreExFiltList
+                    'Add all filters to Store
+                    For Each item As ExclusionFilter In exlist
+                        mainexlist.Add(item)
+                    Next
 
-                'Add all filters to UI
-                For Each item As ExclusionFilter In mainexlist
-                    dgvFilters.Rows.Add(False, "Exclusion", item.FilterName)
-                Next
-            End If
+                    'Add all filters to UI
+                    For Each item As ExclusionFilter In mainexlist
+                        dgvFilters.Rows.Add(False, "Exclusion", item.FilterName)
+                    Next
+                End If
 
-            'Send File Options
-            Dim ar_send() As JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile
-            ar_send = box.R1_AR_Send
-            '> 0 send options
-            If ar_send.Count > 0 Then
-                'Send option list = Store
-                Dim remsendlst As List(Of JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile) = StoreRemSendList
-                'Add all send options to store
-                For Each item In ar_send
-                    'Add item to UI
-                    Dim nrem = lvRemOptions.Items.Add("Send File")
-                    nrem.SubItems.Add(remsendlst.Count + 1)
-                    'Add item to Store
-                    remsendlst.Add(item)
-                Next
-            End If
+                'Send File Options
+                Dim ar_send() As JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile
+                ar_send = box.R1_AR_Send
+                '> 0 send options
+                If ar_send.Count > 0 Then
+                    'Send option list = Store
+                    Dim remsendlst As List(Of JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile) = StoreRemSendList
+                    'Add all send options to store
+                    For Each item In ar_send
+                        'Add item to UI
+                        Dim nrem = lvRemOptions.Items.Add("Send File")
+                        nrem.SubItems.Add(remsendlst.Count + 1)
+                        'Add item to Store
+                        remsendlst.Add(item)
+                    Next
+                End If
 
-            'Execute Options
-            Dim ar_exec() As JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute
-            ar_exec = box.R1_AR_Execute
-            '> 0 Execute options
-            If ar_exec.Count > 0 Then
-                'Execute option list = Store
-                Dim remexeclist As List(Of JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute) = StoreRemExecList
-                'Add all exec optinos to store
-                For Each item In ar_exec
-                    'Add item to UI
-                    Dim nrem = lvRemOptions.Items.Add("Execute")
-                    nrem.SubItems.Add(remexeclist.Count + 1)
-                    'Add item to store
-                    remexeclist.Add(item)
-                Next
-            End If
+                'Execute Options
+                Dim ar_exec() As JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute
+                ar_exec = box.R1_AR_Execute
+                '> 0 Execute options
+                If ar_exec.Count > 0 Then
+                    'Execute option list = Store
+                    Dim remexeclist As List(Of JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute) = StoreRemExecList
+                    'Add all exec optinos to store
+                    For Each item In ar_exec
+                        'Add item to UI
+                        Dim nrem = lvRemOptions.Items.Add("Execute")
+                        nrem.SubItems.Add(remexeclist.Count + 1)
+                        'Add item to store
+                        remexeclist.Add(item)
+                    Next
+                End If
 
-            'Erase options
-            Dim ar_erase() As JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase
-            ar_erase = box.R1_AR_Erase
-            '> 0 Erase Options
-            If ar_erase.Count > 0 Then
-                'Erase option list = Store
-                Dim remdelist As List(Of JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase) = StoreRemDelList
-                'Add all erase options to store
-                For Each item In ar_erase
-                    'Add item to UI
-                    Dim nrem = lvRemOptions.Items.Add("Delete File")
-                    nrem.SubItems.Add(remdelist.Count + 1)
-                    'Add item to store
-                    remdelist.Add(item)
-                Next
-            End If
+                'Erase options
+                Dim ar_erase() As JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase
+                ar_erase = box.R1_AR_Erase
+                '> 0 Erase Options
+                If ar_erase.Count > 0 Then
+                    'Erase option list = Store
+                    Dim remdelist As List(Of JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase) = StoreRemDelList
+                    'Add all erase options to store
+                    For Each item In ar_erase
+                        'Add item to UI
+                        Dim nrem = lvRemOptions.Items.Add("Delete File")
+                        nrem.SubItems.Add(remdelist.Count + 1)
+                        'Add item to store
+                        remdelist.Add(item)
+                    Next
+                End If
 
-            'Kill ID Options
-            Dim pids() As String = box.R1_AR_PIDS
-            '> 0 ID Options
-            If pids.Count > 0 Then
-                'Kill ID list = store
-                Dim rempidlist As List(Of String) = StoreRemKillIDList
-                'Add all kill ids to store
-                For Each item In pids
-                    'Add item to UI
-                    Dim nrem = lvRemOptions.Items.Add("Kill Process ID")
-                    nrem.SubItems.Add(rempidlist.Count + 1)
-                    'Add item to store
-                    rempidlist.Add(item)
-                Next
-            End If
+                'Kill ID Options
+                Dim pids() As String = box.R1_AR_PIDS
+                '> 0 ID Options
+                If pids.Count > 0 Then
+                    'Kill ID list = store
+                    Dim rempidlist As List(Of String) = StoreRemKillIDList
+                    'Add all kill ids to store
+                    For Each item In pids
+                        'Add item to UI
+                        Dim nrem = lvRemOptions.Items.Add("Kill Process ID")
+                        nrem.SubItems.Add(rempidlist.Count + 1)
+                        'Add item to store
+                        rempidlist.Add(item)
+                    Next
+                End If
 
-            'Kill Process name Options
-            Dim processnames() As String = box.R1_AR_ProcessNames
-            '> 0 kill name oprtions
-            If processnames.Count > 0 Then
-                'Kill name list = store
-                Dim rempnamelist As List(Of String) = StoreRemKillNameList
-                'Add all kill names to store
-                For Each item In processnames
-                    'Add item to UI
-                    Dim nrem = lvRemOptions.Items.Add("Kill Process Name")
-                    nrem.SubItems.Add(rempnamelist.Count + 1)
-                    'Add item to store
-                    rempnamelist.Add(item)
-                Next
-            End If
-
-            'File Doesn't Exists
+                'Kill Process name Options
+                Dim processnames() As String = box.R1_AR_ProcessNames
+                '> 0 kill name oprtions
+                If processnames.Count > 0 Then
+                    'Kill name list = store
+                    Dim rempnamelist As List(Of String) = StoreRemKillNameList
+                    'Add all kill names to store
+                    For Each item In processnames
+                        'Add item to UI
+                        Dim nrem = lvRemOptions.Items.Add("Kill Process Name")
+                        nrem.SubItems.Add(rempnamelist.Count + 1)
+                        'Add item to store
+                        rempnamelist.Add(item)
+                    Next
+                End If
+                DebugWriteLine("Loaded Box Job")
+                'File Doesn't Exists
+            Catch ex As Exception
+                DebugWriteLine(ex.Message)
+            End Try
         Else
             MsgBox("File Doesn't Exist")
         End If
@@ -827,6 +837,7 @@ Public Class Main
                 Else
                     fevent.alert.explanation.malwaredetected.malware.name = txtFireEyeMalwareName.Text
                 End If
+                DebugWriteLine("Sending FEYE Event")
                 FireEye.SendEvent(FireEye.FEventtoJson(fevent))
             End If
         Catch ex As Exception
@@ -850,6 +861,7 @@ Public Class Main
                     panwthreat.P31Miscellaneous = txtPANWMalwareName.Text & ".exe"
                 End If
                 Dim panwtstr As String = PANW.ThreatTOCSV(panwthreat)
+                DebugWriteLine("Sending PANW Event")
                 PANW.SendEvent(panwtstr)
             End If
         Catch ex As Exception
@@ -921,6 +933,7 @@ Public Class Main
                 If Not xps_sim_var Is Nothing Then
                     xps_sim_var.MalwareMD5 = txtXPSMalwareMD5.Text
                 End If
+                DebugWriteLine("Sending XPS Event")
                 XPS.SendEvent(xpststr)
             End If
         Catch Ex As Exception
@@ -945,12 +958,14 @@ Public Class Main
                     lbldemoxpsstatus.Text = "XPS CP Sim Status: Started"
                     xps_sim_Port.Enabled = False
                     xps_sim_var = New XPS.XPS_Sim
+                    DebugWriteLine("Starting XPS Sim")
                     xps_sim_var.Start()
                 Catch ex As Exception
                     DebugWriteLine(ex.Message)
                 End Try
             Case "Stop XPS CP Sim"
                 Try
+                    DebugWriteLine("Stopping XPS Sim")
                     xps_sim_var.Stop()
                     btnStartXPSListener.Text = "Start XPS CP Sim"
                     lbldemoxpsstatus.Text = "XPS CP Sim Status: Not Started"
@@ -976,12 +991,15 @@ Public Class Main
                     lblwildfirestatus.Text = "Wildfire Sim Status: Started"
                     panw_sim_port.Enabled = False
                     panw_sim_var = New PANW.PANW_Sim
+                    DebugWriteLine("Starting WildFire Sim")
                     panw_sim_var.Start()
+
                 Catch ex As Exception
                     DebugWriteLine(ex.Message)
                 End Try
             Case "Stop Wildfire Sim"
                 Try
+                    DebugWriteLine("Stopping WildFire Sim")
                     panw_sim_var.Stop()
                     btn_WildfireStart.Text = "Start Wildfire Sim"
                     lblwildfirestatus.Text = "Wildfire Sim Status: Not Started"
@@ -1004,6 +1022,7 @@ Public Class Main
         Try
             CheckForUpdates(False, chkIncludPreRelease.Checked)
         Catch ex As Exception
+            DebugWriteLine(ex.Message)
         End Try
     End Sub
 
@@ -1011,6 +1030,7 @@ Public Class Main
         Try
             CheckForUpdates(False, chkIncludPreRelease.Checked)
         Catch ex As Exception
+            DebugWriteLine(ex.Message)
         End Try
     End Sub
 
@@ -1114,6 +1134,7 @@ Public Class Main
                 End Select
             End If
         Catch ex As Exception
+            DebugWriteLine(ex.Message)
             MsgBox(ex.Message)
         End Try
     End Sub
@@ -1217,6 +1238,7 @@ Public Class Main
                 End Select
             End If
         Catch ex As Exception
+            DebugWriteLine(ex.Message)
             MsgBox(ex.Message)
         End Try
     End Sub
@@ -1511,6 +1533,7 @@ Public Class Main
                 Next
 
                 'Kick off the job
+                DebugWriteLine("Executing Job")
                 Jobs.RunFromTemplateName(txtServer.Text, templatename, txtJobName.Text, txtProjectName.Text, txtApiUser.Text, ToInsecureString(apipass), cnames, snames, filter, pids, processnames, remediatesendfile, remediateexecute, remediateerase)
             Else
                 MsgBox("At least one computer or share target must be added.")
@@ -1934,227 +1957,230 @@ Public Class Main
 
         sfdPowerShell.InitialDirectory = My.Application.Info.DirectoryPath & "\PowerShell"
         If sfdPowerShell.ShowDialog() = 1 Then
-           
+            Try
 
 
 
-            If Not String.IsNullOrWhiteSpace(txtJobName.Text) Then
-                If lstComputerTargets.Items.Count > 0 Or lstNetShare.Items.Count > 0 Then
-                    'Set label color and text
-                    ' lblJobStatus.Text = "Submitting Job..."
-                    'Get Computers
-                    Dim cnames(lstComputerTargets.Items.Count - 1) As String
-                    lstComputerTargets.Items.CopyTo(cnames, 0)
-                    If lstComputerTargets.Items.Count < 1 Then cnames = Jobs.nullstring
+                If Not String.IsNullOrWhiteSpace(txtJobName.Text) Then
+                    If lstComputerTargets.Items.Count > 0 Or lstNetShare.Items.Count > 0 Then
+                        'Set label color and text
+                        ' lblJobStatus.Text = "Submitting Job..."
+                        'Get Computers
+                        Dim cnames(lstComputerTargets.Items.Count - 1) As String
+                        lstComputerTargets.Items.CopyTo(cnames, 0)
+                        If lstComputerTargets.Items.Count < 1 Then cnames = Jobs.nullstring
 
-                    'Get Shares
-                    Dim snames(lstNetShare.Items.Count - 1) As String
-                    lstNetShare.Items.CopyTo(snames, 0)
-                    If lstNetShare.Items.Count < 1 Then snames = Jobs.nullstring
+                        'Get Shares
+                        Dim snames(lstNetShare.Items.Count - 1) As String
+                        lstNetShare.Items.CopyTo(snames, 0)
+                        If lstNetShare.Items.Count < 1 Then snames = Jobs.nullstring
 
-                    'API Limitation, choose agent or shares
-                    If snames.Length >= 1 And cnames.Length >= 1 Then
-                        Dim result As DialogResult = Form_AgentorShareDialog.ShowDialog()
+                        'API Limitation, choose agent or shares
+                        If snames.Length >= 1 And cnames.Length >= 1 Then
+                            Dim result As DialogResult = Form_AgentorShareDialog.ShowDialog()
 
-                        'Choose Agent
-                        If result = DialogResult.OK Then
-                            'Null shares
-                            snames = Jobs.nullstring
+                            'Choose Agent
+                            If result = DialogResult.OK Then
+                                'Null shares
+                                snames = Jobs.nullstring
 
-                            'Choose Shares
-                        ElseIf result = DialogResult.Cancel Then
-                            'Null computers
-                            cnames = Jobs.nullstring
+                                'Choose Shares
+                            ElseIf result = DialogResult.Cancel Then
+                                'Null computers
+                                cnames = Jobs.nullstring
+                            End If
                         End If
-                    End If
 
 
-                    'Generate Inclusion/Exclusion Filters
-                    Dim filter As String = Jobs.BuildFilterJSON(StoreInFiltList, StoreExFiltList)
-                    'Dim filter As String = Jobs.CreateFilter
+                        'Generate Inclusion/Exclusion Filters
+                        Dim filter As String = Jobs.BuildFilterJSON(StoreInFiltList, StoreExFiltList)
+                        'Dim filter As String = Jobs.CreateFilter
 
-                    'Set Job Template
-                    Dim templatename As String
-                    If txtTemplateName.Text <> "" Then
-                        templatename = txtTemplateName.Text
-                    Else
-                        'If it isn't set use the default
-                        templatename = "coll-evtx"
-                    End If
+                        'Set Job Template
+                        Dim templatename As String
+                        If txtTemplateName.Text <> "" Then
+                            templatename = txtTemplateName.Text
+                        Else
+                            'If it isn't set use the default
+                            templatename = "coll-evtx"
+                        End If
 
-                    'Agent Remediation - Send File
-                    Dim remediatesendfile() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile = StoreRemSendList.toarray
-                    For Each item In remediatesendfile
-                        Debug.WriteLine(item)
-                    Next
-
-                    'Agent Remediation - Erase File
-                    Dim remediateerase() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase = StoreRemDelList.toarray
-
-
-                    'Agent Remediation - Execute
-                    Dim remediateexecute() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute = StoreRemExecList.toarray
-
-
-                    'Agent Remediation - Kill by PID
-                    Dim pids() As String = New String() {}
-                    Dim pidlist As List(Of String) = StoreRemKillIDList
-                    For Each item In pidlist
-                        pids.Add(item)
-                    Next
-
-
-                    'Agent Remediation - Kill by Process Name
-                    Dim processnames() As String = New String() {}
-                    Dim pnamelist As List(Of String) = StoreRemKillNameList
-                    For Each item In pnamelist
-                        processnames.Add(item)
-                    Next
-
-                    'Write the PS1 File
-                    Dim psfile As System.IO.StreamWriter
-                    psfile = My.Computer.FileSystem.OpenTextFileWriter(sfdPowerShell.FileName, False)
-                    If chkbypasscerts.Checked = True Then
-                        psfile.WriteLine("#Ignore Bad Certs")
-                        psfile.WriteLine("[System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}")
-                    End If
-                    psfile.WriteLine("#Service URI")
-                    psfile.WriteLine("$Service = New-WebServiceProxy -uri https://" & txtServer.Text & "/" & My.Settings.websitepath & "/services/api/JobsService.asmx?wsdl")
-                    psfile.WriteLine("$type = $Service.GetType().Namespace")
-                    psfile.WriteLine()
-                    psfile.WriteLine("#Main Config")
-                    psfile.WriteLine("#----------------------------------------------")
-                    psfile.WriteLine("$TemplateName = """ & templatename & """")
-                    psfile.WriteLine("$JobName = """ & txtJobName.Text & """")
-                    If Not String.IsNullOrWhiteSpace(txtProjectName.Text) Then
-                        psfile.WriteLine("$ProjectName = """ & txtProjectName.Text & """")
-                    Else
-                        psfile.WriteLine("$ProjectName = $null")
-                    End If
-                    psfile.WriteLine("$APIUsername = """ & txtApiUser.Text & """")
-                    psfile.WriteLine("$APIPassword = """ & ToInsecureString(apipass) & """")
-                    If cnames.Count > 0 Then
-                        psfile.Write("$Computers = """)
-                        psfile.Write(String.Join(""",""", cnames))
-                        psfile.Write("""")
-                        psfile.WriteLine()
-                    Else
-                        psfile.Write("$Computers = $null")
-                    End If
-                    If snames.Count > 0 Then
-                        psfile.Write("$Shares = """)
-                        psfile.Write(String.Join(""",""", snames))
-                        psfile.Write("""")
-                        psfile.WriteLine()
-                    Else
-                        psfile.WriteLine("$Shares = $null")
-                    End If
-                    If pids.Count > 0 Then
-                        psfile.Write("$PIDs = """)
-                        psfile.Write(String.Join(""",""", pids))
-                        psfile.Write("""")
-                        psfile.WriteLine()
-                    Else
-                        psfile.WriteLine("$PIDs = $null")
-                    End If
-                    If processnames.Count > 0 Then
-                        psfile.Write("$ProcessNames = """)
-                        psfile.Write(String.Join(""",""", processnames))
-                        psfile.Write("""")
-                        psfile.WriteLine()
-                    Else
-                        psfile.WriteLine("$ProcessNames = $null")
-                    End If
-                    psfile.WriteLine("$moduleID = ""ISModuleArcSight""")
-                    psfile.WriteLine("$thirdPartyJobId = ""00000000-0000-0000-0000-000000000000""")
-                    psfile.WriteLine("$integrationInfo = ""Job Runner""")
-                    psfile.WriteLine("#----------------------------------------------")
-                    psfile.WriteLine("#End Main Config")
-                    psfile.WriteLine()
-
-                    If remediatesendfile.Count > 0 Then
-                        psfile.WriteLine("#SendFileOptions")
-                        psfile.WriteLine("$OptionsSendFile = ($type + '.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile')")
-                        psfile.WriteLine("$SendFileOptions = @()")
-                        For i = 0 To remediatesendfile.Count - 1
-                            psfile.WriteLine("#Start - SendFileOption - " & i)
-                            psfile.WriteLine("#----------------------------------------------")
-                            psfile.WriteLine("$send" & i & " = New-Object ($OptionsSendFile)")
-                            psfile.WriteLine("$send" & i & ".FileToSend = """ & remediatesendfile(i).FileToSend & """")
-                            psfile.WriteLine("$send" & i & ".RemotePath = """ & remediatesendfile(i).RemotePath & """")
-                            psfile.WriteLine("$send" & i & ".IsRelative = """ & remediatesendfile(i).IsRelative & """")
-                            psfile.WriteLine("$send" & i & ".OverwriteIfExists = """ & remediatesendfile(i).OverwriteIfExists & """")
-                            psfile.WriteLine("$SendFileOptions += $send" & i)
-                            psfile.WriteLine("#----------------------------------------------")
-                            psfile.WriteLine("#End - SendFileOption - " & i)
-                            psfile.WriteLine()
+                        'Agent Remediation - Send File
+                        Dim remediatesendfile() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile = StoreRemSendList.toarray
+                        For Each item In remediatesendfile
+                            Debug.WriteLine(item)
                         Next
-                    Else
-                        psfile.WriteLine("$SendFileOptions = $null")
-                    End If
-                    psfile.WriteLine()
-                    If remediateexecute.Count > 0 Then
-                        psfile.WriteLine("#ExecuteFileOptions")
-                        psfile.WriteLine("$OptionsExecute = ($type + '.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute')")
-                        psfile.WriteLine("$ExecuteOptions = @()")
-                        For i = 0 To remediateexecute.Count - 1
-                            psfile.WriteLine("#Start - ExecuteOption - " & i)
-                            psfile.WriteLine("#----------------------------------------------")
-                            psfile.WriteLine("$exec" & i & " = New-Object ($OptionsExecute)")
-                            psfile.WriteLine("$exec" & i & ".Executable = """ & remediateexecute(i).Executable & """")
-                            psfile.WriteLine("$exec" & i & ".Arguments = """ & remediateexecute(i).Arguments & """")
-                            psfile.WriteLine("$ExecuteOptions += $exec" & i)
-                            psfile.WriteLine("#----------------------------------------------")
-                            psfile.WriteLine("#End - ExecuteOption - " & i)
-                            psfile.WriteLine()
+
+                        'Agent Remediation - Erase File
+                        Dim remediateerase() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase = StoreRemDelList.toarray
+
+
+                        'Agent Remediation - Execute
+                        Dim remediateexecute() As R1_Job_Runner.JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute = StoreRemExecList.toarray
+
+
+                        'Agent Remediation - Kill by PID
+                        Dim pids() As String = New String() {}
+                        Dim pidlist As List(Of String) = StoreRemKillIDList
+                        For Each item In pidlist
+                            pids.Add(item)
                         Next
-                    Else
-                        psfile.WriteLine("$ExecuteOptions = $null")
-                    End If
-                    psfile.WriteLine()
-                    If remediateerase.Count > 0 Then
-                        psfile.WriteLine("#EraseFileOptions")
-                        psfile.WriteLine("$OptionsErase = ($type + '.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase')")
-                        psfile.WriteLine("$EraseOptions = @()")
-                        For i = 0 To remediateerase.Count - 1
-                            psfile.WriteLine("#Start - EraseOption - " & i)
-                            psfile.WriteLine("#----------------------------------------------")
-                            psfile.WriteLine("$erase" & i & " = New-Object ($OptionsErase)")
-                            psfile.WriteLine("$erase" & i & ".RemotePath = """ & remediateerase(i).RemotePath & """")
-                            psfile.WriteLine("$erase" & i & ".IsRelative = """ & remediateerase(i).IsRelative & """")
-                            psfile.WriteLine("$erase" & i & ".Wipe = """ & remediateerase(i).Wipe & """")
-                            psfile.WriteLine("$EraseOptions += $erase" & i)
-                            psfile.WriteLine("#----------------------------------------------")
-                            psfile.WriteLine("#End - EraseOption - " & i)
-                            psfile.WriteLine()
+
+
+                        'Agent Remediation - Kill by Process Name
+                        Dim processnames() As String = New String() {}
+                        Dim pnamelist As List(Of String) = StoreRemKillNameList
+                        For Each item In pnamelist
+                            processnames.Add(item)
                         Next
+
+                        'Write the PS1 File
+                        Dim psfile As System.IO.StreamWriter
+                        psfile = My.Computer.FileSystem.OpenTextFileWriter(sfdPowerShell.FileName, False)
+                        If chkbypasscerts.Checked = True Then
+                            psfile.WriteLine("#Ignore Bad Certs")
+                            psfile.WriteLine("[System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}")
+                        End If
+                        psfile.WriteLine("#Service URI")
+                        psfile.WriteLine("$Service = New-WebServiceProxy -uri https://" & txtServer.Text & "/" & My.Settings.websitepath & "/services/api/JobsService.asmx?wsdl")
+                        psfile.WriteLine("$type = $Service.GetType().Namespace")
+                        psfile.WriteLine()
+                        psfile.WriteLine("#Main Config")
+                        psfile.WriteLine("#----------------------------------------------")
+                        psfile.WriteLine("$TemplateName = """ & templatename & """")
+                        psfile.WriteLine("$JobName = """ & txtJobName.Text & """")
+                        If Not String.IsNullOrWhiteSpace(txtProjectName.Text) Then
+                            psfile.WriteLine("$ProjectName = """ & txtProjectName.Text & """")
+                        Else
+                            psfile.WriteLine("$ProjectName = $null")
+                        End If
+                        psfile.WriteLine("$APIUsername = """ & txtApiUser.Text & """")
+                        psfile.WriteLine("$APIPassword = """ & ToInsecureString(apipass) & """")
+                        If cnames.Count > 0 Then
+                            psfile.Write("$Computers = """)
+                            psfile.Write(String.Join(""",""", cnames))
+                            psfile.Write("""")
+                            psfile.WriteLine()
+                        Else
+                            psfile.Write("$Computers = $null")
+                        End If
+                        If snames.Count > 0 Then
+                            psfile.Write("$Shares = """)
+                            psfile.Write(String.Join(""",""", snames))
+                            psfile.Write("""")
+                            psfile.WriteLine()
+                        Else
+                            psfile.WriteLine("$Shares = $null")
+                        End If
+                        If pids.Count > 0 Then
+                            psfile.Write("$PIDs = """)
+                            psfile.Write(String.Join(""",""", pids))
+                            psfile.Write("""")
+                            psfile.WriteLine()
+                        Else
+                            psfile.WriteLine("$PIDs = $null")
+                        End If
+                        If processnames.Count > 0 Then
+                            psfile.Write("$ProcessNames = """)
+                            psfile.Write(String.Join(""",""", processnames))
+                            psfile.Write("""")
+                            psfile.WriteLine()
+                        Else
+                            psfile.WriteLine("$ProcessNames = $null")
+                        End If
+                        psfile.WriteLine("$moduleID = ""ISModuleArcSight""")
+                        psfile.WriteLine("$thirdPartyJobId = ""00000000-0000-0000-0000-000000000000""")
+                        psfile.WriteLine("$integrationInfo = ""Job Runner""")
+                        psfile.WriteLine("#----------------------------------------------")
+                        psfile.WriteLine("#End Main Config")
+                        psfile.WriteLine()
+
+                        If remediatesendfile.Count > 0 Then
+                            psfile.WriteLine("#SendFileOptions")
+                            psfile.WriteLine("$OptionsSendFile = ($type + '.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile')")
+                            psfile.WriteLine("$SendFileOptions = @()")
+                            For i = 0 To remediatesendfile.Count - 1
+                                psfile.WriteLine("#Start - SendFileOption - " & i)
+                                psfile.WriteLine("#----------------------------------------------")
+                                psfile.WriteLine("$send" & i & " = New-Object ($OptionsSendFile)")
+                                psfile.WriteLine("$send" & i & ".FileToSend = """ & remediatesendfile(i).FileToSend & """")
+                                psfile.WriteLine("$send" & i & ".RemotePath = """ & remediatesendfile(i).RemotePath & """")
+                                psfile.WriteLine("$send" & i & ".IsRelative = """ & remediatesendfile(i).IsRelative & """")
+                                psfile.WriteLine("$send" & i & ".OverwriteIfExists = """ & remediatesendfile(i).OverwriteIfExists & """")
+                                psfile.WriteLine("$SendFileOptions += $send" & i)
+                                psfile.WriteLine("#----------------------------------------------")
+                                psfile.WriteLine("#End - SendFileOption - " & i)
+                                psfile.WriteLine()
+                            Next
+                        Else
+                            psfile.WriteLine("$SendFileOptions = $null")
+                        End If
+                        psfile.WriteLine()
+                        If remediateexecute.Count > 0 Then
+                            psfile.WriteLine("#ExecuteFileOptions")
+                            psfile.WriteLine("$OptionsExecute = ($type + '.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute')")
+                            psfile.WriteLine("$ExecuteOptions = @()")
+                            For i = 0 To remediateexecute.Count - 1
+                                psfile.WriteLine("#Start - ExecuteOption - " & i)
+                                psfile.WriteLine("#----------------------------------------------")
+                                psfile.WriteLine("$exec" & i & " = New-Object ($OptionsExecute)")
+                                psfile.WriteLine("$exec" & i & ".Executable = """ & remediateexecute(i).Executable & """")
+                                psfile.WriteLine("$exec" & i & ".Arguments = """ & remediateexecute(i).Arguments & """")
+                                psfile.WriteLine("$ExecuteOptions += $exec" & i)
+                                psfile.WriteLine("#----------------------------------------------")
+                                psfile.WriteLine("#End - ExecuteOption - " & i)
+                                psfile.WriteLine()
+                            Next
+                        Else
+                            psfile.WriteLine("$ExecuteOptions = $null")
+                        End If
+                        psfile.WriteLine()
+                        If remediateerase.Count > 0 Then
+                            psfile.WriteLine("#EraseFileOptions")
+                            psfile.WriteLine("$OptionsErase = ($type + '.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase')")
+                            psfile.WriteLine("$EraseOptions = @()")
+                            For i = 0 To remediateerase.Count - 1
+                                psfile.WriteLine("#Start - EraseOption - " & i)
+                                psfile.WriteLine("#----------------------------------------------")
+                                psfile.WriteLine("$erase" & i & " = New-Object ($OptionsErase)")
+                                psfile.WriteLine("$erase" & i & ".RemotePath = """ & remediateerase(i).RemotePath & """")
+                                psfile.WriteLine("$erase" & i & ".IsRelative = """ & remediateerase(i).IsRelative & """")
+                                psfile.WriteLine("$erase" & i & ".Wipe = """ & remediateerase(i).Wipe & """")
+                                psfile.WriteLine("$EraseOptions += $erase" & i)
+                                psfile.WriteLine("#----------------------------------------------")
+                                psfile.WriteLine("#End - EraseOption - " & i)
+                                psfile.WriteLine()
+                            Next
+                        Else
+                            psfile.WriteLine("$EraseOptions = $null")
+                        End If
+                        psfile.WriteLine()
+                        psfile.WriteLine("#Execute Job")
+                        psfile.WriteLine("$Service.RunJobFromTemplateName($TemplateName, $JobName, $ProjectName, $APIUsername, $APIPassword,")
+                        psfile.WriteLine("$Computers, $Shares, $PIDs, $ProcessNames, $SendFileOptions, $ExecuteOptions, $EraseOptions,")
+
+                        If cnames.Count > 0 Then
+                            psfile.WriteLine("""" & filter.Replace("""", "'") & """, $null,")
+                        ElseIf snames.Count > 0 Then
+                            psfile.WriteLine("$null,""" & filter.Replace("""", "'") & """,")
+                        Else
+                            psfile.WriteLine("$null, $null,")
+                        End If
+
+                        psfile.WriteLine("$moduleID, $thirdPartyJobId, $integrationInfo)")
+
+                        psfile.Close()
+                        DebugWriteLine("Powershell file written to " & sfdPowerShell.FileName)
+                        MsgBox("Powershell file written to " & sfdPowerShell.FileName)
                     Else
-                        psfile.WriteLine("$EraseOptions = $null")
+                        MsgBox("At least one computer or share target must be added.")
                     End If
-                    psfile.WriteLine()
-                    psfile.WriteLine("#Execute Job")
-                    psfile.WriteLine("$Service.RunJobFromTemplateName($TemplateName, $JobName, $ProjectName, $APIUsername, $APIPassword,")
-                    psfile.WriteLine("$Computers, $Shares, $PIDs, $ProcessNames, $SendFileOptions, $ExecuteOptions, $EraseOptions,")
-
-                    If cnames.Count > 0 Then
-                        psfile.WriteLine("""" & filter.Replace("""", "'") & """, $null,")
-                    ElseIf snames.Count > 0 Then
-                        psfile.WriteLine("$null,""" & filter.Replace("""", "'") & """,")
-                    Else
-                        psfile.WriteLine("$null, $null,")
-                    End If
-
-                    psfile.WriteLine("$moduleID, $thirdPartyJobId, $integrationInfo)")
-
-                    psfile.Close()
-
-                    MsgBox("Powershell file written to " & sfdPowerShell.FileName)
                 Else
-                    MsgBox("At least one computer or share target must be added.")
+                    MsgBox("Job name required.")
                 End If
-            Else
-                MsgBox("Job name required.")
-            End If
+            Catch ex As Exception
+                DebugWriteLine(ex.Message)
+            End Try
         End If
     End Sub
 End Class

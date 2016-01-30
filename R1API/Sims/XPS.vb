@@ -69,6 +69,7 @@ Public Module XPS
             Main.lblXPSStatus.Text = "XPS Syslog Malware Event Sent"
 
         Catch ex As Exception
+            DebugWriteLine(ex.Message)
             Main.lblXPSStatus.Text = ex.Message
         End Try
 
@@ -423,6 +424,7 @@ Public Module XPS
                     End If
 
                 Catch ex As HttpListenerException
+                    DebugWriteLine(ex.Message)
                     Console.WriteLine(ex.Message)
                 Finally
 

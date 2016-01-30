@@ -47,7 +47,8 @@ Module JobRunner_DLL
                     ' Purposely do nothing
                     ' Unmanaged dll or assembly cannot be loaded directly from byte[]
                     ' Let the process fall through for next part
-                Catch
+                Catch ex As Exception
+                    DebugWriteLine(ex.Message)
                 End Try
             End Using
 

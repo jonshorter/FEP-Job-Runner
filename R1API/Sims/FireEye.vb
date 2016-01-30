@@ -149,9 +149,11 @@ Module FireEye
                 End If
             End Using
         Catch we As System.Net.WebException
+            DebugWriteLine(we.Message)
             Main.lblFEStatus.Text = we.Message
 
         Catch ex As Exception
+            DebugWriteLine(ex.Message)
             Main.lblFEStatus.Text = ex.Message
 
 

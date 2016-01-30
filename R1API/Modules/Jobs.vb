@@ -201,7 +201,7 @@ Module Jobs
             'If no errors, then update the status as Job submitted + GUID
             If e.Error Is Nothing Then
                 Main.lblJobStatus.Text = "Job Submitted: " & e.Result.RunJobFromTemplateNameResult.ToString
-
+                DebugWriteLine("Job Submitted: " & e.Result.RunJobFromTemplateNameResult.ToString)
 
             Else
                 'Errors!
@@ -212,30 +212,38 @@ Module Jobs
                 Select Case True
                     'Invalid server
                     Case e.Error.Message.Contains("There was no endpoint listening")
+                        DebugWriteLine(e.Error.Message)
                         Main.lblJobStatus.Text = "Invalid Server Name or Address"
                         'Job Target Required
                     Case e.Error.Message.Contains("computerNames or shareName must be provided")
+                        DebugWriteLine(e.Error.Message)
                         Main.lblJobStatus.Text = "A job target must be specificed. Computer or Network Share."
                         'Bad API Username/Pass
                     Case e.Error.Message.Contains("Bad username or password")
+                        DebugWriteLine(e.Error.Message)
                         Main.lblJobStatus.Text = "Bad API Username or Password!"
                         'Can't find job template
                     Case e.Error.Message.Contains("Unable to retrieve template")
-                        Main.lblJobStatus.Text = e.Error.Message.Replace("Server was unable to process request. --->", "").ToString
+                        DebugWriteLine(e.Error.Message)
+                        Main.lblJobStatus.Text = e.Error.Message.Replace("System.Web.Services.Protocols.SoapException: Server was unable to process request. ---> System.ApplicationException:", "").ToString
                         'Bad project name
                     Case e.Error.Message.Contains("Invalid Project Name")
-                        Main.lblJobStatus.Text = e.Error.Message.Replace("Server was unable to process request. --->", "").ToString
+                        DebugWriteLine(e.Error.Message)
+                        Main.lblJobStatus.Text = e.Error.Message.Replace("System.Web.Services.Protocols.SoapException: Server was unable to process request. ---> System.ApplicationException:", "").ToString
                         'Script on job completion error
                     Case e.Error.Message.Contains("ScriptFileName,ImpersonationUsername and  ImpersonationPassword are Required")
-                        Main.lblJobStatus.Text = e.Error.Message.Replace("Server was unable to process request. --->", "").ToString
+                        DebugWriteLine(e.Error.Message)
+                        Main.lblJobStatus.Text = e.Error.Message.Replace("System.Web.Services.Protocols.SoapException: Server was unable to process request. ---> System.ApplicationException:", "").ToString
                         'Catch others - display error
                     Case Else
-                        Main.lblJobStatus.Text = e.Error.Message.Replace("Server was unable to process request. --->", "").ToString
+                        DebugWriteLine(e.Error.Message)
+                        Main.lblJobStatus.Text = e.Error.Message.Replace("System.Web.Services.Protocols.SoapException: Server was unable to process request. ---> System.ApplicationException:", "").ToString
                 End Select
 
 
             End If
         Catch ex As Exception
+            DebugWriteLine(ex.Message)
             Main.lblJobStatus.Text = ex.Message
         End Try
     End Sub
@@ -284,6 +292,7 @@ Module Jobs
             jsserv.RunJobFromTemplateNameAsync(js)
         Catch ex As Exception
             Main.lblJobStatus.Text = ex.Message
+            DebugWriteLine(ex.Message)
         End Try
 
     End Sub

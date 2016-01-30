@@ -137,6 +137,7 @@ Module BoxedJobs
             jsonsw.Close()
 
         Catch ex As Exception
+            DebugWriteLine(ex.Message)
             Return 0
         End Try
         Return 1
@@ -203,6 +204,7 @@ Module BoxedJobs
             jsonsw.Close()
 
         Catch ex As Exception
+            DebugWriteLine(ex.Message)
             Return 0
         End Try
         Return 1

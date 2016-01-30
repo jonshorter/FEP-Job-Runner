@@ -9,7 +9,7 @@ Imports RestSharp
 Module JobRunner_Functions
 
     Public Sub CheckForUpdates(ByVal Silent As Boolean, ByVal PreRelease As Boolean)
-
+        DebugWriteLine("Checking for Updates")
         Try
             Dim rest As New RestSharp.RestClient("https://api.github.com/repos/bmartin5692/R1-Job-Runner/releases")
             Dim request = New RestSharp.RestRequest("latest", RestSharp.Method.GET)
@@ -107,7 +107,7 @@ Module JobRunner_Functions
 
 
     Public Function CheckInclusionFilterList(ByVal FilterName As String) As Integer
-
+        DebugWriteLine("Check Inclusion Filter List")
         Dim inclist As List(Of InclusionFilter) = Main.StoreInFiltList
         Dim retvalue As Integer = -1
         Dim cnt As Integer = 0
@@ -123,7 +123,7 @@ Module JobRunner_Functions
     End Function
 
     Public Function CheckExclusionFilterList(ByVal FilterName As String) As Integer
-
+        DebugWriteLine("Check Exclusion Filter List")
         Dim exclist As List(Of ExclusionFilter) = Main.StoreExFiltList
         Dim retvalue As Integer = -1
         Dim cnt As Integer = 0
@@ -139,6 +139,7 @@ Module JobRunner_Functions
     End Function
 
     Public Function GetCheckedFilters()
+        DebugWriteLine("GetCheckedFilters")
         Dim checkedlist As New List(Of Integer)
         For Each item As DataGridViewRow In Main.dgvFilters.Rows
             If item.Cells(0).Value = True Then

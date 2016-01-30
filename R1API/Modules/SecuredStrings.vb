@@ -13,7 +13,8 @@ Module SecuredStrings
         Try
             Dim decryptedData As Byte() = System.Security.Cryptography.ProtectedData.Unprotect(Convert.FromBase64String(encryptedData), entropy, System.Security.Cryptography.DataProtectionScope.CurrentUser)
             Return ToSecureString(System.Text.Encoding.Unicode.GetString(decryptedData))
-        Catch
+        Catch ex As Exception
+            DebugWriteLine(ex.Message)
             Return New SecureString()
         End Try
     End Function

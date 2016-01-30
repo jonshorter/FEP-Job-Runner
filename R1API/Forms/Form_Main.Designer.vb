@@ -2906,11 +2906,11 @@ Partial Class Main
         'lblJobStatus
         '
         Me.lblJobStatus.AutoSize = True
-        Me.tableJobExecute.SetColumnSpan(Me.lblJobStatus, 4)
+        Me.tableJobExecute.SetColumnSpan(Me.lblJobStatus, 5)
         Me.lblJobStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblJobStatus.Location = New System.Drawing.Point(8, 40)
         Me.lblJobStatus.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblJobStatus.MaximumSize = New System.Drawing.Size(667, 0)
+        Me.lblJobStatus.MaximumSize = New System.Drawing.Size(688, 0)
         Me.lblJobStatus.MinimumSize = New System.Drawing.Size(400, 0)
         Me.lblJobStatus.Name = "lblJobStatus"
         Me.lblJobStatus.Size = New System.Drawing.Size(400, 20)

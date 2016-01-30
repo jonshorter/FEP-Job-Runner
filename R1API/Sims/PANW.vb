@@ -314,6 +314,7 @@ Public Module PANW
                         End If
                     End If
                 Catch ex As HttpListenerException
+                    DebugWriteLine(ex.Message)
                     Console.WriteLine(ex.Message)
                 Finally
 

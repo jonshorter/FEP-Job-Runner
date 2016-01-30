@@ -477,7 +477,9 @@ Namespace JobsService
         
         <System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)>  _
         Public Function EndRunJobFromTemplateName(ByVal result As System.IAsyncResult) As JobsService.RunJobFromTemplateNameResponse Implements JobsService.JobsServiceSoap.EndRunJobFromTemplateName
+
             Return MyBase.Channel.EndRunJobFromTemplateName(result)
+
         End Function
         
         Private Function OnBeginRunJobFromTemplateName(ByVal inValues() As Object, ByVal callback As System.AsyncCallback, ByVal asyncState As Object) As System.IAsyncResult
@@ -498,7 +500,13 @@ Namespace JobsService
         End Sub
         
         Public Overloads Sub RunJobFromTemplateNameAsync(ByVal request As JobsService.RunJobFromTemplateNameRequest)
-            Me.RunJobFromTemplateNameAsync(request, Nothing)
+            Try
+                Me.RunJobFromTemplateNameAsync(request, Nothing)
+
+
+            Catch ex As Exception
+                DebugWriteLine(ex.Message)
+            End Try
         End Sub
         
         Public Overloads Sub RunJobFromTemplateNameAsync(ByVal request As JobsService.RunJobFromTemplateNameRequest, ByVal userState As Object)

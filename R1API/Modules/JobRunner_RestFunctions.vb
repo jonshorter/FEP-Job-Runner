@@ -77,6 +77,7 @@ Module JobRunner_RestFunctions
                 Main.dgvJobsRestJobsList.Rows.Add(New String() {job.Name, job.Status, "Retry", CancelStatus, job.JobType, job.StartDate.ToString, job.EndDate.ToString, job.JobID.ToString, job.ResultID.ToString, "Status", "Result"})
             Next
         Catch ex As Exception
+            DebugWriteLine(ex.Message)
         End Try
     End Sub
 
@@ -94,6 +95,7 @@ Module JobRunner_RestFunctions
             Dim job = r1rest.Functions.Job.ResubmitJob(Main.auth, Main.txtServer.Text, ResubmitJob)
             GetJobList()
         Catch ex As Exception
+            DebugWriteLine(ex.Message)
         End Try
     End Sub
 
@@ -107,6 +109,7 @@ Module JobRunner_RestFunctions
             Dim job = r1rest.Functions.Job.CancelJobResult(Main.auth, Main.txtServer.Text, JobResultID, CancelSchedule)
             GetJobList()
         Catch ex As Exception
+            DebugWriteLine(ex.Message)
         End Try
     End Sub
 
@@ -120,6 +123,7 @@ Module JobRunner_RestFunctions
             Dim job = r1rest.Functions.Job.CancelJobTargetResults(Main.auth, Main.txtServer.Text, JobTargetResultID)
 
         Catch ex As Exception
+            DebugWriteLine(ex.Message)
         End Try
     End Sub
 
@@ -135,6 +139,7 @@ Module JobRunner_RestFunctions
             Dim job = r1rest.Functions.Project.DeleteProject(Main.auth, Main.txtServer.Text, ProjectID)
             GetProjectList("")
         Catch ex As Exception
+            DebugWriteLine(ex.Message)
         End Try
     End Sub
 
@@ -151,6 +156,7 @@ Module JobRunner_RestFunctions
             Main.lblepstatusFailed.Text = "Failed: " & job.Data.failedCount
             Main.lblepstatusSuccessful.Text = "Successful: " & job.Data.completedCount
         Catch ex As Exception
+            DebugWriteLine(ex.Message)
         End Try
     End Sub
 
@@ -174,6 +180,7 @@ Module JobRunner_RestFunctions
 
             Next
         Catch ex As Exception
+            DebugWriteLine(ex.Message)
         End Try
     End Sub
 
@@ -197,6 +204,7 @@ Module JobRunner_RestFunctions
                 Main.dgvProjectList.Rows.Add(New String() {project.Name, project.CreatedDate, project.CreatedByUsername, project.ModifiedDate, project.FtkCaseFolderPath, project.ProjectId})
             Next
         Catch ex As Exception
+            DebugWriteLine(ex.Message)
         End Try
     End Sub
 
@@ -220,6 +228,7 @@ Module JobRunner_RestFunctions
                 Form_JobFromTemplate.dgvProjectList.Rows.Add(New String() {project.Name, project.CreatedDate, project.CreatedByUsername, project.ModifiedDate, project.FtkCaseFolderPath, project.ProjectId})
             Next
         Catch ex As Exception
+            DebugWriteLine(ex.Message)
         End Try
     End Sub
 
@@ -249,6 +258,7 @@ Module JobRunner_RestFunctions
                 Next
             End If
         Catch ex As Exception
+            DebugWriteLine(ex.Message)
         End Try
     End Sub
 
@@ -297,6 +307,7 @@ Module JobRunner_RestFunctions
             Main.flowTasks.Refresh()
 
         Catch ex As Exception
+            DebugWriteLine(ex.Message)
         End Try
     End Sub
 
@@ -324,6 +335,7 @@ Module JobRunner_RestFunctions
             Dim project = r1rest.Functions.Project.CreateProjectSimple(auth, Server, proj)
 
         Catch ex As Exception
+            DebugWriteLine(ex.Message)
         End Try
     End Sub
 
@@ -343,6 +355,7 @@ Module JobRunner_RestFunctions
             Dim project = r1rest.Functions.Project.UpdateProject(auth, Server, proj)
 
         Catch ex As Exception
+            DebugWriteLine(ex.Message)
         End Try
     End Sub
 
@@ -395,6 +408,7 @@ Module JobRunner_RestFunctions
                 Form_JobFromTemplate.dgvTargetEndpoints.Rows.Add(New String() {True, endpoint.computerName, endpoint.ipAddressLastContacted, endpoint.agentOS, endpoint.agentLastContacted, endpoint.computerId})
             Next
         Catch ex As Exception
+            DebugWriteLine(ex.Message)
         End Try
     End Sub
 
@@ -408,6 +422,7 @@ Module JobRunner_RestFunctions
             Return r1rest.Functions.Job.CreateJobFromTemplate(Main.auth, Main.txtServer.Text, Job, Execute)
 
         Catch ex As Exception
+            DebugWriteLine(ex.Message)
             Return ex.Message
         End Try
     End Function
@@ -422,6 +437,7 @@ Module JobRunner_RestFunctions
             Return r1rest.Functions.Job.GetSetJobStatus(Main.auth, Main.txtServer.Text, JobID, Status)
 
         Catch ex As Exception
+            DebugWriteLine(ex.Message)
             Return ex.Message
         End Try
     End Function
@@ -436,6 +452,7 @@ Module JobRunner_RestFunctions
             Return r1rest.Functions.Job.ThreatScanOptioms(Main.auth, Main.txtServer.Text, JobID, Options)
 
         Catch ex As Exception
+            DebugWriteLine(ex.Message)
             Return ex.Message
         End Try
     End Function
@@ -450,6 +467,7 @@ Module JobRunner_RestFunctions
             Return r1rest.Functions.Job.SetJobSchedule(Main.auth, Main.txtServer.Text, JobID, IsIncremental, Schedule)
 
         Catch ex As Exception
+            DebugWriteLine(ex.Message)
             Return ex.Message
         End Try
     End Function
@@ -540,6 +558,7 @@ Module JobRunner_RestFunctions
 
 
         Catch ex As Exception
+            DebugWriteLine(ex.Message)
         End Try
 
     End Sub
