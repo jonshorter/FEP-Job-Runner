@@ -75,6 +75,9 @@ Public Class Main
             'Set Blank Password
             My.Settings.apipassword = EncryptString(ToSecureString(""))
 
+            'Set websitepath Endpoint
+            My.Settings.websitepath = "Endpoint"
+
             'Updates on
             My.Settings.updatecheck = True
 
