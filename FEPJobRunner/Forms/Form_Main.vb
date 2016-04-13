@@ -2,6 +2,7 @@
 Imports System.Security
 Imports System.Runtime.InteropServices
 Imports FEPRestClient.Models.Response
+Imports FEPRestClient.Models
 Imports System.Threading
 Imports System.Reflection
 Imports System.IO
@@ -1077,32 +1078,6 @@ Public Class Main
     End Sub
 
 
-
-    Private Sub txtJobsSearch_Enter(sender As Object, e As EventArgs) Handles txtJobsSearch.Enter
-        If txtJobsSearch.Text = "Search" Then
-            txtJobsSearch.Text = ""
-        End If
-    End Sub
-
-
-
-
-
-    Private Sub txtJobsSearch_KeyDown(sender As Object, e As KeyEventArgs) Handles txtJobsSearch.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            JobRunner_RestFunctions.GetJobList(txtJobsSearch.Text)
-        End If
-    End Sub
-
-
-    Private Sub txtJobsSearch_Leave(sender As Object, e As EventArgs) Handles txtJobsSearch.Leave
-        If txtJobsSearch.Text = "" Then
-            txtJobsSearch.Text = "Search"
-        End If
-    End Sub
-
-
-
     Private Sub dgvJobsRestJobsList_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvJobsRestJobsList.CellClick
         Try
             If e.RowIndex > -1 Then
@@ -1144,7 +1119,7 @@ Public Class Main
     Private Sub tabControlJobsRest_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabControlJobsRest.SelectedIndexChanged
         Select Case tabControlJobsRest.SelectedTab.Name
             Case tabJobsList.Name
-                JobRunner_RestFunctions.GetJobList("")
+                JobRunner_RestFunctions.GetJobList()
                 Me.Width = 830
                 JobRefreshTimer = Create_JobRefreshTimer()
 
@@ -1152,7 +1127,7 @@ Public Class Main
                 JobRunner_RestFunctions.GetTasks()
                 Me.Width = 830
             Case tabProjects.Name
-                JobRunner_RestFunctions.GetProjectList("")
+                JobRunner_RestFunctions.GetProjectList()
                 Me.Width = 830
             Case tabAlerts.Name
                 JobRunner_RestFunctions.LoadAlerts()
@@ -1168,35 +1143,12 @@ Public Class Main
         splitEndpointStatus.SendToBack()
     End Sub
 
-
-
-    Private Sub txtSearchProject_Enter(sender As Object, e As EventArgs) Handles txtSearchProject.Enter
-        If txtSearchProject.Text = "Search" Then
-            txtSearchProject.Text = ""
-        End If
-    End Sub
-
-    Private Sub txtSearchProject_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSearchProject.KeyDown
-
-        If e.KeyCode = Keys.Enter Then
-            JobRunner_RestFunctions.GetProjectList(txtSearchProject.Text)
-        End If
-    End Sub
-
-
-
-    Private Sub txtSearchProject_Leave(sender As Object, e As EventArgs) Handles txtSearchProject.Leave
-        If txtSearchProject.Text = "" Then
-            txtSearchProject.Text = "Search"
-        End If
-    End Sub
-
-
+   
 
     Private Sub btnNewProject_Click(sender As Object, e As EventArgs) Handles btnNewProject.Click
         Dim projectcreate As New Form_CreateEditProject("Create Project", True)
         projectcreate.ShowDialog()
-        JobRunner_RestFunctions.GetProjectList("")
+        JobRunner_RestFunctions.GetProjectList()
     End Sub
 
 
@@ -1204,7 +1156,7 @@ Public Class Main
     Private Sub btnEditProject_Click(sender As Object, e As EventArgs) Handles btnEditProject.Click
         Dim projectedit As New Form_CreateEditProject("Edit Project", False, dgvProjectList.CurrentRow.Cells(5).Value)
         projectedit.ShowDialog()
-        JobRunner_RestFunctions.GetProjectList("")
+        JobRunner_RestFunctions.GetProjectList()
     End Sub
 
     Private Sub btnDeleteProject_Click(sender As Object, e As EventArgs) Handles btnDeleteProject.Click
@@ -1258,7 +1210,7 @@ Public Class Main
             End If
             If RestClient.IsAuthenticated Then
 
-                JobRunner_RestFunctions.GetJobList("")
+                JobRunner_RestFunctions.GetJobList()
                 JobRefreshTimer = Create_JobRefreshTimer()
                 tabControlJobsRest.SelectedTab = tabJobsList
                 Me.Width = 830
@@ -1381,14 +1333,15 @@ Public Class Main
         If Me.InvokeRequired Then
             Me.Invoke(New RefreshJobTimer(AddressOf JobRefreshUp), Me)
         Else
-            Select Case txtJobsSearch.Text
-                Case ""
-                    JobRunner_RestFunctions.GetJobList("")
-                Case "Search"
-                    JobRunner_RestFunctions.GetJobList("")
-                Case Else
-                    JobRunner_RestFunctions.GetJobList(txtJobsSearch.Text)
-            End Select
+            'Add code for facet search
+            'Select Case txtJobsSearch.Text
+            '   Case ""
+            'JobRunner_RestFunctions.GetJobList("")
+            '    Case "Search"
+            'JobRunner_RestFunctions.GetJobList("")
+            '   Case Else
+            JobRunner_RestFunctions.GetJobList()
+            'End Select
 
         End If
     End Sub
@@ -2155,5 +2108,47 @@ Public Class Main
                 DebugWriteLine(ex.Message)
             End Try
         End If
+    End Sub
+
+   
+    Private Sub txtSearchProject_TextChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
+
+
+    Public Shared Sub projsearchmenu_Click(sender As Object, e As ToolStripItemClickedEventArgs)
+        Debug.WriteLine(e.ClickedItem.OwnerItem.Text)
+        Debug.WriteLine(e.ClickedItem.Text)
+        Dim facsearch As New FacetSearch
+        Dim facsearchfield As New FacetSearchFields
+        facsearchfield.FieldName = e.ClickedItem.OwnerItem.Tag
+        facsearchfield.Values.Add(e.ClickedItem.Tag)
+        facsearch.SearchFields.Add(facsearchfield)
+        JobRunner_RestFunctions.GetProjectList(facsearch)
+    End Sub
+    Public Shared Sub jobsearchmenu_Click(sender As Object, e As ToolStripItemClickedEventArgs)
+        Debug.WriteLine(e.ClickedItem.OwnerItem.Text)
+        Debug.WriteLine(e.ClickedItem.Text)
+        Dim facsearch As New FacetSearch
+        Dim facsearchfield As New FacetSearchFields
+        facsearchfield.FieldName = e.ClickedItem.OwnerItem.Tag
+        facsearchfield.Values.Add(e.ClickedItem.Tag)
+        facsearch.SearchFields.Add(facsearchfield)
+        JobRunner_RestFunctions.GetJobList(facsearch)
+    End Sub
+
+    Private Sub tabProjects_Enter(sender As Object, e As EventArgs) Handles tabProjects.Enter
+        Dim projsearchmenu = JobRunner_RestFunctions.GetProjectFacets
+        dgvProjectList.ContextMenuStrip = projsearchmenu
+    End Sub
+
+    Private Sub btnJobStatusClearSearch_Click(sender As Object, e As EventArgs) Handles btnJobStatusClearSearch.Click
+        JobRunner_RestFunctions.GetJobList()
+    End Sub
+
+    Private Sub tabJobsList_Enter(sender As Object, e As EventArgs) Handles tabJobsList.Enter
+        Dim jobsearchmenu = JobRunner_RestFunctions.GetJobFacets
+        dgvJobsRestJobsList.ContextMenuStrip = jobsearchmenu
     End Sub
 End Class

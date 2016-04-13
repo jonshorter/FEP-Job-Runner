@@ -27,6 +27,62 @@ Module JobRunner_RestFunctions
 
     End Sub
 
+    Public Function GetProjectFacets()
+
+        If Main.RestClient.IsAuthenticated = False Then
+            Main.RestClient.Authenticate()
+        End If
+
+        Dim facets = Main.RestClient.Functions.Project.GetProjectFacets()
+        Dim cmenu As New ContextMenuStrip
+
+
+        For Each facet In facets.Data
+            Dim mitem As New ToolStripMenuItem(facet.Label)
+            mitem.Tag = facet.Key
+            AddHandler mitem.DropDownItemClicked, AddressOf Main.projsearchmenu_Click
+
+            If facet.TotalOptions > 0 Then
+                For Each opt In facet.Options
+                    Dim optitem As New ToolStripMenuItem(opt.Label)
+                    optitem.Tag = opt.Key
+                    mitem.DropDownItems.Add(optitem)
+                Next
+            End If
+            cmenu.Items.Add(mitem)
+        Next
+        Return cmenu
+
+    End Function
+
+    Public Function GetJobFacets()
+
+        If Main.RestClient.IsAuthenticated = False Then
+            Main.RestClient.Authenticate()
+        End If
+
+        Dim facets = Main.RestClient.Functions.Job.GetJobResultsFacets
+        Dim cmenu As New ContextMenuStrip
+
+
+        For Each facet In facets.Data
+            Dim mitem As New ToolStripMenuItem(facet.Label)
+            mitem.Tag = facet.Key
+            AddHandler mitem.DropDownItemClicked, AddressOf Main.jobsearchmenu_Click
+
+            If facet.TotalOptions > 0 Then
+                For Each opt In facet.Options
+                    Dim optitem As New ToolStripMenuItem(opt.Label)
+                    optitem.Tag = opt.Key
+                    mitem.DropDownItems.Add(optitem)
+                Next
+            End If
+            cmenu.Items.Add(mitem)
+        Next
+        Return cmenu
+
+    End Function
+
     Public Function GetTemplateInfo(ByVal templateid As String) As ApiResponse(Of TemplateInformation)
 
         If Main.RestClient.IsAuthenticated = False Then
@@ -37,13 +93,13 @@ Module JobRunner_RestFunctions
 
     End Function
 
-    Public Sub GetJobList(Optional Search As String = "")
+    Public Sub GetJobList(Optional Search As FEPRestClient.Models.FacetSearch = Nothing)
         Try
-              If Main.RestClient.IsAuthenticated = False Then
+            If Main.RestClient.IsAuthenticated = False Then
                 Main.RestClient.Authenticate()
             End If
             Dim jobslist As ApiResponse(Of JobData)
-            If Not Search = "" Or Search = "Search" Then
+            If Not Search Is Nothing Then
                 jobslist = Main.RestClient.Functions.Job.GetAllJobs(, 90000, , Search)
             Else
                 jobslist = Main.RestClient.Functions.Job.GetAllJobs(, 90000)
@@ -113,7 +169,7 @@ Module JobRunner_RestFunctions
                 Main.RestClient.Authenticate()
             End If
             Dim job = Main.RestClient.Functions.Project.DeleteProject(ProjectID)
-            GetProjectList("")
+            GetProjectList()
         Catch ex As Exception
             DebugWriteLine(ex.Message)
         End Try
@@ -156,13 +212,13 @@ Module JobRunner_RestFunctions
         End Try
     End Sub
 
-    Public Sub GetProjectList(Optional Search As String = "")
+    Public Sub GetProjectList(Optional Search As FEPRestClient.Models.FacetSearch = Nothing)
         Try
-    If Main.RestClient.IsAuthenticated = False Then
+            If Main.RestClient.IsAuthenticated = False Then
                 Main.RestClient.Authenticate()
             End If
             Dim projectlist As ApiResponse(Of List(Of ProjectPresenter))
-            If Not Search = "" Or Search = "Search" Then
+            If Not Search Is Nothing Then
                 projectlist = Main.RestClient.Functions.Project.GetProjectList(Search)
             Else
                 projectlist = Main.RestClient.Functions.Project.GetProjectList()
@@ -185,7 +241,7 @@ Module JobRunner_RestFunctions
             End If
             Dim projectlist As ApiResponse(Of List(Of ProjectPresenter))
             If Not Search = "" Or Search = "Search" Then
-                projectlist = Main.RestClient.Functions.Project.GetProjectList(Search)
+                projectlist = Main.RestClient.Functions.Project.GetProjectList()
             Else
                 projectlist = Main.RestClient.Functions.Project.GetProjectList()
             End If

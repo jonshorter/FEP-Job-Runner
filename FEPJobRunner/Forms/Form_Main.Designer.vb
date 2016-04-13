@@ -172,7 +172,6 @@ Partial Class Main
         Me.btnDeleteProject = New System.Windows.Forms.Button()
         Me.btnEditProject = New System.Windows.Forms.Button()
         Me.btnNewProject = New System.Windows.Forms.Button()
-        Me.txtSearchProject = New System.Windows.Forms.TextBox()
         Me.dgvProjectList = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CreationDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -182,7 +181,6 @@ Partial Class Main
         Me.ProjectID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tabJobsList = New System.Windows.Forms.TabPage()
         Me.splitJobsRestJobs = New System.Windows.Forms.SplitContainer()
-        Me.txtJobsSearch = New System.Windows.Forms.TextBox()
         Me.dgvJobsRestJobsList = New System.Windows.Forms.DataGridView()
         Me.jobName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.jobStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -315,6 +313,7 @@ Partial Class Main
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
         Me.tooltip = New System.Windows.Forms.ToolTip(Me.components)
         Me.sfdPowerShell = New System.Windows.Forms.SaveFileDialog()
+        Me.btnJobStatusClearSearch = New System.Windows.Forms.Button()
         Me.grpSettings.SuspendLayout()
         Me.flowSettings.SuspendLayout()
         Me.grpReqSettings.SuspendLayout()
@@ -2162,7 +2161,6 @@ Partial Class Main
         Me.splitProjects.Panel1.Controls.Add(Me.btnDeleteProject)
         Me.splitProjects.Panel1.Controls.Add(Me.btnEditProject)
         Me.splitProjects.Panel1.Controls.Add(Me.btnNewProject)
-        Me.splitProjects.Panel1.Controls.Add(Me.txtSearchProject)
         '
         'splitProjects.Panel2
         '
@@ -2209,15 +2207,6 @@ Partial Class Main
         Me.btnNewProject.TabIndex = 2
         Me.btnNewProject.Text = "New"
         Me.btnNewProject.UseVisualStyleBackColor = True
-        '
-        'txtSearchProject
-        '
-        Me.txtSearchProject.AcceptsReturn = True
-        Me.txtSearchProject.Location = New System.Drawing.Point(216, 10)
-        Me.txtSearchProject.Name = "txtSearchProject"
-        Me.txtSearchProject.Size = New System.Drawing.Size(209, 22)
-        Me.txtSearchProject.TabIndex = 1
-        Me.txtSearchProject.Text = "Search"
         '
         'dgvProjectList
         '
@@ -2306,7 +2295,7 @@ Partial Class Main
         '
         'splitJobsRestJobs.Panel1
         '
-        Me.splitJobsRestJobs.Panel1.Controls.Add(Me.txtJobsSearch)
+        Me.splitJobsRestJobs.Panel1.Controls.Add(Me.btnJobStatusClearSearch)
         '
         'splitJobsRestJobs.Panel2
         '
@@ -2314,15 +2303,6 @@ Partial Class Main
         Me.splitJobsRestJobs.Size = New System.Drawing.Size(736, 661)
         Me.splitJobsRestJobs.SplitterDistance = 36
         Me.splitJobsRestJobs.TabIndex = 2
-        '
-        'txtJobsSearch
-        '
-        Me.txtJobsSearch.AcceptsReturn = True
-        Me.txtJobsSearch.Location = New System.Drawing.Point(10, 6)
-        Me.txtJobsSearch.Name = "txtJobsSearch"
-        Me.txtJobsSearch.Size = New System.Drawing.Size(209, 22)
-        Me.txtJobsSearch.TabIndex = 0
-        Me.txtJobsSearch.Text = "Search"
         '
         'dgvJobsRestJobsList
         '
@@ -3837,6 +3817,15 @@ Partial Class Main
         Me.sfdPowerShell.Filter = "Powershell Files|*.ps1"
         Me.sfdPowerShell.InitialDirectory = "My.Application.Info.DirectoryPath & ""\Powershell"""
         '
+        'btnJobStatusClearSearch
+        '
+        Me.btnJobStatusClearSearch.Location = New System.Drawing.Point(3, 10)
+        Me.btnJobStatusClearSearch.Name = "btnJobStatusClearSearch"
+        Me.btnJobStatusClearSearch.Size = New System.Drawing.Size(97, 23)
+        Me.btnJobStatusClearSearch.TabIndex = 0
+        Me.btnJobStatusClearSearch.Text = "Clear Facets"
+        Me.btnJobStatusClearSearch.UseVisualStyleBackColor = True
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -3938,7 +3927,6 @@ Partial Class Main
         CType(Me.dgvProjectList, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabJobsList.ResumeLayout(False)
         Me.splitJobsRestJobs.Panel1.ResumeLayout(False)
-        Me.splitJobsRestJobs.Panel1.PerformLayout()
         Me.splitJobsRestJobs.Panel2.ResumeLayout(False)
         CType(Me.splitJobsRestJobs, System.ComponentModel.ISupportInitialize).EndInit()
         Me.splitJobsRestJobs.ResumeLayout(False)
@@ -4176,7 +4164,6 @@ Partial Class Main
     Friend WithEvents tabRESTUI As System.Windows.Forms.TabPage
     Friend WithEvents tabControlJobsRest As System.Windows.Forms.TabControl
     Friend WithEvents tabJobsList As System.Windows.Forms.TabPage
-    Friend WithEvents txtJobsSearch As System.Windows.Forms.TextBox
     Friend WithEvents splitJobsRestJobs As System.Windows.Forms.SplitContainer
     Friend WithEvents dgvJobsRestJobsList As System.Windows.Forms.DataGridView
     Friend WithEvents splitEndpointStatus As System.Windows.Forms.SplitContainer
@@ -4185,7 +4172,6 @@ Partial Class Main
     Friend WithEvents tabProjects As System.Windows.Forms.TabPage
     Friend WithEvents splitProjects As System.Windows.Forms.SplitContainer
     Friend WithEvents btnNewProject As System.Windows.Forms.Button
-    Friend WithEvents txtSearchProject As System.Windows.Forms.TextBox
     Friend WithEvents dgvProjectList As System.Windows.Forms.DataGridView
     Friend WithEvents tabAlerts As System.Windows.Forms.TabPage
     Friend WithEvents flowTasks As System.Windows.Forms.FlowLayoutPanel
@@ -4299,5 +4285,6 @@ Partial Class Main
     Friend WithEvents threatScore As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents btnSavePowershell As System.Windows.Forms.Button
     Friend WithEvents sfdPowerShell As System.Windows.Forms.SaveFileDialog
+    Friend WithEvents btnJobStatusClearSearch As System.Windows.Forms.Button
 
 End Class
