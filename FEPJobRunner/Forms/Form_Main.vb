@@ -2127,6 +2127,27 @@ Public Class Main
         facsearch.SearchFields.Add(facsearchfield)
         JobRunner_RestFunctions.GetProjectList(facsearch)
     End Sub
+    Public Shared Sub projsearchmenu_txtEnter(sender As Object, e As KeyEventArgs)
+
+        If e.KeyCode = Keys.Enter Then
+            Dim facsearch As New FacetSearch
+            Dim facsearchfield As New FacetSearchFields
+            facsearch.SearchAny.Add(sender.text)
+            JobRunner_RestFunctions.GetProjectList(facsearch)
+        End If
+       
+    End Sub
+    Public Shared Sub jobsearchmenu_txtEnter(sender As Object, e As KeyEventArgs)
+
+        If e.KeyCode = Keys.Enter Then
+            Dim facsearch As New FacetSearch
+            Dim facsearchfield As New FacetSearchFields
+            facsearch.SearchAny.Add(sender.text)
+            JobRunner_RestFunctions.GetJobList(facsearch)
+        End If
+
+    End Sub
+
     Public Shared Sub jobsearchmenu_Click(sender As Object, e As ToolStripItemClickedEventArgs)
         Debug.WriteLine(e.ClickedItem.OwnerItem.Text)
         Debug.WriteLine(e.ClickedItem.Text)
@@ -2137,6 +2158,7 @@ Public Class Main
         facsearch.SearchFields.Add(facsearchfield)
         JobRunner_RestFunctions.GetJobList(facsearch)
     End Sub
+
 
     Private Sub tabProjects_Enter(sender As Object, e As EventArgs) Handles tabProjects.Enter
         Dim projsearchmenu = JobRunner_RestFunctions.GetProjectFacets

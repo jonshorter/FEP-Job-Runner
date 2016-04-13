@@ -51,6 +51,13 @@ Module JobRunner_RestFunctions
             End If
             cmenu.Items.Add(mitem)
         Next
+        Dim citem As New ToolStripTextBox("Search")
+        citem.Text = "Search"
+        citem.Tag = "Search"
+        AddHandler citem.KeyDown, AddressOf Main.projsearchmenu_txtEnter
+
+        cmenu.Items.Add(citem)
+
         Return cmenu
 
     End Function
@@ -79,6 +86,13 @@ Module JobRunner_RestFunctions
             End If
             cmenu.Items.Add(mitem)
         Next
+        Dim citem As New ToolStripTextBox("Search")
+        citem.Text = "Search"
+        citem.Tag = "Search"
+        AddHandler citem.KeyDown, AddressOf Main.jobsearchmenu_txtEnter
+
+        cmenu.Items.Add(citem)
+
         Return cmenu
 
     End Function

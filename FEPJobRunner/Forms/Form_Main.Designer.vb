@@ -181,6 +181,7 @@ Partial Class Main
         Me.ProjectID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tabJobsList = New System.Windows.Forms.TabPage()
         Me.splitJobsRestJobs = New System.Windows.Forms.SplitContainer()
+        Me.btnJobStatusClearSearch = New System.Windows.Forms.Button()
         Me.dgvJobsRestJobsList = New System.Windows.Forms.DataGridView()
         Me.jobName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.jobStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -313,7 +314,6 @@ Partial Class Main
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
         Me.tooltip = New System.Windows.Forms.ToolTip(Me.components)
         Me.sfdPowerShell = New System.Windows.Forms.SaveFileDialog()
-        Me.btnJobStatusClearSearch = New System.Windows.Forms.Button()
         Me.grpSettings.SuspendLayout()
         Me.flowSettings.SuspendLayout()
         Me.grpReqSettings.SuspendLayout()
@@ -2304,6 +2304,15 @@ Partial Class Main
         Me.splitJobsRestJobs.SplitterDistance = 36
         Me.splitJobsRestJobs.TabIndex = 2
         '
+        'btnJobStatusClearSearch
+        '
+        Me.btnJobStatusClearSearch.Location = New System.Drawing.Point(3, 10)
+        Me.btnJobStatusClearSearch.Name = "btnJobStatusClearSearch"
+        Me.btnJobStatusClearSearch.Size = New System.Drawing.Size(97, 23)
+        Me.btnJobStatusClearSearch.TabIndex = 0
+        Me.btnJobStatusClearSearch.Text = "Clear Facets"
+        Me.btnJobStatusClearSearch.UseVisualStyleBackColor = True
+        '
         'dgvJobsRestJobsList
         '
         Me.dgvJobsRestJobsList.AllowUserToAddRows = False
@@ -3816,15 +3825,6 @@ Partial Class Main
         Me.sfdPowerShell.DefaultExt = "ps1"
         Me.sfdPowerShell.Filter = "Powershell Files|*.ps1"
         Me.sfdPowerShell.InitialDirectory = "My.Application.Info.DirectoryPath & ""\Powershell"""
-        '
-        'btnJobStatusClearSearch
-        '
-        Me.btnJobStatusClearSearch.Location = New System.Drawing.Point(3, 10)
-        Me.btnJobStatusClearSearch.Name = "btnJobStatusClearSearch"
-        Me.btnJobStatusClearSearch.Size = New System.Drawing.Size(97, 23)
-        Me.btnJobStatusClearSearch.TabIndex = 0
-        Me.btnJobStatusClearSearch.Text = "Clear Facets"
-        Me.btnJobStatusClearSearch.UseVisualStyleBackColor = True
         '
         'Main
         '
