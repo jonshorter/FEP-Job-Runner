@@ -1041,9 +1041,15 @@ Public Class Main
     Private Sub tabJobExecution_Enter(sender As Object, e As EventArgs) Handles tabJobExecution.Enter
         If chkRestAPI.Checked Then
             If RestClient.IsAuthenticated = False Then
+                If chkbypasscerts.Checked Then
+                    'Ignore self-signed / bad certificates
+                    RestClient.IgnoreSSL = True
+                    ServicePointManager.ServerCertificateValidationCallback = AddressOf ValidateRemoteCertificate
+                End If
                 RestClient.Authenticate()
             End If
             If RestClient.IsAuthenticated Then
+
                 JobRunner_RestFunctions.GetJobTemplates()
 
                 If My.Settings.templatenameselect <> "" Then
@@ -1056,7 +1062,7 @@ Public Class Main
                 Else
                     txtTemplateName.SelectedIndex = 0
                 End If
-            
+
             End If
         Else
             txtTemplateName.Items.Clear()
@@ -1206,10 +1212,19 @@ Public Class Main
 
         If tabMenu.SelectedTab.Name = tabRESTUI.Name Then
             If RestClient.IsAuthenticated = False Then
+                If chkbypasscerts.Checked Then
+                    'Ignore self-signed / bad certificates
+                    RestClient.IgnoreSSL = True
+                    ServicePointManager.ServerCertificateValidationCallback = AddressOf ValidateRemoteCertificate
+                End If
                 RestClient.Authenticate()
             End If
             If RestClient.IsAuthenticated Then
-
+                If chkbypasscerts.Checked Then
+                    'Ignore self-signed / bad certificates
+                    RestClient.IgnoreSSL = True
+                    ServicePointManager.ServerCertificateValidationCallback = AddressOf ValidateRemoteCertificate
+                End If
                 JobRunner_RestFunctions.GetJobList()
                 JobRefreshTimer = Create_JobRefreshTimer()
                 tabControlJobsRest.SelectedTab = tabJobsList
@@ -1291,26 +1306,31 @@ Public Class Main
     Private Sub btnLoadDefaultTemplateName_Click(sender As Object, e As EventArgs) Handles btnLoadDefaultTemplateName.Click
 
         If chkRestAPI.Checked = True Then
+            If chkbypasscerts.Checked Then
+                'Ignore self-signed / bad certificates
+                RestClient.IgnoreSSL = True
+                ServicePointManager.ServerCertificateValidationCallback = AddressOf ValidateRemoteCertificate
+            End If
             If RestClient.IsAuthenticated = False Then
                 RestClient.Authenticate()
             End If
             JobRunner_RestFunctions.GetJobTemplates()
 
-                txtDefaultTemplateName.Items.Clear()
-                Dim tempitems(txtTemplateName.Items.Count - 1)
-                txtTemplateName.Items.CopyTo(tempitems, 0)
-                txtDefaultTemplateName.Items.AddRange(tempitems)
-                If My.Settings.templatenameselect <> "" Then
-                    If txtDefaultTemplateName.Items.Contains(My.Settings.templatenameselect) Then
-                        txtDefaultTemplateName.SelectedItem = My.Settings.templatenameselect
-                    Else
-                        txtDefaultTemplateName.Items.Add(My.Settings.templatenameselect)
-                        txtDefaultTemplateName.SelectedItem = My.Settings.templatenameselect
-                    End If
+            txtDefaultTemplateName.Items.Clear()
+            Dim tempitems(txtTemplateName.Items.Count - 1)
+            txtTemplateName.Items.CopyTo(tempitems, 0)
+            txtDefaultTemplateName.Items.AddRange(tempitems)
+            If My.Settings.templatenameselect <> "" Then
+                If txtDefaultTemplateName.Items.Contains(My.Settings.templatenameselect) Then
+                    txtDefaultTemplateName.SelectedItem = My.Settings.templatenameselect
                 Else
-                    txtDefaultTemplateName.SelectedIndex = 0
+                    txtDefaultTemplateName.Items.Add(My.Settings.templatenameselect)
+                    txtDefaultTemplateName.SelectedItem = My.Settings.templatenameselect
                 End If
-           
+            Else
+                txtDefaultTemplateName.SelectedIndex = 0
+            End If
+
         Else
             txtDefaultTemplateName.Items.Clear()
             txtDefaultTemplateName.Items.Add("coll-evtx")
@@ -2172,5 +2192,9 @@ Public Class Main
     Private Sub tabJobsList_Enter(sender As Object, e As EventArgs) Handles tabJobsList.Enter
         Dim jobsearchmenu = JobRunner_RestFunctions.GetJobFacets
         dgvJobsRestJobsList.ContextMenuStrip = jobsearchmenu
+    End Sub
+
+    Private Sub chkbypasscerts_CheckedChanged(sender As Object, e As EventArgs) Handles chkbypasscerts.CheckedChanged
+
     End Sub
 End Class
