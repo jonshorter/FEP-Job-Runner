@@ -11,7 +11,7 @@ Module JobRunner_Functions
     Public Sub CheckForUpdates(ByVal Silent As Boolean, ByVal PreRelease As Boolean)
         DebugWriteLine("Checking for Updates")
         Try
-            Dim rest As New RestSharp.RestClient("https://api.github.com/repos/bmartin5692/R1-Job-Runner/releases")
+            Dim rest As New RestSharp.RestClient("https://api.github.com/repos/bmartin5692/FEP-Job-Runner/releases")
             Dim request = New RestSharp.RestRequest("latest", RestSharp.Method.GET)
             request.RequestFormat = DataFormat.Json
             request.JsonSerializer = New RestSharpJsonNetSerializer
@@ -66,7 +66,7 @@ Module JobRunner_Functions
                 newrelease_description = rgx.Replace(newrelease_description, replacement)
             End If
             For Each asset In newrelease.assets
-                If asset.browser_download_url.Contains("R1_Job_Runner") Then
+                If asset.browser_download_url.Contains("FEP_Job_Runner") Then
                     newrelease_link = asset.browser_download_url
                 End If
             Next
@@ -91,7 +91,7 @@ Module JobRunner_Functions
                     End If
                 End If
             Else
-                'There may be releases, but they don't include R1_Job_Runner executable attached.
+                'There may be releases, but they don't include FEP_Job_Runner executable attached.
                 If Not Silent = True Then
                     MsgBox("No Updates Available. Your have the latest version available.", MsgBoxStyle.Information, "No Updates Available")
                 End If

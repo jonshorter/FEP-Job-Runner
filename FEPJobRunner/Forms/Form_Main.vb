@@ -12,6 +12,8 @@ Imports System.Text
 Public Class Main
 
     Public RestClient As New FEPRestClient.Client
+    Public RestClientValidLogin As Boolean = False
+
     Public JobRefreshTimer As System.Threading.Timer
     Public JobEndpointRefreshTimer As System.Threading.Timer
     Public AlertsRefreshTimer As System.Threading.Timer
@@ -200,6 +202,9 @@ Public Class Main
             Dim ppass = MsgBox("Save New Password?", MsgBoxStyle.YesNo, "Save Password")
             If ppass = MsgBoxResult.Yes Then
                 RestClient.Password = txtAPIPass.Text
+                If RestClient.IsAuthenticated = True Then
+                    RestClient.Logout()
+                End If
                 My.Settings.apipassword = EncryptString(ToSecureString(txtAPIPass.Text))
                 Me.apipass = DecryptString(My.Settings.apipassword)
                 txtAPIPass.Text = apipass.ToString
@@ -1212,24 +1217,13 @@ Public Class Main
 
         If tabMenu.SelectedTab.Name = tabRESTUI.Name Then
             If RestClient.IsAuthenticated = False Then
-                If chkbypasscerts.Checked Then
-                    'Ignore self-signed / bad certificates
-                    RestClient.IgnoreSSL = True
-                    ServicePointManager.ServerCertificateValidationCallback = AddressOf ValidateRemoteCertificate
-                End If
-                RestClient.Authenticate()
+                JobRunner_RestFunctions.FEPAuthenticate()
             End If
             If RestClient.IsAuthenticated Then
-                If chkbypasscerts.Checked Then
-                    'Ignore self-signed / bad certificates
-                    RestClient.IgnoreSSL = True
-                    ServicePointManager.ServerCertificateValidationCallback = AddressOf ValidateRemoteCertificate
-                End If
                 JobRunner_RestFunctions.GetJobList()
                 JobRefreshTimer = Create_JobRefreshTimer()
                 tabControlJobsRest.SelectedTab = tabJobsList
                 Me.Width = 830
-           
             End If
         End If
         If tabMenu.SelectedTab.Name = tabJobExecution.Name Then
@@ -1305,15 +1299,11 @@ Public Class Main
 
     Private Sub btnLoadDefaultTemplateName_Click(sender As Object, e As EventArgs) Handles btnLoadDefaultTemplateName.Click
 
+       
+
         If chkRestAPI.Checked = True Then
-            If chkbypasscerts.Checked Then
-                'Ignore self-signed / bad certificates
-                RestClient.IgnoreSSL = True
-                ServicePointManager.ServerCertificateValidationCallback = AddressOf ValidateRemoteCertificate
-            End If
-            If RestClient.IsAuthenticated = False Then
-                RestClient.Authenticate()
-            End If
+            JobRunner_RestFunctions.FEPAuthenticate()
+
             JobRunner_RestFunctions.GetJobTemplates()
 
             txtDefaultTemplateName.Items.Clear()
@@ -2195,6 +2185,28 @@ Public Class Main
     End Sub
 
     Private Sub chkbypasscerts_CheckedChanged(sender As Object, e As EventArgs) Handles chkbypasscerts.CheckedChanged
+        If chkbypasscerts.Checked = True Then
+            RestClient.IgnoreSSL = True
+        Else
+            RestClient.IgnoreSSL = False
+        End If
 
+    End Sub
+
+    Private Sub txtAPIPass_Leave(sender As Object, e As EventArgs) Handles txtAPIPass.Leave
+        btnSaveSettings_Click(e, e)
+
+    End Sub
+
+    Private Sub txtServer_Leave(sender As Object, e As EventArgs) Handles txtServer.Leave
+        btnSaveSettings_Click(e, e)
+    End Sub
+
+    Private Sub txtApiUser_Leave(sender As Object, e As EventArgs) Handles txtApiUser.Leave
+        btnSaveSettings_Click(e, e)
+    End Sub
+
+    Private Sub chkRestAPI_Leave(sender As Object, e As EventArgs) Handles chkRestAPI.Leave
+        btnSaveSettings_Click(e, e)
     End Sub
 End Class

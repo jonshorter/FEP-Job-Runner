@@ -68,7 +68,7 @@
     End Sub
 
     Private Sub bgwCreateProject_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwCreateProject.DoWork
-        JobRunner_RestFunctions.CreateProject(txtNewProjectName.Text, txtNewProjectDescription.Text, chkEnableThreatBridge.Checked, e.Argument(0), e.Argument(1))
+        JobRunner_RestFunctions.CreateProject(txtNewProjectName.Text, txtNewProjectDescription.Text, chkEnableThreatBridge.Checked)
     End Sub
 
     Private Sub bgwCreateProject_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwCreateProject.RunWorkerCompleted
@@ -92,7 +92,7 @@
     End Sub
 
     Private Sub bgwEditProject_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwEditProject.DoWork
-        JobRunner_RestFunctions.EditProject(EditProjectID, txtNewProjectName.Text, txtNewProjectDescription.Text, chkEnableThreatBridge.Checked, e.Argument(0), e.Argument(1))
+        JobRunner_RestFunctions.EditProject(EditProjectID, txtNewProjectName.Text, txtNewProjectDescription.Text, chkEnableThreatBridge.Checked)
 
     End Sub
 

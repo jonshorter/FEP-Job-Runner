@@ -221,7 +221,6 @@
     <EmbeddedResource Include="Newtonsoft.Json.dll" />
     <EmbeddedResource Include="FEPRestClient.dll" />
     <Content Include="Fidelis.ico" />
-    <Content Include="r1branding.ico" />
     <None Include="Service References\JobsService\R1_Job_Runner.JobsService.RunJobFromTemplateNameResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
