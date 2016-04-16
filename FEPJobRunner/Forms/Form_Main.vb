@@ -940,7 +940,7 @@ Public Class Main
                 If Not xps_sim_var Is Nothing Then
                     xps_sim_var.MalwareMD5 = txtXPSMalwareMD5.Text
                 End If
-                DebugWriteLine("Sending XPS Event")
+                DebugWriteLine("Sending Network Event")
                 XPS.SendEvent(xpststr)
             End If
         Catch Ex As Exception
@@ -951,31 +951,31 @@ Public Class Main
 
 
     Private Sub tabXPS_Enter(sender As Object, e As EventArgs) Handles tabXPS.Enter
-        lblXPSHostname.Location = New Point(xpsPicture.Location.X + 94, xpsPicture.Location.Y + 86)
+        lblXPSHostname.Location = New Point(xpsPicture.Location.X + 75, xpsPicture.Location.Y + 65)
         lblXPSHostname.Text = My.Computer.Name & ":" & xps_sim_Port.Value
         cmbXPSSeverity.SelectedItem = "Critical"
-        txtXPSSim.Text = "The XPS CP Sim simulates Resolution1 queries to XPS to get malware reports and kick off validated threatscans. After starting the XPS CP Sim, configure the Resolution1 XPS connector as shown below. If Job Runner isn't running on the R1 server, browse to https://" & My.Computer.Name & ":" & xps_sim_Port.Value & " on the server and import the certificate to the Local Machine - Trusted Root Certification Authorities Store."
+        txtXPSSim.Text = "The Network CP Sim simulates Endpoint queries to Network to get malware reports and kick off validated threatscans. After starting the Network CP Sim, configure the FEP Network connector as shown below. If Job Runner isn't running on the FEP server, browse to https://" & My.Computer.Name & ":" & xps_sim_Port.Value & " on the server and import the certificate to the Local Machine - Trusted Root Certification Authorities Store."
     End Sub
 
     Private Sub btnStartXPSListener_Click(sender As Object, e As EventArgs) Handles btnStartXPSListener.Click
         Select Case btnStartXPSListener.Text
-            Case "Start XPS CP Sim"
+            Case "Start Network CP Sim"
                 Try
-                    btnStartXPSListener.Text = "Stop XPS CP Sim"
-                    lbldemoxpsstatus.Text = "XPS CP Sim Status: Started"
+                    btnStartXPSListener.Text = "Stop Network CP Sim"
+                    lbldemoxpsstatus.Text = "Network CP Sim Status: Started"
                     xps_sim_Port.Enabled = False
                     xps_sim_var = New XPS.XPS_Sim
-                    DebugWriteLine("Starting XPS Sim")
+                    DebugWriteLine("Starting Network Sim")
                     xps_sim_var.Start()
                 Catch ex As Exception
                     DebugWriteLine(ex.Message)
                 End Try
-            Case "Stop XPS CP Sim"
+            Case "Stop Network CP Sim"
                 Try
-                    DebugWriteLine("Stopping XPS Sim")
+                    DebugWriteLine("Stopping Network Sim")
                     xps_sim_var.Stop()
-                    btnStartXPSListener.Text = "Start XPS CP Sim"
-                    lbldemoxpsstatus.Text = "XPS CP Sim Status: Not Started"
+                    btnStartXPSListener.Text = "Start Network CP Sim"
+                    lbldemoxpsstatus.Text = "Network CP Sim Status: Not Started"
                     xps_sim_Port.Enabled = True
                 Catch ex As Exception
                     DebugWriteLine(ex.Message)
@@ -1566,7 +1566,7 @@ Public Class Main
 
     Private Sub xps_sim_Port_ValueChanged(sender As Object, e As EventArgs) Handles xps_sim_Port.ValueChanged
         lblXPSHostname.Text = My.Computer.Name & ":" & xps_sim_Port.Value
-        txtXPSSim.Text = "The XPS CP Sim simulates Resolution1 queries to XPS to get malware reports and kick off validated threatscans. After starting the XPS CP Sim, configure the Resolution1 XPS connector as shown below. If Job Runner isn't running on the R1 server, browse to https://" & My.Computer.Name & ":" & xps_sim_Port.Value & " on the server and import the certificate to the Local Machine - Trusted Root Certification Authorities Store."
+        txtXPSSim.Text = "The Network CP Sim simulates Endpoint queries to Network to get malware reports and kick off validated threatscans. After starting the Network CP Sim, configure the FEP Network connector as shown below. If Job Runner isn't running on the FEP server, browse to https://" & My.Computer.Name & ":" & xps_sim_Port.Value & " on the server and import the certificate to the Local Machine - Trusted Root Certification Authorities Store."
     End Sub
 
     Private Sub Main_RegionChanged(sender As Object, e As EventArgs) Handles Me.RegionChanged

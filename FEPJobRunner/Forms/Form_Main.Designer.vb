@@ -558,7 +558,7 @@ Partial Class Main
         Me.flowSettings.SetFlowBreak(Me.grpReqSettings, True)
         Me.grpReqSettings.Location = New System.Drawing.Point(3, 3)
         Me.grpReqSettings.Name = "grpReqSettings"
-        Me.grpReqSettings.Size = New System.Drawing.Size(646, 167)
+        Me.grpReqSettings.Size = New System.Drawing.Size(646, 138)
         Me.grpReqSettings.TabIndex = 1
         Me.grpReqSettings.TabStop = False
         Me.grpReqSettings.Text = "Required Settings"
@@ -587,7 +587,7 @@ Partial Class Main
         Me.tableSettingRequired.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tableSettingRequired.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tableSettingRequired.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tableSettingRequired.Size = New System.Drawing.Size(640, 146)
+        Me.tableSettingRequired.Size = New System.Drawing.Size(640, 117)
         Me.tableSettingRequired.TabIndex = 0
         '
         'chkRestAPI
@@ -595,7 +595,7 @@ Partial Class Main
         Me.chkRestAPI.AutoSize = True
         Me.chkRestAPI.Checked = True
         Me.chkRestAPI.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkRestAPI.Location = New System.Drawing.Point(398, 122)
+        Me.chkRestAPI.Location = New System.Drawing.Point(398, 93)
         Me.chkRestAPI.Name = "chkRestAPI"
         Me.chkRestAPI.Size = New System.Drawing.Size(170, 21)
         Me.chkRestAPI.TabIndex = 4
@@ -613,7 +613,7 @@ Partial Class Main
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Padding = New System.Windows.Forms.Padding(4)
         Me.tableSettingRequired.SetRowSpan(Me.GroupBox2, 3)
-        Me.GroupBox2.Size = New System.Drawing.Size(237, 111)
+        Me.GroupBox2.Size = New System.Drawing.Size(237, 52)
         Me.GroupBox2.TabIndex = 3
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Website Address:"
@@ -628,6 +628,7 @@ Partial Class Main
         Me.txtcustomwebaddress.Name = "txtcustomwebaddress"
         Me.txtcustomwebaddress.Size = New System.Drawing.Size(197, 22)
         Me.txtcustomwebaddress.TabIndex = 21
+        Me.txtcustomwebaddress.Visible = False
         '
         'rdocustom
         '
@@ -640,6 +641,7 @@ Partial Class Main
         Me.rdocustom.TabStop = True
         Me.tooltip.SetToolTip(Me.rdocustom, "Specify a custom website path.")
         Me.rdocustom.UseVisualStyleBackColor = True
+        Me.rdocustom.Visible = False
         '
         'rdoendpoint
         '
@@ -661,7 +663,7 @@ Partial Class Main
         Me.grpOptDefSet.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.grpOptDefSet.Controls.Add(Me.tableSettingOptional)
         Me.flowSettings.SetFlowBreak(Me.grpOptDefSet, True)
-        Me.grpOptDefSet.Location = New System.Drawing.Point(4, 177)
+        Me.grpOptDefSet.Location = New System.Drawing.Point(4, 148)
         Me.grpOptDefSet.Margin = New System.Windows.Forms.Padding(4)
         Me.grpOptDefSet.Name = "grpOptDefSet"
         Me.grpOptDefSet.Padding = New System.Windows.Forms.Padding(4)
@@ -844,7 +846,7 @@ Partial Class Main
         Me.tableSettingSave.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.tableSettingSave.Controls.Add(Me.btnSaveSettings, 1, 0)
         Me.tableSettingSave.Controls.Add(Me.txtStatusSettings, 0, 0)
-        Me.tableSettingSave.Location = New System.Drawing.Point(3, 398)
+        Me.tableSettingSave.Location = New System.Drawing.Point(3, 369)
         Me.tableSettingSave.Name = "tableSettingSave"
         Me.tableSettingSave.RowCount = 1
         Me.tableSettingSave.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -3157,7 +3159,7 @@ Partial Class Main
         Me.tablePANWSendAlert.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tablePANWSendAlert.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tablePANWSendAlert.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tablePANWSendAlert.Size = New System.Drawing.Size(409, 207)
+        Me.tablePANWSendAlert.Size = New System.Drawing.Size(417, 204)
         Me.tablePANWSendAlert.TabIndex = 0
         '
         'Label30
@@ -3166,9 +3168,9 @@ Partial Class Main
         Me.Label30.Location = New System.Drawing.Point(4, 0)
         Me.Label30.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(160, 17)
+        Me.Label30.Size = New System.Drawing.Size(168, 17)
         Me.Label30.TabIndex = 10
-        Me.Label30.Text = "R1 PANW Listener Port:"
+        Me.Label30.Text = "FEP PANW Listener Port:"
         '
         'Label36
         '
@@ -3182,7 +3184,7 @@ Partial Class Main
         '
         'txtPANWMalwareMD5
         '
-        Me.txtPANWMalwareMD5.Location = New System.Drawing.Point(172, 126)
+        Me.txtPANWMalwareMD5.Location = New System.Drawing.Point(180, 126)
         Me.txtPANWMalwareMD5.Margin = New System.Windows.Forms.Padding(4)
         Me.txtPANWMalwareMD5.Name = "txtPANWMalwareMD5"
         Me.txtPANWMalwareMD5.Size = New System.Drawing.Size(233, 22)
@@ -3191,7 +3193,7 @@ Partial Class Main
         '
         'txtPANWMalwareName
         '
-        Me.txtPANWMalwareName.Location = New System.Drawing.Point(172, 96)
+        Me.txtPANWMalwareName.Location = New System.Drawing.Point(180, 96)
         Me.txtPANWMalwareName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtPANWMalwareName.Name = "txtPANWMalwareName"
         Me.txtPANWMalwareName.Size = New System.Drawing.Size(233, 22)
@@ -3230,7 +3232,7 @@ Partial Class Main
         '
         'panwPort
         '
-        Me.panwPort.Location = New System.Drawing.Point(172, 4)
+        Me.panwPort.Location = New System.Drawing.Point(180, 4)
         Me.panwPort.Margin = New System.Windows.Forms.Padding(4)
         Me.panwPort.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
         Me.panwPort.Name = "panwPort"
@@ -3242,7 +3244,7 @@ Partial Class Main
         '
         Me.btnPANWSend.AutoSize = True
         Me.btnPANWSend.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btnPANWSend.Location = New System.Drawing.Point(172, 156)
+        Me.btnPANWSend.Location = New System.Drawing.Point(180, 156)
         Me.btnPANWSend.Margin = New System.Windows.Forms.Padding(4)
         Me.btnPANWSend.Name = "btnPANWSend"
         Me.btnPANWSend.Size = New System.Drawing.Size(180, 27)
@@ -3252,7 +3254,7 @@ Partial Class Main
         '
         'txtPANWTarget
         '
-        Me.txtPANWTarget.Location = New System.Drawing.Point(172, 34)
+        Me.txtPANWTarget.Location = New System.Drawing.Point(180, 34)
         Me.txtPANWTarget.Margin = New System.Windows.Forms.Padding(4)
         Me.txtPANWTarget.Name = "txtPANWTarget"
         Me.txtPANWTarget.Size = New System.Drawing.Size(233, 22)
@@ -3265,7 +3267,7 @@ Partial Class Main
         Me.cmbPANWAlert.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbPANWAlert.FormattingEnabled = True
         Me.cmbPANWAlert.Items.AddRange(New Object() {"WILDFIRE", "VIRUS", "FILE", "FLOOD", "URL"})
-        Me.cmbPANWAlert.Location = New System.Drawing.Point(172, 64)
+        Me.cmbPANWAlert.Location = New System.Drawing.Point(180, 64)
         Me.cmbPANWAlert.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbPANWAlert.Name = "cmbPANWAlert"
         Me.cmbPANWAlert.Size = New System.Drawing.Size(233, 24)
@@ -3274,11 +3276,11 @@ Partial Class Main
         'lblPANWStatus
         '
         Me.lblPANWStatus.AutoSize = True
-        Me.lblPANWStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPANWStatus.Location = New System.Drawing.Point(172, 187)
+        Me.lblPANWStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPANWStatus.Location = New System.Drawing.Point(180, 187)
         Me.lblPANWStatus.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblPANWStatus.Name = "lblPANWStatus"
-        Me.lblPANWStatus.Size = New System.Drawing.Size(124, 20)
+        Me.lblPANWStatus.Size = New System.Drawing.Size(103, 17)
         Me.lblPANWStatus.TabIndex = 31
         Me.lblPANWStatus.Text = "lblPANWStatus"
         '
@@ -3291,7 +3293,7 @@ Partial Class Main
         Me.grpWildFireSim.Controls.Add(Me.lblwildfirestatus)
         Me.grpWildFireSim.Controls.Add(Me.btn_WildfireStart)
         Me.flowPANW.SetFlowBreak(Me.grpWildFireSim, True)
-        Me.grpWildFireSim.Location = New System.Drawing.Point(419, 4)
+        Me.grpWildFireSim.Location = New System.Drawing.Point(427, 4)
         Me.grpWildFireSim.Margin = New System.Windows.Forms.Padding(4)
         Me.grpWildFireSim.Name = "grpWildFireSim"
         Me.grpWildFireSim.Padding = New System.Windows.Forms.Padding(4)
@@ -3351,14 +3353,14 @@ Partial Class Main
         Me.tablePANWBottom.Controls.Add(Me.txtFireEyeDownload1, 0, 3)
         Me.tablePANWBottom.Controls.Add(Me.lblPANWHitInstruction, 0, 2)
         Me.tablePANWBottom.Controls.Add(Me.txtPANWSim, 0, 0)
-        Me.tablePANWBottom.Location = New System.Drawing.Point(3, 216)
+        Me.tablePANWBottom.Location = New System.Drawing.Point(3, 213)
         Me.tablePANWBottom.Name = "tablePANWBottom"
         Me.tablePANWBottom.RowCount = 4
         Me.tablePANWBottom.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tablePANWBottom.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tablePANWBottom.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tablePANWBottom.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tablePANWBottom.Size = New System.Drawing.Size(707, 275)
+        Me.tablePANWBottom.Size = New System.Drawing.Size(707, 270)
         Me.tablePANWBottom.TabIndex = 43
         '
         'grpWildFirePicture
@@ -3368,7 +3370,7 @@ Partial Class Main
         Me.grpWildFirePicture.Controls.Add(Me.lblWildFireURL)
         Me.grpWildFirePicture.Controls.Add(Me.panwPicture)
         Me.grpWildFirePicture.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.grpWildFirePicture.Location = New System.Drawing.Point(3, 24)
+        Me.grpWildFirePicture.Location = New System.Drawing.Point(3, 23)
         Me.grpWildFirePicture.Name = "grpWildFirePicture"
         Me.grpWildFirePicture.Size = New System.Drawing.Size(701, 187)
         Me.grpWildFirePicture.TabIndex = 41
@@ -3401,12 +3403,12 @@ Partial Class Main
         Me.txtFireEyeDownload1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtFireEyeDownload1.Cursor = System.Windows.Forms.Cursors.Hand
         Me.txtFireEyeDownload1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtFireEyeDownload1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFireEyeDownload1.Location = New System.Drawing.Point(4, 254)
+        Me.txtFireEyeDownload1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFireEyeDownload1.Location = New System.Drawing.Point(4, 251)
         Me.txtFireEyeDownload1.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFireEyeDownload1.Name = "txtFireEyeDownload1"
         Me.txtFireEyeDownload1.ReadOnly = True
-        Me.txtFireEyeDownload1.Size = New System.Drawing.Size(699, 17)
+        Me.txtFireEyeDownload1.Size = New System.Drawing.Size(699, 15)
         Me.txtFireEyeDownload1.TabIndex = 33
         Me.txtFireEyeDownload1.TabStop = False
         Me.txtFireEyeDownload1.Text = "http://fedeploycheck.fireeye.com/appliance-test/test-infection.exe"
@@ -3415,12 +3417,12 @@ Partial Class Main
         '
         Me.lblPANWHitInstruction.AutoSize = True
         Me.lblPANWHitInstruction.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblPANWHitInstruction.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPANWHitInstruction.Location = New System.Drawing.Point(4, 214)
+        Me.lblPANWHitInstruction.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPANWHitInstruction.Location = New System.Drawing.Point(4, 213)
         Me.lblPANWHitInstruction.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblPANWHitInstruction.MaximumSize = New System.Drawing.Size(700, 0)
         Me.lblPANWHitInstruction.Name = "lblPANWHitInstruction"
-        Me.lblPANWHitInstruction.Size = New System.Drawing.Size(699, 36)
+        Me.lblPANWHitInstruction.Size = New System.Drawing.Size(699, 34)
         Me.lblPANWHitInstruction.TabIndex = 32
         Me.lblPANWHitInstruction.Text = "To generate a verified hit from a test PANW ThreatScan download the following EXE" & _
     " to your target, or enter a custom MD5 Hash above."
@@ -3429,12 +3431,12 @@ Partial Class Main
         '
         Me.txtPANWSim.AutoSize = True
         Me.txtPANWSim.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtPANWSim.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPANWSim.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtPANWSim.Location = New System.Drawing.Point(3, 0)
         Me.txtPANWSim.Margin = New System.Windows.Forms.Padding(3, 0, 3, 3)
         Me.txtPANWSim.MaximumSize = New System.Drawing.Size(700, 0)
         Me.txtPANWSim.Name = "txtPANWSim"
-        Me.txtPANWSim.Size = New System.Drawing.Size(700, 18)
+        Me.txtPANWSim.Size = New System.Drawing.Size(700, 17)
         Me.txtPANWSim.TabIndex = 24
         Me.txtPANWSim.Text = "PANW Text. Set at runtime"
         '
@@ -3447,7 +3449,7 @@ Partial Class Main
         Me.tabXPS.Padding = New System.Windows.Forms.Padding(4)
         Me.tabXPS.Size = New System.Drawing.Size(750, 696)
         Me.tabXPS.TabIndex = 6
-        Me.tabXPS.Text = "XPS"
+        Me.tabXPS.Text = "Fidelis Network"
         Me.tabXPS.UseVisualStyleBackColor = True
         '
         'flowXPS
@@ -3492,7 +3494,7 @@ Partial Class Main
         Me.tableXPSGrid.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tableXPSGrid.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tableXPSGrid.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tableXPSGrid.Size = New System.Drawing.Size(395, 208)
+        Me.tableXPSGrid.Size = New System.Drawing.Size(427, 205)
         Me.tableXPSGrid.TabIndex = 0
         '
         'Label38
@@ -3501,13 +3503,13 @@ Partial Class Main
         Me.Label38.Location = New System.Drawing.Point(4, 0)
         Me.Label38.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label38.Name = "Label38"
-        Me.Label38.Size = New System.Drawing.Size(146, 17)
+        Me.Label38.Size = New System.Drawing.Size(178, 17)
         Me.Label38.TabIndex = 17
-        Me.Label38.Text = "R1 XPS Listener Port:"
+        Me.Label38.Text = "FEP Network Listener Port:"
         '
         'xpsPort
         '
-        Me.xpsPort.Location = New System.Drawing.Point(158, 4)
+        Me.xpsPort.Location = New System.Drawing.Point(190, 4)
         Me.xpsPort.Margin = New System.Windows.Forms.Padding(4)
         Me.xpsPort.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
         Me.xpsPort.Name = "xpsPort"
@@ -3517,7 +3519,7 @@ Partial Class Main
         '
         'txtXPSMalwareMD5
         '
-        Me.txtXPSMalwareMD5.Location = New System.Drawing.Point(158, 126)
+        Me.txtXPSMalwareMD5.Location = New System.Drawing.Point(190, 126)
         Me.txtXPSMalwareMD5.Margin = New System.Windows.Forms.Padding(4)
         Me.txtXPSMalwareMD5.Name = "txtXPSMalwareMD5"
         Me.txtXPSMalwareMD5.Size = New System.Drawing.Size(233, 22)
@@ -3536,12 +3538,12 @@ Partial Class Main
         '
         'btnXPSSend
         '
-        Me.btnXPSSend.Location = New System.Drawing.Point(158, 156)
+        Me.btnXPSSend.Location = New System.Drawing.Point(190, 156)
         Me.btnXPSSend.Margin = New System.Windows.Forms.Padding(4)
         Me.btnXPSSend.Name = "btnXPSSend"
-        Me.btnXPSSend.Size = New System.Drawing.Size(185, 28)
+        Me.btnXPSSend.Size = New System.Drawing.Size(207, 28)
         Me.btnXPSSend.TabIndex = 5
-        Me.btnXPSSend.Text = "Send XPS SysLog Alert"
+        Me.btnXPSSend.Text = "Send Network SysLog Alert"
         Me.btnXPSSend.UseVisualStyleBackColor = True
         '
         'Label46
@@ -3556,7 +3558,7 @@ Partial Class Main
         '
         'txtXPSTarget
         '
-        Me.txtXPSTarget.Location = New System.Drawing.Point(158, 34)
+        Me.txtXPSTarget.Location = New System.Drawing.Point(190, 34)
         Me.txtXPSTarget.Margin = New System.Windows.Forms.Padding(4)
         Me.txtXPSTarget.Name = "txtXPSTarget"
         Me.txtXPSTarget.Size = New System.Drawing.Size(233, 22)
@@ -3574,7 +3576,7 @@ Partial Class Main
         '
         'txtXPSMalware
         '
-        Me.txtXPSMalware.Location = New System.Drawing.Point(158, 96)
+        Me.txtXPSMalware.Location = New System.Drawing.Point(190, 96)
         Me.txtXPSMalware.Margin = New System.Windows.Forms.Padding(4)
         Me.txtXPSMalware.Name = "txtXPSMalware"
         Me.txtXPSMalware.Size = New System.Drawing.Size(233, 22)
@@ -3586,7 +3588,7 @@ Partial Class Main
         Me.cmbXPSSeverity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbXPSSeverity.FormattingEnabled = True
         Me.cmbXPSSeverity.Items.AddRange(New Object() {"Low", "Medium", "High", "Critical"})
-        Me.cmbXPSSeverity.Location = New System.Drawing.Point(158, 64)
+        Me.cmbXPSSeverity.Location = New System.Drawing.Point(190, 64)
         Me.cmbXPSSeverity.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbXPSSeverity.Name = "cmbXPSSeverity"
         Me.cmbXPSSeverity.Size = New System.Drawing.Size(233, 24)
@@ -3605,11 +3607,11 @@ Partial Class Main
         'lblXPSStatus
         '
         Me.lblXPSStatus.AutoSize = True
-        Me.lblXPSStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblXPSStatus.Location = New System.Drawing.Point(158, 188)
+        Me.lblXPSStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblXPSStatus.Location = New System.Drawing.Point(190, 188)
         Me.lblXPSStatus.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblXPSStatus.Name = "lblXPSStatus"
-        Me.lblXPSStatus.Size = New System.Drawing.Size(107, 20)
+        Me.lblXPSStatus.Size = New System.Drawing.Size(89, 17)
         Me.lblXPSStatus.TabIndex = 30
         Me.lblXPSStatus.Text = "lblXPSStatus"
         '
@@ -3620,23 +3622,23 @@ Partial Class Main
         Me.GroupBox3.Controls.Add(Me.lbldemoxpsstatus)
         Me.GroupBox3.Controls.Add(Me.btnStartXPSListener)
         Me.flowXPS.SetFlowBreak(Me.GroupBox3, True)
-        Me.GroupBox3.Location = New System.Drawing.Point(405, 4)
+        Me.GroupBox3.Location = New System.Drawing.Point(437, 4)
         Me.GroupBox3.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox3.Size = New System.Drawing.Size(272, 126)
         Me.GroupBox3.TabIndex = 1
         Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "XPS CP Sim"
+        Me.GroupBox3.Text = "Network CP Sim"
         '
         'xps_sim_Port
         '
-        Me.xps_sim_Port.Location = New System.Drawing.Point(136, 28)
+        Me.xps_sim_Port.Location = New System.Drawing.Point(158, 28)
         Me.xps_sim_Port.Margin = New System.Windows.Forms.Padding(4)
         Me.xps_sim_Port.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
         Me.xps_sim_Port.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.xps_sim_Port.Name = "xps_sim_Port"
-        Me.xps_sim_Port.Size = New System.Drawing.Size(128, 22)
+        Me.xps_sim_Port.Size = New System.Drawing.Size(106, 22)
         Me.xps_sim_Port.TabIndex = 0
         Me.xps_sim_Port.Value = New Decimal(New Integer() {8448, 0, 0, 0})
         '
@@ -3646,9 +3648,9 @@ Partial Class Main
         Me.Label43.Location = New System.Drawing.Point(8, 31)
         Me.Label43.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label43.Name = "Label43"
-        Me.Label43.Size = New System.Drawing.Size(118, 17)
+        Me.Label43.Size = New System.Drawing.Size(142, 17)
         Me.Label43.TabIndex = 23
-        Me.Label43.Text = "XPS CP Sim Port:"
+        Me.Label43.Text = "Network CP Sim Port:"
         '
         'lbldemoxpsstatus
         '
@@ -3656,9 +3658,9 @@ Partial Class Main
         Me.lbldemoxpsstatus.Location = New System.Drawing.Point(24, 101)
         Me.lbldemoxpsstatus.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbldemoxpsstatus.Name = "lbldemoxpsstatus"
-        Me.lbldemoxpsstatus.Size = New System.Drawing.Size(208, 17)
+        Me.lbldemoxpsstatus.Size = New System.Drawing.Size(232, 17)
         Me.lbldemoxpsstatus.TabIndex = 22
-        Me.lbldemoxpsstatus.Text = "XPS CP Sim Status: Not Started"
+        Me.lbldemoxpsstatus.Text = "Network CP Sim Status: Not Started"
         '
         'btnStartXPSListener
         '
@@ -3667,7 +3669,7 @@ Partial Class Main
         Me.btnStartXPSListener.Name = "btnStartXPSListener"
         Me.btnStartXPSListener.Size = New System.Drawing.Size(175, 28)
         Me.btnStartXPSListener.TabIndex = 1
-        Me.btnStartXPSListener.Text = "Start XPS CP Sim"
+        Me.btnStartXPSListener.Text = "Start Network CP Sim"
         Me.btnStartXPSListener.UseVisualStyleBackColor = True
         '
         'tableXPSTextPic
@@ -3680,26 +3682,26 @@ Partial Class Main
         Me.tableXPSTextPic.Controls.Add(Me.grpXPSPicture, 0, 1)
         Me.tableXPSTextPic.Controls.Add(Me.Label39, 0, 2)
         Me.tableXPSTextPic.Controls.Add(Me.txtFELink2, 0, 3)
-        Me.tableXPSTextPic.Location = New System.Drawing.Point(3, 217)
+        Me.tableXPSTextPic.Location = New System.Drawing.Point(3, 214)
         Me.tableXPSTextPic.Name = "tableXPSTextPic"
         Me.tableXPSTextPic.RowCount = 4
         Me.tableXPSTextPic.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tableXPSTextPic.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tableXPSTextPic.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tableXPSTextPic.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tableXPSTextPic.Size = New System.Drawing.Size(707, 277)
+        Me.tableXPSTextPic.Size = New System.Drawing.Size(707, 341)
         Me.tableXPSTextPic.TabIndex = 43
         '
         'txtXPSSim
         '
         Me.txtXPSSim.AutoSize = True
         Me.txtXPSSim.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtXPSSim.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtXPSSim.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtXPSSim.Location = New System.Drawing.Point(3, 0)
         Me.txtXPSSim.Margin = New System.Windows.Forms.Padding(3, 0, 3, 3)
         Me.txtXPSSim.MaximumSize = New System.Drawing.Size(700, 0)
         Me.txtXPSSim.Name = "txtXPSSim"
-        Me.txtXPSSim.Size = New System.Drawing.Size(700, 18)
+        Me.txtXPSSim.Size = New System.Drawing.Size(700, 17)
         Me.txtXPSSim.TabIndex = 43
         Me.txtXPSSim.Text = "XPS Text. Set at runtime."
         '
@@ -3709,9 +3711,9 @@ Partial Class Main
         Me.grpXPSPicture.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.grpXPSPicture.Controls.Add(Me.lblXPSHostname)
         Me.grpXPSPicture.Controls.Add(Me.xpsPicture)
-        Me.grpXPSPicture.Location = New System.Drawing.Point(3, 24)
+        Me.grpXPSPicture.Location = New System.Drawing.Point(3, 23)
         Me.grpXPSPicture.Name = "grpXPSPicture"
-        Me.grpXPSPicture.Size = New System.Drawing.Size(508, 189)
+        Me.grpXPSPicture.Size = New System.Drawing.Size(449, 257)
         Me.grpXPSPicture.TabIndex = 42
         Me.grpXPSPicture.TabStop = False
         '
@@ -3719,7 +3721,7 @@ Partial Class Main
         '
         Me.lblXPSHostname.AutoSize = True
         Me.lblXPSHostname.BackColor = System.Drawing.Color.White
-        Me.lblXPSHostname.Location = New System.Drawing.Point(97, 102)
+        Me.lblXPSHostname.Location = New System.Drawing.Point(76, 81)
         Me.lblXPSHostname.MinimumSize = New System.Drawing.Size(367, 0)
         Me.lblXPSHostname.Name = "lblXPSHostname"
         Me.lblXPSHostname.Size = New System.Drawing.Size(367, 17)
@@ -3733,7 +3735,7 @@ Partial Class Main
         Me.xpsPicture.Location = New System.Drawing.Point(3, 18)
         Me.xpsPicture.Margin = New System.Windows.Forms.Padding(4)
         Me.xpsPicture.Name = "xpsPicture"
-        Me.xpsPicture.Size = New System.Drawing.Size(502, 168)
+        Me.xpsPicture.Size = New System.Drawing.Size(443, 236)
         Me.xpsPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
         Me.xpsPicture.TabIndex = 27
         Me.xpsPicture.TabStop = False
@@ -3741,12 +3743,12 @@ Partial Class Main
         'Label39
         '
         Me.Label39.AutoSize = True
-        Me.Label39.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label39.Location = New System.Drawing.Point(4, 216)
+        Me.Label39.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label39.Location = New System.Drawing.Point(4, 283)
         Me.Label39.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label39.MaximumSize = New System.Drawing.Size(700, 0)
         Me.Label39.Name = "Label39"
-        Me.Label39.Size = New System.Drawing.Size(699, 36)
+        Me.Label39.Size = New System.Drawing.Size(687, 34)
         Me.Label39.TabIndex = 24
         Me.Label39.Text = "To generate a verified hit from a test XPS ThreatScan download the following EXE " & _
     "to your target, or enter a custom MD5 hash above."
@@ -3756,12 +3758,12 @@ Partial Class Main
         Me.txtFELink2.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtFELink2.Cursor = System.Windows.Forms.Cursors.Hand
         Me.txtFELink2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtFELink2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFELink2.Location = New System.Drawing.Point(4, 256)
+        Me.txtFELink2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFELink2.Location = New System.Drawing.Point(4, 321)
         Me.txtFELink2.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFELink2.Name = "txtFELink2"
         Me.txtFELink2.ReadOnly = True
-        Me.txtFELink2.Size = New System.Drawing.Size(699, 17)
+        Me.txtFELink2.Size = New System.Drawing.Size(699, 16)
         Me.txtFELink2.TabIndex = 25
         Me.txtFELink2.TabStop = False
         Me.txtFELink2.Text = "http://fedeploycheck.fireeye.com/appliance-test/test-infection.exe"

@@ -65,8 +65,8 @@ Public Module XPS
             bytCommand = Encoding.ASCII.GetBytes(XPSEvent)
             Dim pRet = udpClient.Send(bytCommand, bytCommand.Length)
             ' Console.WriteLine("No of bytes sent " & pRet)
-            DebugWriteLine("XPS SysLog Event Sent")
-            Main.lblXPSStatus.Text = "XPS Syslog Malware Event Sent"
+            DebugWriteLine("Network SysLog Event Sent")
+            Main.lblXPSStatus.Text = "Network Syslog Malware Event Sent"
 
         Catch ex As Exception
             DebugWriteLine(ex.Message)
@@ -346,7 +346,7 @@ Public Module XPS
             listener.Prefixes.Add(prefix)
             listener.Start()
             listener.BeginGetContext(AddressOf Sim_Respond, listener)
-            DebugWriteLine("XPS Sim Listening " & prefix)
+            DebugWriteLine("Network Sim Listening " & prefix)
 
         End Sub
         Public Sub [Stop]()
@@ -371,16 +371,16 @@ Public Module XPS
                             response = context.Response
                             response.StatusCode = 200
                             response.StatusDescription = "Success"
-                            responseString = "<html><body>R1JobRunner - XPS CP Sim </br> LISTENING!!</body></html>"
+                            responseString = "<html><body>FEP JobRunner - Network CP Sim </br> LISTENING!!</body></html>"
                             buffer = System.Text.Encoding.UTF8.GetBytes(responseString)
                             response.ContentLength64 = buffer.Length
                             output = response.OutputStream
                             output.Write(buffer, 0, buffer.Length)
-                            DebugWriteLine("XPS General Website")
+                            DebugWriteLine("Network General Website")
                         Else
                             'Check for stop command and END
                             If context.Request.QueryString.Item(context.Request.QueryString.Count - 1) = "STOP" Then
-                                DebugWriteLine("XPS STOP")
+                                DebugWriteLine("Network STOP")
                                 response = context.Response
                                 response.StatusCode = 200
                                 response.StatusDescription = "STOP"
@@ -403,18 +403,18 @@ Public Module XPS
                             response.ContentLength64 = buffer.Length
                             output = response.OutputStream
                             output.Write(buffer, 0, buffer.Length)
-                            DebugWriteLine("XPS Auth Request")
+                            DebugWriteLine("Network Auth Request")
                         Else
                             'Response for report query
                             response = context.Response
                             If Not String.IsNullOrWhiteSpace(Me.MalwareMD5) Then
                                 'Use Specified MD5
                                 buffer = System.Text.Encoding.UTF8.GetBytes(XPS.XPS_MDE_Response_ToJSON(XPS.GenerateXPS_MDE_Response(Me.MalwareMD5)))
-                                DebugWriteLine("XPS Response with Custom MD5")
+                                DebugWriteLine("Network Response with Custom MD5")
                             Else
                                 'Else use FETest MD5
                                 buffer = System.Text.Encoding.UTF8.GetBytes(XPS.XPS_MDE_Response_ToJSON(XPS.GenerateXPS_MDE_Response("47f9fdc617f8c98a6732be534d8dbe9a")))
-                                DebugWriteLine("XPS Response with FE MD5")
+                                DebugWriteLine("Network Response with FE MD5")
                             End If
                             response.ContentLength64 = buffer.Length
                             output = response.OutputStream
