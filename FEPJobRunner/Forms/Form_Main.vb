@@ -2126,26 +2126,58 @@ Public Class Main
 
 
     Public Shared Sub projsearchmenu_Click(sender As Object, e As ToolStripItemClickedEventArgs)
-        Debug.WriteLine(e.ClickedItem.OwnerItem.Text)
-        Debug.WriteLine(e.ClickedItem.Text)
-        Dim facsearch As New FacetSearch
-        Dim facsearchfield As New FacetSearchFields
-        facsearchfield.FieldName = e.ClickedItem.OwnerItem.Tag
-        facsearchfield.Values.Add(e.ClickedItem.Tag)
-        facsearch.SearchFields.Add(facsearchfield)
-        Main.lvProjectFacets.Items.Add(e.ClickedItem.OwnerItem.Tag & ":" & e.ClickedItem.Tag)
-        JobRunner_RestFunctions.GetProjectList(facsearch)
+        '    Dim facsearch As New FacetSearch
+        '    Dim facsearchfield As New FacetSearchFields
+        '    facsearchfield.FieldName = e.ClickedItem.OwnerItem.Tag
+        '    facsearchfield.Values.Add(e.ClickedItem.Tag)
+        '    facsearch.SearchFields.Add(facsearchfield)
+        Dim tmpitem = Main.lvProjectFacets.Items.Add(e.ClickedItem.OwnerItem.Text & ":" & e.ClickedItem.Tag)
+        tmpitem.tag = e.ClickedItem.OwnerItem.Tag
+        ProjSearchFacetUpdate()
+        'JobRunner_RestFunctions.GetProjectList(facsearch)
     End Sub
     Public Shared Sub projsearchmenu_txtEnter(sender As Object, e As KeyEventArgs)
 
         If e.KeyCode = Keys.Enter Then
-            Dim facsearch As New FacetSearch
-            Dim facsearchfield As New FacetSearchFields
-            facsearch.SearchAny.Add(sender.text)
-            Main.lvProjectFacets.Items.Add("Any:" & sender.text)
-            JobRunner_RestFunctions.GetProjectList(facsearch)
+            '    Dim facsearch As New FacetSearch
+            '    Dim facsearchfield As New FacetSearchFields
+            '    facsearch.SearchAny.Add(sender.text)
+            Dim tmpitem = Main.lvProjectFacets.Items.Add("Any:" & sender.text)
+            ProjSearchFacetUpdate()
+            '   JobRunner_RestFunctions.GetProjectList(facsearch)
         End If
 
+    End Sub
+    Public Shared Sub ProjSearchFacetUpdate()
+        If Main.lvProjectFacets.Items.Count > 0 Then
+            Dim facsearch As New FacetSearch
+            For Each item As ListViewItem In Main.lvProjectFacets.Items
+                Select Case Split(item.Text, ":")(0)
+                    Case "Any"
+                        facsearch.SearchAny.Add(Split(item.Text, ":")(1))
+
+                    Case Else
+                        Dim facsearchfield As New FacetSearchFields
+                        If Not facsearch.SearchFields.Count = 0 Then
+                            Dim found = facsearch.SearchFields.Find(Function(srch As FacetSearchFields)
+                                                                        Return srch.FieldName = item.Tag
+                                                                    End Function)
+                            If Not found Is Nothing Then
+                                found.Values.Add(Split(item.Text, ":")(1))
+                            Else
+                                facsearchfield.FieldName = item.Tag
+                                facsearchfield.Values.Add(Split(item.Text, ":")(1))
+                                facsearch.SearchFields.Add(facsearchfield)
+                            End If
+                        Else
+                            facsearchfield.FieldName = item.Tag
+                            facsearchfield.Values.Add(Split(item.Text, ":")(1))
+                            facsearch.SearchFields.Add(facsearchfield)
+                        End If
+                End Select
+            Next
+            JobRunner_RestFunctions.GetProjectList(facsearch)
+        End If
     End Sub
     Public Shared Sub jobsearchmenu_txtEnter(sender As Object, e As KeyEventArgs)
 
@@ -2210,11 +2242,12 @@ Public Class Main
         btnSaveSettings_Click(e, e)
     End Sub
 
-    Private Sub lvProjectFacets_SelectedIndexChanged(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub dgvProjectList_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvProjectList.CellContentClick
-
+   
+ 
+    Private Sub lvProjectFacets_DoubleClick(sender As Object, e As EventArgs) Handles lvProjectFacets.DoubleClick
+        For Each item In lvProjectFacets.SelectedItems
+            lvProjectFacets.Items.Remove(item)
+        Next
+        ProjSearchFacetUpdate()
     End Sub
 End Class
