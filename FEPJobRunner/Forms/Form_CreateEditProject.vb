@@ -33,11 +33,6 @@
                 progressCreateProject.Style = ProgressBarStyle.Marquee
                 panelProjectCreateLoading.BringToFront()
                 Me.Refresh()
-
-               If Main.RestClient.IsAuthenticated = False Then
-                    Main.RestClient.Authenticate()
-                End If
-               
                 bgwCreateProject.RunWorkerAsync()
             Case "Edit"
                 lblWaitText.Text = "Editing Project...."
@@ -45,10 +40,6 @@
                 progressCreateProject.Style = ProgressBarStyle.Marquee
                 panelProjectCreateLoading.BringToFront()
                 Me.Refresh()
-                 If Main.RestClient.IsAuthenticated = False Then
-                    Main.RestClient.Authenticate()
-                End If
-            
                 bgwEditProject.RunWorkerAsync()
         End Select
 

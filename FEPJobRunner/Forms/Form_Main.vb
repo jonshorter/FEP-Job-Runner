@@ -8,11 +8,9 @@ Imports System.Reflection
 Imports System.IO
 Imports System.Text
 
-
 Public Class Main
-
-    Public RestClient As New FEPRestClient.Client
-    Public RestClientValidLogin As Boolean = False
+    Public Shared RestClient As New FEPRestClient.Client
+    Public Shared RestClientValidLogin As Boolean = False
 
     Public JobRefreshTimer As System.Threading.Timer
     Public JobEndpointRefreshTimer As System.Threading.Timer
@@ -138,37 +136,37 @@ Public Class Main
         txtTemplateName.Text = My.Settings.templatenameselect
 
         Dim websitepath As String = My.Settings.websitepath
-       
-            If websitepath = "Endpoint" Then
+
+        If websitepath = "Endpoint" Then
             rdoendpoint.Checked = True
-                rdocustom.Checked = False
-            Else
-                rdocustom.Checked = True
-                rdoendpoint.Checked = False
+            rdocustom.Checked = False
+        Else
+            rdocustom.Checked = True
+            rdoendpoint.Checked = False
             txtcustomwebaddress.Text = My.Settings.websitepath
-            End If
+        End If
 
-            'Update Check settings
-            chkUpdates.Checked = My.Settings.updatecheck
+        'Update Check settings
+        chkUpdates.Checked = My.Settings.updatecheck
 
-            'Set the job stores
-            StoreInFiltList = New List(Of InclusionFilter)
-            StoreExFiltList = New List(Of ExclusionFilter)
-            StoreRemDelList = New List(Of JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase)
-            StoreRemExecList = New List(Of JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute)
-            StoreRemSendList = New List(Of JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile)
-            StoreRemKillNameList = New List(Of String)
-            StoreRemKillIDList = New List(Of String)
+        'Set the job stores
+        StoreInFiltList = New List(Of InclusionFilter)
+        StoreExFiltList = New List(Of ExclusionFilter)
+        StoreRemDelList = New List(Of JobsService.ArrayOfJobOptionsOperationsAgentRemediationEraseJobOptionsOperationsAgentRemediationErase)
+        StoreRemExecList = New List(Of JobsService.ArrayOfJobOptionsOperationsAgentRemediationExecuteJobOptionsOperationsAgentRemediationExecute)
+        StoreRemSendList = New List(Of JobsService.ArrayOfJobOptionsOperationsAgentRemediationSendFileJobOptionsOperationsAgentRemediationSendFile)
+        StoreRemKillNameList = New List(Of String)
+        StoreRemKillIDList = New List(Of String)
 
-            If chkUpdates.Checked Then
-                Try
-                    CheckForUpdates(True, chkIncludPreRelease.Checked)
-                Catch ex As Exception
-                    DebugWriteLine(ex.Message)
-                End Try
-            End If
+        If chkUpdates.Checked Then
+            Try
+                CheckForUpdates(True, chkIncludPreRelease.Checked)
+            Catch ex As Exception
+                DebugWriteLine(ex.Message)
+            End Try
+        End If
 
-            tabSubMenu.Height = flowJobInfo.Height + 20
+        tabSubMenu.Height = flowJobInfo.Height + 20
     End Sub
 
     Private Sub rdoagent_CheckedChanged(sender As Object, e As EventArgs) Handles rdoagent.CheckedChanged
@@ -230,18 +228,18 @@ Public Class Main
             My.Settings.templatenameselect = txtDefaultTemplateName.SelectedItem
         End If
 
-      
-            If rdoendpoint.Checked = True Then
+
+        If rdoendpoint.Checked = True Then
             My.Settings.websitepath = "Endpoint"
 
-            Else
-                My.Settings.websitepath = txtcustomwebaddress.Text
-            End If
+        Else
+            My.Settings.websitepath = txtcustomwebaddress.Text
+        End If
 
-            My.Settings.updatecheck = chkUpdates.Checked
+        My.Settings.updatecheck = chkUpdates.Checked
 
-            My.Settings.Save()
-            txtStatusSettings.Text = "Settings Saved"
+        My.Settings.Save()
+        txtStatusSettings.Text = "Settings Saved"
     End Sub
 
 
@@ -1154,7 +1152,7 @@ Public Class Main
         splitEndpointStatus.SendToBack()
     End Sub
 
-   
+
 
     Private Sub btnNewProject_Click(sender As Object, e As EventArgs) Handles btnNewProject.Click
         Dim projectcreate As New Form_CreateEditProject("Create Project", True)
@@ -1299,7 +1297,7 @@ Public Class Main
 
     Private Sub btnLoadDefaultTemplateName_Click(sender As Object, e As EventArgs) Handles btnLoadDefaultTemplateName.Click
 
-       
+
 
         If chkRestAPI.Checked = True Then
             JobRunner_RestFunctions.FEPAuthenticate()
@@ -2120,7 +2118,7 @@ Public Class Main
         End If
     End Sub
 
-   
+
     Private Sub txtSearchProject_TextChanged(sender As Object, e As EventArgs)
 
     End Sub
@@ -2147,7 +2145,7 @@ Public Class Main
             Main.lvProjectFacets.Items.Add("Any:" & sender.text)
             JobRunner_RestFunctions.GetProjectList(facsearch)
         End If
-       
+
     End Sub
     Public Shared Sub jobsearchmenu_txtEnter(sender As Object, e As KeyEventArgs)
 

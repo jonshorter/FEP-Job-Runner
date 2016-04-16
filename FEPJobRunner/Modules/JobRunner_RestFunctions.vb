@@ -505,15 +505,16 @@ retry:
                     FEPAuthenticate()
                 End If
 
-                Dim proj As New SimpleNewProject
+         
+                Dim proj As New NewProjectDefinition
                 proj.name = Name
-                proj.description = Description
+                proj.Comments = Description
                 proj.feedCheckingEnabled = TBCheck
                 proj.processingMode = FEPRestClient.Models.Enums.ProcessModeEnum.Security
                 proj.ftkCaseFolderPath = Main.RestClient.Functions.Configuration.GetDefaultJobDataPath().Data
                 proj.responsiveFilePath = Main.RestClient.Functions.Configuration.GetDefaultJobDataPath().Data
 
-                Dim project = Main.RestClient.Functions.Project.CreateProjectSimple(proj)
+                Dim project = Main.RestClient.Functions.Project.CreateProject(proj)
                 If project.Success = True Then
                 Else
                     If Not project.Error.Message = "Could not find root cookie." Then GoTo retry
@@ -544,6 +545,7 @@ retry:
                 Dim project = Main.RestClient.Functions.Project.UpdateProject(proj)
                 If project.Success = True Then
                 Else
+                    DebugWriteLine(project.Error.Message)
                     If Not project.Error.Message = "Could not find root cookie." Then GoTo retry
 
                 End If

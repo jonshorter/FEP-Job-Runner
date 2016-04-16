@@ -168,6 +168,7 @@ Partial Class Main
         Me.flowTasks = New System.Windows.Forms.FlowLayoutPanel()
         Me.tabProjects = New System.Windows.Forms.TabPage()
         Me.splitProjects = New System.Windows.Forms.SplitContainer()
+        Me.lvProjectFacets = New System.Windows.Forms.ListView()
         Me.btnViewProjectReview = New System.Windows.Forms.Button()
         Me.btnDeleteProject = New System.Windows.Forms.Button()
         Me.btnEditProject = New System.Windows.Forms.Button()
@@ -314,7 +315,6 @@ Partial Class Main
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
         Me.tooltip = New System.Windows.Forms.ToolTip(Me.components)
         Me.sfdPowerShell = New System.Windows.Forms.SaveFileDialog()
-        Me.lvProjectFacets = New System.Windows.Forms.ListView()
         Me.grpSettings.SuspendLayout()
         Me.flowSettings.SuspendLayout()
         Me.grpReqSettings.SuspendLayout()
@@ -2172,6 +2172,20 @@ Partial Class Main
         Me.splitProjects.SplitterDistance = 98
         Me.splitProjects.TabIndex = 0
         '
+        'lvProjectFacets
+        '
+        Me.lvProjectFacets.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lvProjectFacets.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lvProjectFacets.GridLines = True
+        Me.lvProjectFacets.Location = New System.Drawing.Point(196, 7)
+        Me.lvProjectFacets.MultiSelect = False
+        Me.lvProjectFacets.Name = "lvProjectFacets"
+        Me.lvProjectFacets.Size = New System.Drawing.Size(523, 75)
+        Me.lvProjectFacets.TabIndex = 6
+        Me.lvProjectFacets.UseCompatibleStateImageBehavior = False
+        Me.lvProjectFacets.View = System.Windows.Forms.View.List
+        '
         'btnViewProjectReview
         '
         Me.btnViewProjectReview.Location = New System.Drawing.Point(28, 55)
@@ -3828,20 +3842,6 @@ Partial Class Main
         Me.sfdPowerShell.DefaultExt = "ps1"
         Me.sfdPowerShell.Filter = "Powershell Files|*.ps1"
         Me.sfdPowerShell.InitialDirectory = "My.Application.Info.DirectoryPath & ""\Powershell"""
-        '
-        'lvProjectFacets
-        '
-        Me.lvProjectFacets.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lvProjectFacets.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lvProjectFacets.GridLines = True
-        Me.lvProjectFacets.Location = New System.Drawing.Point(196, 7)
-        Me.lvProjectFacets.MultiSelect = False
-        Me.lvProjectFacets.Name = "lvProjectFacets"
-        Me.lvProjectFacets.Size = New System.Drawing.Size(523, 75)
-        Me.lvProjectFacets.TabIndex = 6
-        Me.lvProjectFacets.UseCompatibleStateImageBehavior = False
-        Me.lvProjectFacets.View = System.Windows.Forms.View.List
         '
         'Main
         '
