@@ -2135,6 +2135,7 @@ Public Class Main
         facsearchfield.FieldName = e.ClickedItem.OwnerItem.Tag
         facsearchfield.Values.Add(e.ClickedItem.Tag)
         facsearch.SearchFields.Add(facsearchfield)
+        Main.lvProjectFacets.Items.Add(e.ClickedItem.OwnerItem.Tag & ":" & e.ClickedItem.Tag)
         JobRunner_RestFunctions.GetProjectList(facsearch)
     End Sub
     Public Shared Sub projsearchmenu_txtEnter(sender As Object, e As KeyEventArgs)
@@ -2143,6 +2144,7 @@ Public Class Main
             Dim facsearch As New FacetSearch
             Dim facsearchfield As New FacetSearchFields
             facsearch.SearchAny.Add(sender.text)
+            Main.lvProjectFacets.Items.Add("Any:" & sender.text)
             JobRunner_RestFunctions.GetProjectList(facsearch)
         End If
        
@@ -2208,5 +2210,13 @@ Public Class Main
 
     Private Sub chkRestAPI_Leave(sender As Object, e As EventArgs) Handles chkRestAPI.Leave
         btnSaveSettings_Click(e, e)
+    End Sub
+
+    Private Sub lvProjectFacets_SelectedIndexChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub dgvProjectList_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvProjectList.CellContentClick
+
     End Sub
 End Class

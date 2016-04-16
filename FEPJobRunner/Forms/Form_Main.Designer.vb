@@ -314,6 +314,7 @@ Partial Class Main
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
         Me.tooltip = New System.Windows.Forms.ToolTip(Me.components)
         Me.sfdPowerShell = New System.Windows.Forms.SaveFileDialog()
+        Me.lvProjectFacets = New System.Windows.Forms.ListView()
         Me.grpSettings.SuspendLayout()
         Me.flowSettings.SuspendLayout()
         Me.grpReqSettings.SuspendLayout()
@@ -2152,13 +2153,13 @@ Partial Class Main
         'splitProjects
         '
         Me.splitProjects.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.splitProjects.IsSplitterFixed = True
         Me.splitProjects.Location = New System.Drawing.Point(3, 3)
         Me.splitProjects.Name = "splitProjects"
         Me.splitProjects.Orientation = System.Windows.Forms.Orientation.Horizontal
         '
         'splitProjects.Panel1
         '
+        Me.splitProjects.Panel1.Controls.Add(Me.lvProjectFacets)
         Me.splitProjects.Panel1.Controls.Add(Me.btnViewProjectReview)
         Me.splitProjects.Panel1.Controls.Add(Me.btnDeleteProject)
         Me.splitProjects.Panel1.Controls.Add(Me.btnEditProject)
@@ -2168,12 +2169,12 @@ Partial Class Main
         '
         Me.splitProjects.Panel2.Controls.Add(Me.dgvProjectList)
         Me.splitProjects.Size = New System.Drawing.Size(736, 661)
-        Me.splitProjects.SplitterDistance = 37
+        Me.splitProjects.SplitterDistance = 98
         Me.splitProjects.TabIndex = 0
         '
         'btnViewProjectReview
         '
-        Me.btnViewProjectReview.Location = New System.Drawing.Point(447, 8)
+        Me.btnViewProjectReview.Location = New System.Drawing.Point(28, 55)
         Me.btnViewProjectReview.Name = "btnViewProjectReview"
         Me.btnViewProjectReview.Size = New System.Drawing.Size(135, 27)
         Me.btnViewProjectReview.TabIndex = 5
@@ -2226,7 +2227,7 @@ Partial Class Main
         Me.dgvProjectList.RowHeadersVisible = False
         Me.dgvProjectList.RowTemplate.Height = 24
         Me.dgvProjectList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvProjectList.Size = New System.Drawing.Size(736, 620)
+        Me.dgvProjectList.Size = New System.Drawing.Size(736, 559)
         Me.dgvProjectList.TabIndex = 1
         '
         'DataGridViewTextBoxColumn1
@@ -3828,6 +3829,20 @@ Partial Class Main
         Me.sfdPowerShell.Filter = "Powershell Files|*.ps1"
         Me.sfdPowerShell.InitialDirectory = "My.Application.Info.DirectoryPath & ""\Powershell"""
         '
+        'lvProjectFacets
+        '
+        Me.lvProjectFacets.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lvProjectFacets.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lvProjectFacets.GridLines = True
+        Me.lvProjectFacets.Location = New System.Drawing.Point(196, 7)
+        Me.lvProjectFacets.MultiSelect = False
+        Me.lvProjectFacets.Name = "lvProjectFacets"
+        Me.lvProjectFacets.Size = New System.Drawing.Size(523, 75)
+        Me.lvProjectFacets.TabIndex = 6
+        Me.lvProjectFacets.UseCompatibleStateImageBehavior = False
+        Me.lvProjectFacets.View = System.Windows.Forms.View.List
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -4288,5 +4303,6 @@ Partial Class Main
     Friend WithEvents btnSavePowershell As System.Windows.Forms.Button
     Friend WithEvents sfdPowerShell As System.Windows.Forms.SaveFileDialog
     Friend WithEvents btnJobStatusClearSearch As System.Windows.Forms.Button
+    Friend WithEvents lvProjectFacets As System.Windows.Forms.ListView
 
 End Class
