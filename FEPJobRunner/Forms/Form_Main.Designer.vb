@@ -168,11 +168,8 @@ Partial Class Main
         Me.flowTasks = New System.Windows.Forms.FlowLayoutPanel()
         Me.tabProjects = New System.Windows.Forms.TabPage()
         Me.splitProjects = New System.Windows.Forms.SplitContainer()
+        Me.Label31 = New System.Windows.Forms.Label()
         Me.lvProjectFacets = New System.Windows.Forms.ListView()
-        Me.btnViewProjectReview = New System.Windows.Forms.Button()
-        Me.btnDeleteProject = New System.Windows.Forms.Button()
-        Me.btnEditProject = New System.Windows.Forms.Button()
-        Me.btnNewProject = New System.Windows.Forms.Button()
         Me.dgvProjectList = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CreationDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -182,19 +179,14 @@ Partial Class Main
         Me.ProjectID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tabJobsList = New System.Windows.Forms.TabPage()
         Me.splitJobsRestJobs = New System.Windows.Forms.SplitContainer()
-        Me.btnJobStatusClearSearch = New System.Windows.Forms.Button()
         Me.dgvJobsRestJobsList = New System.Windows.Forms.DataGridView()
         Me.jobName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.jobStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.jobRetry = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.jobCancel = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.jobType = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.jobStart = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.jobEnd = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.jobID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.jobResultID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.jobEndpointStatus = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.Result = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.splitEndpointStatus = New System.Windows.Forms.SplitContainer()
         Me.flowEndpointStatus = New System.Windows.Forms.FlowLayoutPanel()
         Me.btnBackFromEndpointStatus = New System.Windows.Forms.Button()
@@ -311,10 +303,23 @@ Partial Class Main
         Me.flowAbout = New System.Windows.Forms.FlowLayoutPanel()
         Me.lbltxtAbout = New System.Windows.Forms.Label()
         Me.btn_AboutCheckforUpdates = New System.Windows.Forms.Button()
+        Me.cms_Project = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.NewProjectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EditProjectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DeleteProjectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ViewProjectInReviewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ofdBox = New System.Windows.Forms.OpenFileDialog()
         Me.sfdBox = New System.Windows.Forms.SaveFileDialog()
         Me.tooltip = New System.Windows.Forms.ToolTip(Me.components)
         Me.sfdPowerShell = New System.Windows.Forms.SaveFileDialog()
+        Me.cms_JobStatus = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.EndpointStatusToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ResultToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.RetryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CancelJobToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Label32 = New System.Windows.Forms.Label()
+        Me.lvJobStatusFacets = New System.Windows.Forms.ListView()
         Me.grpSettings.SuspendLayout()
         Me.flowSettings.SuspendLayout()
         Me.grpReqSettings.SuspendLayout()
@@ -411,6 +416,8 @@ Partial Class Main
         CType(Me.xpsPicture, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabAbout.SuspendLayout()
         Me.flowAbout.SuspendLayout()
+        Me.cms_Project.SuspendLayout()
+        Me.cms_JobStatus.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnExecute
@@ -2159,18 +2166,24 @@ Partial Class Main
         '
         'splitProjects.Panel1
         '
+        Me.splitProjects.Panel1.Controls.Add(Me.Label31)
         Me.splitProjects.Panel1.Controls.Add(Me.lvProjectFacets)
-        Me.splitProjects.Panel1.Controls.Add(Me.btnViewProjectReview)
-        Me.splitProjects.Panel1.Controls.Add(Me.btnDeleteProject)
-        Me.splitProjects.Panel1.Controls.Add(Me.btnEditProject)
-        Me.splitProjects.Panel1.Controls.Add(Me.btnNewProject)
         '
         'splitProjects.Panel2
         '
         Me.splitProjects.Panel2.Controls.Add(Me.dgvProjectList)
         Me.splitProjects.Size = New System.Drawing.Size(736, 661)
-        Me.splitProjects.SplitterDistance = 98
+        Me.splitProjects.SplitterDistance = 55
         Me.splitProjects.TabIndex = 0
+        '
+        'Label31
+        '
+        Me.Label31.AutoSize = True
+        Me.Label31.Location = New System.Drawing.Point(3, 9)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(43, 17)
+        Me.Label31.TabIndex = 7
+        Me.Label31.Text = "Filter:"
         '
         'lvProjectFacets
         '
@@ -2178,52 +2191,13 @@ Partial Class Main
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lvProjectFacets.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lvProjectFacets.GridLines = True
-        Me.lvProjectFacets.Location = New System.Drawing.Point(196, 7)
+        Me.lvProjectFacets.Location = New System.Drawing.Point(52, 3)
         Me.lvProjectFacets.MultiSelect = False
         Me.lvProjectFacets.Name = "lvProjectFacets"
-        Me.lvProjectFacets.Size = New System.Drawing.Size(523, 75)
+        Me.lvProjectFacets.Size = New System.Drawing.Size(681, 49)
         Me.lvProjectFacets.TabIndex = 6
         Me.lvProjectFacets.UseCompatibleStateImageBehavior = False
         Me.lvProjectFacets.View = System.Windows.Forms.View.List
-        '
-        'btnViewProjectReview
-        '
-        Me.btnViewProjectReview.Location = New System.Drawing.Point(28, 55)
-        Me.btnViewProjectReview.Name = "btnViewProjectReview"
-        Me.btnViewProjectReview.Size = New System.Drawing.Size(135, 27)
-        Me.btnViewProjectReview.TabIndex = 5
-        Me.btnViewProjectReview.Text = "View in Review"
-        Me.btnViewProjectReview.UseVisualStyleBackColor = True
-        '
-        'btnDeleteProject
-        '
-        Me.btnDeleteProject.AutoSize = True
-        Me.btnDeleteProject.Location = New System.Drawing.Point(124, 8)
-        Me.btnDeleteProject.Name = "btnDeleteProject"
-        Me.btnDeleteProject.Size = New System.Drawing.Size(59, 27)
-        Me.btnDeleteProject.TabIndex = 4
-        Me.btnDeleteProject.Text = "Delete"
-        Me.btnDeleteProject.UseVisualStyleBackColor = True
-        '
-        'btnEditProject
-        '
-        Me.btnEditProject.AutoSize = True
-        Me.btnEditProject.Location = New System.Drawing.Point(65, 8)
-        Me.btnEditProject.Name = "btnEditProject"
-        Me.btnEditProject.Size = New System.Drawing.Size(53, 27)
-        Me.btnEditProject.TabIndex = 3
-        Me.btnEditProject.Text = "Edit"
-        Me.btnEditProject.UseVisualStyleBackColor = True
-        '
-        'btnNewProject
-        '
-        Me.btnNewProject.AutoSize = True
-        Me.btnNewProject.Location = New System.Drawing.Point(9, 8)
-        Me.btnNewProject.Name = "btnNewProject"
-        Me.btnNewProject.Size = New System.Drawing.Size(50, 27)
-        Me.btnNewProject.TabIndex = 2
-        Me.btnNewProject.Text = "New"
-        Me.btnNewProject.UseVisualStyleBackColor = True
         '
         'dgvProjectList
         '
@@ -2241,7 +2215,7 @@ Partial Class Main
         Me.dgvProjectList.RowHeadersVisible = False
         Me.dgvProjectList.RowTemplate.Height = 24
         Me.dgvProjectList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvProjectList.Size = New System.Drawing.Size(736, 559)
+        Me.dgvProjectList.Size = New System.Drawing.Size(736, 602)
         Me.dgvProjectList.TabIndex = 1
         '
         'DataGridViewTextBoxColumn1
@@ -2304,31 +2278,21 @@ Partial Class Main
         'splitJobsRestJobs
         '
         Me.splitJobsRestJobs.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.splitJobsRestJobs.FixedPanel = System.Windows.Forms.FixedPanel.Panel1
-        Me.splitJobsRestJobs.IsSplitterFixed = True
         Me.splitJobsRestJobs.Location = New System.Drawing.Point(3, 3)
         Me.splitJobsRestJobs.Name = "splitJobsRestJobs"
         Me.splitJobsRestJobs.Orientation = System.Windows.Forms.Orientation.Horizontal
         '
         'splitJobsRestJobs.Panel1
         '
-        Me.splitJobsRestJobs.Panel1.Controls.Add(Me.btnJobStatusClearSearch)
+        Me.splitJobsRestJobs.Panel1.Controls.Add(Me.Label32)
+        Me.splitJobsRestJobs.Panel1.Controls.Add(Me.lvJobStatusFacets)
         '
         'splitJobsRestJobs.Panel2
         '
         Me.splitJobsRestJobs.Panel2.Controls.Add(Me.dgvJobsRestJobsList)
         Me.splitJobsRestJobs.Size = New System.Drawing.Size(736, 661)
-        Me.splitJobsRestJobs.SplitterDistance = 36
+        Me.splitJobsRestJobs.SplitterDistance = 57
         Me.splitJobsRestJobs.TabIndex = 2
-        '
-        'btnJobStatusClearSearch
-        '
-        Me.btnJobStatusClearSearch.Location = New System.Drawing.Point(3, 10)
-        Me.btnJobStatusClearSearch.Name = "btnJobStatusClearSearch"
-        Me.btnJobStatusClearSearch.Size = New System.Drawing.Size(97, 23)
-        Me.btnJobStatusClearSearch.TabIndex = 0
-        Me.btnJobStatusClearSearch.Text = "Clear Facets"
-        Me.btnJobStatusClearSearch.UseVisualStyleBackColor = True
         '
         'dgvJobsRestJobsList
         '
@@ -2337,14 +2301,16 @@ Partial Class Main
         Me.dgvJobsRestJobsList.AllowUserToResizeRows = False
         Me.dgvJobsRestJobsList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvJobsRestJobsList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvJobsRestJobsList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.jobName, Me.jobStatus, Me.jobRetry, Me.jobCancel, Me.jobType, Me.jobStart, Me.jobEnd, Me.jobID, Me.jobResultID, Me.jobEndpointStatus, Me.Result})
+        Me.dgvJobsRestJobsList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.jobName, Me.jobStatus, Me.jobType, Me.jobStart, Me.jobEnd, Me.jobID, Me.jobResultID})
         Me.dgvJobsRestJobsList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvJobsRestJobsList.Location = New System.Drawing.Point(0, 0)
+        Me.dgvJobsRestJobsList.MultiSelect = False
         Me.dgvJobsRestJobsList.Name = "dgvJobsRestJobsList"
         Me.dgvJobsRestJobsList.ReadOnly = True
         Me.dgvJobsRestJobsList.RowHeadersVisible = False
         Me.dgvJobsRestJobsList.RowTemplate.Height = 24
-        Me.dgvJobsRestJobsList.Size = New System.Drawing.Size(736, 621)
+        Me.dgvJobsRestJobsList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvJobsRestJobsList.Size = New System.Drawing.Size(736, 600)
         Me.dgvJobsRestJobsList.TabIndex = 0
         '
         'jobName
@@ -2358,36 +2324,11 @@ Partial Class Main
         'jobStatus
         '
         Me.jobStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.jobStatus.DividerWidth = 5
         Me.jobStatus.FillWeight = 5.0!
         Me.jobStatus.HeaderText = "Status"
         Me.jobStatus.Name = "jobStatus"
         Me.jobStatus.ReadOnly = True
-        Me.jobStatus.Width = 78
-        '
-        'jobRetry
-        '
-        Me.jobRetry.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.jobRetry.DividerWidth = 5
-        Me.jobRetry.FillWeight = 5.0!
-        Me.jobRetry.HeaderText = "Retry Job"
-        Me.jobRetry.MinimumWidth = 80
-        Me.jobRetry.Name = "jobRetry"
-        Me.jobRetry.ReadOnly = True
-        Me.jobRetry.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.jobRetry.Width = 80
-        '
-        'jobCancel
-        '
-        Me.jobCancel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.jobCancel.DividerWidth = 5
-        Me.jobCancel.FillWeight = 5.0!
-        Me.jobCancel.HeaderText = "Cancel Job"
-        Me.jobCancel.MinimumWidth = 80
-        Me.jobCancel.Name = "jobCancel"
-        Me.jobCancel.ReadOnly = True
-        Me.jobCancel.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.jobCancel.Width = 81
+        Me.jobStatus.Width = 73
         '
         'jobType
         '
@@ -2429,28 +2370,6 @@ Partial Class Main
         Me.jobResultID.Name = "jobResultID"
         Me.jobResultID.ReadOnly = True
         Me.jobResultID.Visible = False
-        '
-        'jobEndpointStatus
-        '
-        Me.jobEndpointStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.jobEndpointStatus.FillWeight = 5.0!
-        Me.jobEndpointStatus.HeaderText = "Endpoint Status"
-        Me.jobEndpointStatus.MinimumWidth = 80
-        Me.jobEndpointStatus.Name = "jobEndpointStatus"
-        Me.jobEndpointStatus.ReadOnly = True
-        Me.jobEndpointStatus.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.jobEndpointStatus.Width = 103
-        '
-        'Result
-        '
-        Me.Result.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Result.FillWeight = 5.0!
-        Me.Result.HeaderText = "Result"
-        Me.Result.MinimumWidth = 75
-        Me.Result.Name = "Result"
-        Me.Result.ReadOnly = True
-        Me.Result.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.Result.Width = 75
         '
         'splitEndpointStatus
         '
@@ -3825,6 +3744,37 @@ Partial Class Main
         Me.btn_AboutCheckforUpdates.Text = "Check for Updates"
         Me.btn_AboutCheckforUpdates.UseVisualStyleBackColor = True
         '
+        'cms_Project
+        '
+        Me.cms_Project.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.cms_Project.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewProjectToolStripMenuItem, Me.EditProjectToolStripMenuItem, Me.DeleteProjectToolStripMenuItem, Me.ViewProjectInReviewToolStripMenuItem})
+        Me.cms_Project.Name = "cms_Project"
+        Me.cms_Project.Size = New System.Drawing.Size(178, 100)
+        '
+        'NewProjectToolStripMenuItem
+        '
+        Me.NewProjectToolStripMenuItem.Name = "NewProjectToolStripMenuItem"
+        Me.NewProjectToolStripMenuItem.Size = New System.Drawing.Size(177, 24)
+        Me.NewProjectToolStripMenuItem.Text = "New Project"
+        '
+        'EditProjectToolStripMenuItem
+        '
+        Me.EditProjectToolStripMenuItem.Name = "EditProjectToolStripMenuItem"
+        Me.EditProjectToolStripMenuItem.Size = New System.Drawing.Size(177, 24)
+        Me.EditProjectToolStripMenuItem.Text = "Edit Project"
+        '
+        'DeleteProjectToolStripMenuItem
+        '
+        Me.DeleteProjectToolStripMenuItem.Name = "DeleteProjectToolStripMenuItem"
+        Me.DeleteProjectToolStripMenuItem.Size = New System.Drawing.Size(177, 24)
+        Me.DeleteProjectToolStripMenuItem.Text = "Delete Project"
+        '
+        'ViewProjectInReviewToolStripMenuItem
+        '
+        Me.ViewProjectInReviewToolStripMenuItem.Name = "ViewProjectInReviewToolStripMenuItem"
+        Me.ViewProjectInReviewToolStripMenuItem.Size = New System.Drawing.Size(177, 24)
+        Me.ViewProjectInReviewToolStripMenuItem.Text = "View in Review"
+        '
         'ofdBox
         '
         Me.ofdBox.FileName = "*.json"
@@ -3842,6 +3792,65 @@ Partial Class Main
         Me.sfdPowerShell.DefaultExt = "ps1"
         Me.sfdPowerShell.Filter = "Powershell Files|*.ps1"
         Me.sfdPowerShell.InitialDirectory = "My.Application.Info.DirectoryPath & ""\Powershell"""
+        '
+        'cms_JobStatus
+        '
+        Me.cms_JobStatus.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.cms_JobStatus.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EndpointStatusToolStripMenuItem, Me.ResultToolStripMenuItem, Me.ToolStripSeparator1, Me.RetryToolStripMenuItem, Me.CancelJobToolStripMenuItem})
+        Me.cms_JobStatus.Name = "cms_JobStatus"
+        Me.cms_JobStatus.Size = New System.Drawing.Size(183, 106)
+        '
+        'EndpointStatusToolStripMenuItem
+        '
+        Me.EndpointStatusToolStripMenuItem.Name = "EndpointStatusToolStripMenuItem"
+        Me.EndpointStatusToolStripMenuItem.Size = New System.Drawing.Size(182, 24)
+        Me.EndpointStatusToolStripMenuItem.Text = "Endpoint Status"
+        '
+        'ResultToolStripMenuItem
+        '
+        Me.ResultToolStripMenuItem.Name = "ResultToolStripMenuItem"
+        Me.ResultToolStripMenuItem.Size = New System.Drawing.Size(182, 24)
+        Me.ResultToolStripMenuItem.Text = "Result"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(179, 6)
+        '
+        'RetryToolStripMenuItem
+        '
+        Me.RetryToolStripMenuItem.Name = "RetryToolStripMenuItem"
+        Me.RetryToolStripMenuItem.Size = New System.Drawing.Size(182, 24)
+        Me.RetryToolStripMenuItem.Text = "Retry"
+        '
+        'CancelJobToolStripMenuItem
+        '
+        Me.CancelJobToolStripMenuItem.Name = "CancelJobToolStripMenuItem"
+        Me.CancelJobToolStripMenuItem.Size = New System.Drawing.Size(182, 24)
+        Me.CancelJobToolStripMenuItem.Text = "Cancel"
+        '
+        'Label32
+        '
+        Me.Label32.AutoSize = True
+        Me.Label32.Location = New System.Drawing.Point(3, 9)
+        Me.Label32.Name = "Label32"
+        Me.Label32.Size = New System.Drawing.Size(43, 17)
+        Me.Label32.TabIndex = 9
+        Me.Label32.Text = "Filter:"
+        '
+        'lvJobStatusFacets
+        '
+        Me.lvJobStatusFacets.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lvJobStatusFacets.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lvJobStatusFacets.GridLines = True
+        Me.lvJobStatusFacets.Location = New System.Drawing.Point(52, 3)
+        Me.lvJobStatusFacets.MultiSelect = False
+        Me.lvJobStatusFacets.Name = "lvJobStatusFacets"
+        Me.lvJobStatusFacets.Size = New System.Drawing.Size(681, 49)
+        Me.lvJobStatusFacets.TabIndex = 8
+        Me.lvJobStatusFacets.UseCompatibleStateImageBehavior = False
+        Me.lvJobStatusFacets.View = System.Windows.Forms.View.List
         '
         'Main
         '
@@ -3944,6 +3953,7 @@ Partial Class Main
         CType(Me.dgvProjectList, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabJobsList.ResumeLayout(False)
         Me.splitJobsRestJobs.Panel1.ResumeLayout(False)
+        Me.splitJobsRestJobs.Panel1.PerformLayout()
         Me.splitJobsRestJobs.Panel2.ResumeLayout(False)
         CType(Me.splitJobsRestJobs, System.ComponentModel.ISupportInitialize).EndInit()
         Me.splitJobsRestJobs.ResumeLayout(False)
@@ -4009,6 +4019,8 @@ Partial Class Main
         Me.tabAbout.PerformLayout()
         Me.flowAbout.ResumeLayout(False)
         Me.flowAbout.PerformLayout()
+        Me.cms_Project.ResumeLayout(False)
+        Me.cms_JobStatus.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -4188,12 +4200,9 @@ Partial Class Main
     Friend WithEvents tabTasks As System.Windows.Forms.TabPage
     Friend WithEvents tabProjects As System.Windows.Forms.TabPage
     Friend WithEvents splitProjects As System.Windows.Forms.SplitContainer
-    Friend WithEvents btnNewProject As System.Windows.Forms.Button
     Friend WithEvents dgvProjectList As System.Windows.Forms.DataGridView
     Friend WithEvents tabAlerts As System.Windows.Forms.TabPage
     Friend WithEvents flowTasks As System.Windows.Forms.FlowLayoutPanel
-    Friend WithEvents btnEditProject As System.Windows.Forms.Button
-    Friend WithEvents btnDeleteProject As System.Windows.Forms.Button
     Friend WithEvents splitAlerts As System.Windows.Forms.SplitContainer
     Friend WithEvents dgvAlerts As System.Windows.Forms.DataGridView
     Friend WithEvents tblAlertBreakdown As System.Windows.Forms.TableLayoutPanel
@@ -4210,7 +4219,6 @@ Partial Class Main
     Friend WithEvents EndPointID As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Action As System.Windows.Forms.DataGridViewButtonColumn
     Friend WithEvents Review As System.Windows.Forms.DataGridViewButtonColumn
-    Friend WithEvents btnViewProjectReview As System.Windows.Forms.Button
     Friend WithEvents flowEndpointStatus As System.Windows.Forms.FlowLayoutPanel
     Friend WithEvents btnBackFromEndpointStatus As System.Windows.Forms.Button
     Friend WithEvents lblJobName As System.Windows.Forms.Label
@@ -4281,17 +4289,6 @@ Partial Class Main
     Friend WithEvents LastModDate As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ProjectFolderPath As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ProjectID As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents jobName As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents jobStatus As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents jobRetry As System.Windows.Forms.DataGridViewButtonColumn
-    Friend WithEvents jobCancel As System.Windows.Forms.DataGridViewButtonColumn
-    Friend WithEvents jobType As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents jobStart As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents jobEnd As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents jobID As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents jobResultID As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents jobEndpointStatus As System.Windows.Forms.DataGridViewButtonColumn
-    Friend WithEvents Result As System.Windows.Forms.DataGridViewButtonColumn
     Friend WithEvents artifactName As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents createDate As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents severity As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -4302,7 +4299,27 @@ Partial Class Main
     Friend WithEvents threatScore As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents btnSavePowershell As System.Windows.Forms.Button
     Friend WithEvents sfdPowerShell As System.Windows.Forms.SaveFileDialog
-    Friend WithEvents btnJobStatusClearSearch As System.Windows.Forms.Button
     Friend WithEvents lvProjectFacets As System.Windows.Forms.ListView
+    Friend WithEvents cms_Project As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents NewProjectToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents EditProjectToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DeleteProjectToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ViewProjectInReviewToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents Label31 As System.Windows.Forms.Label
+    Friend WithEvents cms_JobStatus As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents EndpointStatusToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ResultToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents RetryToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CancelJobToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents jobName As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents jobStatus As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents jobType As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents jobStart As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents jobEnd As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents jobID As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents jobResultID As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Label32 As System.Windows.Forms.Label
+    Friend WithEvents lvJobStatusFacets As System.Windows.Forms.ListView
 
 End Class

@@ -11,6 +11,8 @@ Imports System.Text
 Public Class Main
     Public Shared RestClient As New FEPRestClient.Client
     Public Shared RestClientValidLogin As Boolean = False
+    Public projsearchmenu As New ContextMenuStrip
+    Public jobstatussearchmenu As New ContextMenuStrip
 
     Public JobRefreshTimer As System.Threading.Timer
     Public JobEndpointRefreshTimer As System.Threading.Timer
@@ -1044,12 +1046,8 @@ Public Class Main
     Private Sub tabJobExecution_Enter(sender As Object, e As EventArgs) Handles tabJobExecution.Enter
         If chkRestAPI.Checked Then
             If RestClient.IsAuthenticated = False Then
-                If chkbypasscerts.Checked Then
-                    'Ignore self-signed / bad certificates
-                    RestClient.IgnoreSSL = True
-                    ServicePointManager.ServerCertificateValidationCallback = AddressOf ValidateRemoteCertificate
-                End If
-                RestClient.Authenticate()
+                FEPAuthenticate()
+
             End If
             If RestClient.IsAuthenticated Then
 
@@ -1087,43 +1085,6 @@ Public Class Main
     End Sub
 
 
-    Private Sub dgvJobsRestJobsList_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvJobsRestJobsList.CellClick
-        Try
-            If e.RowIndex > -1 Then
-                Dim jobname = dgvJobsRestJobsList.Rows.Item(e.RowIndex).Cells(0).Value.ToString
-                Dim jobid = dgvJobsRestJobsList.Rows.Item(e.RowIndex).Cells(7).Value.ToString
-                Dim resultid = dgvJobsRestJobsList.Rows.Item(e.RowIndex).Cells(8).Value.ToString
-                Select Case e.ColumnIndex
-
-                    Case 2 'Retry
-                        JobRunner_RestFunctions.RetryJob(jobid, jobname & " Retry")
-
-                    Case 3 'Cancel
-                        If dgvJobsRestJobsList.Rows.Item(e.RowIndex).Cells(3).Value.ToString = "Cancel" Then
-                            JobRunner_RestFunctions.CancelJob(resultid, True)
-                        End If
-
-                    Case 9 'EndPoint Status
-                        JobsEndpointStatus = resultid
-                        If JobsEndpointStatus <> "" Then
-                            JobRunner_RestFunctions.GetEndpointStatusCounts(JobsEndpointStatus)
-                            JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus)
-                            JobEndpointRefreshTimer = Create_JobEndpointRefreshTimer()
-                            splitEndpointStatus.BringToFront()
-                        End If
-
-
-                    Case 10 'Result
-                        Process.Start("https://" & txtServer.Text & "/r1/#/reviewpage?JobResultID=" & resultid & "&ShowAgentPivot=false&ShowJobPivot=false")
-
-                End Select
-            End If
-        Catch ex As Exception
-            DebugWriteLine(ex.Message)
-            MsgBox(ex.Message)
-        End Try
-    End Sub
-
 
     Private Sub tabControlJobsRest_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabControlJobsRest.SelectedIndexChanged
         Select Case tabControlJobsRest.SelectedTab.Name
@@ -1152,32 +1113,6 @@ Public Class Main
         splitEndpointStatus.SendToBack()
     End Sub
 
-
-
-    Private Sub btnNewProject_Click(sender As Object, e As EventArgs) Handles btnNewProject.Click
-        Dim projectcreate As New Form_CreateEditProject("Create Project", True)
-        projectcreate.ShowDialog()
-        JobRunner_RestFunctions.GetProjectList()
-    End Sub
-
-
-
-    Private Sub btnEditProject_Click(sender As Object, e As EventArgs) Handles btnEditProject.Click
-        Dim projectedit As New Form_CreateEditProject("Edit Project", False, dgvProjectList.CurrentRow.Cells(5).Value)
-        projectedit.ShowDialog()
-        JobRunner_RestFunctions.GetProjectList()
-    End Sub
-
-    Private Sub btnDeleteProject_Click(sender As Object, e As EventArgs) Handles btnDeleteProject.Click
-        If MsgBox("Delete Project " & dgvProjectList.CurrentRow.Cells(0).Value & "?", MsgBoxStyle.YesNoCancel, "Delete Project?") = MsgBoxResult.Yes Then
-            JobRunner_RestFunctions.DeleteProject(dgvProjectList.CurrentRow.Cells(5).Value)
-        End If
-    End Sub
-
-
-    Private Sub dgvJobsRestJobsList_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvJobsRestJobsList.CellContentClick
-
-    End Sub
 
     Private Sub dgvEndpointStatusJobTargets_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvEndpointStatusJobTargets.CellClick
         Try
@@ -1229,9 +1164,7 @@ Public Class Main
         End If
     End Sub
 
-    Private Sub btnViewProjectReview_Click(sender As Object, e As EventArgs) Handles btnViewProjectReview.Click
-        Dim projectid = dgvProjectList.CurrentRow.Cells(5).Value
-        Process.Start("https://" & txtServer.Text & "/" & My.Settings.websitepath & "/#/reviewpage?projectid=" & projectid)
+    Private Sub btnViewProjectReview_Click(sender As Object, e As EventArgs)
     End Sub
 
     Private Sub txtSearchEndpointStatus_TextChanged(sender As Object, e As EventArgs) Handles txtSearchEndpointStatus.TextChanged
@@ -2118,33 +2051,16 @@ Public Class Main
         End If
     End Sub
 
-
-    Private Sub txtSearchProject_TextChanged(sender As Object, e As EventArgs)
-
-    End Sub
-
-
-
     Public Shared Sub projsearchmenu_Click(sender As Object, e As ToolStripItemClickedEventArgs)
-        '    Dim facsearch As New FacetSearch
-        '    Dim facsearchfield As New FacetSearchFields
-        '    facsearchfield.FieldName = e.ClickedItem.OwnerItem.Tag
-        '    facsearchfield.Values.Add(e.ClickedItem.Tag)
-        '    facsearch.SearchFields.Add(facsearchfield)
         Dim tmpitem = Main.lvProjectFacets.Items.Add(e.ClickedItem.OwnerItem.Text & ":" & e.ClickedItem.Tag)
         tmpitem.tag = e.ClickedItem.OwnerItem.Tag
         ProjSearchFacetUpdate()
-        'JobRunner_RestFunctions.GetProjectList(facsearch)
     End Sub
     Public Shared Sub projsearchmenu_txtEnter(sender As Object, e As KeyEventArgs)
 
         If e.KeyCode = Keys.Enter Then
-            '    Dim facsearch As New FacetSearch
-            '    Dim facsearchfield As New FacetSearchFields
-            '    facsearch.SearchAny.Add(sender.text)
             Dim tmpitem = Main.lvProjectFacets.Items.Add("Any:" & sender.text)
             ProjSearchFacetUpdate()
-            '   JobRunner_RestFunctions.GetProjectList(facsearch)
         End If
 
     End Sub
@@ -2177,6 +2093,41 @@ Public Class Main
                 End Select
             Next
             JobRunner_RestFunctions.GetProjectList(facsearch)
+        Else
+            JobRunner_RestFunctions.GetProjectList()
+        End If
+    End Sub
+    Public Shared Sub JobStatusSearchFacetUpdate()
+        If Main.lvJobStatusFacets.Items.Count > 0 Then
+            Dim facsearch As New FacetSearch
+            For Each item As ListViewItem In Main.lvJobStatusFacets.Items
+                Select Case Split(item.Text, ":")(0)
+                    Case "Any"
+                        facsearch.SearchAny.Add(Split(item.Text, ":")(1))
+
+                    Case Else
+                        Dim facsearchfield As New FacetSearchFields
+                        If Not facsearch.SearchFields.Count = 0 Then
+                            Dim found = facsearch.SearchFields.Find(Function(srch As FacetSearchFields)
+                                                                        Return srch.FieldName = item.Tag
+                                                                    End Function)
+                            If Not found Is Nothing Then
+                                found.Values.Add(Split(item.Text, ":")(1))
+                            Else
+                                facsearchfield.FieldName = item.Tag
+                                facsearchfield.Values.Add(Split(item.Text, ":")(1))
+                                facsearch.SearchFields.Add(facsearchfield)
+                            End If
+                        Else
+                            facsearchfield.FieldName = item.Tag
+                            facsearchfield.Values.Add(Split(item.Text, ":")(1))
+                            facsearch.SearchFields.Add(facsearchfield)
+                        End If
+                End Select
+            Next
+            JobRunner_RestFunctions.GetJobList(facsearch)
+        Else
+            JobRunner_RestFunctions.GetJobList()
         End If
     End Sub
     Public Shared Sub jobsearchmenu_txtEnter(sender As Object, e As KeyEventArgs)
@@ -2203,17 +2154,13 @@ Public Class Main
 
 
     Private Sub tabProjects_Enter(sender As Object, e As EventArgs) Handles tabProjects.Enter
-        Dim projsearchmenu = JobRunner_RestFunctions.GetProjectFacets
-        dgvProjectList.ContextMenuStrip = projsearchmenu
-    End Sub
-
-    Private Sub btnJobStatusClearSearch_Click(sender As Object, e As EventArgs) Handles btnJobStatusClearSearch.Click
-        JobRunner_RestFunctions.GetJobList()
+        projsearchmenu = JobRunner_RestFunctions.GetProjectFacets
+        lvProjectFacets.ContextMenuStrip = projsearchmenu
     End Sub
 
     Private Sub tabJobsList_Enter(sender As Object, e As EventArgs) Handles tabJobsList.Enter
-        Dim jobsearchmenu = JobRunner_RestFunctions.GetJobFacets
-        dgvJobsRestJobsList.ContextMenuStrip = jobsearchmenu
+        jobstatussearchmenu = JobRunner_RestFunctions.GetJobFacets
+        lvJobStatusFacets.ContextMenuStrip = jobstatussearchmenu
     End Sub
 
     Private Sub chkbypasscerts_CheckedChanged(sender As Object, e As EventArgs) Handles chkbypasscerts.CheckedChanged
@@ -2249,5 +2196,94 @@ Public Class Main
             lvProjectFacets.Items.Remove(item)
         Next
         ProjSearchFacetUpdate()
+    End Sub
+
+
+    Private Sub NewProjectToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewProjectToolStripMenuItem.Click
+        Dim projectcreate As New Form_CreateEditProject("Create Project", True)
+        projectcreate.ShowDialog()
+        JobRunner_RestFunctions.GetProjectList()
+    End Sub
+
+    Private Sub EditProjectToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditProjectToolStripMenuItem.Click
+        Dim projectedit As New Form_CreateEditProject("Edit Project", False, dgvProjectList.CurrentRow.Cells(5).Value)
+        projectedit.ShowDialog()
+        JobRunner_RestFunctions.GetProjectList()
+    End Sub
+
+    Private Sub DeleteProjectToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteProjectToolStripMenuItem.Click
+        If MsgBox("Delete Project " & dgvProjectList.CurrentRow.Cells(0).Value & "?", MsgBoxStyle.YesNoCancel, "Delete Project?") = MsgBoxResult.Yes Then
+            JobRunner_RestFunctions.DeleteProject(dgvProjectList.CurrentRow.Cells(5).Value)
+        End If
+    End Sub
+
+    Private Sub ViewProjectInReviewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewProjectInReviewToolStripMenuItem.Click
+        Dim projectid = dgvProjectList.CurrentRow.Cells(5).Value
+        Process.Start("https://" & txtServer.Text & "/" & My.Settings.websitepath & "/#/reviewpage?projectid=" & projectid)
+    End Sub
+
+  
+    Private Sub dgvProjectList_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvProjectList.CellMouseClick
+        If e.Button = Windows.Forms.MouseButtons.Right Then
+            If Not e.RowIndex = -1 Then
+                dgvProjectList.Rows.Item(e.RowIndex).Selected = True
+                cms_Project.Show(MousePosition)
+            End If
+        End If
+    End Sub
+
+    
+    Private Sub dgvJobsRestJobsList_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvJobsRestJobsList.CellMouseClick
+        If e.Button = Windows.Forms.MouseButtons.Right Then
+            If Not e.RowIndex = -1 Then
+                dgvJobsRestJobsList.Rows.Item(e.RowIndex).Selected = True
+                Select Case dgvJobsRestJobsList.Rows.Item(e.RowIndex).Cells("jobType").Value
+                    Case "Agent Script"
+                        cms_JobStatus.Items("ResultToolStripMenuItem").Enabled = False
+                    Case Else
+                        cms_JobStatus.Items("ResultToolStripMenuItem").Enabled = True
+                End Select
+
+                Select Case dgvJobsRestJobsList.Rows.Item(e.RowIndex).Cells("jobStatus").Value
+                    Case "Running"
+                        cms_JobStatus.Items("CancelJobToolStripMenuItem").Enabled = True
+                    Case Else
+                        cms_JobStatus.Items("CancelJobToolStripMenuItem").Enabled = False
+                End Select
+
+
+                cms_JobStatus.Show(MousePosition)
+            End If
+        End If
+    End Sub
+
+   
+    Private Sub EndpointStatusToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EndpointStatusToolStripMenuItem.Click
+
+        JobsEndpointStatus = dgvJobsRestJobsList.SelectedRows(0).Cells("jobResultID").Value
+        If JobsEndpointStatus <> "" Then
+        JobRunner_RestFunctions.GetEndpointStatusCounts(JobsEndpointStatus)
+        JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus)
+        JobEndpointRefreshTimer = Create_JobEndpointRefreshTimer()
+        splitEndpointStatus.BringToFront()
+        End If
+    End Sub
+
+    Private Sub ResultToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ResultToolStripMenuItem.Click
+        Dim resultid = dgvJobsRestJobsList.SelectedRows(0).Cells("jobResultID").Value
+        Process.Start("https://" & txtServer.Text & "/endpoint/#/reviewpage?JobResultID=" & resultid & "&ShowAgentPivot=false&ShowJobPivot=false")
+    End Sub
+
+    Private Sub CancelJobToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CancelJobToolStripMenuItem.Click
+        Dim resultid = dgvJobsRestJobsList.SelectedRows(0).Cells("jobResultID").Value
+        JobRunner_RestFunctions.CancelJob(resultid, True)
+
+    End Sub
+
+    Private Sub RetryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RetryToolStripMenuItem.Click
+        Dim jobName = dgvJobsRestJobsList.SelectedRows(0).Cells("jobName").Value
+        Dim jobID = dgvJobsRestJobsList.SelectedRows(0).Cells("jobID").Value
+
+        JobRunner_RestFunctions.RetryJob(jobID, jobName & " Retry")
     End Sub
 End Class

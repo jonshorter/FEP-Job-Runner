@@ -184,13 +184,7 @@ retry:
                     Main.dgvJobsRestJobsList.Rows.Clear()
 
                     For Each job As JobInfo In jobslist.Data.jobs
-                        Dim CancelStatus
-                        If job.Status = "Running" Then
-                            CancelStatus = "Cancel"
-                        Else
-                            CancelStatus = ""
-                        End If
-                        Main.dgvJobsRestJobsList.Rows.Add(New String() {job.Name, job.Status, "Retry", CancelStatus, job.JobType, job.StartDate.ToString, job.EndDate.ToString, job.JobID.ToString, job.ResultID.ToString, "Status", "Result"})
+                        Main.dgvJobsRestJobsList.Rows.Add(New String() {job.Name, job.Status, job.JobType, job.StartDate.ToString, job.EndDate.ToString, job.JobID.ToString, job.ResultID.ToString})
                     Next
                 Else
                     If Not jobslist.Error.Message = "Could not find root cookie." Then GoTo retry
