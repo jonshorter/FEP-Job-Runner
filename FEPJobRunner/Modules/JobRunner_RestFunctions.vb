@@ -130,7 +130,7 @@ retry:
                 citem.Text = "Search"
                 citem.Tag = "Search"
                 AddHandler citem.KeyDown, AddressOf Main.jobsearchmenu_txtEnter
-
+              
                 cmenu.Items.Add(citem)
 
                 Return cmenu
@@ -365,7 +365,7 @@ retry:
         End If
     End Sub
 
-    Public Sub GetProjectList_JobFromTemplate(Optional Search As String = "")
+    Public Sub GetProjectList_JobFromTemplate(Optional Search As FacetSearch = Nothing)
         If Main.RestClientValidLogin = True Then
 retry:
             Try
@@ -373,11 +373,13 @@ retry:
                     FEPAuthenticate()
                 End If
                 Dim projectlist As ApiResponse(Of List(Of ProjectPresenter))
-                If Not Search = "" Or Search = "Search" Then
-                    projectlist = Main.RestClient.Functions.Project.GetProjectList()
+                If Not Search Is Nothing Then
+                    projectlist = Main.RestClient.Functions.Project.GetProjectList(Search)
                 Else
                     projectlist = Main.RestClient.Functions.Project.GetProjectList()
                 End If
+
+
                 If projectlist.Success = True Then
                     Form_JobFromTemplate.dgvProjectList.Rows.Clear()
 
@@ -611,14 +613,21 @@ retry:
     End Sub
 
 
-    Public Sub GetGroupComputer_JobFromTemplate(ByVal GroupID As String, Optional count As Integer = 100, Optional start As Integer = 0, Optional Search As String = "")
+    Public Sub GetGroupComputer_JobFromTemplate(ByVal GroupID As String, Optional count As Integer = 100, Optional start As Integer = 0, Optional Search As FacetSearch = Nothing)
         If Main.RestClientValidLogin = True Then
 retry:
             Try
                 If Main.RestClient.IsAuthenticated = False Then
                     FEPAuthenticate()
                 End If
-                Dim endpoints = Main.RestClient.Functions.Computers.GetGroupComputers(GroupID, count, start, Search)
+
+                Dim endpoints As ApiResponse(Of ComputersInGroup)
+                If Not Search Is Nothing Then
+                    endpoints = Main.RestClient.Functions.Computers.GetGroupComputers(count, GroupID, False, 0, Search)
+                Else
+                    endpoints = Main.RestClient.Functions.Computers.GetGroupComputers(count, GroupID, False, 0)
+                End If
+
                 If endpoints.Success = True Then
                     Form_JobFromTemplate.dgvTargetEndpoints.Rows.Clear()
                     For Each endpoint In endpoints.Data.computers

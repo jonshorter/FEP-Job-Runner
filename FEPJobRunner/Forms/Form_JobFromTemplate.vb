@@ -32,6 +32,8 @@ Public Class Form_JobFromTemplate
                     CurrentTabName = tabTargets.Name
                     tabControlJobFromTemplate.SelectedTab = tabTargets
                     GetGroups_JobFromTemplate()
+                    treeGroups.SelectedNode = treeGroups.Nodes.Item(0)
+                    JobRunner_RestFunctions.GetGroupComputer_JobFromTemplate(treeGroups.SelectedNode.Tag)
                     lblJobFromTemplateMenuText.Text = "Select the target endpoints"
 
                 End If
@@ -403,7 +405,7 @@ Public Class Form_JobFromTemplate
     Private Sub btnNewProject_Click(sender As Object, e As EventArgs) Handles btnNewProject.Click
         Dim projectcreate As New Form_CreateEditProject("Create Project", True)
         projectcreate.ShowDialog()
-        JobRunner_RestFunctions.GetProjectList_JobFromTemplate("")
+        JobRunner_RestFunctions.GetProjectList_JobFromTemplate()
     End Sub
 
     Private Sub txtSearchProject_TextChanged(sender As Object, e As EventArgs) Handles txtSearchProject.TextChanged
@@ -416,9 +418,19 @@ Public Class Form_JobFromTemplate
     End Sub
 
     Private Sub txtSearchProject_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSearchProject.KeyDown
-
+        Dim x As TextBox = sender
         If e.KeyCode = Keys.Enter Then
-            JobRunner_RestFunctions.GetProjectList_JobFromTemplate(txtSearchProject.Text)
+            Select Case x.Text
+                Case "Search"
+                    JobRunner_RestFunctions.GetProjectList_JobFromTemplate()
+                Case vbNullString
+                    JobRunner_RestFunctions.GetProjectList_JobFromTemplate()
+                Case Else
+                    Dim facsearch As New FacetSearch
+                    facsearch.SearchAny.Add(x.Text)
+                    JobRunner_RestFunctions.GetProjectList_JobFromTemplate(facsearch)
+            End Select
+
         End If
     End Sub
 
@@ -449,7 +461,7 @@ Public Class Form_JobFromTemplate
 
         tabControlJobFromTemplate.TabPages.Remove(tabThreatFilters)
         TemplateInfo = JobRunner_RestFunctions.GetTemplateInfo(JobTemplateID).Data
-        JobRunner_RestFunctions.GetProjectList_JobFromTemplate("")
+        JobRunner_RestFunctions.GetProjectList_JobFromTemplate()
         tabControlJobFromTemplate.SelectedTab = tabProject
         CurrentTabName = tabControlJobFromTemplate.SelectedTab.Name
 
@@ -519,9 +531,25 @@ Public Class Form_JobFromTemplate
     End Sub
 
     Private Sub txtSearchEndpoint_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSearchEndpoint.KeyDown
-
+        Dim x As TextBox = sender
         If e.KeyCode = Keys.Enter Then
-            JobRunner_RestFunctions.GetGroupComputer_JobFromTemplate(treeGroups.SelectedNode.Tag, , , txtSearchEndpoint.Text)
+            Dim treegroup As String = ""
+            If Not treeGroups.SelectedNode Is Nothing Then
+                treegroup = treeGroups.SelectedNode.Tag
+            Else
+                treegroup = "00000000-0000-0000-0000-000000000000"
+            End If
+            Select Case x.Text
+                Case "Search"
+
+                    JobRunner_RestFunctions.GetGroupComputer_JobFromTemplate(treegroup, , )
+                Case vbNullString
+                    JobRunner_RestFunctions.GetGroupComputer_JobFromTemplate(treegroup, , )
+                Case Else
+                    Dim facsearch As New FacetSearch
+                    facsearch.SearchAny.Add(x.Text)
+                    JobRunner_RestFunctions.GetGroupComputer_JobFromTemplate(treegroup, , , facsearch)
+            End Select
         End If
     End Sub
 

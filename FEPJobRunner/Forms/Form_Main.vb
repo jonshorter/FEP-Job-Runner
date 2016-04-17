@@ -2051,10 +2051,15 @@ Public Class Main
         ProjSearchFacetUpdate()
     End Sub
     Public Shared Sub projsearchmenu_txtEnter(sender As Object, e As KeyEventArgs)
-
+        Dim x As ToolStripTextBox = sender
         If e.KeyCode = Keys.Enter Then
-            Dim tmpitem = Main.lvProjectFacets.Items.Add("Any:" & sender.text)
-            ProjSearchFacetUpdate()
+            Select Case x.Text
+                Case "Search"
+                Case vbNullString
+                Case Else
+                    Dim tmpitem = Main.lvProjectFacets.Items.Add("Any:" & x.Text)
+                    ProjSearchFacetUpdate()
+            End Select
         End If
 
     End Sub
@@ -2125,15 +2130,18 @@ Public Class Main
         End If
     End Sub
     Public Shared Sub jobsearchmenu_txtEnter(sender As Object, e As KeyEventArgs)
-
+        Dim x As ToolStripTextBox = sender
         If e.KeyCode = Keys.Enter Then
-            Dim tmpitem = Main.lvJobStatusFacets.Items.Add("Any:" & sender.text)
-            JobStatusSearchFacetUpdate()
+            Select Case x.Text
+                Case "Search"
+                Case vbNullString
+                Case Else
+                    Dim tmpitem = Main.lvJobStatusFacets.Items.Add("Any:" & x.Text)
+                    JobStatusSearchFacetUpdate()
+            End Select
         End If
-
-
-
     End Sub
+ 
 
     Public Shared Sub jobsearchmenu_Click(sender As Object, e As ToolStripItemClickedEventArgs)
 

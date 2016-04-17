@@ -179,6 +179,8 @@ Partial Class Main
         Me.ProjectID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tabJobsList = New System.Windows.Forms.TabPage()
         Me.splitJobsRestJobs = New System.Windows.Forms.SplitContainer()
+        Me.Label32 = New System.Windows.Forms.Label()
+        Me.lvJobStatusFacets = New System.Windows.Forms.ListView()
         Me.dgvJobsRestJobsList = New System.Windows.Forms.DataGridView()
         Me.jobName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.jobStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -318,8 +320,6 @@ Partial Class Main
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.RetryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CancelJobToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Label32 = New System.Windows.Forms.Label()
-        Me.lvJobStatusFacets = New System.Windows.Forms.ListView()
         Me.grpSettings.SuspendLayout()
         Me.flowSettings.SuspendLayout()
         Me.grpReqSettings.SuspendLayout()
@@ -2294,6 +2294,29 @@ Partial Class Main
         Me.splitJobsRestJobs.SplitterDistance = 57
         Me.splitJobsRestJobs.TabIndex = 2
         '
+        'Label32
+        '
+        Me.Label32.AutoSize = True
+        Me.Label32.Location = New System.Drawing.Point(3, 9)
+        Me.Label32.Name = "Label32"
+        Me.Label32.Size = New System.Drawing.Size(43, 17)
+        Me.Label32.TabIndex = 9
+        Me.Label32.Text = "Filter:"
+        '
+        'lvJobStatusFacets
+        '
+        Me.lvJobStatusFacets.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lvJobStatusFacets.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lvJobStatusFacets.GridLines = True
+        Me.lvJobStatusFacets.Location = New System.Drawing.Point(52, 3)
+        Me.lvJobStatusFacets.MultiSelect = False
+        Me.lvJobStatusFacets.Name = "lvJobStatusFacets"
+        Me.lvJobStatusFacets.Size = New System.Drawing.Size(681, 49)
+        Me.lvJobStatusFacets.TabIndex = 8
+        Me.lvJobStatusFacets.UseCompatibleStateImageBehavior = False
+        Me.lvJobStatusFacets.View = System.Windows.Forms.View.List
+        '
         'dgvJobsRestJobsList
         '
         Me.dgvJobsRestJobsList.AllowUserToAddRows = False
@@ -3828,29 +3851,6 @@ Partial Class Main
         Me.CancelJobToolStripMenuItem.Name = "CancelJobToolStripMenuItem"
         Me.CancelJobToolStripMenuItem.Size = New System.Drawing.Size(182, 24)
         Me.CancelJobToolStripMenuItem.Text = "Cancel"
-        '
-        'Label32
-        '
-        Me.Label32.AutoSize = True
-        Me.Label32.Location = New System.Drawing.Point(3, 9)
-        Me.Label32.Name = "Label32"
-        Me.Label32.Size = New System.Drawing.Size(43, 17)
-        Me.Label32.TabIndex = 9
-        Me.Label32.Text = "Filter:"
-        '
-        'lvJobStatusFacets
-        '
-        Me.lvJobStatusFacets.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lvJobStatusFacets.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lvJobStatusFacets.GridLines = True
-        Me.lvJobStatusFacets.Location = New System.Drawing.Point(52, 3)
-        Me.lvJobStatusFacets.MultiSelect = False
-        Me.lvJobStatusFacets.Name = "lvJobStatusFacets"
-        Me.lvJobStatusFacets.Size = New System.Drawing.Size(681, 49)
-        Me.lvJobStatusFacets.TabIndex = 8
-        Me.lvJobStatusFacets.UseCompatibleStateImageBehavior = False
-        Me.lvJobStatusFacets.View = System.Windows.Forms.View.List
         '
         'Main
         '
