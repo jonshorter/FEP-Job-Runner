@@ -1089,7 +1089,8 @@ Public Class Main
     Private Sub tabControlJobsRest_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabControlJobsRest.SelectedIndexChanged
         Select Case tabControlJobsRest.SelectedTab.Name
             Case tabJobsList.Name
-                JobRunner_RestFunctions.GetJobList()
+                JobStatusSearchFacetUpdate()
+
                 Me.Width = 830
                 JobRefreshTimer = Create_JobRefreshTimer()
 
@@ -1097,7 +1098,8 @@ Public Class Main
                 JobRunner_RestFunctions.GetTasks()
                 Me.Width = 830
             Case tabProjects.Name
-                JobRunner_RestFunctions.GetProjectList()
+                ProjSearchFacetUpdate()
+
                 Me.Width = 830
             Case tabAlerts.Name
                 JobRunner_RestFunctions.LoadAlerts()
@@ -1153,7 +1155,7 @@ Public Class Main
                 JobRunner_RestFunctions.FEPAuthenticate()
             End If
             If RestClient.IsAuthenticated Then
-                JobRunner_RestFunctions.GetJobList()
+                JobStatusSearchFacetUpdate()
                 JobRefreshTimer = Create_JobRefreshTimer()
                 tabControlJobsRest.SelectedTab = tabJobsList
                 Me.Width = 830
@@ -1274,15 +1276,7 @@ Public Class Main
         If Me.InvokeRequired Then
             Me.Invoke(New RefreshJobTimer(AddressOf JobRefreshUp), Me)
         Else
-            'Add code for facet search
-            'Select Case txtJobsSearch.Text
-            '   Case ""
-            'JobRunner_RestFunctions.GetJobList("")
-            '    Case "Search"
-            'JobRunner_RestFunctions.GetJobList("")
-            '   Case Else
-            JobRunner_RestFunctions.GetJobList()
-            'End Select
+            JobStatusSearchFacetUpdate()
 
         End If
     End Sub
@@ -2133,23 +2127,20 @@ Public Class Main
     Public Shared Sub jobsearchmenu_txtEnter(sender As Object, e As KeyEventArgs)
 
         If e.KeyCode = Keys.Enter Then
-            Dim facsearch As New FacetSearch
-            Dim facsearchfield As New FacetSearchFields
-            facsearch.SearchAny.Add(sender.text)
-            JobRunner_RestFunctions.GetJobList(facsearch)
+            Dim tmpitem = Main.lvJobStatusFacets.Items.Add("Any:" & sender.text)
+            JobStatusSearchFacetUpdate()
         End If
+
+
 
     End Sub
 
     Public Shared Sub jobsearchmenu_Click(sender As Object, e As ToolStripItemClickedEventArgs)
-        Debug.WriteLine(e.ClickedItem.OwnerItem.Text)
-        Debug.WriteLine(e.ClickedItem.Text)
-        Dim facsearch As New FacetSearch
-        Dim facsearchfield As New FacetSearchFields
-        facsearchfield.FieldName = e.ClickedItem.OwnerItem.Tag
-        facsearchfield.Values.Add(e.ClickedItem.Tag)
-        facsearch.SearchFields.Add(facsearchfield)
-        JobRunner_RestFunctions.GetJobList(facsearch)
+
+        Dim tmpitem = Main.lvJobStatusFacets.Items.Add(e.ClickedItem.OwnerItem.Text & ":" & e.ClickedItem.Tag)
+        tmpitem.tag = e.ClickedItem.OwnerItem.Tag
+        JobStatusSearchFacetUpdate()
+
     End Sub
 
 
@@ -2285,5 +2276,12 @@ Public Class Main
         Dim jobID = dgvJobsRestJobsList.SelectedRows(0).Cells("jobID").Value
 
         JobRunner_RestFunctions.RetryJob(jobID, jobName & " Retry")
+    End Sub
+
+    Private Sub lvJobStatusFacets_DoubleClick(sender As Object, e As EventArgs) Handles lvJobStatusFacets.DoubleClick
+        For Each item In lvJobStatusFacets.SelectedItems
+            lvJobStatusFacets.Items.Remove(item)
+        Next
+        JobStatusSearchFacetUpdate()
     End Sub
 End Class
