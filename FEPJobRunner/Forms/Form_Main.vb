@@ -1179,9 +1179,19 @@ Public Class Main
     End Sub
 
     Private Sub txtSearchEndpointStatus_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSearchEndpointStatus.KeyDown
-
+        Dim x As TextBox = sender
         If e.KeyCode = Keys.Enter Then
-            JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus, txtSearchEndpointStatus.Text)
+            Select Case x.Text
+                Case "Search"
+                    JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus)
+                Case vbNullString
+                    JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus)
+                Case Else
+                    Dim facsearch As New FacetSearch
+                    facsearch.SearchAny.Add(x.Text)
+                    JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus, facsearch)
+            End Select
+
         End If
     End Sub
 
@@ -1295,7 +1305,9 @@ Public Class Main
                 Case "Search"
                     JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus)
                 Case Else
-                    JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus, txtSearchEndpointStatus.Text)
+                    Dim facsearch As New FacetSearch
+                    facsearch.SearchAny.Add(txtSearchEndpointStatus.Text)
+                    JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus, facsearch)
             End Select
 
         End If

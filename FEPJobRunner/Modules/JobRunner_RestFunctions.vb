@@ -307,7 +307,7 @@ retry:
     End Sub
 
 
-    Public Sub GetJobTargets(ByVal JobResultID As String, Optional Search As String = "")
+    Public Sub GetJobTargets(ByVal JobResultID As String, Optional Search As FacetSearch = Nothing)
         If Main.RestClientValidLogin = True Then
 retry:
             Try
