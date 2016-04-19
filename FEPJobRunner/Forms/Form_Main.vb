@@ -1105,6 +1105,9 @@ Public Class Main
                 JobRunner_RestFunctions.LoadAlerts()
                 Me.Width = 830
                 AlertsRefreshTimer = Create_AlertsRefreshTimer()
+            Case tabScriptManagement.Name
+                JobRunner_RestFunctions.GetScriptList()
+                Me.Width = 830
         End Select
 
 
@@ -2303,5 +2306,27 @@ Public Class Main
             lvJobStatusFacets.Items.Remove(item)
         Next
         JobStatusSearchFacetUpdate()
+    End Sub
+
+    Private Sub DownloadToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles DownloadToolStripMenuItem1.Click
+        Process.Start("https://" & txtServer.Text & "/Endpoint/Handlers/ScriptPackageDownload.ashx?PackageId=" & dgvScriptManagementList.SelectedRows(0).Cells("scriptID").Value)
+    End Sub
+
+    Private Sub dgvScriptManagementList_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvScriptManagementList.CellMouseClick
+        If e.Button = Windows.Forms.MouseButtons.Right Then
+            If Not e.RowIndex = -1 Then
+                dgvScriptManagementList.Rows.Item(e.RowIndex).Selected = True
+                cms_ScriptManage.Show(MousePosition)
+            End If
+        End If
+    End Sub
+
+    Private Sub DownloadToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DownloadToolStripMenuItem.Click
+        Dim x = RestClient.Functions.ScriptPackages.DeletePackage(dgvScriptManagementList.SelectedRows(0).Cells("scriptID").Value)
+        If x.Success = True Then
+            JobRunner_RestFunctions.GetScriptList()
+        Else
+            MsgBox(x.Error.Message)
+        End If
     End Sub
 End Class

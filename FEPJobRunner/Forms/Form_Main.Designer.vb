@@ -224,6 +224,15 @@ Partial Class Main
         Me.flowTotalResponses = New System.Windows.Forms.FlowLayoutPanel()
         Me.lblTotalNumberAlerts = New System.Windows.Forms.Label()
         Me.flowAlertBreakdown = New System.Windows.Forms.FlowLayoutPanel()
+        Me.tabScriptManagement = New System.Windows.Forms.TabPage()
+        Me.splitScriptManagement = New System.Windows.Forms.SplitContainer()
+        Me.Label45 = New System.Windows.Forms.Label()
+        Me.lvScriptManageFacet = New System.Windows.Forms.ListView()
+        Me.dgvScriptManagementList = New System.Windows.Forms.DataGridView()
+        Me.scriptName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.scriptPlatform = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.scriptTags = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.scriptID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tabJobExecution = New System.Windows.Forms.TabPage()
         Me.flowJobsAPI = New System.Windows.Forms.FlowLayoutPanel()
         Me.tableJobExecute = New System.Windows.Forms.TableLayoutPanel()
@@ -320,6 +329,10 @@ Partial Class Main
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.RetryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CancelJobToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cms_ScriptManage = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DownloadToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DownloadToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpSettings.SuspendLayout()
         Me.flowSettings.SuspendLayout()
         Me.grpReqSettings.SuspendLayout()
@@ -390,6 +403,12 @@ Partial Class Main
         Me.splitAlerts.SuspendLayout()
         CType(Me.dgvAlerts, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tblAlertBreakdown.SuspendLayout()
+        Me.tabScriptManagement.SuspendLayout()
+        CType(Me.splitScriptManagement, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.splitScriptManagement.Panel1.SuspendLayout()
+        Me.splitScriptManagement.Panel2.SuspendLayout()
+        Me.splitScriptManagement.SuspendLayout()
+        CType(Me.dgvScriptManagementList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabJobExecution.SuspendLayout()
         Me.flowJobsAPI.SuspendLayout()
         Me.tableJobExecute.SuspendLayout()
@@ -418,6 +437,7 @@ Partial Class Main
         Me.flowAbout.SuspendLayout()
         Me.cms_Project.SuspendLayout()
         Me.cms_JobStatus.SuspendLayout()
+        Me.cms_ScriptManage.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnExecute
@@ -2119,6 +2139,7 @@ Partial Class Main
         Me.tabControlJobsRest.Controls.Add(Me.tabProjects)
         Me.tabControlJobsRest.Controls.Add(Me.tabJobsList)
         Me.tabControlJobsRest.Controls.Add(Me.tabAlerts)
+        Me.tabControlJobsRest.Controls.Add(Me.tabScriptManagement)
         Me.tabControlJobsRest.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tabControlJobsRest.Location = New System.Drawing.Point(0, 0)
         Me.tabControlJobsRest.Name = "tabControlJobsRest"
@@ -2777,6 +2798,103 @@ Partial Class Main
         Me.flowAlertBreakdown.Name = "flowAlertBreakdown"
         Me.flowAlertBreakdown.Size = New System.Drawing.Size(526, 123)
         Me.flowAlertBreakdown.TabIndex = 4
+        '
+        'tabScriptManagement
+        '
+        Me.tabScriptManagement.Controls.Add(Me.splitScriptManagement)
+        Me.tabScriptManagement.Location = New System.Drawing.Point(4, 25)
+        Me.tabScriptManagement.Name = "tabScriptManagement"
+        Me.tabScriptManagement.Size = New System.Drawing.Size(742, 667)
+        Me.tabScriptManagement.TabIndex = 4
+        Me.tabScriptManagement.Text = "Script Management"
+        Me.tabScriptManagement.UseVisualStyleBackColor = True
+        '
+        'splitScriptManagement
+        '
+        Me.splitScriptManagement.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.splitScriptManagement.Location = New System.Drawing.Point(0, 0)
+        Me.splitScriptManagement.Name = "splitScriptManagement"
+        Me.splitScriptManagement.Orientation = System.Windows.Forms.Orientation.Horizontal
+        '
+        'splitScriptManagement.Panel1
+        '
+        Me.splitScriptManagement.Panel1.Controls.Add(Me.Label45)
+        Me.splitScriptManagement.Panel1.Controls.Add(Me.lvScriptManageFacet)
+        '
+        'splitScriptManagement.Panel2
+        '
+        Me.splitScriptManagement.Panel2.Controls.Add(Me.dgvScriptManagementList)
+        Me.splitScriptManagement.Size = New System.Drawing.Size(742, 667)
+        Me.splitScriptManagement.SplitterDistance = 55
+        Me.splitScriptManagement.TabIndex = 1
+        '
+        'Label45
+        '
+        Me.Label45.AutoSize = True
+        Me.Label45.Location = New System.Drawing.Point(3, 9)
+        Me.Label45.Name = "Label45"
+        Me.Label45.Size = New System.Drawing.Size(43, 17)
+        Me.Label45.TabIndex = 7
+        Me.Label45.Text = "Filter:"
+        '
+        'lvScriptManageFacet
+        '
+        Me.lvScriptManageFacet.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lvScriptManageFacet.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lvScriptManageFacet.GridLines = True
+        Me.lvScriptManageFacet.Location = New System.Drawing.Point(52, 3)
+        Me.lvScriptManageFacet.MultiSelect = False
+        Me.lvScriptManageFacet.Name = "lvScriptManageFacet"
+        Me.lvScriptManageFacet.Size = New System.Drawing.Size(687, 49)
+        Me.lvScriptManageFacet.TabIndex = 6
+        Me.lvScriptManageFacet.UseCompatibleStateImageBehavior = False
+        Me.lvScriptManageFacet.View = System.Windows.Forms.View.List
+        '
+        'dgvScriptManagementList
+        '
+        Me.dgvScriptManagementList.AccessibleRole = System.Windows.Forms.AccessibleRole.None
+        Me.dgvScriptManagementList.AllowUserToAddRows = False
+        Me.dgvScriptManagementList.AllowUserToDeleteRows = False
+        Me.dgvScriptManagementList.AllowUserToResizeRows = False
+        Me.dgvScriptManagementList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvScriptManagementList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvScriptManagementList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.scriptName, Me.scriptPlatform, Me.scriptTags, Me.scriptID})
+        Me.dgvScriptManagementList.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvScriptManagementList.Location = New System.Drawing.Point(0, 0)
+        Me.dgvScriptManagementList.MultiSelect = False
+        Me.dgvScriptManagementList.Name = "dgvScriptManagementList"
+        Me.dgvScriptManagementList.ReadOnly = True
+        Me.dgvScriptManagementList.RowHeadersVisible = False
+        Me.dgvScriptManagementList.RowTemplate.Height = 24
+        Me.dgvScriptManagementList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvScriptManagementList.Size = New System.Drawing.Size(742, 608)
+        Me.dgvScriptManagementList.TabIndex = 1
+        '
+        'scriptName
+        '
+        Me.scriptName.HeaderText = "Name"
+        Me.scriptName.Name = "scriptName"
+        Me.scriptName.ReadOnly = True
+        '
+        'scriptPlatform
+        '
+        Me.scriptPlatform.HeaderText = "Platform"
+        Me.scriptPlatform.Name = "scriptPlatform"
+        Me.scriptPlatform.ReadOnly = True
+        '
+        'scriptTags
+        '
+        Me.scriptTags.HeaderText = "Tags"
+        Me.scriptTags.Name = "scriptTags"
+        Me.scriptTags.ReadOnly = True
+        '
+        'scriptID
+        '
+        Me.scriptID.HeaderText = "ID"
+        Me.scriptID.Name = "scriptID"
+        Me.scriptID.ReadOnly = True
+        Me.scriptID.Visible = False
         '
         'tabJobExecution
         '
@@ -3852,6 +3970,31 @@ Partial Class Main
         Me.CancelJobToolStripMenuItem.Size = New System.Drawing.Size(182, 24)
         Me.CancelJobToolStripMenuItem.Text = "Cancel"
         '
+        'cms_ScriptManage
+        '
+        Me.cms_ScriptManage.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.cms_ScriptManage.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditToolStripMenuItem, Me.DownloadToolStripMenuItem, Me.DownloadToolStripMenuItem1})
+        Me.cms_ScriptManage.Name = "cms_JobStatus"
+        Me.cms_ScriptManage.Size = New System.Drawing.Size(176, 104)
+        '
+        'EditToolStripMenuItem
+        '
+        Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
+        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(175, 24)
+        Me.EditToolStripMenuItem.Text = "Edit"
+        '
+        'DownloadToolStripMenuItem
+        '
+        Me.DownloadToolStripMenuItem.Name = "DownloadToolStripMenuItem"
+        Me.DownloadToolStripMenuItem.Size = New System.Drawing.Size(175, 24)
+        Me.DownloadToolStripMenuItem.Text = "Delete"
+        '
+        'DownloadToolStripMenuItem1
+        '
+        Me.DownloadToolStripMenuItem1.Name = "DownloadToolStripMenuItem1"
+        Me.DownloadToolStripMenuItem1.Size = New System.Drawing.Size(175, 24)
+        Me.DownloadToolStripMenuItem1.Text = "Download"
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -3974,6 +4117,13 @@ Partial Class Main
         CType(Me.dgvAlerts, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tblAlertBreakdown.ResumeLayout(False)
         Me.tblAlertBreakdown.PerformLayout()
+        Me.tabScriptManagement.ResumeLayout(False)
+        Me.splitScriptManagement.Panel1.ResumeLayout(False)
+        Me.splitScriptManagement.Panel1.PerformLayout()
+        Me.splitScriptManagement.Panel2.ResumeLayout(False)
+        CType(Me.splitScriptManagement, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.splitScriptManagement.ResumeLayout(False)
+        CType(Me.dgvScriptManagementList, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabJobExecution.ResumeLayout(False)
         Me.flowJobsAPI.ResumeLayout(False)
         Me.flowJobsAPI.PerformLayout()
@@ -4021,6 +4171,7 @@ Partial Class Main
         Me.flowAbout.PerformLayout()
         Me.cms_Project.ResumeLayout(False)
         Me.cms_JobStatus.ResumeLayout(False)
+        Me.cms_ScriptManage.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -4321,5 +4472,18 @@ Partial Class Main
     Friend WithEvents jobResultID As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Label32 As System.Windows.Forms.Label
     Friend WithEvents lvJobStatusFacets As System.Windows.Forms.ListView
+    Friend WithEvents tabScriptManagement As System.Windows.Forms.TabPage
+    Friend WithEvents splitScriptManagement As System.Windows.Forms.SplitContainer
+    Friend WithEvents Label45 As System.Windows.Forms.Label
+    Friend WithEvents lvScriptManageFacet As System.Windows.Forms.ListView
+    Friend WithEvents dgvScriptManagementList As System.Windows.Forms.DataGridView
+    Friend WithEvents cms_ScriptManage As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents scriptName As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents scriptPlatform As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents scriptTags As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents scriptID As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents EditToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DownloadToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DownloadToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
 
 End Class

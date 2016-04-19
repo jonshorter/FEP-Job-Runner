@@ -365,6 +365,35 @@ retry:
         End If
     End Sub
 
+    Public Sub GetScriptList(Optional Search As Facet.FacetSearch = Nothing)
+        If Main.RestClientValidLogin = True Then
+retry:
+            Try
+                If Main.RestClient.IsAuthenticated = False Then
+                    FEPAuthenticate()
+                End If
+                Dim scriptlist As ApiResponse(Of Scripts.ScriptPackages)
+                If Not Search Is Nothing Then
+                    scriptlist = Main.RestClient.Functions.ScriptPackages.GetScriptPackages(, , , , Search)
+                Else
+                    scriptlist = Main.RestClient.Functions.ScriptPackages.GetScriptPackages
+                End If
+                If scriptlist.Success = True Then
+                    Main.dgvScriptManagementList.Rows.Clear()
+
+                    For Each item In scriptlist.Data.scripts
+                        Main.dgvScriptManagementList.Rows.Add(New String() {item.name, item.platformsLocalizedStringList, item.tags, item.id})
+                    Next
+                Else
+                    If Not scriptlist.Error.Message = "Could not find root cookie." Then GoTo retry
+
+                End If
+            Catch ex As Exception
+                DebugWriteLine(ex.Message)
+            End Try
+        End If
+    End Sub
+
     Public Sub GetProjectList_JobFromTemplate(Optional Search As Facet.FacetSearch = Nothing)
         If Main.RestClientValidLogin = True Then
 retry:
