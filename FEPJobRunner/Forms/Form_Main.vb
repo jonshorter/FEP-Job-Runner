@@ -2329,4 +2329,9 @@ Public Class Main
             MsgBox(x.Error.Message)
         End If
     End Sub
+
+    Private Sub EditToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditToolStripMenuItem.Click
+        Dim scEdit As New Form_CreateEditScript("Edit Script", False, dgvScriptManagementList.SelectedRows(0).Cells("scriptID").Value)
+        scEdit.ShowDialog()
+    End Sub
 End Class

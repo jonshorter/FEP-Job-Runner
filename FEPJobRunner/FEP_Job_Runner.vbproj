@@ -112,6 +112,12 @@
     <Compile Include="Forms\Form_AgentorShareDialog.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\Form_CreateEditScript.Designer.vb">
+      <DependentUpon>Form_CreateEditScript.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form_CreateEditScript.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Form_CreateEditProject.Designer.vb">
       <DependentUpon>Form_CreateEditProject.vb</DependentUpon>
     </Compile>
@@ -172,6 +178,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Forms\Form_AgentorShareDialog.resx">
       <DependentUpon>Form_AgentorShareDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form_CreateEditScript.resx">
+      <DependentUpon>Form_CreateEditScript.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Form_CreateEditProject.resx">
       <DependentUpon>Form_CreateEditProject.vb</DependentUpon>
