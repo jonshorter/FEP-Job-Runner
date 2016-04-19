@@ -70,13 +70,13 @@ retry:
             Dim cmenu As New ContextMenuStrip
             If facets.Success = True Then
 
-                For Each facet In facets.Data
-                    Dim mitem As New ToolStripMenuItem(facet.Label)
-                    mitem.Tag = facet.Key
+                For Each facetitem In facets.Data
+                    Dim mitem As New ToolStripMenuItem(facetitem.Label)
+                    mitem.Tag = facetitem.Key
                     AddHandler mitem.DropDownItemClicked, AddressOf Main.projsearchmenu_Click
 
-                    If facet.TotalOptions > 0 Then
-                        For Each opt In facet.Options
+                    If facetitem.TotalOptions > 0 Then
+                        For Each opt In facetitem.Options
                             Dim optitem As New ToolStripMenuItem(opt.Label)
                             optitem.Tag = opt.Key
                             mitem.DropDownItems.Add(optitem)
@@ -112,13 +112,13 @@ retry:
             Dim cmenu As New ContextMenuStrip
             If facets.Success = True Then
 
-                For Each facet In facets.Data
-                    Dim mitem As New ToolStripMenuItem(facet.Label)
-                    mitem.Tag = facet.Key
+                For Each facetitem In facets.Data
+                    Dim mitem As New ToolStripMenuItem(facetitem.Label)
+                    mitem.Tag = facetitem.Key
                     AddHandler mitem.DropDownItemClicked, AddressOf Main.jobsearchmenu_Click
 
-                    If facet.TotalOptions > 0 Then
-                        For Each opt In facet.Options
+                    If facetitem.TotalOptions > 0 Then
+                        For Each opt In facetitem.Options
                             Dim optitem As New ToolStripMenuItem(opt.Label)
                             optitem.Tag = opt.Key
                             mitem.DropDownItems.Add(optitem)
@@ -167,8 +167,8 @@ retry:
 
     End Function
 
-    Public Sub GetJobList(Optional Search As FEPRestClient.Models.FacetSearch = Nothing)
-    If Main.RestClientValidLogin = True Then
+    Public Sub GetJobList(Optional Search As Facet.FacetSearch = Nothing)
+        If Main.RestClientValidLogin = True Then
 retry:
             Try
                 If Main.RestClient.IsAuthenticated = False Then
@@ -203,10 +203,10 @@ retry:
                 If Main.RestClient.IsAuthenticated = False Then
                     FEPAuthenticate()
                 End If
-                Dim ResubmitJob As New FEPRestClient.Models.Job2.ResubmitJobOptions
+                Dim ResubmitJob As New ResubmitJobOptions
                 ResubmitJob.JobID = JobID
                 ResubmitJob.NewJobName = NewJobName
-                ResubmitJob.ResubmissionType = FEPRestClient.Models.Job2.ResubmitType.All
+                ResubmitJob.ResubmissionType = ResubmitType.All
                 Dim job = Main.RestClient.Functions.Job.ResubmitJob(ResubmitJob)
                 If job.Success = True Then
                     GetJobList()
@@ -307,7 +307,7 @@ retry:
     End Sub
 
 
-    Public Sub GetJobTargets(ByVal JobResultID As String, Optional Search As FacetSearch = Nothing)
+    Public Sub GetJobTargets(ByVal JobResultID As String, Optional Search As Facet.FacetSearch = Nothing)
         If Main.RestClientValidLogin = True Then
 retry:
             Try
@@ -336,7 +336,7 @@ retry:
         End If
     End Sub
 
-    Public Sub GetProjectList(Optional Search As FEPRestClient.Models.FacetSearch = Nothing)
+    Public Sub GetProjectList(Optional Search As Facet.FacetSearch = Nothing)
         If Main.RestClientValidLogin = True Then
 retry:
             Try
@@ -365,7 +365,7 @@ retry:
         End If
     End Sub
 
-    Public Sub GetProjectList_JobFromTemplate(Optional Search As FacetSearch = Nothing)
+    Public Sub GetProjectList_JobFromTemplate(Optional Search As Facet.FacetSearch = Nothing)
         If Main.RestClientValidLogin = True Then
 retry:
             Try
@@ -613,7 +613,7 @@ retry:
     End Sub
 
 
-    Public Sub GetGroupComputer_JobFromTemplate(ByVal GroupID As String, Optional count As Integer = 100, Optional start As Integer = 0, Optional Search As FacetSearch = Nothing)
+    Public Sub GetGroupComputer_JobFromTemplate(ByVal GroupID As String, Optional count As Integer = 100, Optional start As Integer = 0, Optional Search As Facet.FacetSearch = Nothing)
         If Main.RestClientValidLogin = True Then
 retry:
             Try
@@ -621,7 +621,7 @@ retry:
                     FEPAuthenticate()
                 End If
 
-                Dim endpoints As ApiResponse(Of ComputersInGroup)
+                Dim endpoints As ApiResponse(Of Computer.ComputersInGroup)
                 If Not Search Is Nothing Then
                     endpoints = Main.RestClient.Functions.Computers.GetGroupComputers(count, GroupID, False, 0, Search)
                 Else
@@ -643,7 +643,7 @@ retry:
         End If
     End Sub
 
-    Public Function CreateFromTemplate(ByVal Job As FEPRestClient.Models.Job2.JobFromTemplate, ByVal Execute As Boolean)
+    Public Function CreateFromTemplate(ByVal Job As JobFromTemplate, ByVal Execute As Boolean)
         If Main.RestClientValidLogin = True Then
 retry:
             Try
@@ -688,14 +688,14 @@ retry:
                 Return ex.Message
             End Try
         Else
-            Dim tmp As New ApiResponse(Of List(Of Job2.JobStatus))
+            Dim tmp As New ApiResponse(Of List(Of JobStatus))
             tmp.Success = False
             tmp.Error.Message = "Invalid Login"
             Return tmp
         End If
     End Function
 
-    Public Function SetThreatScanOptions(ByVal JobID As String, ByVal Options As Job2.ThreatScanJobOptions)
+    Public Function SetThreatScanOptions(ByVal JobID As String, ByVal Options As ThreatScanJobOptions)
         If Main.RestClientValidLogin = True Then
 retry:
             Try
@@ -721,7 +721,7 @@ retry:
         End If
     End Function
 
-    Public Function SetJobSchedule(ByVal JobID As String, ByVal IsIncremental As Boolean, ByVal Schedule As Job2.SchedulerEventCore)
+    Public Function SetJobSchedule(ByVal JobID As String, ByVal IsIncremental As Boolean, ByVal Schedule As SchedulerEventCore)
         If Main.RestClientValidLogin = True Then
 retry:
             Try
@@ -740,7 +740,7 @@ retry:
                 Return ex.Message
             End Try
         Else
-            Dim tmp As New ApiResponse(Of Job2.SchedulerEventCore)
+            Dim tmp As New ApiResponse(Of SchedulerEventCore)
             tmp.Success = False
             tmp.Error.Message = "Invalid Login"
             Return tmp

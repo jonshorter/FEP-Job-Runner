@@ -1187,7 +1187,7 @@ Public Class Main
                 Case vbNullString
                     JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus)
                 Case Else
-                    Dim facsearch As New FacetSearch
+                    Dim facsearch As New Facet.FacetSearch
                     facsearch.SearchAny.Add(x.Text)
                     JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus, facsearch)
             End Select
@@ -1305,7 +1305,7 @@ Public Class Main
                 Case "Search"
                     JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus)
                 Case Else
-                    Dim facsearch As New FacetSearch
+                    Dim facsearch As New Facet.FacetSearch
                     facsearch.SearchAny.Add(txtSearchEndpointStatus.Text)
                     JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus, facsearch)
             End Select
@@ -2077,16 +2077,16 @@ Public Class Main
     End Sub
     Public Shared Sub ProjSearchFacetUpdate()
         If Main.lvProjectFacets.Items.Count > 0 Then
-            Dim facsearch As New FacetSearch
+            Dim facsearch As New Facet.FacetSearch
             For Each item As ListViewItem In Main.lvProjectFacets.Items
                 Select Case Split(item.Text, ":")(0)
                     Case "Any"
                         facsearch.SearchAny.Add(Split(item.Text, ":")(1))
 
                     Case Else
-                        Dim facsearchfield As New FacetSearchFields
+                        Dim facsearchfield As New Facet.FacetSearchFields
                         If Not facsearch.SearchFields.Count = 0 Then
-                            Dim found = facsearch.SearchFields.Find(Function(srch As FacetSearchFields)
+                            Dim found = facsearch.SearchFields.Find(Function(srch As Facet.FacetSearchFields)
                                                                         Return srch.FieldName = item.Tag
                                                                     End Function)
                             If Not found Is Nothing Then
@@ -2110,16 +2110,16 @@ Public Class Main
     End Sub
     Public Shared Sub JobStatusSearchFacetUpdate()
         If Main.lvJobStatusFacets.Items.Count > 0 Then
-            Dim facsearch As New FacetSearch
+            Dim facsearch As New Facet.FacetSearch
             For Each item As ListViewItem In Main.lvJobStatusFacets.Items
                 Select Case Split(item.Text, ":")(0)
                     Case "Any"
                         facsearch.SearchAny.Add(Split(item.Text, ":")(1))
 
                     Case Else
-                        Dim facsearchfield As New FacetSearchFields
+                        Dim facsearchfield As New Facet.FacetSearchFields
                         If Not facsearch.SearchFields.Count = 0 Then
-                            Dim found = facsearch.SearchFields.Find(Function(srch As FacetSearchFields)
+                            Dim found = facsearch.SearchFields.Find(Function(srch As Facet.FacetSearchFields)
                                                                         Return srch.FieldName = item.Tag
                                                                     End Function)
                             If Not found Is Nothing Then

@@ -64,126 +64,17 @@ Public Class Form_JobFromTemplate
             Case tabSchedule.Name
                 If btnJobFromTemplateNext.Text = "Start" Then
                     If NewJobTargets.Count > 0 Then
-                        Dim JobSchedule As New Job2.SchedulerEventCore
-                        '-----------------Setup JobSchedule
-                        If rdoSchedule_Immediate.Checked = False Then
-                            Select Case chkEnableRecurrence.Checked
-                                Case True '-----------Set Recurrence Options
-                                    JobSchedule.InitialDateTime = dtpScheduleStart.Value
-                                    If rdoRecurEnd_After.Checked Then '----------End After X Occurences
-                                        JobSchedule.RecurrenceRange = Job2.RecurrenceRangeEnum.EndAfterInstances
-                                        JobSchedule.MaxRecurrenceCount = nmbRecurEndOccurences.Value
-                                    ElseIf rdoRecurEnd_EndBy.Checked Then '-----------End By Date
-                                        JobSchedule.RecurrenceRange = Job2.RecurrenceRangeEnum.EndOnDate
-                                        JobSchedule.EndDateTime = dtpRecurEndBy.Value
-                                    ElseIf rdoRecurEnd_NoEnd.Checked Then '--------------No End
-                                        JobSchedule.RecurrenceRange = Job2.RecurrenceRangeEnum.NoEndDate
-                                    End If
-                                    Select Case RecurStart
-                                        Case rdoRecurStart_Minute.Name '--------Minute
-                                            JobSchedule.TimeUnit = Job2.TimeUnitEnum.Minute
-                                            JobSchedule.Period = cmb_RecurMinutes.SelectedItem
-                                        Case rdoRecurStart_Hourly.Name '---------Hourly
-                                            JobSchedule.TimeUnit = Job2.TimeUnitEnum.Hour
-                                            JobSchedule.Period = cmb_RecurHours.SelectedItem
-                                        Case rdoRecurStart_Daily.Name '----------Daily
-                                            JobSchedule.TimeUnit = Job2.TimeUnitEnum.Day
-                                            JobSchedule.Period = nmb_RecurDays.Value
-                                        Case rdoRecurStart_Weekly.Name '-------------Weekly
-                                            JobSchedule.TimeUnit = Job2.TimeUnitEnum.Week
-                                            JobSchedule.Period = nmbRecurWeekly_Weeks.Value
-                                            If chkRecurWeekly_Friday.Checked = False And chkRecurWeekly_Monday.Checked = False And chkRecurWeekly_Saturday.Checked = False And chkRecurWeekly_Sunday.Checked = False And chkRecurWeekly_Thursday.Checked = False And chkRecurWeekly_Tuesday.Checked = False And chkRecurWeekly_Wednesday.Checked = False Then
-                                                MsgBox("At least one day must be selected.", MsgBoxStyle.Exclamation, "Day Selection")
-                                                Return
-                                            Else
-                                                JobSchedule.Weekday = New HashSet(Of DayOfWeek)
-                                                If chkRecurWeekly_Sunday.Checked Then JobSchedule.Weekday.Add([Enum].Parse(GetType(DayOfWeek), chkRecurWeekly_Sunday.Text))
-                                                If chkRecurWeekly_Monday.Checked Then JobSchedule.Weekday.Add([Enum].Parse(GetType(DayOfWeek), chkRecurWeekly_Monday.Text))
-                                                If chkRecurWeekly_Tuesday.Checked Then JobSchedule.Weekday.Add([Enum].Parse(GetType(DayOfWeek), chkRecurWeekly_Tuesday.Text))
-                                                If chkRecurWeekly_Wednesday.Checked Then JobSchedule.Weekday.Add([Enum].Parse(GetType(DayOfWeek), chkRecurWeekly_Wednesday.Text))
-                                                If chkRecurWeekly_Thursday.Checked Then JobSchedule.Weekday.Add([Enum].Parse(GetType(DayOfWeek), chkRecurWeekly_Thursday.Text))
-                                                If chkRecurWeekly_Friday.Checked Then JobSchedule.Weekday.Add([Enum].Parse(GetType(DayOfWeek), chkRecurWeekly_Friday.Text))
-                                                If chkRecurWeekly_Saturday.Checked Then JobSchedule.Weekday.Add([Enum].Parse(GetType(DayOfWeek), chkRecurWeekly_Saturday.Text))
-                                            End If
-                                        Case rdoRecurStart_Monthly.Name '-------------Monthly
-                                            JobSchedule.TimeUnit = Job2.TimeUnitEnum.Month
-                                            If rdoRecurMonth_Day.Checked = True Then
-                                                JobSchedule.Period = nmbRecurMonth_DayMonth.Value
-                                                JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.DayOfMonth
-                                                JobSchedule.Ordinal = nmbRecurMonth_Day.Value
-                                            Else
-                                                JobSchedule.Period = nmbRecurMonth_TheMonth.Value
-                                                Select Case cmbRecurMonth_TheFirstDay.SelectedItem.ToString
-                                                    Case "First"
-                                                        JobSchedule.Ordinal = 1
-                                                    Case "Second"
-                                                        JobSchedule.Ordinal = 2
-                                                    Case "Third"
-                                                        JobSchedule.Ordinal = 3
-                                                    Case "Fourth"
-                                                        JobSchedule.Ordinal = 4
-                                                End Select
-                                                Select Case cmbRecurMonth_TheSelectDay.SelectedItem
-                                                    Case "Day"
-                                                        JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.Day
-                                                    Case "Weekday"
-                                                        JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.Weekday
-                                                    Case "Weekend"
-                                                        JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.WeekendDay
-                                                    Case Else
-                                                        JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.DayOfWeek
-                                                        JobSchedule.OrdinalDayOfWeek = [Enum].Parse(GetType(DayOfWeek), cmbRecurMonth_TheSelectDay.SelectedItem)
-                                                End Select
-                                            End If
-                                        Case rdoRecurStart_Yearly.Name '--------------Yearly
-                                            JobSchedule.TimeUnit = Job2.TimeUnitEnum.Year
-                                            If rdoRecurYear_Every.Checked = True Then
-                                                JobSchedule.OrdinalMonth = DateTime.ParseExact(cmbRecurYear_EveryMonth.SelectedItem, "MMMM", CultureInfo.CurrentCulture).Month
-                                                JobSchedule.Ordinal = nmbRecurYear_Day.Value
-                                                JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.DayOfMonth
-                                                JobSchedule.Period = 1
-                                            Else
-                                                JobSchedule.OrdinalMonth = DateTime.ParseExact(cmbRecurYear_TheMonth.SelectedItem, "MMMM", CultureInfo.CurrentCulture).Month
-                                                Select Case cmbRecurYear_TheFirstDay.SelectedItem.ToString
-                                                    Case "First"
-                                                        JobSchedule.Ordinal = 1
-                                                    Case "Second"
-                                                        JobSchedule.Ordinal = 2
-                                                    Case "Third"
-                                                        JobSchedule.Ordinal = 3
-                                                    Case "Fourth"
-                                                        JobSchedule.Ordinal = 4
-                                                End Select
-                                                Select Case cmbRecurYear_TheSelectDay.SelectedItem
-                                                    Case "Day"
-                                                        JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.Day
-                                                    Case "Weekday"
-                                                        JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.Weekday
-                                                    Case "Weekend"
-                                                        JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.WeekendDay
-                                                    Case Else
-                                                        JobSchedule.OrdinalUnit = Job2.OrdinalUnitEnum.DayOfWeek
-                                                        JobSchedule.OrdinalDayOfWeek = [Enum].Parse(GetType(DayOfWeek), cmbRecurYear_TheSelectDay.SelectedItem)
-                                                End Select
-                                                JobSchedule.Period = 1
-                                            End If
-                                    End Select
-                                Case False '------------No Recurrence Options
-                                    JobSchedule.InitialDateTime = dtpScheduleStart.Value
-                                    JobSchedule.Period = 1
-                                    JobSchedule.RecurrenceRange = Job2.RecurrenceRangeEnum.InitialOnly
-                            End Select
-                        End If
+                       
                         '----------------------------Threat Scan Job
                         If TemplateInfo.jobType = 16 Then
-                            Dim job As New FEPRestClient.Models.Job2.JobFromTemplate
+                            Dim job As New JobFromTemplate
                             job.ComputerTargets = NewJobTargets
                             job.ProjectId = SelectedProjectID
                             job.TemplateId = JobTemplateID
                             '------------Submit Job From Template Dont Execute
                             Dim tsjob As ApiResponse(Of String) = JobRunner_RestFunctions.CreateFromTemplate(job, False)
                             '-------------Define TS Options
-                            Dim tsoptions As New Job2.ThreatScanJobOptions
+                            Dim tsoptions As New ThreatScanJobOptions
                             If rdoIOCAll.Checked Then
                                 tsoptions.threatScanSelection = 0
                                 If String.IsNullOrWhiteSpace(txtThreatAuthor.Text) Then tsoptions.authoredByFilter = txtThreatAuthor.Text
@@ -239,31 +130,23 @@ Public Class Form_JobFromTemplate
 
                             '---------------Set TS Options on Job
                             JobRunner_RestFunctions.SetThreatScanOptions(tsjob.Data, tsoptions)
-                            '--------------If Scheduled Set Schedule and Approve, Else Execute
-                            If JobSchedule.InitialDateTime <> Nothing Then
-                                JobRunner_RestFunctions.SetJobSchedule(tsjob.Data, chkIncrementalCollection.Checked, JobSchedule)
-                                JobRunner_RestFunctions.GetSetJobStatus(tsjob.Data, Enums.JobAction.Approve)
-                            Else '---------No Schedule Execute
-                                JobRunner_RestFunctions.GetSetJobStatus(tsjob.Data, Enums.JobAction.Execute)
-                            End If
+                            '--------------Execute
+                            JobRunner_RestFunctions.GetSetJobStatus(tsjob.Data, Enums.JobAction.Execute)
+
 
                             Me.Close()
                             Main.tabControlJobsRest.SelectedTab = Main.tabJobsList
                         Else
 
                             '------------------------------Normal Job                       
-                            Dim job As New FEPRestClient.Models.Job2.JobFromTemplate
+                            Dim job As New JobFromTemplate
                             job.ComputerTargets = NewJobTargets
                             job.ProjectId = SelectedProjectID
                             job.TemplateId = JobTemplateID
-                            '--------------If Scheduled Set Schedule and Approve, Else Execute
-                            If JobSchedule.InitialDateTime <> Nothing Then
-                                Dim schJob = JobRunner_RestFunctions.CreateFromTemplate(job, False)
-                                JobRunner_RestFunctions.SetJobSchedule(schJob.Data, False, JobSchedule)
-                                JobRunner_RestFunctions.GetSetJobStatus(schJob.Data, Enums.JobAction.Approve)
-                            Else '---------No Schedule Execute
+                            '-------------- Execute
+                        
                                 JobRunner_RestFunctions.CreateFromTemplate(job, True)
-                            End If
+
 
                             Me.Close()
                             Main.tabControlJobsRest.SelectedTab = Main.tabJobsList
@@ -426,7 +309,7 @@ Public Class Form_JobFromTemplate
                 Case vbNullString
                     JobRunner_RestFunctions.GetProjectList_JobFromTemplate()
                 Case Else
-                    Dim facsearch As New FacetSearch
+                    Dim facsearch As New Facet.FacetSearch
                     facsearch.SearchAny.Add(x.Text)
                     JobRunner_RestFunctions.GetProjectList_JobFromTemplate(facsearch)
             End Select
@@ -490,7 +373,7 @@ Public Class Form_JobFromTemplate
             splitThreatFilters.SplitterDistance = 45
 
             'Build Advanced Checkboxes
-            Dim TSArchive As Array = System.Enum.GetNames(GetType(Job2.ThreatScanArchives))
+            Dim TSArchive As Array = System.Enum.GetNames(GetType(Enums.ThreatScanArchives))
             For Each item In TSArchive
                 Dim chkitem As New CheckBox
                 chkitem.Name = item
@@ -546,7 +429,7 @@ Public Class Form_JobFromTemplate
                 Case vbNullString
                     JobRunner_RestFunctions.GetGroupComputer_JobFromTemplate(treegroup, , )
                 Case Else
-                    Dim facsearch As New FacetSearch
+                    Dim facsearch As New Facet.FacetSearch
                     facsearch.SearchAny.Add(x.Text)
                     JobRunner_RestFunctions.GetGroupComputer_JobFromTemplate(treegroup, , , facsearch)
             End Select

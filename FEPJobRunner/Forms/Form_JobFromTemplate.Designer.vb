@@ -603,6 +603,7 @@ Partial Class Form_JobFromTemplate
         'rdoSchedule_Schedule
         '
         Me.rdoSchedule_Schedule.AutoSize = True
+        Me.rdoSchedule_Schedule.Enabled = False
         Me.rdoSchedule_Schedule.Location = New System.Drawing.Point(192, 30)
         Me.rdoSchedule_Schedule.Name = "rdoSchedule_Schedule"
         Me.rdoSchedule_Schedule.Size = New System.Drawing.Size(161, 21)
