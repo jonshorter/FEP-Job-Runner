@@ -330,9 +330,11 @@ Partial Class Main
         Me.RetryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CancelJobToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.cms_ScriptManage = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.NewScriptMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DeleteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DownloadToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DownloadToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpSettings.SuspendLayout()
         Me.flowSettings.SuspendLayout()
         Me.grpReqSettings.SuspendLayout()
@@ -3973,27 +3975,40 @@ Partial Class Main
         'cms_ScriptManage
         '
         Me.cms_ScriptManage.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.cms_ScriptManage.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditToolStripMenuItem, Me.DownloadToolStripMenuItem, Me.DownloadToolStripMenuItem1})
+        Me.cms_ScriptManage.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewScriptMenuItem, Me.ToolStripSeparator2, Me.EditToolStripMenuItem, Me.DeleteToolStripMenuItem, Me.DownloadToolStripMenuItem})
         Me.cms_ScriptManage.Name = "cms_JobStatus"
-        Me.cms_ScriptManage.Size = New System.Drawing.Size(176, 104)
+        Me.cms_ScriptManage.Size = New System.Drawing.Size(190, 134)
+        '
+        'NewScriptMenuItem
+        '
+        Me.NewScriptMenuItem.Name = "NewScriptMenuItem"
+        Me.NewScriptMenuItem.Size = New System.Drawing.Size(189, 24)
+        Me.NewScriptMenuItem.Text = "New Script"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(186, 6)
         '
         'EditToolStripMenuItem
         '
         Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
-        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(175, 24)
-        Me.EditToolStripMenuItem.Text = "Edit"
+        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(189, 24)
+        Me.EditToolStripMenuItem.Text = "Edit Script"
+        '
+        'DeleteToolStripMenuItem
+        '
+        Me.DeleteToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control
+        Me.DeleteToolStripMenuItem.ForeColor = System.Drawing.Color.Red
+        Me.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem"
+        Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(189, 24)
+        Me.DeleteToolStripMenuItem.Text = "Delete Script"
         '
         'DownloadToolStripMenuItem
         '
         Me.DownloadToolStripMenuItem.Name = "DownloadToolStripMenuItem"
-        Me.DownloadToolStripMenuItem.Size = New System.Drawing.Size(175, 24)
-        Me.DownloadToolStripMenuItem.Text = "Delete"
-        '
-        'DownloadToolStripMenuItem1
-        '
-        Me.DownloadToolStripMenuItem1.Name = "DownloadToolStripMenuItem1"
-        Me.DownloadToolStripMenuItem1.Size = New System.Drawing.Size(175, 24)
-        Me.DownloadToolStripMenuItem1.Text = "Download"
+        Me.DownloadToolStripMenuItem.Size = New System.Drawing.Size(189, 24)
+        Me.DownloadToolStripMenuItem.Text = "Download Script"
         '
         'Main
         '
@@ -4483,7 +4498,9 @@ Partial Class Main
     Friend WithEvents scriptTags As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents scriptID As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents EditToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DeleteToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents DownloadToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DownloadToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents NewScriptMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
 
 End Class

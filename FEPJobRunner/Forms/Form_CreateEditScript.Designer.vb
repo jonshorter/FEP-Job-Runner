@@ -22,6 +22,7 @@ Partial Class Form_CreateEditScript
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_CreateEditScript))
         Me.bgwCreateScript = New System.ComponentModel.BackgroundWorker()
         Me.bgwEditScript = New System.ComponentModel.BackgroundWorker()
@@ -42,20 +43,29 @@ Partial Class Form_CreateEditScript
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.lbScriptFiles = New System.Windows.Forms.ListBox()
+        Me.cms_Files = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.AddStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RemoveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.txtScriptCommands = New System.Windows.Forms.TextBox()
         Me.txtScriptUsername = New System.Windows.Forms.TextBox()
         Me.txtScriptPassword = New System.Windows.Forms.TextBox()
         Me.nmbScriptTimeout = New System.Windows.Forms.NumericUpDown()
-        Me.lbScriptFields = New System.Windows.Forms.ListBox()
         Me.txtScriptTags = New System.Windows.Forms.TextBox()
         Me.txtScriptDelimiter = New System.Windows.Forms.TextBox()
         Me.lbScriptPlatforms = New System.Windows.Forms.CheckedListBox()
+        Me.lbScriptFields = New System.Windows.Forms.ListBox()
+        Me.cms_Fields = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.AddFieldToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RemoveFieldToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblStatus = New System.Windows.Forms.Label()
         Me.progressBar = New System.Windows.Forms.ProgressBar()
+        Me.ofdScriptFiles = New System.Windows.Forms.OpenFileDialog()
         Me.panelControls.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.tableScript.SuspendLayout()
+        Me.cms_Files.SuspendLayout()
         CType(Me.nmbScriptTimeout, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.cms_Fields.SuspendLayout()
         Me.SuspendLayout()
         '
         'bgwCreateScript
@@ -108,31 +118,32 @@ Partial Class Form_CreateEditScript
         Me.tableScript.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.tableScript.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.tableScript.ColumnCount = 4
+        Me.tableScript.ColumnCount = 5
         Me.tableScript.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.tableScript.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.tableScript.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 36.0!))
         Me.tableScript.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.tableScript.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.tableScript.Controls.Add(Me.Label1, 0, 0)
         Me.tableScript.Controls.Add(Me.txtScriptName, 1, 0)
         Me.tableScript.Controls.Add(Me.Label2, 0, 1)
-        Me.tableScript.Controls.Add(Me.Label3, 2, 1)
+        Me.tableScript.Controls.Add(Me.Label3, 3, 1)
         Me.tableScript.Controls.Add(Me.Label4, 0, 2)
-        Me.tableScript.Controls.Add(Me.Label5, 2, 2)
+        Me.tableScript.Controls.Add(Me.Label5, 3, 2)
         Me.tableScript.Controls.Add(Me.Label6, 0, 3)
         Me.tableScript.Controls.Add(Me.Label7, 0, 4)
         Me.tableScript.Controls.Add(Me.Label8, 0, 5)
-        Me.tableScript.Controls.Add(Me.Label9, 2, 3)
-        Me.tableScript.Controls.Add(Me.Label10, 2, 5)
+        Me.tableScript.Controls.Add(Me.Label9, 3, 3)
+        Me.tableScript.Controls.Add(Me.Label10, 3, 5)
         Me.tableScript.Controls.Add(Me.lbScriptFiles, 1, 1)
         Me.tableScript.Controls.Add(Me.txtScriptCommands, 1, 2)
         Me.tableScript.Controls.Add(Me.txtScriptUsername, 1, 3)
         Me.tableScript.Controls.Add(Me.txtScriptPassword, 1, 4)
         Me.tableScript.Controls.Add(Me.nmbScriptTimeout, 1, 5)
-        Me.tableScript.Controls.Add(Me.lbScriptFields, 3, 2)
-        Me.tableScript.Controls.Add(Me.txtScriptTags, 3, 3)
-        Me.tableScript.Controls.Add(Me.txtScriptDelimiter, 3, 5)
-        Me.tableScript.Controls.Add(Me.lbScriptPlatforms, 3, 1)
+        Me.tableScript.Controls.Add(Me.txtScriptTags, 4, 3)
+        Me.tableScript.Controls.Add(Me.txtScriptDelimiter, 4, 5)
+        Me.tableScript.Controls.Add(Me.lbScriptPlatforms, 4, 1)
+        Me.tableScript.Controls.Add(Me.lbScriptFields, 4, 2)
         Me.tableScript.Location = New System.Drawing.Point(3, 3)
         Me.tableScript.Name = "tableScript"
         Me.tableScript.RowCount = 6
@@ -160,7 +171,7 @@ Partial Class Form_CreateEditScript
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtScriptName.Location = New System.Drawing.Point(137, 3)
         Me.txtScriptName.Name = "txtScriptName"
-        Me.txtScriptName.Size = New System.Drawing.Size(421, 22)
+        Me.txtScriptName.Size = New System.Drawing.Size(403, 22)
         Me.txtScriptName.TabIndex = 1
         '
         'Label2
@@ -175,7 +186,7 @@ Partial Class Form_CreateEditScript
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(564, 28)
+        Me.Label3.Location = New System.Drawing.Point(582, 28)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(67, 17)
         Me.Label3.TabIndex = 3
@@ -193,7 +204,7 @@ Partial Class Form_CreateEditScript
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(564, 138)
+        Me.Label5.Location = New System.Drawing.Point(582, 138)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(45, 17)
         Me.Label5.TabIndex = 5
@@ -229,7 +240,7 @@ Partial Class Form_CreateEditScript
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(564, 248)
+        Me.Label9.Location = New System.Drawing.Point(582, 248)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(40, 17)
         Me.Label9.TabIndex = 9
@@ -238,7 +249,7 @@ Partial Class Form_CreateEditScript
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(564, 304)
+        Me.Label10.Location = New System.Drawing.Point(582, 304)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(107, 17)
         Me.Label10.TabIndex = 10
@@ -249,12 +260,32 @@ Partial Class Form_CreateEditScript
         Me.lbScriptFiles.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lbScriptFiles.ContextMenuStrip = Me.cms_Files
         Me.lbScriptFiles.FormattingEnabled = True
         Me.lbScriptFiles.ItemHeight = 16
         Me.lbScriptFiles.Location = New System.Drawing.Point(137, 31)
         Me.lbScriptFiles.Name = "lbScriptFiles"
-        Me.lbScriptFiles.Size = New System.Drawing.Size(421, 100)
+        Me.lbScriptFiles.Size = New System.Drawing.Size(403, 100)
         Me.lbScriptFiles.TabIndex = 11
+        '
+        'cms_Files
+        '
+        Me.cms_Files.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.cms_Files.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddStripMenuItem1, Me.RemoveToolStripMenuItem})
+        Me.cms_Files.Name = "cms_Files"
+        Me.cms_Files.Size = New System.Drawing.Size(160, 52)
+        '
+        'AddStripMenuItem1
+        '
+        Me.AddStripMenuItem1.Name = "AddStripMenuItem1"
+        Me.AddStripMenuItem1.Size = New System.Drawing.Size(159, 24)
+        Me.AddStripMenuItem1.Text = "Add File"
+        '
+        'RemoveToolStripMenuItem
+        '
+        Me.RemoveToolStripMenuItem.Name = "RemoveToolStripMenuItem"
+        Me.RemoveToolStripMenuItem.Size = New System.Drawing.Size(159, 24)
+        Me.RemoveToolStripMenuItem.Text = "Remove File"
         '
         'txtScriptCommands
         '
@@ -265,7 +296,7 @@ Partial Class Form_CreateEditScript
         Me.txtScriptCommands.Multiline = True
         Me.txtScriptCommands.Name = "txtScriptCommands"
         Me.txtScriptCommands.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtScriptCommands.Size = New System.Drawing.Size(421, 104)
+        Me.txtScriptCommands.Size = New System.Drawing.Size(403, 104)
         Me.txtScriptCommands.TabIndex = 12
         '
         'txtScriptUsername
@@ -274,7 +305,7 @@ Partial Class Form_CreateEditScript
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtScriptUsername.Location = New System.Drawing.Point(137, 251)
         Me.txtScriptUsername.Name = "txtScriptUsername"
-        Me.txtScriptUsername.Size = New System.Drawing.Size(421, 22)
+        Me.txtScriptUsername.Size = New System.Drawing.Size(403, 22)
         Me.txtScriptUsername.TabIndex = 13
         '
         'txtScriptPassword
@@ -284,7 +315,7 @@ Partial Class Form_CreateEditScript
         Me.txtScriptPassword.Location = New System.Drawing.Point(137, 279)
         Me.txtScriptPassword.Name = "txtScriptPassword"
         Me.txtScriptPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-        Me.txtScriptPassword.Size = New System.Drawing.Size(421, 22)
+        Me.txtScriptPassword.Size = New System.Drawing.Size(403, 22)
         Me.txtScriptPassword.TabIndex = 14
         '
         'nmbScriptTimeout
@@ -293,42 +324,30 @@ Partial Class Form_CreateEditScript
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.nmbScriptTimeout.Location = New System.Drawing.Point(137, 307)
         Me.nmbScriptTimeout.Name = "nmbScriptTimeout"
-        Me.nmbScriptTimeout.Size = New System.Drawing.Size(421, 22)
+        Me.nmbScriptTimeout.Size = New System.Drawing.Size(403, 22)
         Me.nmbScriptTimeout.TabIndex = 15
         Me.nmbScriptTimeout.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'lbScriptFields
-        '
-        Me.lbScriptFields.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lbScriptFields.FormattingEnabled = True
-        Me.lbScriptFields.ItemHeight = 16
-        Me.lbScriptFields.Location = New System.Drawing.Point(677, 141)
-        Me.lbScriptFields.Name = "lbScriptFields"
-        Me.lbScriptFields.Size = New System.Drawing.Size(421, 100)
-        Me.lbScriptFields.TabIndex = 17
         '
         'txtScriptTags
         '
         Me.txtScriptTags.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtScriptTags.Location = New System.Drawing.Point(677, 251)
+        Me.txtScriptTags.Location = New System.Drawing.Point(695, 251)
         Me.txtScriptTags.Multiline = True
         Me.txtScriptTags.Name = "txtScriptTags"
         Me.tableScript.SetRowSpan(Me.txtScriptTags, 2)
         Me.txtScriptTags.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtScriptTags.Size = New System.Drawing.Size(421, 50)
+        Me.txtScriptTags.Size = New System.Drawing.Size(403, 50)
         Me.txtScriptTags.TabIndex = 18
         '
         'txtScriptDelimiter
         '
         Me.txtScriptDelimiter.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtScriptDelimiter.Location = New System.Drawing.Point(677, 307)
+        Me.txtScriptDelimiter.Location = New System.Drawing.Point(695, 307)
         Me.txtScriptDelimiter.Name = "txtScriptDelimiter"
-        Me.txtScriptDelimiter.Size = New System.Drawing.Size(421, 22)
+        Me.txtScriptDelimiter.Size = New System.Drawing.Size(403, 22)
         Me.txtScriptDelimiter.TabIndex = 19
         '
         'lbScriptPlatforms
@@ -337,10 +356,43 @@ Partial Class Form_CreateEditScript
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lbScriptPlatforms.FormattingEnabled = True
-        Me.lbScriptPlatforms.Location = New System.Drawing.Point(677, 31)
+        Me.lbScriptPlatforms.Location = New System.Drawing.Point(695, 31)
         Me.lbScriptPlatforms.Name = "lbScriptPlatforms"
-        Me.lbScriptPlatforms.Size = New System.Drawing.Size(421, 89)
+        Me.lbScriptPlatforms.Size = New System.Drawing.Size(403, 89)
         Me.lbScriptPlatforms.TabIndex = 20
+        '
+        'lbScriptFields
+        '
+        Me.lbScriptFields.AllowDrop = True
+        Me.lbScriptFields.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lbScriptFields.ContextMenuStrip = Me.cms_Fields
+        Me.lbScriptFields.FormattingEnabled = True
+        Me.lbScriptFields.ItemHeight = 16
+        Me.lbScriptFields.Location = New System.Drawing.Point(695, 141)
+        Me.lbScriptFields.Name = "lbScriptFields"
+        Me.lbScriptFields.Size = New System.Drawing.Size(403, 100)
+        Me.lbScriptFields.TabIndex = 22
+        '
+        'cms_Fields
+        '
+        Me.cms_Fields.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.cms_Fields.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddFieldToolStripMenuItem1, Me.RemoveFieldToolStripMenuItem2})
+        Me.cms_Fields.Name = "cms_Files"
+        Me.cms_Fields.Size = New System.Drawing.Size(169, 52)
+        '
+        'AddFieldToolStripMenuItem1
+        '
+        Me.AddFieldToolStripMenuItem1.Name = "AddFieldToolStripMenuItem1"
+        Me.AddFieldToolStripMenuItem1.Size = New System.Drawing.Size(168, 24)
+        Me.AddFieldToolStripMenuItem1.Text = "Add Field"
+        '
+        'RemoveFieldToolStripMenuItem2
+        '
+        Me.RemoveFieldToolStripMenuItem2.Name = "RemoveFieldToolStripMenuItem2"
+        Me.RemoveFieldToolStripMenuItem2.Size = New System.Drawing.Size(168, 24)
+        Me.RemoveFieldToolStripMenuItem2.Text = "Remove Field"
         '
         'lblStatus
         '
@@ -362,6 +414,10 @@ Partial Class Form_CreateEditScript
         Me.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous
         Me.progressBar.TabIndex = 0
         '
+        'ofdScriptFiles
+        '
+        Me.ofdScriptFiles.Multiselect = True
+        '
         'Form_CreateEditScript
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -380,10 +436,12 @@ Partial Class Form_CreateEditScript
         Me.Panel1.ResumeLayout(False)
         Me.tableScript.ResumeLayout(False)
         Me.tableScript.PerformLayout()
+        Me.cms_Files.ResumeLayout(False)
         CType(Me.nmbScriptTimeout, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.cms_Fields.ResumeLayout(False)
         Me.ResumeLayout(False)
 
-    End Sub
+End Sub
     Friend WithEvents bgwCreateScript As System.ComponentModel.BackgroundWorker
     Friend WithEvents bgwEditScript As System.ComponentModel.BackgroundWorker
     Friend WithEvents panelControls As System.Windows.Forms.Panel
@@ -407,10 +465,17 @@ Partial Class Form_CreateEditScript
     Friend WithEvents txtScriptUsername As System.Windows.Forms.TextBox
     Friend WithEvents txtScriptPassword As System.Windows.Forms.TextBox
     Friend WithEvents nmbScriptTimeout As System.Windows.Forms.NumericUpDown
-    Friend WithEvents lbScriptFields As System.Windows.Forms.ListBox
     Friend WithEvents txtScriptTags As System.Windows.Forms.TextBox
     Friend WithEvents txtScriptDelimiter As System.Windows.Forms.TextBox
     Friend WithEvents lblStatus As System.Windows.Forms.Label
     Friend WithEvents progressBar As System.Windows.Forms.ProgressBar
     Friend WithEvents lbScriptPlatforms As System.Windows.Forms.CheckedListBox
+    Friend WithEvents ofdScriptFiles As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents cms_Files As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents RemoveToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents lbScriptFields As System.Windows.Forms.ListBox
+    Friend WithEvents AddStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents cms_Fields As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents AddFieldToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents RemoveFieldToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
 End Class

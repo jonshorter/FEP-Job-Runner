@@ -2308,7 +2308,7 @@ Public Class Main
         JobStatusSearchFacetUpdate()
     End Sub
 
-    Private Sub DownloadToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles DownloadToolStripMenuItem1.Click
+    Private Sub DownloadToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles DownloadToolStripMenuItem.Click
         Process.Start("https://" & txtServer.Text & "/Endpoint/Handlers/ScriptPackageDownload.ashx?PackageId=" & dgvScriptManagementList.SelectedRows(0).Cells("scriptID").Value)
     End Sub
 
@@ -2321,17 +2321,25 @@ Public Class Main
         End If
     End Sub
 
-    Private Sub DownloadToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DownloadToolStripMenuItem.Click
-        Dim x = RestClient.Functions.ScriptPackages.DeletePackage(dgvScriptManagementList.SelectedRows(0).Cells("scriptID").Value)
-        If x.Success = True Then
-            JobRunner_RestFunctions.GetScriptList()
-        Else
-            MsgBox(x.Error.Message)
+    Private Sub DownloadToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteToolStripMenuItem.Click
+        Dim c = MsgBox("Are you sure you want to delete the script: " & dgvScriptManagementList.SelectedRows(0).Cells("scriptName").Value & "?", MsgBoxStyle.YesNo, "Delete Script?")
+        If c = MsgBoxResult.Yes Then
+            Dim x = RestClient.Functions.ScriptPackages.DeletePackage(dgvScriptManagementList.SelectedRows(0).Cells("scriptID").Value)
+            If x.Success = True Then
+                JobRunner_RestFunctions.GetScriptList()
+            Else
+                MsgBox(x.Error.Message)
+            End If
         End If
     End Sub
 
     Private Sub EditToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditToolStripMenuItem.Click
         Dim scEdit As New Form_CreateEditScript("Edit Script", False, dgvScriptManagementList.SelectedRows(0).Cells("scriptID").Value)
         scEdit.ShowDialog()
+    End Sub
+
+    Private Sub NewScriptMenuItem_Click(sender As Object, e As EventArgs) Handles NewScriptMenuItem.Click
+        Dim scCreate As New Form_CreateEditScript("Create Script", True, "")
+        scCreate.Show()
     End Sub
 End Class
