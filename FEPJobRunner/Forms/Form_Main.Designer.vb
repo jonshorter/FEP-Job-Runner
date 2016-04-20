@@ -2142,6 +2142,7 @@ Partial Class Main
         Me.tabControlJobsRest.Controls.Add(Me.tabJobsList)
         Me.tabControlJobsRest.Controls.Add(Me.tabAlerts)
         Me.tabControlJobsRest.Controls.Add(Me.tabScriptManagement)
+
         Me.tabControlJobsRest.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tabControlJobsRest.Location = New System.Drawing.Point(0, 0)
         Me.tabControlJobsRest.Name = "tabControlJobsRest"

@@ -5,6 +5,7 @@ Imports System.Text.RegularExpressions
 Imports System.Security.Cryptography.X509Certificates
 Imports FEPRestClient
 Imports RestSharp
+Imports FEPRestClient.Models
 
 Module JobRunner_Functions
 
@@ -83,7 +84,7 @@ Module JobRunner_Functions
                             maintext = "Version " & newrelease.tag_name & " is now available." & vbCrLf & "---------------" & vbCrLf & _
                                                     newrelease_description & vbCrLf & "---------------" & vbCrLf
                     End Select
-                  Dim updatedialog As New Form_UpdateDialog(maintext, "New Version Available", newrelease_link)
+                    Dim updatedialog As New Form_UpdateDialog(maintext, "New Version Available", newrelease_link)
                     Dim result = updatedialog.ShowDialog
                 Else
                     If Not Silent = True Then
@@ -221,4 +222,71 @@ Module JobRunner_Functions
         Next
         xstore.Close()
     End Sub
+    Public Sub JobStatusSearchFacetUpdate()
+        If Main.lvJobStatusFacets.Items.Count > 0 Then
+            Dim facsearch As New Facet.FacetSearch
+            For Each item As ListViewItem In Main.lvJobStatusFacets.Items
+                Select Case Split(item.Text, ":")(0)
+                    Case "Any"
+                        facsearch.SearchAny.Add(Split(item.Text, ":")(1))
+
+                    Case Else
+                        Dim facsearchfield As New Facet.FacetSearchFields
+                        If Not facsearch.SearchFields.Count = 0 Then
+                            Dim found = facsearch.SearchFields.Find(Function(srch As Facet.FacetSearchFields)
+                                                                        Return srch.FieldName = item.Tag
+                                                                    End Function)
+                            If Not found Is Nothing Then
+                                found.Values.Add(Split(item.Text, ":")(1))
+                            Else
+                                facsearchfield.FieldName = item.Tag
+                                facsearchfield.Values.Add(Split(item.Text, ":")(1))
+                                facsearch.SearchFields.Add(facsearchfield)
+                            End If
+                        Else
+                            facsearchfield.FieldName = item.Tag
+                            facsearchfield.Values.Add(Split(item.Text, ":")(1))
+                            facsearch.SearchFields.Add(facsearchfield)
+                        End If
+                End Select
+            Next
+            JobRunner_RestFunctions.GetJobList(facsearch)
+        Else
+            JobRunner_RestFunctions.GetJobList()
+        End If
+    End Sub
+    Public Sub ProjSearchFacetUpdate()
+        If Main.lvProjectFacets.Items.Count > 0 Then
+            Dim facsearch As New Facet.FacetSearch
+            For Each item As ListViewItem In Main.lvProjectFacets.Items
+                Select Case Split(item.Text, ":")(0)
+                    Case "Any"
+                        facsearch.SearchAny.Add(Split(item.Text, ":")(1))
+
+                    Case Else
+                        Dim facsearchfield As New Facet.FacetSearchFields
+                        If Not facsearch.SearchFields.Count = 0 Then
+                            Dim found = facsearch.SearchFields.Find(Function(srch As Facet.FacetSearchFields)
+                                                                        Return srch.FieldName = item.Tag
+                                                                    End Function)
+                            If Not found Is Nothing Then
+                                found.Values.Add(Split(item.Text, ":")(1))
+                            Else
+                                facsearchfield.FieldName = item.Tag
+                                facsearchfield.Values.Add(Split(item.Text, ":")(1))
+                                facsearch.SearchFields.Add(facsearchfield)
+                            End If
+                        Else
+                            facsearchfield.FieldName = item.Tag
+                            facsearchfield.Values.Add(Split(item.Text, ":")(1))
+                            facsearch.SearchFields.Add(facsearchfield)
+                        End If
+                End Select
+            Next
+            JobRunner_RestFunctions.GetProjectList(facsearch)
+        Else
+            JobRunner_RestFunctions.GetProjectList()
+        End If
+    End Sub
+
 End Module

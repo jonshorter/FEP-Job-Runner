@@ -1084,7 +1084,56 @@ Public Class Main
 
 
     End Sub
+    Private Delegate Sub RefreshJobTimer(ByVal form As Form)
+    Public Sub JobRefreshUp(state As Object)
+        If Me.InvokeRequired Then
+            Me.Invoke(New RefreshJobTimer(AddressOf JobRefreshUp), Me)
+        Else
+            JobStatusSearchFacetUpdate()
 
+        End If
+    End Sub
+    Public Function Create_JobRefreshTimer()
+        Dim JobRefreshCall As New System.Threading.TimerCallback(AddressOf JobRefreshUp)
+        Return New System.Threading.Timer(JobRefreshCall, Nothing, 10, 10000)
+    End Function
+    Private Delegate Sub RefreshJobEndpointTimer(ByVal form As Form)
+    Public Sub JobEndpointRefreshUp(state As Object)
+        If Me.InvokeRequired Then
+            Me.Invoke(New RefreshJobTimer(AddressOf JobEndpointRefreshUp), Me)
+        Else
+            Select Case txtSearchEndpointStatus.Text
+                Case ""
+                    JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus)
+                Case "Search"
+                    JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus)
+                Case Else
+                    Dim facsearch As New Facet.FacetSearch
+                    facsearch.SearchAny.Add(txtSearchEndpointStatus.Text)
+                    JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus, facsearch)
+            End Select
+
+        End If
+    End Sub
+    Public Function Create_JobEndpointRefreshTimer()
+        Dim JobEndpointRefreshCall As New System.Threading.TimerCallback(AddressOf JobEndpointRefreshUp)
+        Return New System.Threading.Timer(JobEndpointRefreshCall, Nothing, 10, 10000)
+    End Function
+
+
+
+    Private Delegate Sub RefreshAlertTimer(ByVal form As Form)
+    Public Sub AlertsRefreshUp(state As Object)
+        If Me.InvokeRequired Then
+            Me.Invoke(New RefreshAlertTimer(AddressOf AlertsRefreshUp), Me)
+        Else
+            JobRunner_RestFunctions.LoadAlerts()
+        End If
+    End Sub
+    Public Function Create_AlertsRefreshTimer()
+        Dim AlertRefreshCall As New System.Threading.TimerCallback(AddressOf AlertsRefreshUp)
+        Return New System.Threading.Timer(AlertRefreshCall, Nothing, 10, 10000)
+    End Function
 
 
     Private Sub tabControlJobsRest_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabControlJobsRest.SelectedIndexChanged
@@ -1285,56 +1334,7 @@ Public Class Main
         End If
     End Sub
 
-    Private Delegate Sub RefreshJobTimer(ByVal form As Form)
-    Public Sub JobRefreshUp(state As Object)
-        If Me.InvokeRequired Then
-            Me.Invoke(New RefreshJobTimer(AddressOf JobRefreshUp), Me)
-        Else
-            JobStatusSearchFacetUpdate()
-
-        End If
-    End Sub
-    Public Function Create_JobRefreshTimer()
-        Dim JobRefreshCall As New System.Threading.TimerCallback(AddressOf JobRefreshUp)
-        Return New System.Threading.Timer(JobRefreshCall, Nothing, 10, 10000)
-    End Function
-    Private Delegate Sub RefreshJobEndpointTimer(ByVal form As Form)
-    Public Sub JobEndpointRefreshUp(state As Object)
-        If Me.InvokeRequired Then
-            Me.Invoke(New RefreshJobTimer(AddressOf JobEndpointRefreshUp), Me)
-        Else
-            Select Case txtSearchEndpointStatus.Text
-                Case ""
-                    JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus)
-                Case "Search"
-                    JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus)
-                Case Else
-                    Dim facsearch As New Facet.FacetSearch
-                    facsearch.SearchAny.Add(txtSearchEndpointStatus.Text)
-                    JobRunner_RestFunctions.GetJobTargets(JobsEndpointStatus, facsearch)
-            End Select
-
-        End If
-    End Sub
-    Public Function Create_JobEndpointRefreshTimer()
-        Dim JobEndpointRefreshCall As New System.Threading.TimerCallback(AddressOf JobEndpointRefreshUp)
-        Return New System.Threading.Timer(JobEndpointRefreshCall, Nothing, 10, 10000)
-    End Function
-
-
-
-    Private Delegate Sub RefreshAlertTimer(ByVal form As Form)
-    Public Sub AlertsRefreshUp(state As Object)
-        If Me.InvokeRequired Then
-            Me.Invoke(New RefreshAlertTimer(AddressOf AlertsRefreshUp), Me)
-        Else
-            JobRunner_RestFunctions.LoadAlerts()
-        End If
-    End Sub
-    Public Function Create_AlertsRefreshTimer()
-        Dim AlertRefreshCall As New System.Threading.TimerCallback(AddressOf AlertsRefreshUp)
-        Return New System.Threading.Timer(AlertRefreshCall, Nothing, 10, 10000)
-    End Function
+   
 
     Private Sub btnExecute_Click(sender As Object, e As EventArgs) Handles btnExecute.Click
         ResetStatusBar()
@@ -2079,72 +2079,7 @@ Public Class Main
         End If
 
     End Sub
-    Public Shared Sub ProjSearchFacetUpdate()
-        If Main.lvProjectFacets.Items.Count > 0 Then
-            Dim facsearch As New Facet.FacetSearch
-            For Each item As ListViewItem In Main.lvProjectFacets.Items
-                Select Case Split(item.Text, ":")(0)
-                    Case "Any"
-                        facsearch.SearchAny.Add(Split(item.Text, ":")(1))
-
-                    Case Else
-                        Dim facsearchfield As New Facet.FacetSearchFields
-                        If Not facsearch.SearchFields.Count = 0 Then
-                            Dim found = facsearch.SearchFields.Find(Function(srch As Facet.FacetSearchFields)
-                                                                        Return srch.FieldName = item.Tag
-                                                                    End Function)
-                            If Not found Is Nothing Then
-                                found.Values.Add(Split(item.Text, ":")(1))
-                            Else
-                                facsearchfield.FieldName = item.Tag
-                                facsearchfield.Values.Add(Split(item.Text, ":")(1))
-                                facsearch.SearchFields.Add(facsearchfield)
-                            End If
-                        Else
-                            facsearchfield.FieldName = item.Tag
-                            facsearchfield.Values.Add(Split(item.Text, ":")(1))
-                            facsearch.SearchFields.Add(facsearchfield)
-                        End If
-                End Select
-            Next
-            JobRunner_RestFunctions.GetProjectList(facsearch)
-        Else
-            JobRunner_RestFunctions.GetProjectList()
-        End If
-    End Sub
-    Public Shared Sub JobStatusSearchFacetUpdate()
-        If Main.lvJobStatusFacets.Items.Count > 0 Then
-            Dim facsearch As New Facet.FacetSearch
-            For Each item As ListViewItem In Main.lvJobStatusFacets.Items
-                Select Case Split(item.Text, ":")(0)
-                    Case "Any"
-                        facsearch.SearchAny.Add(Split(item.Text, ":")(1))
-
-                    Case Else
-                        Dim facsearchfield As New Facet.FacetSearchFields
-                        If Not facsearch.SearchFields.Count = 0 Then
-                            Dim found = facsearch.SearchFields.Find(Function(srch As Facet.FacetSearchFields)
-                                                                        Return srch.FieldName = item.Tag
-                                                                    End Function)
-                            If Not found Is Nothing Then
-                                found.Values.Add(Split(item.Text, ":")(1))
-                            Else
-                                facsearchfield.FieldName = item.Tag
-                                facsearchfield.Values.Add(Split(item.Text, ":")(1))
-                                facsearch.SearchFields.Add(facsearchfield)
-                            End If
-                        Else
-                            facsearchfield.FieldName = item.Tag
-                            facsearchfield.Values.Add(Split(item.Text, ":")(1))
-                            facsearch.SearchFields.Add(facsearchfield)
-                        End If
-                End Select
-            Next
-            JobRunner_RestFunctions.GetJobList(facsearch)
-        Else
-            JobRunner_RestFunctions.GetJobList()
-        End If
-    End Sub
+ 
     Public Shared Sub jobsearchmenu_txtEnter(sender As Object, e As KeyEventArgs)
         Dim x As ToolStripTextBox = sender
         If e.KeyCode = Keys.Enter Then
