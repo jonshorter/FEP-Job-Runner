@@ -130,6 +130,12 @@
     <Compile Include="Forms\Form_JobFromTemplate.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\Form_ScriptJobResults.Designer.vb">
+      <DependentUpon>Form_ScriptJobResults.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form_ScriptJobResults.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Modules\BoxedJobs.vb" />
     <Compile Include="Modules\CertificateCreator.vb" />
     <Compile Include="Modules\JobRunner_DLL.vb" />
@@ -191,6 +197,9 @@
     <EmbeddedResource Include="Forms\Form_Main.resx">
       <DependentUpon>Form_Main.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form_ScriptJobResults.resx">
+      <DependentUpon>Form_ScriptJobResults.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

@@ -1,4 +1,5 @@
-﻿Imports System.Net
+﻿Imports RestSharp
+Imports System.Net
 Imports System.Security
 Imports System.Runtime.InteropServices
 Imports FEPRestClient.Models.Response
@@ -2253,7 +2254,7 @@ Public Class Main
                 dgvJobsRestJobsList.Rows.Item(e.RowIndex).Selected = True
                 Select Case dgvJobsRestJobsList.Rows.Item(e.RowIndex).Cells("jobType").Value
                     Case "Agent Script"
-                        cms_JobStatus.Items("ResultToolStripMenuItem").Enabled = False
+                        cms_JobStatus.Items("ResultToolStripMenuItem").Enabled = True
                     Case Else
                         cms_JobStatus.Items("ResultToolStripMenuItem").Enabled = True
                 End Select
@@ -2285,7 +2286,13 @@ Public Class Main
 
     Private Sub ResultToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ResultToolStripMenuItem.Click
         Dim resultid = dgvJobsRestJobsList.SelectedRows(0).Cells("jobResultID").Value
-        Process.Start("https://" & txtServer.Text & "/endpoint/#/reviewpage?JobResultID=" & resultid & "&ShowAgentPivot=false&ShowJobPivot=false")
+        If dgvJobsRestJobsList.SelectedRows(0).Cells("jobType").Value = "Agent Script" Then
+            Dim jobresultscript As New Form_ScriptJobResults(resultid)
+            jobresultscript.Show()
+        Else
+            Process.Start("https://" & txtServer.Text & "/endpoint/#/reviewpage?JobResultID=" & resultid & "&ShowAgentPivot=false&ShowJobPivot=false")
+
+        End If
     End Sub
 
     Private Sub CancelJobToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CancelJobToolStripMenuItem.Click
@@ -2340,6 +2347,8 @@ Public Class Main
 
     Private Sub NewScriptMenuItem_Click(sender As Object, e As EventArgs) Handles NewScriptMenuItem.Click
         Dim scCreate As New Form_CreateEditScript("Create Script", True, "")
-        scCreate.Show()
+        scCreate.ShowDialog()
     End Sub
+
+
 End Class

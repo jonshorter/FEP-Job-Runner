@@ -335,6 +335,7 @@ Partial Class Main
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DeleteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DownloadToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.grpSettings.SuspendLayout()
         Me.flowSettings.SuspendLayout()
         Me.grpReqSettings.SuspendLayout()
@@ -440,6 +441,7 @@ Partial Class Main
         Me.cms_Project.SuspendLayout()
         Me.cms_JobStatus.SuspendLayout()
         Me.cms_ScriptManage.SuspendLayout()
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnExecute
@@ -3941,7 +3943,7 @@ Partial Class Main
         Me.cms_JobStatus.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.cms_JobStatus.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EndpointStatusToolStripMenuItem, Me.ResultToolStripMenuItem, Me.ToolStripSeparator1, Me.RetryToolStripMenuItem, Me.CancelJobToolStripMenuItem})
         Me.cms_JobStatus.Name = "cms_JobStatus"
-        Me.cms_JobStatus.Size = New System.Drawing.Size(183, 106)
+        Me.cms_JobStatus.Size = New System.Drawing.Size(183, 134)
         '
         'EndpointStatusToolStripMenuItem
         '
@@ -3977,7 +3979,7 @@ Partial Class Main
         Me.cms_ScriptManage.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.cms_ScriptManage.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewScriptMenuItem, Me.ToolStripSeparator2, Me.EditToolStripMenuItem, Me.DeleteToolStripMenuItem, Me.DownloadToolStripMenuItem})
         Me.cms_ScriptManage.Name = "cms_JobStatus"
-        Me.cms_ScriptManage.Size = New System.Drawing.Size(190, 134)
+        Me.cms_ScriptManage.Size = New System.Drawing.Size(190, 106)
         '
         'NewScriptMenuItem
         '
@@ -4187,6 +4189,7 @@ Partial Class Main
         Me.cms_Project.ResumeLayout(False)
         Me.cms_JobStatus.ResumeLayout(False)
         Me.cms_ScriptManage.ResumeLayout(False)
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -4502,5 +4505,6 @@ Partial Class Main
     Friend WithEvents DownloadToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents NewScriptMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents BindingSource1 As System.Windows.Forms.BindingSource
 
 End Class
